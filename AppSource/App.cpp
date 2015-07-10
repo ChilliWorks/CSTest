@@ -40,7 +40,7 @@ CSCore::Application* CreateApplication()
 std::string GetGooglePlayLvlPublicKey()
 {
     //Enter your Google Play LVL public key here if you are building for Google Play on Android
-    return "";
+    return "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgnZYTbeRc01ZxEDhLFQd49PWtoCWak7Ia5oDSmQY/dQH5rx1X+tAI+mF8uUjIgcizlH6CJT7a6wtoaNWgKBRPmjvbqjAwMzLs0c27atVGw0peX9zyEO9JEgl6UWzPMVoUPJtkn82/Z6fYHjp92DPtiEypnJs0Fyna2ZAwH+cUwS9TUQIkFVCWa5h/VY/MXuoCyYt7SlveNAScpv1ozEzFwbtBOFYrQCgeYUGhOPyagZ1VpTZjarepCGuz+nfrti+5SvyFeS18jzU9ytsmxM7i8DtBX6VygfWelPl09wHuEOV9obmw932FCebuel57w6nFMmKw3eUSYWn6iFlh0fShwIDAQAB";
 }
 
 #endif

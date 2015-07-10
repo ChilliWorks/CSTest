@@ -114,6 +114,9 @@ THE SOFTWARE.
             </intent-filter>
         </receiver>
 
+        <!-- Google Play Apk Expansion Download View -->
+        <meta-data android:name="apkExpansionDownloadView" android:value="" />
+
         <!-- Application extra information -->
         
 
