@@ -1,11 +1,11 @@
 //
 //  State.cpp
 //  CSTest
-//  Created by Ian Copland on 15/10/2014.
+//  Created by Ian Copland on 13/07/2015.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Tag Games Limited
+//  Copyright (c) 2015 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -28,25 +28,8 @@
 
 #include <UnitTest/State.h>
 
-#define CATCH_CONFIG_COLOUR_NONE
-#define CATCH_CONFIG_NOSTDOUT
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
-
-
-TEST_CASE("A random test", "[Test]")
-{
-    REQUIRE(1 == 1);
-    REQUIRE(2 == 2);
-    REQUIRE(0 == 0);
-}
-
-TEST_CASE("Another random test", "[Test]")
-{
-    REQUIRE(1 == 1);
-    REQUIRE(1 == 0);
-    REQUIRE(0 == 0);
-}
 
 //------------------------------------------------------------------------------
 /// TODO: !? This stuff should be replaced by a custom reporter. We want on

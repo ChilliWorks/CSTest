@@ -17,6 +17,7 @@
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
 		8103F80A1B53C43D002242DE /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8103F8081B53C43D002242DE /* State.cpp */; };
+		8103F8121B53FC40002242DE /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8103F8111B53FC40002242DE /* FileSystem.cpp */; };
 		811289D61636EACD008D781D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D51636EACD008D781D /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		811289D81636EC0B008D781D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D71636EC0B008D781D /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		811289DA1636F1DC008D781D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D91636F1DB008D781D /* libz.dylib */; };
@@ -70,6 +71,7 @@
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8103F8081B53C43D002242DE /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		8103F8091B53C43D002242DE /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		8103F8111B53FC40002242DE /* FileSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
 		811289D51636EACD008D781D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		811289D71636EC0B008D781D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		811289D91636F1DB008D781D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -204,10 +206,19 @@
 		8103F8071B53C43D002242DE /* UnitTest */ = {
 			isa = PBXGroup;
 			children = (
+				8103F8101B53FC40002242DE /* Tests */,
 				8103F8081B53C43D002242DE /* State.cpp */,
 				8103F8091B53C43D002242DE /* State.h */,
 			);
 			path = UnitTest;
+			sourceTree = "<group>";
+		};
+		8103F8101B53FC40002242DE /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8103F8111B53FC40002242DE /* FileSystem.cpp */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		81455FE81961B47C00471F69 /* Built */ = {
@@ -351,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81CFA14719EE9177003C8436 /* App.cpp in Sources */,
+				8103F8121B53FC40002242DE /* FileSystem.cpp in Sources */,
 				8103F80A1B53C43D002242DE /* State.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,6 +461,8 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					CATCH_CONFIG_COLOUR_NONE,
+					CATCH_CONFIG_NOSTDOUT,
 					NDEBUG,
 					CS_TARGETPLATFORM_IOS,
 					CS_LOGLEVEL_WARNING,
@@ -514,6 +528,8 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					CATCH_CONFIG_COLOUR_NONE,
+					CATCH_CONFIG_NOSTDOUT,
 					DEBUG,
 					CS_TARGETPLATFORM_IOS,
 					CS_ENABLE_DEBUG,
@@ -539,6 +555,8 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					CATCH_CONFIG_COLOUR_NONE,
+					CATCH_CONFIG_NOSTDOUT,
 					NDEBUG,
 					CS_TARGETPLATFORM_IOS,
 					CS_LOGLEVEL_WARNING,
