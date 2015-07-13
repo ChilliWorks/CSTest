@@ -26,20 +26,46 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _CSEMPTYTEMPLATE_APP_H_
-#define _CSEMPTYTEMPLATE_APP_H_
+#ifndef _APP_H_
+#define _APP_H_
 
 #include <ChilliSource/ChilliSource.h>
 #include <ChilliSource/Core/Base.h>
 
 namespace CSTest
 {
+    //------------------------------------------------------------------------------
+    /// The main application class, providing the entry point to the a CS app and
+    /// events for creating systems and pushing the first state.
+    ///
+    /// @author Ian Copland
+    //------------------------------------------------------------------------------
     class App final : public CSCore::Application
     {
-    public:
+        //------------------------------------------------------------------------------
+        /// The life-cycle event for creating all application systems.
+        ///
+        /// @author Ian Copland
+        //------------------------------------------------------------------------------
         void CreateSystems() override;
+        //------------------------------------------------------------------------------
+        /// Initialisation event called immediately after create systems and before
+        /// push initial state.
+        ///
+        /// @author Ian Copland
+        //------------------------------------------------------------------------------
         void OnInit() override;
+        //------------------------------------------------------------------------------
+        /// Creates the first state that will be added to the state stack.
+        ///
+        /// @author Ian Copland
+        //------------------------------------------------------------------------------
         void PushInitialState() override;
+        //------------------------------------------------------------------------------
+        /// Called when the application is about to be destroyed.
+        ///
+        /// @author Ian Copland
+        //------------------------------------------------------------------------------
         void OnDestroy() override;
     };
 }

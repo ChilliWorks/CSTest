@@ -1,3 +1,6 @@
 [submodule "ChilliSource"]
 	path = ChilliSource
 	url = https://github.com/ChilliWorks/ChilliSource.git
+[submodule "Libraries/Catch"]
+	path = Libraries/Catch
+	url = https://github.com/philsquared/Catch.git

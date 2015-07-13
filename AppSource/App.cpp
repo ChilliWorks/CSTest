@@ -28,8 +28,15 @@
 
 #include <App.h>
 
-#include <State.h>
+#include <UnitTest/State.h>
 
+//------------------------------------------------------------------------------
+/// Creates the application instance for this app.
+///
+/// @author Ian Copland
+///
+/// @return The new Application instance.
+//------------------------------------------------------------------------------
 CSCore::Application* CreateApplication()
 {
     return new CSTest::App();
@@ -37,6 +44,14 @@ CSCore::Application* CreateApplication()
 
 #if defined(CS_TARGETPLATFORM_ANDROID) && defined(CS_ANDROIDFLAVOUR_GOOGLEPLAY)
 
+//------------------------------------------------------------------------------
+/// Returns the LVL Public key used by Google Play Android builds for a number
+/// of systems, including IAP and APK expansion downloading.
+///
+/// @author Ian Copland
+///
+/// @return The Google Play LVL key.
+//------------------------------------------------------------------------------
 std::string GetGooglePlayLvlPublicKey()
 {
     //Enter your Google Play LVL public key here if you are building for Google Play on Android
@@ -47,24 +62,26 @@ std::string GetGooglePlayLvlPublicKey()
 
 namespace CSTest
 {
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
     void App::CreateSystems()
     {
-        //Create systems here.
     }
-
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
     void App::OnInit()
     {
-        //initialisation stuff here.
     }
-
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
     void App::PushInitialState()
     {
-        GetStateManager()->Push(CSCore::StateSPtr(new State()));
+        GetStateManager()->Push(CSCore::StateSPtr(new UnitTest::State()));
     }
-
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
     void App::OnDestroy()
     {
-        //destruction stuff here.
     }
 }
 

@@ -16,6 +16,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		8103F80A1B53C43D002242DE /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8103F8081B53C43D002242DE /* State.cpp */; };
 		811289D61636EACD008D781D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D51636EACD008D781D /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		811289D81636EC0B008D781D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D71636EC0B008D781D /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		811289DA1636F1DC008D781D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D91636F1DB008D781D /* libz.dylib */; };
@@ -36,7 +37,6 @@
 		81A83FAC1340B90900FBCC29 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A83FA21340B8E900FBCC29 /* SystemConfiguration.framework */; };
 		81B9C0D918B27D490029BC9E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81B9C0D818B27D490029BC9E /* CoreMotion.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		81CFA14719EE9177003C8436 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CFA14319EE9177003C8436 /* App.cpp */; };
-		81CFA14819EE9177003C8436 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CFA14519EE9177003C8436 /* State.cpp */; };
 		81D8923F196160E70010DA84 /* AppResources in Resources */ = {isa = PBXBuildFile; fileRef = 81D8923D196160E70010DA84 /* AppResources */; };
 		81D89240196160E70010DA84 /* CSResources in Resources */ = {isa = PBXBuildFile; fileRef = 81D8923E196160E70010DA84 /* CSResources */; };
 		81D89B751962BD400010DA84 /* com_taggames_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D89B721962BD400010DA84 /* com_taggames_close_button.png */; };
@@ -68,6 +68,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8103F8081B53C43D002242DE /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		8103F8091B53C43D002242DE /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		811289D51636EACD008D781D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		811289D71636EC0B008D781D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		811289D91636F1DB008D781D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -89,8 +91,6 @@
 		81B9C0D818B27D490029BC9E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		81CFA14319EE9177003C8436 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		81CFA14419EE9177003C8436 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
-		81CFA14519EE9177003C8436 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
-		81CFA14619EE9177003C8436 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81D8923D196160E70010DA84 /* AppResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppResources; path = XcodeBuiltAssets/AppResources; sourceTree = "<group>"; };
 		81D8923E196160E70010DA84 /* CSResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CSResources; path = XcodeBuiltAssets/CSResources; sourceTree = "<group>"; };
 		81D89B721962BD400010DA84 /* com_taggames_close_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = com_taggames_close_button.png; sourceTree = "<group>"; };
@@ -201,6 +201,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8103F8071B53C43D002242DE /* UnitTest */ = {
+			isa = PBXGroup;
+			children = (
+				8103F8081B53C43D002242DE /* State.cpp */,
+				8103F8091B53C43D002242DE /* State.h */,
+			);
+			path = UnitTest;
+			sourceTree = "<group>";
+		};
 		81455FE81961B47C00471F69 /* Built */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,8 +225,7 @@
 			children = (
 				81CFA14319EE9177003C8436 /* App.cpp */,
 				81CFA14419EE9177003C8436 /* App.h */,
-				81CFA14519EE9177003C8436 /* State.cpp */,
-				81CFA14619EE9177003C8436 /* State.h */,
+				8103F8071B53C43D002242DE /* UnitTest */,
 			);
 			name = AppSource;
 			path = ../../AppSource;
@@ -343,7 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81CFA14719EE9177003C8436 /* App.cpp in Sources */,
-				81CFA14819EE9177003C8436 /* State.cpp in Sources */,
+				8103F80A1B53C43D002242DE /* State.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +386,7 @@
 					"$(SRCROOT)/../../ChilliSource/Source",
 					"$(SRCROOT)/../../ChilliSource/Libraries/Core/iOS/Headers",
 					"$(SRCROOT)/../../ChilliSource/Libraries/CricketAudio/iOS/Headers",
+					"$(SRCROOT)/../../Libraries/Catch/include",
 				);
 				INFOPLIST_FILE = "ProjectResources/CSTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
@@ -418,6 +427,7 @@
 					"$(SRCROOT)/../../ChilliSource/Source",
 					"$(SRCROOT)/../../ChilliSource/Libraries/Core/iOS/Headers",
 					"$(SRCROOT)/../../ChilliSource/Libraries/CricketAudio/iOS/Headers",
+					"$(SRCROOT)/../../Libraries/Catch/include",
 				);
 				INFOPLIST_FILE = "ProjectResources/CSTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
@@ -482,6 +492,7 @@
 					"$(SRCROOT)/../../ChilliSource/Source",
 					"$(SRCROOT)/../../ChilliSource/Libraries/Core/iOS/Headers",
 					"$(SRCROOT)/../../ChilliSource/Libraries/CricketAudio/iOS/Headers",
+					"$(SRCROOT)/../../Libraries/Catch/include",
 				);
 				INFOPLIST_FILE = "ProjectResources/CSTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
