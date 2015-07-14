@@ -154,6 +154,8 @@ namespace
         const std::vector<std::string> k_expectedFilePathsExtC = { "BinaryFileC.bin" };
         const std::vector<std::string> k_expectedFilePathsNameA = { "DirectoryC/DirectoryD/BinaryFileD.bin" };
         const std::vector<std::string> k_expectedFilePathsNameC = { };
+        const std::vector<std::string> k_expectedDirectoryPathsA = { "DirectoryB/", "DirectoryC/" };
+        const std::vector<std::string> k_expectedDirectoryPathsRecursiveA = { "DirectoryB/", "DirectoryC/", "DirectoryC/DirectoryD/" };
         
         auto fileSystem = CSCore::Application::Get()->GetFileSystem();
         CS_ASSERT(fileSystem->IsStorageLocationWritable(in_storageLocation) == true, "Storage location must be writable");
@@ -215,7 +217,13 @@ namespace
             REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(in_storageLocation, k_copiedDirectoryC, false, k_searchFileName), k_expectedFilePathsNameC) == true);
         }
         
-        //TODO: !? add test for GetDirectories()
+        SECTION("Get directory paths")
+        {
+            fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryCopySource, in_storageLocation, k_directoryCopyDestA);
+            
+            REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(in_storageLocation, k_directoryCopyDestA, true), k_expectedDirectoryPathsRecursiveA) == true);
+            REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(in_storageLocation, k_directoryCopyDestA, false), k_expectedDirectoryPathsA) == true);
+        }
         
         SECTION("Delete file")
         {
@@ -261,6 +269,8 @@ TEST_CASE("FileSystem: Package storage location", "[FileSystem]")
     const std::vector<std::string> k_expectedFilePathsExtC = { "BinaryFileC.bin" };
     const std::vector<std::string> k_expectedFilePathsNameA = { "DirectoryC/DirectoryD/BinaryFileD.bin" };
     const std::vector<std::string> k_expectedFilePathsNameC = { };
+    const std::vector<std::string> k_expectedDirectoryPathsA = { "DirectoryB/", "DirectoryC/" };
+    const std::vector<std::string> k_expectedDirectoryPathsRecursiveA = { "DirectoryB/", "DirectoryC/", "DirectoryC/DirectoryD/" };
     
     auto fileSystem = CSCore::Application::Get()->GetFileSystem();
     
@@ -295,7 +305,11 @@ TEST_CASE("FileSystem: Package storage location", "[FileSystem]")
         REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_package, k_directoryPathC, false, k_searchFileName), k_expectedFilePathsNameC) == true);
     }
     
-    //TODO: !? add test for GetDirectories()
+    SECTION("Get directory paths")
+    {
+        REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_package, k_directoryPathA, true), k_expectedDirectoryPathsRecursiveA) == true);
+        REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_package, k_directoryPathA, false), k_expectedDirectoryPathsA) == true);
+    }
 }
 
 TEST_CASE("FileSystem: ChilliSource storage location", "[FileSystem]")
@@ -310,6 +324,7 @@ TEST_CASE("FileSystem: ChilliSource storage location", "[FileSystem]")
     const std::vector<std::string> k_expectedFilePaths = { "CarlitoMed.high.csfont", "CarlitoMed.high.csimage", "CarlitoMed.low.csfont", "CarlitoMed.low.csimage", "CarlitoMed.med.csfont", "CarlitoMed.med.csimage" };
     const std::vector<std::string> k_expectedFilePathsExt = { "CarlitoMed.high.csfont", "CarlitoMed.low.csfont", "CarlitoMed.med.csfont", };
     const std::vector<std::string> k_expectedFilePathsName = { "CarlitoMed.high.csfont" };
+    const std::vector<std::string> k_expectedDirectoryPaths = { "Fonts/", "Shaders/", "Textures/", "Widgets/" };
     const u32 k_cscsInt = 1396921155; //'CSCS' in little endian
 
     auto fileSystem = CSCore::Application::Get()->GetFileSystem();
@@ -342,7 +357,10 @@ TEST_CASE("FileSystem: ChilliSource storage location", "[FileSystem]")
         REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_chilliSource, k_directoryPath, false, k_searchFileName), k_expectedFilePathsName) == true);
     }
     
-    //TODO: !? add test for GetDirectories()
+    SECTION("Get directory paths")
+    {
+        REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_chilliSource, "", false), k_expectedDirectoryPaths) == true);
+    }
 }
 
 TEST_CASE("FileSystem: Cache storage location", "[FileSystem]")
