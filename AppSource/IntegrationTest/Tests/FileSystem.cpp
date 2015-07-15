@@ -123,12 +123,12 @@ namespace CSTest
                     (in_storageLocation != CSCore::StorageLocation::k_DLC && fileSystem->DoesDirectoryExist(in_storageLocation, in_directoryPath) == true))
                 {
                     bool deleted = fileSystem->DeleteDirectory(in_storageLocation, in_directoryPath);
-                    CS_ASSERT(deleted == true, "Cannot perform unit tests becuase test directory couldn't be deleted.");
+                    CS_ASSERT(deleted == true, "Cannot perform integration tests because test directory couldn't be deleted.");
                 }
                 
                 
                 bool created = fileSystem->CreateDirectoryPath(in_storageLocation, in_directoryPath);
-                CS_ASSERT(created == true, "Cannot perform unit tests becuase test directory couldn't be created.");
+                CS_ASSERT(created == true, "Cannot perform integration tests because test directory couldn't be created.");
             }
             
             //------------------------------------------------------------------------------
@@ -141,14 +141,14 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void TestWritableStorageLocation(CSCore::StorageLocation in_storageLocation)
             {
-                const std::string k_unitTestDirectory = "IntegrationTest/FileSystem/";
-                const std::string k_textFilePath = k_unitTestDirectory + "TextFileZ.txt";
-                const std::string k_binFilePath = k_unitTestDirectory + "BinaryFileZ.bin";
-                const std::string k_directoryPath = k_unitTestDirectory + "DirectoryZ/";
+                const std::string k_integrationTestDirectory = "IntegrationTest/FileSystem/";
+                const std::string k_textFilePath = k_integrationTestDirectory + "TextFileZ.txt";
+                const std::string k_binFilePath = k_integrationTestDirectory + "BinaryFileZ.bin";
+                const std::string k_directoryPath = k_integrationTestDirectory + "DirectoryZ/";
                 const char k_fileCopySource[] = "IntegrationTest/FileSystem/TextFileA.txt";
-                const std::string k_fileCopyDest = k_unitTestDirectory + "CopiedTextFileA.txt";
+                const std::string k_fileCopyDest = k_integrationTestDirectory + "CopiedTextFileA.txt";
                 const char k_directoryCopySource[] = "IntegrationTest/FileSystem/DirectoryA/";
-                const std::string k_directoryCopyDestA = k_unitTestDirectory + "CopiedDirectoryA/";
+                const std::string k_directoryCopyDestA = k_integrationTestDirectory + "CopiedDirectoryA/";
                 const std::string k_copiedDirectoryC = k_directoryCopyDestA + "DirectoryC/";
                 const char k_searchFileName[] = "BinaryFileD.bin";
                 const u32 k_binaryFileContents = 9999;
@@ -165,7 +165,7 @@ namespace CSTest
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 CS_ASSERT(fileSystem->IsStorageLocationWritable(in_storageLocation) == true, "Storage location must be writable");
                 
-                ClearDirectory(in_storageLocation, k_unitTestDirectory);
+                ClearDirectory(in_storageLocation, k_integrationTestDirectory);
 
                 SECTION("Reading and writing text files")
                 {
@@ -254,7 +254,7 @@ namespace CSTest
                     REQUIRE(fileSystem->DeleteDirectory(in_storageLocation, k_directoryCopyDestA) == false);
                 }
                 
-                ClearDirectory(in_storageLocation, k_unitTestDirectory);
+                ClearDirectory(in_storageLocation, k_integrationTestDirectory);
             }
         }
 
@@ -387,24 +387,25 @@ namespace CSTest
         {
             auto fileSystem = CSCore::Application::Get()->GetFileSystem();
             
-            const std::string k_unitTestDirectory = "IntegrationTest/FileSystem/";
+            const std::string k_integrationTestDirectory = "IntegrationTest/FileSystem/";
             const char k_packageDirectoryPath[] = "IntegrationTest/FileSystem/DirectoryA/";
-            const std::string k_copiedDirectoryPath = k_unitTestDirectory + "CopiedDirectoryA/";
-            const std::vector<std::string> k_expectedDirectoryContents = { "DirectoryB/BinaryFileB.bin", "DirectoryB/TextFileB.txt", "DirectoryC/BinaryFileC.bin", "DirectoryC/TextFileC.txt", "DirectoryC/DirectoryD/BinaryFileD.bin", "DirectoryC/DirectoryD/TextFileD.txt" };
+            const std::string k_copiedDirectoryPath = k_integrationTestDirectory + "CopiedDirectoryA/";
+            const std::vector<std::string> k_expectedFilePaths = { "DirectoryB/BinaryFileB.bin", "DirectoryB/TextFileB.txt", "DirectoryC/BinaryFileC.bin", "DirectoryC/TextFileC.txt",
+                "DirectoryC/DirectoryD/BinaryFileD.bin", "DirectoryC/DirectoryD/TextFileD.txt" };
             
-            ClearDirectory(CSCore::StorageLocation::k_cache, k_unitTestDirectory);
-            ClearDirectory(CSCore::StorageLocation::k_saveData, k_unitTestDirectory);
-            ClearDirectory(CSCore::StorageLocation::k_DLC, k_unitTestDirectory);
+            ClearDirectory(CSCore::StorageLocation::k_cache, k_integrationTestDirectory);
+            ClearDirectory(CSCore::StorageLocation::k_saveData, k_integrationTestDirectory);
+            ClearDirectory(CSCore::StorageLocation::k_DLC, k_integrationTestDirectory);
             
             SECTION("Copy from Cache")
             {
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_packageDirectoryPath, CSCore::StorageLocation::k_cache, k_copiedDirectoryPath);
                 
                 REQUIRE(fileSystem->CopyDirectory(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, true), k_expectedDirectoryContents) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
                 
                 REQUIRE(fileSystem->CopyDirectory(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath, true), k_expectedDirectoryContents) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
             }
             
             SECTION("Copy from SaveData")
@@ -412,10 +413,10 @@ namespace CSTest
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_packageDirectoryPath, CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath);
                 
                 REQUIRE(fileSystem->CopyDirectory(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, CSCore::StorageLocation::k_cache, k_copiedDirectoryPath) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, true), k_expectedDirectoryContents) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
                 
                 REQUIRE(fileSystem->CopyDirectory(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath, true), k_expectedDirectoryContents) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
             }
             
             SECTION("Copy from DLC")
@@ -423,15 +424,129 @@ namespace CSTest
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_packageDirectoryPath, CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath);
                 
                 REQUIRE(fileSystem->CopyDirectory(CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath, CSCore::StorageLocation::k_cache, k_copiedDirectoryPath) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, true), k_expectedDirectoryContents) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
                 
                 REQUIRE(fileSystem->CopyDirectory(CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath, CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, true), k_expectedDirectoryContents) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
             }
             
-            ClearDirectory(CSCore::StorageLocation::k_cache, k_unitTestDirectory);
-            ClearDirectory(CSCore::StorageLocation::k_saveData, k_unitTestDirectory);
-            ClearDirectory(CSCore::StorageLocation::k_DLC, k_unitTestDirectory);
+            ClearDirectory(CSCore::StorageLocation::k_cache, k_integrationTestDirectory);
+            ClearDirectory(CSCore::StorageLocation::k_saveData, k_integrationTestDirectory);
+            ClearDirectory(CSCore::StorageLocation::k_DLC, k_integrationTestDirectory);
         }
+        
+    	TEST_CASE("FileSystem: packaged DLC and cached DLC", "[FileSystem]")
+        {
+            const std::string k_integrationTestDirectory = "IntegrationTest/FileSystemDLC/";
+            const std::string k_textFilePath = k_integrationTestDirectory + "TextFileA.txt";
+            const std::string k_directoryPath = k_integrationTestDirectory + "DirectoryA/";
+            const std::string k_replacementFilePath = k_directoryPath + "TextFileB.txt";
+            const std::string k_extraDirectoryPath = k_directoryPath + "DirectoryC/";
+            const std::string k_extraFilePath1 = k_directoryPath + "DirectoryC/BinaryFileD.bin";
+            const std::string k_extraFilePath2 = k_directoryPath + "BinaryFileC.bin";
+            const std::string k_textFilePathFake = k_integrationTestDirectory + "TextFileAFake.txt";
+            const std::string k_directoryPathFake = k_integrationTestDirectory + "DirectoryFake/";
+            const char k_searchFileName[] = "BinaryFileC.bin";
+            const std::vector<std::string> k_expectedPackageDLCFilePathsRecursive = { "BinaryFileB.bin", "TextFileB.txt", "DirectoryB/BinaryFileC.bin", "DirectoryB/TextFileC.txt" };
+            const std::vector<std::string> k_expectedPackageDLCFilePaths = { "BinaryFileB.bin", "TextFileB.txt" };
+            const std::vector<std::string> k_expectedPackageDLCFilePathsExtRecursive = { "BinaryFileB.bin", "DirectoryB/BinaryFileC.bin" };
+            const std::vector<std::string> k_expectedPackageDLCFilePathsExt = { "BinaryFileB.bin" };
+            const std::vector<std::string> k_expectedPackageDLCFilePathsNameRecursive = { "DirectoryB/BinaryFileC.bin" };
+            const std::vector<std::string> k_expectedPackageDLCFilePathsName = { };
+            const std::vector<std::string> k_expectedPackageDLCDirectoryPaths = { "DirectoryB/" };
+            const std::vector<std::string> k_expectedMixedDLCFilePathsRecursive = { "BinaryFileB.bin", "BinaryFileC.bin", "TextFileB.txt", "DirectoryB/BinaryFileC.bin", "DirectoryB/TextFileC.txt",
+                "DirectoryC/BinaryFileD.bin" };
+            const std::vector<std::string> k_expectedMixedDLCFilePaths = { "BinaryFileB.bin", "BinaryFileC.bin", "TextFileB.txt" };
+            const std::vector<std::string> k_expectedMixedDLCFilePathsExtRecursive = { "BinaryFileB.bin", "BinaryFileC.bin", "DirectoryB/BinaryFileC.bin", "DirectoryC/BinaryFileD.bin" };
+            const std::vector<std::string> k_expectedMixedDLCFilePathsExt = { "BinaryFileB.bin", "BinaryFileC.bin" };
+            const std::vector<std::string> k_expectedMixedDLCFilePathsNameRecursive = { "BinaryFileC.bin", "DirectoryB/BinaryFileC.bin" };
+            const std::vector<std::string> k_expectedMixedDLCFilePathsName = { "BinaryFileC.bin" };
+            const std::vector<std::string> k_expectedMixedDLCDirectoryPaths = { "DirectoryB/", "DirectoryC/" };
+            const u32 k_binaryFileContents = 9999;
+
+            auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+
+            ClearDirectory(CSCore::StorageLocation::k_DLC, k_integrationTestDirectory);
+
+            SECTION("Does file exist in packaged DLC")
+            {
+                REQUIRE(fileSystem->DoesFileExist(CSCore::StorageLocation::k_DLC, k_textFilePath) == true);
+                REQUIRE(fileSystem->DoesFileExist(CSCore::StorageLocation::k_DLC, k_textFilePathFake) == false);
+                REQUIRE(fileSystem->DoesFileExistInPackageDLC(k_textFilePath) == true);
+                REQUIRE(fileSystem->DoesFileExistInPackageDLC(k_textFilePathFake) == false);
+                REQUIRE(fileSystem->DoesFileExistInCachedDLC(k_textFilePath) == false);
+            }
+            
+            SECTION("Does directory exist in packaged DLC")
+            {
+                REQUIRE(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_DLC, k_directoryPath) == true);
+                REQUIRE(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_DLC, k_directoryPathFake) == false);
+                REQUIRE(fileSystem->DoesDirectoryExistInPackageDLC(k_directoryPath) == true);
+                REQUIRE(fileSystem->DoesDirectoryExistInPackageDLC(k_directoryPathFake) == false);
+                REQUIRE(fileSystem->DoesDirectoryExistInCachedDLC(k_directoryPath) == false);
+            }
+
+            SECTION("Read text file in packaged DLC")
+            {
+                std::string packageTextFileOutput;
+                REQUIRE((fileSystem->ReadFile(CSCore::StorageLocation::k_DLC, k_textFilePath, packageTextFileOutput) == true && packageTextFileOutput == "Package"));
+            }
+
+            SECTION("Get file amd directory paths in packaged DLC")
+            {
+                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_directoryPath, true), k_expectedPackageDLCFilePathsRecursive) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_directoryPath, false), k_expectedPackageDLCFilePaths) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, true, "bin"), k_expectedPackageDLCFilePathsExtRecursive) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, false, "bin"), k_expectedPackageDLCFilePathsExt) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_DLC, k_directoryPath, true, k_searchFileName), k_expectedPackageDLCFilePathsNameRecursive) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, false, k_searchFileName), k_expectedPackageDLCFilePathsName) == true);
+                REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_DLC, k_directoryPath, false), k_expectedPackageDLCDirectoryPaths) == true);
+            }
+            
+            SECTION("Does file exist in cached DLC")
+            {
+                fileSystem->WriteFile(CSCore::StorageLocation::k_DLC, k_textFilePath, "Cache");
+                
+                REQUIRE(fileSystem->DoesFileExistInCachedDLC(k_textFilePath) == true);
+                REQUIRE(fileSystem->DoesFileExistInCachedDLC(k_textFilePathFake) == false);
+            }
+            
+            SECTION("Does directory exist in cached DLC")
+            {
+                fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_DLC, k_directoryPath);
+                
+                REQUIRE(fileSystem->DoesDirectoryExistInCachedDLC(k_directoryPath) == true);
+                REQUIRE(fileSystem->DoesDirectoryExistInCachedDLC(k_directoryPathFake) == false);
+            }
+            
+            SECTION("Read text file in cached DLC")
+            {
+                fileSystem->WriteFile(CSCore::StorageLocation::k_DLC, k_textFilePath, "Cache");
+                
+                std::string cacheTextFileOutput;
+                REQUIRE((fileSystem->ReadFile(CSCore::StorageLocation::k_DLC, k_textFilePath, cacheTextFileOutput) == true && cacheTextFileOutput == "Cache"));
+            }
+            
+            SECTION("Get file and directory paths in cached DLC")
+            {
+                fileSystem->WriteFile(CSCore::StorageLocation::k_DLC, k_textFilePath, "Cache");
+                fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_DLC, k_directoryPath);
+                fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_DLC, k_extraDirectoryPath);
+                fileSystem->WriteFile(CSCore::StorageLocation::k_DLC, k_replacementFilePath, "Cache");
+                fileSystem->WriteFile(CSCore::StorageLocation::k_DLC, k_extraFilePath1, reinterpret_cast<const s8*>(&k_binaryFileContents), 4);
+                fileSystem->WriteFile(CSCore::StorageLocation::k_DLC, k_extraFilePath2, reinterpret_cast<const s8*>(&k_binaryFileContents), 4);
+                
+                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_directoryPath, true), k_expectedMixedDLCFilePathsRecursive) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_directoryPath, false), k_expectedMixedDLCFilePaths) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, true, "bin"), k_expectedMixedDLCFilePathsExtRecursive) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, false, "bin"), k_expectedMixedDLCFilePathsExt) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_DLC, k_directoryPath, true, k_searchFileName), k_expectedMixedDLCFilePathsNameRecursive) == true);
+                REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_DLC, k_directoryPath, false, k_searchFileName), k_expectedMixedDLCFilePathsName) == true);
+                REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_DLC, k_directoryPath, false), k_expectedMixedDLCDirectoryPaths) == true);
+            }
+            
+            ClearDirectory(CSCore::StorageLocation::k_DLC, k_integrationTestDirectory);
+        }
+
     }
 }
