@@ -1,7 +1,7 @@
 //
-//  State.cpp
+//  FailedAssertion.cpp
 //  CSTest
-//  Created by Ian Copland on 13/07/2015.
+//  Created by Ian Copland on 15/07/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,7 +26,7 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/State.h>
+#include <IntegrationTest/TestSystem/FailedAssertion.h>
 
 namespace CSTest
 {
@@ -34,23 +34,27 @@ namespace CSTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::CreateSystems()
+        FailedAssertion::FailedAssertion(const std::string& in_filePath, u32 in_line, const std::string& in_errorMessage)
+            : m_filePath(in_filePath), m_line(in_line), m_errorMessage(in_errorMessage)
         {
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnInit()
+        const std::string& FailedAssertion::GetFilePath() const
         {
+            return m_filePath;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnUpdate(f32 in_deltaTime)
+        u32 FailedAssertion::GetLine() const
         {
+            return m_line;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnDestroy()
+        const std::string& FailedAssertion::GetErrorMessage() const
         {
+            return m_errorMessage;
         }
     }
 }

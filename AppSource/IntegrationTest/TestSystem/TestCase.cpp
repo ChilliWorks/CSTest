@@ -1,5 +1,5 @@
 //
-//  CSTest.h
+//  TestCase.cpp
 //  CSTest
 //  Created by Ian Copland on 15/07/2015.
 //
@@ -26,24 +26,12 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _CSTEST_H_
-#define _CSTEST_H_
-
-#include <ChilliSource/ChilliSource.h>
+#include <IntegrationTest/TestSystem/TestCase.h>
 
 namespace CSTest
 {
-    CS_FORWARDDECLARE_CLASS(App);
-    
     namespace IntegrationTest
     {
-        CS_FORWARDDECLARE_CLASS(CSReporter);
-        CS_FORWARDDECLARE_CLASS(FailedAssertion);
-        CS_FORWARDDECLARE_CLASS(Report);
-        CS_FORWARDDECLARE_CLASS(State);
-        CS_FORWARDDECLARE_CLASS(TestCase);
-        CS_FORWARDDECLARE_CLASS(TestSystem);
+        
     }
 }
-
-#endif

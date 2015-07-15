@@ -1,7 +1,7 @@
 //
-//  State.cpp
+//  TestSystem.cpp
 //  CSTest
-//  Created by Ian Copland on 13/07/2015.
+//  Created by Ian Copland on 15/07/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,31 +26,49 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/State.h>
+#include <IntegrationTest/TestSystem/TestSystem.h>
+
+#include <IntegrationTest/TestSystem/Report.h>
+
+#define CATCH_CONFIG_RUNNER
+#include <catch.hpp>
 
 namespace CSTest
 {
     namespace IntegrationTest
     {
+        CS_DEFINE_NAMEDTYPE(TestSystem);
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::CreateSystems()
+        TestSystemUPtr TestSystem::Create()
         {
+            return TestSystemUPtr(new TestSystem());
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnInit()
+        bool TestSystem::IsA(CSCore::InterfaceIDType in_interfaceId) const
         {
+            return (TestSystem::InterfaceID == in_interfaceId);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnUpdate(f32 in_deltaTime)
+        Report TestSystem::PerformTests()
         {
+            Catch::Session session;
+            session.configData().reporterName = "cs";
+
+            int result = session.run();
+            if (result != 0)
+            {
+            }
+            
+            return Report();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnDestroy()
+        void TestSystem::OnInit()
         {
+            
         }
     }
 }
