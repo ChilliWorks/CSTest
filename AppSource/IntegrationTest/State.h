@@ -26,23 +26,21 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _UNITTEST_STATE_H_
-#define _UNITTEST_STATE_H_
+#ifndef _INTEGRATIONTEST_STATE_H_
+#define _INTEGRATIONTEST_STATE_H_
 
-#include <ChilliSource/ChilliSource.h>
+#include <CSTest.h>
+
 #include <ChilliSource/Core/State.h>
 
 namespace CSTest
 {
-    namespace UnitTest
+    namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// A state which runs a number of unit tests using Catch. The tests performed
-        /// here are not strictly unit tests as they are implemented at a higher level
-        /// than a "unit" and implement no stubbing or mocking. Automated integration
-        /// tests would probably be a more accurate description. They are referred to as
-        /// Unit Tests because they are implemented using a Unit Testing API and to
-        /// separate them from the visual integration tests.
+        /// A state which runs a number of low level integration tests using Catch.
+        /// All Tests for features which can be automated are included here. Other
+        /// features such as input and graphics are smoked tested in other states.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------

@@ -26,15 +26,12 @@
 //  THE SOFTWARE.
 //
 
-#include <UnitTest/State.h>
+#include <IntegrationTest/State.h>
 
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
 
-//------------------------------------------------------------------------------
-/// TODO: !? This stuff should be replaced by a custom reporter. We want on
-/// screen confirmation of success / failure and this won't give that.
-//------------------------------------------------------------------------------
+/// TODO: !? This stuff should be replaced by a custom reporter. We want on screen confirmation of success / failure and this won't give that.
 namespace Catch
 {
     std::stringstream g_outputStream;
@@ -52,7 +49,7 @@ namespace Catch
 
 namespace CSTest
 {
-    namespace UnitTest
+    namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

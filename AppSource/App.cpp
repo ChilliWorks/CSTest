@@ -28,7 +28,7 @@
 
 #include <App.h>
 
-#include <UnitTest/State.h>
+#include <IntegrationTest/State.h>
 
 //------------------------------------------------------------------------------
 /// Creates the application instance for this app.
@@ -76,7 +76,7 @@ namespace CSTest
     //------------------------------------------------------------------------------
     void App::PushInitialState()
     {
-        GetStateManager()->Push(CSCore::StateSPtr(new UnitTest::State()));
+        GetStateManager()->Push(CSCore::StateSPtr(new IntegrationTest::State()));
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------

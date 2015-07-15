@@ -29,7 +29,8 @@
 #ifndef _APP_H_
 #define _APP_H_
 
-#include <ChilliSource/ChilliSource.h>
+#include <CSTest.h>
+
 #include <ChilliSource/Core/Base.h>
 
 namespace CSTest

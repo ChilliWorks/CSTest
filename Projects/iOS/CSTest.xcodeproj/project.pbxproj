@@ -16,8 +16,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
-		8103F80A1B53C43D002242DE /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8103F8081B53C43D002242DE /* State.cpp */; };
-		8103F8121B53FC40002242DE /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8103F8111B53FC40002242DE /* FileSystem.cpp */; };
 		811289D61636EACD008D781D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D51636EACD008D781D /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		811289D81636EC0B008D781D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D71636EC0B008D781D /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		811289DA1636F1DC008D781D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D91636F1DB008D781D /* libz.dylib */; };
@@ -45,6 +43,8 @@
 		81D8B6ED1962E3420010DA84 /* libChilliSource.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D8B2261962DC120010DA84 /* libChilliSource.a */; };
 		81DB6CAD1A5C8A8A00ED47CE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DB6CAC1A5C8A8A00ED47CE /* AVFoundation.framework */; };
 		81DB6CAF1A5C8AAD00ED47CE /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DB6CAE1A5C8AAC00ED47CE /* CoreMedia.framework */; };
+		81E010791B56721000FEC2AE /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E010751B56721000FEC2AE /* State.cpp */; };
+		81E0107A1B56721000FEC2AE /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E010781B56721000FEC2AE /* FileSystem.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,9 +69,6 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		8103F8081B53C43D002242DE /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
-		8103F8091B53C43D002242DE /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
-		8103F8111B53FC40002242DE /* FileSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
 		811289D51636EACD008D781D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		811289D71636EC0B008D781D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		811289D91636F1DB008D781D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -101,6 +98,10 @@
 		81D8B2211962DC120010DA84 /* ChilliSource.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChilliSource.xcodeproj; path = ../../ChilliSource/Projects/iOS/ChilliSource.xcodeproj; sourceTree = "<group>"; };
 		81DB6CAC1A5C8A8A00ED47CE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		81DB6CAE1A5C8AAC00ED47CE /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		81E010731B56721000FEC2AE /* CSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTest.h; sourceTree = "<group>"; };
+		81E010751B56721000FEC2AE /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81E010761B56721000FEC2AE /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81E010781B56721000FEC2AE /* FileSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,24 +204,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8103F8071B53C43D002242DE /* UnitTest */ = {
-			isa = PBXGroup;
-			children = (
-				8103F8101B53FC40002242DE /* Tests */,
-				8103F8081B53C43D002242DE /* State.cpp */,
-				8103F8091B53C43D002242DE /* State.h */,
-			);
-			path = UnitTest;
-			sourceTree = "<group>";
-		};
-		8103F8101B53FC40002242DE /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				8103F8111B53FC40002242DE /* FileSystem.cpp */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
 		81455FE81961B47C00471F69 /* Built */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,9 +217,10 @@
 		81CFA14219EE9177003C8436 /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
+				81E010731B56721000FEC2AE /* CSTest.h */,
+				81E010741B56721000FEC2AE /* IntegrationTest */,
 				81CFA14319EE9177003C8436 /* App.cpp */,
 				81CFA14419EE9177003C8436 /* App.h */,
-				8103F8071B53C43D002242DE /* UnitTest */,
 			);
 			name = AppSource;
 			path = ../../AppSource;
@@ -258,6 +242,24 @@
 				81D8B2261962DC120010DA84 /* libChilliSource.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		81E010741B56721000FEC2AE /* IntegrationTest */ = {
+			isa = PBXGroup;
+			children = (
+				81E010751B56721000FEC2AE /* State.cpp */,
+				81E010761B56721000FEC2AE /* State.h */,
+				81E010771B56721000FEC2AE /* Tests */,
+			);
+			path = IntegrationTest;
+			sourceTree = "<group>";
+		};
+		81E010771B56721000FEC2AE /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				81E010781B56721000FEC2AE /* FileSystem.cpp */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,8 +364,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				81CFA14719EE9177003C8436 /* App.cpp in Sources */,
-				8103F8121B53FC40002242DE /* FileSystem.cpp in Sources */,
-				8103F80A1B53C43D002242DE /* State.cpp in Sources */,
+				81E0107A1B56721000FEC2AE /* FileSystem.cpp in Sources */,
+				81E010791B56721000FEC2AE /* State.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
