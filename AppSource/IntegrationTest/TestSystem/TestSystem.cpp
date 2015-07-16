@@ -28,7 +28,7 @@
 
 #include <IntegrationTest/TestSystem/TestSystem.h>
 
-#include <IntegrationTest/TestSystem/Report.h>
+#include <IntegrationTest/TestSystem/CSReporter.h>
 
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
@@ -38,6 +38,9 @@ namespace CSTest
     namespace IntegrationTest
     {
         CS_DEFINE_NAMEDTYPE(TestSystem);
+        
+        Catch::Session TestSystem::s_session;
+        
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         TestSystemUPtr TestSystem::Create()
@@ -54,21 +57,16 @@ namespace CSTest
         //------------------------------------------------------------------------------
         Report TestSystem::PerformTests()
         {
-            Catch::Session session;
-            session.configData().reporterName = "cs";
+            s_session.configData().reporterName = "cs";
 
-            int result = session.run();
-            if (result != 0)
-            {
-            }
+            s_session.run();
             
-            return Report();
+            return CSReporter::getReport();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void TestSystem::OnInit()
         {
-            
         }
     }
 }

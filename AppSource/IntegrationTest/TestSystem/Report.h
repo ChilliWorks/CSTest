@@ -48,6 +48,12 @@ namespace CSTest
         {
         public:
             //------------------------------------------------------------------------------
+            /// Construtor. Creates a blank report.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            Report();
+            //------------------------------------------------------------------------------
             /// Construtor. Takes all input data for the Report.
             ///
             /// @author Ian Copland
@@ -102,10 +108,11 @@ namespace CSTest
             //------------------------------------------------------------------------------
             const std::vector<TestCase>& GetFailedTestCases() const;
             
-            const bool m_wasRunSuccessful;
-            const u32 m_numTestCases;
-            const u32 m_numAssertions;
-            const std::vector<TestCase> m_failedTestCases;
+        private:
+            bool m_wasRunSuccessful;
+            u32 m_numTestCases;
+            u32 m_numAssertions;
+            std::vector<TestCase> m_failedTestCases;
             u32 m_numFailedAssertions;
         };
     }

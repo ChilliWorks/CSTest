@@ -32,6 +32,41 @@ namespace CSTest
 {
     namespace IntegrationTest
     {
-        
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        TestCase::TestCase()
+        : m_name(""), m_numAssertions(0)
+        {
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        TestCase::TestCase(const std::string& in_name, u32 in_numAssertions, const std::vector<FailedAssertion>& in_failedAssertions)
+            : m_name(in_name), m_numAssertions(in_numAssertions), m_failedAssertions(in_failedAssertions)
+        {
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        const std::string& TestCase::GetName() const
+        {
+            return m_name;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        u32 TestCase::GetNumAssertions() const
+        {
+            return m_numAssertions;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        u32 TestCase::GetNumFailedAssertions() const
+        {
+            return static_cast<u32>(m_failedAssertions.size());
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        const std::vector<FailedAssertion>& TestCase::GetFailedAssertions() const
+        {
+            return m_failedAssertions;
+        }
     }
 }

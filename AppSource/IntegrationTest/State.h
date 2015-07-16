@@ -73,6 +73,8 @@ namespace CSTest
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnDestroy() override;
+            
+            TestSystem* m_testSystem = nullptr;
         };
     }
 }

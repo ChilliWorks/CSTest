@@ -31,6 +31,8 @@
 
 #include <CSTest.h>
 
+#include <IntegrationTest/TestSystem/Report.h>
+
 #include <reporters/catch_reporter_bases.hpp>
 
 namespace CSTest
@@ -38,85 +40,82 @@ namespace CSTest
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// //TODO: !?
+        /// Receives events from Catch to generate a report.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class CSLogReporter final : public Catch::StreamingReporterBase
+        class CSReporter final : public Catch::StreamingReporterBase
         {
         public:
             //------------------------------------------------------------------------------
-            /// //TODO: !?
-            ///
             /// @author Ian Copland
+            ///
+            /// @return A description of the the reporter.
             //------------------------------------------------------------------------------
             static std::string getDescription();
             //------------------------------------------------------------------------------
-            /// //TODO: !?
-            ///
             /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            CSLogReporter(const Catch::ReporterConfig& in_config);
-            //------------------------------------------------------------------------------
-            /// //TODO: !?
             ///
+            /// @return The report generated during the last test run.
+            //------------------------------------------------------------------------------
+            static const Report& getReport();
+            //------------------------------------------------------------------------------
             /// @author Ian Copland
+            ///
+            /// @param in_config - The configuration. Note that CSReport only supports a
+            /// subset of available configs. It will assert if the config isn't supported.
+            //------------------------------------------------------------------------------
+            CSReporter(const Catch::ReporterConfig& in_config);
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return The reporter preferences.
             //------------------------------------------------------------------------------
             Catch::ReporterPreferences getPreferences() const override;
             //------------------------------------------------------------------------------
-            /// //TODO: !?
+            /// Called when an assertion begins.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_assertionInfo - The assertion info.
             //------------------------------------------------------------------------------
-//            void noMatchingTestCases(const std::string& in_spec) override;
+            void assertionStarting(const Catch::AssertionInfo& in_assertionInfo) override {};
             //------------------------------------------------------------------------------
-            /// //TODO: !?
+            /// Called when an assertion ends, with stats.
             ///
             /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void assertionStarting(const Catch::AssertionInfo& in_assertionInfo) override;
-            //------------------------------------------------------------------------------
-            /// //TODO: !?
             ///
-            /// @author Ian Copland
+            /// @param in_assertionStats - The stats on the given assertion.
             //------------------------------------------------------------------------------
             bool assertionEnded(const Catch::AssertionStats& in_assertionStats) override;
             //------------------------------------------------------------------------------
-            /// //TODO: !?
+            /// Called when an assertion ends, with stats.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_testCaseStats - The stats on how the test case went.
             //------------------------------------------------------------------------------
-//            void sectionStarting(const Catch::SectionInfo& in_sectionInfo) override;
+            void testCaseEnded(const Catch::TestCaseStats& in_testCaseStats) override;
             //------------------------------------------------------------------------------
-            /// //TODO: !?
+            /// Called when the test run ends, with stats.
             ///
             /// @author Ian Copland
-            //------------------------------------------------------------------------------
-//            void sectionEnded(const Catch::SectionStats& in_sectionStats) override;
-            //------------------------------------------------------------------------------
-            /// //TODO: !?
             ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-//            void testCaseEnded(const Catch::TestCaseStats& in_testCaseStats) override;
-            //------------------------------------------------------------------------------
-            /// //TODO: !?
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-//            void testGroupEnded(const Catch::TestGroupStats& in_testGroupStats) override;
-            //------------------------------------------------------------------------------
-            /// //TODO: !?
-            ///
-            /// @author Ian Copland
+            /// @param in_testRunStats - in_testRunStats
             //------------------------------------------------------------------------------
             void testRunEnded(const Catch::TestRunStats& in_testRunStats) override;
             //------------------------------------------------------------------------------
-            /// //TODO: !?
+            /// Destructor.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            ~CSLogReporter();
+            ~CSReporter();
+            
+        private:
+            std::vector<FailedAssertion> m_currentFailedAssertions;
+            std::vector<TestCase> m_currentFailedTestCases;
+            
+            static Report s_report; //needs to be accessible from TestSystem
         };
     }
 }

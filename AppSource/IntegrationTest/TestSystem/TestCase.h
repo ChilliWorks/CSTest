@@ -31,11 +31,69 @@
 
 #include <CSTest.h>
 
+#include <IntegrationTest/TestSystem/FailedAssertion.h>
+
+#include <vector>
+
 namespace CSTest
 {
     namespace IntegrationTest
     {
-        
+        //------------------------------------------------------------------------------
+        /// A container for information on a single test case.
+        ///
+        /// This is immutable after construction.
+        ///
+        /// @author Ian Copland
+        //------------------------------------------------------------------------------
+        class TestCase final
+        {
+        public:
+            //------------------------------------------------------------------------------
+            /// Construtor. Creates a blank test case.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            TestCase();
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @param in_name - The name of the test case.
+            /// @param in_numAssertions - The total number of assertions in the test case.
+            /// @param in_failedAssertions - A list containing data on each of the failed
+            /// assertions.
+            //------------------------------------------------------------------------------
+            TestCase(const std::string& in_name, u32 in_numAssertions, const std::vector<FailedAssertion>& in_failedAssertions);
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return The name of the test case.
+            //------------------------------------------------------------------------------
+            const std::string& GetName() const;
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return The total number of assertions in the test case.
+            //------------------------------------------------------------------------------
+            u32 GetNumAssertions() const;
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return The number of assertions which failed.
+            //------------------------------------------------------------------------------
+            u32 GetNumFailedAssertions() const;
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return A list containing data on each of the failed assertions.
+            //------------------------------------------------------------------------------
+            const std::vector<FailedAssertion>& GetFailedAssertions() const;
+            
+        private:
+            std::string m_name;
+            u32 m_numAssertions;
+            std::vector<FailedAssertion> m_failedAssertions;
+        };
     }
 }
 

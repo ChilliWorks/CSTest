@@ -28,19 +28,44 @@
 
 #include <IntegrationTest/State.h>
 
+#include <IntegrationTest/TestSystem/TestSystem.h>
+
+#include <catch.hpp>
+
 namespace CSTest
 {
     namespace IntegrationTest
     {
+        TEST_CASE("Example", "[Example]")
+        {
+            REQUIRE(false == true);
+        }
+        
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
+            m_testSystem = CreateSystem<TestSystem>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
+            auto report = m_testSystem->PerformTests();
+            
+            if (report.WasRunSuccessful() == false)
+            {
+                CS_LOG_VERBOSE("Failed to run tests.");
+                return;
+            }
+            
+            if (report.DidAllTestsPass() == false)
+            {
+                CS_LOG_VERBOSE(CSCore::ToString(report.GetNumFailedAssertions()) + " out of " + CSCore::ToString(report.GetNumAssertions()) + " tests failed.");
+                return;
+            }
+            
+            CS_LOG_VERBOSE("All tests passed!");
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

@@ -75,9 +75,9 @@ namespace CSTest
             const std::string& GetErrorMessage() const;
             
         private:
-            const std::string m_filePath;
-            const u32 m_line;
-            const std::string m_errorMessage;
+            std::string m_filePath;
+            u32 m_line;
+            std::string m_errorMessage;
         };
     }
 }

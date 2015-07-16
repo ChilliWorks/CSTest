@@ -1,5 +1,5 @@
 //
-//  TestReporter.cpp
+//  CSReporter.cpp
 //  CSTest
 //  Created by Ian Copland on 15/07/2015.
 //
@@ -26,7 +26,7 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/CSLogReporter.h>
+#include <IntegrationTest/TestSystem/CSReporter.h>
 
 #include <internal/catch_reporter_registrars.hpp>
 
@@ -34,29 +34,37 @@ namespace CSTest
 {
     namespace IntegrationTest
     {
-        INTERNAL_CATCH_REGISTER_REPORTER("cs", CSLogReporter);
+        INTERNAL_CATCH_REGISTER_REPORTER("cs", CSReporter);
+     
+        Report CSReporter::s_report;
         
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        std::string CSLogReporter::getDescription()
+        std::string CSReporter::getDescription()
         {
-            return "Reports using ChilliSource's logging functionality.";
+            return "Generates a report accessible in code.";
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CSLogReporter::CSLogReporter(const Catch::ReporterConfig& in_config)
+        const Report& CSReporter::getReport()
+        {
+            return s_report;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        CSReporter::CSReporter(const Catch::ReporterConfig& in_config)
             : StreamingReporterBase(in_config)
         {
-            CS_ASSERT(m_config->includeSuccessfulResults() == false, "CSLogReporter doesn't support reporting successful results.");
-            CS_ASSERT(m_config->warnAboutMissingAssertions() == false, "CSLogReporter doesn't support warning about missing assertions.");
-            CS_ASSERT(m_config->showInvisibles() == false, "CSLogReporter doesn't support showing invisibles.");
-            CS_ASSERT(m_config->showDurations() == false, "CSLogReporter doesn't support showing durations.");
-            CS_ASSERT(m_config->forceColour() == false, "CSLogReporter doesn't support coloured output.");
-            CS_ASSERT(m_config->shouldDebugBreak() == false, "CSLogReporter doesn't support debug break.");
+            CS_ASSERT(m_config->includeSuccessfulResults() == false, "CSReporter doesn't support reporting successful results.");
+            CS_ASSERT(m_config->warnAboutMissingAssertions() == false, "CSReporter doesn't support warning about missing assertions.");
+            CS_ASSERT(m_config->showInvisibles() == false, "CSReporter doesn't support showing invisibles.");
+            CS_ASSERT(m_config->showDurations() == false, "CSReporter doesn't support showing durations.");
+            CS_ASSERT(m_config->forceColour() == false, "CSReporter doesn't support coloured output.");
+            CS_ASSERT(m_config->shouldDebugBreak() == false, "CSReporter doesn't support debug break.");
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        Catch::ReporterPreferences CSLogReporter::getPreferences() const
+        Catch::ReporterPreferences CSReporter::getPreferences() const
         {
             Catch::ReporterPreferences prefs;
             prefs.shouldRedirectStdOut = true;
@@ -64,128 +72,41 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-//        void CSLogReporter::noMatchingTestCases(const std::string& in_spec)
-//        {
-//            StreamingReporterBase::noMatchingTestCases(in_spec);
-//        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        void CSLogReporter::assertionStarting(const Catch::AssertionInfo& in_assertionInfo)
+        bool CSReporter::assertionEnded(const Catch::AssertionStats& in_assertionStats)
         {
-            //StreamingReporterBase::assertionStarting(in_assertionInfo);
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        bool CSLogReporter::assertionEnded(const Catch::AssertionStats& in_assertionStats)
-        {
-//            if (StreamingReporterBase::assertionEnded(in_assertionStats) == false)
-//                return false;
-            
             const Catch::AssertionResult& assertionResult = in_assertionStats.assertionResult;
             
-            // Print any info messages in <Info> tags.
-            if(assertionResult.getResultType() != Catch::ResultWas::Ok)
+            if (isOk(assertionResult.getResultType()) == false)
             {
-                for(auto it = in_assertionStats.infoMessages.begin(), itEnd = in_assertionStats.infoMessages.end(); it != itEnd; ++it)
-                {
-                    if(it->type == Catch::ResultWas::Info)
-                    {
-                        CS_LOG_VERBOSE("Info: " + it->message);
-                    }
-                    else if (it->type == Catch::ResultWas::Warning)
-                    {
-                        CS_LOG_VERBOSE("Warning: " + it->message);
-                    }
-                }
-            }
-            
-            // Drop out if result was successful but we're not printing them.
-            if(m_config->includeSuccessfulResults() == false && isOk(assertionResult.getResultType()) == true)
-            {
-                return true;
-            }
-            
-            // Print the expression if there is one.
-            if(assertionResult.hasExpression() == true)
-            {
-                CS_LOG_VERBOSE("Expression: success=" + CSCore::ToString(assertionResult.succeeded()) + " type=" + assertionResult.getTestMacroName() +
-                               " filename=" + assertionResult.getSourceInfo().file + " line=" + CSCore::ToString(assertionResult.getSourceInfo().line));
-                
-                CS_LOG_VERBOSE("Original: " + assertionResult.getExpression());
-                CS_LOG_VERBOSE("Expanded: " + assertionResult.getExpandedExpression());
-            }
-            
-            // And... Print a result applicable to each result type.
-            switch( assertionResult.getResultType() ) {
-                case Catch::ResultWas::ThrewException:
-                    CS_LOG_VERBOSE("Exception: " + assertionResult.getMessage());
-                    break;
-                case Catch::ResultWas::FatalErrorCondition:
-                    CS_LOG_VERBOSE("Fatal Error Condition: " + assertionResult.getMessage());
-                    break;
-                case Catch::ResultWas::Info:
-                    CS_LOG_VERBOSE("Info: " + assertionResult.getMessage());
-                    break;
-                case Catch::ResultWas::Warning:
-                    // Warning will already have been written
-                    break;
-                case Catch::ResultWas::ExplicitFailure:
-                    CS_LOG_VERBOSE("Failure: " + assertionResult.getMessage());
-                    break;
-                default:
-                    break;
+                m_currentFailedAssertions.push_back(FailedAssertion(assertionResult.getSourceInfo().file, static_cast<u32>(assertionResult.getSourceInfo().line), assertionResult.getMessage()));
             }
             
             return true;
         }
-//        //------------------------------------------------------------------------------
-//        //------------------------------------------------------------------------------
-//        void CSLogReporter::sectionStarting(const Catch::SectionInfo& in_sectionInfo)
-//        {
-//            StreamingReporterBase::sectionStarting(in_sectionInfo);
-//            
-//            CS_LOG_VERBOSE("Starting section '" + in_sectionInfo.name + "': " + in_sectionInfo.description);
-//        }
-//        //------------------------------------------------------------------------------
-//        //------------------------------------------------------------------------------
-//        void CSLogReporter::sectionEnded(const Catch::SectionStats& in_sectionStats)
-//        {
-//            CS_LOG_VERBOSE("Ending section '" + in_sectionStats.sectionInfo.name + "' with " + CSCore::ToString(in_sectionStats.assertions.failed) + " errors.");
-//        }
-//        //------------------------------------------------------------------------------
-//        //------------------------------------------------------------------------------
-//        void CSLogReporter::testCaseEnded(const Catch::TestCaseStats& in_testCaseStats)
-//        {
-//            
-//        }
-//        //------------------------------------------------------------------------------
-//        //------------------------------------------------------------------------------
-//        void CSLogReporter::testGroupEnded(const Catch::TestGroupStats& in_testGroupStats)
-//        {
-//            
-//        }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void CSLogReporter::testRunEnded(const Catch::TestRunStats& in_testRunStats)
+        void CSReporter::testCaseEnded(const Catch::TestCaseStats& in_testCaseStats)
         {
-            StreamingReporterBase::testRunEnded(in_testRunStats);
+            StreamingReporterBase::testCaseEnded(in_testCaseStats);
             
-            if (in_testRunStats.totals.assertions.allPassed() == 0)
+            if (m_currentFailedAssertions.empty() == false)
             {
-                CS_LOG_VERBOSE("All tests passed!");
+                m_currentFailedTestCases.push_back(TestCase(in_testCaseStats.testInfo.name, static_cast<u32>(in_testCaseStats.totals.assertions.total()), m_currentFailedAssertions));
+                m_currentFailedAssertions.clear();
             }
-            else
-            {
-                std::size_t failed = in_testRunStats.totals.assertions.failed;
-                std::size_t total = in_testRunStats.totals.assertions.total();
-                CS_LOG_VERBOSE("OverallResults: " + CSCore::ToString(failed) + " out of " + CSCore::ToString(total) + " tests failed.");
-            }
-            
-            
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CSLogReporter::~CSLogReporter()
+        void CSReporter::testRunEnded(const Catch::TestRunStats& in_testRunStats)
+        {
+            StreamingReporterBase::testRunEnded(in_testRunStats);
+            
+            s_report = Report((in_testRunStats.aborting == false), static_cast<u32>(in_testRunStats.totals.testCases.total()), static_cast<u32>(in_testRunStats.totals.assertions.total()), m_currentFailedTestCases);
+            m_currentFailedTestCases.clear();
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        CSReporter::~CSReporter()
         {
             
         }

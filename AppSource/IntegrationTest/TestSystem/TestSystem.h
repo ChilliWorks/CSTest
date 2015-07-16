@@ -30,6 +30,7 @@
 #define _INTEGRATIONTEST_TESTSYSTEM_TESTSYSTEM_H_
 
 #include <CSTest.h>
+#include <IntegrationTest/TestSystem/Report.h>
 
 #include <ChilliSource/Core/System.h>
 

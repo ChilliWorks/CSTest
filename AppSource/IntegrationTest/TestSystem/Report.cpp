@@ -32,6 +32,64 @@ namespace CSTest
 {
     namespace IntegrationTest
     {
-        
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        Report::Report()
+            : m_wasRunSuccessful(false), m_numTestCases(0), m_numAssertions(0)
+        {
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        Report::Report(bool in_wasRunSuccessful, u32 in_numTestCases, u32 in_numAssertions, const std::vector<TestCase>& in_failedTestCases)
+            : m_wasRunSuccessful(in_wasRunSuccessful), m_numTestCases(in_numTestCases), m_numAssertions(in_numAssertions), m_failedTestCases(in_failedTestCases)
+        {
+            m_numFailedAssertions = 0;
+            for (const auto& testCase : m_failedTestCases)
+            {
+                m_numFailedAssertions += testCase.GetNumFailedAssertions();
+            }
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        bool Report::WasRunSuccessful() const
+        {
+            return m_wasRunSuccessful;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        bool Report::DidAllTestsPass() const
+        {
+            return (m_numFailedAssertions == 0);
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        u32 Report::GetNumTestCases() const
+        {
+            return m_numTestCases;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        u32 Report::GetNumAssertions() const
+        {
+            return m_numAssertions;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        u32 Report::GetNumFailedTestCases() const
+        {
+            return static_cast<u32>(m_failedTestCases.size());
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        u32 Report::GetNumFailedAssertions() const
+        {
+            return m_numFailedAssertions;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        const std::vector<TestCase>& Report::GetFailedTestCases() const
+        {
+            return m_failedTestCases;
+        }
     }
 }
