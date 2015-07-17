@@ -20,11 +20,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp" />
-    <ClCompile Include="..\..\AppSource\State.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\State.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\Report.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h" />
-    <ClInclude Include="..\..\AppSource\State.h" />
+    <ClInclude Include="..\..\AppSource\CSTest.h" />
+    <ClInclude Include="..\..\AppSource\IntegrationTest\State.h" />
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.h" />
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.h" />
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\Report.h" />
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.h" />
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{29AA6F17-26E4-48A0-95B4-8945F33A71A1}</ProjectGuid>
@@ -75,13 +87,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)..\..\AppSource\;$(ProjectDir)..\..\ChilliSource\Source\;$(ProjectDir)..\..\ChilliSource\Libraries\Core\Windows\Headers\;$(ProjectDir)..\..\ChilliSource\Libraries\CricketAudio\Windows\Headers\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\AppSource\;$(ProjectDir)..\..\Libraries\Catch\include\;$(ProjectDir)..\..\ChilliSource\Source\;$(ProjectDir)..\..\ChilliSource\Libraries\Core\Windows\Headers\;$(ProjectDir)..\..\ChilliSource\Libraries\CricketAudio\Windows\Headers\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)..\..\AppSource\;$(ProjectDir)..\..\ChilliSource\Source\;$(ProjectDir)..\..\ChilliSource\Libraries\Core\Windows\Headers\;$(ProjectDir)..\..\ChilliSource\Libraries\CricketAudio\Windows\Headers\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\AppSource\;$(ProjectDir)..\..\Libraries\Catch\include\;$(ProjectDir)..\..\ChilliSource\Source\;$(ProjectDir)..\..\ChilliSource\Libraries\Core\Windows\Headers\;$(ProjectDir)..\..\ChilliSource\Libraries\CricketAudio\Windows\Headers\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(LibraryPath);$(ProjectDir)..\..\ChilliSource\Libraries\Core\Windows\Libs\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\ChilliSource\Libraries\CricketAudio\Windows\Libs\$(Platform)\$(Configuration)\;$(ProjectDir)csbin\$(Platform)\$(Configuration)\</LibraryPath>
+    <LibraryPath>$(LibraryPath);$(ProjectDir)..\..\ChilliSource\Libraries\Core\Windows\Libs\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\ChilliSource\Libraries\CricketAudio\Windows\Libs\$(Platform)\$(Configuration)\;$(ProjectDir)csbin\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\Libraries\Catch\include\</LibraryPath>
     <LinkIncremental>false</LinkIncremental>
     <ReferencePath>
     </ReferencePath>
@@ -101,7 +113,7 @@
     <IntDir>$(SolutionDir)\obj\$(Platform)\$(Configuration)\a\b\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)..\..\AppSource\;$(ProjectDir)..\..\ChilliSource\Source\;$(ProjectDir)..\..\ChilliSource\Libraries\Core\Windows\Headers\;$(ProjectDir)..\..\ChilliSource\Libraries\CricketAudio\Windows\Headers\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\AppSource\;$(ProjectDir)..\..\Libraries\Catch\include\;$(ProjectDir)..\..\ChilliSource\Source\;$(ProjectDir)..\..\ChilliSource\Libraries\Core\Windows\Headers\;$(ProjectDir)..\..\ChilliSource\Libraries\CricketAudio\Windows\Headers\;$(IncludePath)</IncludePath>
     <ReferencePath>
     </ReferencePath>
     <LibraryPath>$(LibraryPath);$(ProjectDir)..\..\ChilliSource\Libraries\Core\Windows\Libs\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\ChilliSource\Libraries\CricketAudio\Windows\Libs\$(Platform)\$(Configuration)\;$(ProjectDir)csbin\$(Platform)\$(Configuration)\</LibraryPath>
@@ -116,7 +128,7 @@
     <PostBuildEventUseInBuild />
     <CustomBuildAfterTargets />
     <CustomBuildBeforeTargets>PostBuildEvent</CustomBuildBeforeTargets>
-    <IncludePath>$(ProjectDir)..\..\AppSource\;$(ProjectDir)..\..\ChilliSource\Source\;$(ProjectDir)..\..\ChilliSource\Libraries\Core\Windows\Headers\;$(ProjectDir)..\..\ChilliSource\Libraries\CricketAudio\Windows\Headers\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\AppSource\;$(ProjectDir)..\..\Libraries\Catch\include\;$(ProjectDir)..\..\ChilliSource\Source\;$(ProjectDir)..\..\ChilliSource\Libraries\Core\Windows\Headers\;$(ProjectDir)..\..\ChilliSource\Libraries\CricketAudio\Windows\Headers\;$(IncludePath)</IncludePath>
     <ReferencePath />
     <LibraryPath>$(LibraryPath);$(ProjectDir)..\..\ChilliSource\Libraries\Core\Windows\Libs\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\ChilliSource\Libraries\CricketAudio\Windows\Libs\$(Platform)\$(Configuration)\;$(ProjectDir)csbin\$(Platform)\$(Configuration)\</LibraryPath>
     <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>

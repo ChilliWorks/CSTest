@@ -36,11 +36,6 @@ namespace CSTest
 {
     namespace IntegrationTest
     {
-        TEST_CASE("Example", "[Example]")
-        {
-            REQUIRE(false == true);
-        }
-        
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::CreateSystems()
@@ -53,6 +48,7 @@ namespace CSTest
         {
             auto report = m_testSystem->PerformTests();
             
+            //TODO: This will be replaced with on screen display of results when the system for that is built.
             if (report.WasRunSuccessful() == false)
             {
                 CS_LOG_VERBOSE("Failed to run tests.");

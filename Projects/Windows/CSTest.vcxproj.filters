@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="AppSource">
+      <UniqueIdentifier>{2c700bfe-fe0b-40eb-b8bc-3280cc802bc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\IntegrationTest">
+      <UniqueIdentifier>{99ee85e4-36ad-44b5-8704-ac8bba77aba8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\IntegrationTest\Tests">
+      <UniqueIdentifier>{4dc48266-4c13-45f1-b457-93b840559326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\IntegrationTest\TestSystem">
+      <UniqueIdentifier>{15d22452-4cd1-40a3-afe7-09939628ec98}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\AppSource\App.cpp">
+      <Filter>AppSource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\State.cpp">
+      <Filter>AppSource\IntegrationTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\Report.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystem.cpp">
+      <Filter>AppSource\IntegrationTest\Tests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\AppSource\App.h">
+      <Filter>AppSource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\CSTest.h">
+      <Filter>AppSource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\State.h">
+      <Filter>AppSource\IntegrationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\Report.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
