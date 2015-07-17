@@ -57,6 +57,15 @@ namespace CSTest
             
             if (report.DidAllTestsPass() == false)
             {
+                for (const auto& testCase : report.GetFailedTestCases())
+                {
+                    CS_LOG_VERBOSE("Test case '" + testCase.GetName() + "' failed the following assertions.");
+                    for (const auto& assertion : testCase.GetFailedAssertions())
+                    {
+                        CS_LOG_VERBOSE("[" + assertion.GetFilePath() + ": " + CSCore::ToString(assertion.GetLine()) + "] " + assertion.GetErrorMessage());
+                    }
+                }
+
                 CS_LOG_VERBOSE(CSCore::ToString(report.GetNumFailedAssertions()) + " out of " + CSCore::ToString(report.GetNumAssertions()) + " tests failed.");
                 return;
             }

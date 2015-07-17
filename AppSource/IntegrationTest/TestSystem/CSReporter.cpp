@@ -78,7 +78,7 @@ namespace CSTest
             
             if (isOk(assertionResult.getResultType()) == false)
             {
-                m_currentFailedAssertions.push_back(FailedAssertion(assertionResult.getSourceInfo().file, static_cast<u32>(assertionResult.getSourceInfo().line), assertionResult.getMessage()));
+                m_currentFailedAssertions.push_back(FailedAssertion(assertionResult.getSourceInfo().file, static_cast<u32>(assertionResult.getSourceInfo().line), assertionResult.getExpression()));
             }
             
             return true;
@@ -103,12 +103,6 @@ namespace CSTest
             
             s_report = Report((in_testRunStats.aborting == false), static_cast<u32>(in_testRunStats.totals.testCases.total()), static_cast<u32>(in_testRunStats.totals.assertions.total()), m_currentFailedTestCases);
             m_currentFailedTestCases.clear();
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        CSReporter::~CSReporter()
-        {
-            
         }
     }
 }

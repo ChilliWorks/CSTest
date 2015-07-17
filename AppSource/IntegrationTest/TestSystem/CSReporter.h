@@ -104,12 +104,6 @@ namespace CSTest
             /// @param in_testRunStats - in_testRunStats
             //------------------------------------------------------------------------------
             void testRunEnded(const Catch::TestRunStats& in_testRunStats) override;
-            //------------------------------------------------------------------------------
-            /// Destructor.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            ~CSReporter();
             
         private:
             std::vector<FailedAssertion> m_currentFailedAssertions;
