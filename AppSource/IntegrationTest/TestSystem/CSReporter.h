@@ -89,7 +89,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             bool assertionEnded(const Catch::AssertionStats& in_assertionStats) override;
             //------------------------------------------------------------------------------
-            /// Called when an assertion ends, with stats.
+            /// Called when a test case ends, with stats.
             ///
             /// @author Ian Copland
             ///

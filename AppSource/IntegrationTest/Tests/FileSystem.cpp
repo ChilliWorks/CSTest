@@ -41,35 +41,6 @@ namespace CSTest
         namespace
         {
             //------------------------------------------------------------------------------
-            /// Tests that two vectors of strings have the same contents. Both must have
-            /// identical contents and be the same size, but the elements do not need to be
-            /// in the same order.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @param in_a - The first vector
-            /// @param in_b - The second vector
-            ///
-            /// @return Whether or not they have the same contents.
-            //------------------------------------------------------------------------------
-            bool EqualContents(const std::vector<std::string>& in_a, const std::vector<std::string>& in_b)
-            {
-                if (in_a.size() != in_b.size())
-                {
-                    return false;
-                }
-                
-                for (const auto& itemA : in_a)
-                {
-                    if (CSCore::VectorUtils::Contains(in_b, itemA) == false)
-                    {
-                        return false;
-                    }
-                }
-                
-                return true;
-            }
-            //------------------------------------------------------------------------------
             /// Reads a binary file and returns the first 4 bytes as an unsigned integer. If
             /// the file cannot be read 0 will be returned.
             ///
@@ -214,20 +185,20 @@ namespace CSTest
                 {
                     fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryCopySource, in_storageLocation, k_directoryCopyDestA);
 
-                    REQUIRE(EqualContents(fileSystem->GetFilePaths(in_storageLocation, k_directoryCopyDestA, true), k_expectedFilePathsA) == true);
-                    REQUIRE(EqualContents(fileSystem->GetFilePaths(in_storageLocation, k_copiedDirectoryC, false), k_expectedFilePathsC) == true);
-                    REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(in_storageLocation, k_directoryCopyDestA, true, "bin"), k_expectedFilePathsExtA) == true);
-                    REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(in_storageLocation, k_copiedDirectoryC, false, "bin"), k_expectedFilePathsExtC) == true);
-                    REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(in_storageLocation, k_directoryCopyDestA, true, k_searchFileName), k_expectedFilePathsNameA) == true);
-                    REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(in_storageLocation, k_copiedDirectoryC, false, k_searchFileName), k_expectedFilePathsNameC) == true);
+                    REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(in_storageLocation, k_directoryCopyDestA, true), k_expectedFilePathsA) == true);
+                    REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(in_storageLocation, k_copiedDirectoryC, false), k_expectedFilePathsC) == true);
+                    REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithExtension(in_storageLocation, k_directoryCopyDestA, true, "bin"), k_expectedFilePathsExtA) == true);
+                    REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithExtension(in_storageLocation, k_copiedDirectoryC, false, "bin"), k_expectedFilePathsExtC) == true);
+                    REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithFileName(in_storageLocation, k_directoryCopyDestA, true, k_searchFileName), k_expectedFilePathsNameA) == true);
+                    REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithFileName(in_storageLocation, k_copiedDirectoryC, false, k_searchFileName), k_expectedFilePathsNameC) == true);
                 }
                 
                 SECTION("Get directory paths")
                 {
                     fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryCopySource, in_storageLocation, k_directoryCopyDestA);
                     
-                    REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(in_storageLocation, k_directoryCopyDestA, true), k_expectedDirectoryPathsRecursiveA) == true);
-                    REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(in_storageLocation, k_directoryCopyDestA, false), k_expectedDirectoryPathsA) == true);
+                    REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetDirectoryPaths(in_storageLocation, k_directoryCopyDestA, true), k_expectedDirectoryPathsRecursiveA) == true);
+                    REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetDirectoryPaths(in_storageLocation, k_directoryCopyDestA, false), k_expectedDirectoryPathsA) == true);
                 }
                 
                 SECTION("Delete file")
@@ -302,18 +273,18 @@ namespace CSTest
             
             SECTION("Get file paths")
             {
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_package, k_directoryPathA, true), k_expectedFilePathsA) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_package, k_directoryPathC, false), k_expectedFilePathsC) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_package, k_directoryPathA, true, "bin"), k_expectedFilePathsExtA) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_package, k_directoryPathC, false, "bin"), k_expectedFilePathsExtC) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_package, k_directoryPathA, true, k_searchFileName), k_expectedFilePathsNameA) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_package, k_directoryPathC, false, k_searchFileName), k_expectedFilePathsNameC) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_package, k_directoryPathA, true), k_expectedFilePathsA) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_package, k_directoryPathC, false), k_expectedFilePathsC) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_package, k_directoryPathA, true, "bin"), k_expectedFilePathsExtA) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_package, k_directoryPathC, false, "bin"), k_expectedFilePathsExtC) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_package, k_directoryPathA, true, k_searchFileName), k_expectedFilePathsNameA) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_package, k_directoryPathC, false, k_searchFileName), k_expectedFilePathsNameC) == true);
             }
             
             SECTION("Get directory paths")
             {
-                REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_package, k_directoryPathA, true), k_expectedDirectoryPathsRecursiveA) == true);
-                REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_package, k_directoryPathA, false), k_expectedDirectoryPathsA) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_package, k_directoryPathA, true), k_expectedDirectoryPathsRecursiveA) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_package, k_directoryPathA, false), k_expectedDirectoryPathsA) == true);
             }
         }
 
@@ -357,14 +328,14 @@ namespace CSTest
 
             SECTION("Get file paths")
             {
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_chilliSource, k_directoryPath, false), k_expectedFilePaths) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_chilliSource, k_directoryPath, false, "csfont"), k_expectedFilePathsExt) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_chilliSource, k_directoryPath, false, k_searchFileName), k_expectedFilePathsName) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_chilliSource, k_directoryPath, false), k_expectedFilePaths) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_chilliSource, k_directoryPath, false, "csfont"), k_expectedFilePathsExt) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_chilliSource, k_directoryPath, false, k_searchFileName), k_expectedFilePathsName) == true);
             }
             
             SECTION("Get directory paths")
             {
-                REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_chilliSource, "", false), k_expectedDirectoryPaths) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_chilliSource, "", false), k_expectedDirectoryPaths) == true);
             }
         }
 
@@ -402,10 +373,10 @@ namespace CSTest
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_packageDirectoryPath, CSCore::StorageLocation::k_cache, k_copiedDirectoryPath);
                 
                 REQUIRE(fileSystem->CopyDirectory(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
                 
                 REQUIRE(fileSystem->CopyDirectory(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
             }
             
             SECTION("Copy from SaveData")
@@ -413,10 +384,10 @@ namespace CSTest
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_packageDirectoryPath, CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath);
                 
                 REQUIRE(fileSystem->CopyDirectory(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, CSCore::StorageLocation::k_cache, k_copiedDirectoryPath) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
                 
                 REQUIRE(fileSystem->CopyDirectory(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
             }
             
             SECTION("Copy from DLC")
@@ -424,10 +395,10 @@ namespace CSTest
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_packageDirectoryPath, CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath);
                 
                 REQUIRE(fileSystem->CopyDirectory(CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath, CSCore::StorageLocation::k_cache, k_copiedDirectoryPath) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
                 
                 REQUIRE(fileSystem->CopyDirectory(CSCore::StorageLocation::k_DLC, k_copiedDirectoryPath, CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, true), k_expectedFilePaths) == true);
             }
             
             ClearDirectory(CSCore::StorageLocation::k_cache, k_integrationTestDirectory);
@@ -494,13 +465,13 @@ namespace CSTest
 
             SECTION("Get file amd directory paths in packaged DLC")
             {
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_directoryPath, true), k_expectedPackageDLCFilePathsRecursive) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_directoryPath, false), k_expectedPackageDLCFilePaths) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, true, "bin"), k_expectedPackageDLCFilePathsExtRecursive) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, false, "bin"), k_expectedPackageDLCFilePathsExt) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_DLC, k_directoryPath, true, k_searchFileName), k_expectedPackageDLCFilePathsNameRecursive) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, false, k_searchFileName), k_expectedPackageDLCFilePathsName) == true);
-                REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_DLC, k_directoryPath, false), k_expectedPackageDLCDirectoryPaths) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_directoryPath, true), k_expectedPackageDLCFilePathsRecursive) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_directoryPath, false), k_expectedPackageDLCFilePaths) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, true, "bin"), k_expectedPackageDLCFilePathsExtRecursive) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, false, "bin"), k_expectedPackageDLCFilePathsExt) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_DLC, k_directoryPath, true, k_searchFileName), k_expectedPackageDLCFilePathsNameRecursive) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, false, k_searchFileName), k_expectedPackageDLCFilePathsName) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_DLC, k_directoryPath, false), k_expectedPackageDLCDirectoryPaths) == true);
             }
             
             SECTION("Does file exist in cached DLC")
@@ -536,13 +507,13 @@ namespace CSTest
                 fileSystem->WriteFile(CSCore::StorageLocation::k_DLC, k_extraFilePath1, reinterpret_cast<const s8*>(&k_binaryFileContents), 4);
                 fileSystem->WriteFile(CSCore::StorageLocation::k_DLC, k_extraFilePath2, reinterpret_cast<const s8*>(&k_binaryFileContents), 4);
                 
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_directoryPath, true), k_expectedMixedDLCFilePathsRecursive) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_directoryPath, false), k_expectedMixedDLCFilePaths) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, true, "bin"), k_expectedMixedDLCFilePathsExtRecursive) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, false, "bin"), k_expectedMixedDLCFilePathsExt) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_DLC, k_directoryPath, true, k_searchFileName), k_expectedMixedDLCFilePathsNameRecursive) == true);
-                REQUIRE(EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_DLC, k_directoryPath, false, k_searchFileName), k_expectedMixedDLCFilePathsName) == true);
-                REQUIRE(EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_DLC, k_directoryPath, false), k_expectedMixedDLCDirectoryPaths) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_directoryPath, true), k_expectedMixedDLCFilePathsRecursive) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_DLC, k_directoryPath, false), k_expectedMixedDLCFilePaths) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, true, "bin"), k_expectedMixedDLCFilePathsExtRecursive) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_DLC, k_directoryPath, false, "bin"), k_expectedMixedDLCFilePathsExt) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_DLC, k_directoryPath, true, k_searchFileName), k_expectedMixedDLCFilePathsNameRecursive) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_DLC, k_directoryPath, false, k_searchFileName), k_expectedMixedDLCFilePathsName) == true);
+                REQUIRE(CSCore::VectorUtils::EqualContents(fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_DLC, k_directoryPath, false), k_expectedMixedDLCDirectoryPaths) == true);
             }
             
             ClearDirectory(CSCore::StorageLocation::k_DLC, k_integrationTestDirectory);

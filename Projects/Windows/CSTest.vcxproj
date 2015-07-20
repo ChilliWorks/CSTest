@@ -142,7 +142,7 @@
       </PrecompiledHeaderFile>
       <ForcedIncludeFiles>
       </ForcedIncludeFiles>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;DEBUG;GLEW_STATIC;SFML_STATIC;CS_TARGETPLATFORM_WINDOWS;CS_ENABLE_DEBUG;CS_LOGLEVEL_VERBOSE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);CATCH_CONFIG_COLOUR_NONE;WIN32;_DEBUG;DEBUG;GLEW_STATIC;SFML_STATIC;CS_TARGETPLATFORM_WINDOWS;CS_ENABLE_DEBUG;CS_LOGLEVEL_VERBOSE</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
@@ -178,7 +178,7 @@
       </PrecompiledHeaderFile>
       <ForcedIncludeFiles>
       </ForcedIncludeFiles>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;DEBUG;GLEW_STATIC;SFML_STATIC;CS_TARGETPLATFORM_WINDOWS;CS_ENABLE_DEBUG;CS_LOGLEVEL_VERBOSE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);CATCH_CONFIG_COLOUR_NONE;WIN32;_DEBUG;DEBUG;GLEW_STATIC;SFML_STATIC;CS_TARGETPLATFORM_WINDOWS;CS_ENABLE_DEBUG;CS_LOGLEVEL_VERBOSE</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
@@ -214,7 +214,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <ForcedIncludeFiles>
       </ForcedIncludeFiles>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;NDEBUG;GLEW_STATIC;SFML_STATIC;CS_TARGETPLATFORM_WINDOWS;CS_LOGLEVEL_WARNING</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);CATCH_CONFIG_COLOUR_NONE;WIN32;NDEBUG;GLEW_STATIC;SFML_STATIC;CS_TARGETPLATFORM_WINDOWS;CS_LOGLEVEL_WARNING</PreprocessorDefinitions>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -251,7 +251,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <ForcedIncludeFiles>
       </ForcedIncludeFiles>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;NDEBUG;GLEW_STATIC;SFML_STATIC;CS_TARGETPLATFORM_WINDOWS;CS_LOGLEVEL_WARNING</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);CATCH_CONFIG_COLOUR_NONE;WIN32;NDEBUG;GLEW_STATIC;SFML_STATIC;CS_TARGETPLATFORM_WINDOWS;CS_LOGLEVEL_WARNING</PreprocessorDefinitions>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>

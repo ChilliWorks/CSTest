@@ -49,13 +49,11 @@ namespace CSTest
             auto report = m_testSystem->PerformTests();
             
             //TODO: This will be replaced with on screen display of results when the system for that is built.
-            if (report.WasRunSuccessful() == false)
+            if (report.DidAllTestsPass() == true)
             {
-                CS_LOG_VERBOSE("Failed to run tests.");
-                return;
+                CS_LOG_VERBOSE("All tests passed!");
             }
-            
-            if (report.DidAllTestsPass() == false)
+            else
             {
                 for (const auto& testCase : report.GetFailedTestCases())
                 {
@@ -67,10 +65,7 @@ namespace CSTest
                 }
 
                 CS_LOG_VERBOSE(CSCore::ToString(report.GetNumFailedAssertions()) + " out of " + CSCore::ToString(report.GetNumAssertions()) + " tests failed.");
-                return;
             }
-            
-            CS_LOG_VERBOSE("All tests passed!");
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

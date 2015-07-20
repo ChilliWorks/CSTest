@@ -58,19 +58,11 @@ namespace CSTest
             ///
             /// @author Ian Copland
             ///
-            /// @param in_wasRunSuccessful - Whether or not the tests themselves were
-            /// sucessfully run or something went wrong.
             /// @param in_numAssertions - The total number of assertions in the test run.
             /// @param in_numTestCases - The total number of test cases in the test run.
             /// @param in_failedTestCases - The list of failed test cases.
             //------------------------------------------------------------------------------
-            Report(bool in_wasRunSuccessful, u32 in_numTestCases, u32 in_numAssertions, const std::vector<TestCase>& in_failedTestCases);
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return Whether or not the tests themselves were all run successully.
-            //------------------------------------------------------------------------------
-            bool WasRunSuccessful() const;
+            Report(u32 in_numTestCases, u32 in_numAssertions, const std::vector<TestCase>& in_failedTestCases);
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
@@ -109,7 +101,6 @@ namespace CSTest
             const std::vector<TestCase>& GetFailedTestCases() const;
             
         private:
-            bool m_wasRunSuccessful;
             u32 m_numTestCases;
             u32 m_numAssertions;
             std::vector<TestCase> m_failedTestCases;

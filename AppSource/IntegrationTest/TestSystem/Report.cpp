@@ -35,25 +35,19 @@ namespace CSTest
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         Report::Report()
-            : m_wasRunSuccessful(false), m_numTestCases(0), m_numAssertions(0)
+            : m_numTestCases(0), m_numAssertions(0)
         {
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        Report::Report(bool in_wasRunSuccessful, u32 in_numTestCases, u32 in_numAssertions, const std::vector<TestCase>& in_failedTestCases)
-            : m_wasRunSuccessful(in_wasRunSuccessful), m_numTestCases(in_numTestCases), m_numAssertions(in_numAssertions), m_failedTestCases(in_failedTestCases)
+        Report::Report(u32 in_numTestCases, u32 in_numAssertions, const std::vector<TestCase>& in_failedTestCases)
+            : m_numTestCases(in_numTestCases), m_numAssertions(in_numAssertions), m_failedTestCases(in_failedTestCases)
         {
             m_numFailedAssertions = 0;
             for (const auto& testCase : m_failedTestCases)
             {
                 m_numFailedAssertions += testCase.GetNumFailedAssertions();
             }
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        bool Report::WasRunSuccessful() const
-        {
-            return m_wasRunSuccessful;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

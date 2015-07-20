@@ -101,7 +101,12 @@ namespace CSTest
         {
             StreamingReporterBase::testRunEnded(in_testRunStats);
             
-            s_report = Report((in_testRunStats.aborting == false), static_cast<u32>(in_testRunStats.totals.testCases.total()), static_cast<u32>(in_testRunStats.totals.assertions.total()), m_currentFailedTestCases);
+            if (in_testRunStats.aborting == true)
+            {
+                CS_LOG_FATAL("Failed to run tests, aborting.");
+            }
+            
+            s_report = Report(static_cast<u32>(in_testRunStats.totals.testCases.total()), static_cast<u32>(in_testRunStats.totals.assertions.total()), m_currentFailedTestCases);
             m_currentFailedTestCases.clear();
         }
     }
