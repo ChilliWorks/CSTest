@@ -34,7 +34,6 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.taggames.cstest"
         minSdkVersion 9
         targetSdkVersion 22
         versionCode 6
@@ -68,6 +67,7 @@ android {
         }
         debug {
             debuggable true
+            applicationIdSuffix ".debug"
         }
     }
 
@@ -78,9 +78,11 @@ android {
     productFlavors {
         googlePlay {
             dimension "sku"
+            applicationId "com.taggames.cstest.googleplay"
         }
         amazon {
             dimension "sku"
+            applicationId "com.taggames.cstest.amazon"
         }
         arm {
             dimension "abi"
