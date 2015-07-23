@@ -53,13 +53,6 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void CreateSystems() override;
             //------------------------------------------------------------------------------
-            /// A life-cycle event called when the State is first added to the state stack,
-            /// immediately after creation of state systems.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnInit() override;
-            //------------------------------------------------------------------------------
             /// The life-cycle event when is called every frame that the state is active.
             ///
             /// @author Ian Copland
@@ -67,14 +60,11 @@ namespace CSTest
             /// @param in_deltaTime - The time passed since the last frame.
             //------------------------------------------------------------------------------
             void OnUpdate(f32 in_deltaTime) override;
-            //------------------------------------------------------------------------------
-            /// The life-cycle event called when the State is about to be destroyed.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnDestroy() override;
             
             TestSystem* m_testSystem = nullptr;
+            ReportPresenter* m_reportPresenter = nullptr;
+            bool m_testsPerformed = false;
+            f32 m_timer = 0.0f;
         };
     }
 }

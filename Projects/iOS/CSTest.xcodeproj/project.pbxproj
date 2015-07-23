@@ -16,6 +16,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		810B0E461B6142A30035CF48 /* ReportPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 810B0E441B6142A30035CF48 /* ReportPresenter.cpp */; };
 		811289D61636EACD008D781D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D51636EACD008D781D /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		811289D81636EC0B008D781D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D71636EC0B008D781D /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		811289DA1636F1DC008D781D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D91636F1DB008D781D /* libz.dylib */; };
@@ -74,6 +75,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		810B0E441B6142A30035CF48 /* ReportPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReportPresenter.cpp; sourceTree = "<group>"; };
+		810B0E451B6142A30035CF48 /* ReportPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportPresenter.h; sourceTree = "<group>"; };
 		811289D51636EACD008D781D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		811289D71636EC0B008D781D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		811289D91636F1DB008D781D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -281,12 +284,14 @@
 		81E0108E1B56B6F500FEC2AE /* TestSystem */ = {
 			isa = PBXGroup;
 			children = (
-				81E0108F1B56B6F500FEC2AE /* FailedAssertion.cpp */,
-				81E010901B56B6F500FEC2AE /* FailedAssertion.h */,
 				81E010911B56B6F500FEC2AE /* CSReporter.cpp */,
 				81E010921B56B6F500FEC2AE /* CSReporter.h */,
+				81E0108F1B56B6F500FEC2AE /* FailedAssertion.cpp */,
+				81E010901B56B6F500FEC2AE /* FailedAssertion.h */,
 				81E010931B56B6F500FEC2AE /* Report.cpp */,
 				81E010941B56B6F500FEC2AE /* Report.h */,
+				810B0E441B6142A30035CF48 /* ReportPresenter.cpp */,
+				810B0E451B6142A30035CF48 /* ReportPresenter.h */,
 				81E010951B56B6F500FEC2AE /* TestCase.cpp */,
 				81E010961B56B6F500FEC2AE /* TestCase.h */,
 				81E010971B56B6F500FEC2AE /* TestSystem.cpp */,
@@ -403,6 +408,7 @@
 				81E0109D1B56B6F500FEC2AE /* TestSystem.cpp in Sources */,
 				81E010791B56721000FEC2AE /* State.cpp in Sources */,
 				81E0109B1B56B6F500FEC2AE /* Report.cpp in Sources */,
+				810B0E461B6142A30035CF48 /* ReportPresenter.cpp in Sources */,
 				81E0109C1B56B6F500FEC2AE /* TestCase.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

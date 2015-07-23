@@ -28,54 +28,42 @@
 
 #include <IntegrationTest/State.h>
 
+#include <IntegrationTest/TestSystem/ReportPresenter.h>
 #include <IntegrationTest/TestSystem/TestSystem.h>
-
-#include <catch.hpp>
 
 namespace CSTest
 {
     namespace IntegrationTest
     {
+        namespace
+        {
+            const f32 k_timeBeforeTests = 0.5f;
+        }
+        
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
             m_testSystem = CreateSystem<TestSystem>();
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        void State::OnInit()
-        {
-            auto report = m_testSystem->PerformTests();
-            
-            //TODO: This will be replaced with on screen display of results when the system for that is built.
-            if (report.DidAllTestsPass() == true)
-            {
-                CS_LOG_VERBOSE("All tests passed!");
-            }
-            else
-            {
-                for (const auto& testCase : report.GetFailedTestCases())
-                {
-                    CS_LOG_VERBOSE("Test case '" + testCase.GetName() + "' failed the following assertions.");
-                    for (const auto& assertion : testCase.GetFailedAssertions())
-                    {
-                        CS_LOG_VERBOSE("[" + assertion.GetFilePath() + ": " + CSCore::ToString(assertion.GetLine()) + "] " + assertion.GetErrorMessage());
-                    }
-                }
-
-                CS_LOG_VERBOSE(CSCore::ToString(report.GetNumFailedAssertions()) + " out of " + CSCore::ToString(report.GetNumAssertions()) + " tests failed.");
-            }
+            m_reportPresenter = CreateSystem<ReportPresenter>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::OnUpdate(f32 in_deltaTime)
         {
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        void State::OnDestroy()
-        {
+            if (m_testsPerformed == false)
+            {
+                m_timer += in_deltaTime;
+                
+                if (m_timer > k_timeBeforeTests)
+                {
+                    m_timer = 0.0f;
+                    m_testsPerformed = true;
+                    
+                    auto report = m_testSystem->PerformTests();
+                    m_reportPresenter->PresentReport(report);
+                }
+            }
         }
     }
 }

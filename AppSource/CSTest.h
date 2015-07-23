@@ -40,6 +40,7 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(CSReporter);
         CS_FORWARDDECLARE_CLASS(FailedAssertion);
         CS_FORWARDDECLARE_CLASS(Report);
+        CS_FORWARDDECLARE_CLASS(ReportPresenter);
         CS_FORWARDDECLARE_CLASS(State);
         CS_FORWARDDECLARE_CLASS(TestCase);
         CS_FORWARDDECLARE_CLASS(TestSystem);
