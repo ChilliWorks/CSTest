@@ -53,6 +53,12 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void CreateSystems() override;
             //------------------------------------------------------------------------------
+            /// Initialises the state.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void OnInit() override;
+            //------------------------------------------------------------------------------
             /// The life-cycle event when is called every frame that the state is active.
             ///
             /// @author Ian Copland

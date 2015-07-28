@@ -28,6 +28,7 @@
 
 #include <IntegrationTest/State.h>
 
+#include <Common/Core/StateNavigator.h>
 #include <IntegrationTest/TestSystem/ReportPresenter.h>
 #include <IntegrationTest/TestSystem/TestSystem.h>
 
@@ -37,6 +38,8 @@ namespace CSTest
     {
         namespace
         {
+            using NextState = State;
+            
             const f32 k_timeBeforeTests = 0.5f;
         }
         
@@ -46,6 +49,13 @@ namespace CSTest
         {
             m_testSystem = CreateSystem<TestSystem>();
             m_reportPresenter = CreateSystem<ReportPresenter>();
+            CreateSystem<Common::StateNavigator<NextState>>();
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void State::OnInit()
+        {
+            GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(false);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -62,6 +72,7 @@ namespace CSTest
                     
                     auto report = m_testSystem->PerformTests();
                     m_reportPresenter->PresentReport(report);
+                    GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(true);
                 }
             }
         }

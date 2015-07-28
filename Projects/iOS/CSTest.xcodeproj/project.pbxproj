@@ -44,6 +44,7 @@
 		81D8B6ED1962E3420010DA84 /* libChilliSource.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D8B2261962DC120010DA84 /* libChilliSource.a */; };
 		81DB6CAD1A5C8A8A00ED47CE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DB6CAC1A5C8A8A00ED47CE /* AVFoundation.framework */; };
 		81DB6CAF1A5C8AAD00ED47CE /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DB6CAE1A5C8AAC00ED47CE /* CoreMedia.framework */; };
+		81DE059A1B67C5F800583F5F /* UIFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81DE05981B67C5F800583F5F /* UIFactory.cpp */; };
 		81E010791B56721000FEC2AE /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E010751B56721000FEC2AE /* State.cpp */; };
 		81E0107A1B56721000FEC2AE /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E010781B56721000FEC2AE /* FileSystem.cpp */; };
 		81E010991B56B6F500FEC2AE /* FailedAssertion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E0108F1B56B6F500FEC2AE /* FailedAssertion.cpp */; };
@@ -106,6 +107,10 @@
 		81D8B2211962DC120010DA84 /* ChilliSource.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChilliSource.xcodeproj; path = ../../ChilliSource/Projects/iOS/ChilliSource.xcodeproj; sourceTree = "<group>"; };
 		81DB6CAC1A5C8A8A00ED47CE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		81DB6CAE1A5C8AAC00ED47CE /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		81DE05901B67C17C00583F5F /* StateNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateNavigator.h; sourceTree = "<group>"; };
+		81DE05961B67C59C00583F5F /* StateNavigatorImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateNavigatorImpl.h; sourceTree = "<group>"; };
+		81DE05981B67C5F800583F5F /* UIFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIFactory.cpp; sourceTree = "<group>"; };
+		81DE05991B67C5F800583F5F /* UIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFactory.h; sourceTree = "<group>"; };
 		81E010731B56721000FEC2AE /* CSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTest.h; sourceTree = "<group>"; };
 		81E010751B56721000FEC2AE /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81E010761B56721000FEC2AE /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
@@ -235,10 +240,11 @@
 		81CFA14219EE9177003C8436 /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
-				81E010731B56721000FEC2AE /* CSTest.h */,
-				81E010741B56721000FEC2AE /* IntegrationTest */,
 				81CFA14319EE9177003C8436 /* App.cpp */,
 				81CFA14419EE9177003C8436 /* App.h */,
+				81DE058D1B67C17C00583F5F /* Common */,
+				81E010731B56721000FEC2AE /* CSTest.h */,
+				81E010741B56721000FEC2AE /* IntegrationTest */,
 			);
 			name = AppSource;
 			path = ../../AppSource;
@@ -260,6 +266,33 @@
 				81D8B2261962DC120010DA84 /* libChilliSource.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		81DE058D1B67C17C00583F5F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				81DE05971B67C5F800583F5F /* UI */,
+				81DE058E1B67C17C00583F5F /* Core */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		81DE058E1B67C17C00583F5F /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				81DE05961B67C59C00583F5F /* StateNavigatorImpl.h */,
+				81DE05901B67C17C00583F5F /* StateNavigator.h */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		81DE05971B67C5F800583F5F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				81DE05981B67C5F800583F5F /* UIFactory.cpp */,
+				81DE05991B67C5F800583F5F /* UIFactory.h */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		81E010741B56721000FEC2AE /* IntegrationTest */ = {
@@ -405,6 +438,7 @@
 				81E0107A1B56721000FEC2AE /* FileSystem.cpp in Sources */,
 				81E010991B56B6F500FEC2AE /* FailedAssertion.cpp in Sources */,
 				81E0109A1B56B6F500FEC2AE /* CSReporter.cpp in Sources */,
+				81DE059A1B67C5F800583F5F /* UIFactory.cpp in Sources */,
 				81E0109D1B56B6F500FEC2AE /* TestSystem.cpp in Sources */,
 				81E010791B56721000FEC2AE /* State.cpp in Sources */,
 				81E0109B1B56B6F500FEC2AE /* Report.cpp in Sources */,

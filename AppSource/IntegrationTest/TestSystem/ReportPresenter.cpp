@@ -28,6 +28,7 @@
 
 #include <IntegrationTest/TestSystem/ReportPresenter.h>
 
+#include <Common/UI/UIFactory.h>
 #include <IntegrationTest/TestSystem/CSReporter.h>
 
 #include <ChilliSource/Core/Base.h>
@@ -48,42 +49,6 @@ namespace CSTest
             const char k_failureText[] = "Tests failed!";
             const u32 k_maxTestCasesToDisplay = 3;
             
-            //------------------------------------------------------------------------------
-            /// Creates a new text widget with the given properties.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @param in_position - The relative position of the text widget.
-            /// @param in_size - The relative size of the text widget.
-            /// @param in_font - The font the text will be rendered with.
-            /// @param in_alignment - [Optional] The alignment of the text. Defaults to
-            /// middle centre.
-            /// @param iin_horizontalTextJustification - [Optional] The horizontal
-            /// justification of the text. Defaults to centre.
-            /// @param in_verticalTextJustification - [Optional] The vertical justification
-            /// of the text. Defaults to centre.
-            //------------------------------------------------------------------------------
-            CSUI::WidgetUPtr CreateTextWidget(const CSCore::Vector2& in_position, const CSCore::Vector2& in_size, const CSRendering::FontCSPtr& in_font,
-                                              CSRendering::AlignmentAnchor in_alignment = CSRendering::AlignmentAnchor::k_middleCentre,
-                                              CSRendering::HorizontalTextJustification in_horizontalTextJustification = CSRendering::HorizontalTextJustification::k_centre,
-                                              CSRendering::VerticalTextJustification in_verticalTextJustification = CSRendering::VerticalTextJustification::k_centre)
-            {
-                auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
-                
-                auto widget = widgetFactory->CreateLabel();
-                widget->SetRelativePosition(in_position);
-                widget->SetRelativeSize(in_size);
-                widget->SetParentalAnchor(in_alignment);
-                widget->SetOriginAnchor(in_alignment);
-                
-                auto textComponent = widget->GetComponent<CSUI::TextComponent>();
-                textComponent->SetFont(in_font);
-                textComponent->SetTextColour(CSCore::Colour::k_black);
-                textComponent->SetHorizontalJustification(in_horizontalTextJustification);
-                textComponent->SetVerticalJustification(in_verticalTextJustification);
-                
-                return widget;
-            }
             //------------------------------------------------------------------------------
             /// Prints details on a failed test report to console.
             ///
@@ -210,10 +175,10 @@ namespace CSTest
             auto smallFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
             auto mediumFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialMed.csfont");
 
-            m_centreText = CreateTextWidget(CSCore::Vector2::k_zero, CSCore::Vector2(0.9f, 1.0f), mediumFont);
-            m_headerText = CreateTextWidget(CSCore::Vector2::k_zero, CSCore::Vector2(0.9f, 0.15f), mediumFont, CSRendering::AlignmentAnchor::k_topCentre);
-            m_bodyText = CreateTextWidget(CSCore::Vector2(0.0f, -0.15f), CSCore::Vector2(0.9f, 0.65f), smallFont, CSRendering::AlignmentAnchor::k_topCentre, CSRendering::HorizontalTextJustification::k_left,
-                                            CSRendering::VerticalTextJustification::k_top);
+            m_centreText = Common::UIFactory::CreateLabel(CSCore::Vector2(0.9f, 1.0f), mediumFont, "");
+            m_headerText = Common::UIFactory::CreateLabel(CSCore::Vector2(0.9f, 0.15f), mediumFont, "", CSRendering::AlignmentAnchor::k_topCentre);
+            m_bodyText = Common::UIFactory::CreateLabel(CSCore::Vector2(0.9f, 0.65f), smallFont, "", CSRendering::AlignmentAnchor::k_topCentre, CSRendering::HorizontalTextJustification::k_left, CSRendering::VerticalTextJustification::k_top);
+            m_bodyText->SetRelativePosition(CSCore::Vector2(0.0f, -0.15f));
 
             auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
             m_presentationUI = widgetFactory->CreateWidget();
