@@ -27,17 +27,20 @@
 #  THE SOFTWARE.
 #
 
-import os
-import sys
+import font_builder
 import model_builder
 import text_builder
 import texture_atlas_builder
 import texture_builder
 
+import os
+import sys
+
 model_directory_path = "Models/"
 text_directory_path = "Text/"
 texture_atlas_directory_path = "TextureAtlases/"
 texture_directory_path = "Textures/"
+font_directory_path = "Fonts/"
 
 #------------------------------------------------------------------------------
 # The entry point into the script.
@@ -58,6 +61,7 @@ def main(args):
 	text_builder.build(os.path.join(input_path, text_directory_path), os.path.join(output_path, text_directory_path))
 	texture_atlas_builder.build(os.path.join(input_path, texture_atlas_directory_path), os.path.join(output_path, texture_atlas_directory_path))
 	texture_builder.build(os.path.join(input_path, texture_directory_path), os.path.join(output_path, texture_directory_path))
+	font_builder.build(os.path.join(output_path, font_directory_path))
 
 if __name__ == "__main__":
 	main(sys.argv)

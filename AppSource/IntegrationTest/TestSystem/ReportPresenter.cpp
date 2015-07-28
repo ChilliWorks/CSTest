@@ -31,7 +31,9 @@
 #include <IntegrationTest/TestSystem/CSReporter.h>
 
 #include <ChilliSource/Core/Base.h>
+#include <ChilliSource/Core/Resource.h>
 #include <ChilliSource/Core/State.h>
+#include <ChilliSource/Rendering/Font.h>
 #include <ChilliSource/UI/Base.h>
 #include <ChilliSource/UI/Text.h>
 
@@ -42,8 +44,78 @@ namespace CSTest
         namespace
         {
             const char k_defaultText[] = "Running tests...";
-            const char k_successText[] = "All tests succeeded!";
-            const u32 k_maxTestCasesToDisplay = 4;
+            const char k_successText[] = "All tests successful!";
+            const char k_failureText[] = "Tests failed!";
+            const u32 k_maxTestCasesToDisplay = 3;
+            
+            //------------------------------------------------------------------------------
+            /// Creates a new text widget with the given properties.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_position - The relative position of the text widget.
+            /// @param in_size - The relative size of the text widget.
+            /// @param in_font - The font the text will be rendered with.
+            /// @param in_alignment - [Optional] The alignment of the text. Defaults to
+            /// middle centre.
+            /// @param iin_horizontalTextJustification - [Optional] The horizontal
+            /// justification of the text. Defaults to centre.
+            /// @param in_verticalTextJustification - [Optional] The vertical justification
+            /// of the text. Defaults to centre.
+            //------------------------------------------------------------------------------
+            CSUI::WidgetUPtr CreateTextWidget(const CSCore::Vector2& in_position, const CSCore::Vector2& in_size, const CSRendering::FontCSPtr& in_font,
+                                              CSRendering::AlignmentAnchor in_alignment = CSRendering::AlignmentAnchor::k_middleCentre,
+                                              CSRendering::HorizontalTextJustification in_horizontalTextJustification = CSRendering::HorizontalTextJustification::k_centre,
+                                              CSRendering::VerticalTextJustification in_verticalTextJustification = CSRendering::VerticalTextJustification::k_centre)
+            {
+                auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
+                
+                auto widget = widgetFactory->CreateLabel();
+                widget->SetRelativePosition(in_position);
+                widget->SetRelativeSize(in_size);
+                widget->SetParentalAnchor(in_alignment);
+                widget->SetOriginAnchor(in_alignment);
+                
+                auto textComponent = widget->GetComponent<CSUI::TextComponent>();
+                textComponent->SetFont(in_font);
+                textComponent->SetTextColour(CSCore::Colour::k_black);
+                textComponent->SetHorizontalJustification(in_horizontalTextJustification);
+                textComponent->SetVerticalJustification(in_verticalTextJustification);
+                
+                return widget;
+            }
+            //------------------------------------------------------------------------------
+            /// Prints details on a failed test report to console.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_report - The report. Must be failed report.
+            //------------------------------------------------------------------------------
+            void PrintDetailedReport(const Report& in_report)
+            {
+                CS_ASSERT(in_report.DidAllTestsPass() == false, "Must be failed report");
+                
+                CS_LOG_ERROR("==========================================");
+                
+                CS_LOG_ERROR("Tests Failed!");
+                CS_LOG_ERROR(" ");
+                CS_LOG_ERROR(CSCore::ToString(in_report.GetNumFailedTestCases()) + " test cases failed out of " + CSCore::ToString(in_report.GetNumTestCases()));
+                CS_LOG_ERROR(CSCore::ToString(in_report.GetNumFailedAssertions()) + " assertions failed out of " + CSCore::ToString(in_report.GetNumAssertions()));
+                
+                for (const auto& testCase : in_report.GetFailedTestCases())
+                {
+                    CS_LOG_ERROR(" ");
+                    CS_LOG_ERROR("'" + testCase.GetName() + "' failed " + CSCore::ToString(testCase.GetNumFailedAssertions()) + " out of " + CSCore::ToString(testCase.GetNumAssertions()) + " assertions: ");
+                    
+                    for (const auto& assertion : testCase.GetFailedAssertions())
+                    {
+                        CS_LOG_ERROR("  " + assertion.GetFilePath() + ": " + CSCore::ToString(assertion.GetLine()));
+                        CS_LOG_ERROR("    " + assertion.GetErrorMessage());
+                    }
+                }
+                
+                CS_LOG_ERROR("==========================================");
+            }
         }
         
         CS_DEFINE_NAMEDTYPE(ReportPresenter);
@@ -65,55 +137,89 @@ namespace CSTest
         {
             if (in_report.DidAllTestsPass() == true)
             {
-                SetText(k_successText);
+                std::string textBody = CSCore::ToString(in_report.GetNumTestCases()) + " test cases successful.";
+                textBody += "\n" + CSCore::ToString(in_report.GetNumAssertions()) + " assertions successful.";
+                
+                SetText(k_successText, textBody);
             }
             else
             {
-                std::string failureText = "Tests failed!";
-                failureText += "\n\n" + CSCore::ToString(in_report.GetNumFailedTestCases()) + " test cases failed out of " + CSCore::ToString(in_report.GetNumTestCases());
-                failureText += "\n" + CSCore::ToString(in_report.GetNumFailedAssertions()) + " assertions failed out of " + CSCore::ToString(in_report.GetNumAssertions());
+                std::string textBody = CSCore::ToString(in_report.GetNumFailedTestCases()) + " test cases failed out of " + CSCore::ToString(in_report.GetNumTestCases());
+                textBody += "\n" + CSCore::ToString(in_report.GetNumFailedAssertions()) + " assertions failed out of " + CSCore::ToString(in_report.GetNumAssertions());
                 
-                failureText += "\n\nThe following tests cases failed:";
+                textBody += "\n \nThe following tests cases failed:";
                 
                 int count = 0;
-                for (auto testCase : in_report.GetFailedTestCases())
+                for (const auto& testCase : in_report.GetFailedTestCases())
                 {
-                    failureText += "\n" + testCase.GetName();
+                    textBody += "\n - " + testCase.GetName();
                     
-                    if (count++ >= k_maxTestCasesToDisplay)
+                    if (++count >= k_maxTestCasesToDisplay)
                     {
-                        failureText += "\n...";
+                        textBody += "\n - ...";
+                        break;
                     }
                 }
                 
-                SetText(failureText);
+                textBody += "\n \nPlease check the console for further information.";
+                
+                SetText(k_failureText, textBody);
+                
+                PrintDetailedReport(in_report);
             }
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void ReportPresenter::SetText(const std::string& in_text)
         {
-            CS_ASSERT(m_text, "Cannot set the text before the text widget is created.");
+            CS_ASSERT(m_centreText, "Cannot set the text before the text widgets are created.");
+            CS_ASSERT(m_headerText, "Cannot set the text before the text widgets are created.");
+            CS_ASSERT(m_bodyText, "Cannot set the text before the text widgets are created.");
             
-            auto textComponent = m_text->GetComponent<CSUI::TextComponent>();
+            auto textComponent = m_centreText->GetComponent<CSUI::TextComponent>();
             textComponent->SetText(in_text);
+            
+            textComponent = m_headerText->GetComponent<CSUI::TextComponent>();
+            textComponent->SetText("");
+            
+            textComponent = m_bodyText->GetComponent<CSUI::TextComponent>();
+            textComponent->SetText("");
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void ReportPresenter::SetText(const std::string& in_header, const std::string& in_body)
+        {
+            CS_ASSERT(m_centreText, "Cannot set the text before the text widgets are created.");
+            CS_ASSERT(m_headerText, "Cannot set the text before the text widgets are created.");
+            CS_ASSERT(m_bodyText, "Cannot set the text before the text widgets are created.");
+            
+            auto textComponent = m_centreText->GetComponent<CSUI::TextComponent>();
+            textComponent->SetText("");
+            
+            textComponent = m_headerText->GetComponent<CSUI::TextComponent>();
+            textComponent->SetText(in_header);
+            
+            textComponent = m_bodyText->GetComponent<CSUI::TextComponent>();
+            textComponent->SetText(in_body);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void ReportPresenter::OnInit()
         {
+            auto resourcePool = CSCore::Application::Get()->GetResourcePool();
+            auto smallFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
+            auto mediumFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialMed.csfont");
+
+            m_centreText = CreateTextWidget(CSCore::Vector2::k_zero, CSCore::Vector2(0.9f, 1.0f), mediumFont);
+            m_headerText = CreateTextWidget(CSCore::Vector2::k_zero, CSCore::Vector2(0.9f, 0.15f), mediumFont, CSRendering::AlignmentAnchor::k_topCentre);
+            m_bodyText = CreateTextWidget(CSCore::Vector2(0.0f, -0.15f), CSCore::Vector2(0.9f, 0.65f), smallFont, CSRendering::AlignmentAnchor::k_topCentre, CSRendering::HorizontalTextJustification::k_left,
+                                            CSRendering::VerticalTextJustification::k_top);
+
             auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
-            
-            m_text = widgetFactory->CreateLabel();
-            m_text->SetAbsoluteSize(CSCore::Vector2(0.8f, 0.8f));
-            
-            auto textComponent = m_text->GetComponent<CSUI::TextComponent>();
-            textComponent->SetTextColour(CSCore::Colour::k_black);
-            textComponent->SetVerticalJustification(CSRendering::VerticalTextJustification::k_centre);
-            textComponent->SetHorizontalJustification(CSRendering::HorizontalTextJustification::k_centre);
-            
             m_presentationUI = widgetFactory->CreateWidget();
-            m_presentationUI->AddWidget(m_text);
+            m_presentationUI->AddWidget(m_centreText);
+            m_presentationUI->AddWidget(m_headerText);
+            m_presentationUI->AddWidget(m_bodyText);
             
             GetState()->GetUICanvas()->AddWidget(m_presentationUI);
             
@@ -123,7 +229,10 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void ReportPresenter::OnDestroy()
         {
-            m_text.reset();
+            m_centreText.reset();
+            m_headerText.reset();
+            m_bodyText.reset();
+            
             m_presentationUI->RemoveFromParent();
             m_presentationUI.reset();
         }
