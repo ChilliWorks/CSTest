@@ -37,6 +37,7 @@
 		81A83FAC1340B90900FBCC29 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A83FA21340B8E900FBCC29 /* SystemConfiguration.framework */; };
 		81B9C0D918B27D490029BC9E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81B9C0D818B27D490029BC9E /* CoreMotion.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		81CFA14719EE9177003C8436 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CFA14319EE9177003C8436 /* App.cpp */; };
+		81D1535D1B68DB1400341A9F /* ResultPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81D1535B1B68DB1400341A9F /* ResultPresenter.cpp */; };
 		81D8923F196160E70010DA84 /* AppResources in Resources */ = {isa = PBXBuildFile; fileRef = 81D8923D196160E70010DA84 /* AppResources */; };
 		81D89240196160E70010DA84 /* CSResources in Resources */ = {isa = PBXBuildFile; fileRef = 81D8923E196160E70010DA84 /* CSResources */; };
 		81D89B751962BD400010DA84 /* com_taggames_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D89B721962BD400010DA84 /* com_taggames_close_button.png */; };
@@ -45,6 +46,9 @@
 		81DB6CAD1A5C8A8A00ED47CE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DB6CAC1A5C8A8A00ED47CE /* AVFoundation.framework */; };
 		81DB6CAF1A5C8AAD00ED47CE /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DB6CAE1A5C8AAC00ED47CE /* CoreMedia.framework */; };
 		81DE059A1B67C5F800583F5F /* UIFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81DE05981B67C5F800583F5F /* UIFactory.cpp */; };
+		81DE059E1B67D53200583F5F /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81DE059C1B67D53200583F5F /* State.cpp */; };
+		81DE05A11B67D53B00583F5F /* SmokeTester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81DE059F1B67D53B00583F5F /* SmokeTester.cpp */; };
+		81DE05A41B67D67300583F5F /* SmokeTestSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81DE05A21B67D67300583F5F /* SmokeTestSet.cpp */; };
 		81E010791B56721000FEC2AE /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E010751B56721000FEC2AE /* State.cpp */; };
 		81E0107A1B56721000FEC2AE /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E010781B56721000FEC2AE /* FileSystem.cpp */; };
 		81E010991B56B6F500FEC2AE /* FailedAssertion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E0108F1B56B6F500FEC2AE /* FailedAssertion.cpp */; };
@@ -99,6 +103,8 @@
 		81B9C0D818B27D490029BC9E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		81CFA14319EE9177003C8436 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		81CFA14419EE9177003C8436 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
+		81D1535B1B68DB1400341A9F /* ResultPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResultPresenter.cpp; sourceTree = "<group>"; };
+		81D1535C1B68DB1400341A9F /* ResultPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultPresenter.h; sourceTree = "<group>"; };
 		81D8923D196160E70010DA84 /* AppResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppResources; path = XcodeBuiltAssets/AppResources; sourceTree = "<group>"; };
 		81D8923E196160E70010DA84 /* CSResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CSResources; path = XcodeBuiltAssets/CSResources; sourceTree = "<group>"; };
 		81D89B721962BD400010DA84 /* com_taggames_close_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = com_taggames_close_button.png; sourceTree = "<group>"; };
@@ -111,6 +117,12 @@
 		81DE05961B67C59C00583F5F /* StateNavigatorImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateNavigatorImpl.h; sourceTree = "<group>"; };
 		81DE05981B67C5F800583F5F /* UIFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIFactory.cpp; sourceTree = "<group>"; };
 		81DE05991B67C5F800583F5F /* UIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFactory.h; sourceTree = "<group>"; };
+		81DE059C1B67D53200583F5F /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81DE059D1B67D53200583F5F /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81DE059F1B67D53B00583F5F /* SmokeTester.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SmokeTester.cpp; sourceTree = "<group>"; };
+		81DE05A01B67D53B00583F5F /* SmokeTester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmokeTester.h; sourceTree = "<group>"; };
+		81DE05A21B67D67300583F5F /* SmokeTestSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SmokeTestSet.cpp; sourceTree = "<group>"; };
+		81DE05A31B67D67300583F5F /* SmokeTestSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmokeTestSet.h; sourceTree = "<group>"; };
 		81E010731B56721000FEC2AE /* CSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTest.h; sourceTree = "<group>"; };
 		81E010751B56721000FEC2AE /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81E010761B56721000FEC2AE /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
@@ -240,6 +252,7 @@
 		81CFA14219EE9177003C8436 /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
+				81DE059B1B67D53200583F5F /* WebView */,
 				81CFA14319EE9177003C8436 /* App.cpp */,
 				81CFA14419EE9177003C8436 /* App.h */,
 				81DE058D1B67C17C00583F5F /* Common */,
@@ -280,8 +293,14 @@
 		81DE058E1B67C17C00583F5F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				81DE05A21B67D67300583F5F /* SmokeTestSet.cpp */,
+				81DE05A31B67D67300583F5F /* SmokeTestSet.h */,
+				81DE059F1B67D53B00583F5F /* SmokeTester.cpp */,
+				81DE05A01B67D53B00583F5F /* SmokeTester.h */,
 				81DE05961B67C59C00583F5F /* StateNavigatorImpl.h */,
 				81DE05901B67C17C00583F5F /* StateNavigator.h */,
+				81D1535B1B68DB1400341A9F /* ResultPresenter.cpp */,
+				81D1535C1B68DB1400341A9F /* ResultPresenter.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -293,6 +312,15 @@
 				81DE05991B67C5F800583F5F /* UIFactory.h */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		81DE059B1B67D53200583F5F /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				81DE059C1B67D53200583F5F /* State.cpp */,
+				81DE059D1B67D53200583F5F /* State.h */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 		81E010741B56721000FEC2AE /* IntegrationTest */ = {
@@ -436,9 +464,13 @@
 			files = (
 				81CFA14719EE9177003C8436 /* App.cpp in Sources */,
 				81E0107A1B56721000FEC2AE /* FileSystem.cpp in Sources */,
+				81DE059E1B67D53200583F5F /* State.cpp in Sources */,
 				81E010991B56B6F500FEC2AE /* FailedAssertion.cpp in Sources */,
 				81E0109A1B56B6F500FEC2AE /* CSReporter.cpp in Sources */,
+				81D1535D1B68DB1400341A9F /* ResultPresenter.cpp in Sources */,
 				81DE059A1B67C5F800583F5F /* UIFactory.cpp in Sources */,
+				81DE05A11B67D53B00583F5F /* SmokeTester.cpp in Sources */,
+				81DE05A41B67D67300583F5F /* SmokeTestSet.cpp in Sources */,
 				81E0109D1B56B6F500FEC2AE /* TestSystem.cpp in Sources */,
 				81E010791B56721000FEC2AE /* State.cpp in Sources */,
 				81E0109B1B56B6F500FEC2AE /* Report.cpp in Sources */,

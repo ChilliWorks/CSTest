@@ -1,5 +1,5 @@
 //
-//  StateNavigator.h
+//  SmokeTester.h
 //  CSTest
 //  Created by Ian Copland on 28/07/2015.
 //
@@ -26,10 +26,11 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_STATENAVIGATOR_H_
-#define _COMMON_CORE_STATENAVIGATOR_H_
+#ifndef _COMMON_CORE_SMOKETESTER_H_
+#define _COMMON_CORE_SMOKETESTER_H_
 
 #include <CSTest.h>
+
 #include <ChilliSource/Core/System.h>
 
 namespace CSTest
@@ -37,17 +38,16 @@ namespace CSTest
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A system which provides navigation between the different test states. This
-        /// will present an on screen next button which can be used to navigate to the
-        /// state after this one. The next state type is specified by the system template
-        /// parameter.
+        /// A system for presenting the user with different smoke test options. This
+        /// presents a title and a series of user defined buttons, each of which can have
+        /// an action associated with it.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        template <typename TNextState> class StateNavigator final : public CSCore::StateSystem
+        class SmokeTester final : public CSCore::StateSystem
         {
         public:
-            CS_DECLARE_NAMEDTYPE(StateNavigator);
+            CS_DECLARE_NAMEDTYPE(SmokeTester);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly
@@ -61,21 +61,20 @@ namespace CSTest
             //------------------------------------------------------------------------------
             bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return Whether or not the next button is visible. If the button is not
-            /// visible, it cannot be pressed.
-            //------------------------------------------------------------------------------
-            bool IsNextButtonVisible() const;
-            //------------------------------------------------------------------------------
-            /// Whether or not the next button is visible. If the button is not visible,
-            /// it cannot be pressed.
+            /// Presents a series of buttons, each associated with a test.
             ///
             /// @author Ian Copland
             ///
-            /// @param in_visibile - Whether or not to make the button visible.
+            /// @param in_testSet - The information on the tests which should be presented.
             //------------------------------------------------------------------------------
-            void SetNextButtonVisible(bool in_visibile);
+            void Present(const SmokeTestSet& in_testSet);
+            //------------------------------------------------------------------------------
+            /// Cleans up all existing buttons, and resets the system back into a reusable
+            /// state.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void Dismiss();
             
         private:
             friend class CSCore::State;
@@ -86,35 +85,35 @@ namespace CSTest
             ///
             /// @return The new instance.
             //------------------------------------------------------------------------------
-            static std::unique_ptr<StateNavigator<TNextState>> Create();
+            static SmokeTesterUPtr Create();
             //------------------------------------------------------------------------------
             /// Default constructor. Declared private to ensure the system is created
-            /// through State::CreateSystem<StateNavigator>().
+            /// through State::CreateSystem<SmokeTester>().
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            StateNavigator() = default;
+            SmokeTester() = default;
             //------------------------------------------------------------------------------
-            /// Initialises the State Navigator.
+            /// Initialises the Smoke Tester.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnInit() override;
             //------------------------------------------------------------------------------
-            /// Destroys the State Navigator.
+            /// Destroys the Smoke Tester.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnDestroy() override;
             
             CSUI::WidgetSPtr m_ui;
-            CSUI::WidgetSPtr m_nextButton;
+            CSUI::WidgetSPtr m_titleText;
+            CSUI::WidgetSPtr m_buttonContainer;
             
-            CSCore::EventConnectionUPtr m_nextPressedConnection;
+            std::vector<CSUI::WidgetSPtr> m_buttons;
+            std::vector<CSCore::EventConnectionUPtr> m_connectionContainer;
         };
     }
 }
-
-#include <Common/Core/StateNavigatorImpl.h>
 
 #endif

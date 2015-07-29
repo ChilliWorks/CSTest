@@ -1,7 +1,7 @@
 //
-//  State.cpp
+//  SmokeTestSet.cpp
 //  CSTest
-//  Created by Ian Copland on 13/07/2015.
+//  Created by Ian Copland on 28/07/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,60 +26,39 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/State.h>
-
-#include <Common/Core/StateNavigator.h>
-#include <IntegrationTest/TestSystem/ReportPresenter.h>
-#include <IntegrationTest/TestSystem/TestSystem.h>
-#include <WebView/State.h>
-
-#include <ChilliSource/Core/Scene.h>
+#include <Common/Core/SmokeTestSet.h>
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace Common
     {
-        namespace
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        SmokeTestSet::SmokeTestSet(const std::string& in_setName)
+            : m_name(in_setName)
         {
-            using NextState = WebView::State;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void SmokeTestSet::AddTest(const std::string& in_testName, const std::function<void()>& in_action)
+        {
+            Test test;
+            test.m_name = in_testName;
+            test.m_action = in_action;
             
-            const f32 k_timeBeforeTests = 0.5f;
-        }
-        
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        void State::CreateSystems()
-        {
-            m_testSystem = CreateSystem<TestSystem>();
-            m_reportPresenter = CreateSystem<ReportPresenter>();
-            CreateSystem<Common::StateNavigator<NextState>>();
+            m_tests.push_back(test);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnInit()
+        const std::string& SmokeTestSet::GetName() const
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
-            
-            GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(false);
+            return m_name;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnUpdate(f32 in_deltaTime)
+        const std::vector<SmokeTestSet::Test>& SmokeTestSet::GetTests() const
         {
-            if (m_testsPerformed == false)
-            {
-                m_timer += in_deltaTime;
-                
-                if (m_timer > k_timeBeforeTests)
-                {
-                    m_timer = 0.0f;
-                    m_testsPerformed = true;
-                    
-                    auto report = m_testSystem->PerformTests();
-                    m_reportPresenter->PresentReport(report);
-                    GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(true);
-                }
-            }
+            return m_tests;
         }
     }
 }

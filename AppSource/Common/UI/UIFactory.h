@@ -33,6 +33,7 @@
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Rendering/Base.h>
+#include <ChilliSource/UI/Base.h>
 
 namespace CSTest
 {
@@ -48,14 +49,29 @@ namespace CSTest
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
-            /// @param in_height - The relative height of the button.
+            /// @param in_size - The size of the button.
+            /// @param in_text - The text on the button.
+            /// @param in_alignment - [Optional] Both the origin and parental alignment.
+            /// Defaults to middle centre.
+            /// @param in_colour - [Optional] The colour of the button. Note that this does
+            /// not affect the colour of the text. Defaults to white.
+            /// @param in_sizePolicy - [Optional] The size policy for the button. Defaults
+            /// to UseHeightMaintainingAspect.
+            //------------------------------------------------------------------------------
+            CSUI::WidgetUPtr CreateButton(const CSCore::Vector2& in_size, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment = CSRendering::AlignmentAnchor::k_middleCentre,
+                                          const CSCore::Colour& in_colour = CSCore::Colour::k_white, CSUI::SizePolicy in_sizePolicy = CSUI::SizePolicy::k_useHeightMaintainingAspect);
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @param in_size - The size of the button.
             /// @param in_text - The text on the button.
             /// @param in_alignment - [Optional] Both the origin and parental alignment.
             /// Defaults to middle centre.
             /// @param in_colour - [Optional] The colour of the button. Note that this does
             /// not affect the colour of the text. Defaults to white.
             //------------------------------------------------------------------------------
-            CSUI::WidgetUPtr CreateButton(f32 in_height, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment = CSRendering::AlignmentAnchor::k_middleCentre, const CSCore::Colour& in_colour = CSCore::Colour::k_white);
+            CSUI::WidgetUPtr CreateStretchableButton(const CSCore::Vector2& in_size, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment = CSRendering::AlignmentAnchor::k_middleCentre,
+                                                     const CSCore::Colour& in_colour = CSCore::Colour::k_white);
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
@@ -70,8 +86,8 @@ namespace CSTest
             /// of the text. Defaults to centre.
             //------------------------------------------------------------------------------
             CSUI::WidgetUPtr CreateLabel(const CSCore::Vector2& in_size, const CSRendering::FontCSPtr& in_font, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment = CSRendering::AlignmentAnchor::k_middleCentre,
-                CSRendering::HorizontalTextJustification in_horizontalTextJustification = CSRendering::HorizontalTextJustification::k_centre,
-                CSRendering::VerticalTextJustification in_verticalTextJustification = CSRendering::VerticalTextJustification::k_centre);
+                                         CSRendering::HorizontalTextJustification in_horizontalTextJustification = CSRendering::HorizontalTextJustification::k_centre,
+                                         CSRendering::VerticalTextJustification in_verticalTextJustification = CSRendering::VerticalTextJustification::k_centre);
         }
     }
 }

@@ -78,7 +78,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         template <typename TNextState> void StateNavigator<TNextState>::OnInit()
         {
-            m_nextButton = UIFactory::CreateButton(0.1f, "Next", CSRendering::AlignmentAnchor::k_bottomRight, CSCore::Colour::k_green);
+            m_nextButton = UIFactory::CreateButton(CSCore::Vector2(0.0f, 0.1f), "Next", CSRendering::AlignmentAnchor::k_bottomRight, CSCore::Colour::k_green);
             m_nextButton->SetRelativePosition(CSCore::Vector2(-0.05f, 0.05f));
             
             auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();

@@ -1,7 +1,7 @@
 //
-//  StateNavigator.h
+//  ResultPresenter.h
 //  CSTest
-//  Created by Ian Copland on 28/07/2015.
+//  Created by Ian Copland on 29/07/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,10 +26,11 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_STATENAVIGATOR_H_
-#define _COMMON_CORE_STATENAVIGATOR_H_
+#ifndef _COMMON_CORE_RESULTPRESENTER_H_
+#define _COMMON_CORE_RESULTPRESENTER_H_
 
 #include <CSTest.h>
+
 #include <ChilliSource/Core/System.h>
 
 namespace CSTest
@@ -37,17 +38,16 @@ namespace CSTest
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A system which provides navigation between the different test states. This
-        /// will present an on screen next button which can be used to navigate to the
-        /// state after this one. The next state type is specified by the system template
-        /// parameter.
+        /// A system for presenting the user with a result. This simply displays the
+        /// Given text in a system dialogue box for now, but this might be improved in
+        /// the future.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        template <typename TNextState> class StateNavigator final : public CSCore::StateSystem
+        class ResultPresenter final : public CSCore::StateSystem
         {
         public:
-            CS_DECLARE_NAMEDTYPE(StateNavigator);
+            CS_DECLARE_NAMEDTYPE(ResultPresenter);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly
@@ -61,21 +61,13 @@ namespace CSTest
             //------------------------------------------------------------------------------
             bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return Whether or not the next button is visible. If the button is not
-            /// visible, it cannot be pressed.
-            //------------------------------------------------------------------------------
-            bool IsNextButtonVisible() const;
-            //------------------------------------------------------------------------------
-            /// Whether or not the next button is visible. If the button is not visible,
-            /// it cannot be pressed.
+            /// Presents the results of a test. For now this simply presents a dialogue box.
             ///
             /// @author Ian Copland
             ///
-            /// @param in_visibile - Whether or not to make the button visible.
+            /// @param in_result - A string describing the result of the test.
             //------------------------------------------------------------------------------
-            void SetNextButtonVisible(bool in_visibile);
+            void Present(const std::string& in_result);
             
         private:
             friend class CSCore::State;
@@ -86,35 +78,30 @@ namespace CSTest
             ///
             /// @return The new instance.
             //------------------------------------------------------------------------------
-            static std::unique_ptr<StateNavigator<TNextState>> Create();
+            static ResultPresenterUPtr Create();
             //------------------------------------------------------------------------------
             /// Default constructor. Declared private to ensure the system is created
-            /// through State::CreateSystem<StateNavigator>().
+            /// through State::CreateSystem<ResultPresenter>().
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            StateNavigator() = default;
+            ResultPresenter() = default;
             //------------------------------------------------------------------------------
-            /// Initialises the State Navigator.
+            /// Initialises the Result Presenter.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnInit() override;
             //------------------------------------------------------------------------------
-            /// Destroys the State Navigator.
+            /// Destroys the Result Presenter.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnDestroy() override;
             
-            CSUI::WidgetSPtr m_ui;
-            CSUI::WidgetSPtr m_nextButton;
-            
-            CSCore::EventConnectionUPtr m_nextPressedConnection;
+            CSCore::DialogueBoxSystem* m_dialogueBoxSystem = nullptr;
         };
     }
 }
-
-#include <Common/Core/StateNavigatorImpl.h>
 
 #endif

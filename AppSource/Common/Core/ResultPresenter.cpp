@@ -1,7 +1,7 @@
 //
-//  State.cpp
+//  ResultPresenter.cpp
 //  CSTest
-//  Created by Ian Copland on 13/07/2015.
+//  Created by Ian Copland on 29/07/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,60 +26,45 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/State.h>
+#include <Common/Core/ResultPresenter.h>
 
-#include <Common/Core/StateNavigator.h>
-#include <IntegrationTest/TestSystem/ReportPresenter.h>
-#include <IntegrationTest/TestSystem/TestSystem.h>
-#include <WebView/State.h>
-
-#include <ChilliSource/Core/Scene.h>
+#include <ChilliSource/Core/Base.h>
+#include <ChilliSource/Core/DialogueBox.h>
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace Common
     {
-        namespace
-        {
-            using NextState = WebView::State;
-            
-            const f32 k_timeBeforeTests = 0.5f;
-        }
-        
+        CS_DEFINE_NAMEDTYPE(ResultPresenter);
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::CreateSystems()
+        ResultPresenterUPtr ResultPresenter::Create()
         {
-            m_testSystem = CreateSystem<TestSystem>();
-            m_reportPresenter = CreateSystem<ReportPresenter>();
-            CreateSystem<Common::StateNavigator<NextState>>();
+            return ResultPresenterUPtr(new ResultPresenter());
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnInit()
+        bool ResultPresenter::IsA(CSCore::InterfaceIDType in_interfaceId) const
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
-            
-            GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(false);
+            return (ResultPresenter::InterfaceID == in_interfaceId);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnUpdate(f32 in_deltaTime)
+        void ResultPresenter::Present(const std::string& in_result)
         {
-            if (m_testsPerformed == false)
-            {
-                m_timer += in_deltaTime;
-                
-                if (m_timer > k_timeBeforeTests)
-                {
-                    m_timer = 0.0f;
-                    m_testsPerformed = true;
-                    
-                    auto report = m_testSystem->PerformTests();
-                    m_reportPresenter->PresentReport(report);
-                    GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(true);
-                }
-            }
+            m_dialogueBoxSystem->ShowSystemDialogue(0, nullptr, "Result", in_result, "Okay");
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void ResultPresenter::OnInit()
+        {
+            m_dialogueBoxSystem = CSCore::Application::Get()->GetSystem<CSCore::DialogueBoxSystem>();
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void ResultPresenter::OnDestroy()
+        {
+            m_dialogueBoxSystem = nullptr;
         }
     }
 }

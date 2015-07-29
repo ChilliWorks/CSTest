@@ -26,33 +26,30 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/State.h>
-
-#include <Common/Core/StateNavigator.h>
-#include <IntegrationTest/TestSystem/ReportPresenter.h>
-#include <IntegrationTest/TestSystem/TestSystem.h>
 #include <WebView/State.h>
 
+#include <Common/Core/ResultPresenter.h>
+#include <Common/Core/SmokeTester.h>
+#include <Common/Core/SmokeTestSet.h>
+#include <Common/Core/StateNavigator.h>
+#include <IntegrationTest/State.h>
+
+#include <ChilliSource/Core/DialogueBox.h>
 #include <ChilliSource/Core/Scene.h>
+#include <ChilliSource/Web/Base.h>
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace WebView
     {
-        namespace
-        {
-            using NextState = WebView::State;
-            
-            const f32 k_timeBeforeTests = 0.5f;
-        }
-        
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            m_testSystem = CreateSystem<TestSystem>();
-            m_reportPresenter = CreateSystem<ReportPresenter>();
-            CreateSystem<Common::StateNavigator<NextState>>();
+            CreateSystem<Common::StateNavigator<IntegrationTest::State>>();
+            m_smokeTester = CreateSystem<Common::SmokeTester>();
+            m_resultPresenter = CreateSystem<Common::ResultPresenter>();
+            m_webView = CreateSystem<CSWeb::WebView>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -60,26 +57,30 @@ namespace CSTest
         {
             GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
-            GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(false);
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        void State::OnUpdate(f32 in_deltaTime)
-        {
-            if (m_testsPerformed == false)
+            Common::SmokeTestSet testSet("WebView");
+            
+            testSet.AddTest("From Disk", [=]()
             {
-                m_timer += in_deltaTime;
-                
-                if (m_timer > k_timeBeforeTests)
+                m_webView->PresentFromFile(CSCore::StorageLocation::k_package, "WebView/ExampleWebView.html", CSCore::UnifiedVector2(1.0f, 1.0f, 0.0f, 0.0f), 0.1f, [=]()
                 {
-                    m_timer = 0.0f;
-                    m_testsPerformed = true;
-                    
-                    auto report = m_testSystem->PerformTests();
-                    m_reportPresenter->PresentReport(report);
-                    GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(true);
-                }
-            }
+                    m_resultPresenter->Present("WebView dismissed.");
+                });
+            });
+            
+            testSet.AddTest("From Web", [=]()
+            {
+                m_webView->Present("http://google.com", CSCore::UnifiedVector2(0.8f, 0.8f, 0.0f, 0.0f), 0.1f, [=]()
+                {
+                    m_resultPresenter->Present("WebView dismissed.");
+                });
+            });
+            
+            testSet.AddTest("External Browser", [=]()
+            {
+                m_webView->PresentInExternalBrowser("http://google.com");
+            });
+            
+            m_smokeTester->Present(testSet);
         }
     }
 }

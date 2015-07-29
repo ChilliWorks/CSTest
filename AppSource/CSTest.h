@@ -35,6 +35,13 @@ namespace CSTest
 {
     CS_FORWARDDECLARE_CLASS(App);
     
+    namespace Common
+    {
+        CS_FORWARDDECLARE_CLASS(ResultPresenter);
+        CS_FORWARDDECLARE_CLASS(SmokeTester);
+        CS_FORWARDDECLARE_CLASS(SmokeTestSet);
+    }
+    
     namespace IntegrationTest
     {
         CS_FORWARDDECLARE_CLASS(CSReporter);
@@ -44,6 +51,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(State);
         CS_FORWARDDECLARE_CLASS(TestCase);
         CS_FORWARDDECLARE_CLASS(TestSystem);
+    }
+    
+    namespace WebView
+    {
+        CS_FORWARDDECLARE_CLASS(State);
     }
 }
 

@@ -45,7 +45,7 @@ namespace CSTest
         {
             //------------------------------------------------------------------------------
             //------------------------------------------------------------------------------
-            CSUI::WidgetUPtr CreateButton(f32 in_height, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment, const CSCore::Colour& in_colour)
+            CSUI::WidgetUPtr CreateButton(const CSCore::Vector2& in_size, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment, const CSCore::Colour& in_colour, CSUI::SizePolicy in_sizePolicy)
             {
                 auto resourcePool = CSCore::Application::Get()->GetResourcePool();
                 auto font = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
@@ -59,12 +59,38 @@ namespace CSTest
                 auto button = widgetFactory->CreateHighlightButton();
                 button->SetParentalAnchor(in_alignment);
                 button->SetOriginAnchor(in_alignment);
-                button->SetSizePolicy(CSUI::SizePolicy::k_useHeightMaintainingAspect);
-                button->SetRelativeSize(CSCore::Vector2(0.0f, in_height));
+                button->SetSizePolicy(in_sizePolicy);
+                button->SetRelativeSize(in_size);
                 
                 auto buttonComponent = button->GetComponent<CSUI::HighlightComponent>();
                 buttonComponent->SetHighlightColour(CSCore::Colour::k_lightGrey);
                 buttonComponent->SetNormalDrawableDef(CSUI::DrawableDefCSPtr(new CSUI::StandardDrawableDef(texture, atlas, "Button01", in_colour)));
+                
+                button->AddWidget(text);
+                
+                return button;
+            }
+            //------------------------------------------------------------------------------
+            //------------------------------------------------------------------------------
+            CSUI::WidgetUPtr CreateStretchableButton(const CSCore::Vector2& in_size, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment, const CSCore::Colour& in_colour)
+            {
+                auto resourcePool = CSCore::Application::Get()->GetResourcePool();
+                auto font = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
+                auto atlas = resourcePool->LoadResource<CSRendering::TextureAtlas>(CSCore::StorageLocation::k_package, "TextureAtlases/UI/UI.csatlas");
+                auto texture = resourcePool->LoadResource<CSRendering::Texture>(CSCore::StorageLocation::k_package, "TextureAtlases/UI/UI.csimage");
+                
+                auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
+                
+                CSUI::WidgetSPtr text = CreateLabel(CSCore::Vector2::k_one, font, in_text);
+                
+                auto button = widgetFactory->CreateHighlightButton();
+                button->SetParentalAnchor(in_alignment);
+                button->SetOriginAnchor(in_alignment);
+                button->SetRelativeSize(in_size);
+                
+                auto buttonComponent = button->GetComponent<CSUI::HighlightComponent>();
+                buttonComponent->SetHighlightColour(CSCore::Colour::k_lightGrey);
+                buttonComponent->SetNormalDrawableDef(CSUI::DrawableDefCSPtr(new CSUI::NinePatchDrawableDef(texture, atlas, "Button01", CSCore::Vector4(0.15f, 0.15f, 0.15f, 0.15f), in_colour)));
                 
                 button->AddWidget(text);
                 
