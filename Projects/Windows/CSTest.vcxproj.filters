@@ -13,6 +13,18 @@
     <Filter Include="AppSource\IntegrationTest\TestSystem">
       <UniqueIdentifier>{15d22452-4cd1-40a3-afe7-09939628ec98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\WebView">
+      <UniqueIdentifier>{22b80dd3-0923-4692-8def-863a64cfa9e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Common">
+      <UniqueIdentifier>{b404f532-a859-4e36-b46c-59332794476f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Common\Core">
+      <UniqueIdentifier>{4354a0c9-ad52-4a15-abc5-098f3f9aae22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Common\UI">
+      <UniqueIdentifier>{f9c58e59-94d1-4ada-b866-d28defff0df0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -39,6 +51,24 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystem.cpp">
       <Filter>AppSource\IntegrationTest\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\Core\ResultPresenter.cpp">
+      <Filter>AppSource\Common\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\Core\SmokeTester.cpp">
+      <Filter>AppSource\Common\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\Core\SmokeTestSet.cpp">
+      <Filter>AppSource\Common\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\UI\UIFactory.cpp">
+      <Filter>AppSource\Common\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\WebView\State.cpp">
+      <Filter>AppSource\WebView</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -63,6 +93,30 @@
       <Filter>AppSource\IntegrationTest\TestSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\Core\ResultPresenter.h">
+      <Filter>AppSource\Common\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\Core\SmokeTester.h">
+      <Filter>AppSource\Common\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\Core\SmokeTestSet.h">
+      <Filter>AppSource\Common\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\Core\StateNavigator.h">
+      <Filter>AppSource\Common\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\Core\StateNavigatorImpl.h">
+      <Filter>AppSource\Common\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\UI\UIFactory.h">
+      <Filter>AppSource\Common\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\WebView\State.h">
+      <Filter>AppSource\WebView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.h">
       <Filter>AppSource\IntegrationTest\TestSystem</Filter>
     </ClInclude>
   </ItemGroup>

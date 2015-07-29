@@ -73,7 +73,8 @@ namespace CSTest
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
-            /// @param in_name - The
+            /// @param in_name - The name of the test
+            /// @param in_action - The action to perform when the test is selected.
             //------------------------------------------------------------------------------
             void AddTest(const std::string& in_testName, const Action& in_action);
             //------------------------------------------------------------------------------
