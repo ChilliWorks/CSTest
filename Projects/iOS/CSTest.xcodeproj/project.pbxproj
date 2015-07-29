@@ -38,6 +38,7 @@
 		81B9C0D918B27D490029BC9E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81B9C0D818B27D490029BC9E /* CoreMotion.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		81CFA14719EE9177003C8436 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CFA14319EE9177003C8436 /* App.cpp */; };
 		81D1535D1B68DB1400341A9F /* ResultPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81D1535B1B68DB1400341A9F /* ResultPresenter.cpp */; };
+		81D153601B68E90F00341A9F /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81D1535F1B68E90F00341A9F /* Vector2.cpp */; };
 		81D8923F196160E70010DA84 /* AppResources in Resources */ = {isa = PBXBuildFile; fileRef = 81D8923D196160E70010DA84 /* AppResources */; };
 		81D89240196160E70010DA84 /* CSResources in Resources */ = {isa = PBXBuildFile; fileRef = 81D8923E196160E70010DA84 /* CSResources */; };
 		81D89B751962BD400010DA84 /* com_taggames_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D89B721962BD400010DA84 /* com_taggames_close_button.png */; };
@@ -105,6 +106,7 @@
 		81CFA14419EE9177003C8436 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		81D1535B1B68DB1400341A9F /* ResultPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResultPresenter.cpp; sourceTree = "<group>"; };
 		81D1535C1B68DB1400341A9F /* ResultPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultPresenter.h; sourceTree = "<group>"; };
+		81D1535F1B68E90F00341A9F /* Vector2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2.cpp; sourceTree = "<group>"; };
 		81D8923D196160E70010DA84 /* AppResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppResources; path = XcodeBuiltAssets/AppResources; sourceTree = "<group>"; };
 		81D8923E196160E70010DA84 /* CSResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CSResources; path = XcodeBuiltAssets/CSResources; sourceTree = "<group>"; };
 		81D89B721962BD400010DA84 /* com_taggames_close_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = com_taggames_close_button.png; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				81E010781B56721000FEC2AE /* FileSystem.cpp */,
+				81D1535F1B68E90F00341A9F /* Vector2.cpp */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81CFA14719EE9177003C8436 /* App.cpp in Sources */,
+				81D153601B68E90F00341A9F /* Vector2.cpp in Sources */,
 				81E0107A1B56721000FEC2AE /* FileSystem.cpp in Sources */,
 				81DE059E1B67D53200583F5F /* State.cpp in Sources */,
 				81E010991B56B6F500FEC2AE /* FailedAssertion.cpp in Sources */,
