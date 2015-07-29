@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--  
-AndroidManifestTemplateAmazon.xml
+AndroidManifestTemplateGooglePlay.xml
 ChilliSource
 Created by Ian Copland on 21/07/2015.
 
@@ -36,6 +36,9 @@ THE SOFTWARE.
     <uses-feature android:name="android.hardware.touchscreen.multitouch" android:required="true" />
 
     <!-- permissions -->
+    <permission android:name="${applicationId}.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
+	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 	
 		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 		<uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
@@ -56,7 +59,7 @@ THE SOFTWARE.
         
         <!-- provide access to the package name, prior to it being replaced by the applicationId -->
         <meta-data android:name="packageName" android:value="com.taggames.cstest" />
-        
+
         <!-- Chilli Source main -->
         <activity android:name="com.chilliworks.chillisource.core.CSActivity"
             android:screenOrientation="sensorLandscape"
@@ -92,12 +95,33 @@ THE SOFTWARE.
         <!-- Google Play services -->
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 
-        <!-- Amazon iap -->
-        <receiver android:name="com.amazon.inapp.purchasing.ResponseReceiver">
+        <!-- Google Play Expansion Downloader -->
+        <activity android:name="com.chilliworks.chillisource.networking.ApkExpansionDownloadActivity"
+            android:screenOrientation="sensorLandscape"
+            android:label="@string/app_name"
+            android:configChanges="orientation|mcc|mnc|locale|touchscreen|navigation|fontScale|screenSize">
+        </activity>
+
+        <service android:name="com.chilliworks.chillisource.networking.ApkExpansionDownloadService" />
+        <receiver android:name="com.chilliworks.chillisource.networking.ApkExpansionDownloadAlarmReceiver" />
+
+        <!-- Google Play remote notifications -->
+        <receiver android:name="com.chilliworks.chillisource.core.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-                <action android:name="com.amazon.inapp.purchasing.NOTIFY" android:permission="com.amazon.inapp.purchasing.Permission.NOTIFY" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="${applicationId}" />
             </intent-filter>
         </receiver>
+
+        <!-- Google Play apk expansion content provider -->
+        <provider android:name="com.chilliworks.chillisource.core.ApkExpansionContentProvider" android:authorities="${applicationId}.apkexpansioncontentprovider" android:enabled="true" android:exported="false" />
+
+        <!-- Google Play Apk Expansion Download View -->
+        <meta-data android:name="apkExpansionDownloadView" android:value="" />
 
         <!-- Application extra information -->
         
