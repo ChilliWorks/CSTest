@@ -24,6 +24,8 @@
 		818387131301466F004B7099 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818387121301466F004B7099 /* CoreGraphics.framework */; };
 		818387381301467E004B7099 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818387371301467E004B7099 /* AudioToolbox.framework */; };
 		81852A601964003700EC15DE /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81852A5F1964003700EC15DE /* FacebookSDK.framework */; };
+		819303271B6A6C380036740E /* Equals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 819303251B6A6C380036740E /* Equals.cpp */; };
+		8193032A1B6A6D630036740E /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 819303291B6A6D630036740E /* Vector3.cpp */; };
 		819495D616CE45C50063276A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 819495D516CE45C50063276A /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		819A8A3E191CFCB6003E9E9F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 819A8A3D191CFCB6003E9E9F /* GLKit.framework */; };
 		81A83FA31340B90800FBCC29 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A83F991340B86400FBCC29 /* AddressBook.framework */; };
@@ -90,6 +92,9 @@
 		818387121301466F004B7099 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		818387371301467E004B7099 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		81852A5F1964003700EC15DE /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../ChilliSource/Libraries/Core/iOS/Libs/FacebookSDK.framework; sourceTree = "<group>"; };
+		819303251B6A6C380036740E /* Equals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Equals.cpp; sourceTree = "<group>"; };
+		819303261B6A6C380036740E /* Equals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equals.h; sourceTree = "<group>"; };
+		819303291B6A6D630036740E /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3.cpp; sourceTree = "<group>"; };
 		819495D516CE45C50063276A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		819A8A3D191CFCB6003E9E9F /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		81A83F991340B86400FBCC29 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -303,6 +308,8 @@
 				81DE05901B67C17C00583F5F /* StateNavigator.h */,
 				81D1535B1B68DB1400341A9F /* ResultPresenter.cpp */,
 				81D1535C1B68DB1400341A9F /* ResultPresenter.h */,
+				819303251B6A6C380036740E /* Equals.cpp */,
+				819303261B6A6C380036740E /* Equals.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -341,6 +348,7 @@
 			children = (
 				81E010781B56721000FEC2AE /* FileSystem.cpp */,
 				81D1535F1B68E90F00341A9F /* Vector2.cpp */,
+				819303291B6A6D630036740E /* Vector3.cpp */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -471,6 +479,8 @@
 				81DE059E1B67D53200583F5F /* State.cpp in Sources */,
 				81E010991B56B6F500FEC2AE /* FailedAssertion.cpp in Sources */,
 				81E0109A1B56B6F500FEC2AE /* CSReporter.cpp in Sources */,
+				8193032A1B6A6D630036740E /* Vector3.cpp in Sources */,
+				819303271B6A6C380036740E /* Equals.cpp in Sources */,
 				81D1535D1B68DB1400341A9F /* ResultPresenter.cpp in Sources */,
 				81DE059A1B67C5F800583F5F /* UIFactory.cpp in Sources */,
 				81DE05A11B67D53B00583F5F /* SmokeTester.cpp in Sources */,
