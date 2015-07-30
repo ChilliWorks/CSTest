@@ -32,6 +32,7 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystem.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector2.cpp" />
     <ClCompile Include="..\..\AppSource\WebView\State.cpp" />
   </ItemGroup>
   <ItemGroup>

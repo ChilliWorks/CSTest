@@ -66,35 +66,9 @@ namespace CSTest
             {
                 return (Equals(in_a.x, in_b.x) && Equals(in_a.y, in_b.y));
             }
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @param in_a - A vector.
-            /// @param in_b - Another vector.
-            ///
-            /// @return Whether or not the two vectors are effectively equal. This allows for
-            /// a very small small delta to avoid floating point precision issues.
-            //------------------------------------------------------------------------------
-            bool Equals(CSCore::Vector3 in_a, CSCore::Vector3 in_b)
-            {
-                return (Equals(in_a.x, in_b.x) && Equals(in_a.y, in_b.y) && Equals(in_a.z, in_b.z));
-            }
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @param in_a - A vector.
-            /// @param in_b - Another vector.
-            ///
-            /// @return Whether or not the two vectors are effectively equal. This allows for
-            /// a very small small delta to avoid floating point precision issues.
-            //------------------------------------------------------------------------------
-            bool Equals(CSCore::Vector4 in_a, CSCore::Vector4 in_b)
-            {
-                return (Equals(in_a.x, in_b.x) && Equals(in_a.y, in_b.y) && Equals(in_a.z, in_b.z) && Equals(in_a.w, in_b.w));
-            }
         }
         
-        TEST_CASE("Vector2: Construction and component validation", "[Vector2]")
+        TEST_CASE("Vector2: Construction and component validation", "[Math][Vector2]")
         {
             CSCore::Vector2 a;
             CSCore::Vector2 b(1.0f, 2.0f);
@@ -105,114 +79,305 @@ namespace CSTest
             REQUIRE(Equals(b.y, 2.0f));
         }
         
-        TEST_CASE("Vector2: Length", "[Vector2]")
+        TEST_CASE("Vector2: Basic arithmatic", "[Math][Vector2]")
+        {
+            CSCore::Vector2 a1(1.0f, 1.0f);
+            CSCore::Vector2 a2(1.0f, 1.0f);
+            CSCore::Vector2 a3(1.0f, 1.0f);
+            CSCore::Vector2 a4(1.0f, 1.0f);
+            CSCore::Vector2 a5(1.0f, 2.0f);
+            CSCore::Vector2 a6(1.0f, 1.0f);
+            CSCore::Vector2 a7(1.0f, 1.0f);
+            CSCore::Vector2 b1(2.0f, 3.0f);
+            auto b2 = CSCore::Matrix3::CreateTransform(CSCore::Vector2(1.0f, 2.0f), CSCore::Vector2(3.0f, 4.0f), 5.0f);
+            f32 b3 = 2.0f;
+            
+            REQUIRE(a1 == a2);
+            REQUIRE(a1 != a5);
+            REQUIRE(Equals(-a1, CSCore::Vector2(-1.0f, -1.0f)));
+            REQUIRE(Equals(a1 + b1, CSCore::Vector2(3.0f, 4.0f)));
+            REQUIRE(Equals(a2 - b1, CSCore::Vector2(-1.0f, -2.0f)));
+            REQUIRE(Equals(a3 * b1, CSCore::Vector2(2.0f, 3.0f)));
+            REQUIRE(Equals(a4 / b1, CSCore::Vector2(0.5f, 1.0f / 3.0f)));
+            REQUIRE(Equals(a5 * b2, CSCore::Vector2(9.52238082, 1.39252472)));
+            REQUIRE(Equals(a6 * b3, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(b3 * a6, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(a7 / b3, CSCore::Vector2(0.5f, 0.5f)));
+            
+            a1 += b1;
+            a2 -= b1;
+            a3 *= b1;
+            a4 /= b1;
+            a5 *= b2;
+            a6 *= b3;
+            a7 /= b3;
+            
+            REQUIRE(Equals(a1, CSCore::Vector2(3.0f, 4.0f)));
+            REQUIRE(Equals(a2, CSCore::Vector2(-1.0f, -2.0f)));
+            REQUIRE(Equals(a3, CSCore::Vector2(2.0f, 3.0f)));
+            REQUIRE(Equals(a4, CSCore::Vector2(0.5f, 1.0f / 3.0f)));
+            REQUIRE(Equals(a5, CSCore::Vector2(9.52238082, 1.39252472)));
+            REQUIRE(Equals(a6, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(a7, CSCore::Vector2(0.5f, 0.5f)));
+        }
+        
+        TEST_CASE("Vector2: Length", "[Math][Vector2]")
         {
             CSCore::Vector2 a(3.0f, 4.0f);
             CSCore::Vector2 b(0.0f, 0.0f);
             
             REQUIRE(Equals(a.Length(), 5.0f));
-            REQUIRE(Equals(a.LengthSquared(), 25.0f));
             REQUIRE(Equals(b.Length(), 0.0f));
+            REQUIRE(Equals(a.LengthSquared(), 25.0f));
             REQUIRE(Equals(b.LengthSquared(), 0.0f));
         }
         
-        TEST_CASE("Vector2: Normalise", "[Vector2]")
+        TEST_CASE("Vector2: Normalise", "[Math][Vector2]")
         {
-            CSCore::Vector2 a(5.0f, 0.0f);
-            CSCore::Vector2 b(3.0f, 4.0f);
-            CSCore::Vector2 c(0.0f, 0.0f);
-            CSCore::Vector2 d(5.0f, 0.0f);
-            CSCore::Vector2 e(3.0f, 4.0f);
-            CSCore::Vector2 f(0.0f, 0.0f);
+            CSCore::Vector2 a(3.0f, 4.0f);
+            CSCore::Vector2 b(0.0f, 0.0f);
             
-            d.Normalise();
-            e.Normalise();
-            f.Normalise();
+            REQUIRE(Equals(CSCore::Vector2::Normalise(a), CSCore::Vector2(0.6f, 0.8f)));
+            REQUIRE(Equals(CSCore::Vector2::Normalise(b), CSCore::Vector2(0.0f, 0.0f)));
             
-            REQUIRE(Equals(CSCore::Vector2::Normalise(a), CSCore::Vector2(1.0f, 0.0f)));
-            REQUIRE(Equals(CSCore::Vector2::Normalise(b), CSCore::Vector2(0.6f, 0.8f)));
-            REQUIRE(Equals(CSCore::Vector2::Normalise(c), CSCore::Vector2(0.0f, 0.0f)));
-            REQUIRE(Equals(d, CSCore::Vector2(1.0f, 0.0f)));
-            REQUIRE(Equals(e, CSCore::Vector2(0.6f, 0.8f)));
-            REQUIRE(Equals(f, CSCore::Vector2(0.0f, 0.0f)));
+            a.Normalise();
+            b.Normalise();
+            
+            REQUIRE(Equals(a, CSCore::Vector2(0.6f, 0.8f)));
+            REQUIRE(Equals(b, CSCore::Vector2(0.0f, 0.0f)));
         }
         
-        TEST_CASE("Vector2: Inverse", "[Vector2]")
+        TEST_CASE("Vector2: Inverse", "[Math][Vector2]")
         {
             CSCore::Vector2 a(2.0f, 4.0f);
             CSCore::Vector2 b(0.0f, 0.0f);
-            CSCore::Vector2 c(2.0f, 4.0f);
-            CSCore::Vector2 d(0.0f, 0.0f);
-            
-            c.Inverse();
-            d.Inverse();
             
             REQUIRE(Equals(CSCore::Vector2::Inverse(a), CSCore::Vector2(0.5f, 0.25f)));
             REQUIRE(Equals(CSCore::Vector2::Inverse(b), CSCore::Vector2(0.0f, 0.0f)));
-            REQUIRE(Equals(c, CSCore::Vector2(0.5f, 0.25f)));
-            REQUIRE(Equals(d, CSCore::Vector2(0.0f, 0.0f)));
+            
+            a.Inverse();
+            b.Inverse();
+            
+            REQUIRE(Equals(a, CSCore::Vector2(0.5f, 0.25f)));
+            REQUIRE(Equals(b, CSCore::Vector2(0.0f, 0.0f)));
         }
         
-        TEST_CASE("Vector2: Absolute", "[Vector2]")
+        TEST_CASE("Vector2: Absolute", "[Math][Vector2]")
         {
             CSCore::Vector2 a(1.0f, 1.0f);
             CSCore::Vector2 b(1.0f, -1.0f);
             CSCore::Vector2 c(-1.0f, 1.0f);
             CSCore::Vector2 d(-1.0f, -1.0f);
             CSCore::Vector2 e(0.0f, 0.0f);
-            CSCore::Vector2 f(1.0f, 1.0f);
-            CSCore::Vector2 g(1.0f, -1.0f);
-            CSCore::Vector2 h(-1.0f, 1.0f);
-            CSCore::Vector2 i(-1.0f, -1.0f);
-            CSCore::Vector2 j(0.0f, 0.0f);
-            
-            f.Abs();
-            g.Abs();
-            h.Abs();
-            i.Abs();
-            j.Abs();
             
             REQUIRE(Equals(CSCore::Vector2::Abs(a), CSCore::Vector2(1.0f, 1.0f)));
             REQUIRE(Equals(CSCore::Vector2::Abs(b), CSCore::Vector2(1.0f, 1.0f)));
             REQUIRE(Equals(CSCore::Vector2::Abs(c), CSCore::Vector2(1.0f, 1.0f)));
             REQUIRE(Equals(CSCore::Vector2::Abs(d), CSCore::Vector2(1.0f, 1.0f)));
             REQUIRE(Equals(CSCore::Vector2::Abs(e), CSCore::Vector2(0.0f, 0.0f)));
-            REQUIRE(Equals(f, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Equals(g, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Equals(h, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Equals(i, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Equals(j, CSCore::Vector2(0.0f, 0.0f)));
+            
+            a.Abs();
+            b.Abs();
+            c.Abs();
+            d.Abs();
+            e.Abs();
+            
+            REQUIRE(Equals(a, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(b, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(c, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(d, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(e, CSCore::Vector2(0.0f, 0.0f)));
         }
         
-        TEST_CASE("Vector2: Absolute", "[Vector2]")
+        TEST_CASE("Vector2: Minimum", "[Math][Vector2]")
         {
-            CSCore::Vector2 a(1.0f, 1.0f);
-            CSCore::Vector2 b(1.0f, -1.0f);
-            CSCore::Vector2 c(-1.0f, 1.0f);
-            CSCore::Vector2 d(-1.0f, -1.0f);
-            CSCore::Vector2 e(0.0f, 0.0f);
-            CSCore::Vector2 f(1.0f, 1.0f);
-            CSCore::Vector2 g(1.0f, -1.0f);
-            CSCore::Vector2 h(-1.0f, 1.0f);
-            CSCore::Vector2 i(-1.0f, -1.0f);
-            CSCore::Vector2 j(0.0f, 0.0f);
+            CSCore::Vector2 a1(1.0f, 1.0f);
+            CSCore::Vector2 a2(2.0f, 1.0f);
+            CSCore::Vector2 a3(1.0f, 2.0f);
+            CSCore::Vector2 a4(2.0f, 2.0f);
+            CSCore::Vector2 a5(-1.0f, -1.0f);
             
-            f.Abs();
-            g.Abs();
-            h.Abs();
-            i.Abs();
-            j.Abs();
+            CSCore::Vector2 b1(2.0f, 2.0f);
+            CSCore::Vector2 b2(1.0f, 2.0f);
+            CSCore::Vector2 b3(2.0f, 1.0f);
+            CSCore::Vector2 b4(1.0f, 1.0f);
+            CSCore::Vector2 b5(-2.0f, -2.0f);
             
-            REQUIRE(Equals(CSCore::Vector2::Abs(a), CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Equals(CSCore::Vector2::Abs(b), CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Equals(CSCore::Vector2::Abs(c), CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Equals(CSCore::Vector2::Abs(d), CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Equals(CSCore::Vector2::Abs(e), CSCore::Vector2(0.0f, 0.0f)));
-            REQUIRE(Equals(f, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Equals(g, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Equals(h, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Equals(i, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Equals(j, CSCore::Vector2(0.0f, 0.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Min(a1, b1), CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Min(a2, b2), CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Min(a3, b3), CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Min(a4, b4), CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Min(a5, b5), CSCore::Vector2(-2.0f, -2.0f)));
+            
+            a1.Min(b1);
+            a2.Min(b2);
+            a3.Min(b3);
+            a4.Min(b4);
+            a5.Min(b5);
+            
+            REQUIRE(Equals(a1, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(a2, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(a3, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(a4, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(a5, CSCore::Vector2(-2.0f, -2.0f)));
+        }
+        
+        TEST_CASE("Vector2: Maximum", "[Math][Vector2]")
+        {
+            CSCore::Vector2 a1(1.0f, 1.0f);
+            CSCore::Vector2 a2(2.0f, 1.0f);
+            CSCore::Vector2 a3(1.0f, 2.0f);
+            CSCore::Vector2 a4(2.0f, 2.0f);
+            CSCore::Vector2 a5(-1.0f, -1.0f);
+            CSCore::Vector2 b1(2.0f, 2.0f);
+            CSCore::Vector2 b2(1.0f, 2.0f);
+            CSCore::Vector2 b3(2.0f, 1.0f);
+            CSCore::Vector2 b4(1.0f, 1.0f);
+            CSCore::Vector2 b5(-2.0f, -2.0f);
+            
+            REQUIRE(Equals(CSCore::Vector2::Max(a1, b1), CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Max(a2, b2), CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Max(a3, b3), CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Max(a4, b4), CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Max(a5, b5), CSCore::Vector2(-1.0f, -1.0f)));
+            
+            a1.Max(b1);
+            a2.Max(b2);
+            a3.Max(b3);
+            a4.Max(b4);
+            a5.Max(b5);
+            
+            REQUIRE(Equals(a1, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(a2, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(a3, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(a4, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(a5, CSCore::Vector2(-1.0f, -1.0f)));
+        }
+        
+        TEST_CASE("Vector2: Clamp", "[Math][Vector2]")
+        {
+            CSCore::Vector2 value1(0.0f, 0.0f);
+            CSCore::Vector2 value2(2.0f, 2.0f);
+            CSCore::Vector2 value3(4.0f, 4.0f);
+            CSCore::Vector2 value4(4.0f, 0.0f);
+            CSCore::Vector2 value5(0.0f, 4.0f);
+            CSCore::Vector2 value6(0.0f, 0.0f);
+            CSCore::Vector2 value7(-2.0f, -2.0f);
+            CSCore::Vector2 value8(-4.0f, -4.0f);
+            CSCore::Vector2 min1(1.0f, 1.0f);
+            CSCore::Vector2 min2(-3.0f, -3.0f);
+            CSCore::Vector2 max1(3.0f, 3.0f);
+            CSCore::Vector2 max2(-1.0f, -1.0f);
+            
+            REQUIRE(Equals(CSCore::Vector2::Clamp(value1, min1, max1), CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Clamp(value2, min1, max1), CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Clamp(value3, min1, max1), CSCore::Vector2(3.0f, 3.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Clamp(value4, min1, max1), CSCore::Vector2(3.0f, 1.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Clamp(value5, min1, max1), CSCore::Vector2(1.0f, 3.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Clamp(value6, min2, max2), CSCore::Vector2(-1.0f, -1.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Clamp(value7, min2, max2), CSCore::Vector2(-2.0f, -2.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Clamp(value8, min2, max2), CSCore::Vector2(-3.0f, -3.0f)));
+            
+            value1.Clamp(min1, max1);
+            value2.Clamp(min1, max1);
+            value3.Clamp(min1, max1);
+            value4.Clamp(min1, max1);
+            value5.Clamp(min1, max1);
+            value6.Clamp(min2, max2);
+            value7.Clamp(min2, max2);
+            value8.Clamp(min2, max2);
+            
+            REQUIRE(Equals(value1, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Equals(value2, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(value3, CSCore::Vector2(3.0f, 3.0f)));
+            REQUIRE(Equals(value4, CSCore::Vector2(3.0f, 1.0f)));
+            REQUIRE(Equals(value5, CSCore::Vector2(1.0f, 3.0f)));
+            REQUIRE(Equals(value6, CSCore::Vector2(-1.0f, -1.0f)));
+            REQUIRE(Equals(value7, CSCore::Vector2(-2.0f, -2.0f)));
+            REQUIRE(Equals(value8, CSCore::Vector2(-3.0f, -3.0f)));
+        }
+        
+        TEST_CASE("Vector2: Lerp", "[Math][Vector2]")
+        {
+            CSCore::Vector2 a1(1.0f, 1.0f);
+            CSCore::Vector2 a2(-1.0f, -1.0f);
+            CSCore::Vector2 b1(3.0f, 3.0f);
+            CSCore::Vector2 b2(-3.0f, -3.0f);
+            
+            REQUIRE(Equals(CSCore::Vector2::Lerp(a1, b1, 0.5f), CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(CSCore::Vector2::Lerp(a2, b2, 0.5f), CSCore::Vector2(-2.0f, -2.0f)));
+            
+            a1.Lerp(b1, 0.5f);
+            a2.Lerp(b2, 0.5f);
+            
+            REQUIRE(Equals(a1, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Equals(a2, CSCore::Vector2(-2.0f, -2.0f)));
+        }
+        
+        TEST_CASE("Vector2: Dot Product", "[Math][Vector2]")
+        {
+            CSCore::Vector2 a(1.0f, 0.0f);
+            CSCore::Vector2 b(0.0f, 1.0f);
+            CSCore::Vector2 c(-1.0f, 0.0f);
+            CSCore::Vector2 d(1.0f, 2.0f);
+            CSCore::Vector2 e(3.0f, 4.0f);
+            
+            REQUIRE(Equals(CSCore::Vector2::DotProduct(a, a), 1.0f));
+            REQUIRE(Equals(CSCore::Vector2::DotProduct(a, b), 0.0f));
+            REQUIRE(Equals(CSCore::Vector2::DotProduct(a, c), -1.0f));
+            REQUIRE(Equals(CSCore::Vector2::DotProduct(d, e), 11.0f));
+        }
+        
+        TEST_CASE("Vector2: Cross Product Z", "[Math][Vector2]")
+        {
+            CSCore::Vector2 a(1.0f, 2.0f);
+            CSCore::Vector2 b(3.0f, 4.0f);
+            
+            REQUIRE(Equals(CSCore::Vector2::CrossProductZ(a, b), -2.0f));
+        }
+        
+        TEST_CASE("Vector2: Angle", "[Math][Vector2]")
+        {
+            CSCore::Vector2 a(1.0f, 2.0f);
+            CSCore::Vector2 b(3.0f, 4.0f);
+            
+            REQUIRE(Equals(CSCore::Vector2::Angle(a, a), 0.0f));
+            REQUIRE(Equals(CSCore::Vector2::Angle(a, b), -0.179853559));
+            REQUIRE(Equals(CSCore::Vector2::Angle(b, a), 0.179853559));
+        }
+        
+        TEST_CASE("Vector2: Rotate", "[Math][Vector2]")
+        {
+            CSCore::Vector2 pointA(1.0f, 2.0f);
+            CSCore::Vector2 pointB(-3.0f, -4.0f);
+            f32 angleA = 0.5f;
+            f32 angleB = -0.5f;
+            
+            REQUIRE(Equals(CSCore::Vector2::Rotate(pointA, angleA), CSCore::Vector2(1.83643365, 1.27573955)));
+            REQUIRE(Equals(CSCore::Vector2::Rotate(pointB, angleB), CSCore::Vector2(-0.715045452, -4.94860697)));
+            
+            pointA.Rotate(angleA);
+            pointB.Rotate(angleB);
+            
+            REQUIRE(Equals(pointA, CSCore::Vector2(1.83643365, 1.27573955)));
+            REQUIRE(Equals(pointB, CSCore::Vector2(-0.715045452, -4.94860697)));
+        }
+        
+        TEST_CASE("Vector2: Transform2x3", "[Math][Vector2]")
+        {
+            CSCore::Vector2 pointA(1.0f, 2.0f);
+            CSCore::Vector2 pointB(-3.0f, -4.0f);
+            auto transformA = CSCore::Matrix3::CreateTransform(CSCore::Vector2(1.0f, 2.0f), CSCore::Vector2(3.0f, 4.0f), 5.0f);
+            auto transformB = CSCore::Matrix3::CreateTransform(CSCore::Vector2(-1.0f, -2.0f), CSCore::Vector2(-3.0f, -4.0f), -5.0f);
+            
+            REQUIRE(Equals(CSCore::Vector2::Transform2x3(pointA, transformA), CSCore::Vector2(9.52238082, 1.39252472)));
+            REQUIRE(Equals(CSCore::Vector2::Transform2x3(pointB, transformB), CSCore::Vector2(-13.7898293, 11.1689138)));
+            
+            pointA.Transform2x3(transformA);
+            pointB.Transform2x3(transformB);
+            
+            REQUIRE(Equals(pointA, CSCore::Vector2(9.52238082, 1.39252472)));
+            REQUIRE(Equals(pointB, CSCore::Vector2(-13.7898293, 11.1689138)));
         }
     }
 }

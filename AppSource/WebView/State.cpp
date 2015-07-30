@@ -59,6 +59,7 @@ namespace CSTest
             
             Common::SmokeTestSet testSet("WebView");
             
+#if defined(CS_TARGETPLATFORM_IOS) || defined(CS_TARGETPLATFORM_ANDROID)
             testSet.AddTest("From Disk", [=]()
             {
                 m_webView->PresentFromFile(CSCore::StorageLocation::k_package, "WebView/ExampleWebView.html", CSCore::UnifiedVector2(1.0f, 1.0f, 0.0f, 0.0f), 0.1f, [=]()
@@ -79,6 +80,7 @@ namespace CSTest
             {
                 m_webView->PresentInExternalBrowser("http://google.com");
             });
+#endif
             
             m_smokeTester->Present(testSet);
         }
