@@ -32,6 +32,9 @@
 #include <Common/Core/SmokeTester.h>
 #include <Common/Core/SmokeTestSet.h>
 #include <Common/Core/StateNavigator.h>
+
+#include <HTTPRequest/State.h>
+
 #include <IntegrationTest/State.h>
 
 #include <ChilliSource/Core/DialogueBox.h>
@@ -42,6 +45,11 @@ namespace CSTest
 {
     namespace WebView
     {
+        namespace
+        {
+            using NextState = HTTPRequest::State;
+        }
+        
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::CreateSystems()
@@ -50,6 +58,7 @@ namespace CSTest
             m_smokeTester = CreateSystem<Common::SmokeTester>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
             m_webView = CreateSystem<CSWeb::WebView>();
+            CreateSystem<Common::StateNavigator<NextState>>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -81,6 +90,8 @@ namespace CSTest
             });
             
             m_smokeTester->Present(testSet);
+            
+//            GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(true);
         }
     }
 }

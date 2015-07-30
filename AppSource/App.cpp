@@ -30,6 +30,8 @@
 
 #include <IntegrationTest/State.h>
 
+#include <ChilliSource/Networking/Http.h>
+
 //------------------------------------------------------------------------------
 /// Creates the application instance for this app.
 ///
@@ -66,6 +68,7 @@ namespace CSTest
     //------------------------------------------------------------------------------
     void App::CreateSystems()
     {
+        CreateSystem<CSNetworking::HttpRequestSystem>();
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------

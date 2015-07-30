@@ -1,0 +1,82 @@
+{
+  "Type":"Widget",
+  "Name":"DownloadProgress",
+  "ParentalAnchor":"MiddleCentre",
+  "OriginAnchor":"MiddleCentre",
+  "InputEnabled":"true",
+  "InputConsumeEnabled":"true",
+  "Children":
+  [
+    {
+      "Type":"Image",
+      "Name":"DownloadProgressBackground",
+      "ParentalAnchor":"MiddleCentre",
+      "OriginAnchor":"MiddleCentre",
+      "Colour": "0.78 0.78 0.78 1.0",
+      "RelSize": "0.5 0.5",
+      "InputEnabled":"true",
+      "InputConsumeEnabled":"true",
+      "Drawable":
+      {
+        "TextureLocation":"chillisource",
+        "Type":"standard",
+        "TexturePath":"Textures/Blank.csimage"
+      },
+      "Children":
+      [
+        {
+          "Name":"TitleText",
+          "Type":"Label",
+          "RelSize":"1 0.3",
+          "RelPosition":"0.0 0.0",
+          "ClipChildren":"false",
+          "OriginAnchor":"TopCentre",
+          "ParentalAnchor":"TopCentre",
+          "Font":
+          {
+            "Location":"chillisource",
+            "Path":"Fonts/CarlitoMed.csfont"
+          },
+          "TextColour":"0.0 0.0 0.0 1.0",
+          "Text":"Download Progress ..."
+        },
+        {
+          "Name":"ProgressBar",
+          "Type":"HorizontalFillProgressBar",
+          "RelSize":"0.824 0.3",
+          "RelPosition":"0.000 0.0",
+          "OriginAnchor":"MiddleCentre",
+          "ParentalAnchor":"MiddleCentre",
+          "Progress":"0.0",
+          "Drawable":{
+            "TextureLocation":"Package",
+            "TexturePath":"HttpRequest/Event_ProgressBar_BG.png",
+            "Type":"Standard"
+          },
+          "BarDrawable":{
+            "TextureLocation":"Package",
+            "TexturePath":"HttpRequest/Event_ProgressBar_A.png",
+            "Type":"Standard"
+          }
+        },
+        {
+          "Name":"ProgressText",
+          "Type":"Label",
+          "RelSize":"1 0.5",
+          "RelPosition":"0.0 0.0",
+          "ClipChildren":"false",
+          "OriginAnchor":"BottomCentre",
+          "ParentalAnchor":"BottomCentre",
+          "Font":
+          {
+            "Location":"chillisource",
+            "Path":"Fonts/CarlitoMed.csfont"
+          },
+          "TextColour":"0.0 0.0 0.0 1.0",
+          "Text":"Progress",
+          "TextScale": "0.6"
+        }
+      ]
+    }
+  ]
+}
