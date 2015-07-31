@@ -33,7 +33,7 @@
 #include <Common/Core/SmokeTestSet.h>
 #include <Common/Core/StateNavigator.h>
 
-#include <HTTPRequest/State.h>
+#include <HttpRequest/State.h>
 
 #include <IntegrationTest/State.h>
 
@@ -47,7 +47,7 @@ namespace CSTest
     {
         namespace
         {
-            using NextState = HTTPRequest::State;
+            using NextState = HttpRequest::State;
         }
         
         //------------------------------------------------------------------------------
@@ -90,8 +90,6 @@ namespace CSTest
             });
             
             m_smokeTester->Present(testSet);
-            
-//            GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(true);
         }
     }
 }

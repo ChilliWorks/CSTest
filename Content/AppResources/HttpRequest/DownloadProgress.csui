@@ -27,15 +27,15 @@
         {
           "Name":"TitleText",
           "Type":"Label",
-          "RelSize":"1 0.3",
+          "RelSize":"1 0.2",
           "RelPosition":"0.0 0.0",
           "ClipChildren":"false",
           "OriginAnchor":"TopCentre",
           "ParentalAnchor":"TopCentre",
           "Font":
           {
-            "Location":"chillisource",
-            "Path":"Fonts/CarlitoMed.csfont"
+            "Location":"package",
+            "Path":"Fonts/ArialMed.csfont"
           },
           "TextColour":"0.0 0.0 0.0 1.0",
           "Text":"Download Progress ..."
@@ -43,34 +43,40 @@
         {
           "Name":"ProgressBar",
           "Type":"HorizontalFillProgressBar",
-          "RelSize":"0.824 0.3",
-          "RelPosition":"0.000 0.0",
-          "OriginAnchor":"MiddleCentre",
-          "ParentalAnchor":"MiddleCentre",
+          "RelSize":"0.8 0.3",
+          "RelPosition":"0.0 -0.25",
+          "OriginAnchor":"TopCentre",
+          "ParentalAnchor":"TopCentre",
           "Progress":"0.0",
           "Drawable":{
             "TextureLocation":"Package",
-            "TexturePath":"HttpRequest/Event_ProgressBar_BG.png",
-            "Type":"Standard"
+            "TexturePath":"TextureAtlases/UI/UI.csimage",
+            "Type":"Standard",
+            "AtlasLocation":"Package",
+            "AtlasPath":"TextureAtlases/UI/UI.csatlas",
+            "AtlasId":"Event_ProgressBar_BG"
           },
           "BarDrawable":{
             "TextureLocation":"Package",
-            "TexturePath":"HttpRequest/Event_ProgressBar_A.png",
-            "Type":"Standard"
+            "TexturePath":"TextureAtlases/UI/UI.csimage",
+            "Type":"Standard",
+            "AtlasLocation":"Package",
+            "AtlasPath":"TextureAtlases/UI/UI.csatlas",
+            "AtlasId":"Event_ProgressBar_A"
           }
         },
         {
           "Name":"ProgressText",
           "Type":"Label",
-          "RelSize":"1 0.5",
-          "RelPosition":"0.0 0.0",
+          "RelSize":"1 0.4",
+          "RelPosition":"0.0 -0.6",
           "ClipChildren":"false",
-          "OriginAnchor":"BottomCentre",
-          "ParentalAnchor":"BottomCentre",
+          "OriginAnchor":"TopCentre",
+          "ParentalAnchor":"TopCentre",
           "Font":
           {
-            "Location":"chillisource",
-            "Path":"Fonts/CarlitoMed.csfont"
+            "Location":"package",
+            "Path":"Fonts/ArialMed.csfont"
           },
           "TextColour":"0.0 0.0 0.0 1.0",
           "Text":"Progress",

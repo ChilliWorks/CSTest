@@ -21,7 +21,8 @@
 		811289D81636EC0B008D781D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D71636EC0B008D781D /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		811289DA1636F1DC008D781D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D91636F1DB008D781D /* libz.dylib */; };
 		812570EC14D8088E009FA9F3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 812570EB14D8088D009FA9F3 /* CoreTelephony.framework */; };
-		813A54B31B6A2F0500B3F2AC /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 813A54B11B6A2F0500B3F2AC /* State.cpp */; };
+		813A54BA1B6A86A900B3F2AC /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 813A54B81B6A86A800B3F2AC /* State.cpp */; };
+		813A54BD1B6A87F300B3F2AC /* DownloadProgressTestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 813A54BB1B6A87F300B3F2AC /* DownloadProgressTestSystem.cpp */; };
 		818387131301466F004B7099 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818387121301466F004B7099 /* CoreGraphics.framework */; };
 		818387381301467E004B7099 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818387371301467E004B7099 /* AudioToolbox.framework */; };
 		81852A601964003700EC15DE /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81852A5F1964003700EC15DE /* FacebookSDK.framework */; };
@@ -87,8 +88,10 @@
 		811289D71636EC0B008D781D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		811289D91636F1DB008D781D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		812570EB14D8088D009FA9F3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		813A54B11B6A2F0500B3F2AC /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
-		813A54B21B6A2F0500B3F2AC /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		813A54B81B6A86A800B3F2AC /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		813A54B91B6A86A800B3F2AC /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		813A54BB1B6A87F300B3F2AC /* DownloadProgressTestSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DownloadProgressTestSystem.cpp; sourceTree = "<group>"; };
+		813A54BC1B6A87F300B3F2AC /* DownloadProgressTestSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadProgressTestSystem.h; sourceTree = "<group>"; };
 		818387121301466F004B7099 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		818387371301467E004B7099 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		81852A5F1964003700EC15DE /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../ChilliSource/Libraries/Core/iOS/Libs/FacebookSDK.framework; sourceTree = "<group>"; };
@@ -242,13 +245,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		813A54B01B6A2F0500B3F2AC /* HTTPRequest */ = {
+		813A54B71B6A86A800B3F2AC /* HttpRequest */ = {
 			isa = PBXGroup;
 			children = (
-				813A54B11B6A2F0500B3F2AC /* State.cpp */,
-				813A54B21B6A2F0500B3F2AC /* State.h */,
+				813A54B81B6A86A800B3F2AC /* State.cpp */,
+				813A54B91B6A86A800B3F2AC /* State.h */,
+				813A54BB1B6A87F300B3F2AC /* DownloadProgressTestSystem.cpp */,
+				813A54BC1B6A87F300B3F2AC /* DownloadProgressTestSystem.h */,
 			);
-			path = HTTPRequest;
+			path = HttpRequest;
 			sourceTree = "<group>";
 		};
 		81455FE81961B47C00471F69 /* Built */ = {
@@ -264,13 +269,13 @@
 		81CFA14219EE9177003C8436 /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
-				813A54B01B6A2F0500B3F2AC /* HTTPRequest */,
-				81DE059B1B67D53200583F5F /* WebView */,
 				81CFA14319EE9177003C8436 /* App.cpp */,
 				81CFA14419EE9177003C8436 /* App.h */,
 				81DE058D1B67C17C00583F5F /* Common */,
 				81E010731B56721000FEC2AE /* CSTest.h */,
+				813A54B71B6A86A800B3F2AC /* HttpRequest */,
 				81E010741B56721000FEC2AE /* IntegrationTest */,
+				81DE059B1B67D53200583F5F /* WebView */,
 			);
 			name = AppSource;
 			path = ../../AppSource;
@@ -476,8 +481,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				81CFA14719EE9177003C8436 /* App.cpp in Sources */,
+				813A54BD1B6A87F300B3F2AC /* DownloadProgressTestSystem.cpp in Sources */,
 				81E0107A1B56721000FEC2AE /* FileSystem.cpp in Sources */,
-				813A54B31B6A2F0500B3F2AC /* State.cpp in Sources */,
+				813A54BA1B6A86A900B3F2AC /* State.cpp in Sources */,
 				81DE059E1B67D53200583F5F /* State.cpp in Sources */,
 				81E010991B56B6F500FEC2AE /* FailedAssertion.cpp in Sources */,
 				81E0109A1B56B6F500FEC2AE /* CSReporter.cpp in Sources */,

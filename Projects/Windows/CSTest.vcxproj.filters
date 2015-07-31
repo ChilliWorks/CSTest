@@ -25,6 +25,9 @@
     <Filter Include="AppSource\Common\UI">
       <UniqueIdentifier>{f9c58e59-94d1-4ada-b866-d28defff0df0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\HttpRequest">
+      <UniqueIdentifier>{3d83f6fe-8062-44a3-bb28-3a60ace375ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -68,6 +71,9 @@
     </ClCompile>
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.cpp">
       <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\HTTPRequest\State.cpp">
+      <Filter>AppSource\HttpRequest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.h">
       <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\HTTPRequest\State.h">
+      <Filter>AppSource\HttpRequest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

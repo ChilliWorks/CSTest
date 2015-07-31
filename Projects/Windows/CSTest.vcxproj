@@ -24,6 +24,7 @@
     <ClCompile Include="..\..\AppSource\Common\Core\SmokeTester.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\SmokeTestSet.cpp" />
     <ClCompile Include="..\..\AppSource\Common\UI\UIFactory.cpp" />
+    <ClCompile Include="..\..\AppSource\HTTPRequest\State.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\State.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="..\..\AppSource\Common\Core\StateNavigatorImpl.h" />
     <ClInclude Include="..\..\AppSource\Common\UI\UIFactory.h" />
     <ClInclude Include="..\..\AppSource\CSTest.h" />
+    <ClInclude Include="..\..\AppSource\HTTPRequest\State.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\State.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.h" />

@@ -35,7 +35,7 @@
 
 namespace CSTest
 {
-    namespace HTTPRequest
+    namespace HttpRequest
     {
         //------------------------------------------------------------------------------
         /// A state for testing the various ways in which a web view can be used.
@@ -59,15 +59,6 @@ namespace CSTest
             void OnInit() override;
             
         private:
-            
-            //------------------------------------------------------------------------------
-            /// Creates a download progress widget
-            ///
-            /// @author HMcLaughlin
-            ///
-            /// @return Widget
-            //------------------------------------------------------------------------------
-            CSUI::WidgetSPtr CreateProgressWidget();
             //------------------------------------------------------------------------------
             /// Displays the results of a http response
             ///
@@ -76,14 +67,13 @@ namespace CSTest
             /// @param in_response - HttpResponse
             //------------------------------------------------------------------------------
             void PresentHttpResponse(const CSNetworking::HttpResponse& in_response);
+            
         private:
             
             Common::SmokeTester* m_smokeTester = nullptr;
             Common::ResultPresenter* m_resultPresenter = nullptr;
             CSNetworking::HttpRequestSystem* m_httpRequestSystem = nullptr;
-            
-            CSCore::TimerSPtr m_downloadProgressUpdateTimer;
-            CSCore::EventConnectionUPtr m_downloadProgressEventConnection;
+            DownloadProgressTestSystem* m_downloadProgressTestSystem = nullptr;
         };
     }
 }

@@ -26,12 +26,15 @@
 //  THE SOFTWARE.
 //
 
-#include <HTTPRequest/State.h>
+#include <HttpRequest/State.h>
 
 #include <Common/Core/ResultPresenter.h>
 #include <Common/Core/SmokeTester.h>
 #include <Common/Core/SmokeTestSet.h>
 #include <Common/Core/StateNavigator.h>
+
+#include <HttpRequest/DownloadProgressTestSystem.h>
+
 #include <IntegrationTest/State.h>
 
 #include <ChilliSource/Core/DialogueBox.h>
@@ -44,15 +47,11 @@
 
 namespace CSTest
 {
-    namespace HTTPRequest
+    namespace HttpRequest
     {
         namespace
         {
             const u32 k_downloadBufferSize = 256;
-            
-            const f32 k_downloadProgressUpdateIntervalDefault = 1.0f / 30.0f;
-            
-            const char k_downloadProgressCSUIPath[] = "HttpRequest/DownloadProgress.csui";
             
             //------------------------------------------------------------------------------
             /// Converts a HTTP::Result to string
@@ -84,8 +83,7 @@ namespace CSTest
             CreateSystem<Common::StateNavigator<IntegrationTest::State>>();
             m_smokeTester = CreateSystem<Common::SmokeTester>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
-            
-            m_downloadProgressUpdateTimer = CSCore::TimerSPtr(new CSCore::Timer());
+            m_downloadProgressTestSystem = CreateSystem<DownloadProgressTestSystem>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -109,7 +107,7 @@ namespace CSTest
                 });
             });
             
-            testSet.AddTest("Get Request, with headers", [=]()
+            testSet.AddTest("Get Request, w-headers", [=]()
             {
                 CSCore::ParamDictionary headersTest;
                 headersTest["Accept-Language"] = "en-us,en;q=0.5";
@@ -128,7 +126,7 @@ namespace CSTest
                 });
             });
             
-            testSet.AddTest("Post Request, with headers", [=]()
+            testSet.AddTest("Post Request, w-headers", [=]()
             {
                 CSCore::ParamDictionary headersTest;
                 headersTest["Accept-Language"] = "en-us,en;q=0.5";
@@ -141,71 +139,20 @@ namespace CSTest
             
             testSet.AddTest("Download progress", [=]()
             {
-                auto downloadProgressWidget = CreateProgressWidget();
-                CS_ASSERT(downloadProgressWidget, "DownloadProgress widget cannot be NULL");
-                
-                auto progressBar = downloadProgressWidget->GetWidgetRecursive("ProgressBar");
-                auto progressBarComponent = progressBar->GetComponent<CSUI::ProgressBarComponent>();
-                auto progressLabel = downloadProgressWidget->GetWidgetRecursive("ProgressText");
-                auto progressTextComponent = progressLabel->GetComponent<CSUI::TextComponent>();
-                
-                GetUICanvas()->AddWidget(downloadProgressWidget);
-                
-                auto request = m_httpRequestSystem->MakeGetRequest("http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%20Build%203083.dmg", [=](const CSNetworking::HttpRequest* in_request, const CSNetworking::HttpResponse& in_response)
+                m_downloadProgressTestSystem->StartDownloadTest("http://download.thinkbroadband.com/10MB.zip", [=](const CSNetworking::HttpResponse& in_completeResponse)
                 {
-                    if(in_response.GetResult() != CSNetworking::HttpResponse::Result::k_flushed)
-                    {
-                        m_downloadProgressUpdateTimer->Stop();
-                        
-                        if(downloadProgressWidget->GetParent())
-                        {
-                            downloadProgressWidget->RemoveFromParent();
-                        }
-                        
-                        PresentHttpResponse(in_response);
-                    }
+                    PresentHttpResponse(in_completeResponse);
                 });
-                
-                //Reset the timer
-                m_downloadProgressUpdateTimer->Reset();
-                m_downloadProgressEventConnection = m_downloadProgressUpdateTimer->OpenConnection(k_downloadProgressUpdateIntervalDefault, [=]()
-                {
-                    if(request->GetExpectedTotalSize() > 0)
-                    {
-                        f32 progress = (f32)request->GetCurrentSize() / (f32)request->GetExpectedTotalSize();
-                        progressBarComponent->SetProgress(progress);
-                        
-                        std::string percentageProgress = CSCore::ToString((u32)(progress * 100)) + "%";
-                        progressTextComponent->SetText("Total Size - " + CSCore::ToString(request->GetExpectedTotalSize()) + "\nDownloaded - " + CSCore::ToString(request->GetCurrentSize()) + "\nProgress - " + percentageProgress);
-                    }
-                });
-                
-                m_downloadProgressUpdateTimer->Start();
             });
             
             testSet.AddTest("Check Reachability", [=]()
             {
-                CSCore::ParamDictionary headersTest;
-                headersTest["Accept-Language"] = "en-us,en;q=0.5";
-                
                 bool reachable = m_httpRequestSystem->CheckReachability();
                 
                 m_resultPresenter->Present("Rechability status - " + CSCore::ToString(reachable));
             });
             
             m_smokeTester->Present(testSet);
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        CSUI::WidgetSPtr State::CreateProgressWidget()
-        {
-            CSUI::WidgetFactory* widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
-            CS_ASSERT(widgetFactory, "No widget factory");
-            CSCore::ResourcePool* resPool = CSCore::Application::Get()->GetResourcePool();
-            CS_ASSERT(resPool, "No resource pool");
-            CSUI::WidgetTemplateCSPtr widgetTemplate = resPool->LoadResource<CSUI::WidgetTemplate>(CSCore::StorageLocation::k_package, k_downloadProgressCSUIPath);
-            CS_ASSERT(widgetTemplate, "Widget template failed to load");
-            return widgetFactory->Create(widgetTemplate);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
