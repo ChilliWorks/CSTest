@@ -40,11 +40,14 @@ namespace CSTest
         ///
         /// @param in_a - A floating point value.
         /// @param in_b - Another floating point value.
+        /// @param in_toleranceFactor - [Optional] The factor by which float episilon is
+        /// multiplied to get the tolerance before a value is considered inequal.
+        /// Defaults to 100.
         ///
         /// @return Whether or not the two floats are effectively equal. This allows for
         /// a very small small delta to avoid floating point precision issues.
         //------------------------------------------------------------------------------
-        bool Equals(f32 in_a, f32 in_b);
+        bool Equals(f32 in_a, f32 in_b, f32 in_toleranceFactor = 100.0f);
         //------------------------------------------------------------------------------
         /// @author Ian Copland
         ///

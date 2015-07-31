@@ -38,9 +38,9 @@ namespace CSTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool Equals(f32 in_a, f32 in_b)
+        bool Equals(f32 in_a, f32 in_b, f32 in_toleranceFactor = 100.0f)
         {
-            const f32 k_tolerance = std::numeric_limits<f32>::epsilon() * 100.0f;
+            const f32 k_tolerance = std::numeric_limits<f32>::epsilon() * in_toleranceFactor;
             f32 difference = in_a - in_b;
             return (difference < k_tolerance && difference > -k_tolerance);
         }

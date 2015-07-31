@@ -63,8 +63,7 @@ namespace CSTest
             CSCore::Vector3 a8(1.0f, 1.0f, 1.0f);
             CSCore::Vector3 b1(2.0f, 3.0f, 4.0f);
             auto b2 = CSCore::Matrix3::CreateTransform(CSCore::Vector2(1.0f, 2.0f), CSCore::Vector2(3.0f, 4.0f), 5.0f);
-            //TODO: !?
-            //auto b2 = CSCore::Matrix4::CreateTransform(CSCore::Vector3(1.0f, 2.0f, 3.0f), CSCore::Vector3(4.0f, 5.0f, 6.0f), CSCore::Quaternion(CSCore::Vector3(0.0f, 1.0f, 0.0f), 0.5f));
+            auto b3 = CSCore::Matrix4::CreateTransform(CSCore::Vector3(1.0f, 2.0f, 3.0f), CSCore::Vector3(1.0f, 2.0f, 3.0f), CSCore::Quaternion(CSCore::Vector3::Normalise(CSCore::Vector3(1.0f, 1.0f, 1.0f)), -0.5f));
             f32 b4 = 2.0f;
             
             REQUIRE(a1 == a2);
@@ -75,9 +74,7 @@ namespace CSTest
             REQUIRE(Common::Equals(a3 * b1, CSCore::Vector3(2.0f, 3.0f, 4.0f)));
             REQUIRE(Common::Equals(a4 / b1, CSCore::Vector3(0.5f, 1.0f / 3.0f, 0.25f)));
             REQUIRE(Common::Equals(a5 * b2, CSCore::Vector3(9.52238082f, 1.39252472f, 1.0f)));
-            
-            //TODO: !?
-            //REQUIRE(Common::Equals(a6 * b3, CSCore::Vector3(9.52238082, 1.39252472)));
+            REQUIRE(Common::Equals(a6 * b3, CSCore::Vector3(1.06488132f, 8.29598331f, 10.6391354f)));
             REQUIRE(Common::Equals(a7 * b4, CSCore::Vector3(2.0f, 2.0f, 2.0f)));
             REQUIRE(Common::Equals(b4 * a7, CSCore::Vector3(2.0f, 2.0f, 2.0f)));
             REQUIRE(Common::Equals(a8 / b4, CSCore::Vector3(0.5f, 0.5f, 0.5f)));
@@ -87,9 +84,7 @@ namespace CSTest
             a3 *= b1;
             a4 /= b1;
             a5 *= b2;
-            
-            //TODO: !?
-            //a6 *= b3;
+            a6 *= b3;
             a7 *= b4;
             a8 /= b4;
             
@@ -98,9 +93,7 @@ namespace CSTest
             REQUIRE(Common::Equals(a3, CSCore::Vector3(2.0f, 3.0f, 4.0f)));
             REQUIRE(Common::Equals(a4, CSCore::Vector3(0.5f, 1.0f / 3.0f, 0.25f)));
             REQUIRE(Common::Equals(a5, CSCore::Vector3(9.52238082f, 1.39252472f, 1.0f)));
-            
-            //TODO: !?
-            //REQUIRE(Common::Equals(a6, CSCore::Vector3(9.52238082, 1.39252472)));
+            REQUIRE(Common::Equals(a6, CSCore::Vector3(1.06488132f, 8.29598331f, 10.6391354f)));
             REQUIRE(Common::Equals(a7, CSCore::Vector3(2.0f, 2.0f, 2.0f)));
             REQUIRE(Common::Equals(a8, CSCore::Vector3(0.5f, 0.5f, 0.5f)));
         }
@@ -299,13 +292,16 @@ namespace CSTest
 
         TEST_CASE("Vector3: Angle", "[Math][Vector3]")
         {
+            //The angle algorithm suffers badly from floating point error problems, so it requires a
+            //bigger tolerance than most.
+            const f32 k_toleranceFactor = 10000.0f;
+            
             CSCore::Vector3 a(1.0f, 2.0f, 3.0f);
             CSCore::Vector3 b(4.0f, 5.0f, 6.0f);
             
-            //TODO: !? This is REALLY inaccurate! Can the algorithm be changed to be more accurate?
-//            REQUIRE(Common::Equals(CSCore::Vector3::Angle(a, a), 0.0f));
-//            REQUIRE(Common::Equals(CSCore::Vector3::Angle(a, b), 0.225726396f));
-//            REQUIRE(Common::Equals(CSCore::Vector3::Angle(b, a), 0.225726396f));
+            REQUIRE(Common::Equals(CSCore::Vector3::Angle(a, a), 0.0f, k_toleranceFactor));
+            REQUIRE(Common::Equals(CSCore::Vector3::Angle(a, b), 0.225726129f, k_toleranceFactor));
+            REQUIRE(Common::Equals(CSCore::Vector3::Angle(b, a), 0.225726129f, k_toleranceFactor));
         }
 
         TEST_CASE("Vector3: Rotate", "[Math][Vector3]")
@@ -324,22 +320,17 @@ namespace CSTest
             REQUIRE(Common::Equals(pointA, CSCore::Vector3(-0.0812685415f, 2.23459053f, 3.0f)));
             REQUIRE(Common::Equals(pointB, CSCore::Vector3(-3.84562111f, -5.55359268f, -5.60078621f)));
         }
-//
-//        TEST_CASE("Vector3: Transform2x3", "[Math][Vector3]")
-//        {
-//            CSCore::Vector3 pointA(1.0f, 2.0f);
-//            CSCore::Vector3 pointB(-3.0f, -4.0f);
-//            auto transformA = CSCore::Matrix3::CreateTransform(CSCore::Vector3(1.0f, 2.0f), CSCore::Vector3(3.0f, 4.0f), 5.0f);
-//            auto transformB = CSCore::Matrix3::CreateTransform(CSCore::Vector3(-1.0f, -2.0f), CSCore::Vector3(-3.0f, -4.0f), -5.0f);
-//            
-//            REQUIRE(Common::Equals(CSCore::Vector3::Transform2x3(pointA, transformA), CSCore::Vector3(9.52238082, 1.39252472)));
-//            REQUIRE(Common::Equals(CSCore::Vector3::Transform2x3(pointB, transformB), CSCore::Vector3(-13.7898293, 11.1689138)));
-//            
-//            pointA.Transform2x3(transformA);
-//            pointB.Transform2x3(transformB);
-//            
-//            REQUIRE(Common::Equals(pointA, CSCore::Vector3(9.52238082, 1.39252472)));
-//            REQUIRE(Common::Equals(pointB, CSCore::Vector3(-13.7898293, 11.1689138)));
-//        }
+
+        TEST_CASE("Vector3: Transform3x4", "[Math][Vector3]")
+        {
+            CSCore::Vector3 point(1.0f, 2.0f, 3.0f);
+            auto transform = CSCore::Matrix4::CreateTransform(CSCore::Vector3(1.0f, 2.0f, 3.0f), CSCore::Vector3(1.0f, 2.0f, 3.0f), CSCore::Quaternion(CSCore::Vector3::Normalise(CSCore::Vector3(1.0f, 1.0f, 1.0f)), -0.5f));
+            
+            REQUIRE(Common::Equals(CSCore::Vector3::Transform3x4(point, transform), CSCore::Vector3(1.06488132f, 8.29598331f, 10.6391354f)));
+            
+            point.Transform3x4(transform);
+            
+            REQUIRE(Common::Equals(point, CSCore::Vector3(1.06488132f, 8.29598331f, 10.6391354f)));
+        }
     }
 }
