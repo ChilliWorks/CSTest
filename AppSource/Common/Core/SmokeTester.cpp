@@ -72,6 +72,17 @@ namespace CSTest
             
             m_titleText->GetComponent<CSUI::TextComponent>()->SetText(in_testSet.GetName());
             
+			if (in_testSet.GetTests().size() < 4)
+			{
+				auto layoutComponent = m_buttonContainer->GetComponent<CSUI::LayoutComponent>();
+				layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::VListLayoutDef(5, CSCore::Vector4(0.0f, k_listMargins, 0.0f, k_listMargins), CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f)));
+			}
+			else
+			{
+				auto layoutComponent = m_buttonContainer->GetComponent<CSUI::LayoutComponent>();
+				layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::GridLayoutDef(CSUI::GridLayout::CellOrder::k_rowMajor, 5, 2, CSCore::Vector4::k_zero, CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f, k_relativeSpacing, 0.0f)));
+			}
+
             for (const auto& test : in_testSet.GetTests())
             {
                 CSUI::WidgetSPtr button = UIFactory::CreateStretchableButton(CSCore::Vector2::k_one, test.m_name, CSRendering::AlignmentAnchor::k_middleCentre, CSCore::Colour(0.92f, 0.95f, 0.98f, 1.0f));
@@ -84,17 +95,6 @@ namespace CSTest
                 
                 m_buttons.push_back(button);
                 m_connectionContainer.push_back(std::move(connection));
-            }
-            
-            if (in_testSet.GetTests().size() < 4)
-            {
-                auto layoutComponent = m_buttonContainer->GetComponent<CSUI::LayoutComponent>();
-                layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::VListLayoutDef(5, CSCore::Vector4(0.0f, k_listMargins, 0.0f, k_listMargins), CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f)));
-            }
-            else
-            {
-                auto layoutComponent = m_buttonContainer->GetComponent<CSUI::LayoutComponent>();
-                layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::GridLayoutDef(CSUI::GridLayout::CellOrder::k_rowMajor, 5, 2, CSCore::Vector4::k_zero, CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f, k_relativeSpacing, 0.0f)));
             }
         }
         //------------------------------------------------------------------------------
