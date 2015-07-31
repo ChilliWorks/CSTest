@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp" />
+    <ClCompile Include="..\..\AppSource\Common\Core\Equals.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\ResultPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\SmokeTester.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\SmokeTestSet.cpp" />
@@ -33,10 +34,13 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystem.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector2.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector3.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector4.cpp" />
     <ClCompile Include="..\..\AppSource\WebView\State.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h" />
+    <ClInclude Include="..\..\AppSource\Common\Core\Equals.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\ResultPresenter.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\SmokeTester.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\SmokeTestSet.h" />

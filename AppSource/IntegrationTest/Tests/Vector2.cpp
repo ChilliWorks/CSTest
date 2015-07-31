@@ -289,8 +289,8 @@ namespace CSTest
             CSCore::Vector2 b(3.0f, 4.0f);
             
             REQUIRE(Common::Equals(CSCore::Vector2::Angle(a, a), 0.0f));
-            REQUIRE(Common::Equals(CSCore::Vector2::Angle(a, b), -0.179853559)); //TODO: !? This should not take into account direction!!
-            REQUIRE(Common::Equals(CSCore::Vector2::Angle(b, a), 0.179853559));
+            REQUIRE(Common::Equals(CSCore::Vector2::Angle(a, b), 0.179853559f));
+            REQUIRE(Common::Equals(CSCore::Vector2::Angle(b, a), 0.179853559f));
         }
         
         TEST_CASE("Vector2: Rotate", "[Math][Vector2]")
@@ -300,14 +300,14 @@ namespace CSTest
             f32 angleA = 0.5f;
             f32 angleB = -0.5f;
             
-            REQUIRE(Common::Equals(CSCore::Vector2::Rotate(pointA, angleA), CSCore::Vector2(1.83643365, 1.27573955)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Rotate(pointB, angleB), CSCore::Vector2(-0.715045452, -4.94860697)));
+            REQUIRE(Common::Equals(CSCore::Vector2::Rotate(pointA, angleA), CSCore::Vector2(1.83643365f, 1.27573955f)));
+            REQUIRE(Common::Equals(CSCore::Vector2::Rotate(pointB, angleB), CSCore::Vector2(-0.715045452f, -4.94860697f)));
             
             pointA.Rotate(angleA);
             pointB.Rotate(angleB);
             
-            REQUIRE(Common::Equals(pointA, CSCore::Vector2(1.83643365, 1.27573955)));
-            REQUIRE(Common::Equals(pointB, CSCore::Vector2(-0.715045452, -4.94860697)));
+            REQUIRE(Common::Equals(pointA, CSCore::Vector2(1.83643365f, 1.27573955f)));
+            REQUIRE(Common::Equals(pointB, CSCore::Vector2(-0.715045452f, -4.94860697f)));
         }
         
         TEST_CASE("Vector2: Transform2x3", "[Math][Vector2]")
@@ -317,14 +317,14 @@ namespace CSTest
             auto transformA = CSCore::Matrix3::CreateTransform(CSCore::Vector2(1.0f, 2.0f), CSCore::Vector2(3.0f, 4.0f), 5.0f);
             auto transformB = CSCore::Matrix3::CreateTransform(CSCore::Vector2(-1.0f, -2.0f), CSCore::Vector2(-3.0f, -4.0f), -5.0f);
             
-            REQUIRE(Common::Equals(CSCore::Vector2::Transform2x3(pointA, transformA), CSCore::Vector2(9.52238082, 1.39252472)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Transform2x3(pointB, transformB), CSCore::Vector2(-13.7898293, 11.1689138)));
+            REQUIRE(Common::Equals(CSCore::Vector2::Transform2x3(pointA, transformA), CSCore::Vector2(9.52238082f, 1.39252472f)));
+            REQUIRE(Common::Equals(CSCore::Vector2::Transform2x3(pointB, transformB), CSCore::Vector2(-13.7898293f, 11.1689138f)));
             
             pointA.Transform2x3(transformA);
             pointB.Transform2x3(transformB);
             
-            REQUIRE(Common::Equals(pointA, CSCore::Vector2(9.52238082, 1.39252472)));
-            REQUIRE(Common::Equals(pointB, CSCore::Vector2(-13.7898293, 11.1689138)));
+            REQUIRE(Common::Equals(pointA, CSCore::Vector2(9.52238082f, 1.39252472f)));
+            REQUIRE(Common::Equals(pointB, CSCore::Vector2(-13.7898293f, 11.1689138f)));
         }
     }
 }
