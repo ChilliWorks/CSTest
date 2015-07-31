@@ -38,6 +38,7 @@
 		81A83FAB1340B90900FBCC29 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A83FA11340B8C900FBCC29 /* Security.framework */; };
 		81A83FAC1340B90900FBCC29 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A83FA21340B8E900FBCC29 /* SystemConfiguration.framework */; };
 		81B9C0D918B27D490029BC9E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81B9C0D818B27D490029BC9E /* CoreMotion.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		81BAABC61B6BBF4D00500F7D /* Vector4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81BAABC51B6BBF4D00500F7D /* Vector4.cpp */; };
 		81CFA14719EE9177003C8436 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CFA14319EE9177003C8436 /* App.cpp */; };
 		81D1535D1B68DB1400341A9F /* ResultPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81D1535B1B68DB1400341A9F /* ResultPresenter.cpp */; };
 		81D153601B68E90F00341A9F /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81D1535F1B68E90F00341A9F /* Vector2.cpp */; };
@@ -107,6 +108,7 @@
 		81A83FA11340B8C900FBCC29 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		81A83FA21340B8E900FBCC29 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		81B9C0D818B27D490029BC9E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		81BAABC51B6BBF4D00500F7D /* Vector4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector4.cpp; sourceTree = "<group>"; };
 		81CFA14319EE9177003C8436 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		81CFA14419EE9177003C8436 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		81D1535B1B68DB1400341A9F /* ResultPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResultPresenter.cpp; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				81E010781B56721000FEC2AE /* FileSystem.cpp */,
 				81D1535F1B68E90F00341A9F /* Vector2.cpp */,
 				819303291B6A6D630036740E /* Vector3.cpp */,
+				81BAABC51B6BBF4D00500F7D /* Vector4.cpp */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81CFA14719EE9177003C8436 /* App.cpp in Sources */,
+				81BAABC61B6BBF4D00500F7D /* Vector4.cpp in Sources */,
 				81D153601B68E90F00341A9F /* Vector2.cpp in Sources */,
 				81E0107A1B56721000FEC2AE /* FileSystem.cpp in Sources */,
 				81DE059E1B67D53200583F5F /* State.cpp in Sources */,

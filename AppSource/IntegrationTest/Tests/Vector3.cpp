@@ -141,8 +141,8 @@ namespace CSTest
 
         TEST_CASE("Vector3: Absolute", "[Math][Vector3]")
         {
-            CSCore::Vector3 a( 1.0f,  1.0f,  1.0f);
-            CSCore::Vector3 b( -1.0f,  -1.0f, -1.0f);
+            CSCore::Vector3 a(1.0f, 1.0f, 1.0f);
+            CSCore::Vector3 b(-1.0f, -1.0f, -1.0f);
             CSCore::Vector3 c(0.0f, 0.0f, 0.0f);
             
             REQUIRE(Common::Equals(CSCore::Vector3::Abs(a), CSCore::Vector3(1.0f, 1.0f, 1.0f)));
