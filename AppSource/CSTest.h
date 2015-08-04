@@ -39,12 +39,13 @@ namespace CSTest
     {
         CS_FORWARDDECLARE_CLASS(BasicEntityFactory);
         CS_FORWARDDECLARE_CLASS(BasicWidgetFactory);
-        CS_FORWARDDECLARE_CLASS(MaterialFactory);
+        CS_FORWARDDECLARE_CLASS(CameraSpinnerComponent);
         CS_FORWARDDECLARE_CLASS(MaterialFactory);
         CS_FORWARDDECLARE_CLASS(ModelFactory);
         CS_FORWARDDECLARE_CLASS(ResultPresenter);
         CS_FORWARDDECLARE_CLASS(SmokeTester);
         CS_FORWARDDECLARE_CLASS(SmokeTestSet);
+        CS_FORWARDDECLARE_CLASS(ThirdPersonCameraComponent);
     }
     
     namespace IntegrationTest

@@ -60,6 +60,8 @@
 		81E0109D1B56B6F500FEC2AE /* TestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E010971B56B6F500FEC2AE /* TestSystem.cpp */; };
 		81E7C6BB1B70B8D100F32006 /* BasicEntityFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6B91B70B8D100F32006 /* BasicEntityFactory.cpp */; };
 		81E7C6C01B70C73E00F32006 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6BE1B70C73E00F32006 /* State.cpp */; };
+		81E7C6C31B70D0DF00F32006 /* ThirdPersonCameraComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6C11B70D0DF00F32006 /* ThirdPersonCameraComponent.cpp */; };
+		81E7C6C61B70E67900F32006 /* CameraSpinnerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6C41B70E67900F32006 /* CameraSpinnerComponent.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +151,10 @@
 		81E7C6BA1B70B8D100F32006 /* BasicEntityFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicEntityFactory.h; sourceTree = "<group>"; };
 		81E7C6BE1B70C73E00F32006 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81E7C6BF1B70C73E00F32006 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81E7C6C11B70D0DF00F32006 /* ThirdPersonCameraComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThirdPersonCameraComponent.cpp; sourceTree = "<group>"; };
+		81E7C6C21B70D0DF00F32006 /* ThirdPersonCameraComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdPersonCameraComponent.h; sourceTree = "<group>"; };
+		81E7C6C41B70E67900F32006 /* CameraSpinnerComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraSpinnerComponent.cpp; sourceTree = "<group>"; };
+		81E7C6C51B70E67900F32006 /* CameraSpinnerComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSpinnerComponent.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +274,10 @@
 				81C8E86F1B6F635200E7FECF /* MaterialFactory.h */,
 				81C8E8701B6F635200E7FECF /* ModelFactory.cpp */,
 				81C8E8711B6F635200E7FECF /* ModelFactory.h */,
+				81E7C6C11B70D0DF00F32006 /* ThirdPersonCameraComponent.cpp */,
+				81E7C6C21B70D0DF00F32006 /* ThirdPersonCameraComponent.h */,
+				81E7C6C41B70E67900F32006 /* CameraSpinnerComponent.cpp */,
+				81E7C6C51B70E67900F32006 /* CameraSpinnerComponent.h */,
 			);
 			path = Rendering;
 			sourceTree = "<group>";
@@ -504,6 +514,7 @@
 				81DE059E1B67D53200583F5F /* State.cpp in Sources */,
 				81E010991B56B6F500FEC2AE /* FailedAssertion.cpp in Sources */,
 				81E0109A1B56B6F500FEC2AE /* CSReporter.cpp in Sources */,
+				81E7C6C31B70D0DF00F32006 /* ThirdPersonCameraComponent.cpp in Sources */,
 				81D1535D1B68DB1400341A9F /* ResultPresenter.cpp in Sources */,
 				81E7C6BB1B70B8D100F32006 /* BasicEntityFactory.cpp in Sources */,
 				81DE059A1B67C5F800583F5F /* BasicWidgetFactory.cpp in Sources */,
@@ -515,6 +526,7 @@
 				81E0109B1B56B6F500FEC2AE /* Report.cpp in Sources */,
 				810B0E461B6142A30035CF48 /* ReportPresenter.cpp in Sources */,
 				81E0109C1B56B6F500FEC2AE /* TestCase.cpp in Sources */,
+				81E7C6C61B70E67900F32006 /* CameraSpinnerComponent.cpp in Sources */,
 				81E7C6C01B70C73E00F32006 /* State.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

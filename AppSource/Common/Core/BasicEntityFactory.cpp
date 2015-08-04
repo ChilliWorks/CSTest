@@ -28,8 +28,10 @@
 
 #include <Common/Core/BasicEntityFactory.h>
 
+#include <Common/Rendering/CameraSpinnerComponent.h>
 #include <Common/Rendering/MaterialFactory.h>
 #include <Common/Rendering/ModelFactory.h>
+#include <Common/Rendering/ThirdPersonCameraComponent.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Entity.h>
@@ -60,21 +62,22 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CSCore::EntityUPtr BasicEntityFactory::CreateThirdPersonCamera(const CSCore::EntitySPtr& in_target, f32 in_distance, f32 in_verticalAngle, f32 in_horizontalAngle, const CSCore::Vector3& in_targetOffset,
+        CSCore::EntityUPtr BasicEntityFactory::CreateThirdPersonCamera(const CSCore::EntitySPtr& in_target, const CSCore::Vector3& in_targetOffset, f32 in_distance, f32 in_horizontalAngle, f32 in_verticalAngle,
                                                                        f32 in_horizontalAngularVelocity)
         {
             CS_ASSERT(CSCore::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
             CSRendering::CameraComponentSPtr camComponent = m_renderComponentFactory->CreatePerspectiveCameraComponent(3.14f / 3.0f, 1.0f, 30.0f);
+            auto thirdPersonCameraComponent = std::make_shared<ThirdPersonCameraComponent>(in_target, in_targetOffset, in_distance, in_horizontalAngle, in_verticalAngle);
+            auto cameraSpinnerComponent = std::make_shared<CameraSpinnerComponent>(in_horizontalAngularVelocity);
             
-            CSCore::EntityUPtr camera = CSCore::Entity::Create();
-            camera->SetName(CSCore::ToString(m_entityCount++) + "ThirdPersonCamera");
-            camera->AddComponent(camComponent);
+            CSCore::EntityUPtr entity = CSCore::Entity::Create();
+            entity->SetName(CSCore::ToString(m_entityCount++) + "-ThirdPersonCamera");
+            entity->AddComponent(camComponent);
+            entity->AddComponent(thirdPersonCameraComponent);
+            entity->AddComponent(cameraSpinnerComponent);
             
-            //TODO: Do properly
-            camera->GetTransform().SetLookAt(CSCore::Vector3(2.0f, 3.0f, -4.0f), CSCore::Vector3::k_zero, CSCore::Vector3::k_unitPositiveY);
-            
-            return camera;
+            return entity;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -86,6 +89,7 @@ namespace CSTest
             ambientLightComponent->SetColour(in_colour);
             
             auto entity = CSCore::Entity::Create();
+            entity->SetName(CSCore::ToString(m_entityCount++) + "-AmbientLight");
             entity->AddComponent(ambientLightComponent);
             return entity;
         }
@@ -98,9 +102,10 @@ namespace CSTest
             CSRendering::DirectionalLightComponentSPtr directionalLightComponent = m_renderComponentFactory->CreateDirectionalLightComponent(2048);
             directionalLightComponent->SetColour(in_colour);
             directionalLightComponent->SetShadowVolume(in_shadowVolume.x, in_shadowVolume.y, in_shadowVolume.z, in_shadowVolume.w);
-            directionalLightComponent->SetShadowTolerance(0.005f);
+            directionalLightComponent->SetShadowTolerance(0.001f);
             
             auto entity = CSCore::Entity::Create();
+            entity->SetName(CSCore::ToString(m_entityCount++) + "-DirectionalLight");
             entity->AddComponent(directionalLightComponent);
             return entity;
         }
@@ -117,10 +122,27 @@ namespace CSTest
             CSRendering::MaterialCSPtr material = m_resourcePool->LoadResource<CSRendering::Material>(CSCore::StorageLocation::k_package, "Materials/CheckeredLit.csmaterial");
             
             CSRendering::StaticMeshComponentSPtr meshComponent = m_renderComponentFactory->CreateStaticMeshComponent(mesh, material);
+            meshComponent->SetShadowCastingEnabled(false);
+            
+            auto entity = CSCore::Entity::Create();
+            entity->SetName(CSCore::ToString(m_entityCount++) + "-Room");
+            entity->AddComponent(meshComponent);
+            return entity;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        CSCore::EntityUPtr BasicEntityFactory::CreateBox(const CSCore::Colour& in_colour, const CSCore::Vector3& in_size)
+        {
+            CS_ASSERT(CSCore::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
+            
+            CSRendering::MeshCSPtr mesh = m_modelFactory->CreateBox(in_size);
+            CSRendering::MaterialCSPtr material = m_materialFactory->CreateStaticBlinnColour(in_colour);
+            
+            CSRendering::StaticMeshComponentSPtr meshComponent = m_renderComponentFactory->CreateStaticMeshComponent(mesh, material);
             meshComponent->SetShadowCastingEnabled(true);
             
             auto entity = CSCore::Entity::Create();
-            entity->SetName(CSCore::ToString(m_entityCount++) + "Room");
+            entity->SetName(CSCore::ToString(m_entityCount++) + "-Box");
             entity->AddComponent(meshComponent);
             return entity;
         }

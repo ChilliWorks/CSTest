@@ -56,6 +56,14 @@ namespace CSTest
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnInit() override;
+            //------------------------------------------------------------------------------
+            /// Updates the state each frame.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_deltaTime - The delta time.
+            //------------------------------------------------------------------------------
+            void OnUpdate(f32 in_deltaTime) override;
         };
     }
 }

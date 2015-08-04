@@ -30,6 +30,7 @@
 
 #include <Common/Core/StateNavigator.h>
 #include <Common/Core/BasicEntityFactory.h>
+#include <Common/Rendering/ThirdPersonCameraComponent.h>
 #include <WebView/State.h>
 
 #include <ChilliSource/Core/Base.h>
@@ -39,6 +40,17 @@ namespace CSTest
 {
     namespace Lighting
     {
+        namespace
+        {
+            std::array<CSCore::Colour, 4> k_boxColours =
+            {
+                CSCore::Colour(1.0f, 0.1f, 0.1f, 1.0f),
+                CSCore::Colour(0.1f, 1.0f, 0.1f, 1.0f),
+                CSCore::Colour(0.1f, 0.1f, 1.0f, 1.0f),
+                CSCore::Colour(1.0f, 1.0f, 1.0f, 1.0f)
+            };
+        }
+        
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::CreateSystems()
@@ -64,8 +76,31 @@ namespace CSTest
             directionalLight->GetTransform().SetLookAt(CSCore::Vector3(-9.0f, 9.0f, 9.0f), CSCore::Vector3::k_zero, CSCore::Vector3::k_unitPositiveY);
             GetScene()->Add(directionalLight);
             
-            CSCore::EntitySPtr camera = basicEntityFactory->CreateThirdPersonCamera(room);
+            CSCore::EntitySPtr camera = basicEntityFactory->CreateThirdPersonCamera(room, CSCore::Vector3(0.0f, -9.0f, 0.0f));
             GetScene()->Add(camera);
+            
+            const u32 k_numX = 5;
+            const u32 k_numZ = 5;
+            const f32 k_offset = -7.0f;
+            const f32 k_stride = 3.0f;
+            for (u32 x = 0; x < k_numX; ++x)
+            {
+                for (u32 z = 0; z < k_numZ; ++z)
+                {
+                    CSCore::Vector3 positionInGrid(k_offset + x * k_stride, 0.0f, k_offset + z * k_stride);
+                    CSCore::Vector3 size(1.0f, CSCore::Random::Generate<f32>(1.0f, 3.0f), 1.0f);
+                    CSCore::Vector3 worldPosition = positionInGrid + 0.5f * size;
+                    
+                    CSCore::EntitySPtr box = basicEntityFactory->CreateBox(k_boxColours[CSCore::Random::Generate<u32>(0, 3)], size);
+                    box->GetTransform().SetPosition(worldPosition);
+                    GetScene()->Add(box);
+                }
+            }
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void State::OnUpdate(f32 in_deltaTime)
+        {
         }
     }
 }

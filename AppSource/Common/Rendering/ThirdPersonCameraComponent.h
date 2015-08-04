@@ -1,7 +1,7 @@
 //
-//  BasicEntityFactory.h
+//  ThirdPersonCameraComponent.h
 //  CSTest
-//  Created by Ian Copland on 28/07/2015.
+//  Created by Ian Copland on 04/08/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,29 +26,42 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_BASICENTITYFACTORY_H_
-#define _COMMON_CORE_BASICENTITYFACTORY_H_
+#ifndef _COMMON_RENDERING_THIRDPERSONCAMERA_H_
+#define _COMMON_RENDERING_THIRDPERSONCAMERA_H_
 
 #include <CSTest.h>
 
-#include <ChilliSource/Core/Math.h>
-#include <ChilliSource/Core/System.h>
+#include <ChilliSource/Core/Entity.h>
 
 namespace CSTest
 {
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A factory for common entity types.
-        ///
-        /// This is not thread-safe and must only be called from the main thread.
+        /// A component that provides the "follow" logic for a third person camera. This
+        /// takes an "target" entity for the component and follows it at the given
+        /// distance.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class BasicEntityFactory final : public CSCore::AppSystem
+        class ThirdPersonCameraComponent final : public CSCore::Component
         {
         public:
-            CS_DECLARE_NAMEDTYPE(BasicEntityFactory);
+            CS_DECLARE_NAMEDTYPE(ThirdPersonCameraComponent);
+            //------------------------------------------------------------------------------
+            /// Constructor. Sets the target and other base properties of the component.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_target - The entity to follow.
+            /// @param in_offset - The offset from the target (in it's local space)
+            /// that the camera will follow.
+            /// @param in_distance - The distance from the target the camera will follow.
+            /// @param in_horizontalAngle - The horizontal angle of the camera from the
+            /// target.
+            /// @param in_verticalAngle - The vertical angle of the camera from the target.
+            //------------------------------------------------------------------------------
+            ThirdPersonCameraComponent(const CSCore::EntitySPtr& in_target, const CSCore::Vector3& in_offset, f32 in_distance, f32 in_horizontalAngle, f32 in_verticalAngle);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly
@@ -62,106 +75,84 @@ namespace CSTest
             //------------------------------------------------------------------------------
             bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
-            /// Creates a basic third person camera which will follow the given entity.
-            ///
             /// @author Ian Copland
             ///
-            /// @param in_target - The target entity that the camera will follow.
-            /// @param in_targetOffset - [Optional] The offset from the target (in it's
-            /// local space) that the camera will follow. Defaults to [0, 0].
-            /// @param in_distance - [Optional] The distance from the target the camera will
-            /// follow. Defaults to 7.5.
-            /// @param in_horizontalAngle - [Optional] The initial horizontal angle of the
-            /// camera from the target. Defaults to 0.
-            /// @param in_verticalAngle - [Optional] The vertical angle of the camera from
-            /// the target. Defaults to 30 degrees.
-            /// @param in_horizontalAngularVelocity - [Optional] The horizontal rotation
-            /// velocity around the target. Defaults to 0.1f.
-            ///
-            /// @return The entity.
+            /// @return The offset from the target (in it's local space) that the camera
+            /// will follow.
             //------------------------------------------------------------------------------
-            CSCore::EntityUPtr CreateThirdPersonCamera(const CSCore::EntitySPtr& in_target, const CSCore::Vector3& in_targetOffset = CSCore::Vector3::k_zero, f32 in_distance = 7.5f, f32 in_horizontalAngle = 0.0f,
-                                                       f32 in_verticalAngle = CSCore::MathUtils::k_pi / 6.0f, f32 in_horizontalAngularVelocity = 0.1f);
+            const CSCore::Vector3& GetOffset() const;
             //------------------------------------------------------------------------------
-            /// Creates an ambient light with the given colour.
-            ///
             /// @author Ian Copland
             ///
-            /// @param in_colour - The colour of the light.
-            ///
-            /// @return The entity.
+            /// @param The distance from the target.
             //------------------------------------------------------------------------------
-            CSCore::EntityUPtr CreateAmbientLight(const CSCore::Colour& in_colour);
+            f32 GetDistance() const;
             //------------------------------------------------------------------------------
-            /// Creates a directional light with the given colour.
-            ///
             /// @author Ian Copland
             ///
-            /// @param in_colour - The colour of the directional light.
-            /// @param in_shadowVolume - [Optional] The shadow volume. Defaults to
-            /// [30, 30, 1, 30]
-            ///
-            /// @return The entity.
+            /// @param The horizontal angle of the camera from the target.
             //------------------------------------------------------------------------------
-            CSCore::EntityUPtr CreateDirectionalLight(const CSCore::Colour& in_colour, const CSCore::Vector4& in_shadowVolume = CSCore::Vector4(30.0f, 30.0f, 1.0f, 30.0f));
+            f32 GetHorizontalAngle() const;
             //------------------------------------------------------------------------------
-            /// Creates a grey checkered room for graphical tests to take place in.
-            ///
             /// @author Ian Copland
             ///
-            /// @param in_size - [Optional] The size of the room. Defaults to
-            /// [20, 20, 20].
-            ///
-            /// @return The entity.
+            /// @param The vertical angle of the camera from the target.
             //------------------------------------------------------------------------------
-            CSCore::EntityUPtr CreateRoom(const CSCore::Vector3& in_size = CSCore::Vector3(20.0f, 20.0f, 20.0f));
+            f32 GetVerticalAngle() const;
             //------------------------------------------------------------------------------
-            /// Creates a coloured box of the given size.
-            ///
             /// @author Ian Copland
             ///
-            /// @param in_colour - The colour of the box.
-            /// @param in_size - [Optional] The size of the box. Defaults to [1, 1, 1].
-            ///
-            /// @return The entity.
+            /// @param in_target - The target to follow.
             //------------------------------------------------------------------------------
-            CSCore::EntityUPtr CreateBox(const CSCore::Colour& in_colour, const CSCore::Vector3& in_size = CSCore::Vector3(1.0f, 1.0f, 1.0f));
+            void SetTarget(const CSCore::EntitySPtr& in_target);
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @param in_offset - The offset from the target (in it's local space) that
+            /// the camera will follow.
+            //------------------------------------------------------------------------------
+            void SetOffset(const CSCore::Vector3& in_offset);
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @param in_distance - The distance from the target.
+            //------------------------------------------------------------------------------
+            void SetDistance(f32 in_distance);
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @param in_horizontalAngle - The horizontal angle of the camera from the
+            /// target.
+            //------------------------------------------------------------------------------
+            void SetHorizontalAngle(f32 in_horizontalAngle);
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @param in_verticalAngle - The vertical angle of the camera from the target.
+            //------------------------------------------------------------------------------
+            void SetVerticalAngle(f32 in_verticalAngle);
             
         private:
-            friend class CSCore::Application;
             //------------------------------------------------------------------------------
-            /// A factory method for creating new instances of the system.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @return The new instance.
-            //------------------------------------------------------------------------------
-            static BasicEntityFactoryUPtr Create();
-            //------------------------------------------------------------------------------
-            /// Default constructor. Declared private to ensure the system is created
-            /// through State::CreateSystem<>().
+            /// Sets the position of the owning entity based on the target entity.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            BasicEntityFactory() = default;
+            void UpdatePosition();
             //------------------------------------------------------------------------------
-            /// Initialises the system.
+            /// Called whenever this is added to an entity. This will update the position of
+            /// the entity to ensure it is always in the correct place.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnInit() override;
-            //------------------------------------------------------------------------------
-            /// Cleans up the system.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnDestroy() override;
+            void OnAddedToEntity();
             
-            CSCore::ResourcePool* m_resourcePool = nullptr;
-            CSRendering::RenderComponentFactory* m_renderComponentFactory = nullptr;
-            ModelFactory* m_modelFactory = nullptr;
-            MaterialFactory* m_materialFactory = nullptr;
-            u32 m_entityCount = 0;
+            CSCore::EntityWPtr m_target;
+            CSCore::EventConnectionUPtr m_transformChangedConnection;
+            CSCore::Vector3 m_offset;
+            f32 m_distance = 0.0f;
+            f32 m_horizontalAngle = 0.0f;
+            f32 m_verticalAngle = 0.0f;
         };
     }
 }
