@@ -55,7 +55,7 @@ namespace CSTest
             ///
             /// @author Ian Copland
             ///
-            /// @param The interface Id.
+            /// @param in_interfaceId - The interface Id.
             ///
             /// @return Whether or not the interface is implemented.
             //------------------------------------------------------------------------------

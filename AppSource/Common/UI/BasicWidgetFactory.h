@@ -1,5 +1,5 @@
 //
-//  UIFactory.h
+//  BasicWidgetFactory.h
 //  CSTest
 //  Created by Ian Copland on 28/07/2015.
 //
@@ -26,8 +26,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_UI_UIFACTORY_H_
-#define _COMMON_UI_UIFACTORY_H_
+#ifndef _COMMON_UI_BASICWIDGETFACTORY_H_
+#define _COMMON_UI_BASICWIDGETFACTORY_H_
 
 #include <CSTest.h>
 
@@ -40,12 +40,28 @@ namespace CSTest
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A collection of methods for creating different types of standard UI in code.
+        /// A factory for creation of common UI types.
+        ///
+        /// This is not thread-safe and must only be called from the main thread.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        namespace UIFactory
+        class BasicWidgetFactory final : public CSCore::AppSystem
         {
+        public:
+            CS_DECLARE_NAMEDTYPE(BasicWidgetFactory);
+            //------------------------------------------------------------------------------
+            /// Allows querying of whether or not this system implements the interface
+            /// described by the given interface Id. Typically this is not called directly
+            /// as the templated equivalent IsA<Interface>() is preferred.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_interfaceId - The interface Id.
+            ///
+            /// @return Whether or not the interface is implemented.
+            //------------------------------------------------------------------------------
+            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
@@ -88,7 +104,25 @@ namespace CSTest
             CSUI::WidgetUPtr CreateLabel(const CSCore::Vector2& in_size, const CSRendering::FontCSPtr& in_font, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment = CSRendering::AlignmentAnchor::k_middleCentre,
                                          CSRendering::HorizontalTextJustification in_horizontalTextJustification = CSRendering::HorizontalTextJustification::k_centre,
                                          CSRendering::VerticalTextJustification in_verticalTextJustification = CSRendering::VerticalTextJustification::k_centre);
-        }
+            
+        private:
+            friend class CSCore::Application;
+            //------------------------------------------------------------------------------
+            /// A factory method for creating new instances of the system.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @return The new instance.
+            //------------------------------------------------------------------------------
+            static BasicWidgetFactoryUPtr Create();
+            //------------------------------------------------------------------------------
+            /// Default constructor. Declared private to ensure the system is created
+            /// through State::CreateSystem<>().
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            BasicWidgetFactory() = default;
+        };
     }
 }
 

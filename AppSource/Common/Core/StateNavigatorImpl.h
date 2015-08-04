@@ -30,7 +30,7 @@
 #define _COMMON_CORE_TESTNAVIGATORIMPL_H_
 
 #include <Common/Core/StateNavigator.h>
-#include <Common/UI/UIFactory.h>
+#include <Common/UI/BasicWidgetFactory.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Resource.h>
@@ -78,7 +78,8 @@ namespace CSTest
         //------------------------------------------------------------------------------
         template <typename TNextState> void StateNavigator<TNextState>::OnInit()
         {
-            m_nextButton = UIFactory::CreateButton(CSCore::Vector2(0.0f, 0.1f), "Next", CSRendering::AlignmentAnchor::k_bottomRight, CSCore::Colour::k_green);
+            auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
+            m_nextButton = basicWidgetFactory->CreateButton(CSCore::Vector2(0.0f, 0.1f), "Next", CSRendering::AlignmentAnchor::k_bottomRight, CSCore::Colour::k_green);
             m_nextButton->SetRelativePosition(CSCore::Vector2(-0.05f, 0.05f));
             
             auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();

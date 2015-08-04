@@ -1,7 +1,7 @@
 //
-//  StateNavigator.h
+//  ModelFactory.h
 //  CSTest
-//  Created by Ian Copland on 28/07/2015.
+//  Created by Ian Copland on 03/08/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,10 +26,11 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_STATENAVIGATOR_H_
-#define _COMMON_CORE_STATENAVIGATOR_H_
+#ifndef _COMMON_RENDERING_MATERIALFACTORY_H_
+#define _COMMON_RENDERING_MATERIALFACTORY_H_
 
 #include <CSTest.h>
+
 #include <ChilliSource/Core/System.h>
 
 namespace CSTest
@@ -37,17 +38,19 @@ namespace CSTest
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A system which provides navigation between the different test states. This
-        /// will present an on screen next button which can be used to navigate to the
-        /// state after this one. The next state type is specified by the system template
-        /// parameter.
+        /// A factory class for creating various basic material types that are not
+        /// provided by the CS material factory. Prior to creating a new instance of
+        /// a material the factory will check to see an identical material already
+        /// exists. If one does, it will be returned rather than creating a new instance.
+        ///
+        /// This is not thread-safe and must only be called from the main thread.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        template <typename TNextState> class StateNavigator final : public CSCore::StateSystem
+        class MaterialFactory final : public CSCore::AppSystem
         {
         public:
-            CS_DECLARE_NAMEDTYPE(StateNavigator);
+            CS_DECLARE_NAMEDTYPE(MaterialFactory);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly
@@ -61,24 +64,20 @@ namespace CSTest
             //------------------------------------------------------------------------------
             bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return Whether or not the next button is visible. If the button is not
-            /// visible, it cannot be pressed.
-            //------------------------------------------------------------------------------
-            bool IsNextButtonVisible() const;
-            //------------------------------------------------------------------------------
-            /// Whether or not the next button is visible. If the button is not visible,
-            /// it cannot be pressed.
+            /// Creates a new material with the given colour. The material is for static
+            /// models and will apply blinn lighting. If a material of the same colour
+            /// already exists it will be used rather than creating a new instance.
             ///
             /// @author Ian Copland
             ///
-            /// @param in_visibile - Whether or not to make the button visible.
+            /// @param in_colour - The colour of the material.
+            ///
+            /// @return The material.
             //------------------------------------------------------------------------------
-            void SetNextButtonVisible(bool in_visibile);
+            CSRendering::MaterialCSPtr CreateStaticBlinnColour(const CSCore::Colour& in_colour) const;
             
         private:
-            friend class CSCore::State;
+            friend class CSCore::Application;
             //------------------------------------------------------------------------------
             /// A factory method for creating new instances of the system.
             ///
@@ -86,35 +85,16 @@ namespace CSTest
             ///
             /// @return The new instance.
             //------------------------------------------------------------------------------
-            static std::unique_ptr<StateNavigator<TNextState>> Create();
+            static MaterialFactoryUPtr Create();
             //------------------------------------------------------------------------------
             /// Default constructor. Declared private to ensure the system is created
-            /// through State::CreateSystem<StateNavigator>().
+            /// through State::CreateSystem<>().
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            StateNavigator() = default;
-            //------------------------------------------------------------------------------
-            /// Initialises the State Navigator.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnInit() override;
-            //------------------------------------------------------------------------------
-            /// Destroys the State Navigator.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnDestroy() override;
-            
-            CSUI::WidgetSPtr m_ui;
-            CSUI::WidgetSPtr m_nextButton;
-            
-            CSCore::EventConnectionUPtr m_nextPressedConnection;
+            MaterialFactory() = default;
         };
     }
 }
-
-#include <Common/Core/StateNavigatorImpl.h>
 
 #endif

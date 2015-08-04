@@ -1,5 +1,5 @@
 //
-//  StateNavigator.h
+//  BasicEntityFactory.h
 //  CSTest
 //  Created by Ian Copland on 28/07/2015.
 //
@@ -26,10 +26,12 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_STATENAVIGATOR_H_
-#define _COMMON_CORE_STATENAVIGATOR_H_
+#ifndef _COMMON_CORE_BASICENTITYFACTORY_H_
+#define _COMMON_CORE_BASICENTITYFACTORY_H_
 
 #include <CSTest.h>
+
+#include <ChilliSource/Core/Math.h>
 #include <ChilliSource/Core/System.h>
 
 namespace CSTest
@@ -37,17 +39,16 @@ namespace CSTest
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A system which provides navigation between the different test states. This
-        /// will present an on screen next button which can be used to navigate to the
-        /// state after this one. The next state type is specified by the system template
-        /// parameter.
+        /// A factory for common entity types.
+        ///
+        /// This is not thread-safe and must only be called from the main thread.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        template <typename TNextState> class StateNavigator final : public CSCore::StateSystem
+        class BasicEntityFactory final : public CSCore::AppSystem
         {
         public:
-            CS_DECLARE_NAMEDTYPE(StateNavigator);
+            CS_DECLARE_NAMEDTYPE(BasicEntityFactory);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly
@@ -61,24 +62,54 @@ namespace CSTest
             //------------------------------------------------------------------------------
             bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return Whether or not the next button is visible. If the button is not
-            /// visible, it cannot be pressed.
-            //------------------------------------------------------------------------------
-            bool IsNextButtonVisible() const;
-            //------------------------------------------------------------------------------
-            /// Whether or not the next button is visible. If the button is not visible,
-            /// it cannot be pressed.
+            /// Creates a basic third person camera which will follow the given entity.
             ///
             /// @author Ian Copland
             ///
-            /// @param in_visibile - Whether or not to make the button visible.
+            /// @param in_target - The target entity that the camera will follow.
+            /// @param in_distance - [Optional] The distance from the target the camera will
+            /// follow. Defaults to 7.
+            /// @param in_verticalAngle - [Optional] The vertical angle of the camera from
+            /// the target. Defaults to 45 degrees.
+            /// @param in_horizontalAngle - [Optional] The initial horizontal angle of the
+            /// camera from the target. Defaults to 0.
+            /// @param in_targetOffset - [Optional] The offset from the target (in it's
+            /// local space) that the camera will follow. Defaults to [0, 0].
+            /// @param in_horizontalAngularVelocity - [Optional] The horizontal rotation
+            /// velocity around the target. Defaults to 1.0f.
             //------------------------------------------------------------------------------
-            void SetNextButtonVisible(bool in_visibile);
+            CSCore::EntityUPtr CreateThirdPersonCamera(const CSCore::EntitySPtr& in_target, f32 in_distance = 5.0f, f32 in_verticalAngle = CSCore::MathUtils::k_pi / 4.0f, f32 in_horizontalAngle = 0.0f,
+                                                       const CSCore::Vector3& in_targetOffset = CSCore::Vector3::k_zero, f32 in_horizontalAngularVelocity = 1.0f);
+            //------------------------------------------------------------------------------
+            /// Creates an ambient light with the given colour.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_colour - The colour of the light.
+            //------------------------------------------------------------------------------
+            CSCore::EntityUPtr CreateAmbientLight(const CSCore::Colour& in_colour);
+            //------------------------------------------------------------------------------
+            /// Creates a directional light with the given colour.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_colour - The colour of the directional light.
+            /// @param in_shadowVolume - [Optional] The shadow volume. Defaults to
+            /// [30, 30, 1, 30]
+            //------------------------------------------------------------------------------
+            CSCore::EntityUPtr CreateDirectionalLight(const CSCore::Colour& in_colour, const CSCore::Vector4& in_shadowVolume = CSCore::Vector4(30.0f, 30.0f, 1.0f, 30.0f));
+            //------------------------------------------------------------------------------
+            /// Creates a grey checkered room for graphical tests to take place in.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_size - [Optional] The size of the room. Defaults to
+            /// [20, 20, 20].
+            //------------------------------------------------------------------------------
+            CSCore::EntityUPtr CreateRoom(const CSCore::Vector3& in_size = CSCore::Vector3(20.0f, 20.0f, 20.0f));
             
         private:
-            friend class CSCore::State;
+            friend class CSCore::Application;
             //------------------------------------------------------------------------------
             /// A factory method for creating new instances of the system.
             ///
@@ -86,35 +117,34 @@ namespace CSTest
             ///
             /// @return The new instance.
             //------------------------------------------------------------------------------
-            static std::unique_ptr<StateNavigator<TNextState>> Create();
+            static BasicEntityFactoryUPtr Create();
             //------------------------------------------------------------------------------
             /// Default constructor. Declared private to ensure the system is created
-            /// through State::CreateSystem<StateNavigator>().
+            /// through State::CreateSystem<>().
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            StateNavigator() = default;
+            BasicEntityFactory() = default;
             //------------------------------------------------------------------------------
-            /// Initialises the State Navigator.
+            /// Initialises the system.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnInit() override;
             //------------------------------------------------------------------------------
-            /// Destroys the State Navigator.
+            /// Cleans up the system.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnDestroy() override;
             
-            CSUI::WidgetSPtr m_ui;
-            CSUI::WidgetSPtr m_nextButton;
-            
-            CSCore::EventConnectionUPtr m_nextPressedConnection;
+            CSCore::ResourcePool* m_resourcePool = nullptr;
+            CSRendering::RenderComponentFactory* m_renderComponentFactory = nullptr;
+            ModelFactory* m_modelFactory = nullptr;
+            MaterialFactory* m_materialFactory = nullptr;
+            u32 m_entityCount = 0;
         };
     }
 }
-
-#include <Common/Core/StateNavigatorImpl.h>
 
 #endif

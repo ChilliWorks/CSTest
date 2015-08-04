@@ -26,60 +26,46 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/State.h>
-
-#include <Common/Core/StateNavigator.h>
-#include <IntegrationTest/TestSystem/ReportPresenter.h>
-#include <IntegrationTest/TestSystem/TestSystem.h>
 #include <Lighting/State.h>
 
+#include <Common/Core/StateNavigator.h>
+#include <Common/Core/BasicEntityFactory.h>
+#include <WebView/State.h>
+
+#include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace Lighting
     {
-        namespace
-        {
-            using NextState = Lighting::State;
-            
-            const f32 k_timeBeforeTests = 0.5f;
-        }
-        
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            m_testSystem = CreateSystem<TestSystem>();
-            m_reportPresenter = CreateSystem<ReportPresenter>();
-            CreateSystem<Common::StateNavigator<NextState>>();
+            CreateSystem<Common::StateNavigator<WebView::State>>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetScene()->SetClearColour(CSCore::Colour::k_black);
             
-            GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(false);
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        void State::OnUpdate(f32 in_deltaTime)
-        {
-            if (m_testsPerformed == false)
-            {
-                m_timer += in_deltaTime;
-                
-                if (m_timer > k_timeBeforeTests)
-                {
-                    m_timer = 0.0f;
-                    m_testsPerformed = true;
-                    
-                    auto report = m_testSystem->PerformTests();
-                    m_reportPresenter->PresentReport(report);
-                    GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(true);
-                }
-            }
+            auto basicEntityFactory = CSCore::Application::Get()->GetSystem<Common::BasicEntityFactory>();
+            
+            CSCore::EntitySPtr room = basicEntityFactory->CreateRoom();
+            room->GetTransform().SetPosition(0.0f, 10.0f, 0.0f);
+            GetScene()->Add(room);
+            
+            CSCore::EntitySPtr ambientLight = basicEntityFactory->CreateAmbientLight(CSCore::Colour(0.2f, 0.2f, 0.2f, 1.0f));
+            GetScene()->Add(ambientLight);
+            
+            CSCore::EntitySPtr directionalLight = basicEntityFactory->CreateDirectionalLight(CSCore::Colour(0.8f, 0.5f, 0.4f, 1.0f));
+            directionalLight->GetTransform().SetLookAt(CSCore::Vector3(-9.0f, 9.0f, 9.0f), CSCore::Vector3::k_zero, CSCore::Vector3::k_unitPositiveY);
+            GetScene()->Add(directionalLight);
+            
+            CSCore::EntitySPtr camera = basicEntityFactory->CreateThirdPersonCamera(room);
+            GetScene()->Add(camera);
         }
     }
 }

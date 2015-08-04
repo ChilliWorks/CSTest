@@ -1,7 +1,7 @@
 //
-//  StateNavigator.h
+//  ModelFactory.h
 //  CSTest
-//  Created by Ian Copland on 28/07/2015.
+//  Created by Ian Copland on 03/08/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,10 +26,12 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_STATENAVIGATOR_H_
-#define _COMMON_CORE_STATENAVIGATOR_H_
+#ifndef _COMMON_RENDERING_MODELFACTORY_H_
+#define _COMMON_RENDERING_MODELFACTORY_H_
 
 #include <CSTest.h>
+
+#include <ChilliSource/Core/Math.h>
 #include <ChilliSource/Core/System.h>
 
 namespace CSTest
@@ -37,17 +39,18 @@ namespace CSTest
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A system which provides navigation between the different test states. This
-        /// will present an on screen next button which can be used to navigate to the
-        /// state after this one. The next state type is specified by the system template
-        /// parameter.
+        /// A factory class for creating new models types. Prior to creating the
+        /// requested model this will check if an identical model already exists and
+        /// return it if it does.
+        ///
+        /// This is not thread-safe and must only be called from the main thread.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        template <typename TNextState> class StateNavigator final : public CSCore::StateSystem
+        class ModelFactory final : public CSCore::AppSystem
         {
         public:
-            CS_DECLARE_NAMEDTYPE(StateNavigator);
+            CS_DECLARE_NAMEDTYPE(ModelFactory);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly
@@ -61,24 +64,35 @@ namespace CSTest
             //------------------------------------------------------------------------------
             bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return Whether or not the next button is visible. If the button is not
-            /// visible, it cannot be pressed.
-            //------------------------------------------------------------------------------
-            bool IsNextButtonVisible() const;
-            //------------------------------------------------------------------------------
-            /// Whether or not the next button is visible. If the button is not visible,
-            /// it cannot be pressed.
+            /// Creates a new plane model perpendicular to the Y axis of the given size. If
+            /// an identical plane already exists it will be returned instead of creating
+            /// a new instance.
             ///
             /// @author Ian Copland
             ///
-            /// @param in_visibile - Whether or not to make the button visible.
+            /// @param in_size - The size of the plane.
+            ///
+            /// @return The plane model.
             //------------------------------------------------------------------------------
-            void SetNextButtonVisible(bool in_visibile);
+            CSRendering::MeshCSPtr CreatePlane(const CSCore::Vector2& in_size) const;
+            //------------------------------------------------------------------------------
+            /// Creates a box model of the given size. If an identical box already exists
+            /// it will be returned instead of creating a new instance.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_size - The size of the plane.
+            /// @param in_textureRepeat - [Optional] The number of times a texture is
+            /// repeated on each face of the model in each axis. Defaults to [1, 1]
+            /// @param in_flipNormals -[Optional] Whether or not to flip the box inside out.
+            /// This is useful for creating rooms. Defaults to false.
+            ///
+            /// @return The plane model.
+            //------------------------------------------------------------------------------
+            CSRendering::MeshCSPtr CreateBox(const CSCore::Vector3& in_size, const CSCore::Vector2& in_textureRepeat = CSCore::Vector2::k_one, bool in_flipNormals = false) const;
             
         private:
-            friend class CSCore::State;
+            friend class CSCore::Application;
             //------------------------------------------------------------------------------
             /// A factory method for creating new instances of the system.
             ///
@@ -86,35 +100,16 @@ namespace CSTest
             ///
             /// @return The new instance.
             //------------------------------------------------------------------------------
-            static std::unique_ptr<StateNavigator<TNextState>> Create();
+            static ModelFactoryUPtr Create();
             //------------------------------------------------------------------------------
             /// Default constructor. Declared private to ensure the system is created
-            /// through State::CreateSystem<StateNavigator>().
+            /// through State::CreateSystem<>().
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            StateNavigator() = default;
-            //------------------------------------------------------------------------------
-            /// Initialises the State Navigator.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnInit() override;
-            //------------------------------------------------------------------------------
-            /// Destroys the State Navigator.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnDestroy() override;
-            
-            CSUI::WidgetSPtr m_ui;
-            CSUI::WidgetSPtr m_nextButton;
-            
-            CSCore::EventConnectionUPtr m_nextPressedConnection;
+            ModelFactory() = default;
         };
     }
 }
-
-#include <Common/Core/StateNavigatorImpl.h>
 
 #endif

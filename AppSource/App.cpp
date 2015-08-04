@@ -28,6 +28,10 @@
 
 #include <App.h>
 
+#include <Common/Core/BasicEntityFactory.h>
+#include <Common/Rendering/MaterialFactory.h>
+#include <Common/Rendering/ModelFactory.h>
+#include <Common/UI/BasicWidgetFactory.h>
 #include <IntegrationTest/State.h>
 
 //------------------------------------------------------------------------------
@@ -66,6 +70,10 @@ namespace CSTest
     //------------------------------------------------------------------------------
     void App::CreateSystems()
     {
+        CreateSystem<Common::BasicEntityFactory>();
+        CreateSystem<Common::MaterialFactory>();
+        CreateSystem<Common::ModelFactory>();
+        CreateSystem<Common::BasicWidgetFactory>();
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------

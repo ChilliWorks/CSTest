@@ -1,7 +1,7 @@
 //
-//  CSTest.h
+//  State.h
 //  CSTest
-//  Created by Ian Copland on 15/07/2015.
+//  Created by Ian Copland on 04/08/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,46 +26,37 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _CSTEST_H_
-#define _CSTEST_H_
+#ifndef _LIGHTING_STATE_H_
+#define _LIGHTING_STATE_H_
 
-#include <ChilliSource/ChilliSource.h>
+#include <CSTest.h>
+
+#include <ChilliSource/Core/State.h>
 
 namespace CSTest
 {
-    CS_FORWARDDECLARE_CLASS(App);
-    
-    namespace Common
-    {
-        CS_FORWARDDECLARE_CLASS(BasicEntityFactory);
-        CS_FORWARDDECLARE_CLASS(BasicWidgetFactory);
-        CS_FORWARDDECLARE_CLASS(MaterialFactory);
-        CS_FORWARDDECLARE_CLASS(MaterialFactory);
-        CS_FORWARDDECLARE_CLASS(ModelFactory);
-        CS_FORWARDDECLARE_CLASS(ResultPresenter);
-        CS_FORWARDDECLARE_CLASS(SmokeTester);
-        CS_FORWARDDECLARE_CLASS(SmokeTestSet);
-    }
-    
-    namespace IntegrationTest
-    {
-        CS_FORWARDDECLARE_CLASS(CSReporter);
-        CS_FORWARDDECLARE_CLASS(FailedAssertion);
-        CS_FORWARDDECLARE_CLASS(Report);
-        CS_FORWARDDECLARE_CLASS(ReportPresenter);
-        CS_FORWARDDECLARE_CLASS(State);
-        CS_FORWARDDECLARE_CLASS(TestCase);
-        CS_FORWARDDECLARE_CLASS(TestSystem);
-    }
-    
     namespace Lighting
     {
-        CS_FORWARDDECLARE_CLASS(State);
-    }
-    
-    namespace WebView
-    {
-        CS_FORWARDDECLARE_CLASS(State);
+        //------------------------------------------------------------------------------
+        /// A state for testing lighting and shadows.
+        ///
+        /// @author Ian Copland
+        //------------------------------------------------------------------------------
+        class State : public CSCore::State
+        {
+            //------------------------------------------------------------------------------
+            /// The life-cycle event for creating all state systems.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void CreateSystems() override;
+            //------------------------------------------------------------------------------
+            /// Initialises the state.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void OnInit() override;
+        };
     }
 }
 

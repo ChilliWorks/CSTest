@@ -28,7 +28,7 @@
 
 #include <IntegrationTest/TestSystem/ReportPresenter.h>
 
-#include <Common/UI/UIFactory.h>
+#include <Common/UI/BasicWidgetFactory.h>
 #include <IntegrationTest/TestSystem/CSReporter.h>
 
 #include <ChilliSource/Core/Base.h>
@@ -175,9 +175,10 @@ namespace CSTest
             auto smallFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
             auto mediumFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialMed.csfont");
 
-            m_centreText = Common::UIFactory::CreateLabel(CSCore::Vector2(0.9f, 1.0f), mediumFont, "");
-            m_headerText = Common::UIFactory::CreateLabel(CSCore::Vector2(0.9f, 0.15f), mediumFont, "", CSRendering::AlignmentAnchor::k_topCentre);
-            m_bodyText = Common::UIFactory::CreateLabel(CSCore::Vector2(0.9f, 0.65f), smallFont, "", CSRendering::AlignmentAnchor::k_topCentre, CSRendering::HorizontalTextJustification::k_left, CSRendering::VerticalTextJustification::k_top);
+            auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
+            m_centreText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 1.0f), mediumFont, "");
+            m_headerText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 0.15f), mediumFont, "", CSRendering::AlignmentAnchor::k_topCentre);
+            m_bodyText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 0.65f), smallFont, "", CSRendering::AlignmentAnchor::k_topCentre, CSRendering::HorizontalTextJustification::k_left, CSRendering::VerticalTextJustification::k_top);
             m_bodyText->SetRelativePosition(CSCore::Vector2(0.0f, -0.15f));
 
             auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
