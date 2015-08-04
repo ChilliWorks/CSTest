@@ -1,5 +1,5 @@
 //
-//  CameraSpinnerComponent.cpp
+//  SpinnerComponent.cpp
 //  CSTest
 //  Created by Ian Copland on 04/08/2015.
 //
@@ -26,62 +26,62 @@
 //  THE SOFTWARE.
 //
 
-#include <Common/Rendering/CameraSpinnerComponent.h>
+#include <Common/Behaviour/SpinnerComponent.h>
 
-#include <Common/Rendering/ThirdPersonCameraComponent.h>
+#include <Common/Behaviour/FollowerComponent.h>
 
 namespace CSTest
 {
     namespace Common
     {
-        CS_DEFINE_NAMEDTYPE(CameraSpinnerComponent);
+        CS_DEFINE_NAMEDTYPE(SpinnerComponent);
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CameraSpinnerComponent::CameraSpinnerComponent(f32 in_angularVelocity)
+        SpinnerComponent::SpinnerComponent(f32 in_angularVelocity)
         : m_angularVelocity(in_angularVelocity)
         {
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool CameraSpinnerComponent::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool SpinnerComponent::IsA(CSCore::InterfaceIDType in_interfaceId) const
         {
-            return (CameraSpinnerComponent::InterfaceID == in_interfaceId);
+            return (SpinnerComponent::InterfaceID == in_interfaceId);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        f32 CameraSpinnerComponent::GetAngularVelocity() const
+        f32 SpinnerComponent::GetAngularVelocity() const
         {
             return m_angularVelocity;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void CameraSpinnerComponent::SetAngularVelocity(f32 in_angularVelocity)
+        void SpinnerComponent::SetAngularVelocity(f32 in_angularVelocity)
         {
             m_angularVelocity = in_angularVelocity;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void CameraSpinnerComponent::OnAddedToScene()
+        void SpinnerComponent::OnAddedToScene()
         {
-            auto thirdPersonCameraComponent = GetEntity()->GetComponent<ThirdPersonCameraComponent>();
-            CS_ASSERT(thirdPersonCameraComponent, "CameraSpinnerComponent requires there to be a ThirdPersonCameraComponent on the entity.");
+            auto followerComponent = GetEntity()->GetComponent<FollowerComponent>();
+            CS_ASSERT(followerComponent, "SpinnerComponent requires there to be a FollowerComponent on the entity.");
             
-            m_thirdPersonCameraComponent = ThirdPersonCameraComponentWPtr(thirdPersonCameraComponent);
+            m_followerComponent = FollowerComponentWPtr(followerComponent);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void CameraSpinnerComponent::OnUpdate(f32 in_deltaTime)
+        void SpinnerComponent::OnUpdate(f32 in_deltaTime)
         {
-            auto thirdPersonCameraComponent = m_thirdPersonCameraComponent.lock();
-            CS_ASSERT(thirdPersonCameraComponent, "CameraSpinnerComponent requires there to be a ThirdPersonCameraComponent on the entity.");
+            auto followerComponent = m_followerComponent.lock();
+            CS_ASSERT(followerComponent, "SpinnerComponent requires there to be a FollowerComponent on the entity.");
             
-            thirdPersonCameraComponent->SetHorizontalAngle(thirdPersonCameraComponent->GetHorizontalAngle() + m_angularVelocity * in_deltaTime);
+            followerComponent->SetHorizontalAngle(followerComponent->GetHorizontalAngle() + m_angularVelocity * in_deltaTime);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void CameraSpinnerComponent::OnRemovedFromScene()
+        void SpinnerComponent::OnRemovedFromScene()
         {
-            m_thirdPersonCameraComponent.reset();
+            m_followerComponent.reset();
         }
     }
 }

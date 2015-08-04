@@ -1,5 +1,5 @@
 //
-//  ThirdPersonCameraComponent.h
+//  FollowerComponent.h
 //  CSTest
 //  Created by Ian Copland on 04/08/2015.
 //
@@ -26,8 +26,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_RENDERING_THIRDPERSONCAMERA_H_
-#define _COMMON_RENDERING_THIRDPERSONCAMERA_H_
+#ifndef _COMMON_RENDERING_FOLLOWERCOMPONENT_H_
+#define _COMMON_RENDERING_FOLLOWERCOMPONENT_H_
 
 #include <CSTest.h>
 
@@ -44,10 +44,10 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class ThirdPersonCameraComponent final : public CSCore::Component
+        class FollowerComponent final : public CSCore::Component
         {
         public:
-            CS_DECLARE_NAMEDTYPE(ThirdPersonCameraComponent);
+            CS_DECLARE_NAMEDTYPE(FollowerComponent);
             //------------------------------------------------------------------------------
             /// Constructor. Sets the target and other base properties of the component.
             ///
@@ -61,7 +61,7 @@ namespace CSTest
             /// target.
             /// @param in_verticalAngle - The vertical angle of the camera from the target.
             //------------------------------------------------------------------------------
-            ThirdPersonCameraComponent(const CSCore::EntitySPtr& in_target, const CSCore::Vector3& in_offset, f32 in_distance, f32 in_horizontalAngle, f32 in_verticalAngle);
+            FollowerComponent(const CSCore::EntitySPtr& in_target, const CSCore::Vector3& in_offset, f32 in_distance, f32 in_horizontalAngle, f32 in_verticalAngle);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly

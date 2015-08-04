@@ -1,5 +1,5 @@
 //
-//  ThirdPersonCameraComponent.cpp
+//  FollowerComponent.cpp
 //  CSTest
 //  Created by Ian Copland on 04/08/2015.
 //
@@ -26,53 +26,53 @@
 //  THE SOFTWARE.
 //
 
-#include <Common/Rendering/ThirdPersonCameraComponent.h>
+#include <Common/Behaviour/FollowerComponent.h>
 
 namespace CSTest
 {
     namespace Common
     {
-        CS_DEFINE_NAMEDTYPE(ThirdPersonCameraComponent);
+        CS_DEFINE_NAMEDTYPE(FollowerComponent);
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        ThirdPersonCameraComponent::ThirdPersonCameraComponent(const CSCore::EntitySPtr& in_target, const CSCore::Vector3& in_offset, f32 in_distance, f32 in_horizontalAngle, f32 in_verticalAngle)
+        FollowerComponent::FollowerComponent(const CSCore::EntitySPtr& in_target, const CSCore::Vector3& in_offset, f32 in_distance, f32 in_horizontalAngle, f32 in_verticalAngle)
         : m_offset(in_offset), m_distance(in_distance), m_horizontalAngle(in_horizontalAngle), m_verticalAngle(in_verticalAngle)
         {
             SetTarget(in_target);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool ThirdPersonCameraComponent::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool FollowerComponent::IsA(CSCore::InterfaceIDType in_interfaceId) const
         {
-            return (ThirdPersonCameraComponent::InterfaceID == in_interfaceId);
+            return (FollowerComponent::InterfaceID == in_interfaceId);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        const CSCore::Vector3& ThirdPersonCameraComponent::GetOffset() const
+        const CSCore::Vector3& FollowerComponent::GetOffset() const
         {
             return m_offset;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        f32 ThirdPersonCameraComponent::GetDistance() const
+        f32 FollowerComponent::GetDistance() const
         {
             return m_distance;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        f32 ThirdPersonCameraComponent::GetHorizontalAngle() const
+        f32 FollowerComponent::GetHorizontalAngle() const
         {
             return m_horizontalAngle;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        f32 ThirdPersonCameraComponent::GetVerticalAngle() const
+        f32 FollowerComponent::GetVerticalAngle() const
         {
             return m_verticalAngle;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void ThirdPersonCameraComponent::SetTarget(const CSCore::EntitySPtr& in_target)
+        void FollowerComponent::SetTarget(const CSCore::EntitySPtr& in_target)
         {
             m_target = CSCore::EntityWPtr(in_target);
             m_transformChangedConnection = in_target->GetTransform().GetTransformChangedEvent().OpenConnection([=]()
@@ -84,7 +84,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void ThirdPersonCameraComponent::SetOffset(const CSCore::Vector3& in_offset)
+        void FollowerComponent::SetOffset(const CSCore::Vector3& in_offset)
         {
             m_offset = in_offset;
             
@@ -92,7 +92,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void ThirdPersonCameraComponent::SetDistance(f32 in_distance)
+        void FollowerComponent::SetDistance(f32 in_distance)
         {
             m_distance = in_distance;
             
@@ -100,7 +100,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void ThirdPersonCameraComponent::SetHorizontalAngle(f32 in_horizontalAngle)
+        void FollowerComponent::SetHorizontalAngle(f32 in_horizontalAngle)
         {
             m_horizontalAngle = in_horizontalAngle;
             
@@ -108,7 +108,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void ThirdPersonCameraComponent::SetVerticalAngle(f32 in_verticalAngle)
+        void FollowerComponent::SetVerticalAngle(f32 in_verticalAngle)
         {
             m_verticalAngle = in_verticalAngle;
             
@@ -116,7 +116,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void ThirdPersonCameraComponent::UpdatePosition()
+        void FollowerComponent::UpdatePosition()
         {
             if (GetEntity() != nullptr)
             {
@@ -136,7 +136,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void ThirdPersonCameraComponent::OnAddedToEntity()
+        void FollowerComponent::OnAddedToEntity()
         {
             CS_ASSERT(GetEntity()->GetParent() == nullptr, "Third Person Camera Component only works for entities without parents.");
             

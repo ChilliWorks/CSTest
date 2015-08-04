@@ -28,10 +28,10 @@
 
 #include <Common/Core/BasicEntityFactory.h>
 
-#include <Common/Rendering/CameraSpinnerComponent.h>
+#include <Common/Behaviour/SpinnerComponent.h>
 #include <Common/Rendering/MaterialFactory.h>
 #include <Common/Rendering/ModelFactory.h>
-#include <Common/Rendering/ThirdPersonCameraComponent.h>
+#include <Common/Behaviour/FollowerComponent.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Entity.h>
@@ -68,14 +68,14 @@ namespace CSTest
             CS_ASSERT(CSCore::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
             CSRendering::CameraComponentSPtr camComponent = m_renderComponentFactory->CreatePerspectiveCameraComponent(3.14f / 3.0f, 1.0f, 30.0f);
-            auto thirdPersonCameraComponent = std::make_shared<ThirdPersonCameraComponent>(in_target, in_targetOffset, in_distance, in_horizontalAngle, in_verticalAngle);
-            auto cameraSpinnerComponent = std::make_shared<CameraSpinnerComponent>(in_horizontalAngularVelocity);
+            auto followerComponent = std::make_shared<FollowerComponent>(in_target, in_targetOffset, in_distance, in_horizontalAngle, in_verticalAngle);
+            auto spinnerComponent = std::make_shared<SpinnerComponent>(in_horizontalAngularVelocity);
             
             CSCore::EntityUPtr entity = CSCore::Entity::Create();
             entity->SetName(CSCore::ToString(m_entityCount++) + "-ThirdPersonCamera");
             entity->AddComponent(camComponent);
-            entity->AddComponent(thirdPersonCameraComponent);
-            entity->AddComponent(cameraSpinnerComponent);
+            entity->AddComponent(followerComponent);
+            entity->AddComponent(spinnerComponent);
             
             return entity;
         }
@@ -102,7 +102,7 @@ namespace CSTest
             CSRendering::DirectionalLightComponentSPtr directionalLightComponent = m_renderComponentFactory->CreateDirectionalLightComponent(2048);
             directionalLightComponent->SetColour(in_colour);
             directionalLightComponent->SetShadowVolume(in_shadowVolume.x, in_shadowVolume.y, in_shadowVolume.z, in_shadowVolume.w);
-            directionalLightComponent->SetShadowTolerance(0.001f);
+            directionalLightComponent->SetShadowTolerance(0.005f);
             
             auto entity = CSCore::Entity::Create();
             entity->SetName(CSCore::ToString(m_entityCount++) + "-DirectionalLight");

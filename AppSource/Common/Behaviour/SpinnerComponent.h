@@ -1,5 +1,5 @@
 //
-//  CameraSpinnerComponent.h
+//  SpinnerComponent.h
 //  CSTest
 //  Created by Ian Copland on 04/08/2015.
 //
@@ -26,8 +26,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_RENDERING_CAMERASPINNERCOMPONENT_H_
-#define _COMMON_RENDERING_CAMERASPINNERCOMPONENT_H_
+#ifndef _COMMON_RENDERING_SPINNERCOMPONENT_H_
+#define _COMMON_RENDERING_SPINNERCOMPONENT_H_
 
 #include <CSTest.h>
 
@@ -38,21 +38,21 @@ namespace CSTest
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A component used in conjunction with the ThirdPersonCameraComponent to
-        /// provide a camera that will spin arround it's target.
+        /// A component used in conjunction with the FollowerComponent to provide an
+        /// object that will spin arround it's target.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class CameraSpinnerComponent final : public CSCore::Component
+        class SpinnerComponent final : public CSCore::Component
         {
         public:
-            CS_DECLARE_NAMEDTYPE(CameraSpinnerComponent);
+            CS_DECLARE_NAMEDTYPE(SpinnerComponent);
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @param in_angularVelocity - The angular velocity.
             //------------------------------------------------------------------------------
-            CameraSpinnerComponent(f32 in_angularVelocity);
+            SpinnerComponent(f32 in_angularVelocity);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly
@@ -101,7 +101,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnRemovedFromScene();
             
-            ThirdPersonCameraComponentWPtr m_thirdPersonCameraComponent;
+            FollowerComponentWPtr m_followerComponent;
             f32 m_angularVelocity = 0.0f;
         };
     }

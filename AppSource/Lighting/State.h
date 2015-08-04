@@ -45,6 +45,21 @@ namespace CSTest
         class State : public CSCore::State
         {
             //------------------------------------------------------------------------------
+            /// Creates a series of lights.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_room - The room the lights are in.
+            //------------------------------------------------------------------------------
+            void CreateLights(const CSCore::EntitySPtr& in_room);
+            //------------------------------------------------------------------------------
+            /// Creates a grid of randomly sized and coloured boxes and added them to the
+            /// scene.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void CreateBoxes();
+            //------------------------------------------------------------------------------
             /// The life-cycle event for creating all state systems.
             ///
             /// @author Ian Copland
@@ -56,14 +71,6 @@ namespace CSTest
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnInit() override;
-            //------------------------------------------------------------------------------
-            /// Updates the state each frame.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @param in_deltaTime - The delta time.
-            //------------------------------------------------------------------------------
-            void OnUpdate(f32 in_deltaTime) override;
         };
     }
 }
