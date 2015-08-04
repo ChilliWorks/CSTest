@@ -51,7 +51,7 @@ namespace CSTest
     {
         namespace
         {
-            const u32 k_downloadBufferSize = 256;
+            const u32 k_downloadBufferSize = 100 * 1024;//100KB
             
             //------------------------------------------------------------------------------
             /// Converts a HTTP::Result to string
@@ -139,7 +139,7 @@ namespace CSTest
             
             testSet.AddTest("Download progress", [=]()
             {
-                m_downloadProgressTestSystem->StartDownloadTest("http://download.thinkbroadband.com/10MB.zip", [=](const CSNetworking::HttpResponse& in_completeResponse)
+                m_downloadProgressTestSystem->StartDownloadTest("http://download.thinkbroadband.com/5MB.zip", [=](const CSNetworking::HttpResponse& in_completeResponse)
                 {
                     PresentHttpResponse(in_completeResponse);
                 });
@@ -161,7 +161,7 @@ namespace CSTest
             //Ignore flush responses
             if(in_response.GetResult() != CSNetworking::HttpResponse::Result::k_flushed)
             {
-                m_resultPresenter->Present("Request returned:\n Status - " + ConvertResultToString(in_response.GetResult()) + "\nResponse Code - " + CSCore::ToString(in_response.GetCode()));
+                m_resultPresenter->Present("Request returned:\nStatus - " + ConvertResultToString(in_response.GetResult()) + "\nResponse Code - " + CSCore::ToString(in_response.GetCode()));
             }
         }
     }
