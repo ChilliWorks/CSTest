@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp" />
-    <ClCompile Include="..\..\AppSource\Common\Core\Equals.cpp" />
+    <ClCompile Include="..\..\AppSource\Common\Core\Approx.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\ResultPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\SmokeTester.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\SmokeTestSet.cpp" />
@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h" />
-    <ClInclude Include="..\..\AppSource\Common\Core\Equals.h" />
+    <ClInclude Include="..\..\AppSource\Common\Core\Approx.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\ResultPresenter.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\SmokeTester.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\SmokeTestSet.h" />

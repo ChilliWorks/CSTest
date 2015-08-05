@@ -28,7 +28,7 @@
 
 #include <CSTest.h>
 
-#include <Common/Core/Equals.h>
+#include <Common/Core/Approx.h>
 
 #include <ChilliSource/Core/Math.h>
 
@@ -43,10 +43,10 @@ namespace CSTest
             CSCore::Vector2 a;
             CSCore::Vector2 b(1.0f, 2.0f);
             
-            REQUIRE(Common::Equals(a.x, 0.0f));
-            REQUIRE(Common::Equals(a.y, 0.0f));
-            REQUIRE(Common::Equals(b.x, 1.0f));
-            REQUIRE(Common::Equals(b.y, 2.0f));
+            REQUIRE(Common::Approx(a.x, 0.0f));
+            REQUIRE(Common::Approx(a.y, 0.0f));
+            REQUIRE(Common::Approx(b.x, 1.0f));
+            REQUIRE(Common::Approx(b.y, 2.0f));
         }
         
         TEST_CASE("Vector2: Basic arithmatic", "[Math][Vector2]")
@@ -64,15 +64,15 @@ namespace CSTest
             
             REQUIRE(a1 == a2);
             REQUIRE(a1 != a5);
-            REQUIRE(Common::Equals(-a1, CSCore::Vector2(-1.0f, -1.0f)));
-            REQUIRE(Common::Equals(a1 + b1, CSCore::Vector2(3.0f, 4.0f)));
-            REQUIRE(Common::Equals(a2 - b1, CSCore::Vector2(-1.0f, -2.0f)));
-            REQUIRE(Common::Equals(a3 * b1, CSCore::Vector2(2.0f, 3.0f)));
-            REQUIRE(Common::Equals(a4 / b1, CSCore::Vector2(0.5f, 1.0f / 3.0f)));
-            REQUIRE(Common::Equals(a5 * b2, CSCore::Vector2(9.52238082, 1.39252472)));
-            REQUIRE(Common::Equals(a6 * b3, CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(b3 * a6, CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(a7 / b3, CSCore::Vector2(0.5f, 0.5f)));
+            REQUIRE(Common::Approx(-a1, CSCore::Vector2(-1.0f, -1.0f)));
+            REQUIRE(Common::Approx(a1 + b1, CSCore::Vector2(3.0f, 4.0f)));
+            REQUIRE(Common::Approx(a2 - b1, CSCore::Vector2(-1.0f, -2.0f)));
+            REQUIRE(Common::Approx(a3 * b1, CSCore::Vector2(2.0f, 3.0f)));
+            REQUIRE(Common::Approx(a4 / b1, CSCore::Vector2(0.5f, 1.0f / 3.0f)));
+            REQUIRE(Common::Approx(a5 * b2, CSCore::Vector2(9.52238082, 1.39252472)));
+            REQUIRE(Common::Approx(a6 * b3, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(b3 * a6, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(a7 / b3, CSCore::Vector2(0.5f, 0.5f)));
             
             a1 += b1;
             a2 -= b1;
@@ -82,13 +82,13 @@ namespace CSTest
             a6 *= b3;
             a7 /= b3;
             
-            REQUIRE(Common::Equals(a1, CSCore::Vector2(3.0f, 4.0f)));
-            REQUIRE(Common::Equals(a2, CSCore::Vector2(-1.0f, -2.0f)));
-            REQUIRE(Common::Equals(a3, CSCore::Vector2(2.0f, 3.0f)));
-            REQUIRE(Common::Equals(a4, CSCore::Vector2(0.5f, 1.0f / 3.0f)));
-            REQUIRE(Common::Equals(a5, CSCore::Vector2(9.52238082, 1.39252472)));
-            REQUIRE(Common::Equals(a6, CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(a7, CSCore::Vector2(0.5f, 0.5f)));
+            REQUIRE(Common::Approx(a1, CSCore::Vector2(3.0f, 4.0f)));
+            REQUIRE(Common::Approx(a2, CSCore::Vector2(-1.0f, -2.0f)));
+            REQUIRE(Common::Approx(a3, CSCore::Vector2(2.0f, 3.0f)));
+            REQUIRE(Common::Approx(a4, CSCore::Vector2(0.5f, 1.0f / 3.0f)));
+            REQUIRE(Common::Approx(a5, CSCore::Vector2(9.52238082, 1.39252472)));
+            REQUIRE(Common::Approx(a6, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(a7, CSCore::Vector2(0.5f, 0.5f)));
         }
         
         TEST_CASE("Vector2: Length", "[Math][Vector2]")
@@ -96,10 +96,10 @@ namespace CSTest
             CSCore::Vector2 a(3.0f, 4.0f);
             CSCore::Vector2 b(0.0f, 0.0f);
             
-            REQUIRE(Common::Equals(a.Length(), 5.0f));
-            REQUIRE(Common::Equals(b.Length(), 0.0f));
-            REQUIRE(Common::Equals(a.LengthSquared(), 25.0f));
-            REQUIRE(Common::Equals(b.LengthSquared(), 0.0f));
+            REQUIRE(Common::Approx(a.Length(), 5.0f));
+            REQUIRE(Common::Approx(b.Length(), 0.0f));
+            REQUIRE(Common::Approx(a.LengthSquared(), 25.0f));
+            REQUIRE(Common::Approx(b.LengthSquared(), 0.0f));
         }
         
         TEST_CASE("Vector2: Normalise", "[Math][Vector2]")
@@ -107,14 +107,14 @@ namespace CSTest
             CSCore::Vector2 a(3.0f, 4.0f);
             CSCore::Vector2 b(0.0f, 0.0f);
             
-            REQUIRE(Common::Equals(CSCore::Vector2::Normalise(a), CSCore::Vector2(0.6f, 0.8f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Normalise(b), CSCore::Vector2(0.0f, 0.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Normalise(a), CSCore::Vector2(0.6f, 0.8f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Normalise(b), CSCore::Vector2(0.0f, 0.0f)));
             
             a.Normalise();
             b.Normalise();
             
-            REQUIRE(Common::Equals(a, CSCore::Vector2(0.6f, 0.8f)));
-            REQUIRE(Common::Equals(b, CSCore::Vector2(0.0f, 0.0f)));
+            REQUIRE(Common::Approx(a, CSCore::Vector2(0.6f, 0.8f)));
+            REQUIRE(Common::Approx(b, CSCore::Vector2(0.0f, 0.0f)));
         }
         
         TEST_CASE("Vector2: Inverse", "[Math][Vector2]")
@@ -122,14 +122,14 @@ namespace CSTest
             CSCore::Vector2 a(2.0f, 4.0f);
             CSCore::Vector2 b(0.0f, 0.0f);
             
-            REQUIRE(Common::Equals(CSCore::Vector2::Inverse(a), CSCore::Vector2(0.5f, 0.25f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Inverse(b), CSCore::Vector2(0.0f, 0.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Inverse(a), CSCore::Vector2(0.5f, 0.25f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Inverse(b), CSCore::Vector2(0.0f, 0.0f)));
             
             a.Inverse();
             b.Inverse();
             
-            REQUIRE(Common::Equals(a, CSCore::Vector2(0.5f, 0.25f)));
-            REQUIRE(Common::Equals(b, CSCore::Vector2(0.0f, 0.0f)));
+            REQUIRE(Common::Approx(a, CSCore::Vector2(0.5f, 0.25f)));
+            REQUIRE(Common::Approx(b, CSCore::Vector2(0.0f, 0.0f)));
         }
         
         TEST_CASE("Vector2: Absolute", "[Math][Vector2]")
@@ -138,17 +138,17 @@ namespace CSTest
             CSCore::Vector2 b(-1.0f, -1.0f);
             CSCore::Vector2 c(0.0f, 0.0f);
             
-            REQUIRE(Common::Equals(CSCore::Vector2::Abs(a), CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Abs(b), CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Abs(c), CSCore::Vector2(0.0f, 0.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Abs(a), CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Abs(b), CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Abs(c), CSCore::Vector2(0.0f, 0.0f)));
             
             a.Abs();
             b.Abs();
             c.Abs();
             
-            REQUIRE(Common::Equals(a, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Common::Equals(b, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Common::Equals(c, CSCore::Vector2(0.0f, 0.0f)));
+            REQUIRE(Common::Approx(a, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Common::Approx(b, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Common::Approx(c, CSCore::Vector2(0.0f, 0.0f)));
         }
         
         TEST_CASE("Vector2: Minimum", "[Math][Vector2]")
@@ -162,20 +162,20 @@ namespace CSTest
             CSCore::Vector2 b3(2.0f, 1.0f);
             CSCore::Vector2 b4(-2.0f, -2.0f);
             
-            REQUIRE(Common::Equals(CSCore::Vector2::Min(a1, b1), CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Min(a2, b2), CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Min(a3, b3), CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Min(a4, b4), CSCore::Vector2(-2.0f, -2.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Min(a1, b1), CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Min(a2, b2), CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Min(a3, b3), CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Min(a4, b4), CSCore::Vector2(-2.0f, -2.0f)));
             
             a1.Min(b1);
             a2.Min(b2);
             a3.Min(b3);
             a4.Min(b4);
             
-            REQUIRE(Common::Equals(a1, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Common::Equals(a2, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Common::Equals(a3, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Common::Equals(a4, CSCore::Vector2(-2.0f, -2.0f)));
+            REQUIRE(Common::Approx(a1, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Common::Approx(a2, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Common::Approx(a3, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Common::Approx(a4, CSCore::Vector2(-2.0f, -2.0f)));
         }
         
         TEST_CASE("Vector2: Maximum", "[Math][Vector2]")
@@ -189,20 +189,20 @@ namespace CSTest
             CSCore::Vector2 b3(2.0f, 1.0f);
             CSCore::Vector2 b4(-2.0f, -2.0f);
             
-            REQUIRE(Common::Equals(CSCore::Vector2::Max(a1, b1), CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Max(a2, b2), CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Max(a3, b3), CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Max(a4, b4), CSCore::Vector2(-1.0f, -1.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Max(a1, b1), CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Max(a2, b2), CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Max(a3, b3), CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Max(a4, b4), CSCore::Vector2(-1.0f, -1.0f)));
             
             a1.Max(b1);
             a2.Max(b2);
             a3.Max(b3);
             a4.Max(b4);
             
-            REQUIRE(Common::Equals(a1, CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(a2, CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(a3, CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(a4, CSCore::Vector2(-1.0f, -1.0f)));
+            REQUIRE(Common::Approx(a1, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(a2, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(a3, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(a4, CSCore::Vector2(-1.0f, -1.0f)));
         }
         
         TEST_CASE("Vector2: Clamp", "[Math][Vector2]")
@@ -219,13 +219,13 @@ namespace CSTest
             CSCore::Vector2 max1(3.0f, 3.0f);
             CSCore::Vector2 max2(-1.0f, -1.0f);
             
-            REQUIRE(Common::Equals(CSCore::Vector2::Clamp(value1, min1, max1), CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Clamp(value2, min1, max1), CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Clamp(value3, min1, max1), CSCore::Vector2(3.0f, 3.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Clamp(value4, min1, max1), CSCore::Vector2(3.0f, 1.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Clamp(value5, min2, max2), CSCore::Vector2(-1.0f, -1.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Clamp(value6, min2, max2), CSCore::Vector2(-2.0f, -2.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Clamp(value7, min2, max2), CSCore::Vector2(-3.0f, -3.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value1, min1, max1), CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value2, min1, max1), CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value3, min1, max1), CSCore::Vector2(3.0f, 3.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value4, min1, max1), CSCore::Vector2(3.0f, 1.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value5, min2, max2), CSCore::Vector2(-1.0f, -1.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value6, min2, max2), CSCore::Vector2(-2.0f, -2.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value7, min2, max2), CSCore::Vector2(-3.0f, -3.0f)));
             
             value1.Clamp(min1, max1);
             value2.Clamp(min1, max1);
@@ -235,13 +235,13 @@ namespace CSTest
             value6.Clamp(min2, max2);
             value7.Clamp(min2, max2);
             
-            REQUIRE(Common::Equals(value1, CSCore::Vector2(1.0f, 1.0f)));
-            REQUIRE(Common::Equals(value2, CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(value3, CSCore::Vector2(3.0f, 3.0f)));
-            REQUIRE(Common::Equals(value4, CSCore::Vector2(3.0f, 1.0f)));
-            REQUIRE(Common::Equals(value5, CSCore::Vector2(-1.0f, -1.0f)));
-            REQUIRE(Common::Equals(value6, CSCore::Vector2(-2.0f, -2.0f)));
-            REQUIRE(Common::Equals(value7, CSCore::Vector2(-3.0f, -3.0f)));
+            REQUIRE(Common::Approx(value1, CSCore::Vector2(1.0f, 1.0f)));
+            REQUIRE(Common::Approx(value2, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(value3, CSCore::Vector2(3.0f, 3.0f)));
+            REQUIRE(Common::Approx(value4, CSCore::Vector2(3.0f, 1.0f)));
+            REQUIRE(Common::Approx(value5, CSCore::Vector2(-1.0f, -1.0f)));
+            REQUIRE(Common::Approx(value6, CSCore::Vector2(-2.0f, -2.0f)));
+            REQUIRE(Common::Approx(value7, CSCore::Vector2(-3.0f, -3.0f)));
         }
         
         TEST_CASE("Vector2: Lerp", "[Math][Vector2]")
@@ -251,14 +251,14 @@ namespace CSTest
             CSCore::Vector2 b1(3.0f, 3.0f);
             CSCore::Vector2 b2(-3.0f, -3.0f);
             
-            REQUIRE(Common::Equals(CSCore::Vector2::Lerp(a1, b1, 0.5f), CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Lerp(a2, b2, 0.5f), CSCore::Vector2(-2.0f, -2.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Lerp(a1, b1, 0.5f), CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Lerp(a2, b2, 0.5f), CSCore::Vector2(-2.0f, -2.0f)));
             
             a1.Lerp(b1, 0.5f);
             a2.Lerp(b2, 0.5f);
             
-            REQUIRE(Common::Equals(a1, CSCore::Vector2(2.0f, 2.0f)));
-            REQUIRE(Common::Equals(a2, CSCore::Vector2(-2.0f, -2.0f)));
+            REQUIRE(Common::Approx(a1, CSCore::Vector2(2.0f, 2.0f)));
+            REQUIRE(Common::Approx(a2, CSCore::Vector2(-2.0f, -2.0f)));
         }
         
         TEST_CASE("Vector2: Dot Product", "[Math][Vector2]")
@@ -269,10 +269,10 @@ namespace CSTest
             CSCore::Vector2 d(1.0f, 2.0f);
             CSCore::Vector2 e(3.0f, 4.0f);
             
-            REQUIRE(Common::Equals(CSCore::Vector2::DotProduct(a, a), 1.0f));
-            REQUIRE(Common::Equals(CSCore::Vector2::DotProduct(a, b), 0.0f));
-            REQUIRE(Common::Equals(CSCore::Vector2::DotProduct(a, c), -1.0f));
-            REQUIRE(Common::Equals(CSCore::Vector2::DotProduct(d, e), 11.0f));
+            REQUIRE(Common::Approx(CSCore::Vector2::DotProduct(a, a), 1.0f));
+            REQUIRE(Common::Approx(CSCore::Vector2::DotProduct(a, b), 0.0f));
+            REQUIRE(Common::Approx(CSCore::Vector2::DotProduct(a, c), -1.0f));
+            REQUIRE(Common::Approx(CSCore::Vector2::DotProduct(d, e), 11.0f));
         }
         
         TEST_CASE("Vector2: Cross Product Z", "[Math][Vector2]")
@@ -280,7 +280,7 @@ namespace CSTest
             CSCore::Vector2 a(1.0f, 2.0f);
             CSCore::Vector2 b(3.0f, 4.0f);
             
-            REQUIRE(Common::Equals(CSCore::Vector2::CrossProductZ(a, b), -2.0f));
+            REQUIRE(Common::Approx(CSCore::Vector2::CrossProductZ(a, b), -2.0f));
         }
         
         TEST_CASE("Vector2: Angle", "[Math][Vector2]")
@@ -288,9 +288,9 @@ namespace CSTest
             CSCore::Vector2 a(1.0f, 2.0f);
             CSCore::Vector2 b(3.0f, 4.0f);
             
-            REQUIRE(Common::Equals(CSCore::Vector2::Angle(a, a), 0.0f));
-            REQUIRE(Common::Equals(CSCore::Vector2::Angle(a, b), 0.179853559f));
-            REQUIRE(Common::Equals(CSCore::Vector2::Angle(b, a), 0.179853559f));
+            REQUIRE(Common::Approx(CSCore::Vector2::Angle(a, a), 0.0f));
+            REQUIRE(Common::Approx(CSCore::Vector2::Angle(a, b), 0.179853559f));
+            REQUIRE(Common::Approx(CSCore::Vector2::Angle(b, a), 0.179853559f));
         }
         
         TEST_CASE("Vector2: Rotate", "[Math][Vector2]")
@@ -300,14 +300,14 @@ namespace CSTest
             f32 angleA = 0.5f;
             f32 angleB = -0.5f;
             
-            REQUIRE(Common::Equals(CSCore::Vector2::Rotate(pointA, angleA), CSCore::Vector2(1.83643365f, 1.27573955f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Rotate(pointB, angleB), CSCore::Vector2(-0.715045452f, -4.94860697f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Rotate(pointA, angleA), CSCore::Vector2(1.83643365f, 1.27573955f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Rotate(pointB, angleB), CSCore::Vector2(-0.715045452f, -4.94860697f)));
             
             pointA.Rotate(angleA);
             pointB.Rotate(angleB);
             
-            REQUIRE(Common::Equals(pointA, CSCore::Vector2(1.83643365f, 1.27573955f)));
-            REQUIRE(Common::Equals(pointB, CSCore::Vector2(-0.715045452f, -4.94860697f)));
+            REQUIRE(Common::Approx(pointA, CSCore::Vector2(1.83643365f, 1.27573955f)));
+            REQUIRE(Common::Approx(pointB, CSCore::Vector2(-0.715045452f, -4.94860697f)));
         }
         
         TEST_CASE("Vector2: Transform2x3", "[Math][Vector2]")
@@ -317,14 +317,14 @@ namespace CSTest
             auto transformA = CSCore::Matrix3::CreateTransform(CSCore::Vector2(1.0f, 2.0f), CSCore::Vector2(3.0f, 4.0f), 5.0f);
             auto transformB = CSCore::Matrix3::CreateTransform(CSCore::Vector2(-1.0f, -2.0f), CSCore::Vector2(-3.0f, -4.0f), -5.0f);
             
-            REQUIRE(Common::Equals(CSCore::Vector2::Transform2x3(pointA, transformA), CSCore::Vector2(9.52238082f, 1.39252472f)));
-            REQUIRE(Common::Equals(CSCore::Vector2::Transform2x3(pointB, transformB), CSCore::Vector2(-13.7898293f, 11.1689138f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Transform2x3(pointA, transformA), CSCore::Vector2(9.52238082f, 1.39252472f)));
+            REQUIRE(Common::Approx(CSCore::Vector2::Transform2x3(pointB, transformB), CSCore::Vector2(-13.7898293f, 11.1689138f)));
             
             pointA.Transform2x3(transformA);
             pointB.Transform2x3(transformB);
             
-            REQUIRE(Common::Equals(pointA, CSCore::Vector2(9.52238082f, 1.39252472f)));
-            REQUIRE(Common::Equals(pointB, CSCore::Vector2(-13.7898293f, 11.1689138f)));
+            REQUIRE(Common::Approx(pointA, CSCore::Vector2(9.52238082f, 1.39252472f)));
+            REQUIRE(Common::Approx(pointB, CSCore::Vector2(-13.7898293f, 11.1689138f)));
         }
     }
 }

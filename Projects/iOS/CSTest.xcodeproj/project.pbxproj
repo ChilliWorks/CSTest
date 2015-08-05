@@ -24,7 +24,6 @@
 		818387131301466F004B7099 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818387121301466F004B7099 /* CoreGraphics.framework */; };
 		818387381301467E004B7099 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818387371301467E004B7099 /* AudioToolbox.framework */; };
 		81852A601964003700EC15DE /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81852A5F1964003700EC15DE /* FacebookSDK.framework */; };
-		819303271B6A6C380036740E /* Equals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 819303251B6A6C380036740E /* Equals.cpp */; };
 		8193032A1B6A6D630036740E /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 819303291B6A6D630036740E /* Vector3.cpp */; };
 		819495D616CE45C50063276A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 819495D516CE45C50063276A /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		819A8A3E191CFCB6003E9E9F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 819A8A3D191CFCB6003E9E9F /* GLKit.framework */; };
@@ -47,6 +46,7 @@
 		81D89B751962BD400010DA84 /* com_taggames_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 81D89B721962BD400010DA84 /* com_taggames_close_button.png */; };
 		81D89B771962BD400010DA84 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81D89B741962BD400010DA84 /* Images.xcassets */; };
 		81D8B6ED1962E3420010DA84 /* libChilliSource.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D8B2261962DC120010DA84 /* libChilliSource.a */; };
+		81D8F1BA1B72488C0042A7E6 /* Approx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81D8F1B81B72488C0042A7E6 /* Approx.cpp */; };
 		81DB6CAD1A5C8A8A00ED47CE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DB6CAC1A5C8A8A00ED47CE /* AVFoundation.framework */; };
 		81DB6CAF1A5C8AAD00ED47CE /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DB6CAE1A5C8AAC00ED47CE /* CoreMedia.framework */; };
 		81DE059A1B67C5F800583F5F /* UIFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81DE05981B67C5F800583F5F /* UIFactory.cpp */; };
@@ -93,8 +93,6 @@
 		818387121301466F004B7099 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		818387371301467E004B7099 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		81852A5F1964003700EC15DE /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../ChilliSource/Libraries/Core/iOS/Libs/FacebookSDK.framework; sourceTree = "<group>"; };
-		819303251B6A6C380036740E /* Equals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Equals.cpp; sourceTree = "<group>"; };
-		819303261B6A6C380036740E /* Equals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equals.h; sourceTree = "<group>"; };
 		819303291B6A6D630036740E /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3.cpp; sourceTree = "<group>"; };
 		819495D516CE45C50063276A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		819A8A3D191CFCB6003E9E9F /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
@@ -120,6 +118,8 @@
 		81D89B731962BD400010DA84 /* CSTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CSTest-Info.plist"; sourceTree = "<group>"; };
 		81D89B741962BD400010DA84 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81D8B2211962DC120010DA84 /* ChilliSource.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChilliSource.xcodeproj; path = ../../ChilliSource/Projects/iOS/ChilliSource.xcodeproj; sourceTree = "<group>"; };
+		81D8F1B81B72488C0042A7E6 /* Approx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Approx.cpp; sourceTree = "<group>"; };
+		81D8F1B91B72488C0042A7E6 /* Approx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Approx.h; sourceTree = "<group>"; };
 		81DB6CAC1A5C8A8A00ED47CE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		81DB6CAE1A5C8AAC00ED47CE /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		81DE05901B67C17C00583F5F /* StateNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateNavigator.h; sourceTree = "<group>"; };
@@ -302,6 +302,8 @@
 		81DE058E1B67C17C00583F5F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				81D8F1B81B72488C0042A7E6 /* Approx.cpp */,
+				81D8F1B91B72488C0042A7E6 /* Approx.h */,
 				81DE05A21B67D67300583F5F /* SmokeTestSet.cpp */,
 				81DE05A31B67D67300583F5F /* SmokeTestSet.h */,
 				81DE059F1B67D53B00583F5F /* SmokeTester.cpp */,
@@ -310,8 +312,6 @@
 				81DE05901B67C17C00583F5F /* StateNavigator.h */,
 				81D1535B1B68DB1400341A9F /* ResultPresenter.cpp */,
 				81D1535C1B68DB1400341A9F /* ResultPresenter.h */,
-				819303251B6A6C380036740E /* Equals.cpp */,
-				819303261B6A6C380036740E /* Equals.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -484,12 +484,12 @@
 				81E010991B56B6F500FEC2AE /* FailedAssertion.cpp in Sources */,
 				81E0109A1B56B6F500FEC2AE /* CSReporter.cpp in Sources */,
 				8193032A1B6A6D630036740E /* Vector3.cpp in Sources */,
-				819303271B6A6C380036740E /* Equals.cpp in Sources */,
 				81D1535D1B68DB1400341A9F /* ResultPresenter.cpp in Sources */,
 				81DE059A1B67C5F800583F5F /* UIFactory.cpp in Sources */,
 				81DE05A11B67D53B00583F5F /* SmokeTester.cpp in Sources */,
 				81DE05A41B67D67300583F5F /* SmokeTestSet.cpp in Sources */,
 				81E0109D1B56B6F500FEC2AE /* TestSystem.cpp in Sources */,
+				81D8F1BA1B72488C0042A7E6 /* Approx.cpp in Sources */,
 				81E010791B56721000FEC2AE /* State.cpp in Sources */,
 				81E0109B1B56B6F500FEC2AE /* Report.cpp in Sources */,
 				810B0E461B6142A30035CF48 /* ReportPresenter.cpp in Sources */,

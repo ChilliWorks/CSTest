@@ -1,5 +1,5 @@
 //
-//  Equals.cpp
+//  Approx.cpp
 //  CSTest
 //  Created by Ian Copland on 30/07/2015.
 //
@@ -25,10 +25,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
-#ifndef _COMMON_CORE_EQUALS_H_
-#define _COMMON_CORE_EQUALS_H_
 
 #include <CSTest.h>
+
+#include <Common/Core/Approx.h>
 
 #include <ChilliSource/Core/Math.h>
 
@@ -38,31 +38,28 @@ namespace CSTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool Equals(f32 in_a, f32 in_b, f32 in_toleranceFactor = 100.0f)
+        bool Approx(f32 in_a, f32 in_b, f32 in_epsilon)
         {
-            const f32 k_tolerance = std::numeric_limits<f32>::epsilon() * in_toleranceFactor;
             f32 difference = in_a - in_b;
-            return (difference < k_tolerance && difference > -k_tolerance);
+            return (difference < in_epsilon && difference > -in_epsilon);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool Equals(const CSCore::Vector2& in_a, const CSCore::Vector2& in_b)
+        bool Approx(const CSCore::Vector2& in_a, const CSCore::Vector2& in_b, f32 in_epsilon)
         {
-            return (Equals(in_a.x, in_b.x) && Equals(in_a.y, in_b.y));
+            return (Approx(in_a.x, in_b.x, in_epsilon) && Approx(in_a.y, in_b.y, in_epsilon));
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool Equals(const CSCore::Vector3& in_a, const CSCore::Vector3& in_b)
+        bool Approx(const CSCore::Vector3& in_a, const CSCore::Vector3& in_b, f32 in_epsilon)
         {
-            return (Equals(in_a.x, in_b.x) && Equals(in_a.y, in_b.y) && Equals(in_a.z, in_b.z));
+            return (Approx(in_a.x, in_b.x, in_epsilon) && Approx(in_a.y, in_b.y, in_epsilon) && Approx(in_a.z, in_b.z, in_epsilon));
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool Equals(const CSCore::Vector4& in_a, const CSCore::Vector4& in_b)
+        bool Approx(const CSCore::Vector4& in_a, const CSCore::Vector4& in_b, f32 in_epsilon)
         {
-            return (Equals(in_a.x, in_b.x) && Equals(in_a.y, in_b.y) && Equals(in_a.z, in_b.z) && Equals(in_a.w, in_b.w));
+            return (Approx(in_a.x, in_b.x, in_epsilon) && Approx(in_a.y, in_b.y, in_epsilon) && Approx(in_a.z, in_b.z, in_epsilon) && Approx(in_a.w, in_b.w, in_epsilon));
         }
     }
 }
-
-#endif

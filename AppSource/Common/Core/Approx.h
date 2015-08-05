@@ -1,5 +1,5 @@
 //
-//  Equals.h
+//  Approx.h
 //  CSTest
 //  Created by Ian Copland on 30/07/2015.
 //
@@ -26,10 +26,12 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_EQUALS_H_
-#define _COMMON_CORE_EQUALS_H_
+#ifndef _COMMON_CORE_APPROX_H_
+#define _COMMON_CORE_APPROX_H_
 
 #include <CSTest.h>
+
+#include <limits>
 
 namespace CSTest
 {
@@ -40,44 +42,49 @@ namespace CSTest
         ///
         /// @param in_a - A floating point value.
         /// @param in_b - Another floating point value.
-        /// @param in_toleranceFactor - [Optional] The factor by which float episilon is
-        /// multiplied to get the tolerance before a value is considered inequal.
-        /// Defaults to 100.
+        /// @param in_epsilon - [Optional] The amount that the values can differ before
+        /// they're no longer considered approximately equal.
         ///
-        /// @return Whether or not the two floats are effectively equal. This allows for
-        /// a very small small delta to avoid floating point precision issues.
+        /// @return Whether or not the two floats are approximately equal. This allows
+        /// for a very small small delta to avoid floating point precision issues.
         //------------------------------------------------------------------------------
-        bool Equals(f32 in_a, f32 in_b, f32 in_toleranceFactor = 100.0f);
-        //------------------------------------------------------------------------------
-        /// @author Ian Copland
-        ///
-        /// @param in_a - A vector.
-        /// @param in_b - Another vector.
-        ///
-        /// @return Whether or not the two vectors are effectively equal. This allows for
-        /// a very small small delta to avoid floating point precision issues.
-        //------------------------------------------------------------------------------
-        bool Equals(const CSCore::Vector2& in_a, const CSCore::Vector2& in_b);
+        bool Approx(f32 in_a, f32 in_b, f32 in_epsilon = std::numeric_limits<f32>::epsilon() * 100.0f);
         //------------------------------------------------------------------------------
         /// @author Ian Copland
         ///
         /// @param in_a - A vector.
         /// @param in_b - Another vector.
+        /// @param in_epsilon - [Optional] The amount that the values can differ before
+        /// they're no longer considered approximately equal.
         ///
-        /// @return Whether or not the two vectors are effectively equal. This allows for
-        /// a very small small delta to avoid floating point precision issues.
+        /// @return Whether or not the two vectors are approximately equal. This allows
+        /// for a very small small delta to avoid floating point precision issues.
         //------------------------------------------------------------------------------
-        bool Equals(const CSCore::Vector3& in_a, const CSCore::Vector3& in_b);
+        bool Approx(const CSCore::Vector2& in_a, const CSCore::Vector2& in_b, f32 in_epsilon = std::numeric_limits<f32>::epsilon() * 100.0f);
         //------------------------------------------------------------------------------
         /// @author Ian Copland
         ///
         /// @param in_a - A vector.
         /// @param in_b - Another vector.
+        /// @param in_epsilon - [Optional] The amount that the values can differ before
+        /// they're no longer considered approximately equal.
         ///
-        /// @return Whether or not the two vectors are effectively equal. This allows for
-        /// a very small small delta to avoid floating point precision issues.
+        /// @return Whether or not the two vectors are approximately equal. This allows
+        /// for a very small small delta to avoid floating point precision issues.
         //------------------------------------------------------------------------------
-        bool Equals(const CSCore::Vector4& in_a, const CSCore::Vector4& in_b);
+        bool Approx(const CSCore::Vector3& in_a, const CSCore::Vector3& in_b, f32 in_epsilon = std::numeric_limits<f32>::epsilon() * 100.0f);
+        //------------------------------------------------------------------------------
+        /// @author Ian Copland
+        ///
+        /// @param in_a - A vector.
+        /// @param in_b - Another vector.
+        /// @param in_epsilon - [Optional] The amount that the values can differ before
+        /// they're no longer considered approximately equal.
+        ///
+        /// @return Whether or not the two vectors are approximately equal. This allows
+        /// for a very small small delta to avoid floating point precision issues.
+        //------------------------------------------------------------------------------
+        bool Approx(const CSCore::Vector4& in_a, const CSCore::Vector4& in_b, f32 in_epsilon = std::numeric_limits<f32>::epsilon() * 100.0f);
     }
 }
 
