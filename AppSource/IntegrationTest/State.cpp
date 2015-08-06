@@ -31,7 +31,7 @@
 #include <Common/Core/StateNavigator.h>
 #include <IntegrationTest/TestSystem/ReportPresenter.h>
 #include <IntegrationTest/TestSystem/TestSystem.h>
-#include <WebView/State.h>
+#include <Lighting/State.h>
 
 #include <ChilliSource/Core/Scene.h>
 
@@ -41,7 +41,7 @@ namespace CSTest
     {
         namespace
         {
-            using NextState = WebView::State;
+            using NextState = Lighting::State;
             
             const f32 k_timeBeforeTests = 0.5f;
         }

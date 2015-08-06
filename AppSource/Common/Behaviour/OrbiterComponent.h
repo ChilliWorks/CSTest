@@ -1,7 +1,7 @@
 //
-//  StateNavigator.h
+//  OrbiterComponent.h
 //  CSTest
-//  Created by Ian Copland on 28/07/2015.
+//  Created by Ian Copland on 04/08/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,28 +26,33 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_STATENAVIGATOR_H_
-#define _COMMON_CORE_STATENAVIGATOR_H_
+#ifndef _COMMON_RENDERING_ORBITERCOMPONENT_H_
+#define _COMMON_RENDERING_ORBITERCOMPONENT_H_
 
 #include <CSTest.h>
-#include <ChilliSource/Core/System.h>
+
+#include <ChilliSource/Core/Entity.h>
 
 namespace CSTest
 {
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A system which provides navigation between the different test states. This
-        /// will present an on screen next button which can be used to navigate to the
-        /// state after this one. The next state type is specified by the system template
-        /// parameter.
+        /// A component used in conjunction with the FollowerComponent to provide an
+        /// object that will spin arround it's target.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        template <typename TNextState> class StateNavigator final : public CSCore::StateSystem
+        class OrbiterComponent final : public CSCore::Component
         {
         public:
-            CS_DECLARE_NAMEDTYPE(StateNavigator);
+            CS_DECLARE_NAMEDTYPE(OrbiterComponent);
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @param in_angularVelocity - The angular velocity.
+            //------------------------------------------------------------------------------
+            OrbiterComponent(f32 in_angularVelocity);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly
@@ -63,58 +68,43 @@ namespace CSTest
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
-            /// @return Whether or not the next button is visible. If the button is not
-            /// visible, it cannot be pressed.
+            /// @param The angular velocity.
             //------------------------------------------------------------------------------
-            bool IsNextButtonVisible() const;
+            f32 GetAngularVelocity() const;
             //------------------------------------------------------------------------------
-            /// Whether or not the next button is visible. If the button is not visible,
-            /// it cannot be pressed.
-            ///
             /// @author Ian Copland
             ///
-            /// @param in_visibile - Whether or not to make the button visible.
+            /// @param in_angularVelocity - The angular velocity.
             //------------------------------------------------------------------------------
-            void SetNextButtonVisible(bool in_visibile);
+            void SetAngularVelocity(f32 in_angularVelocity);
             
         private:
-            friend class CSCore::State;
             //------------------------------------------------------------------------------
-            /// A factory method for creating new instances of the system.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @return The new instance.
-            //------------------------------------------------------------------------------
-            static std::unique_ptr<StateNavigator<TNextState>> Create();
-            //------------------------------------------------------------------------------
-            /// Default constructor. Declared private to ensure the system is created
-            /// through State::CreateSystem<StateNavigator>().
+            /// Called whenever this is added to the scene.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            StateNavigator() = default;
+            void OnAddedToScene();
             //------------------------------------------------------------------------------
-            /// Initialises the State Navigator.
+            /// Called every frame the component is in the scene. Updates the camera
+            /// angle.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_deltaTime - The delta time.
+            //------------------------------------------------------------------------------
+            void OnUpdate(f32 in_deltaTime);
+            //------------------------------------------------------------------------------
+            /// Called whenever this is removed from the scene.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnInit() override;
-            //------------------------------------------------------------------------------
-            /// Destroys the State Navigator.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnDestroy() override;
+            void OnRemovedFromScene();
             
-            CSUI::WidgetSPtr m_ui;
-            CSUI::WidgetSPtr m_nextButton;
-            
-            CSCore::EventConnectionUPtr m_nextPressedConnection;
+            FollowerComponentWPtr m_followerComponent;
+            f32 m_angularVelocity = 0.0f;
         };
     }
 }
-
-#include <Common/Core/StateNavigatorImpl.h>
 
 #endif

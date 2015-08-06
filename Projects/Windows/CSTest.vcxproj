@@ -20,11 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp" />
+    <ClCompile Include="..\..\AppSource\Common\Behaviour\FollowerComponent.cpp" />
+    <ClCompile Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\Approx.cpp" />
+    <ClCompile Include="..\..\AppSource\Common\Core\BasicEntityFactory.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\ResultPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\SmokeTester.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\SmokeTestSet.cpp" />
-    <ClCompile Include="..\..\AppSource\Common\UI\UIFactory.cpp" />
+    <ClCompile Include="..\..\AppSource\Common\UI\BasicWidgetFactory.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\State.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.cpp" />
@@ -36,17 +39,21 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector2.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector3.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector4.cpp" />
+    <ClCompile Include="..\..\AppSource\Lighting\State.cpp" />
     <ClCompile Include="..\..\AppSource\WebView\State.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h" />
+    <ClInclude Include="..\..\AppSource\Common\Behaviour\FollowerComponent.h" />
+    <ClInclude Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\Approx.h" />
+    <ClInclude Include="..\..\AppSource\Common\Core\BasicEntityFactory.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\ResultPresenter.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\SmokeTester.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\SmokeTestSet.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\StateNavigator.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\StateNavigatorImpl.h" />
-    <ClInclude Include="..\..\AppSource\Common\UI\UIFactory.h" />
+    <ClInclude Include="..\..\AppSource\Common\UI\BasicWidgetFactory.h" />
     <ClInclude Include="..\..\AppSource\CSTest.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\State.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.h" />
@@ -55,6 +62,7 @@
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.h" />
+    <ClInclude Include="..\..\AppSource\Lighting\State.h" />
     <ClInclude Include="..\..\AppSource\WebView\State.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

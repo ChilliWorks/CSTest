@@ -29,7 +29,7 @@
 #include <Common/Core/SmokeTester.h>
 
 #include <Common/Core/SmokeTestSet.h>
-#include <Common/UI/UIFactory.h>
+#include <Common/UI/BasicWidgetFactory.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Resource.h>
@@ -72,9 +72,10 @@ namespace CSTest
             
             m_titleText->GetComponent<CSUI::TextComponent>()->SetText(in_testSet.GetName());
             
+            auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
             for (const auto& test : in_testSet.GetTests())
             {
-                CSUI::WidgetSPtr button = UIFactory::CreateStretchableButton(CSCore::Vector2::k_one, test.m_name, CSRendering::AlignmentAnchor::k_middleCentre, CSCore::Colour(0.92f, 0.95f, 0.98f, 1.0f));
+                CSUI::WidgetSPtr button = basicWidgetFactory->CreateStretchableButton(CSCore::Vector2::k_one, test.m_name, CSRendering::AlignmentAnchor::k_middleCentre, CSCore::Colour(0.92f, 0.95f, 0.98f, 1.0f));
                 m_buttonContainer->AddWidget(button);
                 
                 auto connection = button->GetReleasedInsideEvent().OpenConnection([=](CSUI::Widget* in_widget, const CSInput::Pointer& in_pointer, CSInput::Pointer::InputType in_inputType)
@@ -120,7 +121,8 @@ namespace CSTest
             auto resourcePool = CSCore::Application::Get()->GetResourcePool();
             auto mediumFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialMed.csfont");
             
-            m_titleText = UIFactory::CreateLabel(CSCore::Vector2(0.9f, 0.15f), mediumFont, "", CSRendering::AlignmentAnchor::k_topCentre);
+            auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
+            m_titleText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 0.15f), mediumFont, "", CSRendering::AlignmentAnchor::k_topCentre);
             
             auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
             m_buttonContainer = widgetFactory->CreateLayout();

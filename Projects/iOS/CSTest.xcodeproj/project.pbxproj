@@ -49,7 +49,7 @@
 		81D8F1BA1B72488C0042A7E6 /* Approx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81D8F1B81B72488C0042A7E6 /* Approx.cpp */; };
 		81DB6CAD1A5C8A8A00ED47CE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DB6CAC1A5C8A8A00ED47CE /* AVFoundation.framework */; };
 		81DB6CAF1A5C8AAD00ED47CE /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DB6CAE1A5C8AAC00ED47CE /* CoreMedia.framework */; };
-		81DE059A1B67C5F800583F5F /* UIFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81DE05981B67C5F800583F5F /* UIFactory.cpp */; };
+		81DE059A1B67C5F800583F5F /* BasicWidgetFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81DE05981B67C5F800583F5F /* BasicWidgetFactory.cpp */; };
 		81DE059E1B67D53200583F5F /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81DE059C1B67D53200583F5F /* State.cpp */; };
 		81DE05A11B67D53B00583F5F /* SmokeTester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81DE059F1B67D53B00583F5F /* SmokeTester.cpp */; };
 		81DE05A41B67D67300583F5F /* SmokeTestSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81DE05A21B67D67300583F5F /* SmokeTestSet.cpp */; };
@@ -60,6 +60,10 @@
 		81E0109B1B56B6F500FEC2AE /* Report.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E010931B56B6F500FEC2AE /* Report.cpp */; };
 		81E0109C1B56B6F500FEC2AE /* TestCase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E010951B56B6F500FEC2AE /* TestCase.cpp */; };
 		81E0109D1B56B6F500FEC2AE /* TestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E010971B56B6F500FEC2AE /* TestSystem.cpp */; };
+		81E7C6BB1B70B8D100F32006 /* BasicEntityFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6B91B70B8D100F32006 /* BasicEntityFactory.cpp */; };
+		81E7C6C01B70C73E00F32006 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6BE1B70C73E00F32006 /* State.cpp */; };
+		81E7C6D51B70F7A400F32006 /* FollowerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6D11B70F7A400F32006 /* FollowerComponent.cpp */; };
+		81E7C6D61B70F7A400F32006 /* OrbiterComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6D31B70F7A400F32006 /* OrbiterComponent.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,8 +128,8 @@
 		81DB6CAE1A5C8AAC00ED47CE /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		81DE05901B67C17C00583F5F /* StateNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateNavigator.h; sourceTree = "<group>"; };
 		81DE05961B67C59C00583F5F /* StateNavigatorImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateNavigatorImpl.h; sourceTree = "<group>"; };
-		81DE05981B67C5F800583F5F /* UIFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIFactory.cpp; sourceTree = "<group>"; };
-		81DE05991B67C5F800583F5F /* UIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFactory.h; sourceTree = "<group>"; };
+		81DE05981B67C5F800583F5F /* BasicWidgetFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicWidgetFactory.cpp; sourceTree = "<group>"; };
+		81DE05991B67C5F800583F5F /* BasicWidgetFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicWidgetFactory.h; sourceTree = "<group>"; };
 		81DE059C1B67D53200583F5F /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81DE059D1B67D53200583F5F /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81DE059F1B67D53B00583F5F /* SmokeTester.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SmokeTester.cpp; sourceTree = "<group>"; };
@@ -146,6 +150,14 @@
 		81E010961B56B6F500FEC2AE /* TestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCase.h; sourceTree = "<group>"; };
 		81E010971B56B6F500FEC2AE /* TestSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestSystem.cpp; sourceTree = "<group>"; };
 		81E010981B56B6F500FEC2AE /* TestSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSystem.h; sourceTree = "<group>"; };
+		81E7C6B91B70B8D100F32006 /* BasicEntityFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicEntityFactory.cpp; sourceTree = "<group>"; };
+		81E7C6BA1B70B8D100F32006 /* BasicEntityFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicEntityFactory.h; sourceTree = "<group>"; };
+		81E7C6BE1B70C73E00F32006 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81E7C6BF1B70C73E00F32006 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81E7C6D11B70F7A400F32006 /* FollowerComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FollowerComponent.cpp; sourceTree = "<group>"; };
+		81E7C6D21B70F7A400F32006 /* FollowerComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowerComponent.h; sourceTree = "<group>"; };
+		81E7C6D31B70F7A400F32006 /* OrbiterComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OrbiterComponent.cpp; sourceTree = "<group>"; };
+		81E7C6D41B70F7A400F32006 /* OrbiterComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrbiterComponent.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,12 +273,13 @@
 		81CFA14219EE9177003C8436 /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
-				81DE059B1B67D53200583F5F /* WebView */,
 				81CFA14319EE9177003C8436 /* App.cpp */,
 				81CFA14419EE9177003C8436 /* App.h */,
 				81DE058D1B67C17C00583F5F /* Common */,
 				81E010731B56721000FEC2AE /* CSTest.h */,
 				81E010741B56721000FEC2AE /* IntegrationTest */,
+				81E7C6BD1B70C73E00F32006 /* Lighting */,
+				81DE059B1B67D53200583F5F /* WebView */,
 			);
 			name = AppSource;
 			path = ../../AppSource;
@@ -293,8 +306,9 @@
 		81DE058D1B67C17C00583F5F /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				81DE05971B67C5F800583F5F /* UI */,
+				81E7C6D01B70F7A400F32006 /* Behaviour */,
 				81DE058E1B67C17C00583F5F /* Core */,
+				81DE05971B67C5F800583F5F /* UI */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -304,14 +318,16 @@
 			children = (
 				81D8F1B81B72488C0042A7E6 /* Approx.cpp */,
 				81D8F1B91B72488C0042A7E6 /* Approx.h */,
-				81DE05A21B67D67300583F5F /* SmokeTestSet.cpp */,
-				81DE05A31B67D67300583F5F /* SmokeTestSet.h */,
-				81DE059F1B67D53B00583F5F /* SmokeTester.cpp */,
-				81DE05A01B67D53B00583F5F /* SmokeTester.h */,
-				81DE05961B67C59C00583F5F /* StateNavigatorImpl.h */,
-				81DE05901B67C17C00583F5F /* StateNavigator.h */,
+				81E7C6B91B70B8D100F32006 /* BasicEntityFactory.cpp */,
+				81E7C6BA1B70B8D100F32006 /* BasicEntityFactory.h */,
 				81D1535B1B68DB1400341A9F /* ResultPresenter.cpp */,
 				81D1535C1B68DB1400341A9F /* ResultPresenter.h */,
+				81DE059F1B67D53B00583F5F /* SmokeTester.cpp */,
+				81DE05A01B67D53B00583F5F /* SmokeTester.h */,
+				81DE05A21B67D67300583F5F /* SmokeTestSet.cpp */,
+				81DE05A31B67D67300583F5F /* SmokeTestSet.h */,
+				81DE05901B67C17C00583F5F /* StateNavigator.h */,
+				81DE05961B67C59C00583F5F /* StateNavigatorImpl.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -319,8 +335,8 @@
 		81DE05971B67C5F800583F5F /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				81DE05981B67C5F800583F5F /* UIFactory.cpp */,
-				81DE05991B67C5F800583F5F /* UIFactory.h */,
+				81DE05981B67C5F800583F5F /* BasicWidgetFactory.cpp */,
+				81DE05991B67C5F800583F5F /* BasicWidgetFactory.h */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -373,6 +389,26 @@
 				81E010981B56B6F500FEC2AE /* TestSystem.h */,
 			);
 			path = TestSystem;
+			sourceTree = "<group>";
+		};
+		81E7C6BD1B70C73E00F32006 /* Lighting */ = {
+			isa = PBXGroup;
+			children = (
+				81E7C6BE1B70C73E00F32006 /* State.cpp */,
+				81E7C6BF1B70C73E00F32006 /* State.h */,
+			);
+			path = Lighting;
+			sourceTree = "<group>";
+		};
+		81E7C6D01B70F7A400F32006 /* Behaviour */ = {
+			isa = PBXGroup;
+			children = (
+				81E7C6D11B70F7A400F32006 /* FollowerComponent.cpp */,
+				81E7C6D21B70F7A400F32006 /* FollowerComponent.h */,
+				81E7C6D31B70F7A400F32006 /* OrbiterComponent.cpp */,
+				81E7C6D41B70F7A400F32006 /* OrbiterComponent.h */,
+			);
+			path = Behaviour;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -485,8 +521,11 @@
 				81E0109A1B56B6F500FEC2AE /* CSReporter.cpp in Sources */,
 				8193032A1B6A6D630036740E /* Vector3.cpp in Sources */,
 				81D1535D1B68DB1400341A9F /* ResultPresenter.cpp in Sources */,
-				81DE059A1B67C5F800583F5F /* UIFactory.cpp in Sources */,
+				81E7C6BB1B70B8D100F32006 /* BasicEntityFactory.cpp in Sources */,
+				81DE059A1B67C5F800583F5F /* BasicWidgetFactory.cpp in Sources */,
+				81E7C6D51B70F7A400F32006 /* FollowerComponent.cpp in Sources */,
 				81DE05A11B67D53B00583F5F /* SmokeTester.cpp in Sources */,
+				81E7C6D61B70F7A400F32006 /* OrbiterComponent.cpp in Sources */,
 				81DE05A41B67D67300583F5F /* SmokeTestSet.cpp in Sources */,
 				81E0109D1B56B6F500FEC2AE /* TestSystem.cpp in Sources */,
 				81D8F1BA1B72488C0042A7E6 /* Approx.cpp in Sources */,
@@ -494,6 +533,7 @@
 				81E0109B1B56B6F500FEC2AE /* Report.cpp in Sources */,
 				810B0E461B6142A30035CF48 /* ReportPresenter.cpp in Sources */,
 				81E0109C1B56B6F500FEC2AE /* TestCase.cpp in Sources */,
+				81E7C6C01B70C73E00F32006 /* State.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,7 +1,7 @@
 //
-//  ResultPresenter.h
+//  State.h
 //  CSTest
-//  Created by Ian Copland on 29/07/2015.
+//  Created by Ian Copland on 04/08/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,80 +26,51 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_RESULTPRESENTER_H_
-#define _COMMON_CORE_RESULTPRESENTER_H_
+#ifndef _LIGHTING_STATE_H_
+#define _LIGHTING_STATE_H_
 
 #include <CSTest.h>
 
-#include <ChilliSource/Core/System.h>
+#include <ChilliSource/Core/State.h>
 
 namespace CSTest
 {
-    namespace Common
+    namespace Lighting
     {
         //------------------------------------------------------------------------------
-        /// A system for presenting the user with a result. This simply displays the
-        /// Given text in a system dialogue box for now, but this might be improved in
-        /// the future.
+        /// A state for testing lighting and shadows.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class ResultPresenter final : public CSCore::StateSystem
+        class State : public CSCore::State
         {
-        public:
-            CS_DECLARE_NAMEDTYPE(ResultPresenter);
             //------------------------------------------------------------------------------
-            /// Allows querying of whether or not this system implements the interface
-            /// described by the given interface Id. Typically this is not called directly
-            /// as the templated equivalent IsA<Interface>() is preferred.
+            /// Creates a series of lights.
             ///
             /// @author Ian Copland
             ///
-            /// @param in_interfaceId - The interface Id.
-            ///
-            /// @return Whether or not the interface is implemented.
+            /// @param in_room - The room the lights are in.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            void CreateLights(const CSCore::EntitySPtr& in_room);
             //------------------------------------------------------------------------------
-            /// Presents the results of a test. For now this simply presents a dialogue box.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @param in_result - A string describing the result of the test.
-            //------------------------------------------------------------------------------
-            void Present(const std::string& in_result);
-            
-        private:
-            friend class CSCore::State;
-            //------------------------------------------------------------------------------
-            /// A factory method for creating new instances of the system.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @return The new instance.
-            //------------------------------------------------------------------------------
-            static ResultPresenterUPtr Create();
-            //------------------------------------------------------------------------------
-            /// Default constructor. Declared private to ensure the system is created
-            /// through State::CreateSystem<ResultPresenter>().
+            /// Creates a grid of randomly sized and coloured boxes and added them to the
+            /// scene.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            ResultPresenter() = default;
+            void CreateBoxes();
             //------------------------------------------------------------------------------
-            /// Initialises the Result Presenter.
+            /// The life-cycle event for creating all state systems.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void CreateSystems() override;
+            //------------------------------------------------------------------------------
+            /// Initialises the state.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnInit() override;
-            //------------------------------------------------------------------------------
-            /// Destroys the Result Presenter.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnDestroy() override;
-            
-            CSCore::DialogueBoxSystem* m_dialogueBoxSystem = nullptr;
         };
     }
 }

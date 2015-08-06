@@ -37,9 +37,13 @@ namespace CSTest
     
     namespace Common
     {
+        CS_FORWARDDECLARE_CLASS(BasicEntityFactory);
+        CS_FORWARDDECLARE_CLASS(BasicWidgetFactory);
+        CS_FORWARDDECLARE_CLASS(OrbiterComponent);
         CS_FORWARDDECLARE_CLASS(ResultPresenter);
         CS_FORWARDDECLARE_CLASS(SmokeTester);
         CS_FORWARDDECLARE_CLASS(SmokeTestSet);
+        CS_FORWARDDECLARE_CLASS(FollowerComponent);
     }
     
     namespace IntegrationTest
@@ -51,6 +55,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(State);
         CS_FORWARDDECLARE_CLASS(TestCase);
         CS_FORWARDDECLARE_CLASS(TestSystem);
+    }
+    
+    namespace Lighting
+    {
+        CS_FORWARDDECLARE_CLASS(State);
     }
     
     namespace WebView

@@ -25,6 +25,12 @@
     <Filter Include="AppSource\Common\UI">
       <UniqueIdentifier>{f9c58e59-94d1-4ada-b866-d28defff0df0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\Common\Behaviour">
+      <UniqueIdentifier>{373c4375-d5ba-4e90-9cde-1746c1de6bc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Lighting">
+      <UniqueIdentifier>{752ffa79-e03f-402a-91ad-f40207ad0d03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -60,9 +66,6 @@
     <ClCompile Include="..\..\AppSource\Common\Core\SmokeTestSet.cpp">
       <Filter>AppSource\Common\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\Common\UI\UIFactory.cpp">
-      <Filter>AppSource\Common\UI</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\AppSource\WebView\State.cpp">
       <Filter>AppSource\WebView</Filter>
     </ClCompile>
@@ -80,6 +83,21 @@
     </ClCompile>
     <ClCompile Include="..\..\AppSource\Common\Core\Approx.cpp">
       <Filter>AppSource\Common\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\Behaviour\FollowerComponent.cpp">
+      <Filter>AppSource\Common\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.cpp">
+      <Filter>AppSource\Common\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\Core\BasicEntityFactory.cpp">
+      <Filter>AppSource\Common\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Lighting\State.cpp">
+      <Filter>AppSource\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\UI\BasicWidgetFactory.cpp">
+      <Filter>AppSource\Common\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,9 +140,6 @@
     <ClInclude Include="..\..\AppSource\Common\Core\StateNavigatorImpl.h">
       <Filter>AppSource\Common\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppSource\Common\UI\UIFactory.h">
-      <Filter>AppSource\Common\UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\AppSource\WebView\State.h">
       <Filter>AppSource\WebView</Filter>
     </ClInclude>
@@ -133,6 +148,21 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Common\Core\Approx.h">
       <Filter>AppSource\Common\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\Behaviour\FollowerComponent.h">
+      <Filter>AppSource\Common\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.h">
+      <Filter>AppSource\Common\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\Core\BasicEntityFactory.h">
+      <Filter>AppSource\Common\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Lighting\State.h">
+      <Filter>AppSource\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\UI\BasicWidgetFactory.h">
+      <Filter>AppSource\Common\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
