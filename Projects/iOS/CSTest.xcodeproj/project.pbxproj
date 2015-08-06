@@ -36,8 +36,6 @@
 		81A83FAB1340B90900FBCC29 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A83FA11340B8C900FBCC29 /* Security.framework */; };
 		81A83FAC1340B90900FBCC29 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A83FA21340B8E900FBCC29 /* SystemConfiguration.framework */; };
 		81B9C0D918B27D490029BC9E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81B9C0D818B27D490029BC9E /* CoreMotion.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		81C8E8721B6F635200E7FECF /* MaterialFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C8E86E1B6F635200E7FECF /* MaterialFactory.cpp */; };
-		81C8E8731B6F635200E7FECF /* ModelFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C8E8701B6F635200E7FECF /* ModelFactory.cpp */; };
 		81CFA14719EE9177003C8436 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CFA14319EE9177003C8436 /* App.cpp */; };
 		81D1535D1B68DB1400341A9F /* ResultPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81D1535B1B68DB1400341A9F /* ResultPresenter.cpp */; };
 		81D8923F196160E70010DA84 /* AppResources in Resources */ = {isa = PBXBuildFile; fileRef = 81D8923D196160E70010DA84 /* AppResources */; };
@@ -61,7 +59,7 @@
 		81E7C6BB1B70B8D100F32006 /* BasicEntityFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6B91B70B8D100F32006 /* BasicEntityFactory.cpp */; };
 		81E7C6C01B70C73E00F32006 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6BE1B70C73E00F32006 /* State.cpp */; };
 		81E7C6D51B70F7A400F32006 /* FollowerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6D11B70F7A400F32006 /* FollowerComponent.cpp */; };
-		81E7C6D61B70F7A400F32006 /* SpinnerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6D31B70F7A400F32006 /* SpinnerComponent.cpp */; };
+		81E7C6D61B70F7A400F32006 /* OrbiterComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C6D31B70F7A400F32006 /* OrbiterComponent.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,10 +105,6 @@
 		81A83FA11340B8C900FBCC29 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		81A83FA21340B8E900FBCC29 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		81B9C0D818B27D490029BC9E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		81C8E86E1B6F635200E7FECF /* MaterialFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaterialFactory.cpp; sourceTree = "<group>"; };
-		81C8E86F1B6F635200E7FECF /* MaterialFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialFactory.h; sourceTree = "<group>"; };
-		81C8E8701B6F635200E7FECF /* ModelFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelFactory.cpp; sourceTree = "<group>"; };
-		81C8E8711B6F635200E7FECF /* ModelFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelFactory.h; sourceTree = "<group>"; };
 		81CFA14319EE9177003C8436 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		81CFA14419EE9177003C8436 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		81D1535B1B68DB1400341A9F /* ResultPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResultPresenter.cpp; sourceTree = "<group>"; };
@@ -153,8 +147,8 @@
 		81E7C6BF1B70C73E00F32006 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81E7C6D11B70F7A400F32006 /* FollowerComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FollowerComponent.cpp; sourceTree = "<group>"; };
 		81E7C6D21B70F7A400F32006 /* FollowerComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowerComponent.h; sourceTree = "<group>"; };
-		81E7C6D31B70F7A400F32006 /* SpinnerComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpinnerComponent.cpp; sourceTree = "<group>"; };
-		81E7C6D41B70F7A400F32006 /* SpinnerComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinnerComponent.h; sourceTree = "<group>"; };
+		81E7C6D31B70F7A400F32006 /* OrbiterComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OrbiterComponent.cpp; sourceTree = "<group>"; };
+		81E7C6D41B70F7A400F32006 /* OrbiterComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrbiterComponent.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,17 +261,6 @@
 			name = Built;
 			sourceTree = "<group>";
 		};
-		81C8E86D1B6F635200E7FECF /* Rendering */ = {
-			isa = PBXGroup;
-			children = (
-				81C8E86E1B6F635200E7FECF /* MaterialFactory.cpp */,
-				81C8E86F1B6F635200E7FECF /* MaterialFactory.h */,
-				81C8E8701B6F635200E7FECF /* ModelFactory.cpp */,
-				81C8E8711B6F635200E7FECF /* ModelFactory.h */,
-			);
-			path = Rendering;
-			sourceTree = "<group>";
-		};
 		81CFA14219EE9177003C8436 /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,7 +299,6 @@
 			children = (
 				81E7C6D01B70F7A400F32006 /* Behaviour */,
 				81DE058E1B67C17C00583F5F /* Core */,
-				81C8E86D1B6F635200E7FECF /* Rendering */,
 				81DE05971B67C5F800583F5F /* UI */,
 			);
 			path = Common;
@@ -409,8 +391,8 @@
 			children = (
 				81E7C6D11B70F7A400F32006 /* FollowerComponent.cpp */,
 				81E7C6D21B70F7A400F32006 /* FollowerComponent.h */,
-				81E7C6D31B70F7A400F32006 /* SpinnerComponent.cpp */,
-				81E7C6D41B70F7A400F32006 /* SpinnerComponent.h */,
+				81E7C6D31B70F7A400F32006 /* OrbiterComponent.cpp */,
+				81E7C6D41B70F7A400F32006 /* OrbiterComponent.h */,
 			);
 			path = Behaviour;
 			sourceTree = "<group>";
@@ -518,7 +500,6 @@
 			files = (
 				81CFA14719EE9177003C8436 /* App.cpp in Sources */,
 				81E0107A1B56721000FEC2AE /* FileSystem.cpp in Sources */,
-				81C8E8721B6F635200E7FECF /* MaterialFactory.cpp in Sources */,
 				81DE059E1B67D53200583F5F /* State.cpp in Sources */,
 				81E010991B56B6F500FEC2AE /* FailedAssertion.cpp in Sources */,
 				81E0109A1B56B6F500FEC2AE /* CSReporter.cpp in Sources */,
@@ -527,10 +508,9 @@
 				81DE059A1B67C5F800583F5F /* BasicWidgetFactory.cpp in Sources */,
 				81E7C6D51B70F7A400F32006 /* FollowerComponent.cpp in Sources */,
 				81DE05A11B67D53B00583F5F /* SmokeTester.cpp in Sources */,
-				81E7C6D61B70F7A400F32006 /* SpinnerComponent.cpp in Sources */,
+				81E7C6D61B70F7A400F32006 /* OrbiterComponent.cpp in Sources */,
 				81DE05A41B67D67300583F5F /* SmokeTestSet.cpp in Sources */,
 				81E0109D1B56B6F500FEC2AE /* TestSystem.cpp in Sources */,
-				81C8E8731B6F635200E7FECF /* ModelFactory.cpp in Sources */,
 				81E010791B56721000FEC2AE /* State.cpp in Sources */,
 				81E0109B1B56B6F500FEC2AE /* Report.cpp in Sources */,
 				810B0E461B6142A30035CF48 /* ReportPresenter.cpp in Sources */,

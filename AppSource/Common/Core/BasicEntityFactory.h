@@ -115,17 +115,6 @@ namespace CSTest
             /// @return The entity.
             //------------------------------------------------------------------------------
             CSCore::EntityUPtr CreateRoom(const CSCore::Vector3& in_size = CSCore::Vector3(20.0f, 20.0f, 20.0f));
-            //------------------------------------------------------------------------------
-            /// Creates a coloured box of the given size.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @param in_colour - The colour of the box.
-            /// @param in_size - [Optional] The size of the box. Defaults to [1, 1, 1].
-            ///
-            /// @return The entity.
-            //------------------------------------------------------------------------------
-            CSCore::EntityUPtr CreateBox(const CSCore::Colour& in_colour, const CSCore::Vector3& in_size = CSCore::Vector3(1.0f, 1.0f, 1.0f));
             
         private:
             friend class CSCore::Application;
@@ -159,8 +148,7 @@ namespace CSTest
             
             CSCore::ResourcePool* m_resourcePool = nullptr;
             CSRendering::RenderComponentFactory* m_renderComponentFactory = nullptr;
-            ModelFactory* m_modelFactory = nullptr;
-            MaterialFactory* m_materialFactory = nullptr;
+            CSRendering::PrimitiveModelFactory* m_primitiveModelFactory = nullptr;
             u32 m_entityCount = 0;
         };
     }

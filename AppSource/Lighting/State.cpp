@@ -31,7 +31,7 @@
 #include <Common/Core/StateNavigator.h>
 #include <Common/Core/BasicEntityFactory.h>
 #include <Common/Behaviour/FollowerComponent.h>
-#include <Common/Behaviour/SpinnerComponent.h>
+#include <Common/Behaviour/OrbiterComponent.h>
 #include <WebView/State.h>
 
 #include <ChilliSource/Core/Base.h>
@@ -81,7 +81,7 @@ namespace CSTest
                 CSCore::Colour(1.0f, 1.0f, 1.0f, 1.0f)
             };
             
-            auto basicEntityFactory = CSCore::Application::Get()->GetSystem<Common::BasicEntityFactory>();
+            auto primitiveEntityFactory = CSCore::Application::Get()->GetSystem<CSCore::PrimitiveEntityFactory>();
             
             for (u32 x = 0; x < k_numX; ++x)
             {
@@ -91,7 +91,7 @@ namespace CSTest
                     CSCore::Vector3 size(1.0f, CSCore::Random::Generate<f32>(1.0f, 3.0f), 1.0f);
                     CSCore::Vector3 worldPosition = positionInGrid + 0.5f * size;
                     
-                    CSCore::EntitySPtr box = basicEntityFactory->CreateBox(k_boxColours[CSCore::Random::Generate<u32>(0, k_boxColours.size() - 1)], size);
+                    CSCore::EntitySPtr box = primitiveEntityFactory->CreateBox(k_boxColours[CSCore::Random::Generate<u32>(0, k_boxColours.size() - 1)], size);
                     box->GetTransform().SetPosition(worldPosition);
                     GetScene()->Add(box);
                 }

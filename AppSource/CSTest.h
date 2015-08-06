@@ -39,9 +39,7 @@ namespace CSTest
     {
         CS_FORWARDDECLARE_CLASS(BasicEntityFactory);
         CS_FORWARDDECLARE_CLASS(BasicWidgetFactory);
-        CS_FORWARDDECLARE_CLASS(SpinnerComponent);
-        CS_FORWARDDECLARE_CLASS(MaterialFactory);
-        CS_FORWARDDECLARE_CLASS(ModelFactory);
+        CS_FORWARDDECLARE_CLASS(OrbiterComponent);
         CS_FORWARDDECLARE_CLASS(ResultPresenter);
         CS_FORWARDDECLARE_CLASS(SmokeTester);
         CS_FORWARDDECLARE_CLASS(SmokeTestSet);

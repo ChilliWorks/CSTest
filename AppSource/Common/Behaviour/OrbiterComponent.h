@@ -1,7 +1,7 @@
 //
-//  ModelFactory.h
+//  OrbiterComponent.h
 //  CSTest
-//  Created by Ian Copland on 03/08/2015.
+//  Created by Ian Copland on 04/08/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,31 +26,33 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_RENDERING_MODELFACTORY_H_
-#define _COMMON_RENDERING_MODELFACTORY_H_
+#ifndef _COMMON_RENDERING_ORBITERCOMPONENT_H_
+#define _COMMON_RENDERING_ORBITERCOMPONENT_H_
 
 #include <CSTest.h>
 
-#include <ChilliSource/Core/Math.h>
-#include <ChilliSource/Core/System.h>
+#include <ChilliSource/Core/Entity.h>
 
 namespace CSTest
 {
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A factory class for creating new models types. Prior to creating the
-        /// requested model this will check if an identical model already exists and
-        /// return it if it does.
-        ///
-        /// This is not thread-safe and must only be called from the main thread.
+        /// A component used in conjunction with the FollowerComponent to provide an
+        /// object that will spin arround it's target.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class ModelFactory final : public CSCore::AppSystem
+        class OrbiterComponent final : public CSCore::Component
         {
         public:
-            CS_DECLARE_NAMEDTYPE(ModelFactory);
+            CS_DECLARE_NAMEDTYPE(OrbiterComponent);
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @param in_angularVelocity - The angular velocity.
+            //------------------------------------------------------------------------------
+            OrbiterComponent(f32 in_angularVelocity);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly
@@ -64,50 +66,43 @@ namespace CSTest
             //------------------------------------------------------------------------------
             bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
-            /// Creates a new plane model perpendicular to the Y axis of the given size. If
-            /// an identical plane already exists it will be returned instead of creating
-            /// a new instance.
-            ///
             /// @author Ian Copland
             ///
-            /// @param in_size - The size of the plane.
-            ///
-            /// @return The plane model.
+            /// @param The angular velocity.
             //------------------------------------------------------------------------------
-            CSRendering::MeshCSPtr CreatePlane(const CSCore::Vector2& in_size) const;
+            f32 GetAngularVelocity() const;
             //------------------------------------------------------------------------------
-            /// Creates a box model of the given size. If an identical box already exists
-            /// it will be returned instead of creating a new instance.
-            ///
             /// @author Ian Copland
             ///
-            /// @param in_size - The size of the plane.
-            /// @param in_textureRepeat - [Optional] The number of times a texture is
-            /// repeated on each face of the model in each axis. Defaults to [1, 1]
-            /// @param in_flipNormals -[Optional] Whether or not to flip the box inside out.
-            /// This is useful for creating rooms. Defaults to false.
-            ///
-            /// @return The plane model.
+            /// @param in_angularVelocity - The angular velocity.
             //------------------------------------------------------------------------------
-            CSRendering::MeshCSPtr CreateBox(const CSCore::Vector3& in_size, const CSCore::Vector2& in_textureRepeat = CSCore::Vector2::k_one, bool in_flipNormals = false) const;
+            void SetAngularVelocity(f32 in_angularVelocity);
             
         private:
-            friend class CSCore::Application;
             //------------------------------------------------------------------------------
-            /// A factory method for creating new instances of the system.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @return The new instance.
-            //------------------------------------------------------------------------------
-            static ModelFactoryUPtr Create();
-            //------------------------------------------------------------------------------
-            /// Default constructor. Declared private to ensure the system is created
-            /// through State::CreateSystem<>().
+            /// Called whenever this is added to the scene.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            ModelFactory() = default;
+            void OnAddedToScene();
+            //------------------------------------------------------------------------------
+            /// Called every frame the component is in the scene. Updates the camera
+            /// angle.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_deltaTime - The delta time.
+            //------------------------------------------------------------------------------
+            void OnUpdate(f32 in_deltaTime);
+            //------------------------------------------------------------------------------
+            /// Called whenever this is removed from the scene.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void OnRemovedFromScene();
+            
+            FollowerComponentWPtr m_followerComponent;
+            f32 m_angularVelocity = 0.0f;
         };
     }
 }

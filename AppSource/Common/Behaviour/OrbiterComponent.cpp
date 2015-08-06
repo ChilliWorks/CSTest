@@ -1,5 +1,5 @@
 //
-//  SpinnerComponent.cpp
+//  OrbiterComponent.cpp
 //  CSTest
 //  Created by Ian Copland on 04/08/2015.
 //
@@ -26,7 +26,7 @@
 //  THE SOFTWARE.
 //
 
-#include <Common/Behaviour/SpinnerComponent.h>
+#include <Common/Behaviour/OrbiterComponent.h>
 
 #include <Common/Behaviour/FollowerComponent.h>
 
@@ -34,52 +34,52 @@ namespace CSTest
 {
     namespace Common
     {
-        CS_DEFINE_NAMEDTYPE(SpinnerComponent);
+        CS_DEFINE_NAMEDTYPE(OrbiterComponent);
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        SpinnerComponent::SpinnerComponent(f32 in_angularVelocity)
+        OrbiterComponent::OrbiterComponent(f32 in_angularVelocity)
         : m_angularVelocity(in_angularVelocity)
         {
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool SpinnerComponent::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool OrbiterComponent::IsA(CSCore::InterfaceIDType in_interfaceId) const
         {
-            return (SpinnerComponent::InterfaceID == in_interfaceId);
+            return (OrbiterComponent::InterfaceID == in_interfaceId);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        f32 SpinnerComponent::GetAngularVelocity() const
+        f32 OrbiterComponent::GetAngularVelocity() const
         {
             return m_angularVelocity;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void SpinnerComponent::SetAngularVelocity(f32 in_angularVelocity)
+        void OrbiterComponent::SetAngularVelocity(f32 in_angularVelocity)
         {
             m_angularVelocity = in_angularVelocity;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void SpinnerComponent::OnAddedToScene()
+        void OrbiterComponent::OnAddedToScene()
         {
             auto followerComponent = GetEntity()->GetComponent<FollowerComponent>();
-            CS_ASSERT(followerComponent, "SpinnerComponent requires there to be a FollowerComponent on the entity.");
+            CS_ASSERT(followerComponent, "OrbiterComponent requires there to be a FollowerComponent on the entity.");
             
             m_followerComponent = FollowerComponentWPtr(followerComponent);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void SpinnerComponent::OnUpdate(f32 in_deltaTime)
+        void OrbiterComponent::OnUpdate(f32 in_deltaTime)
         {
             auto followerComponent = m_followerComponent.lock();
-            CS_ASSERT(followerComponent, "SpinnerComponent requires there to be a FollowerComponent on the entity.");
+            CS_ASSERT(followerComponent, "OrbiterComponent requires there to be a FollowerComponent on the entity.");
             
             followerComponent->SetHorizontalAngle(followerComponent->GetHorizontalAngle() + m_angularVelocity * in_deltaTime);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void SpinnerComponent::OnRemovedFromScene()
+        void OrbiterComponent::OnRemovedFromScene()
         {
             m_followerComponent.reset();
         }

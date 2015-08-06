@@ -138,7 +138,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void FollowerComponent::OnAddedToEntity()
         {
-            CS_ASSERT(GetEntity()->GetParent() == nullptr, "Third Person Camera Component only works for entities without parents.");
+            CS_ASSERT(GetEntity()->GetParent() == nullptr, "FollowerComponent only works for entities without parents.");
             
             UpdatePosition();
         }

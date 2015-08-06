@@ -29,10 +29,11 @@
 #include <App.h>
 
 #include <Common/Core/BasicEntityFactory.h>
-#include <Common/Rendering/MaterialFactory.h>
-#include <Common/Rendering/ModelFactory.h>
 #include <Common/UI/BasicWidgetFactory.h>
 #include <IntegrationTest/State.h>
+
+#include <ChilliSource/Core/Entity.h>
+#include <ChilliSource/Rendering/Model.h>
 
 //------------------------------------------------------------------------------
 /// Creates the application instance for this app.
@@ -70,9 +71,10 @@ namespace CSTest
     //------------------------------------------------------------------------------
     void App::CreateSystems()
     {
+        CreateSystem<CSCore::PrimitiveEntityFactory>();
+        CreateSystem<CSRendering::PrimitiveModelFactory>();
+        
         CreateSystem<Common::BasicEntityFactory>();
-        CreateSystem<Common::MaterialFactory>();
-        CreateSystem<Common::ModelFactory>();
         CreateSystem<Common::BasicWidgetFactory>();
     }
     //------------------------------------------------------------------------------

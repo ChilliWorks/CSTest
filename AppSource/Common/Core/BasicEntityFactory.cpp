@@ -28,9 +28,7 @@
 
 #include <Common/Core/BasicEntityFactory.h>
 
-#include <Common/Behaviour/SpinnerComponent.h>
-#include <Common/Rendering/MaterialFactory.h>
-#include <Common/Rendering/ModelFactory.h>
+#include <Common/Behaviour/OrbiterComponent.h>
 #include <Common/Behaviour/FollowerComponent.h>
 
 #include <ChilliSource/Core/Base.h>
@@ -69,13 +67,13 @@ namespace CSTest
             
             CSRendering::CameraComponentSPtr camComponent = m_renderComponentFactory->CreatePerspectiveCameraComponent(3.14f / 3.0f, 1.0f, 30.0f);
             auto followerComponent = std::make_shared<FollowerComponent>(in_target, in_targetOffset, in_distance, in_horizontalAngle, in_verticalAngle);
-            auto spinnerComponent = std::make_shared<SpinnerComponent>(in_horizontalAngularVelocity);
+            auto orbiterComponent = std::make_shared<OrbiterComponent>(in_horizontalAngularVelocity);
             
             CSCore::EntityUPtr entity = CSCore::Entity::Create();
             entity->SetName(CSCore::ToString(m_entityCount++) + "-ThirdPersonCamera");
             entity->AddComponent(camComponent);
             entity->AddComponent(followerComponent);
-            entity->AddComponent(spinnerComponent);
+            entity->AddComponent(orbiterComponent);
             
             return entity;
         }
@@ -118,7 +116,7 @@ namespace CSTest
             const f32 k_textureRepeatFactor = 0.5f;
             CSCore::Vector2 textureRepeat(in_size.x * k_textureRepeatFactor, in_size.z * k_textureRepeatFactor);
             
-            CSRendering::MeshCSPtr mesh = m_modelFactory->CreateBox(in_size, textureRepeat, true);
+            CSRendering::MeshCSPtr mesh = m_primitiveModelFactory->CreateBox(in_size, textureRepeat, true);
             CSRendering::MaterialCSPtr material = m_resourcePool->LoadResource<CSRendering::Material>(CSCore::StorageLocation::k_package, "Materials/CheckeredLit.csmaterial");
             
             CSRendering::StaticMeshComponentSPtr meshComponent = m_renderComponentFactory->CreateStaticMeshComponent(mesh, material);
@@ -131,29 +129,16 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CSCore::EntityUPtr BasicEntityFactory::CreateBox(const CSCore::Colour& in_colour, const CSCore::Vector3& in_size)
-        {
-            CS_ASSERT(CSCore::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
-            
-            CSRendering::MeshCSPtr mesh = m_modelFactory->CreateBox(in_size);
-            CSRendering::MaterialCSPtr material = m_materialFactory->CreateStaticBlinnColour(in_colour);
-            
-            CSRendering::StaticMeshComponentSPtr meshComponent = m_renderComponentFactory->CreateStaticMeshComponent(mesh, material);
-            meshComponent->SetShadowCastingEnabled(true);
-            
-            auto entity = CSCore::Entity::Create();
-            entity->SetName(CSCore::ToString(m_entityCount++) + "-Box");
-            entity->AddComponent(meshComponent);
-            return entity;
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
         void BasicEntityFactory::OnInit()
         {
             m_resourcePool = CSCore::Application::Get()->GetResourcePool();
+            
             m_renderComponentFactory = CSCore::Application::Get()->GetSystem<CSRendering::RenderComponentFactory>();
-            m_modelFactory = CSCore::Application::Get()->GetSystem<Common::ModelFactory>();
-            m_materialFactory = CSCore::Application::Get()->GetSystem<Common::MaterialFactory>();
+            CS_ASSERT(m_renderComponentFactory, "BasicEntityFactory is missing required app system: RenderComponentFactory");
+            
+            m_primitiveModelFactory = CSCore::Application::Get()->GetSystem<CSRendering::PrimitiveModelFactory>();
+            CS_ASSERT(m_renderComponentFactory, "BasicEntityFactory is missing required app system: PrimitiveModelFactory");
+
             m_entityCount = 0;
         }
         //------------------------------------------------------------------------------
@@ -162,8 +147,7 @@ namespace CSTest
         {
             m_resourcePool = nullptr;
             m_renderComponentFactory = nullptr;
-            m_modelFactory = nullptr;
-            m_materialFactory = nullptr;
+            m_primitiveModelFactory = nullptr;
             m_entityCount = 0;
         }
     }
