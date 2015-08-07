@@ -28,6 +28,11 @@ namespace CSTest
             const char k_downloadProgressCSUIPath[] = "HttpRequest/DownloadProgress.csui";
             
             //------------------------------------------------------------------------------
+            /// Creates a download progress widget
+            ///
+            /// @author HMcLaughlin
+            ///
+            /// @return Widget
             //------------------------------------------------------------------------------
             CSUI::WidgetSPtr CreateProgressWidget()
             {
