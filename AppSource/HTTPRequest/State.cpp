@@ -51,14 +51,12 @@ namespace CSTest
     {
         namespace
         {
-            const u32 k_downloadBufferSize = 100 * 1024;//100KB
-            
             //------------------------------------------------------------------------------
             /// Converts a HTTP::Result to string
             ///
             /// @author HMcLaughlin
             //------------------------------------------------------------------------------
-            std::string ConvertResultToString(CSNetworking::HttpResponse::Result in_result)
+            std::string ToString(CSNetworking::HttpResponse::Result in_result)
             {
                 switch (in_result)
                 {
@@ -91,6 +89,8 @@ namespace CSTest
         {
             m_httpRequestSystem = CSCore::Application::Get()->GetSystem<CSNetworking::HttpRequestSystem>();
             CS_ASSERT(m_httpRequestSystem, "Cannot complete HttpRequest smoke test as the system could not be created!");
+            
+            const u32 k_downloadBufferSize = 100 * 1024;//100KB
             
             //Setup the http system with a buffer size
             m_httpRequestSystem->SetMaxBufferSize(k_downloadBufferSize);
@@ -161,7 +161,7 @@ namespace CSTest
             //Ignore flush responses
             if(in_response.GetResult() != CSNetworking::HttpResponse::Result::k_flushed)
             {
-                m_resultPresenter->Present("Request returned:\nStatus - " + ConvertResultToString(in_response.GetResult()) + "\nResponse Code - " + CSCore::ToString(in_response.GetCode()));
+                m_resultPresenter->Present("Request returned:\nStatus - " + ToString(in_response.GetResult()) + "\nResponse Code - " + CSCore::ToString(in_response.GetCode()));
             }
         }
     }

@@ -45,11 +45,6 @@ namespace CSTest
 {
     namespace WebView
     {
-        namespace
-        {
-            using NextState = HttpRequest::State;
-        }
-        
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::CreateSystems()
@@ -58,7 +53,7 @@ namespace CSTest
             m_smokeTester = CreateSystem<Common::SmokeTester>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
             m_webView = CreateSystem<CSWeb::WebView>();
-            CreateSystem<Common::StateNavigator<NextState>>();
+            CreateSystem<Common::StateNavigator<HttpRequest::State>>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

@@ -2,22 +2,44 @@
 //  DownloadProgressTestSystem.h
 //  CSTest
 //
-//  Created by Hugh McLaughlin on 30/07/2015.
-//  Copyright (c) 2015 Tag Games Ltd. All rights reserved.
+//  Created by HMcLaughlin on 30/07/2015.
+//
+//  The MIT License (MIT)
+//
+//  Copyright (c) 2015 Tag Games Limited
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 #ifndef _HTTPREQUEST_DOWNLOADPROGRESSTESTSYSTEM_H_
 #define _HTTPREQUEST_DOWNLOADPROGRESSTESTSYSTEM_H_
 
-#include <ChilliSource/ChilliSource.h>
+#include <CSTest.h>
+
 #include <ChilliSource/Core/System/StateSystem.h>
+
+#include <functional>
 
 namespace CSTest
 {
     namespace HttpRequest
     {
-        CS_FORWARDDECLARE_CLASS(DownloadProgressTestSystem);
-
         //------------------------------------------------------------------------------
         /// System used to test download functionality with UI feedback
         ///
@@ -38,14 +60,6 @@ namespace CSTest
             using DownloadCompleteDelegate = std::function<void(const CSNetworking::HttpResponse& in_response)>;
             
             //------------------------------------------------------------------------------
-            /// Creates a new instance of the system.
-            ///
-            /// @author Hugh McLaughlin
-            ///
-            /// @return The new instance.
-            //------------------------------------------------------------------------------
-            static DownloadProgressTestSystemUPtr Create();
-            //------------------------------------------------------------------------------
             /// Allows querying of whether or not the component implements the
             /// interface associated with the given interface Id.
             ///
@@ -56,18 +70,6 @@ namespace CSTest
             /// @return Whether the object implements the given interface.
             //------------------------------------------------------------------------------
             bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
-            //------------------------------------------------
-            /// OnInit
-            ///
-            /// @author Hugh McLaughlin
-            //------------------------------------------------------------------------------
-            void OnInit() override;
-            //------------------------------------------------------------------------------
-            /// OnDestroy
-            ///
-            /// @author Hugh McLaughlin
-            //------------------------------------------------------------------------------
-            void OnDestroy() override;
             //------------------------------------------------------------------------------
             /// Start the download test
             ///
@@ -80,6 +82,16 @@ namespace CSTest
             
         private:
             
+            friend class CSCore::State;
+            
+            //------------------------------------------------------------------------------
+            /// Creates a new instance of the system.
+            ///
+            /// @author Hugh McLaughlin
+            ///
+            /// @return The new instance.
+            //------------------------------------------------------------------------------
+            static DownloadProgressTestSystemUPtr Create();
             //------------------------------------------------------------------------------
             /// Constructor
             ///
@@ -87,17 +99,23 @@ namespace CSTest
             //------------------------------------------------------------------------------
             DownloadProgressTestSystem() = default;
             //------------------------------------------------------------------------------
-            /// Creates a download progress widget
+            /// OnInit
             ///
-            /// @author HMcLaughlin
-            ///
-            /// @return Widget
+            /// @author Hugh McLaughlin
             //------------------------------------------------------------------------------
-            CSUI::WidgetSPtr CreateProgressWidget();
+            void OnInit() override;
+            //------------------------------------------------------------------------------
+            /// OnDestroy
+            ///
+            /// @author Hugh McLaughlin
+            //------------------------------------------------------------------------------
+            void OnDestroy() override;
             
         private:
             
-            CSCore::TimerSPtr m_downloadProgressUpdateTimer;
+            CSUI::WidgetSPtr m_downloadProgressWidget;
+            
+            CSCore::TimerUPtr m_downloadProgressUpdateTimer;
             CSCore::EventConnectionUPtr m_downloadProgressEventConnection;
         };
     }

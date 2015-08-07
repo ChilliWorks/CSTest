@@ -75,6 +75,9 @@
     <ClCompile Include="..\..\AppSource\HTTPRequest\State.cpp">
       <Filter>AppSource\HttpRequest</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\HttpRequest\DownloadProgressTestSystem.cpp">
+      <Filter>AppSource\HttpRequest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -126,6 +129,9 @@
       <Filter>AppSource\IntegrationTest\TestSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\AppSource\HTTPRequest\State.h">
+      <Filter>AppSource\HttpRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\HttpRequest\DownloadProgressTestSystem.h">
       <Filter>AppSource\HttpRequest</Filter>
     </ClInclude>
   </ItemGroup>

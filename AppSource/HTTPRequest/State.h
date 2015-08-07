@@ -42,23 +42,15 @@ namespace CSTest
         ///
         /// @author HMcLaughlin
         //------------------------------------------------------------------------------
-        class State : public CSCore::State
+        class State final : public CSCore::State
         {
-        public:
+        private:
             //------------------------------------------------------------------------------
             /// The life-cycle event for creating all state systems.
             ///
             /// @author HMcLaughlin
             //------------------------------------------------------------------------------
             void CreateSystems() override;
-            //------------------------------------------------------------------------------
-            /// Initialises the state.
-            ///
-            /// @author HMcLaughlin
-            //------------------------------------------------------------------------------
-            void OnInit() override;
-            
-        private:
             //------------------------------------------------------------------------------
             /// Displays the results of a http response
             ///
@@ -67,6 +59,12 @@ namespace CSTest
             /// @param in_response - HttpResponse
             //------------------------------------------------------------------------------
             void PresentHttpResponse(const CSNetworking::HttpResponse& in_response);
+            //------------------------------------------------------------------------------
+            /// Initialises the state.
+            ///
+            /// @author HMcLaughlin
+            //------------------------------------------------------------------------------
+            void OnInit() override;
             
         private:
             

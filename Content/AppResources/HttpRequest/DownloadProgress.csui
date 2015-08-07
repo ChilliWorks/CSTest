@@ -54,7 +54,7 @@
             "Type":"Standard",
             "AtlasLocation":"Package",
             "AtlasPath":"TextureAtlases/UI/UI.csatlas",
-            "AtlasId":"Event_ProgressBar_BG"
+            "AtlasId":"ProgressBarBG01"
           },
           "BarDrawable":{
             "TextureLocation":"Package",
@@ -62,7 +62,7 @@
             "Type":"Standard",
             "AtlasLocation":"Package",
             "AtlasPath":"TextureAtlases/UI/UI.csatlas",
-            "AtlasId":"Event_ProgressBar_A"
+            "AtlasId":"ProgressBar01"
           }
         },
         {
