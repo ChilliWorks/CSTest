@@ -34,6 +34,7 @@
 
 #include <ChilliSource/Core/Entity.h>
 #include <ChilliSource/Rendering/Model.h>
+#include <ChilliSource/Networking/Http.h>
 
 //------------------------------------------------------------------------------
 /// Creates the application instance for this app.
@@ -72,6 +73,7 @@ namespace CSTest
     void App::CreateSystems()
     {
         CreateSystem<CSCore::PrimitiveEntityFactory>();
+        CreateSystem<CSNetworking::HttpRequestSystem>();
         CreateSystem<CSRendering::PrimitiveModelFactory>();
         
         CreateSystem<Common::BasicEntityFactory>();

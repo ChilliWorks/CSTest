@@ -66,6 +66,12 @@ namespace CSTest
     {
         CS_FORWARDDECLARE_CLASS(State);
     }
+    
+    namespace HttpRequest
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+        CS_FORWARDDECLARE_CLASS(DownloadProgressTestSystem);
+    }
 }
 
 #endif

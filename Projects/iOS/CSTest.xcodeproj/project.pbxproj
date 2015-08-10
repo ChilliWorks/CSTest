@@ -16,6 +16,8 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		810775E11B7906EF006C9E8A /* DownloadProgressTestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 810775DD1B7906EF006C9E8A /* DownloadProgressTestSystem.cpp */; };
+		810775E21B7906EF006C9E8A /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 810775DF1B7906EF006C9E8A /* State.cpp */; };
 		810B0E461B6142A30035CF48 /* ReportPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 810B0E441B6142A30035CF48 /* ReportPresenter.cpp */; };
 		811289D61636EACD008D781D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D51636EACD008D781D /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		811289D81636EC0B008D781D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811289D71636EC0B008D781D /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -88,6 +90,10 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		810775DD1B7906EF006C9E8A /* DownloadProgressTestSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DownloadProgressTestSystem.cpp; sourceTree = "<group>"; };
+		810775DE1B7906EF006C9E8A /* DownloadProgressTestSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadProgressTestSystem.h; sourceTree = "<group>"; };
+		810775DF1B7906EF006C9E8A /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		810775E01B7906EF006C9E8A /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		810B0E441B6142A30035CF48 /* ReportPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReportPresenter.cpp; sourceTree = "<group>"; };
 		810B0E451B6142A30035CF48 /* ReportPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportPresenter.h; sourceTree = "<group>"; };
 		811289D51636EACD008D781D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -260,6 +266,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		810775DC1B7906EF006C9E8A /* HTTPRequest */ = {
+			isa = PBXGroup;
+			children = (
+				810775DD1B7906EF006C9E8A /* DownloadProgressTestSystem.cpp */,
+				810775DE1B7906EF006C9E8A /* DownloadProgressTestSystem.h */,
+				810775DF1B7906EF006C9E8A /* State.cpp */,
+				810775E01B7906EF006C9E8A /* State.h */,
+			);
+			path = HTTPRequest;
+			sourceTree = "<group>";
+		};
 		81455FE81961B47C00471F69 /* Built */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +294,7 @@
 				81CFA14419EE9177003C8436 /* App.h */,
 				81DE058D1B67C17C00583F5F /* Common */,
 				81E010731B56721000FEC2AE /* CSTest.h */,
+				810775DC1B7906EF006C9E8A /* HTTPRequest */,
 				81E010741B56721000FEC2AE /* IntegrationTest */,
 				81E7C6BD1B70C73E00F32006 /* Lighting */,
 				81DE059B1B67D53200583F5F /* WebView */,
@@ -523,9 +541,11 @@
 				81D1535D1B68DB1400341A9F /* ResultPresenter.cpp in Sources */,
 				81E7C6BB1B70B8D100F32006 /* BasicEntityFactory.cpp in Sources */,
 				81DE059A1B67C5F800583F5F /* BasicWidgetFactory.cpp in Sources */,
+				810775E21B7906EF006C9E8A /* State.cpp in Sources */,
 				81E7C6D51B70F7A400F32006 /* FollowerComponent.cpp in Sources */,
 				81DE05A11B67D53B00583F5F /* SmokeTester.cpp in Sources */,
 				81E7C6D61B70F7A400F32006 /* OrbiterComponent.cpp in Sources */,
+				810775E11B7906EF006C9E8A /* DownloadProgressTestSystem.cpp in Sources */,
 				81DE05A41B67D67300583F5F /* SmokeTestSet.cpp in Sources */,
 				81E0109D1B56B6F500FEC2AE /* TestSystem.cpp in Sources */,
 				81D8F1BA1B72488C0042A7E6 /* Approx.cpp in Sources */,

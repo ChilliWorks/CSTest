@@ -31,6 +31,9 @@
     <Filter Include="AppSource\Lighting">
       <UniqueIdentifier>{752ffa79-e03f-402a-91ad-f40207ad0d03}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\HTTPRequest">
+      <UniqueIdentifier>{ff5aff15-c7a6-4d38-a5f0-19ff5424262c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -99,6 +102,12 @@
     <ClCompile Include="..\..\AppSource\Common\UI\BasicWidgetFactory.cpp">
       <Filter>AppSource\Common\UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\HTTPRequest\DownloadProgressTestSystem.cpp">
+      <Filter>AppSource\HTTPRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\HTTPRequest\State.cpp">
+      <Filter>AppSource\HTTPRequest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -163,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Common\UI\BasicWidgetFactory.h">
       <Filter>AppSource\Common\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\HTTPRequest\DownloadProgressTestSystem.h">
+      <Filter>AppSource\HTTPRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\HTTPRequest\State.h">
+      <Filter>AppSource\HTTPRequest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
