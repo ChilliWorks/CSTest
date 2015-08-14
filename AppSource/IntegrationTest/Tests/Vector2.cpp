@@ -69,7 +69,7 @@ namespace CSTest
             REQUIRE(Common::Approx(a2 - b1, CSCore::Vector2(-1.0f, -2.0f)));
             REQUIRE(Common::Approx(a3 * b1, CSCore::Vector2(2.0f, 3.0f)));
             REQUIRE(Common::Approx(a4 / b1, CSCore::Vector2(0.5f, 1.0f / 3.0f)));
-            REQUIRE(Common::Approx(a5 * b2, CSCore::Vector2(9.52238082, 1.39252472)));
+            REQUIRE(Common::Approx(a5 * b2, CSCore::Vector2(9.52238082f, 1.39252472f)));
             REQUIRE(Common::Approx(a6 * b3, CSCore::Vector2(2.0f, 2.0f)));
             REQUIRE(Common::Approx(b3 * a6, CSCore::Vector2(2.0f, 2.0f)));
             REQUIRE(Common::Approx(a7 / b3, CSCore::Vector2(0.5f, 0.5f)));
