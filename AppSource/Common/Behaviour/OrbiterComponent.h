@@ -84,7 +84,7 @@ namespace CSTest
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnAddedToScene() override;
+            void OnAddedToScene();
             //------------------------------------------------------------------------------
             /// Called every frame the component is in the scene. Updates the camera
             /// angle.
@@ -93,13 +93,13 @@ namespace CSTest
             ///
             /// @param in_deltaTime - The delta time.
             //------------------------------------------------------------------------------
-            void OnUpdate(f32 in_deltaTime) override;
+            void OnUpdate(f32 in_deltaTime);
             //------------------------------------------------------------------------------
             /// Called whenever this is removed from the scene.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnRemovedFromScene() override;
+            void OnRemovedFromScene();
             
             FollowerComponentWPtr m_followerComponent;
             f32 m_angularVelocity = 0.0f;
