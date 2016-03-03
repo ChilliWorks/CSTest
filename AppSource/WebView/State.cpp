@@ -33,8 +33,6 @@
 #include <Common/Core/SmokeTestSet.h>
 #include <Common/Core/StateNavigator.h>
 
-#include <HttpRequest/State.h>
-
 #include <IntegrationTest/State.h>
 
 #include <ChilliSource/Core/DialogueBox.h>
@@ -53,7 +51,6 @@ namespace CSTest
             m_smokeTester = CreateSystem<Common::SmokeTester>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
             m_webView = CreateSystem<CSWeb::WebView>();
-            CreateSystem<Common::StateNavigator<HttpRequest::State>>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

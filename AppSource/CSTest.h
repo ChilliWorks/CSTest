@@ -57,6 +57,18 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(TestSystem);
     }
     
+    namespace Gesture
+    {
+        CS_FORWARDDECLARE_CLASS(GesturePresenter);
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
+    namespace HttpRequest
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+        CS_FORWARDDECLARE_CLASS(DownloadProgressTestSystem);
+    }
+    
     namespace Lighting
     {
         CS_FORWARDDECLARE_CLASS(State);
@@ -65,12 +77,6 @@ namespace CSTest
     namespace WebView
     {
         CS_FORWARDDECLARE_CLASS(State);
-    }
-    
-    namespace HttpRequest
-    {
-        CS_FORWARDDECLARE_CLASS(State);
-        CS_FORWARDDECLARE_CLASS(DownloadProgressTestSystem);
     }
 }
 

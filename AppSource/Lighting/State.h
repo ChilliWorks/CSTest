@@ -42,7 +42,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State : public CSCore::State
+        class State final : public CSCore::State
         {
             //------------------------------------------------------------------------------
             /// Creates a series of lights.

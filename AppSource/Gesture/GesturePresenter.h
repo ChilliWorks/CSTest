@@ -1,11 +1,11 @@
 //
-//  OrbiterComponent.h
+//  GesturePresenter.h
 //  CSTest
-//  Created by Ian Copland on 04/08/2015.
+//  Created by Ian Copland on 03/03/2016.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Tag Games Limited
+//  Copyright (c) 2016 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,83 +26,109 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_RENDERING_ORBITERCOMPONENT_H_
-#define _COMMON_RENDERING_ORBITERCOMPONENT_H_
+#ifndef _GESTURE_GESTUREPRESENTER_H_
+#define _GESTURE_GESTUREPRESENTER_H_
 
 #include <CSTest.h>
 
-#include <ChilliSource/Core/Entity.h>
+#include <ChilliSource/Core/System.h>
 
 namespace CSTest
 {
-    namespace Common
+    namespace Gesture
     {
         //------------------------------------------------------------------------------
-        /// A component used in conjunction with the FollowerComponent to provide an
-        /// object that will spin arround it's target.
+        /// A system which displays information about a series of different gesture
+        /// types on screen.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class OrbiterComponent final : public CSCore::Component
+        class GesturePresenter final : public CSCore::StateSystem
         {
         public:
-            CS_DECLARE_NAMEDTYPE(OrbiterComponent);
+            CS_DECLARE_NAMEDTYPE(GesturePresenter);
             //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @param in_angularVelocity - The angular velocity.
-            //------------------------------------------------------------------------------
-            OrbiterComponent(f32 in_angularVelocity);
-            //------------------------------------------------------------------------------
-            /// Allows querying of whether or not this system implements the interface
-            /// described by the given interface Id. Typically this is not called directly
-            /// as the templated equivalent IsA<Interface>() is preferred.
+            /// Allows querying of whether or not the component implements the
+            /// interface associated with the given interface Id.
             ///
             /// @author Ian Copland
             ///
             /// @param in_interfaceId - The interface Id.
             ///
-            /// @return Whether or not the interface is implemented.
+            /// @return Whether the object implements the given interface.
             //------------------------------------------------------------------------------
             bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @param The angular velocity.
-            //------------------------------------------------------------------------------
-            f32 GetAngularVelocity() const;
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @param in_angularVelocity - The angular velocity.
-            //------------------------------------------------------------------------------
-            void SetAngularVelocity(f32 in_angularVelocity);
             
         private:
+            friend class CSCore::State;
             //------------------------------------------------------------------------------
-            /// Called whenever this is added to the scene.
+            /// A struct containing various information about the gestures which have occured.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnAddedToScene() override;
+            struct GestureInfo
+            {
+                u32 m_numTaps = 0;
+                u32 m_numDoubleTaps = 0;
+                u32 m_numTwoFingerTaps = 0;
+                u32 m_numTwoFingerDoubleTaps = 0;
+                u32 m_numHolds = 0;
+                u32 m_numTwoFingerHolds = 0;
+            };
             //------------------------------------------------------------------------------
-            /// Called every frame the component is in the scene. Updates the camera
-            /// angle.
+            /// Creates a new instance of the system.
             ///
             /// @author Ian Copland
             ///
-            /// @param in_deltaTime - The delta time.
+            /// @return The new instance.
+            //------------------------------------------------------------------------------
+            static GesturePresenterUPtr Create();
+            //------------------------------------------------------------------------------
+            /// Constructor
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            GesturePresenter() = default;
+            //------------------------------------------------------------------------------
+            /// Initialises all of the gestures that will be presented.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void InitGestures();
+            //------------------------------------------------------------------------------
+            /// Initialises all of the UI on which the gesture information will be presented.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void InitUI();
+            //------------------------------------------------------------------------------
+            /// Called when the gesture presenter is first created. This will set up the
+            /// gestures which should be presented.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void OnInit() override;
+            //------------------------------------------------------------------------------
+            /// Updated every frame. Presents information on the gestures.
+            ///
+            /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnUpdate(f32 in_deltaTime) override;
             //------------------------------------------------------------------------------
-            /// Called whenever this is removed from the scene.
+            /// Called when the gesture presenter is about to be destroyed. This will clean
+            /// up the gestures which were being presented.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnRemovedFromScene() override;
+            void OnDestroy() override;
             
-            FollowerComponentWPtr m_followerComponent;
-            f32 m_angularVelocity = 0.0f;
+            std::vector<CSInput::GestureSPtr> m_gestures;
+            std::vector<CSCore::EventConnectionSPtr> m_eventConnections;
+            GestureInfo m_gestureInfo;
+            
+            bool m_uiDirty = true;
+            CSUI::WidgetSPtr m_rootUI;
+            CSUI::TextComponent* m_textComponent;
         };
     }
 }

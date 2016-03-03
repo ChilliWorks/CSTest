@@ -32,10 +32,8 @@
 #include <Common/Core/SmokeTester.h>
 #include <Common/Core/SmokeTestSet.h>
 #include <Common/Core/StateNavigator.h>
-
 #include <HttpRequest/DownloadProgressTestSystem.h>
-
-#include <IntegrationTest/State.h>
+#include <WebView/State.h>
 
 #include <ChilliSource/Core/DialogueBox.h>
 #include <ChilliSource/Core/Scene.h>
@@ -78,7 +76,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::StateNavigator<IntegrationTest::State>>();
+            CreateSystem<Common::StateNavigator<WebView::State>>();
             m_smokeTester = CreateSystem<Common::SmokeTester>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
             m_downloadProgressTestSystem = CreateSystem<DownloadProgressTestSystem>();

@@ -26,6 +26,8 @@
 		818387131301466F004B7099 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818387121301466F004B7099 /* CoreGraphics.framework */; };
 		818387381301467E004B7099 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818387371301467E004B7099 /* AudioToolbox.framework */; };
 		81852A601964003700EC15DE /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81852A5F1964003700EC15DE /* FacebookSDK.framework */; };
+		81903F951C88939C0016C34D /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81903F931C88939C0016C34D /* State.cpp */; settings = {ASSET_TAGS = (); }; };
+		81903F991C8897480016C34D /* GesturePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81903F981C8897480016C34D /* GesturePresenter.cpp */; settings = {ASSET_TAGS = (); }; };
 		8193032A1B6A6D630036740E /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 819303291B6A6D630036740E /* Vector3.cpp */; };
 		819495D616CE45C50063276A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 819495D516CE45C50063276A /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		819A8A3E191CFCB6003E9E9F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 819A8A3D191CFCB6003E9E9F /* GLKit.framework */; };
@@ -103,6 +105,10 @@
 		818387121301466F004B7099 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		818387371301467E004B7099 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		81852A5F1964003700EC15DE /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../ChilliSource/Libraries/Core/iOS/Libs/FacebookSDK.framework; sourceTree = "<group>"; };
+		81903F931C88939C0016C34D /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81903F941C88939C0016C34D /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81903F971C8897280016C34D /* GesturePresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GesturePresenter.h; sourceTree = "<group>"; };
+		81903F981C8897480016C34D /* GesturePresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GesturePresenter.cpp; sourceTree = "<group>"; };
 		819303291B6A6D630036740E /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3.cpp; sourceTree = "<group>"; };
 		819495D516CE45C50063276A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		819A8A3D191CFCB6003E9E9F /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
@@ -287,6 +293,17 @@
 			name = Built;
 			sourceTree = "<group>";
 		};
+		81903F921C88939C0016C34D /* Gesture */ = {
+			isa = PBXGroup;
+			children = (
+				81903F981C8897480016C34D /* GesturePresenter.cpp */,
+				81903F971C8897280016C34D /* GesturePresenter.h */,
+				81903F931C88939C0016C34D /* State.cpp */,
+				81903F941C88939C0016C34D /* State.h */,
+			);
+			path = Gesture;
+			sourceTree = "<group>";
+		};
 		81CFA14219EE9177003C8436 /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +311,7 @@
 				81CFA14419EE9177003C8436 /* App.h */,
 				81DE058D1B67C17C00583F5F /* Common */,
 				81E010731B56721000FEC2AE /* CSTest.h */,
+				81903F921C88939C0016C34D /* Gesture */,
 				810775DC1B7906EF006C9E8A /* HTTPRequest */,
 				81E010741B56721000FEC2AE /* IntegrationTest */,
 				81E7C6BD1B70C73E00F32006 /* Lighting */,
@@ -542,6 +560,7 @@
 				81E7C6BB1B70B8D100F32006 /* BasicEntityFactory.cpp in Sources */,
 				81DE059A1B67C5F800583F5F /* BasicWidgetFactory.cpp in Sources */,
 				810775E21B7906EF006C9E8A /* State.cpp in Sources */,
+				81903F951C88939C0016C34D /* State.cpp in Sources */,
 				81E7C6D51B70F7A400F32006 /* FollowerComponent.cpp in Sources */,
 				81DE05A11B67D53B00583F5F /* SmokeTester.cpp in Sources */,
 				81E7C6D61B70F7A400F32006 /* OrbiterComponent.cpp in Sources */,
@@ -553,6 +572,7 @@
 				81E0109B1B56B6F500FEC2AE /* Report.cpp in Sources */,
 				810B0E461B6142A30035CF48 /* ReportPresenter.cpp in Sources */,
 				81E0109C1B56B6F500FEC2AE /* TestCase.cpp in Sources */,
+				81903F991C8897480016C34D /* GesturePresenter.cpp in Sources */,
 				81E7C6C01B70C73E00F32006 /* State.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

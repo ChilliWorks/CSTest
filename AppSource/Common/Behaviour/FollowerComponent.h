@@ -145,7 +145,7 @@ namespace CSTest
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnAddedToEntity();
+            void OnAddedToEntity() override;
             
             CSCore::EntityWPtr m_target;
             CSCore::EventConnectionUPtr m_transformChangedConnection;

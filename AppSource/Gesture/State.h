@@ -1,11 +1,11 @@
 //
 //  State.h
 //  CSTest
-//  Created by Ian Copland on 13/07/2015.
+//  Created by Ian Copland on 03/03/2016.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Tag Games Limited
+//  Copyright (c) 2016 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +26,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _INTEGRATIONTEST_STATE_H_
-#define _INTEGRATIONTEST_STATE_H_
+#ifndef _GESTURE_STATE_H_
+#define _GESTURE_STATE_H_
 
 #include <CSTest.h>
 
@@ -35,12 +35,11 @@
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace Gesture
     {
         //------------------------------------------------------------------------------
-        /// A state which runs a number of low level integration tests using Catch.
-        /// All Tests for features which can be automated are included here. Other
-        /// features such as input and graphics are smoked tested in other states.
+        /// A state for testing the gestures available in the engine, including tap,
+        /// hold, drag, pinch and rotation gestures.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
@@ -58,19 +57,9 @@ namespace CSTest
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnInit() override;
-            //------------------------------------------------------------------------------
-            /// The life-cycle event when is called every frame that the state is active.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @param in_deltaTime - The time passed since the last frame.
-            //------------------------------------------------------------------------------
-            void OnUpdate(f32 in_deltaTime) override;
             
-            TestSystem* m_testSystem = nullptr;
-            ReportPresenter* m_reportPresenter = nullptr;
-            bool m_testsPerformed = false;
-            f32 m_timer = 0.0f;
+            Common::SmokeTester* m_smokeTester = nullptr;
+            CSInput::GestureSystem* m_gestureSystem = nullptr;
         };
     }
 }

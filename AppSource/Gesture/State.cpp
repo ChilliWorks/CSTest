@@ -1,11 +1,11 @@
 //
-//  State.h
+//  State.cpp
 //  CSTest
-//  Created by Ian Copland on 28/07/2015.
+//  Created by Ian Copland on 03/03/2016.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Tag Games Limited
+//  Copyright (c) 2016 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,42 +26,38 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _WEBVIEW_STATE_H_
-#define _WEBVIEW_STATE_H_
+#include <Gesture/State.h>
 
-#include <CSTest.h>
+#include <Common/Core/SmokeTester.h>
+#include <Common/Core/SmokeTestSet.h>
+#include <Common/Core/StateNavigator.h>
+#include <Gesture/GesturePresenter.h>
+#include <HTTPRequest/State.h>
 
-#include <ChilliSource/Core/State.h>
+#include <ChilliSource/Core/Scene.h>
+#include <ChilliSource/Input/Gesture.h>
 
 namespace CSTest
 {
-    namespace WebView
+    namespace Gesture
     {
         //------------------------------------------------------------------------------
-        /// A state for testing the various ways in which a web view can be used.
-        ///
-        /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        void State::CreateSystems()
         {
-            //------------------------------------------------------------------------------
-            /// The life-cycle event for creating all state systems.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void CreateSystems() override;
-            //------------------------------------------------------------------------------
-            /// Initialises the state.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnInit() override;
+            CreateSystem<Common::StateNavigator<HttpRequest::State>>();
+            m_smokeTester = CreateSystem<Common::SmokeTester>();
+            m_gestureSystem = CreateSystem<CSInput::GestureSystem>();
+            CreateSystem<GesturePresenter>();
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void State::OnInit()
+        {
+            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
-            Common::SmokeTester* m_smokeTester = nullptr;
-            Common::ResultPresenter* m_resultPresenter = nullptr;
-            CSWeb::WebView* m_webView = nullptr;
-        };
+            Common::SmokeTestSet testSet("Gestures");
+            m_smokeTester->Present(testSet);
+        }
     }
 }
-
-#endif
