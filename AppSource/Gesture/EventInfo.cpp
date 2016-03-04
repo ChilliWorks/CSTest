@@ -28,6 +28,8 @@
 
 #include <Gesture/EventInfo.h>
 
+#include <algorithm>
+
 namespace CSTest
 {
     namespace Gesture

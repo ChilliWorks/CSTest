@@ -34,6 +34,9 @@
     <Filter Include="AppSource\HTTPRequest">
       <UniqueIdentifier>{ff5aff15-c7a6-4d38-a5f0-19ff5424262c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\Gesture">
+      <UniqueIdentifier>{f32b5a87-c0d6-4bda-b401-0844b8e83c08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -108,6 +111,15 @@
     <ClCompile Include="..\..\AppSource\HTTPRequest\State.cpp">
       <Filter>AppSource\HTTPRequest</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\Gesture\EventInfo.cpp">
+      <Filter>AppSource\Gesture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Gesture\GesturePresenter.cpp">
+      <Filter>AppSource\Gesture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Gesture\State.cpp">
+      <Filter>AppSource\Gesture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -178,6 +190,15 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\HTTPRequest\State.h">
       <Filter>AppSource\HTTPRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Gesture\EventInfo.h">
+      <Filter>AppSource\Gesture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Gesture\GesturePresenter.h">
+      <Filter>AppSource\Gesture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Gesture\State.h">
+      <Filter>AppSource\Gesture</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
