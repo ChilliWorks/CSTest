@@ -31,6 +31,8 @@
 
 #include <CSTest.h>
 
+#include <Gesture/EventInfo.h>
+
 #include <ChilliSource/Core/System.h>
 
 namespace CSTest
@@ -62,20 +64,6 @@ namespace CSTest
         private:
             friend class CSCore::State;
             //------------------------------------------------------------------------------
-            /// A struct containing various information about the gestures which have occured.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            struct GestureInfo
-            {
-                u32 m_numTaps = 0;
-                u32 m_numDoubleTaps = 0;
-                u32 m_numTwoFingerTaps = 0;
-                u32 m_numTwoFingerDoubleTaps = 0;
-                u32 m_numHolds = 0;
-                u32 m_numTwoFingerHolds = 0;
-            };
-            //------------------------------------------------------------------------------
             /// Creates a new instance of the system.
             ///
             /// @author Ian Copland
@@ -95,6 +83,53 @@ namespace CSTest
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void InitGestures();
+            //------------------------------------------------------------------------------
+            /// Adds a new tap gesture with the given properties.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_eventName - The unique name of the event.
+            /// @param in_numTaps - The number of taps to activate the gesture.
+            /// @param in_numPointers - The number of pointers which should be used in the
+            /// gesture.
+            //------------------------------------------------------------------------------
+            void AddTapGesture(const std::string& in_eventName, u32 in_numTaps, u32 in_numPointers);
+            //------------------------------------------------------------------------------
+            /// Adds a new hold gesture with the given properties.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_eventName - The unique name of the event.
+            /// @param in_numPointers - The number of pointers which should be used in the
+            /// gesture.
+            //------------------------------------------------------------------------------
+            void AddHoldGesture(const std::string& in_eventName, u32 in_numPointers);
+            //------------------------------------------------------------------------------
+            /// Adds a new drag gesture with the given properties.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_eventName - The unique name of the event.
+            /// @param in_numPointers - The number of pointers which should be used in the
+            /// gesture.
+            //------------------------------------------------------------------------------
+            void AddDragGesture(const std::string& in_eventName, u32 in_numPointers);
+            //------------------------------------------------------------------------------
+            /// Adds a new pinch gesture with the given name.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_eventName - The unique name of the event.
+            //------------------------------------------------------------------------------
+            void AddPinchGesture(const std::string& in_eventName);
+            //------------------------------------------------------------------------------
+            /// Adds a new rotation gesture with the given name.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_eventName - The unique name of the event.
+            //------------------------------------------------------------------------------
+            void AddRotationGesture(const std::string& in_eventName);
             //------------------------------------------------------------------------------
             /// Initialises all of the UI on which the gesture information will be presented.
             ///
@@ -124,7 +159,7 @@ namespace CSTest
             
             std::vector<CSInput::GestureSPtr> m_gestures;
             std::vector<CSCore::EventConnectionSPtr> m_eventConnections;
-            GestureInfo m_gestureInfo;
+            EventInfo m_gestureEventInfo;
             
             bool m_uiDirty = true;
             CSUI::WidgetSPtr m_rootUI;

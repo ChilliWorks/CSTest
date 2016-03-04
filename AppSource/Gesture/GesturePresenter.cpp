@@ -42,6 +42,45 @@ namespace CSTest
 {
     namespace Gesture
     {
+        namespace
+        {
+            //------------------------------------------------------------------------------
+            /// Calculates the event info string for the given drag info.
+            ///
+            /// @param in_dragInfo - The drag info containing the event info.
+            ///
+            /// @return The event info string.
+            //------------------------------------------------------------------------------
+            std::string GetEventInfo(const CSInput::DragGesture::DragInfo& in_dragInfo)
+            {
+                return CSCore::ToString(in_dragInfo.m_position);
+            }
+            
+            //------------------------------------------------------------------------------
+            /// Calculates the event info string for the given pinch info.
+            ///
+            /// @param in_pinchInfo - The pinch info containing the event info.
+            ///
+            /// @return The event info string.
+            //------------------------------------------------------------------------------
+            std::string GetEventInfo(const CSInput::PinchGesture::PinchInfo& in_pinchInfo)
+            {
+                return CSCore::ToString(in_pinchInfo.m_position) + "; " + CSCore::ToString(in_pinchInfo.m_scale);
+            }
+            
+            //------------------------------------------------------------------------------
+            /// Calculates the event info string for the given rotation info.
+            ///
+            /// @param in_rotationInfo - The rotation info containing the event info.
+            ///
+            /// @return The event info string.
+            //------------------------------------------------------------------------------
+            std::string GetEventInfo(const CSInput::RotationGesture::RotationInfo& in_rotationInfo)
+            {
+                return CSCore::ToString(in_rotationInfo.m_position) + "; " + CSCore::ToString(in_rotationInfo.m_rotation);
+            }
+        }
+        
         CS_DEFINE_NAMEDTYPE(GesturePresenter);
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -59,62 +98,135 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void GesturePresenter::InitGestures()
         {
+            AddTapGesture("Tap", 1, 1);
+            AddTapGesture("Double tap", 2, 1);
+            AddTapGesture("Two pointer tap", 1, 2);
+            AddTapGesture("Two pointer double tap", 2, 2);
+            AddHoldGesture("Hold", 1);
+            AddHoldGesture("Two pointer hold", 2);
+            AddDragGesture("Drag", 1);
+            AddDragGesture("Two pointer drag", 2);
+            AddPinchGesture("Pinch");
+            AddRotationGesture("Rotation");
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void GesturePresenter::AddTapGesture(const std::string& in_eventName, u32 in_numTaps, u32 in_numPointers)
+        {
             auto gestureSystem = GetState()->GetSystem<CSInput::GestureSystem>();
             CS_ASSERT(gestureSystem, "Must have gesture system to use gesture presenter");
             
-            // Tap
-            auto tapGesture = std::make_shared<CSInput::TapGesture>();
-            m_eventConnections.push_back(tapGesture->GetTappedEvent().OpenConnection([=](const CSInput::TapGesture*, const CSCore::Vector2&)
+            auto gesture = std::make_shared<CSInput::TapGesture>(in_numTaps, in_numPointers);
+            m_eventConnections.push_back(gesture->GetTappedEvent().OpenConnection([=](const CSInput::TapGesture*, const CSCore::Vector2&)
             {
-                m_gestureInfo.m_numTaps++;
+                m_gestureEventInfo.IncrementEventCounter(in_eventName);
                 m_uiDirty = true;
             }));
-            gestureSystem->AddGesture(tapGesture);
-
-            // Double tap
-            auto doubleTapGesture = std::make_shared<CSInput::TapGesture>(2);
-            m_eventConnections.push_back(doubleTapGesture->GetTappedEvent().OpenConnection([=](const CSInput::TapGesture*, const CSCore::Vector2&)
-            {
-                m_gestureInfo.m_numDoubleTaps++;
-                m_uiDirty = true;
-            }));
-            gestureSystem->AddGesture(doubleTapGesture);
             
-            // Two finger tap
-            auto twoFingerTapGesture = std::make_shared<CSInput::TapGesture>(1, 2);
-            m_eventConnections.push_back(twoFingerTapGesture->GetTappedEvent().OpenConnection([=](const CSInput::TapGesture*, const CSCore::Vector2&)
-            {
-                m_gestureInfo.m_numTwoFingerTaps++;
-                m_uiDirty = true;
-            }));
-            gestureSystem->AddGesture(twoFingerTapGesture);
-
-            // Two finger double tap
-            auto twoFingerDoubleTapGesture = std::make_shared<CSInput::TapGesture>(2, 2);
-            m_eventConnections.push_back(twoFingerDoubleTapGesture->GetTappedEvent().OpenConnection([=](const CSInput::TapGesture*, const CSCore::Vector2&)
-            {
-                m_gestureInfo.m_numTwoFingerDoubleTaps++;
-                m_uiDirty = true;
-            }));
-            gestureSystem->AddGesture(twoFingerDoubleTapGesture);
+            gestureSystem->AddGesture(gesture);
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void GesturePresenter::AddHoldGesture(const std::string& in_eventName, u32 in_numPointers)
+        {
+            auto gestureSystem = GetState()->GetSystem<CSInput::GestureSystem>();
+            CS_ASSERT(gestureSystem, "Must have gesture system to use gesture presenter");
             
-            // Hold
-            auto holdGesture = std::make_shared<CSInput::HoldGesture>();
-            m_eventConnections.push_back(holdGesture->GetHeldEvent().OpenConnection([=](const CSInput::HoldGesture*, const CSCore::Vector2&)
+            auto gesture = std::make_shared<CSInput::HoldGesture>(in_numPointers);
+            m_eventConnections.push_back(gesture->GetHeldEvent().OpenConnection([=](const CSInput::HoldGesture*, const CSCore::Vector2&)
             {
-                m_gestureInfo.m_numHolds++;
+                m_gestureEventInfo.IncrementEventCounter(in_eventName);
                 m_uiDirty = true;
             }));
-            gestureSystem->AddGesture(holdGesture);
+            
+            gestureSystem->AddGesture(gesture);
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void GesturePresenter::AddDragGesture(const std::string& in_eventName, u32 in_numPointers)
+        {
+            auto gestureSystem = GetState()->GetSystem<CSInput::GestureSystem>();
+            CS_ASSERT(gestureSystem, "Must have gesture system to use gesture presenter");
+            
+            auto gesture = std::make_shared<CSInput::DragGesture>(in_numPointers);
+            
+            m_eventConnections.push_back(gesture->GetDragStartedEvent().OpenConnection([=](const CSInput::DragGesture*, const CSInput::DragGesture::DragInfo& in_info)
+            {
+                m_gestureEventInfo.AddActiveEvent(in_eventName, GetEventInfo(in_info));
+                m_uiDirty = true;
+            }));
+            
+            m_eventConnections.push_back(gesture->GetDragMovedEvent().OpenConnection([=](const CSInput::DragGesture*, const CSInput::DragGesture::DragInfo& in_info)
+            {
+                m_gestureEventInfo.UpdateActiveEvent(in_eventName, GetEventInfo(in_info));
+                m_uiDirty = true;
+            }));
 
-            // Two finger hold
-            auto twoFingerHoldGesture = std::make_shared<CSInput::HoldGesture>(2);
-            m_eventConnections.push_back(twoFingerHoldGesture->GetHeldEvent().OpenConnection([=](const CSInput::HoldGesture*, const CSCore::Vector2&)
+            m_eventConnections.push_back(gesture->GetDragEndedEvent().OpenConnection([=](const CSInput::DragGesture*, const CSInput::DragGesture::DragInfo& in_info)
             {
-                m_gestureInfo.m_numTwoFingerHolds++;
+                m_gestureEventInfo.RemoveActiveEvent(in_eventName);
                 m_uiDirty = true;
             }));
-            gestureSystem->AddGesture(twoFingerHoldGesture);
+            
+            gestureSystem->AddGesture(gesture);
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void GesturePresenter::AddPinchGesture(const std::string& in_eventName)
+        {
+            auto gestureSystem = GetState()->GetSystem<CSInput::GestureSystem>();
+            CS_ASSERT(gestureSystem, "Must have gesture system to use gesture presenter");
+            
+            auto gesture = std::make_shared<CSInput::PinchGesture>();
+            
+            m_eventConnections.push_back(gesture->GetPinchStartedEvent().OpenConnection([=](const CSInput::PinchGesture*, const CSInput::PinchGesture::PinchInfo& in_info)
+            {
+                m_gestureEventInfo.AddActiveEvent(in_eventName, GetEventInfo(in_info));
+                m_uiDirty = true;
+            }));
+
+            m_eventConnections.push_back(gesture->GetPinchMovedEvent().OpenConnection([=](const CSInput::PinchGesture*, const CSInput::PinchGesture::PinchInfo& in_info)
+            {
+                m_gestureEventInfo.UpdateActiveEvent(in_eventName, GetEventInfo(in_info));
+                m_uiDirty = true;
+            }));
+
+            m_eventConnections.push_back(gesture->GetPinchEndedEvent().OpenConnection([=](const CSInput::PinchGesture*, const CSInput::PinchGesture::PinchInfo& in_info)
+            {
+                m_gestureEventInfo.RemoveActiveEvent(in_eventName);
+                m_uiDirty = true;
+            }));
+            
+            gestureSystem->AddGesture(gesture);
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void GesturePresenter::AddRotationGesture(const std::string& in_eventName)
+        {
+            auto gestureSystem = GetState()->GetSystem<CSInput::GestureSystem>();
+            CS_ASSERT(gestureSystem, "Must have gesture system to use gesture presenter");
+            
+            auto gesture = std::make_shared<CSInput::RotationGesture>();
+            
+            m_eventConnections.push_back(gesture->GetRotationStartedEvent().OpenConnection([=](const CSInput::RotationGesture*, const CSInput::RotationGesture::RotationInfo& in_info)
+            {
+                m_gestureEventInfo.AddActiveEvent(in_eventName, GetEventInfo(in_info));
+                m_uiDirty = true;
+            }));
+
+            m_eventConnections.push_back(gesture->GetRotationMovedEvent().OpenConnection([=](const CSInput::RotationGesture*, const CSInput::RotationGesture::RotationInfo& in_info)
+            {
+                m_gestureEventInfo.UpdateActiveEvent(in_eventName, GetEventInfo(in_info));
+                m_uiDirty = true;
+            }));
+
+            m_eventConnections.push_back(gesture->GetRotationEndedEvent().OpenConnection([=](const CSInput::RotationGesture*, const CSInput::RotationGesture::RotationInfo& in_info)
+            {
+                m_gestureEventInfo.RemoveActiveEvent(in_eventName);
+                m_uiDirty = true;
+            }));
+            
+            gestureSystem->AddGesture(gesture);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -146,12 +258,18 @@ namespace CSTest
             {
                 m_uiDirty = false;
                 
-                std::string text = "Taps: " + CSCore::ToString(m_gestureInfo.m_numTaps) + "\n";
-                text += "Double Taps: " + CSCore::ToString(m_gestureInfo.m_numDoubleTaps) + "\n";
-                text += "Two Finger Taps: " + CSCore::ToString(m_gestureInfo.m_numTwoFingerTaps) + "\n";
-                text += "Two Finger Double Taps: " + CSCore::ToString(m_gestureInfo.m_numTwoFingerDoubleTaps) + "\n";
-                text += "Holds: " + CSCore::ToString(m_gestureInfo.m_numHolds) + "\n";
-                text += "Two Finger Holds: " + CSCore::ToString(m_gestureInfo.m_numTwoFingerHolds) + "\n";
+                std::string text = "Immediate events:";
+                for (const auto& counter : m_gestureEventInfo.GetEventCounters())
+                {
+                    text += "\n  " + counter.m_name + ": " + CSCore::ToString(counter.m_count);
+                }
+                
+                text += "\n \nActive events:";
+                for (const auto& event : m_gestureEventInfo.GetActiveEvents())
+                {
+                    text += "\n  " + event.m_name + ": " + event.m_info;
+                }
+                
                 m_textComponent->SetText(text);
             }
         }

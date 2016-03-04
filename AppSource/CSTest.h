@@ -59,6 +59,7 @@ namespace CSTest
     
     namespace Gesture
     {
+        CS_FORWARDDECLARE_CLASS(EventInfo);
         CS_FORWARDDECLARE_CLASS(GesturePresenter);
         CS_FORWARDDECLARE_CLASS(State);
     }
