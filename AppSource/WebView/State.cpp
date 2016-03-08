@@ -71,7 +71,7 @@ namespace CSTest
             
             testSet.AddTest("From Web", [=]()
             {
-                m_webView->Present("http://google.com", CSCore::UnifiedVector2(0.8f, 0.8f, 0.0f, 0.0f), 0.1f, [=]()
+                m_webView->Present("https://google.com", CSCore::UnifiedVector2(0.8f, 0.8f, 0.0f, 0.0f), 0.1f, [=]()
                 {
                     m_resultPresenter->Present("WebView dismissed.");
                 });
@@ -79,7 +79,7 @@ namespace CSTest
             
             testSet.AddTest("External Browser", [=]()
             {
-                m_webView->PresentInExternalBrowser("http://google.com");
+                m_webView->PresentInExternalBrowser("https://google.com");
             });
 #endif
             
