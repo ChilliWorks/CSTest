@@ -69,6 +69,7 @@
 		81CF70C61C8F363C000DDF92 /* TestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CF70A61C8F363C000DDF92 /* TestSystem.cpp */; };
 		81CF70C71C8F363C000DDF92 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CF70A91C8F363C000DDF92 /* State.cpp */; };
 		81CF70C81C8F363C000DDF92 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CF70AC1C8F363C000DDF92 /* State.cpp */; };
+		81CF70CC1C8F3850000DDF92 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CF70CA1C8F3850000DDF92 /* State.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +173,8 @@
 		81CF70AA1C8F363C000DDF92 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81CF70AC1C8F363C000DDF92 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81CF70AD1C8F363C000DDF92 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81CF70CA1C8F3850000DDF92 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81CF70CB1C8F3850000DDF92 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +309,7 @@
 				81CF706F1C8F363C000DDF92 /* App.h */,
 				81CF70701C8F363C000DDF92 /* Common */,
 				81CF70861C8F363C000DDF92 /* CSTest.h */,
+				81CF70C91C8F3850000DDF92 /* EmailComposer */,
 				81CF70871C8F363C000DDF92 /* Gesture */,
 				81CF708E1C8F363C000DDF92 /* HTTPRequest */,
 				81CF70931C8F363C000DDF92 /* IntegrationTest */,
@@ -448,6 +452,15 @@
 			path = WebView;
 			sourceTree = "<group>";
 		};
+		81CF70C91C8F3850000DDF92 /* EmailComposer */ = {
+			isa = PBXGroup;
+			children = (
+				81CF70CA1C8F3850000DDF92 /* State.cpp */,
+				81CF70CB1C8F3850000DDF92 /* State.h */,
+			);
+			path = EmailComposer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -565,6 +578,7 @@
 				81CF70C81C8F363C000DDF92 /* State.cpp in Sources */,
 				81CF70BD1C8F363C000DDF92 /* FileSystem.cpp in Sources */,
 				81CF70C01C8F363C000DDF92 /* Vector4.cpp in Sources */,
+				81CF70CC1C8F3850000DDF92 /* State.cpp in Sources */,
 				81CF70B81C8F363C000DDF92 /* GesturePresenter.cpp in Sources */,
 				81CF70C11C8F363C000DDF92 /* CSReporter.cpp in Sources */,
 				81CF70B21C8F363C000DDF92 /* BasicEntityFactory.cpp in Sources */,

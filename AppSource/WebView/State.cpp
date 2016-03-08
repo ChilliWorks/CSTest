@@ -33,7 +33,7 @@
 #include <Common/Core/SmokeTestSet.h>
 #include <Common/Core/StateNavigator.h>
 
-#include <IntegrationTest/State.h>
+#include <EmailComposer/State.h>
 
 #include <ChilliSource/Core/DialogueBox.h>
 #include <ChilliSource/Core/Scene.h>
@@ -47,7 +47,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::StateNavigator<IntegrationTest::State>>();
+            CreateSystem<Common::StateNavigator<EmailComposer::State>>();
             m_smokeTester = CreateSystem<Common::SmokeTester>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
             m_webView = CreateSystem<CSWeb::WebView>();
@@ -58,7 +58,7 @@ namespace CSTest
         {
             GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
-            Common::SmokeTestSet testSet("WebView");
+            Common::SmokeTestSet testSet("Web View");
             
 #if defined(CS_TARGETPLATFORM_IOS) || defined(CS_TARGETPLATFORM_ANDROID)
             testSet.AddTest("From Disk", [=]()
