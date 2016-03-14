@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		814192891C97099B0056F280 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 814192871C97099B0056F280 /* State.cpp */; };
+		8141928F1C9724D20056F280 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8141928D1C9724D20056F280 /* State.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		81C7000A1C89E9F300D306F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C700041C89E9F300D306F9 /* LaunchScreen.storyboard */; };
 		81C700321C89ECA400D306F9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700151C89ECA400D306F9 /* Accounts.framework */; };
@@ -86,6 +87,8 @@
 /* Begin PBXFileReference section */
 		814192871C97099B0056F280 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		814192881C97099B0056F280 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		8141928D1C9724D20056F280 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		8141928E1C9724D20056F280 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81C700051C89E9F300D306F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81C700081C89E9F300D306F9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -230,6 +233,15 @@
 			path = Particle;
 			sourceTree = "<group>";
 		};
+		8141928C1C9724D20056F280 /* CricketAudio */ = {
+			isa = PBXGroup;
+			children = (
+				8141928D1C9724D20056F280 /* State.cpp */,
+				8141928E1C9724D20056F280 /* State.h */,
+			);
+			path = CricketAudio;
+			sourceTree = "<group>";
+		};
 		81C700021C89E9F300D306F9 /* ProjectResources */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +332,7 @@
 				81CF706E1C8F363C000DDF92 /* App.cpp */,
 				81CF706F1C8F363C000DDF92 /* App.h */,
 				81CF70701C8F363C000DDF92 /* Common */,
+				8141928C1C9724D20056F280 /* CricketAudio */,
 				81CF70861C8F363C000DDF92 /* CSTest.h */,
 				81CF70C91C8F3850000DDF92 /* EmailComposer */,
 				81CF70871C8F363C000DDF92 /* Gesture */,
@@ -597,6 +610,7 @@
 				814192891C97099B0056F280 /* State.cpp in Sources */,
 				81CF70B21C8F363C000DDF92 /* BasicEntityFactory.cpp in Sources */,
 				81CF70C21C8F363C000DDF92 /* FailedAssertion.cpp in Sources */,
+				8141928F1C9724D20056F280 /* State.cpp in Sources */,
 				81CF70BA1C8F363C000DDF92 /* DownloadProgressTestSystem.cpp in Sources */,
 				81CF70B51C8F363C000DDF92 /* SmokeTestSet.cpp in Sources */,
 				81CF70AE1C8F363C000DDF92 /* App.cpp in Sources */,

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<bank name="SFX">
+    <sound name="Beep01" source="Beep01.wav" />
+    <sound name="Beep02" source="Beep02.wav" />
+</bank>

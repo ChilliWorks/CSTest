@@ -28,6 +28,7 @@
     <ClCompile Include="..\..\AppSource\Common\Core\SmokeTester.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\SmokeTestSet.cpp" />
     <ClCompile Include="..\..\AppSource\Common\UI\BasicWidgetFactory.cpp" />
+    <ClCompile Include="..\..\AppSource\CricketAudio\State.cpp" />
     <ClCompile Include="..\..\AppSource\EmailComposer\State.cpp" />
     <ClCompile Include="..\..\AppSource\Gesture\EventInfo.cpp" />
     <ClCompile Include="..\..\AppSource\Gesture\GesturePresenter.cpp" />
@@ -61,6 +62,7 @@
     <ClInclude Include="..\..\AppSource\Common\Core\StateNavigator.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\StateNavigatorImpl.h" />
     <ClInclude Include="..\..\AppSource\Common\UI\BasicWidgetFactory.h" />
+    <ClInclude Include="..\..\AppSource\CricketAudio\State.h" />
     <ClInclude Include="..\..\AppSource\CSTest.h" />
     <ClInclude Include="..\..\AppSource\EmailComposer\State.h" />
     <ClInclude Include="..\..\AppSource\Gesture\EventInfo.h" />

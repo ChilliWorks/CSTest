@@ -32,10 +32,8 @@
 #include <Common/Core/SmokeTester.h>
 #include <Common/Core/SmokeTestSet.h>
 #include <Common/Core/StateNavigator.h>
-
 #include <EmailComposer/State.h>
 
-#include <ChilliSource/Core/DialogueBox.h>
 #include <ChilliSource/Core/Scene.h>
 #include <ChilliSource/Web/Base.h>
 
@@ -60,28 +58,29 @@ namespace CSTest
             
             Common::SmokeTestSet testSet("Web View");
             
-#if defined(CS_TARGETPLATFORM_IOS) || defined(CS_TARGETPLATFORM_ANDROID)
-            testSet.AddTest("From Disk", [=]()
+            if (m_webView != nullptr)
             {
-                m_webView->PresentFromFile(CSCore::StorageLocation::k_package, "WebView/ExampleWebView.html", CSCore::UnifiedVector2(1.0f, 1.0f, 0.0f, 0.0f), 0.1f, [=]()
+                testSet.AddTest("From Disk", [=]()
                 {
-                    m_resultPresenter->Present("WebView dismissed.");
+                    m_webView->PresentFromFile(CSCore::StorageLocation::k_package, "WebView/ExampleWebView.html", CSCore::UnifiedVector2(1.0f, 1.0f, 0.0f, 0.0f), 0.1f, [=]()
+                    {
+                        m_resultPresenter->Present("WebView dismissed.");
+                    });
                 });
-            });
-            
-            testSet.AddTest("From Web", [=]()
-            {
-                m_webView->Present("https://google.com", CSCore::UnifiedVector2(0.8f, 0.8f, 0.0f, 0.0f), 0.1f, [=]()
+                
+                testSet.AddTest("From Web", [=]()
                 {
-                    m_resultPresenter->Present("WebView dismissed.");
+                    m_webView->Present("https://google.com", CSCore::UnifiedVector2(0.8f, 0.8f, 0.0f, 0.0f), 0.1f, [=]()
+                    {
+                        m_resultPresenter->Present("WebView dismissed.");
+                    });
                 });
-            });
-            
-            testSet.AddTest("External Browser", [=]()
-            {
-                m_webView->PresentInExternalBrowser("https://google.com");
-            });
-#endif
+                
+                testSet.AddTest("External Browser", [=]()
+                {
+                    m_webView->PresentInExternalBrowser("https://google.com");
+                });
+            }
             
             m_smokeTester->Present(testSet);
         }

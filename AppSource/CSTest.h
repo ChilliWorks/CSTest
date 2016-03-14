@@ -46,6 +46,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(FollowerComponent);
     }
     
+    namespace CricketAudio
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
     namespace IntegrationTest
     {
         CS_FORWARDDECLARE_CLASS(CSReporter);
@@ -71,6 +76,11 @@ namespace CSTest
     }
     
     namespace Lighting
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
+    namespace Particle
     {
         CS_FORWARDDECLARE_CLASS(State);
     }

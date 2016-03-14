@@ -32,7 +32,7 @@
 #include <Common/Core/SmokeTestSet.h>
 #include <Common/Core/StateNavigator.h>
 #include <Gesture/GesturePresenter.h>
-#include <HTTPRequest/State.h>
+#include <CricketAudio/State.h>
 
 #include <ChilliSource/Core/Scene.h>
 #include <ChilliSource/Input/Gesture.h>
@@ -45,7 +45,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::StateNavigator<HttpRequest::State>>();
+            CreateSystem<Common::StateNavigator<CricketAudio::State>>();
             m_smokeTester = CreateSystem<Common::SmokeTester>();
             m_gestureSystem = CreateSystem<CSInput::GestureSystem>();
             CreateSystem<GesturePresenter>();

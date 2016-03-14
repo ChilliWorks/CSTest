@@ -32,6 +32,7 @@
 #include <Common/UI/BasicWidgetFactory.h>
 #include <IntegrationTest/State.h>
 
+#include <ChilliSource/Audio/CricketAudio.h>
 #include <ChilliSource/Core/Entity.h>
 #include <ChilliSource/Rendering/Model.h>
 #include <ChilliSource/Networking/Http.h>
@@ -72,6 +73,8 @@ namespace CSTest
     //------------------------------------------------------------------------------
     void App::CreateSystems()
     {
+        CreateSystem<CSAudio::CricketAudioSystem>();
+        CreateSystem<CSAudio::CkBankProvider>();
         CreateSystem<CSCore::PrimitiveEntityFactory>();
         CreateSystem<CSNetworking::HttpRequestSystem>();
         CreateSystem<CSRendering::PrimitiveModelFactory>();
