@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		814192891C97099B0056F280 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 814192871C97099B0056F280 /* State.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		81C7000A1C89E9F300D306F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C700041C89E9F300D306F9 /* LaunchScreen.storyboard */; };
 		81C700321C89ECA400D306F9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700151C89ECA400D306F9 /* Accounts.framework */; };
@@ -83,6 +84,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		814192871C97099B0056F280 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		814192881C97099B0056F280 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81C700051C89E9F300D306F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81C700081C89E9F300D306F9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -218,6 +221,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		814192861C97099B0056F280 /* Particle */ = {
+			isa = PBXGroup;
+			children = (
+				814192871C97099B0056F280 /* State.cpp */,
+				814192881C97099B0056F280 /* State.h */,
+			);
+			path = Particle;
+			sourceTree = "<group>";
+		};
 		81C700021C89E9F300D306F9 /* ProjectResources */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +326,7 @@
 				81CF708E1C8F363C000DDF92 /* HTTPRequest */,
 				81CF70931C8F363C000DDF92 /* IntegrationTest */,
 				81CF70A81C8F363C000DDF92 /* Lighting */,
+				814192861C97099B0056F280 /* Particle */,
 				81CF70AB1C8F363C000DDF92 /* WebView */,
 			);
 			name = AppSource;
@@ -581,6 +594,7 @@
 				81CF70CC1C8F3850000DDF92 /* State.cpp in Sources */,
 				81CF70B81C8F363C000DDF92 /* GesturePresenter.cpp in Sources */,
 				81CF70C11C8F363C000DDF92 /* CSReporter.cpp in Sources */,
+				814192891C97099B0056F280 /* State.cpp in Sources */,
 				81CF70B21C8F363C000DDF92 /* BasicEntityFactory.cpp in Sources */,
 				81CF70C21C8F363C000DDF92 /* FailedAssertion.cpp in Sources */,
 				81CF70BA1C8F363C000DDF92 /* DownloadProgressTestSystem.cpp in Sources */,

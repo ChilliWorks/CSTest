@@ -1,0 +1,89 @@
+{
+	"Duration": "1.0",
+	"MaxParticles": "1010",
+	"SimulationSpace": "World",
+	"LifetimeProperty":
+	{
+		"Type": "RandomConstant",
+		"LowerValue": "0.8",
+		"UpperValue": "1.2"
+	},
+	"InitialScaleProperty":
+	{
+		"Type": "RandomConstant",
+		"LowerValue": "0.5 0.5",
+		"UpperValue": "1.2 1.2"
+	},
+	"InitialRotationProperty":  
+	{
+		"Type": "RandomConstant",
+		"LowerValue": "0.0",
+		"UpperValue": "0.0"
+	},
+	"InitialColourProperty": "0.0 0.0 0.0 0.0",
+	"InitialSpeedProperty": 
+	{
+		"Type": "RandomConstant",
+		"LowerValue": "1.5",
+		"UpperValue": "2.0"
+	},
+	"InitialAngularVelocityProperty": "0.0",
+
+	"Drawable": 
+	{
+		"Type": "StaticBillboard",
+		"MaterialPath": "Particle/Particle.csmaterial",
+        "AtlasPath": "TextureAtlases/Particle/Particle.csatlas",
+        "ImageIds": "Fire",
+		"Size": "1.0 1.0",
+		"SizePolicy": "FitMaintainingAspect"
+	},
+	
+	"Emitter":
+	{
+		"Type": "Cone",
+		"EmissionMode": "Stream",
+		"EmitFromType": "Inside",
+		"EmitDirectionType": "AwayFromBase",
+		"EmissionRateProperty": "100.0f",
+		"ParticlesPerEmissionProperty": "1",
+		"EmissionChanceProperty": "1.0",
+		"RadiusProperty": "0.5",
+		"AngleProperty": "0.8"
+	},
+	
+	"Affectors":
+	[
+		{
+			"Type": "ColourOverLifetime",
+			"TargetColourProperty": "0.0 0.0 0.0 0.0",
+            "IntermediateColours": [
+                {
+                    "ColourProperty": {
+                        "Type": "RandomConstant",
+                        "LowerValue": "0.9 0.4 0.12 0.0",
+                        "UpperValue": "1.0 0.25 0.0 0.5"
+                    },
+                    "TimeProperty": "0.15"
+                },
+                {
+                    "ColourProperty": {
+                        "Type": "RandomConstant",
+                        "LowerValue": "0.9 0.4 0.12 0.0",
+                        "UpperValue": "1.0 0.25 0.0 0.5"
+                    },
+                    "TimeProperty": "0.75"
+                }
+            ]
+		},
+		{
+			"Type": "ScaleOverLifetime",
+			"ScaleProperty": 
+			{
+				"Type": "RandomConstant",
+				"LowerValue": "0.75 1.5",
+				"UpperValue": "1.0 2.0"
+			}
+		}
+	]
+}

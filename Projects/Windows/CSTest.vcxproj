@@ -46,6 +46,7 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector3.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector4.cpp" />
     <ClCompile Include="..\..\AppSource\Lighting\State.cpp" />
+    <ClCompile Include="..\..\AppSource\Particle\State.cpp" />
     <ClCompile Include="..\..\AppSource\WebView\State.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +76,7 @@
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.h" />
     <ClInclude Include="..\..\AppSource\Lighting\State.h" />
+    <ClInclude Include="..\..\AppSource\Particle\State.h" />
     <ClInclude Include="..\..\AppSource\WebView\State.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

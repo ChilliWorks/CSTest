@@ -40,6 +40,9 @@
     <Filter Include="AppSource\IntegrationTest\Tests">
       <UniqueIdentifier>{3e62b116-8ec0-4bd6-bdbe-1537512c3c0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\Particle">
+      <UniqueIdentifier>{0da443ff-d030-4347-a728-489b81f96776}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -126,6 +129,9 @@
     <ClCompile Include="..\..\AppSource\WebView\State.cpp">
       <Filter>AppSource\WebView</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\Particle\State.cpp">
+      <Filter>AppSource\Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -208,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\WebView\State.h">
       <Filter>AppSource\WebView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Particle\State.h">
+      <Filter>AppSource\Particle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -32,7 +32,7 @@
 #include <Common/Core/BasicEntityFactory.h>
 #include <Common/Behaviour/FollowerComponent.h>
 #include <Common/Behaviour/OrbiterComponent.h>
-#include <Gesture/State.h>
+#include <Particle/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -101,7 +101,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::StateNavigator<Gesture::State>>();
+            CreateSystem<Common::StateNavigator<Particle::State>>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

@@ -1,0 +1,69 @@
+{
+	"Duration": "2.0",
+	"MaxParticles": "21",
+	"SimulationSpace": "World",
+	"LifetimeProperty":
+	{
+		"Type": "RandomConstant",
+		"LowerValue": "1.0",
+		"UpperValue": "2.0"
+	},
+	"InitialScaleProperty": "0.1 0.1",
+	"InitialRotationProperty": "0.0",
+	"InitialColourProperty":
+	{
+		"Type": "RandomConstant",
+		"LowerValue": "0.9 0.4 0.12 0.0",
+		"UpperValue": "0.9 0.4 0.12 0.5"
+	},
+	"InitialSpeedProperty": 
+	{
+		"Type": "RandomConstant",
+		"LowerValue": "3.0",
+		"UpperValue": "4.0"
+	},
+	"InitialAngularVelocityProperty": "1.0",
+
+	"Drawable": 
+	{
+		"Type": "StaticBillboard",
+		"MaterialPath": "Particle/Particle.csmaterial",
+        "AtlasPath": "TextureAtlases/Particle/Particle.csatlas",
+        "ImageIds": "Embers",
+		"Size": "1.0 1.0",
+		"SizePolicy": "FitMaintainingAspect"
+	},
+	
+	"Emitter":
+	{
+		"Type": "Cone",
+		"EmissionMode": "Stream",
+		"EmitFromType": "Surface",
+		"EmitDirectionType": "AwayFromBase",
+		"EmissionRateProperty": "20.0f",
+		"ParticlesPerEmissionProperty": "2",
+		"EmissionChanceProperty": "0.25",
+		"RadiusProperty": "2.0",
+		"AngleProperty": "0.7"
+	},
+	
+	"Affectors":
+	[
+		{
+			"Type": "ColourOverLifetime",
+			"TargetColourProperty": "0.0 0.0 0.0 0.0"
+		},
+		{
+			"Type": "ScaleOverLifetime",
+			"ScaleProperty": "0.2 0.2"
+		},
+		{
+			"Type": "Acceleration",
+			"AccelerationProperty": "0.0 -3.3 0.0"
+		},
+		{
+			"Type": "AngularAcceleration",
+			"AngularAccelerationProperty": "10.0"
+		}
+	]
+}
