@@ -64,6 +64,7 @@ namespace CSTest
                         return "Cancelled";
                     default:
                         CS_LOG_FATAL("Invalid result.");
+						return "";
                 }
             }
         }

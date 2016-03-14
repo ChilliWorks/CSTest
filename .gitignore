@@ -9,9 +9,11 @@ gen
 xcuserdata
 *.sdf
 *.opensdf
+*.opendb
+*.pyc
 Projects/iOS/XcodeBuiltAssets
-Projects/Windows/csobj
-Projects/Windows/csbin
+Projects/Windows/.vs
+Projects/Windows/Build
 Projects/Android/cstest/local.properties
 Projects/Android/cstest/.gradle
 Projects/Android/cstest/.idea/workspace.xml
@@ -22,4 +24,3 @@ Projects/Android/cstest/app/src/main/libs/armeabi-v7a
 Projects/Android/cstest/app/src/main/libs/armeabi
 Projects/Android/cstest/app/src/main/libs/x86
 Projects/Android/cstest/build
-*.pyc

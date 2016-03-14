@@ -2,66 +2,60 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="AppSource">
-      <UniqueIdentifier>{2c700bfe-fe0b-40eb-b8bc-3280cc802bc0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AppSource\IntegrationTest">
-      <UniqueIdentifier>{99ee85e4-36ad-44b5-8704-ac8bba77aba8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AppSource\IntegrationTest\Tests">
-      <UniqueIdentifier>{4dc48266-4c13-45f1-b457-93b840559326}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AppSource\IntegrationTest\TestSystem">
-      <UniqueIdentifier>{15d22452-4cd1-40a3-afe7-09939628ec98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AppSource\WebView">
-      <UniqueIdentifier>{22b80dd3-0923-4692-8def-863a64cfa9e9}</UniqueIdentifier>
+      <UniqueIdentifier>{e3af39e3-66f2-4fc8-81be-2e2ff69be4f9}</UniqueIdentifier>
     </Filter>
     <Filter Include="AppSource\Common">
-      <UniqueIdentifier>{b404f532-a859-4e36-b46c-59332794476f}</UniqueIdentifier>
+      <UniqueIdentifier>{20f7ceb9-0257-4543-ac91-a708b8b411aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AppSource\Common\Core">
-      <UniqueIdentifier>{4354a0c9-ad52-4a15-abc5-098f3f9aae22}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AppSource\Common\UI">
-      <UniqueIdentifier>{f9c58e59-94d1-4ada-b866-d28defff0df0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AppSource\Common\Behaviour">
-      <UniqueIdentifier>{373c4375-d5ba-4e90-9cde-1746c1de6bc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AppSource\Lighting">
-      <UniqueIdentifier>{752ffa79-e03f-402a-91ad-f40207ad0d03}</UniqueIdentifier>
+    <Filter Include="AppSource\EmailComposer">
+      <UniqueIdentifier>{9137ee90-e962-4fd8-b61f-98a82c3bc132}</UniqueIdentifier>
     </Filter>
     <Filter Include="AppSource\HTTPRequest">
-      <UniqueIdentifier>{ff5aff15-c7a6-4d38-a5f0-19ff5424262c}</UniqueIdentifier>
+      <UniqueIdentifier>{ce75bbf2-3123-4072-b9c7-61ca6d080bec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\IntegrationTest">
+      <UniqueIdentifier>{aa185b3e-8a27-44d6-b0e8-65101cd7eb99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Lighting">
+      <UniqueIdentifier>{31cab2f5-ace5-47db-a659-a628b4b1a0b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\WebView">
+      <UniqueIdentifier>{06ffcfcd-02b6-429b-8e77-56f2ef165f8b}</UniqueIdentifier>
     </Filter>
     <Filter Include="AppSource\Gesture">
-      <UniqueIdentifier>{f32b5a87-c0d6-4bda-b401-0844b8e83c08}</UniqueIdentifier>
+      <UniqueIdentifier>{ea8fd364-86f0-4472-ae95-37089bab6cc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Common\Behaviour">
+      <UniqueIdentifier>{9b4f6935-4dd6-44a6-93ae-32822b4d9665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Common\Core">
+      <UniqueIdentifier>{5de7961b-7d3a-4c82-b655-4b0da15ff934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Common\UI">
+      <UniqueIdentifier>{d3a98938-d3e8-4a84-9c0b-d177e07a0ced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\IntegrationTest\TestSystem">
+      <UniqueIdentifier>{bfa7b5c8-8962-494e-917d-060e5f12ada9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\IntegrationTest\Tests">
+      <UniqueIdentifier>{3e62b116-8ec0-4bd6-bdbe-1537512c3c0b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
       <Filter>AppSource</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\State.cpp">
-      <Filter>AppSource\IntegrationTest</Filter>
+    <ClCompile Include="..\..\AppSource\Common\Behaviour\FollowerComponent.cpp">
+      <Filter>AppSource\Common\Behaviour</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.cpp">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    <ClCompile Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.cpp">
+      <Filter>AppSource\Common\Behaviour</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.cpp">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    <ClCompile Include="..\..\AppSource\Common\Core\Approx.cpp">
+      <Filter>AppSource\Common\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\Report.cpp">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.cpp">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.cpp">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystem.cpp">
-      <Filter>AppSource\IntegrationTest\Tests</Filter>
+    <ClCompile Include="..\..\AppSource\Common\Core\BasicEntityFactory.cpp">
+      <Filter>AppSource\Common\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\AppSource\Common\Core\ResultPresenter.cpp">
       <Filter>AppSource\Common\Core</Filter>
@@ -72,44 +66,11 @@
     <ClCompile Include="..\..\AppSource\Common\Core\SmokeTestSet.cpp">
       <Filter>AppSource\Common\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\WebView\State.cpp">
-      <Filter>AppSource\WebView</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.cpp">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector2.cpp">
-      <Filter>AppSource\IntegrationTest\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector3.cpp">
-      <Filter>AppSource\IntegrationTest\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector4.cpp">
-      <Filter>AppSource\IntegrationTest\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\Common\Core\Approx.cpp">
-      <Filter>AppSource\Common\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\Common\Behaviour\FollowerComponent.cpp">
-      <Filter>AppSource\Common\Behaviour</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.cpp">
-      <Filter>AppSource\Common\Behaviour</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\Common\Core\BasicEntityFactory.cpp">
-      <Filter>AppSource\Common\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\Lighting\State.cpp">
-      <Filter>AppSource\Lighting</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\AppSource\Common\UI\BasicWidgetFactory.cpp">
       <Filter>AppSource\Common\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\HTTPRequest\DownloadProgressTestSystem.cpp">
-      <Filter>AppSource\HTTPRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\HTTPRequest\State.cpp">
-      <Filter>AppSource\HTTPRequest</Filter>
+    <ClCompile Include="..\..\AppSource\EmailComposer\State.cpp">
+      <Filter>AppSource\EmailComposer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\AppSource\Gesture\EventInfo.cpp">
       <Filter>AppSource\Gesture</Filter>
@@ -120,6 +81,51 @@
     <ClCompile Include="..\..\AppSource\Gesture\State.cpp">
       <Filter>AppSource\Gesture</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\HTTPRequest\DownloadProgressTestSystem.cpp">
+      <Filter>AppSource\HTTPRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\HTTPRequest\State.cpp">
+      <Filter>AppSource\HTTPRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\State.cpp">
+      <Filter>AppSource\IntegrationTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystem.cpp">
+      <Filter>AppSource\IntegrationTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector2.cpp">
+      <Filter>AppSource\IntegrationTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector3.cpp">
+      <Filter>AppSource\IntegrationTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector4.cpp">
+      <Filter>AppSource\IntegrationTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\Report.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Lighting\State.cpp">
+      <Filter>AppSource\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\WebView\State.cpp">
+      <Filter>AppSource\WebView</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -128,23 +134,17 @@
     <ClInclude Include="..\..\AppSource\CSTest.h">
       <Filter>AppSource</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\State.h">
-      <Filter>AppSource\IntegrationTest</Filter>
+    <ClInclude Include="..\..\AppSource\Common\Behaviour\FollowerComponent.h">
+      <Filter>AppSource\Common\Behaviour</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.h">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    <ClInclude Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.h">
+      <Filter>AppSource\Common\Behaviour</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.h">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    <ClInclude Include="..\..\AppSource\Common\Core\Approx.h">
+      <Filter>AppSource\Common\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\Report.h">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.h">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.h">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    <ClInclude Include="..\..\AppSource\Common\Core\BasicEntityFactory.h">
+      <Filter>AppSource\Common\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Common\Core\ResultPresenter.h">
       <Filter>AppSource\Common\Core</Filter>
@@ -161,35 +161,11 @@
     <ClInclude Include="..\..\AppSource\Common\Core\StateNavigatorImpl.h">
       <Filter>AppSource\Common\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppSource\WebView\State.h">
-      <Filter>AppSource\WebView</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.h">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\Common\Core\Approx.h">
-      <Filter>AppSource\Common\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\Common\Behaviour\FollowerComponent.h">
-      <Filter>AppSource\Common\Behaviour</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.h">
-      <Filter>AppSource\Common\Behaviour</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\Common\Core\BasicEntityFactory.h">
-      <Filter>AppSource\Common\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\Lighting\State.h">
-      <Filter>AppSource\Lighting</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\AppSource\Common\UI\BasicWidgetFactory.h">
       <Filter>AppSource\Common\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppSource\HTTPRequest\DownloadProgressTestSystem.h">
-      <Filter>AppSource\HTTPRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\HTTPRequest\State.h">
-      <Filter>AppSource\HTTPRequest</Filter>
+    <ClInclude Include="..\..\AppSource\EmailComposer\State.h">
+      <Filter>AppSource\EmailComposer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Gesture\EventInfo.h">
       <Filter>AppSource\Gesture</Filter>
@@ -199,6 +175,39 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Gesture\State.h">
       <Filter>AppSource\Gesture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\HTTPRequest\DownloadProgressTestSystem.h">
+      <Filter>AppSource\HTTPRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\HTTPRequest\State.h">
+      <Filter>AppSource\HTTPRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\State.h">
+      <Filter>AppSource\IntegrationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\Report.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Lighting\State.h">
+      <Filter>AppSource\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\WebView\State.h">
+      <Filter>AppSource\WebView</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

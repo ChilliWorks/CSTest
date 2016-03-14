@@ -91,7 +91,7 @@ namespace CSTest
                     CSCore::Vector3 size(1.0f, CSCore::Random::Generate<f32>(1.0f, 3.0f), 1.0f);
                     CSCore::Vector3 worldPosition = positionInGrid + 0.5f * size;
                     
-                    CSCore::EntitySPtr box = primitiveEntityFactory->CreateBox(k_boxColours[CSCore::Random::Generate<u32>(0, k_boxColours.size() - 1)], size);
+                    CSCore::EntitySPtr box = primitiveEntityFactory->CreateBox(k_boxColours[CSCore::Random::Generate<u32>(0, u32(k_boxColours.size()) - 1)], size);
                     box->GetTransform().SetPosition(worldPosition);
                     GetScene()->Add(box);
                 }
