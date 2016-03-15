@@ -47,7 +47,10 @@ namespace CSTest
         {
             CreateSystem<Common::StateNavigator<HttpRequest::State>>();
             m_smokeTester = CreateSystem<Common::SmokeTester>();
+
+#ifndef CS_TARGETPLATFORM_WINDOWS
             m_audioPlayer = CreateSystem<CSAudio::CkAudioPlayer>();
+#endif
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -55,10 +58,11 @@ namespace CSTest
         {
             GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
+			Common::SmokeTestSet testSet("Cricket Audio");
+
+#ifndef CS_TARGETPLATFORM_WINDOWS
             auto resourcePool = CSCore::Application::Get()->GetResourcePool();
             auto bank = resourcePool->LoadResource<CSAudio::CkBank>(CSCore::StorageLocation::k_package, "SFX/SFX.ckb");
-            
-            Common::SmokeTestSet testSet("Web View");
             
             testSet.AddTest("Play Music", [=]()
             {
@@ -79,6 +83,7 @@ namespace CSTest
             {
                 m_audioPlayer->PlayEffect(bank, "Beep02");
             });
+#endif
             
             m_smokeTester->Present(testSet);
         }
