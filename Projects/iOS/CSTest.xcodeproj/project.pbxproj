@@ -70,14 +70,15 @@
 		81CF70B71C8F363C000DDF92 /* EventInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CF70881C8F363C000DDF92 /* EventInfo.cpp */; };
 		81CF70B81C8F363C000DDF92 /* GesturePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CF708A1C8F363C000DDF92 /* GesturePresenter.cpp */; };
 		81CF70B91C8F363C000DDF92 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CF708C1C8F363C000DDF92 /* State.cpp */; };
-		81CF70BA1C8F363C000DDF92 /* DownloadProgressTestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CF708F1C8F363C000DDF92 /* DownloadProgressTestSystem.cpp */; };
-		81CF70BB1C8F363C000DDF92 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CF70911C8F363C000DDF92 /* State.cpp */; };
 		81CF70C71C8F363C000DDF92 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CF70A91C8F363C000DDF92 /* State.cpp */; };
 		81CF70C81C8F363C000DDF92 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CF70AC1C8F363C000DDF92 /* State.cpp */; };
 		81CF70CC1C8F3850000DDF92 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CF70CA1C8F3850000DDF92 /* State.cpp */; };
 		81E64C111C996CC300579AB3 /* TestDesc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E64C0F1C996CC300579AB3 /* TestDesc.cpp */; };
 		81E64C141C999FAF00579AB3 /* Report.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E64C121C999FAF00579AB3 /* Report.cpp */; };
 		81E64C171C99A5F000579AB3 /* ReportPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E64C151C99A5F000579AB3 /* ReportPresenter.cpp */; };
+		81E64C191C99B34D00579AB3 /* HttpRequestTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E64C181C99B34D00579AB3 /* HttpRequestTest.cpp */; };
+		81E64C1F1C99BDA600579AB3 /* DownloadProgressTestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E64C1B1C99BDA600579AB3 /* DownloadProgressTestSystem.cpp */; };
+		81E64C201C99BDA600579AB3 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E64C1D1C99BDA600579AB3 /* State.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,10 +186,6 @@
 		81CF708B1C8F363C000DDF92 /* GesturePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GesturePresenter.h; sourceTree = "<group>"; };
 		81CF708C1C8F363C000DDF92 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81CF708D1C8F363C000DDF92 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
-		81CF708F1C8F363C000DDF92 /* DownloadProgressTestSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DownloadProgressTestSystem.cpp; sourceTree = "<group>"; };
-		81CF70901C8F363C000DDF92 /* DownloadProgressTestSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadProgressTestSystem.h; sourceTree = "<group>"; };
-		81CF70911C8F363C000DDF92 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
-		81CF70921C8F363C000DDF92 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81CF70A91C8F363C000DDF92 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81CF70AA1C8F363C000DDF92 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81CF70AC1C8F363C000DDF92 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
@@ -201,6 +198,11 @@
 		81E64C131C999FAF00579AB3 /* Report.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Report.h; sourceTree = "<group>"; };
 		81E64C151C99A5F000579AB3 /* ReportPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReportPresenter.cpp; sourceTree = "<group>"; };
 		81E64C161C99A5F000579AB3 /* ReportPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportPresenter.h; sourceTree = "<group>"; };
+		81E64C181C99B34D00579AB3 /* HttpRequestTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestTest.cpp; sourceTree = "<group>"; };
+		81E64C1B1C99BDA600579AB3 /* DownloadProgressTestSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DownloadProgressTestSystem.cpp; sourceTree = "<group>"; };
+		81E64C1C1C99BDA600579AB3 /* DownloadProgressTestSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadProgressTestSystem.h; sourceTree = "<group>"; };
+		81E64C1D1C99BDA600579AB3 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81E64C1E1C99BDA600579AB3 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +310,7 @@
 		81BF96D11C984F6700E51E18 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				81E64C181C99B34D00579AB3 /* HttpRequestTest.cpp */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -424,9 +427,9 @@
 				81CF706F1C8F363C000DDF92 /* App.h */,
 				81CF70701C8F363C000DDF92 /* Common */,
 				81CF70861C8F363C000DDF92 /* CSTest.h */,
+				81E64C1A1C99BDA600579AB3 /* DownloadProgress */,
 				81CF70C91C8F3850000DDF92 /* EmailComposer */,
 				81CF70871C8F363C000DDF92 /* Gesture */,
-				81CF708E1C8F363C000DDF92 /* HTTPRequest */,
 				81BF96CE1C984F6700E51E18 /* IntegrationTest */,
 				81CF70A81C8F363C000DDF92 /* Lighting */,
 				814192861C97099B0056F280 /* Particle */,
@@ -499,17 +502,6 @@
 			path = Gesture;
 			sourceTree = "<group>";
 		};
-		81CF708E1C8F363C000DDF92 /* HTTPRequest */ = {
-			isa = PBXGroup;
-			children = (
-				81CF708F1C8F363C000DDF92 /* DownloadProgressTestSystem.cpp */,
-				81CF70901C8F363C000DDF92 /* DownloadProgressTestSystem.h */,
-				81CF70911C8F363C000DDF92 /* State.cpp */,
-				81CF70921C8F363C000DDF92 /* State.h */,
-			);
-			path = HTTPRequest;
-			sourceTree = "<group>";
-		};
 		81CF70A81C8F363C000DDF92 /* Lighting */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,6 +527,17 @@
 				81CF70CB1C8F3850000DDF92 /* State.h */,
 			);
 			path = EmailComposer;
+			sourceTree = "<group>";
+		};
+		81E64C1A1C99BDA600579AB3 /* DownloadProgress */ = {
+			isa = PBXGroup;
+			children = (
+				81E64C1B1C99BDA600579AB3 /* DownloadProgressTestSystem.cpp */,
+				81E64C1C1C99BDA600579AB3 /* DownloadProgressTestSystem.h */,
+				81E64C1D1C99BDA600579AB3 /* State.cpp */,
+				81E64C1E1C99BDA600579AB3 /* State.h */,
+			);
+			path = DownloadProgress;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -649,8 +652,10 @@
 				81CF70B01C8F363C000DDF92 /* OrbiterComponent.cpp in Sources */,
 				81BF96C51C984DE400E51E18 /* Vector2.cpp in Sources */,
 				81BF96C91C984DE400E51E18 /* FailedAssertion.cpp in Sources */,
+				81E64C191C99B34D00579AB3 /* HttpRequestTest.cpp in Sources */,
 				81CF70B41C8F363C000DDF92 /* SmokeTester.cpp in Sources */,
 				81E64C141C999FAF00579AB3 /* Report.cpp in Sources */,
+				81E64C201C99BDA600579AB3 /* State.cpp in Sources */,
 				81CF70B11C8F363C000DDF92 /* Approx.cpp in Sources */,
 				81CF70C81C8F363C000DDF92 /* State.cpp in Sources */,
 				81BF96C71C984DE400E51E18 /* Vector4.cpp in Sources */,
@@ -662,8 +667,8 @@
 				81CF70B21C8F363C000DDF92 /* BasicEntityFactory.cpp in Sources */,
 				81BF96CB1C984DE400E51E18 /* ReportPresenter.cpp in Sources */,
 				81BF96DC1C984F6700E51E18 /* Tester.cpp in Sources */,
-				81CF70BA1C8F363C000DDF92 /* DownloadProgressTestSystem.cpp in Sources */,
 				81BF96D91C984F6700E51E18 /* State.cpp in Sources */,
+				81E64C1F1C99BDA600579AB3 /* DownloadProgressTestSystem.cpp in Sources */,
 				81CF70B51C8F363C000DDF92 /* SmokeTestSet.cpp in Sources */,
 				81CF70AE1C8F363C000DDF92 /* App.cpp in Sources */,
 				81CF70B71C8F363C000DDF92 /* EventInfo.cpp in Sources */,
@@ -676,7 +681,6 @@
 				81CF70B61C8F363C000DDF92 /* BasicWidgetFactory.cpp in Sources */,
 				81BF96C41C984DE400E51E18 /* FileSystem.cpp in Sources */,
 				81E64C171C99A5F000579AB3 /* ReportPresenter.cpp in Sources */,
-				81CF70BB1C8F363C000DDF92 /* State.cpp in Sources */,
 				81CF70B31C8F363C000DDF92 /* ResultPresenter.cpp in Sources */,
 				81CF70B91C8F363C000DDF92 /* State.cpp in Sources */,
 			);

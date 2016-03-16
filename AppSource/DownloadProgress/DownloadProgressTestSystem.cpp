@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Tag Games Ltd. All rights reserved.
 //
 
-#include <HttpRequest/DownloadProgressTestSystem.h>
+#include <DownloadProgress/DownloadProgressTestSystem.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Resource.h>
@@ -19,7 +19,7 @@
 
 namespace CSTest
 {
-    namespace HttpRequest
+    namespace DownloadProgress
     {
         namespace
         {

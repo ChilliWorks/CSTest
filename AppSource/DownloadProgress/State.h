@@ -26,8 +26,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _HTTPREQUEST_STATE_H_
-#define _HTTPREQUEST_STATE_H_
+#ifndef _DOWNLOADPROGRESS_STATE_H_
+#define _DOWNLOADPROGRESS_STATE_H_
 
 #include <CSTest.h>
 
@@ -35,10 +35,10 @@
 
 namespace CSTest
 {
-    namespace HttpRequest
+    namespace DownloadProgress
     {
         //------------------------------------------------------------------------------
-        /// A state for testing the various ways in which a web view can be used.
+        /// A state for testing HTTP request download progress.
         ///
         /// @author HMcLaughlin
         //------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ namespace CSTest
             ///
             /// @author HMcLaughlin
             ///
-            /// @param in_response - HttpResponse
+            /// @param in_response - The HTTP response.
             //------------------------------------------------------------------------------
             void PresentHttpResponse(const CSNetworking::HttpResponse& in_response);
             //------------------------------------------------------------------------------
@@ -67,7 +67,6 @@ namespace CSTest
             void OnInit() override;
             
         private:
-            
             Common::SmokeTester* m_smokeTester = nullptr;
             Common::ResultPresenter* m_resultPresenter = nullptr;
             CSNetworking::HttpRequestSystem* m_httpRequestSystem = nullptr;

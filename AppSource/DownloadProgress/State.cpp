@@ -26,33 +26,31 @@
 //  THE SOFTWARE.
 //
 
-#include <HttpRequest/State.h>
+#include <DownloadProgress/State.h>
 
 #include <Common/Core/ResultPresenter.h>
 #include <Common/Core/SmokeTester.h>
 #include <Common/Core/SmokeTestSet.h>
 #include <Common/Core/StateNavigator.h>
-#include <HttpRequest/DownloadProgressTestSystem.h>
+#include <DownloadProgress/DownloadProgressTestSystem.h>
 #include <WebView/State.h>
 
-#include <ChilliSource/Core/DialogueBox.h>
 #include <ChilliSource/Core/Scene.h>
-#include <ChilliSource/Core/Time.h>
 #include <ChilliSource/Networking/Http.h>
 #include <ChilliSource/UI/Base.h>
-#include <ChilliSource/UI/ProgressBar.h>
-#include <ChilliSource/Web/Base.h>
 
 namespace CSTest
 {
-    namespace HttpRequest
+    namespace DownloadProgress
     {
         namespace
         {
             //------------------------------------------------------------------------------
-            /// Converts a HTTP::Result to string
-            ///
             /// @author HMcLaughlin
+            ///
+            /// @param in_result - The HTTP result which should be converted to a string.
+            ///
+            /// @return The string representation of the given HTTP result.
             //------------------------------------------------------------------------------
             std::string ToString(CSNetworking::HttpResponse::Result in_result)
             {
@@ -85,69 +83,22 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
+            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            
             m_httpRequestSystem = CSCore::Application::Get()->GetSystem<CSNetworking::HttpRequestSystem>();
             CS_ASSERT(m_httpRequestSystem, "Cannot complete HttpRequest smoke test as the system could not be created!");
             
-            const u32 k_downloadBufferSize = 100 * 1024;//100KB
-            
-            //Setup the http system with a buffer size
+            const u32 k_downloadBufferSize = 100 * 1024;
             m_httpRequestSystem->SetMaxBufferSize(k_downloadBufferSize);
             
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
-            
-            Common::SmokeTestSet testSet("HttpRequest");
-            
-            testSet.AddTest("Get Request", [=]()
-            {
-                m_httpRequestSystem->MakeGetRequest("http://www.google.com", [=](const CSNetworking::HttpRequest* in_request, const CSNetworking::HttpResponse& in_response)
-                {
-                    PresentHttpResponse(in_response);
-                });
-            });
-            
-            testSet.AddTest("Get Request, w-headers", [=]()
-            {
-                CSCore::ParamDictionary headersTest;
-                headersTest["Accept-Language"] = "en-us,en;q=0.5";
-                
-                m_httpRequestSystem->MakeGetRequest("http://www.google.com", headersTest, [=](const CSNetworking::HttpRequest* in_request, const CSNetworking::HttpResponse& in_response)
-                {
-                    PresentHttpResponse(in_response);
-                });
-            });
-            
-            testSet.AddTest("Post Request", [=]()
-            {
-                m_httpRequestSystem->MakePostRequest("http://postcatcher.in/catchers/55b9fc6f24937d0300000292", "SomeData", [=](const CSNetworking::HttpRequest* in_request, const CSNetworking::HttpResponse& in_response)
-                {
-                    PresentHttpResponse(in_response);
-                });
-            });
-            
-            testSet.AddTest("Post Request, w-headers", [=]()
-            {
-                CSCore::ParamDictionary headersTest;
-                headersTest["Accept-Language"] = "en-us,en;q=0.5";
-                
-                m_httpRequestSystem->MakePostRequest("http://postcatcher.in/catchers/55b9fc6f24937d0300000292", "SomeData", headersTest, [=](const CSNetworking::HttpRequest* in_request, const CSNetworking::HttpResponse& in_response)
-                {
-                    PresentHttpResponse(in_response);
-                });
-            });
-            
-            testSet.AddTest("Download progress", [=]()
+            Common::SmokeTestSet testSet("Download Progress");
+
+            testSet.AddTest("Test download progress", [=]()
             {
                 m_downloadProgressTestSystem->StartDownloadTest("http://download.thinkbroadband.com/5MB.zip", [=](const CSNetworking::HttpResponse& in_completeResponse)
                 {
                     PresentHttpResponse(in_completeResponse);
                 });
-            });
-            
-            testSet.AddTest("Check Reachability", [=]()
-            {
-                bool reachable = m_httpRequestSystem->CheckReachability();
-                
-                m_resultPresenter->Present("Rechability status - " + CSCore::ToString(reachable));
             });
             
             m_smokeTester->Present(testSet);
@@ -159,7 +110,7 @@ namespace CSTest
             //Ignore flush responses
             if(in_response.GetResult() != CSNetworking::HttpResponse::Result::k_flushed)
             {
-                m_resultPresenter->Present("Request returned:\nStatus - " + ToString(in_response.GetResult()) + "\nResponse Code - " + CSCore::ToString(in_response.GetCode()));
+                m_resultPresenter->Present("Request Status: " + ToString(in_response.GetResult()) + "\nResponse Code: " + CSCore::ToString(in_response.GetCode()));
             }
         }
     }

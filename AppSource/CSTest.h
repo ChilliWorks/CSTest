@@ -46,17 +46,17 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(FollowerComponent);
     }
     
+    namespace DownloadProgress
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+        CS_FORWARDDECLARE_CLASS(DownloadProgressTestSystem);
+    }
+    
     namespace Gesture
     {
         CS_FORWARDDECLARE_CLASS(EventInfo);
         CS_FORWARDDECLARE_CLASS(GesturePresenter);
         CS_FORWARDDECLARE_CLASS(State);
-    }
-    
-    namespace HttpRequest
-    {
-        CS_FORWARDDECLARE_CLASS(State);
-        CS_FORWARDDECLARE_CLASS(DownloadProgressTestSystem);
     }
     
     namespace IntegrationTest

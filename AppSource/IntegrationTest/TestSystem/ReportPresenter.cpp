@@ -89,7 +89,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void ReportPresenter::PresentProgress(const TestDesc& in_testDesc, u32 in_testIndex, u32 in_numTests)
         {
-            SetText("Running test " + CSCore::ToString(in_testIndex) + "/" + CSCore::ToString(in_numTests) + ": " + in_testDesc.GetTestName());
+            SetText("Running test " + CSCore::ToString(in_testIndex) + " out of " + CSCore::ToString(in_numTests) + ": " + in_testDesc.GetTestName());
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

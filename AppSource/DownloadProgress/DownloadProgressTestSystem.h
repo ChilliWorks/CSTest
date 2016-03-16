@@ -27,18 +27,19 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _HTTPREQUEST_DOWNLOADPROGRESSTESTSYSTEM_H_
-#define _HTTPREQUEST_DOWNLOADPROGRESSTESTSYSTEM_H_
+#ifndef _DOWNLOADPROGRESS_DOWNLOADPROGRESSTESTSYSTEM_H_
+#define _DOWNLOADPROGRESS_DOWNLOADPROGRESSTESTSYSTEM_H_
 
 #include <CSTest.h>
 
-#include <ChilliSource/Core/System/StateSystem.h>
+#include <ChilliSource/Core/System.h>
+#include <ChilliSource/Core/Time.h>
 
 #include <functional>
 
 namespace CSTest
 {
-    namespace HttpRequest
+    namespace DownloadProgress
     {
         //------------------------------------------------------------------------------
         /// System used to test download functionality with UI feedback
