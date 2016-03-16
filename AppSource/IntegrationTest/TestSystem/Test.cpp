@@ -1,11 +1,11 @@
 //
-//  TestSystem.cpp
+//  Test.cpp
 //  CSTest
-//  Created by Ian Copland on 15/07/2015.
+//  Created by Ian Copland on 15/03/2016.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Tag Games Limited
+//  Copyright (c) 2016 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,47 +26,71 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/TestSystem/TestSystem.h>
+#include <IntegrationTest/TestSystem/Test.h>
 
-#include <IntegrationTest/TestSystem/CSReporter.h>
-
-#define CATCH_CONFIG_RUNNER
-#include <catch.hpp>
+#include <ChilliSource/Core/Base.h>
+#include <ChilliSource/Core/Threading.h>
 
 namespace CSTest
 {
     namespace IntegrationTest
     {
-        CS_DEFINE_NAMEDTYPE(TestSystem);
-        
-        Catch::Session TestSystem::s_session;
-        
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        TestSystemUPtr TestSystem::Create()
+        Test::Test(const TestDesc& in_desc, const PassDelegate& in_passDelegate, const FailDelegate& in_failDelegate) noexcept
+            : m_desc(in_desc), m_passDelegate(in_passDelegate), m_failDelegate(in_failDelegate)
         {
-            return TestSystemUPtr(new TestSystem());
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        bool TestSystem::IsA(CSCore::InterfaceIDType in_interfaceId) const
-        {
-            return (TestSystem::InterfaceID == in_interfaceId);
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        Report TestSystem::PerformTests()
-        {
-            s_session.configData().reporterName = "cs";
-
-            s_session.run();
+            CS_ASSERT(m_passDelegate, "A valid pass delegate must be supplied.");
+            CS_ASSERT(m_failDelegate, "A valid fail delegate must be supplied.");
             
-            return CSReporter::getReport();
+            m_taskScheduler = CSCore::Application::Get()->GetTaskScheduler();
+            
+            m_desc.GetTestDelegate()(this);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void TestSystem::OnInit()
+        const TestDesc& Test::GetDesc() const noexcept
         {
+            return m_desc;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void Test::Pass() noexcept
+        {
+            std::unique_lock<std::mutex> lock(m_mutex);
+            
+            if (m_active)
+            {
+                m_active = false;
+                m_taskScheduler->ScheduleMainThreadTask([=]() noexcept
+                {
+                    m_passDelegate();
+                });
+            }
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void Test::Fail(const std::string& in_message) noexcept
+        {
+            std::unique_lock<std::mutex> lock(m_mutex);
+            
+            if (m_active)
+            {
+                m_active = false;
+                m_taskScheduler->ScheduleMainThreadTask([=]() noexcept
+                {
+                    m_failDelegate(in_message);
+                });
+            }
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void Test::Assert(bool in_condition, const std::string& in_failureMessage) noexcept
+        {
+            if (!in_condition)
+            {
+                Fail(in_failureMessage);
+            }
         }
     }
 }

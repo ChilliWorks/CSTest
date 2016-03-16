@@ -26,17 +26,17 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _INTEGRATIONTEST_TESTSYSTEM_REPORTPRESENTATIONSYSTEM_H_
-#define _INTEGRATIONTEST_TESTSYSTEM_REPORTPRESENTATIONSYSTEM_H_
+#ifndef _UNITTEST_TESTSYSTEM_REPORTPRESENTATIONSYSTEM_H_
+#define _UNITTEST_TESTSYSTEM_REPORTPRESENTATIONSYSTEM_H_
 
 #include <CSTest.h>
-#include <IntegrationTest/TestSystem/Report.h>
+#include <UnitTest/TestSystem/Report.h>
 
 #include <ChilliSource/Core/System.h>
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace UnitTest
     {
         //------------------------------------------------------------------------------
         /// A system which renders the results of the integration tests to screen.

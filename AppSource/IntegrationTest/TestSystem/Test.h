@@ -1,5 +1,5 @@
 //
-//  State.h
+//  Test.h
 //  CSTest
 //  Created by Ian Copland on 15/03/2016.
 //
@@ -26,50 +26,81 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _INTEGRATIONTEST_STATE_H_
-#define _INTEGRATIONTEST_STATE_H_
+#ifndef _INTEGRATIONTEST_TESTSYSTEM_TEST_H_
+#define _INTEGRATIONTEST_TESTSYSTEM_TEST_H_
 
 #include <CSTest.h>
 
-#include <IntegrationTest/TestSystem/Tester.h>
+#include <IntegrationTest/TestSystem/TestDesc.h>
 
-#include <ChilliSource/Core/State.h>
+#include <mutex>
 
 namespace CSTest
 {
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// A state which runs all defined integration tests and presents the results of
-        /// the tests on screen.
+        /// TODO
+        ///
+        /// This is thread-safe, though it should be created on the main thread.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        class Test final
         {
-        private:
+        public:
+            CS_DECLARE_NOCOPY(Test);
             //------------------------------------------------------------------------------
-            /// The life-cycle event for creating all state systems.
+            /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void CreateSystems() override;
+            using PassDelegate = std::function<void() noexcept>;
             //------------------------------------------------------------------------------
-            /// Initialises the state.
+            /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnInit() override;
+            using FailDelegate = std::function<void(const std::string& in_message) noexcept>;
             //------------------------------------------------------------------------------
-            /// The life-cycle event when is called every frame that the state is active.
+            /// TODO
             ///
             /// @author Ian Copland
-            ///
-            /// @param in_deltaTime - The time passed since the last frame.
             //------------------------------------------------------------------------------
-            void OnUpdate(f32 in_deltaTime) override;
+            Test(const TestDesc& in_desc, const PassDelegate& in_passDelegate, const FailDelegate& in_failDelegate) noexcept;
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            const TestDesc& GetDesc() const noexcept;
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void Pass() noexcept;
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void Fail(const std::string& in_message) noexcept;
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void Assert(bool in_condition, const std::string& in_failureMessage = "") noexcept;
             
-            TesterUPtr m_tester;
+        private:
+            const TestDesc m_desc;
+            const PassDelegate m_passDelegate;
+            const FailDelegate m_failDelegate;
+            
+            CSCore::TaskScheduler* m_taskScheduler = nullptr;
+            bool m_active = true;
+            std::mutex m_mutex;
         };
     }
 }

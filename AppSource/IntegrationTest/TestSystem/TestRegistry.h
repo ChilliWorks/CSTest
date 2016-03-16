@@ -1,5 +1,5 @@
 //
-//  State.h
+//  TestRegistry.h
 //  CSTest
 //  Created by Ian Copland on 15/03/2016.
 //
@@ -26,50 +26,57 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _INTEGRATIONTEST_STATE_H_
-#define _INTEGRATIONTEST_STATE_H_
+#ifndef _INTEGRATIONTEST_TESTSYSTEM_TESTREGISTRY_H_
+#define _INTEGRATIONTEST_TESTSYSTEM_TESTREGISTRY_H_
 
 #include <CSTest.h>
 
-#include <IntegrationTest/TestSystem/Tester.h>
+#include <IntegrationTest/TestSystem/TestDesc.h>
 
-#include <ChilliSource/Core/State.h>
+#include <vector>
 
 namespace CSTest
 {
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// A state which runs all defined integration tests and presents the results of
-        /// the tests on screen.
+        /// TODO
+        ///
+        /// This is not thread-safe.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        class TestRegistry final
         {
-        private:
+        public:
+            CS_DECLARE_NOCOPY(TestRegistry);
             //------------------------------------------------------------------------------
-            /// The life-cycle event for creating all state systems.
+            /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void CreateSystems() override;
+            TestRegistry() = default;
             //------------------------------------------------------------------------------
-            /// Initialises the state.
+            /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnInit() override;
+            static TestRegistry& Get() noexcept;
             //------------------------------------------------------------------------------
-            /// The life-cycle event when is called every frame that the state is active.
+            /// TODO
             ///
             /// @author Ian Copland
-            ///
-            /// @param in_deltaTime - The time passed since the last frame.
             //------------------------------------------------------------------------------
-            void OnUpdate(f32 in_deltaTime) override;
+            void RegisterTest(const TestDesc& in_desc) noexcept;
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            const std::vector<TestDesc>& GetTests() const noexcept;
             
-            TesterUPtr m_tester;
+        private:
+            std::vector<TestDesc> m_tests;
         };
     }
 }

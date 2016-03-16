@@ -36,7 +36,7 @@
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace UnitTest
     {
         TEST_CASE("Vector3: Construction and component validation", "[Math][Vector3]")
         {

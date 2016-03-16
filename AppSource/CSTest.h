@@ -46,17 +46,6 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(FollowerComponent);
     }
     
-    namespace IntegrationTest
-    {
-        CS_FORWARDDECLARE_CLASS(CSReporter);
-        CS_FORWARDDECLARE_CLASS(FailedAssertion);
-        CS_FORWARDDECLARE_CLASS(Report);
-        CS_FORWARDDECLARE_CLASS(ReportPresenter);
-        CS_FORWARDDECLARE_CLASS(State);
-        CS_FORWARDDECLARE_CLASS(TestCase);
-        CS_FORWARDDECLARE_CLASS(TestSystem);
-    }
-    
     namespace Gesture
     {
         CS_FORWARDDECLARE_CLASS(EventInfo);
@@ -70,9 +59,30 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(DownloadProgressTestSystem);
     }
     
+    namespace IntegrationTest
+    {
+        CS_FORWARDDECLARE_CLASS(AutoRegister);
+        CS_FORWARDDECLARE_CLASS(State);
+        CS_FORWARDDECLARE_CLASS(Test);
+        CS_FORWARDDECLARE_CLASS(TestDesc);
+        CS_FORWARDDECLARE_CLASS(Tester);
+        CS_FORWARDDECLARE_CLASS(TestRegistry);
+    }
+    
     namespace Lighting
     {
         CS_FORWARDDECLARE_CLASS(State);
+    }
+    
+    namespace UnitTest
+    {
+        CS_FORWARDDECLARE_CLASS(CSReporter);
+        CS_FORWARDDECLARE_CLASS(FailedAssertion);
+        CS_FORWARDDECLARE_CLASS(Report);
+        CS_FORWARDDECLARE_CLASS(ReportPresenter);
+        CS_FORWARDDECLARE_CLASS(State);
+        CS_FORWARDDECLARE_CLASS(TestCase);
+        CS_FORWARDDECLARE_CLASS(TestSystem);
     }
     
     namespace WebView

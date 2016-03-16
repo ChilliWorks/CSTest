@@ -1,5 +1,5 @@
 //
-//  TestSystem.h
+//  FailedAssertion.h
 //  CSTest
 //  Created by Ian Copland on 15/07/2015.
 //
@@ -26,77 +26,58 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _INTEGRATIONTEST_TESTSYSTEM_TESTSYSTEM_H_
-#define _INTEGRATIONTEST_TESTSYSTEM_TESTSYSTEM_H_
+#ifndef _UNITTEST_TESTSYSTEM_FAILEDASSERTION_H_
+#define _UNITTEST_TESTSYSTEM_FAILEDASSERTION_H_
 
 #include <CSTest.h>
-#include <IntegrationTest/TestSystem/Report.h>
-
-#include <ChilliSource/Core/System.h>
-
-namespace Catch { class Session; }
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace UnitTest
     {
         //------------------------------------------------------------------------------
-        /// A system for performing integration tests using Catch. The tests should be
-        /// setup using standard Catch format.
+        /// A container for all information pertaining to a single failed test assertion.
+        ///
+        /// This is immutable after construction.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class TestSystem final : public CSCore::StateSystem
+        class FailedAssertion final
         {
         public:
-            CS_DECLARE_NAMEDTYPE(TestSystem);
             //------------------------------------------------------------------------------
-            /// Allows querying of whether or not this system implements the interface
-            /// described by the given interface Id. Typically this is not called directly
-            /// as the templated equivalent IsA<Interface>() is preferred.
+            /// Constructor. Creates the assertion with failure information.
             ///
             /// @author Ian Copland
             ///
-            /// @param The interface Id.
-            ///
-            /// @return Whether or not the interface is implemented.
+            /// @param in_filePath - The file the failed assertion is contained in.
+            /// @param in_line - The line the failed assertion is at within the file.
+            /// @param in_errorMessage - The error message associated with the assertion.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            FailedAssertion(const std::string& in_filePath, u32 in_line, const std::string& in_errorMessage);
             //------------------------------------------------------------------------------
-            /// Performs all integration tests and returns a report detailing whether or not
-            /// they were successful.
-            ///
             /// @author Ian Copland
             ///
-            /// @return The test report.
+            /// @return The file the failed assertion is contained in.
             //------------------------------------------------------------------------------
-            Report PerformTests();
+            const std::string& GetFilePath() const;
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return The line the failed assertion is at within the file.
+            //------------------------------------------------------------------------------
+            u32 GetLine() const;
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return The error message associated with the assertion.
+            //------------------------------------------------------------------------------
+            const std::string& GetErrorMessage() const;
             
         private:
-            friend class CSCore::State;
-            //------------------------------------------------------------------------------
-            /// A factory method for creating new instances of the system.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @return The new instance.
-            //------------------------------------------------------------------------------
-            static TestSystemUPtr Create();
-            //------------------------------------------------------------------------------
-            /// Default constructor. Declared private to ensure the system is created
-            /// through State::CreateSystem<TestSystem>().
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            TestSystem() = default;
-            //------------------------------------------------------------------------------
-            /// Initialises the test system.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnInit() override;
-            
-            static Catch::Session s_session; //there can only be one catch session
+            std::string m_filePath;
+            u32 m_line;
+            std::string m_errorMessage;
         };
     }
 }

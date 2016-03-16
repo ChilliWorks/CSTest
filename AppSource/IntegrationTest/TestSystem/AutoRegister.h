@@ -1,5 +1,5 @@
 //
-//  State.h
+//  AutoRegister.h
 //  CSTest
 //  Created by Ian Copland on 15/03/2016.
 //
@@ -26,50 +26,43 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _INTEGRATIONTEST_STATE_H_
-#define _INTEGRATIONTEST_STATE_H_
+#ifndef _INTEGRATIONTEST_TESTSYSTEM_AUTOREGISTER_H_
+#define _INTEGRATIONTEST_TESTSYSTEM_AUTOREGISTER_H_
 
 #include <CSTest.h>
 
-#include <IntegrationTest/TestSystem/Tester.h>
-
-#include <ChilliSource/Core/State.h>
+#include <IntegrationTest/TestSystem/TestRegistry.h>
 
 namespace CSTest
 {
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// A state which runs all defined integration tests and presents the results of
-        /// the tests on screen.
+        /// TODO
+        ///
+        /// This is not thread-safe.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        class AutoRegister final
         {
-        private:
+        public:
+            CS_DECLARE_NOCOPY(AutoRegister);
             //------------------------------------------------------------------------------
-            /// The life-cycle event for creating all state systems.
+            /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void CreateSystems() override;
+            AutoRegister() = default;
             //------------------------------------------------------------------------------
-            /// Initialises the state.
+            /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnInit() override;
-            //------------------------------------------------------------------------------
-            /// The life-cycle event when is called every frame that the state is active.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @param in_deltaTime - The time passed since the last frame.
-            //------------------------------------------------------------------------------
-            void OnUpdate(f32 in_deltaTime) override;
-            
-            TesterUPtr m_tester;
+            AutoRegister(const TestDesc& in_testDesc) noexcept
+            {
+                TestRegistry::Get().RegisterTest(in_testDesc);
+            }
         };
     }
 }

@@ -1,7 +1,7 @@
 //
-//  FailedAssertion.h
+//  State.h
 //  CSTest
-//  Created by Ian Copland on 15/07/2015.
+//  Created by Ian Copland on 13/07/2015.
 //
 //  The MIT License (MIT)
 //
@@ -26,58 +26,51 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _INTEGRATIONTEST_TESTSYSTEM_FAILEDASSERTION_H_
-#define _INTEGRATIONTEST_TESTSYSTEM_FAILEDASSERTION_H_
+#ifndef _UNITTEST_STATE_H_
+#define _UNITTEST_STATE_H_
 
 #include <CSTest.h>
 
+#include <ChilliSource/Core/State.h>
+
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace UnitTest
     {
         //------------------------------------------------------------------------------
-        /// A container for all information pertaining to a single failed test assertion.
-        ///
-        /// This is immutable after construction.
+        /// A state which runs a number of low level integration tests using Catch.
+        /// All Tests for features which can be automated are included here. Other
+        /// features such as input and graphics are smoked tested in other states.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class FailedAssertion final
+        class State final : public CSCore::State
         {
-        public:
             //------------------------------------------------------------------------------
-            /// Constructor. Creates the assertion with failure information.
+            /// The life-cycle event for creating all state systems.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void CreateSystems() override;
+            //------------------------------------------------------------------------------
+            /// Initialises the state.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void OnInit() override;
+            //------------------------------------------------------------------------------
+            /// The life-cycle event when is called every frame that the state is active.
             ///
             /// @author Ian Copland
             ///
-            /// @param in_filePath - The file the failed assertion is contained in.
-            /// @param in_line - The line the failed assertion is at within the file.
-            /// @param in_errorMessage - The error message associated with the assertion.
+            /// @param in_deltaTime - The time passed since the last frame.
             //------------------------------------------------------------------------------
-            FailedAssertion(const std::string& in_filePath, u32 in_line, const std::string& in_errorMessage);
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return The file the failed assertion is contained in.
-            //------------------------------------------------------------------------------
-            const std::string& GetFilePath() const;
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return The line the failed assertion is at within the file.
-            //------------------------------------------------------------------------------
-            u32 GetLine() const;
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return The error message associated with the assertion.
-            //------------------------------------------------------------------------------
-            const std::string& GetErrorMessage() const;
+            void OnUpdate(f32 in_deltaTime) override;
             
-        private:
-            std::string m_filePath;
-            u32 m_line;
-            std::string m_errorMessage;
+            TestSystem* m_testSystem = nullptr;
+            ReportPresenter* m_reportPresenter = nullptr;
+            bool m_testsPerformed = false;
+            f32 m_timer = 0.0f;
         };
     }
 }

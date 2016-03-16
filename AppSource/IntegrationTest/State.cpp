@@ -1,11 +1,11 @@
 //
 //  State.cpp
 //  CSTest
-//  Created by Ian Copland on 13/07/2015.
+//  Created by Ian Copland on 15/03/2016.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Tag Games Limited
+//  Copyright (c) 2016 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,8 @@
 #include <IntegrationTest/State.h>
 
 #include <Common/Core/StateNavigator.h>
-#include <IntegrationTest/TestSystem/ReportPresenter.h>
-#include <IntegrationTest/TestSystem/TestSystem.h>
+#include <IntegrationTest/TestSystem/Tester.h>
+#include <IntegrationTest/TestSystem/TestRegistry.h>
 #include <Lighting/State.h>
 
 #include <ChilliSource/Core/Scene.h>
@@ -43,15 +43,65 @@ namespace CSTest
         {
             using NextState = Lighting::State;
             
-            const f32 k_timeBeforeTests = 0.5f;
+            CSIT_TESTCASE(TestCase01)
+            {
+                CSIT_TEST(Test01)
+                {
+                    CSIT_ASSERT(true, "Example assertion failure message.");
+                    
+                    CSIT_PASS();
+                }
+                
+                CSIT_TEST(Test02)
+                {
+                    CSIT_ASSERT(false, "Example assertion failure message.");
+                    CSIT_ASSERT(false, "Example assertion failure message.");
+                    CSIT_ASSERT(false, "Example assertion failure message.");
+                    CSIT_ASSERT(false, "Example assertion failure message.");
+                    
+                    CSIT_PASS();
+                }
+                
+                CSIT_TEST(Test03)
+                {
+                    CSIT_ASSERT(true, "Example assertion failure message.");
+                    
+                    CSIT_PASS();
+                }
+            };
+            
+            CSIT_TESTCASE(TestCase02)
+            {
+                CSIT_TEST(Test01)
+                {
+                    CSIT_ASSERT(true, "Example assertion failure message.");
+                    
+                    CSIT_PASS();
+                }
+                
+                CSIT_TEST(Test02)
+                {
+                    CSIT_ASSERT(false, "Example assertion failure message.");
+                    CSIT_ASSERT(false, "Example assertion failure message.");
+                    CSIT_ASSERT(false, "Example assertion failure message.");
+                    CSIT_ASSERT(false, "Example assertion failure message.");
+                    
+                    CSIT_PASS();
+                }
+                
+                CSIT_TEST(Test03)
+                {
+                    CSIT_ASSERT(true, "Example assertion failure message.");
+                    
+                    CSIT_PASS();
+                }
+            };
         }
         
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            m_testSystem = CreateSystem<TestSystem>();
-            m_reportPresenter = CreateSystem<ReportPresenter>();
             CreateSystem<Common::StateNavigator<NextState>>();
         }
         //------------------------------------------------------------------------------
@@ -60,26 +110,22 @@ namespace CSTest
         {
             GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
-            GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(false);
+            auto progressUpdateDelegate = [](const TestDesc& in_testDesc, u32 in_testIndex, u32 in_numTests)
+            {
+                CS_LOG_VERBOSE(CSCore::ToString(in_testIndex) + "/" + CSCore::ToString(in_numTests) + ": [" + in_testDesc.GetTestCaseName() + "] " + in_testDesc.GetTestName());
+            };
+            
+            auto completionDelegate = []()
+            {
+                CS_LOG_VERBOSE("Testing complete!");
+            };
+            
+            m_tester = TesterUPtr(new Tester(TestRegistry::Get().GetTests(), progressUpdateDelegate, completionDelegate));
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::OnUpdate(f32 in_deltaTime)
         {
-            if (m_testsPerformed == false)
-            {
-                m_timer += in_deltaTime;
-                
-                if (m_timer > k_timeBeforeTests)
-                {
-                    m_timer = 0.0f;
-                    m_testsPerformed = true;
-                    
-                    auto report = m_testSystem->PerformTests();
-                    m_reportPresenter->PresentReport(report);
-                    GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(true);
-                }
-            }
         }
     }
 }

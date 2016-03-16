@@ -1,5 +1,5 @@
 //
-//  Report.h
+//  CSReporter.h
 //  CSTest
 //  Created by Ian Copland on 15/07/2015.
 //
@@ -26,85 +26,90 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _INTEGRATIONTEST_TESTSYSTEM_REPORT_H_
-#define _INTEGRATIONTEST_TESTSYSTEM_REPORT_H_
+#ifndef _UNITTEST_TESTSYSTEM_CSREPORTER_H_
+#define _UNITTEST_TESTSYSTEM_CSREPORTER_H_
 
 #include <CSTest.h>
-#include <IntegrationTest/TestSystem/TestCase.h>
+
+#include <UnitTest/TestSystem/Report.h>
+
+#include <reporters/catch_reporter_bases.hpp>
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace UnitTest
     {
         //------------------------------------------------------------------------------
-        /// Provides information on the overall progress of a test run through the
-        /// TestSystem.
-        ///
-        /// This is immutable after construction.
+        /// Receives events from Catch to generate a report.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class Report final
+        class CSReporter final : public Catch::StreamingReporterBase
         {
         public:
             //------------------------------------------------------------------------------
-            /// Construtor. Creates a blank report.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            Report();
-            //------------------------------------------------------------------------------
-            /// Construtor. Takes all input data for the Report.
-            ///
             /// @author Ian Copland
             ///
-            /// @param in_numAssertions - The total number of assertions in the test run.
-            /// @param in_numTestCases - The total number of test cases in the test run.
-            /// @param in_failedTestCases - The list of failed test cases.
+            /// @return A description of the the reporter.
             //------------------------------------------------------------------------------
-            Report(u32 in_numTestCases, u32 in_numAssertions, const std::vector<TestCase>& in_failedTestCases);
+            static std::string getDescription();
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
-            /// @return Whether or not all of the tests which were run passed.
+            /// @return The report generated during the last test run.
             //------------------------------------------------------------------------------
-            bool DidAllTestsPass() const;
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return The number of test cases that were run.
-            //------------------------------------------------------------------------------
-            u32 GetNumTestCases() const;
+            static const Report& getReport();
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
-            /// @return The total number of assertions that were run.
+            /// @param in_config - The configuration. Note that CSReport only supports a
+            /// subset of available configs. It will assert if the config isn't supported.
             //------------------------------------------------------------------------------
-            u32 GetNumAssertions() const;
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return The number of test cases that failed.
-            //------------------------------------------------------------------------------
-            u32 GetNumFailedTestCases() const;
+            CSReporter(const Catch::ReporterConfig& in_config);
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
-            /// @return The total number of failed assertions accross all tests cases.
+            /// @return The reporter preferences.
             //------------------------------------------------------------------------------
-            u32 GetNumFailedAssertions() const;
+            Catch::ReporterPreferences getPreferences() const override;
             //------------------------------------------------------------------------------
+            /// Called when an assertion begins.
+            ///
             /// @author Ian Copland
             ///
-            /// @return The list of failed assertions.
+            /// @param in_assertionInfo - The assertion info.
             //------------------------------------------------------------------------------
-            const std::vector<TestCase>& GetFailedTestCases() const;
+            void assertionStarting(const Catch::AssertionInfo& in_assertionInfo) override {};
+            //------------------------------------------------------------------------------
+            /// Called when an assertion ends, with stats.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_assertionStats - The stats on the given assertion.
+            //------------------------------------------------------------------------------
+            bool assertionEnded(const Catch::AssertionStats& in_assertionStats) override;
+            //------------------------------------------------------------------------------
+            /// Called when a test case ends, with stats.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_testCaseStats - The stats on how the test case went.
+            //------------------------------------------------------------------------------
+            void testCaseEnded(const Catch::TestCaseStats& in_testCaseStats) override;
+            //------------------------------------------------------------------------------
+            /// Called when the test run ends, with stats.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_testRunStats - in_testRunStats
+            //------------------------------------------------------------------------------
+            void testRunEnded(const Catch::TestRunStats& in_testRunStats) override;
             
         private:
-            u32 m_numTestCases;
-            u32 m_numAssertions;
-            std::vector<TestCase> m_failedTestCases;
-            u32 m_numFailedAssertions;
+            std::vector<FailedAssertion> m_currentFailedAssertions;
+            std::vector<TestCase> m_currentFailedTestCases;
+            
+            static Report s_report; //needs to be accessible from TestSystem
         };
     }
 }

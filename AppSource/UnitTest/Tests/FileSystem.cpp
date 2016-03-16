@@ -36,7 +36,7 @@
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace UnitTest
     {
         namespace
         {
@@ -112,13 +112,13 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void TestWritableStorageLocation(CSCore::StorageLocation in_storageLocation)
             {
-                const std::string k_integrationTestDirectory = "IntegrationTest/FileSystem/";
+                const std::string k_integrationTestDirectory = "UnitTest/FileSystem/";
                 const std::string k_textFilePath = k_integrationTestDirectory + "TextFileZ.txt";
                 const std::string k_binFilePath = k_integrationTestDirectory + "BinaryFileZ.bin";
                 const std::string k_directoryPath = k_integrationTestDirectory + "DirectoryZ/";
-                const char k_fileCopySource[] = "IntegrationTest/FileSystem/TextFileA.txt";
+                const char k_fileCopySource[] = "UnitTest/FileSystem/TextFileA.txt";
                 const std::string k_fileCopyDest = k_integrationTestDirectory + "CopiedTextFileA.txt";
-                const char k_directoryCopySource[] = "IntegrationTest/FileSystem/DirectoryA/";
+                const char k_directoryCopySource[] = "UnitTest/FileSystem/DirectoryA/";
                 const std::string k_directoryCopyDestA = k_integrationTestDirectory + "CopiedDirectoryA/";
                 const std::string k_copiedDirectoryC = k_directoryCopyDestA + "DirectoryC/";
                 const char k_searchFileName[] = "BinaryFileD.bin";
@@ -231,12 +231,12 @@ namespace CSTest
 
         TEST_CASE("FileSystem: Package storage location", "[FileSystem]")
         {
-            const char k_textFilePath[] = "IntegrationTest/FileSystem/TextFileA.txt";
-            const char k_binFilePath[] = "IntegrationTest/FileSystem/BinaryFileA.bin";
-            const char k_directoryPathA[] = "IntegrationTest/FileSystem/DirectoryA/";
-            const char k_directoryPathC[] = "IntegrationTest/FileSystem/DirectoryA/DirectoryC/";
-            const char k_textFilePathFake[] = "IntegrationTest/FileSystem/TextFileAFake.txt";
-            const char k_directoryPathFake[] = "IntegrationTest/FileSystem/DirectoryFake/";
+            const char k_textFilePath[] = "UnitTest/FileSystem/TextFileA.txt";
+            const char k_binFilePath[] = "UnitTest/FileSystem/BinaryFileA.bin";
+            const char k_directoryPathA[] = "UnitTest/FileSystem/DirectoryA/";
+            const char k_directoryPathC[] = "UnitTest/FileSystem/DirectoryA/DirectoryC/";
+            const char k_textFilePathFake[] = "UnitTest/FileSystem/TextFileAFake.txt";
+            const char k_directoryPathFake[] = "UnitTest/FileSystem/DirectoryFake/";
             const char k_searchFileName[] = "BinaryFileD.bin";
             const std::vector<std::string> k_expectedFilePathsA = { "DirectoryB/BinaryFileB.bin", "DirectoryB/TextFileB.txt", "DirectoryC/BinaryFileC.bin", "DirectoryC/TextFileC.txt",
                 "DirectoryC/DirectoryD/BinaryFileD.bin", "DirectoryC/DirectoryD/TextFileD.txt" };
@@ -358,8 +358,8 @@ namespace CSTest
         {
             auto fileSystem = CSCore::Application::Get()->GetFileSystem();
             
-            const std::string k_integrationTestDirectory = "IntegrationTest/FileSystem/";
-            const char k_packageDirectoryPath[] = "IntegrationTest/FileSystem/DirectoryA/";
+            const std::string k_integrationTestDirectory = "UnitTest/FileSystem/";
+            const char k_packageDirectoryPath[] = "UnitTest/FileSystem/DirectoryA/";
             const std::string k_copiedDirectoryPath = k_integrationTestDirectory + "CopiedDirectoryA/";
             const std::vector<std::string> k_expectedFilePaths = { "DirectoryB/BinaryFileB.bin", "DirectoryB/TextFileB.txt", "DirectoryC/BinaryFileC.bin", "DirectoryC/TextFileC.txt",
                 "DirectoryC/DirectoryD/BinaryFileD.bin", "DirectoryC/DirectoryD/TextFileD.txt" };
@@ -408,7 +408,7 @@ namespace CSTest
         
     	TEST_CASE("FileSystem: packaged DLC and cached DLC", "[FileSystem]")
         {
-            const std::string k_integrationTestDirectory = "IntegrationTest/FileSystemDLC/";
+            const std::string k_integrationTestDirectory = "UnitTest/FileSystemDLC/";
             const std::string k_textFilePath = k_integrationTestDirectory + "TextFileA.txt";
             const std::string k_directoryPath = k_integrationTestDirectory + "DirectoryA/";
             const std::string k_replacementFilePath = k_directoryPath + "TextFileB.txt";

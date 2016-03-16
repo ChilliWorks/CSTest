@@ -1,11 +1,11 @@
 //
 //  TestCase.h
 //  CSTest
-//  Created by Ian Copland on 15/07/2015.
+//  Created by Ian Copland on 15/03/2016.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Tag Games Limited
+//  Copyright (c) 2016 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -31,70 +31,49 @@
 
 #include <CSTest.h>
 
-#include <IntegrationTest/TestSystem/FailedAssertion.h>
+#include <IntegrationTest/TestSystem/AutoRegister.h>
+#include <IntegrationTest/TestSystem/Test.h>
 
-#include <vector>
-
-namespace CSTest
-{
-    namespace IntegrationTest
-    {
-        //------------------------------------------------------------------------------
-        /// A container for information on a single test case.
-        ///
-        /// This is immutable after construction.
-        ///
-        /// @author Ian Copland
-        //------------------------------------------------------------------------------
-        class TestCase final
-        {
-        public:
-            //------------------------------------------------------------------------------
-            /// Construtor. Creates a blank test case.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            TestCase();
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @param in_name - The name of the test case.
-            /// @param in_numAssertions - The total number of assertions in the test case.
-            /// @param in_failedAssertions - A list containing data on each of the failed
-            /// assertions.
-            //------------------------------------------------------------------------------
-            TestCase(const std::string& in_name, u32 in_numAssertions, const std::vector<FailedAssertion>& in_failedAssertions);
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return The name of the test case.
-            //------------------------------------------------------------------------------
-            const std::string& GetName() const;
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return The total number of assertions in the test case.
-            //------------------------------------------------------------------------------
-            u32 GetNumAssertions() const;
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return The number of assertions which failed.
-            //------------------------------------------------------------------------------
-            u32 GetNumFailedAssertions() const;
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return A list containing data on each of the failed assertions.
-            //------------------------------------------------------------------------------
-            const std::vector<FailedAssertion>& GetFailedAssertions() const;
-            
-        private:
-            std::string m_name;
-            u32 m_numAssertions;
-            std::vector<FailedAssertion> m_failedAssertions;
-        };
-    }
-}
+//------------------------------------------------------------------------------
+/// TODO
+///
+/// @author Ian Copland
+//------------------------------------------------------------------------------
+#define CSIT_TESTCASE(in_name) \
+    namespace in_name##IntegrationTestCase \
+    { \
+        const std::string k_testCaseName_ = #in_name; \
+    } \
+    namespace in_name##IntegrationTestCase
+//------------------------------------------------------------------------------
+/// TODO
+///
+/// @author Ian Copland
+//------------------------------------------------------------------------------
+#define CSIT_TEST(in_name) \
+    void in_name##IntegrationTest(CSTest::IntegrationTest::Test* in_thisTest_); \
+    namespace \
+    { \
+        CSTest::IntegrationTest::AutoRegister in_name##IntegrationTest##AutoReg(CSTest::IntegrationTest::TestDesc(k_testCaseName_, #in_name, in_name##IntegrationTest)); \
+    } \
+    void in_name##IntegrationTest(CSTest::IntegrationTest::Test* in_thisTest_)
+//------------------------------------------------------------------------------
+/// TODO
+///
+/// @author Ian Copland
+//------------------------------------------------------------------------------
+#define CSIT_PASS() in_thisTest_->Pass();
+//------------------------------------------------------------------------------
+/// TODO
+///
+/// @author Ian Copland
+//------------------------------------------------------------------------------
+#define CSIT_FAIL(in_message) in_thisTest_->Fail(in_message);
+//------------------------------------------------------------------------------
+/// TODO
+///
+/// @author Ian Copland
+//------------------------------------------------------------------------------
+#define CSIT_ASSERT(in_condition, in_failureMessage) in_thisTest_->Assert(in_condition, in_failureMessage);
 
 #endif

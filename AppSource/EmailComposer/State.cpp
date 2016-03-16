@@ -33,7 +33,7 @@
 #include <Common/Core/SmokeTestSet.h>
 #include <Common/Core/StateNavigator.h>
 
-#include <IntegrationTest/State.h>
+#include <UnitTest/State.h>
 
 #include <ChilliSource/Core/DialogueBox.h>
 #include <ChilliSource/Core/Scene.h>
@@ -73,7 +73,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::StateNavigator<IntegrationTest::State>>();
+            CreateSystem<Common::StateNavigator<UnitTest::State>>();
             m_smokeTester = CreateSystem<Common::SmokeTester>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
             m_emailComposer = CreateSystem<CSSocial::EmailComposer>();

@@ -26,11 +26,11 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/TestSystem/Report.h>
+#include <UnitTest/TestSystem/Report.h>
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace UnitTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

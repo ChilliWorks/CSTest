@@ -26,10 +26,10 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/TestSystem/ReportPresenter.h>
+#include <UnitTest/TestSystem/ReportPresenter.h>
 
 #include <Common/UI/BasicWidgetFactory.h>
-#include <IntegrationTest/TestSystem/CSReporter.h>
+#include <UnitTest/TestSystem/CSReporter.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Resource.h>
@@ -40,7 +40,7 @@
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace UnitTest
     {
         namespace
         {

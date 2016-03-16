@@ -26,11 +26,11 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/TestSystem/FailedAssertion.h>
+#include <UnitTest/TestSystem/FailedAssertion.h>
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace UnitTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

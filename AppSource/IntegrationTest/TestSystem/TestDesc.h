@@ -1,7 +1,7 @@
 //
-//  State.h
+//  TestDesc.h
 //  CSTest
-//  Created by Ian Copland on 15/03/2016.
+//  Created by Ian Copland on 16/03/2016.
 //
 //  The MIT License (MIT)
 //
@@ -26,50 +26,62 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _INTEGRATIONTEST_STATE_H_
-#define _INTEGRATIONTEST_STATE_H_
+#ifndef _INTEGRATIONTEST_TESTSYSTEM_TESTDESC_H_
+#define _INTEGRATIONTEST_TESTSYSTEM_TESTDESC_H_
 
 #include <CSTest.h>
 
-#include <IntegrationTest/TestSystem/Tester.h>
-
-#include <ChilliSource/Core/State.h>
+#include <vector>
 
 namespace CSTest
 {
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// A state which runs all defined integration tests and presents the results of
-        /// the tests on screen.
+        /// TODO
+        ///
+        /// This is immutable and therefore thread-safe.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        class TestDesc final
         {
-        private:
+        public:
             //------------------------------------------------------------------------------
-            /// The life-cycle event for creating all state systems.
+            /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void CreateSystems() override;
+            using TestDelegate = std::function<void(Test*) noexcept>;
             //------------------------------------------------------------------------------
-            /// Initialises the state.
+            /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnInit() override;
+            TestDesc(const std::string& in_testCaseName, const std::string& in_testName, const TestDelegate& in_testDelegate) noexcept;
             //------------------------------------------------------------------------------
-            /// The life-cycle event when is called every frame that the state is active.
+            /// TODO
             ///
             /// @author Ian Copland
-            ///
-            /// @param in_deltaTime - The time passed since the last frame.
             //------------------------------------------------------------------------------
-            void OnUpdate(f32 in_deltaTime) override;
+            const std::string& GetTestCaseName() const noexcept;
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            const std::string& GetTestName() const noexcept;
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            const TestDelegate& GetTestDelegate() const noexcept;
             
-            TesterUPtr m_tester;
+        private:
+            std::string m_testCaseName;
+            std::string m_testName;
+            TestDelegate m_testDelegate;
         };
     }
 }

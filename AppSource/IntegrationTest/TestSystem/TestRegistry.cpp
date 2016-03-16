@@ -1,11 +1,11 @@
 //
-//  TestCase.cpp
+//  TestRegistry.cpp
 //  CSTest
-//  Created by Ian Copland on 15/07/2015.
+//  Created by Ian Copland on 15/03/2016.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Tag Games Limited
+//  Copyright (c) 2016 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/TestSystem/TestCase.h>
+#include <IntegrationTest/TestSystem/TestRegistry.h>
 
 namespace CSTest
 {
@@ -34,39 +34,22 @@ namespace CSTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        TestCase::TestCase()
-        : m_name(""), m_numAssertions(0)
+        TestRegistry& TestRegistry::Get() noexcept
         {
+            static TestRegistry s_testRegistry;
+            return s_testRegistry;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        TestCase::TestCase(const std::string& in_name, u32 in_numAssertions, const std::vector<FailedAssertion>& in_failedAssertions)
-            : m_name(in_name), m_numAssertions(in_numAssertions), m_failedAssertions(in_failedAssertions)
+        void TestRegistry::RegisterTest(const TestDesc& in_desc) noexcept
         {
+            m_tests.push_back(in_desc);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        const std::string& TestCase::GetName() const
+        const std::vector<TestDesc>& TestRegistry::GetTests() const noexcept
         {
-            return m_name;
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        u32 TestCase::GetNumAssertions() const
-        {
-            return m_numAssertions;
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        u32 TestCase::GetNumFailedAssertions() const
-        {
-            return static_cast<u32>(m_failedAssertions.size());
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        const std::vector<FailedAssertion>& TestCase::GetFailedAssertions() const
-        {
-            return m_failedAssertions;
+            return m_tests;
         }
     }
 }

@@ -26,13 +26,13 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/TestSystem/CSReporter.h>
+#include <UnitTest/TestSystem/CSReporter.h>
 
 #include <internal/catch_reporter_registrars.hpp>
 
 namespace CSTest
 {
-    namespace IntegrationTest
+    namespace UnitTest
     {
         INTERNAL_CATCH_REGISTER_REPORTER("cs", CSReporter);
      

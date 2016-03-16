@@ -1,5 +1,5 @@
 //
-//  State.h
+//  Tester.h
 //  CSTest
 //  Created by Ian Copland on 15/03/2016.
 //
@@ -26,50 +26,70 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _INTEGRATIONTEST_STATE_H_
-#define _INTEGRATIONTEST_STATE_H_
+#ifndef _INTEGRATIONTEST_TESTSYSTEM_TESTER_H_
+#define _INTEGRATIONTEST_TESTSYSTEM_TESTER_H_
 
 #include <CSTest.h>
 
-#include <IntegrationTest/TestSystem/Tester.h>
+#include <IntegrationTest/TestSystem/TestCase.h>
 
-#include <ChilliSource/Core/State.h>
+#include <queue>
+#include <vector>
 
 namespace CSTest
 {
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// A state which runs all defined integration tests and presents the results of
-        /// the tests on screen.
+        /// TODO
+        ///
+        /// This is not thread-safe.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        class Tester final
         {
+        public:
+            CS_DECLARE_NOCOPY(Tester);
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            using ProgressUpdateDelegate = std::function<void(const TestDesc& in_testDesc, u32 in_testIndex, u32 in_numTests) noexcept>;
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            using CompletionDelegate = std::function<void() noexcept>;
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            Tester() = default;
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            Tester(const std::vector<TestDesc>& in_tests, const ProgressUpdateDelegate& in_progressUpdateDelegate, const CompletionDelegate& in_completionDelegate) noexcept;
         private:
             //------------------------------------------------------------------------------
-            /// The life-cycle event for creating all state systems.
+            /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void CreateSystems() override;
-            //------------------------------------------------------------------------------
-            /// Initialises the state.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnInit() override;
-            //------------------------------------------------------------------------------
-            /// The life-cycle event when is called every frame that the state is active.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @param in_deltaTime - The time passed since the last frame.
-            //------------------------------------------------------------------------------
-            void OnUpdate(f32 in_deltaTime) override;
+            void TryStartTest() noexcept;
             
-            TesterUPtr m_tester;
+            const ProgressUpdateDelegate m_progressUpdateDelegate;
+            const CompletionDelegate m_completionDelegate;
+            const u32 m_numTests;
+            
+            std::queue<TestDesc> m_testQueue;
+            TestUPtr m_activeTest;
+            u32 m_activeTestIndex = 0;
         };
     }
 }
