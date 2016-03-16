@@ -61,14 +61,13 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnInit() override;
             //------------------------------------------------------------------------------
-            /// The life-cycle event when is called every frame that the state is active.
+            /// Destroys the state.
             ///
             /// @author Ian Copland
-            ///
-            /// @param in_deltaTime - The time passed since the last frame.
             //------------------------------------------------------------------------------
-            void OnUpdate(f32 in_deltaTime) override;
+            void OnDestroy() override;
             
+            ReportPresenter* m_reportPresenter = nullptr;
             TesterUPtr m_tester;
         };
     }

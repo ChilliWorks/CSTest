@@ -1,7 +1,7 @@
 //
-//  State.cpp
+//  Report.cpp
 //  CSTest
-//  Created by Ian Copland on 15/03/2016.
+//  Created by Ian Copland on 16/03/2016.
 //
 //  The MIT License (MIT)
 //
@@ -26,58 +26,53 @@
 //  THE SOFTWARE.
 //
 
-#include <IntegrationTest/State.h>
-
-#include <Common/Core/StateNavigator.h>
-#include <IntegrationTest/TestSystem/ReportPresenter.h>
-#include <IntegrationTest/TestSystem/Tester.h>
-#include <IntegrationTest/TestSystem/TestRegistry.h>
-#include <Lighting/State.h>
-
-#include <ChilliSource/Core/Scene.h>
+#include <IntegrationTest/TestSystem/Report.h>
 
 namespace CSTest
 {
     namespace IntegrationTest
     {
-        namespace
-        {
-            using NextState = Lighting::State;
-        }
-        
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::CreateSystems()
+        Report::FailedTest::FailedTest(const TestDesc& in_desc, const std::string& in_errorMessage) noexcept
+            : m_desc(in_desc), m_errorMessage(in_errorMessage)
         {
-            CreateSystem<Common::StateNavigator<NextState>>();
-            m_reportPresenter = CreateSystem<ReportPresenter>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnInit()
+        const TestDesc& Report::FailedTest::GetDesc() const noexcept
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
-            
-            GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(false);
-            
-            auto progressUpdateDelegate = [=](const TestDesc& in_testDesc, u32 in_testIndex, u32 in_numTests)
-            {
-                m_reportPresenter->PresentProgress(in_testDesc, in_testIndex, in_numTests);
-            };
-            
-            auto completionDelegate = [=](const Report& in_report)
-            {
-                m_reportPresenter->PresentReport(in_report);
-                GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(true);
-            };
-            
-            m_tester = TesterUPtr(new Tester(TestRegistry::Get().GetTests(), progressUpdateDelegate, completionDelegate));
+            return m_desc;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnDestroy()
+        const std::string& Report::FailedTest::GetErrorMessage() const noexcept
         {
-            m_tester.reset();
+            return m_errorMessage;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        Report::Report(u32 in_numTests, const std::vector<FailedTest>& in_failedTests) noexcept
+            : m_numTests(in_numTests), m_failedTests(in_failedTests)
+        {
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        u32 Report::GetNumTests() const noexcept
+        {
+            return m_numTests;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        u32 Report::GetNumFailedTests() const noexcept
+        {
+            return m_failedTests.size();
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        const std::vector<Report::FailedTest>& Report::GetFailedTests() const noexcept
+        {
+            return m_failedTests;
         }
     }
 }

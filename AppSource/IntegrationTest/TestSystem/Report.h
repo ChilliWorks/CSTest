@@ -1,7 +1,7 @@
 //
-//  Tester.h
+//  Report.h
 //  CSTest
-//  Created by Ian Copland on 15/03/2016.
+//  Created by Ian Copland on 16/03/2016.
 //
 //  The MIT License (MIT)
 //
@@ -26,15 +26,13 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _INTEGRATIONTEST_TESTSYSTEM_TESTER_H_
-#define _INTEGRATIONTEST_TESTSYSTEM_TESTER_H_
+#ifndef _INTEGRATIONTEST_TESTSYSTEM_REPORT_H_
+#define _INTEGRATIONTEST_TESTSYSTEM_REPORT_H_
 
 #include <CSTest.h>
 
-#include <IntegrationTest/TestSystem/Report.h>
-#include <IntegrationTest/TestSystem/TestCase.h>
+#include <IntegrationTest/TestSystem/TestDesc.h>
 
-#include <queue>
 #include <vector>
 
 namespace CSTest
@@ -44,54 +42,74 @@ namespace CSTest
         //------------------------------------------------------------------------------
         /// TODO
         ///
-        /// This is not thread-safe.
+        /// This is immutable and therefore thread-safe.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class Tester final
+        class Report final
         {
         public:
-            CS_DECLARE_NOCOPY(Tester);
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// This is immutable and therefore thread-safe.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            class FailedTest final
+            {
+            public:
+                //------------------------------------------------------------------------------
+                /// TODO
+                ///
+                /// @author Ian Copland
+                //------------------------------------------------------------------------------
+                FailedTest(const TestDesc& in_desc, const std::string& in_errorMessage) noexcept;
+                //------------------------------------------------------------------------------
+                /// TODO
+                ///
+                /// @author Ian Copland
+                //------------------------------------------------------------------------------
+                const TestDesc& GetDesc() const noexcept;
+                //------------------------------------------------------------------------------
+                /// TODO
+                ///
+                /// @author Ian Copland
+                //------------------------------------------------------------------------------
+                const std::string& GetErrorMessage() const noexcept;
+                
+            private:
+                TestDesc m_desc;
+                std::string m_errorMessage;
+            };
             //------------------------------------------------------------------------------
             /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            using ProgressUpdateDelegate = std::function<void(const TestDesc& in_testDesc, u32 in_testIndex, u32 in_numTests) noexcept>;
+            Report(u32 in_numTests, const std::vector<FailedTest>& in_failedTests) noexcept;
             //------------------------------------------------------------------------------
             /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            using CompletionDelegate = std::function<void(const Report& in_report) noexcept>;
+            u32 GetNumTests() const noexcept;
             //------------------------------------------------------------------------------
             /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            Tester() = default;
+            u32 GetNumFailedTests() const noexcept;
             //------------------------------------------------------------------------------
             /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            Tester(const std::vector<TestDesc>& in_tests, const ProgressUpdateDelegate& in_progressUpdateDelegate, const CompletionDelegate& in_completionDelegate) noexcept;
+            const std::vector<FailedTest>& GetFailedTests() const noexcept;
+            
         private:
-            //------------------------------------------------------------------------------
-            /// TODO
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void TryStartTest() noexcept;
-            
-            const ProgressUpdateDelegate m_progressUpdateDelegate;
-            const CompletionDelegate m_completionDelegate;
-            const u32 m_numTests;
-            
-            std::queue<TestDesc> m_testQueue;
-            TestUPtr m_activeTest;
-            u32 m_activeTestIndex = 0;
-            std::vector<Report::FailedTest> m_failedTests;
+            u32 m_numTests;
+            std::vector<FailedTest> m_failedTests;
         };
     }
 }

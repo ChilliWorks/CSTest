@@ -62,6 +62,8 @@ namespace CSTest
     namespace IntegrationTest
     {
         CS_FORWARDDECLARE_CLASS(AutoRegister);
+        CS_FORWARDDECLARE_CLASS(Report);
+        CS_FORWARDDECLARE_CLASS(ReportPresenter);
         CS_FORWARDDECLARE_CLASS(State);
         CS_FORWARDDECLARE_CLASS(Test);
         CS_FORWARDDECLARE_CLASS(TestDesc);

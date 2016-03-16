@@ -50,7 +50,7 @@ namespace CSTest
         {
             if (m_testQueue.empty())
             {
-                m_completionDelegate();
+                m_completionDelegate(Report(m_numTests, m_failedTests));
                 return;
             }
             
@@ -65,9 +65,6 @@ namespace CSTest
                 CS_ASSERT(testDesc.GetTestCaseName() == m_activeTest->GetDesc().GetTestCaseName(), "Received callback for test which is no longer active.");
                 CS_ASSERT(testDesc.GetTestName() == m_activeTest->GetDesc().GetTestName(), "Received callback for test which is no longer active.");
                 
-                //TODO: Update report.
-                CS_LOG_VERBOSE("PASS!");
-                
                 TryStartTest();
             };
             
@@ -76,8 +73,7 @@ namespace CSTest
                 CS_ASSERT(testDesc.GetTestCaseName() == m_activeTest->GetDesc().GetTestCaseName(), "Received callback for test which is no longer active.");
                 CS_ASSERT(testDesc.GetTestName() == m_activeTest->GetDesc().GetTestName(), "Received callback for test which is no longer active.");
                 
-                //TODO: Update report
-                CS_LOG_VERBOSE("FAIL: " + in_message);
+                m_failedTests.push_back(Report::FailedTest(testDesc, in_message));
                 
                 TryStartTest();
             };

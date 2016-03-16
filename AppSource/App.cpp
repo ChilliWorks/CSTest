@@ -30,7 +30,7 @@
 
 #include <Common/Core/BasicEntityFactory.h>
 #include <Common/UI/BasicWidgetFactory.h>
-#include <IntegrationTest/State.h>
+#include <UnitTest/State.h>
 
 #include <ChilliSource/Core/Entity.h>
 #include <ChilliSource/Rendering/Model.h>
@@ -88,7 +88,7 @@ namespace CSTest
     //------------------------------------------------------------------------------
     void App::PushInitialState()
     {
-        GetStateManager()->Push(CSCore::StateSPtr(new IntegrationTest::State()));
+        GetStateManager()->Push(CSCore::StateSPtr(new UnitTest::State()));
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
