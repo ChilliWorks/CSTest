@@ -38,9 +38,10 @@ namespace CSTest
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// TODO
+        /// Instances of this class created during static initialisation are used by the
+        /// test case macros to register tests with the test registry.
         ///
-        /// This is not thread-safe.
+        /// This is not thread-safe and should only be created on the main thread.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
@@ -49,15 +50,18 @@ namespace CSTest
         public:
             CS_DECLARE_NOCOPY(AutoRegister);
             //------------------------------------------------------------------------------
-            /// TODO
+            /// The default constructor.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             AutoRegister() = default;
             //------------------------------------------------------------------------------
-            /// TODO
+            /// Creates a new instances of this, adding the given test description to the
+            /// test registry.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_testDesc - The test description.
             //------------------------------------------------------------------------------
             AutoRegister(const TestDesc& in_testDesc) noexcept
             {

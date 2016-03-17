@@ -40,7 +40,7 @@ namespace CSTest
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// TODO
+        /// An immutable container for all information on a set of integration tests.
         ///
         /// This is immutable and therefore thread-safe.
         ///
@@ -50,7 +50,7 @@ namespace CSTest
         {
         public:
             //------------------------------------------------------------------------------
-            /// TODO
+            /// An immutable container for information on a failed integration test.
             ///
             /// This is immutable and therefore thread-safe.
             ///
@@ -60,21 +60,24 @@ namespace CSTest
             {
             public:
                 //------------------------------------------------------------------------------
-                /// TODO
+                /// Constructs a new instance with the given test description and error message.
                 ///
                 /// @author Ian Copland
+                ///
+                /// @param in_desc - The test description.
+                /// @param in_errorMessage - A message describing why the test failed.
                 //------------------------------------------------------------------------------
                 FailedTest(const TestDesc& in_desc, const std::string& in_errorMessage) noexcept;
                 //------------------------------------------------------------------------------
-                /// TODO
-                ///
                 /// @author Ian Copland
+                ///
+                /// @return The test description.
                 //------------------------------------------------------------------------------
                 const TestDesc& GetDesc() const noexcept;
                 //------------------------------------------------------------------------------
-                /// TODO
-                ///
                 /// @author Ian Copland
+                ///
+                /// @return A message describing why the test failed.
                 //------------------------------------------------------------------------------
                 const std::string& GetErrorMessage() const noexcept;
                 
@@ -83,27 +86,30 @@ namespace CSTest
                 std::string m_errorMessage;
             };
             //------------------------------------------------------------------------------
-            /// TODO
+            /// Constructs a new instance with the given list of failed tests.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_numTests - The total number of tests.
+            /// @param in_failedTests - A list of information on the failed tests.
             //------------------------------------------------------------------------------
             Report(u32 in_numTests, const std::vector<FailedTest>& in_failedTests) noexcept;
             //------------------------------------------------------------------------------
-            /// TODO
-            ///
             /// @author Ian Copland
+            ///
+            /// @return The total number of tests.
             //------------------------------------------------------------------------------
             u32 GetNumTests() const noexcept;
             //------------------------------------------------------------------------------
-            /// TODO
-            ///
             /// @author Ian Copland
+            ///
+            /// @return The number of tests which failed.
             //------------------------------------------------------------------------------
             u32 GetNumFailedTests() const noexcept;
             //------------------------------------------------------------------------------
-            /// TODO
-            ///
             /// @author Ian Copland
+            ///
+            /// @return The list of failed tests.
             //------------------------------------------------------------------------------
             const std::vector<FailedTest>& GetFailedTests() const noexcept;
             

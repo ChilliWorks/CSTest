@@ -40,7 +40,8 @@ namespace CSTest
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// TODO
+        /// Contains a list of all registered tests. This is a singleton so that it can
+        /// be accessed from multiple translation units during static initialisation.
         ///
         /// This is not thread-safe.
         ///
@@ -51,31 +52,35 @@ namespace CSTest
         public:
             CS_DECLARE_NOCOPY(TestRegistry);
             //------------------------------------------------------------------------------
-            /// TODO
-            ///
             /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            TestRegistry() = default;
-            //------------------------------------------------------------------------------
-            /// TODO
             ///
-            /// @author Ian Copland
+            /// @return The singleton instane of the TestRegistry.
             //------------------------------------------------------------------------------
             static TestRegistry& Get() noexcept;
             //------------------------------------------------------------------------------
-            /// TODO
+            /// Adds a new test description to the registry. This is typically handled via
+            /// a AutoRegister instance.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_desc - The new test description.
             //------------------------------------------------------------------------------
             void RegisterTest(const TestDesc& in_desc) noexcept;
             //------------------------------------------------------------------------------
-            /// TODO
-            ///
             /// @author Ian Copland
+            ///
+            /// @return The list of all registered tests.
             //------------------------------------------------------------------------------
             const std::vector<TestDesc>& GetTests() const noexcept;
             
         private:
+            //------------------------------------------------------------------------------
+            /// Default constructor.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            TestRegistry() = default;
+            
             std::vector<TestDesc> m_tests;
         };
     }

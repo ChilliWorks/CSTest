@@ -35,9 +35,11 @@
 #include <IntegrationTest/TestSystem/Test.h>
 
 //------------------------------------------------------------------------------
-/// TODO
+/// A macro used to declare a new test case.
 ///
 /// @author Ian Copland
+///
+/// @param in_name - The name of the test case.
 //------------------------------------------------------------------------------
 #define CSIT_TESTCASE(in_name) \
     namespace in_name##IntegrationTestCase \
@@ -46,9 +48,13 @@
     } \
     namespace in_name##IntegrationTestCase
 //------------------------------------------------------------------------------
-/// TODO
+/// A macro used to declare a new test with the given timeout. If the default
+/// timeout is desired then the CSIT_TEST() macro should be used instead.
 ///
 /// @author Ian Copland
+///
+/// @param in_name - The name of the test.
+/// @param in_timeoutSeconds - The time before the test fails.
 //------------------------------------------------------------------------------
 #define CSIT_TEST_TIMEOUT(in_name, in_timeoutSeconds) \
     void in_name##IntegrationTest(const CSTest::IntegrationTest::TestSPtr& in_thisTest_); \
@@ -58,27 +64,36 @@
     } \
     void in_name##IntegrationTest(const CSTest::IntegrationTest::TestSPtr& in_thisTest_)
 //------------------------------------------------------------------------------
-/// TODO
+/// A macro used to declare a new test with the default timeout.
 ///
 /// @author Ian Copland
+///
+/// @param in_name - The name of the test.
 //------------------------------------------------------------------------------
 #define CSIT_TEST(in_name) CSIT_TEST_TIMEOUT(in_name, CSTest::IntegrationTest::TestDesc::k_defaultTimeoutSeconds)
 //------------------------------------------------------------------------------
-/// TODO
+/// A macro used to flag a test as passed. This can be called on any thread.
 ///
 /// @author Ian Copland
 //------------------------------------------------------------------------------
 #define CSIT_PASS() in_thisTest_->Pass();
 //------------------------------------------------------------------------------
-/// TODO
+/// A macro used to flag a test as failed, providing an error message detailing
+/// what went wrong. This can be called on any thread.
 ///
 /// @author Ian Copland
+///
+/// @param in_message - The error message detailing why it failed.
 //------------------------------------------------------------------------------
 #define CSIT_FAIL(in_message) in_thisTest_->Fail(in_message);
 //------------------------------------------------------------------------------
-/// TODO
+/// An assertion macro which will call Fail() if the given condition is not true.
 ///
 /// @author Ian Copland
+///
+/// @param in_condition - The condition to check.
+/// @param in_failureMessage - The message to pass to Fail() if the condition is
+/// not true.
 //------------------------------------------------------------------------------
 #define CSIT_ASSERT(in_condition, in_failureMessage) in_thisTest_->Assert(in_condition, in_failureMessage);
 

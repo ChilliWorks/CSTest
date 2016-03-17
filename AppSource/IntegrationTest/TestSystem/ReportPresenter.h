@@ -39,7 +39,8 @@ namespace CSTest
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// TODO
+        /// A state system which presents information pertaining to the results of
+        /// integration tests.
         ///
         /// This is not thread safe.
         ///
@@ -62,9 +63,13 @@ namespace CSTest
             //------------------------------------------------------------------------------
             bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
-            /// TODO
+            /// Presents information about the progress of integration tests on screen.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_testDesc - The desciption of the test.
+            /// @param in_testIndex - The current index of the test. Indices start at 1.
+            /// @param in_numTests - The total number of tests.
             //------------------------------------------------------------------------------
             void PresentProgress(const TestDesc& in_testDesc, u32 in_testIndex, u32 in_numTests);
             //------------------------------------------------------------------------------

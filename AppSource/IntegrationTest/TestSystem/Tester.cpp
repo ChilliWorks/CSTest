@@ -28,16 +28,21 @@
 
 #include <IntegrationTest/TestSystem/Tester.h>
 
+#include <IntegrationTest/TestSystem/TestRegistry.h>
+
 namespace CSTest
 {
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        Tester::Tester(const std::vector<TestDesc>& in_tests, const ProgressUpdateDelegate& in_progressUpdateDelegate, const CompletionDelegate& in_completionDelegate) noexcept
-            : m_progressUpdateDelegate(in_progressUpdateDelegate), m_completionDelegate(in_completionDelegate), m_numTests(in_tests.size())
+        Tester::Tester(const ProgressUpdateDelegate& in_progressUpdateDelegate, const CompletionDelegate& in_completionDelegate) noexcept
+            : m_progressUpdateDelegate(in_progressUpdateDelegate), m_completionDelegate(in_completionDelegate)
         {
-            for (const auto& test : in_tests)
+            auto tests = TestRegistry::Get().GetTests();
+            m_numTests = tests.size();
+            
+            for (const auto& test : tests)
             {
                 m_testQueue.push(test);
             }

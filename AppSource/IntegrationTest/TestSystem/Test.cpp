@@ -37,9 +37,6 @@ namespace CSTest
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// TODO
-        ///
-        /// @author Ian Copland
         //------------------------------------------------------------------------------
         TestSPtr Test::Create(const TestDesc& in_desc, const PassDelegate& in_passDelegate, const FailDelegate& in_failDelegate)
         {

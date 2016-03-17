@@ -31,7 +31,6 @@
 #include <Common/Core/StateNavigator.h>
 #include <IntegrationTest/TestSystem/ReportPresenter.h>
 #include <IntegrationTest/TestSystem/Tester.h>
-#include <IntegrationTest/TestSystem/TestRegistry.h>
 #include <Lighting/State.h>
 
 #include <ChilliSource/Core/Scene.h>
@@ -71,7 +70,7 @@ namespace CSTest
                 GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(true);
             };
             
-            m_tester = TesterUPtr(new Tester(TestRegistry::Get().GetTests(), progressUpdateDelegate, completionDelegate));
+            m_tester = TesterUPtr(new Tester(progressUpdateDelegate, completionDelegate));
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

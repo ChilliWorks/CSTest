@@ -42,7 +42,11 @@ namespace CSTest
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// TODO
+        /// Runs a single integration test which can be multi-threaded. Provides the
+        /// means for the test to pass, fail and assert safely from any thread. Tests
+        /// which take too long will timeout.
+        ///
+        /// Integration tests are declared using the macros declared in TestCase.h.
         ///
         /// This is thread-safe, though it should be created on the main thread.
         ///
@@ -53,53 +57,78 @@ namespace CSTest
         public:
             CS_DECLARE_NOCOPY(Test);
             //------------------------------------------------------------------------------
-            /// TODO
+            /// A callback which will be called if the test passes.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             using PassDelegate = std::function<void() noexcept>;
             //------------------------------------------------------------------------------
-            /// TODO
+            /// A callback which will be called if the test fails. An error message will be
+            /// provided.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_message - The error message providing details about why the test
+            /// failed.
             //------------------------------------------------------------------------------
             using FailDelegate = std::function<void(const std::string& in_message) noexcept>;
             //------------------------------------------------------------------------------
-            /// TODO
+            /// Creates a new instance of the test with the given description. This factory
+            /// method must be used rather than direct allocation.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_desc - The test description.
+            /// @param in_passDelegate - A delegate which will be called if the test passes.
+            /// @param in_failDelegate - A delegate which will be called if the test fails.
+            ///
+            /// @return The new test instance.
             //------------------------------------------------------------------------------
             static TestSPtr Create(const TestDesc& in_desc, const PassDelegate& in_passDelegate, const FailDelegate& in_failDelegate);
             //------------------------------------------------------------------------------
-            /// TODO
-            ///
             /// @author Ian Copland
+            ///
+            /// @return The test description.
             //------------------------------------------------------------------------------
             const TestDesc& GetDesc() const noexcept;
             //------------------------------------------------------------------------------
-            /// TODO
+            /// This should be called by the test code to signify that the test was
+            /// successful.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void Pass() noexcept;
             //------------------------------------------------------------------------------
-            /// TODO
+            /// This should be called by the test code to signify that the test was
+            /// unsuccessful, providing a reason as to what went wrong.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_message - An error message detailing why the test failed.
             //------------------------------------------------------------------------------
             void Fail(const std::string& in_message) noexcept;
             //------------------------------------------------------------------------------
-            /// TODO
+            /// Test code can use this to assert that the given condition is indeed true.
+            /// Failure will call Fail() with the given failure message.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_condition - The condition to check.
+            /// @param in_failureMessage - The message which will be passed to fail if the
+            /// condition is not true.
             //------------------------------------------------------------------------------
             void Assert(bool in_condition, const std::string& in_failureMessage = "") noexcept;
             
         private:
             //------------------------------------------------------------------------------
-            /// TODO
+            /// Creates a new instance of the test. Declared private to force use of the
+            /// factory method.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_desc - The test description.
+            /// @param in_passDelegate - A delegate which will be called if the test passes.
+            /// @param in_failDelegate - A delegate which will be called if the test fails.
             //------------------------------------------------------------------------------
             Test(const TestDesc& in_desc, const PassDelegate& in_passDelegate, const FailDelegate& in_failDelegate) noexcept;
             

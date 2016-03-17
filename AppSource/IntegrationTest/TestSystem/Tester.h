@@ -42,7 +42,8 @@ namespace CSTest
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// TODO
+        /// Provides the means to run the integration tests and receive a report on
+        /// how many passed or failed.
         ///
         /// This is not thread-safe.
         ///
@@ -53,40 +54,39 @@ namespace CSTest
         public:
             CS_DECLARE_NOCOPY(Tester);
             //------------------------------------------------------------------------------
-            /// TODO
+            /// A delegate which is called as each test is run which can be used to display
+            /// test progress onscreen.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             using ProgressUpdateDelegate = std::function<void(const TestDesc& in_testDesc, u32 in_testIndex, u32 in_numTests) noexcept>;
             //------------------------------------------------------------------------------
-            /// TODO
+            /// A delegate which is called when the tests have completed, providing a report.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             using CompletionDelegate = std::function<void(const Report& in_report) noexcept>;
             //------------------------------------------------------------------------------
-            /// TODO
+            /// Constructs a new instance of the tester and begins the integration tests.
             ///
             /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            Tester() = default;
-            //------------------------------------------------------------------------------
-            /// TODO
             ///
-            /// @author Ian Copland
+            /// @param in_progressUpdateDelegate - The update progress delegate.
+            /// @param in_completionDelegate - The completion delegate.
             //------------------------------------------------------------------------------
-            Tester(const std::vector<TestDesc>& in_tests, const ProgressUpdateDelegate& in_progressUpdateDelegate, const CompletionDelegate& in_completionDelegate) noexcept;
+            Tester(const ProgressUpdateDelegate& in_progressUpdateDelegate, const CompletionDelegate& in_completionDelegate) noexcept;
         private:
             //------------------------------------------------------------------------------
-            /// TODO
+            /// Attempts to start the next test. If there are no tests left to run the the
+            /// completion delegate is called.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void TryStartTest() noexcept;
             
-            const ProgressUpdateDelegate m_progressUpdateDelegate;
-            const CompletionDelegate m_completionDelegate;
-            const u32 m_numTests;
+            ProgressUpdateDelegate m_progressUpdateDelegate;
+            CompletionDelegate m_completionDelegate;
+            u32 m_numTests;
             
             std::queue<TestDesc> m_testQueue;
             TestSPtr m_activeTest;

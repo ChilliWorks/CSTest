@@ -38,7 +38,7 @@ namespace CSTest
     namespace IntegrationTest
     {
         //------------------------------------------------------------------------------
-        /// TODO
+        /// An immutable description of a test.
         ///
         /// This is immutable and therefore thread-safe.
         ///
@@ -49,39 +49,46 @@ namespace CSTest
         public:
             static constexpr f32 k_defaultTimeoutSeconds = 5.0f;
             //------------------------------------------------------------------------------
-            /// TODO
+            /// A delegate describing the test method.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_test - The test instance.
             //------------------------------------------------------------------------------
             using TestDelegate = std::function<void(const TestSPtr& in_test) noexcept>;
             //------------------------------------------------------------------------------
-            /// TODO
+            /// The constructor.
             ///
             /// @author Ian Copland
+            ///
+            /// @param in_testCaseName - The name of the test case.
+            /// @param in_testName - The name of the test.
+            /// @param in_testDelegate - The test delegate.
+            /// @param in_timoutSeconds - [Optional] The time before the test fails.
             //------------------------------------------------------------------------------
             TestDesc(const std::string& in_testCaseName, const std::string& in_testName, const TestDelegate& in_testDelegate, f32 in_timeoutSeconds = k_defaultTimeoutSeconds) noexcept;
             //------------------------------------------------------------------------------
-            /// TODO
-            ///
             /// @author Ian Copland
+            ///
+            /// @return The name of the test case.
             //------------------------------------------------------------------------------
             const std::string& GetTestCaseName() const noexcept;
             //------------------------------------------------------------------------------
-            /// TODO
-            ///
             /// @author Ian Copland
+            ///
+            /// @return The name of the test.
             //------------------------------------------------------------------------------
             const std::string& GetTestName() const noexcept;
             //------------------------------------------------------------------------------
-            /// TODO
-            ///
             /// @author Ian Copland
+            ///
+            /// @param The test delegate.
             //------------------------------------------------------------------------------
             const TestDelegate& GetTestDelegate() const noexcept;
             //------------------------------------------------------------------------------
-            /// TODO
-            ///
             /// @author Ian Copland
+            ///
+            /// @param The time before the test will fail.
             //------------------------------------------------------------------------------
             f32 GetTimeoutSeconds() const noexcept;
             
