@@ -1,6 +1,6 @@
 ::
 ::  BuildAll.bat
-::  CSTest
+::  CSEmptyTemplate
 ::  Created by Ian Copland on 22/01/2015
 ::
 ::  The MIT License (MIT)
@@ -26,6 +26,6 @@
 ::  THE SOFTWARE.
 ::
 
-python ../Tools/Scripts/content_builder.py PrebuiltResources/ AppResources/
+python ../Tools/Scripts/content_builder.py --input PrebuiltResources/ --output AppResources/
 
 PAUSE

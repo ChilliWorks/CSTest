@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 #  content_builder.py
-#  CSTest
+#  CSEmptyTemplate
 #  Created by Ian Copland on 22/01/2015.
 #
 #  The MIT License (MIT)
@@ -27,6 +27,10 @@
 #  THE SOFTWARE.
 #
 
+import argparse
+import os
+import sys
+
 import font_builder
 import model_builder
 import music_builder
@@ -35,40 +39,52 @@ import text_builder
 import texture_atlas_builder
 import texture_builder
 
-import os
-import sys
+FONT_DIRECTORY_PATH = "Fonts/"
+MODEL_DIRECTORY_PATH = "Models/"
+MUSIC_DIRECTORY_PATH = "Music/"
+SFX_DIRECTORY_PATH = "SFX/"
+TEXT_DIRECTORY_PATH = "Text/"
+TEXTURE_ATLAS_DIRECTORY_PATH = "TextureAtlases/"
+TEXTURE_DIRECTORY_PATH = "Textures/"
 
-model_directory_path = "Models/"
-texture_directory_path = "Textures/"
-texture_atlas_directory_path = "TextureAtlases/"
-sfx_directory_path = "SFX/"
-music_directory_path = "Music/"
-font_directory_path = "Fonts/"
-text_directory_path = "Text/"
-
-#------------------------------------------------------------------------------
-# The entry point into the script.
-#
-# @author Ian Copland
-#
-# @param The list of arguments.
-#------------------------------------------------------------------------------
-def main(args):
-	if not len(args) is 3:
-		print("ERROR: Incorrect parameters supplied.")
-		return
-
-	input_path = args[1]
-	output_path = args[2]
-
-	model_builder.build(os.path.join(input_path, model_directory_path), os.path.join(output_path, model_directory_path))
-	texture_builder.build(os.path.join(input_path, texture_directory_path), os.path.join(output_path, texture_directory_path))
-	texture_atlas_builder.build(os.path.join(input_path, texture_atlas_directory_path), os.path.join(output_path, texture_atlas_directory_path))
-	sfx_builder.build(os.path.join(input_path, sfx_directory_path), os.path.join(output_path, sfx_directory_path))
-	music_builder.build(os.path.join(input_path, music_directory_path), os.path.join(output_path, music_directory_path))
-	font_builder.build(os.path.join(output_path, font_directory_path))
-	text_builder.build(os.path.join(input_path, text_directory_path), os.path.join(output_path, text_directory_path))
-
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
+def build(input_directory_path, output_directory_path):
+    """
+    Runs all of the individual asset pipeline build scripts. 
+    
+    :Authors: Ian Copland
+    
+    :param input_directory_path: The input directory path.
+    :param output_directory_path: The output directory path.
+    """
+    model_builder.build(os.path.join(input_directory_path, MODEL_DIRECTORY_PATH), os.path.join(output_directory_path, MODEL_DIRECTORY_PATH))
+    texture_builder.build(os.path.join(input_directory_path, TEXTURE_DIRECTORY_PATH), os.path.join(output_directory_path, TEXTURE_DIRECTORY_PATH))
+    texture_atlas_builder.build(os.path.join(input_directory_path, TEXTURE_ATLAS_DIRECTORY_PATH), os.path.join(output_directory_path, TEXTURE_ATLAS_DIRECTORY_PATH))
+    music_builder.build(os.path.join(input_directory_path, MUSIC_DIRECTORY_PATH), os.path.join(output_directory_path, MUSIC_DIRECTORY_PATH))
+    sfx_builder.build(os.path.join(input_directory_path, SFX_DIRECTORY_PATH), os.path.join(output_directory_path, SFX_DIRECTORY_PATH))
+    font_builder.build(os.path.join(output_directory_path, FONT_DIRECTORY_PATH))
+    text_builder.build(os.path.join(input_directory_path, TEXT_DIRECTORY_PATH), os.path.join(output_directory_path, TEXT_DIRECTORY_PATH))
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
+def parse_arguments():
+    """
+    Parses the given argument list.
+    
+    :Authors: Ian Copland
+    
+    :returns: A container for the parsed arguments.
+    """
+    script_desc = 'The default content pipeline for a ChilliSource application. This only provides a starting point and should be extended or replaced as per the requirements of the project.'
+    
+    parser = argparse.ArgumentParser(description=script_desc)
+    parser.add_argument('-i', '--input', dest='input_directory_path', type=str, required=True, help="The input directory containing the assets which should be built.")
+    parser.add_argument('-o', '--output', dest='output_directory_path', type=str, required=True, help="The output directory where the built assets should be saved.")
+    
+    return parser.parse_args()
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
 if __name__ == "__main__":
-	main(sys.argv)
+    args = parse_arguments();
+    build(args.input_directory_path, args.output_directory_path)
 

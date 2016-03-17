@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 #  file_system_utils.py
-#  CSTest
+#  CSEmptyTemplate
 #  Created by Ian Copland on 22/01/2015.
 #
 #  The MIT License (MIT)
@@ -27,33 +27,37 @@
 #  THE SOFTWARE.
 #
 
+import errno
+import shutil
 import sys
 import os
-import shutil
-import errno
 
-#------------------------------------------------------------------------------
-# Calculates the absolute path from a path relative to this script file.
-# 
-# @author I Copland
-#
-# @param The path relative to this source file.
-#
-# @return The absolute path.
-#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
 def get_path_from_here(path):
+    """
+    Calculates the absolute path from a path relative to this script file.
+    
+    :Authors: Ian Copland
+    
+    :param path: The path relative to this source file.
+    
+    :returns: The absolute path.
+    """
     return os.path.realpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), path));
-#------------------------------------------------------------------------------
-# Copy the given dst directory or create it if it doesn't exist with the 
-# contents of the src directory. This will overwrite exisiting files of the 
-# same name in the dst directory
-#
-# @author S Downie
-#
-# @param The source directory path.
-# @param The destination directory path.
-#------------------------------------------------------------------------------      
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
 def copy_directory(src_path, dst_path):
+    """
+    Copy the given dst directory or create it if it doesn't exist with the 
+    contents of the src directory. This will overwrite exisiting files of the 
+    same name in the dst directory.
+    
+    :Authors: S Downie
+    
+    :param src_path: The source directory path.
+    :param dst_path: The destination directory path.
+    """
     if os.path.exists(dst_path) == False:
         os.makedirs(dst_path)
 
@@ -64,37 +68,43 @@ def copy_directory(src_path, dst_path):
             copy_directory(src, dst)
         else:
             shutil.copy2(src, dst)
-#------------------------------------------------------------------------------  
-# Deletes a directory if it exists. Does not return an error if trying to 
-# delete a directory that doesn't exist.
-#
-# @author I Copland
-#
-# @param The path to the directory to delete.
-#------------------------------------------------------------------------------  
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
 def delete_directory(directory_path):
+    """
+    Deletes a directory if it exists. Does not return an error if trying to 
+    delete a directory that doesn't exist.
+    
+    :Authors: Ian Copland
+    
+    :param directory_path: The path to the directory to delete.
+    """
     if os.path.exists(directory_path) == True:
         shutil.rmtree(directory_path)
-#------------------------------------------------------------------------------  
-# Deletes a file if it exists. Does not return an error if trying to delete a
-# file that doesn't exist.
-#
-# @author I Copland
-#
-# @param The path to the file to delete.
+#------------------------------------------------------------------------------ 
 #------------------------------------------------------------------------------  
 def delete_file(file_path):
+    """
+    Deletes a file if it exists. Does not return an error if trying to delete a
+    file that doesn't exist.
+    
+    :Authors: Ian Copland
+    
+    :param file_path: The path to the file to delete.
+    """
     if os.path.isfile(file_path) == True:
         os.remove(file_path)
-#------------------------------------------------------------------------------  
-# @author I Copland
-#
-# @param The path.
-# @param The extension. This is not case sensitive.
-#
-# @return Whether or not the path has the given extension.
-#------------------------------------------------------------------------------  
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
 def has_extension(file_path, extension):
+    """
+    :Authors: Ian Copland
+    
+    :param file_path: The file path.
+    :param extension: The extension. This is not case sensitive.
+    
+    :returns: Whether or not the path has the given extension.
+    """
     lowercase_filepath = file_path.lower()
     lowercase_extension = extension.lower()
     return lowercase_filepath.endswith(lowercase_extension)

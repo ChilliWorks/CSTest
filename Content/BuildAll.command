@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #  BuildAll.command
-#  CSTest
+#  CSEmptyTemplate
 #  Created by Scott Downie on 30/06/2014
 #
 #  The MIT License (MIT)
@@ -30,4 +30,4 @@
 CURRENT_DIR=${0%/*} 
 cd $CURRENT_DIR
 
-python ../Tools/Scripts/content_builder.py $CURRENT_DIR/PrebuiltResources/ $CURRENT_DIR/AppResources/
+python ../Tools/Scripts/content_builder.py --input $CURRENT_DIR/PrebuiltResources/ --output $CURRENT_DIR/AppResources/

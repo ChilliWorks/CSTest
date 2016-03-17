@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 #  texture_builder.py
-#  CSTest
+#  CSEmptyTemplate
 #  Created by Scott Downie on 30/06/2014.
 #
 #  The MIT License (MIT)
@@ -27,79 +27,82 @@
 #  THE SOFTWARE.
 #
 
-import sys
+import argparse
 import os
-import subprocess
 import shutil
+import subprocess
+import sys
+
 import file_system_utils
 
-relative_tool_path = "../../ChilliSource/Tools/PNGToCSImage.jar"
+RELATIVE_TOOL_FILE_PATH = "../../ChilliSource/Tools/PNGToCSImage.jar"
 
 #------------------------------------------------------------------------------
-# Walks the input directory and converts all pngs into csimages
-#
-# @author S Downie
-#
-# @param Input path
-# @param Output path
 #------------------------------------------------------------------------------
-def build(input_path, output_path):
-	print("-----------------------------------------")
-	print("           Building Textures")
-	print("-----------------------------------------")
+def build(input_directory_path, output_directory_path):
+    """
+    Walks the input directory and converts all pngs into csimages
+    
+    :Authors: S Downie
+    
+    :param input_directory_path: The input directory path.
+    :param output_directory_path: The output directory path.
+    """
+    print("-----------------------------------------")
+    print("           Building Textures")
+    print("-----------------------------------------")
 
-	if(input_path.endswith("/") == False):
-		input_path = input_path + "/"
+    file_system_utils.delete_directory(output_directory_path)
 
-	if(output_path.endswith("/") == False):
-		output_path = output_path + "/"
+    for current_input_directory_path, sub_input_directory_paths, file_names in os.walk(input_directory_path):
+        current_output_directory_path = os.path.join(output_directory_path, current_input_directory_path[len(input_directory_path):]);
 
-	file_system_utils.delete_directory(output_path)
+        for file_name in file_names:
+            if file_system_utils.has_extension(file_name, ".png"):
+                if os.path.exists(current_output_directory_path) == False:
+                    os.makedirs(current_output_directory_path);
 
-	for directory, sub_dirs, filenames in os.walk(input_path):
-		input_dir = directory
-		output_dir = os.path.join(output_path, input_dir[len(input_path):len(input_dir)]);
+                input_file_path = os.path.join(current_input_directory_path, file_name)
+                output_file_path = os.path.splitext(os.path.join(current_output_directory_path, file_name))[0] + ".csimage"
+                build_texture(input_file_path, output_file_path)
 
-		for filename in filenames:
-			if file_system_utils.has_extension(filename, ".png") == True:
-				if os.path.exists(output_dir) == False:
-					os.makedirs(output_dir);
-				
-				output_file_path = os.path.splitext(os.path.join(output_dir, filename))[0] + ".csimage"
-				build_texture(os.path.join(directory, filename), output_file_path)
-
-	print (" ")
-
+    print (" ")
 #------------------------------------------------------------------------------
-# Converts a single PNG to a csimage
-#
-# @author S Downie
-#
-# @param Input path
-# @param Output path
 #------------------------------------------------------------------------------
-def build_texture(input_filepath, output_filepath):
-	print(output_filepath)
+def build_texture(input_file_path, output_file_path):
+    """
+    Converts a single PNG to a csimage
+    
+    :Authors: S Downie
+    
+    :param input_file_path: The input file path.
+    :param output_file_path: The output file path.
+    """
+    print(output_file_path)
 
-	tool_path = file_system_utils.get_path_from_here(relative_tool_path)
-	subprocess.call(["java", "-Djava.awt.headless=true", "-Xmx512m", "-jar", tool_path, "--input", input_filepath, "--output", output_filepath]);
-
-#------------------------------------------------------------------------------
-# The entry point into the script.
-#
-# @author S Downie
-#
-# @param The list of arguments.
-#------------------------------------------------------------------------------
-def main(args):
-	if not len(args) is 3:
-		print("ERROR: Invalid parameters supplied.")
-		return
-
-	input_path = args[1]
-	output_path = args[2]
-	build(input_path, output_path)
-
+    tool_file_path = file_system_utils.get_path_from_here(RELATIVE_TOOL_FILE_PATH)
+    tool_args = ["java", "-Djava.awt.headless=true", "-Xmx512m", "-jar", tool_file_path, "--input", input_file_path, "--output", output_file_path];
+    subprocess.call(tool_args);
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
+def parse_arguments():
+    """
+    Parses the given argument list.
+    
+    :Authors: Ian Copland
+    
+    :returns: A container for the parsed arguments.
+    """
+    script_desc = 'Converts all xls files in the input directory to cstext format and outputs them to the given output directory. Sub directories will be recursed.'
+    
+    parser = argparse.ArgumentParser(description=script_desc)
+    parser.add_argument('-i', '--input', dest='input_directory_path', type=str, required=True, help="The input directory containing xls files.")
+    parser.add_argument('-o', '--output', dest='output_directory_path', type=str, required=True, help="The output directory where the output cstext files should be saved.")
+    
+    return parser.parse_args()
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
 if __name__ == "__main__":
-	main(sys.argv)
+    args = parse_arguments();
+    build(args.input_directory_path, args.output_directory_path)
 

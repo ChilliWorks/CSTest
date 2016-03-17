@@ -33,64 +33,73 @@ import subprocess
 import shutil
 import file_system_utils
 
-csfont_tool_filepath = file_system_utils.get_path_from_here("../../ChilliSource/Tools/CSFontBuilder.jar")
+RELATIVE_TOOL_FILE_PATH = "../../ChilliSource/Tools/CSFontBuilder.jar"
 
 #------------------------------------------------------------------------------
-# Builds a single font with the given font name and size to the given file path.
-#
-# @author Ian Copland
-#
-# @param font_name - The name of the font which should be used. The font must
-# exist as a system font.
-# @param font_size - The size the output font should be rendered at.
-# @param font_file_path - The path to the output font.
+#------------------------------------------------------------------------------
+def build(output_directory_path):
+    """
+    Builds a series of fonts in different sizes.
+    
+    :Authors: Ian Copland
+    
+    :param output_directory_path: The path to the destination directory. The 
+        path to the directory (excluding the directory itself) must already 
+        exist.
+    """
+    print("-----------------------------------------")
+    print("           Building Fonts")
+    print("-----------------------------------------")
+    
+    file_system_utils.delete_directory(output_directory_path)
+    os.mkdir(output_directory_path)
+
+    build_font("Arial", "10", os.path.join(output_directory_path, "ArialSmall.low.csfont"))
+    build_font("Arial", "20", os.path.join(output_directory_path, "ArialSmall.med.csfont"))
+    build_font("Arial", "40", os.path.join(output_directory_path, "ArialSmall.high.csfont"))
+    
+    build_font("Arial", "16", os.path.join(output_directory_path, "ArialMed.low.csfont"))
+    build_font("Arial", "32", os.path.join(output_directory_path, "ArialMed.med.csfont"))
+    build_font("Arial", "64", os.path.join(output_directory_path, "ArialMed.high.csfont"))
+
+    print (" ")
+#------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 def build_font(font_name, font_size, font_file_path):
+    """
+    Builds a single font with the given font name and size to the given file path.
+    
+    :Authors: Ian Copland
+    
+    :param font_name: The name of the font which should be used. The font must
+        exist as a system font.
+    :param font_size: The size the output font should be rendered at.
+    :param font_file_path: The path to the output font.
+    """
     print("Building font '" + font_name + "' of size '" + font_size + "' to '" + font_file_path + "'")
-    subprocess.call(["java", "-Djava.awt.headless=true", "-jar", csfont_tool_filepath, "--fontname", font_name, "--fontsize", font_size, "--output", font_file_path]);
-
-#------------------------------------------------------------------------------
-# Builds all of the fonts using the CSFontBuilder tool.
-#
-# @author Ian Copland
-#
-# @param destination_directory_path - The path to the destination directory.
-# The path to the directory (excluding the directory itself) must already
-# exist.
-#------------------------------------------------------------------------------
-def build(destination_directory_path):
-	print("-----------------------------------------")
-	print("           Building Fonts")
-	print("-----------------------------------------")
-	
-	file_system_utils.delete_directory(destination_directory_path)
-	os.mkdir(destination_directory_path)
-
-	build_font("Arial", "10", os.path.join(destination_directory_path, "ArialSmall.low.csfont"))
-	build_font("Arial", "20", os.path.join(destination_directory_path, "ArialSmall.med.csfont"))
-	build_font("Arial", "40", os.path.join(destination_directory_path, "ArialSmall.high.csfont"))
-	
-	build_font("Arial", "16", os.path.join(destination_directory_path, "ArialMed.low.csfont"))
-	build_font("Arial", "32", os.path.join(destination_directory_path, "ArialMed.med.csfont"))
-	build_font("Arial", "64", os.path.join(destination_directory_path, "ArialMed.high.csfont"))
-
-	print (" ")
-
-#------------------------------------------------------------------------------
-# The entry point into the script.
-#
-# @author Ian Copland
-#
-# @param The list of arguments.
-#------------------------------------------------------------------------------
-def main(args):
-	if not len(args) is 2:
-		print("ERROR: Invalid parameters supplied.")
-		return
-
-	destination_directory_path = args[1]
-	build(destination_directory_path)
-
+    
+    tool_file_path = file_system_utils.get_path_from_here(RELATIVE_TOOL_FILE_PATH)
+    tool_args = ["java", "-Djava.awt.headless=true", "-jar", tool_file_path, "--fontname", font_name, "--fontsize", font_size, "--output", font_file_path]
+    subprocess.call(tool_args);
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
+def parse_arguments():
+    """
+    Parses the given argument list.
+    
+    :Authors: Ian Copland
+    
+    :returns: A container for the parsed arguments.
+    """
+    script_desc = 'Builds a series of fonts in different sizes.'
+    
+    parser = argparse.ArgumentParser(description=script_desc)
+    parser.add_argument('-o', '--output', dest='output_directory_path', type=str, required=True, help="The output directory where the fonts should be saved.")
+    
+    return parser.parse_args()
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
 if __name__ == "__main__":
-	main(sys.argv)
+    args = parse_arguments();
+    build(args.output_directory_path)
 
