@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 #  sfx_builder.py
-#  CSEmptyTemplate
+#  CSTest
 #  Created by Ian Copland on 14/03/2016.
 #
 #  The MIT License (MIT)

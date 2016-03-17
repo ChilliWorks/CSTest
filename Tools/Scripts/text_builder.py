@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 #  text_builder.py
-#  CSEmptyTemplate
+#  CSTest
 #  Created by Scott Downie on 30/06/2014.
 #
 #  The MIT License (MIT)

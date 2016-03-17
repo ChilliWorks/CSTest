@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 #  file_system_utils.py
-#  CSEmptyTemplate
+#  CSTest
 #  Created by Ian Copland on 22/01/2015.
 #
 #  The MIT License (MIT)
