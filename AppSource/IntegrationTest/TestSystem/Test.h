@@ -33,6 +33,8 @@
 
 #include <IntegrationTest/TestSystem/TestDesc.h>
 
+#include <ChilliSource/Core/Time.h>
+
 #include <mutex>
 
 namespace CSTest
@@ -67,7 +69,7 @@ namespace CSTest
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            Test(const TestDesc& in_desc, const PassDelegate& in_passDelegate, const FailDelegate& in_failDelegate) noexcept;
+            static TestSPtr Create(const TestDesc& in_desc, const PassDelegate& in_passDelegate, const FailDelegate& in_failDelegate);
             //------------------------------------------------------------------------------
             /// TODO
             ///
@@ -94,6 +96,13 @@ namespace CSTest
             void Assert(bool in_condition, const std::string& in_failureMessage = "") noexcept;
             
         private:
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            Test(const TestDesc& in_desc, const PassDelegate& in_passDelegate, const FailDelegate& in_failDelegate) noexcept;
+            
             const TestDesc m_desc;
             const PassDelegate m_passDelegate;
             const FailDelegate m_failDelegate;
@@ -101,6 +110,8 @@ namespace CSTest
             CSCore::TaskScheduler* m_taskScheduler = nullptr;
             bool m_active = true;
             std::mutex m_mutex;
+            CSCore::Timer m_timer;
+            CSCore::EventConnectionUPtr m_timerEventConnection;
         };
     }
 }

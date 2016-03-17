@@ -34,12 +34,13 @@ namespace CSTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        TestDesc::TestDesc(const std::string& in_testCaseName, const std::string& in_testName, const TestDelegate& in_testDelegate) noexcept
-            : m_testCaseName(in_testCaseName), m_testName(in_testName), m_testDelegate(in_testDelegate)
+        TestDesc::TestDesc(const std::string& in_testCaseName, const std::string& in_testName, const TestDelegate& in_testDelegate, f32 in_timeoutSeconds) noexcept
+            : m_testCaseName(in_testCaseName), m_testName(in_testName), m_testDelegate(in_testDelegate), m_timeoutSeconds(in_timeoutSeconds)
         {
             CS_ASSERT(!m_testCaseName.empty(), "The test case must have a name.");
             CS_ASSERT(!m_testName.empty(), "The test must have a name.");
             CS_ASSERT(m_testDelegate, "A valid test delegate must be supplied.");
+            CS_ASSERT(m_timeoutSeconds > 0.0f, "The timeout must be more than 0 seconds.");
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -58,6 +59,12 @@ namespace CSTest
         const TestDesc::TestDelegate& TestDesc::GetTestDelegate() const noexcept
         {
             return m_testDelegate;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        f32 TestDesc::GetTimeoutSeconds() const noexcept
+        {
+            return m_timeoutSeconds;
         }
     }
 }

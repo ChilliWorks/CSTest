@@ -89,7 +89,7 @@ namespace CSTest
             const u32 m_numTests;
             
             std::queue<TestDesc> m_testQueue;
-            TestUPtr m_activeTest;
+            TestSPtr m_activeTest;
             u32 m_activeTestIndex = 0;
             std::vector<Report::FailedTest> m_failedTests;
         };

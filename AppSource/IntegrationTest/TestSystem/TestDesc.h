@@ -47,18 +47,19 @@ namespace CSTest
         class TestDesc final
         {
         public:
+            static constexpr f32 k_defaultTimeoutSeconds = 5.0f;
             //------------------------------------------------------------------------------
             /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            using TestDelegate = std::function<void(Test*) noexcept>;
+            using TestDelegate = std::function<void(const TestSPtr& in_test) noexcept>;
             //------------------------------------------------------------------------------
             /// TODO
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            TestDesc(const std::string& in_testCaseName, const std::string& in_testName, const TestDelegate& in_testDelegate) noexcept;
+            TestDesc(const std::string& in_testCaseName, const std::string& in_testName, const TestDelegate& in_testDelegate, f32 in_timeoutSeconds = k_defaultTimeoutSeconds) noexcept;
             //------------------------------------------------------------------------------
             /// TODO
             ///
@@ -77,11 +78,18 @@ namespace CSTest
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             const TestDelegate& GetTestDelegate() const noexcept;
+            //------------------------------------------------------------------------------
+            /// TODO
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            f32 GetTimeoutSeconds() const noexcept;
             
         private:
             std::string m_testCaseName;
             std::string m_testName;
             TestDelegate m_testDelegate;
+            f32 m_timeoutSeconds;
         };
     }
 }

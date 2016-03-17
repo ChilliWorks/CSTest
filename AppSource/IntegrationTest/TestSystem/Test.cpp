@@ -30,11 +30,26 @@
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Threading.h>
+#include <ChilliSource/Core/Time.h>
 
 namespace CSTest
 {
     namespace IntegrationTest
     {
+        //------------------------------------------------------------------------------
+        /// TODO
+        ///
+        /// @author Ian Copland
+        //------------------------------------------------------------------------------
+        TestSPtr Test::Create(const TestDesc& in_desc, const PassDelegate& in_passDelegate, const FailDelegate& in_failDelegate)
+        {
+            TestSPtr test(new Test(in_desc, in_passDelegate, in_failDelegate));
+            
+            // This is called here rather than inside the constructor to ensure the shared pointer exists.
+            test->GetDesc().GetTestDelegate()(test);
+            
+            return test;
+        }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         Test::Test(const TestDesc& in_desc, const PassDelegate& in_passDelegate, const FailDelegate& in_failDelegate) noexcept
@@ -45,7 +60,21 @@ namespace CSTest
             
             m_taskScheduler = CSCore::Application::Get()->GetTaskScheduler();
             
-            m_desc.GetTestDelegate()(this);
+            m_timerEventConnection = m_timer.OpenConnection(in_desc.GetTimeoutSeconds(), [=]()
+            {
+                std::unique_lock<std::mutex> lock(m_mutex);
+                
+                if (m_active)
+                {
+                    m_active = false;
+                    m_timer.Stop();
+                    m_timerEventConnection.reset();
+                    
+                    m_failDelegate("Timed out.");
+                }
+            });
+            
+            m_timer.Start();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -62,8 +91,12 @@ namespace CSTest
             if (m_active)
             {
                 m_active = false;
+                
                 m_taskScheduler->ScheduleMainThreadTask([=]() noexcept
                 {
+                    m_timer.Stop();
+                    m_timerEventConnection.reset();
+                    
                     m_passDelegate();
                 });
             }
@@ -77,8 +110,12 @@ namespace CSTest
             if (m_active)
             {
                 m_active = false;
+                
                 m_taskScheduler->ScheduleMainThreadTask([=]() noexcept
                 {
+                    m_timer.Stop();
+                    m_timerEventConnection.reset();
+                    
                     m_failDelegate(in_message);
                 });
             }

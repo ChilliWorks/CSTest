@@ -50,13 +50,19 @@
 ///
 /// @author Ian Copland
 //------------------------------------------------------------------------------
-#define CSIT_TEST(in_name) \
-    void in_name##IntegrationTest(CSTest::IntegrationTest::Test* in_thisTest_); \
+#define CSIT_TEST_TIMEOUT(in_name, in_timeoutSeconds) \
+    void in_name##IntegrationTest(const CSTest::IntegrationTest::TestSPtr& in_thisTest_); \
     namespace \
     { \
-        CSTest::IntegrationTest::AutoRegister in_name##IntegrationTest##AutoReg(CSTest::IntegrationTest::TestDesc(k_testCaseName_, #in_name, in_name##IntegrationTest)); \
+        CSTest::IntegrationTest::AutoRegister in_name##IntegrationTest##AutoReg(CSTest::IntegrationTest::TestDesc(k_testCaseName_, #in_name, in_name##IntegrationTest, in_timeoutSeconds)); \
     } \
-    void in_name##IntegrationTest(CSTest::IntegrationTest::Test* in_thisTest_)
+    void in_name##IntegrationTest(const CSTest::IntegrationTest::TestSPtr& in_thisTest_)
+//------------------------------------------------------------------------------
+/// TODO
+///
+/// @author Ian Copland
+//------------------------------------------------------------------------------
+#define CSIT_TEST(in_name) CSIT_TEST_TIMEOUT(in_name, CSTest::IntegrationTest::TestDesc::k_defaultTimeoutSeconds)
 //------------------------------------------------------------------------------
 /// TODO
 ///

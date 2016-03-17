@@ -78,7 +78,7 @@ namespace CSTest
                 TryStartTest();
             };
             
-            m_activeTest = TestUPtr(new Test(testDesc, passDelegate, failDelegate));
+            m_activeTest = Test::Create(testDesc, passDelegate, failDelegate);
         }
     }
 }
