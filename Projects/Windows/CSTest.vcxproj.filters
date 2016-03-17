@@ -10,12 +10,6 @@
     <Filter Include="AppSource\EmailComposer">
       <UniqueIdentifier>{9137ee90-e962-4fd8-b61f-98a82c3bc132}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AppSource\HTTPRequest">
-      <UniqueIdentifier>{ce75bbf2-3123-4072-b9c7-61ca6d080bec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AppSource\IntegrationTest">
-      <UniqueIdentifier>{aa185b3e-8a27-44d6-b0e8-65101cd7eb99}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AppSource\Lighting">
       <UniqueIdentifier>{31cab2f5-ace5-47db-a659-a628b4b1a0b9}</UniqueIdentifier>
     </Filter>
@@ -34,17 +28,32 @@
     <Filter Include="AppSource\Common\UI">
       <UniqueIdentifier>{d3a98938-d3e8-4a84-9c0b-d177e07a0ced}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AppSource\IntegrationTest\TestSystem">
-      <UniqueIdentifier>{bfa7b5c8-8962-494e-917d-060e5f12ada9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AppSource\IntegrationTest\Tests">
-      <UniqueIdentifier>{3e62b116-8ec0-4bd6-bdbe-1537512c3c0b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AppSource\Particle">
       <UniqueIdentifier>{0da443ff-d030-4347-a728-489b81f96776}</UniqueIdentifier>
     </Filter>
     <Filter Include="AppSource\CricketAudio">
       <UniqueIdentifier>{aac4450b-ad3e-4d7c-840b-1539075d7064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\IntegrationTest">
+      <UniqueIdentifier>{e2a44b82-0543-478e-b183-13baf98759fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\UnitTest">
+      <UniqueIdentifier>{63ea556f-832d-4595-a10b-8ddc78f3af01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\DownloadProgress">
+      <UniqueIdentifier>{f9d4f220-b5dc-4586-bfd4-9b310c8a4bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\IntegrationTest\TestSystem">
+      <UniqueIdentifier>{a20764d6-190b-455f-99b2-a972df97e027}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\IntegrationTest\Tests">
+      <UniqueIdentifier>{eebad987-5717-4628-a619-68dac7719987}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\UnitTest\TestSystem">
+      <UniqueIdentifier>{0d4d6b8f-5860-448f-a3ef-79ab360adeff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\UnitTest\Tests">
+      <UniqueIdentifier>{467e313a-305a-4c9c-93d4-ccd260124044}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -87,45 +96,6 @@
     <ClCompile Include="..\..\AppSource\Gesture\State.cpp">
       <Filter>AppSource\Gesture</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\HTTPRequest\DownloadProgressTestSystem.cpp">
-      <Filter>AppSource\HTTPRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\HTTPRequest\State.cpp">
-      <Filter>AppSource\HTTPRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\State.cpp">
-      <Filter>AppSource\IntegrationTest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystem.cpp">
-      <Filter>AppSource\IntegrationTest\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector2.cpp">
-      <Filter>AppSource\IntegrationTest\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector3.cpp">
-      <Filter>AppSource\IntegrationTest\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\Vector4.cpp">
-      <Filter>AppSource\IntegrationTest\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.cpp">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.cpp">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\Report.cpp">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.cpp">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.cpp">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.cpp">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\AppSource\Lighting\State.cpp">
       <Filter>AppSource\Lighting</Filter>
     </ClCompile>
@@ -137,6 +107,69 @@
     </ClCompile>
     <ClCompile Include="..\..\AppSource\CricketAudio\State.cpp">
       <Filter>AppSource\CricketAudio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\State.cpp">
+      <Filter>AppSource\IntegrationTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\HttpRequestTest.cpp">
+      <Filter>AppSource\IntegrationTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\Report.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\Test.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestDesc.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\Tester.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestRegistry.cpp">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\DownloadProgress\DownloadProgressTestSystem.cpp">
+      <Filter>AppSource\DownloadProgress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\DownloadProgress\State.cpp">
+      <Filter>AppSource\DownloadProgress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\State.cpp">
+      <Filter>AppSource\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\Tests\FileSystem.cpp">
+      <Filter>AppSource\UnitTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector2.cpp">
+      <Filter>AppSource\UnitTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector3.cpp">
+      <Filter>AppSource\UnitTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector4.cpp">
+      <Filter>AppSource\UnitTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\Report.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\ReportPresenter.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\TestCase.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,33 +221,6 @@
     <ClInclude Include="..\..\AppSource\Gesture\State.h">
       <Filter>AppSource\Gesture</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppSource\HTTPRequest\DownloadProgressTestSystem.h">
-      <Filter>AppSource\HTTPRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\HTTPRequest\State.h">
-      <Filter>AppSource\HTTPRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\State.h">
-      <Filter>AppSource\IntegrationTest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\CSReporter.h">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\FailedAssertion.h">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\Report.h">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.h">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.h">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestSystem.h">
-      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\AppSource\Lighting\State.h">
       <Filter>AppSource\Lighting</Filter>
     </ClInclude>
@@ -226,6 +232,60 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\CricketAudio\State.h">
       <Filter>AppSource\CricketAudio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\State.h">
+      <Filter>AppSource\IntegrationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\AutoRegister.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\Report.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\ReportPresenter.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\Test.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestCase.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestDesc.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\Tester.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestRegistry.h">
+      <Filter>AppSource\IntegrationTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\DownloadProgress\DownloadProgressTestSystem.h">
+      <Filter>AppSource\DownloadProgress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\DownloadProgress\State.h">
+      <Filter>AppSource\DownloadProgress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\State.h">
+      <Filter>AppSource\UnitTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\Report.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\ReportPresenter.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestCase.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

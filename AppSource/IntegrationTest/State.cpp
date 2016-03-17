@@ -57,7 +57,8 @@ namespace CSTest
         {
             GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
-            GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(false);
+			auto stateNavigator = GetSystem<Common::StateNavigator<NextState>>();
+			stateNavigator->SetNextButtonVisible(false);
             
             auto progressUpdateDelegate = [=](const TestDesc& in_testDesc, u32 in_testIndex, u32 in_numTests)
             {
@@ -67,7 +68,7 @@ namespace CSTest
             auto completionDelegate = [=](const Report& in_report)
             {
                 m_reportPresenter->PresentReport(in_report);
-                GetSystem<Common::StateNavigator<NextState>>()->SetNextButtonVisible(true);
+				stateNavigator->SetNextButtonVisible(true);
             };
             
             m_tester = TesterUPtr(new Tester(progressUpdateDelegate, completionDelegate));

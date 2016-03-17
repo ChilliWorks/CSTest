@@ -31,6 +31,7 @@
 
 #include <CSTest.h>
 
+#include <functional>
 #include <vector>
 
 namespace CSTest
