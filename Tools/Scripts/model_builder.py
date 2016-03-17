@@ -27,79 +27,82 @@
 #  THE SOFTWARE.
 #
 
-import sys
+import argparse
 import os
-import subprocess
 import shutil
+import subprocess
+import sys
+
 import file_system_utils
 
-relative_tool_path = "../../ChilliSource/Tools/ColladaToCSModel.jar"
-#------------------------------------------------------------------------------
-# Walks the input directory and converts all DAEs into csmodels.
-#
-# @author S Downie
-#
-# @param Input path
-# @param Output path
-#------------------------------------------------------------------------------
-def build(input_path, output_path):
-	
-	print("-----------------------------------------")
-	print("           Building Models")
-	print("-----------------------------------------")
-
-	if(input_path.endswith("/") == False):
-		input_path = input_path + "/"
-
-	if(output_path.endswith("/") == False):
-		output_path = output_path + "/"
-
-	file_system_utils.delete_directory(output_path)
-
-	for directory, sub_dirs, filenames in os.walk(input_path):
-		input_dir = directory
-		output_dir = os.path.join(output_path, input_dir[len(input_path):len(input_dir)]);
-
-		for filename in filenames:
-			if file_system_utils.has_extension(filename, ".dae") == True:
-				if os.path.exists(output_dir) == False:
-					os.makedirs(output_dir);
-
-				output_file_path = os.path.splitext(os.path.join(output_dir, filename))[0] + ".csmodel"
-				build_model(os.path.join(directory, filename), output_file_path)
-
-	print (" ")
+RELATIVE_TOOL_FILE_PATH = "../../ChilliSource/Tools/ColladaToCSModel.jar"
 
 #------------------------------------------------------------------------------
-# Converts a single DAE to a csmodel
-#
-# @author S Downie
-#
-# @param Input path
-# @param Output path
 #------------------------------------------------------------------------------
-def build_model(input_filepath, output_filepath):
-	print(output_filepath)
+def build(input_directory_path, output_directory_path):
+    """
+    Walks the input directory and converts all DAEs into csmodels.
+    
+    :Authors: S Downie
+    
+    :param input_directory_path: The input directory path.
+    :param output_directory_path: The output directory path.
+    """
+    print("-----------------------------------------")
+    print("           Building Models")
+    print("-----------------------------------------")
 
-	tool_path = file_system_utils.get_path_from_here(relative_tool_path)
-	subprocess.call(["java", "-Djava.awt.headless=true", "-Xmx512m", "-jar", tool_path, "--input", input_filepath, "--output", output_filepath, "--swapyandz"]);
+    file_system_utils.delete_directory(output_directory_path)
 
+    for current_input_directory_path, sub_input_directory_paths, file_names in os.walk(input_directory_path):
+        current_output_directory_path = os.path.join(output_directory_path, current_input_directory_path[len(input_directory_path):]);
+
+        for file_name in file_names:
+            if file_system_utils.has_extension(file_name, ".dae"):
+                if os.path.exists(current_output_directory_path) == False:
+                    os.makedirs(current_output_directory_path);
+
+                input_file_path = os.path.join(current_input_directory_path, file_name)
+                output_file_path = os.path.splitext(os.path.join(current_output_directory_path, file_name))[0] + ".csmodel"
+                build_model(input_file_path, output_file_path)
+
+    print (" ")
 #------------------------------------------------------------------------------
-# The entry point into the script.
-#
-# @author S Downie
-#
-# @param The list of arguments.
 #------------------------------------------------------------------------------
-def main(args):
-	if not len(args) is 3:
-		print("ERROR: Incorrect parameters supplied.")
-		return
+def build_model(input_file_path, output_file_path):
+    '''
+    Converts a single DAE to a csmodel
+    
+    :Authors: S Downie
+    
+    :param input_file_path: The input file path.
+    :param output_file_path: The output file path.
+    '''
+    print(output_file_path)
 
-	input_path = args[1]
-	output_path = args[2]
-	build_models(input_path, output_path)
-
+    tool_file_path = file_system_utils.get_path_from_here(RELATIVE_TOOL_FILE_PATH)
+    tool_args = ["java", "-Djava.awt.headless=true", "-Xmx512m", "-jar", tool_file_path, "--input", input_file_path, "--output", output_file_path, "--swapyandz"]
+    subprocess.call(tool_args);
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
+def parse_arguments():
+    """
+    Parses the given argument list.
+    
+    :Authors: Ian Copland
+    
+    :returns: A container for the parsed arguments.
+    """
+    script_desc = 'Converts all DAE files in the input directory to CSModel format and outputs them to the given output directory. Sub directories will be recursed.'
+    
+    parser = argparse.ArgumentParser(description=script_desc)
+    parser.add_argument('-i', '--input', dest='input_directory_path', type=str, required=True, help="The input directory containing DAE files.")
+    parser.add_argument('-o', '--output', dest='output_directory_path', type=str, required=True, help="The output directory where the output CSModel files should be saved.")
+    
+    return parser.parse_args()
+#------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------ 
 if __name__ == "__main__":
-	main(sys.argv)
+    args = parse_arguments();
+    build(args.input_directory_path, args.output_directory_path)
 

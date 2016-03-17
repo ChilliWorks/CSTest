@@ -43,6 +43,9 @@
     <Filter Include="AppSource\Particle">
       <UniqueIdentifier>{0da443ff-d030-4347-a728-489b81f96776}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\CricketAudio">
+      <UniqueIdentifier>{aac4450b-ad3e-4d7c-840b-1539075d7064}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -132,6 +135,9 @@
     <ClCompile Include="..\..\AppSource\Particle\State.cpp">
       <Filter>AppSource\Particle</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\CricketAudio\State.cpp">
+      <Filter>AppSource\CricketAudio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -217,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Particle\State.h">
       <Filter>AppSource\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\CricketAudio\State.h">
+      <Filter>AppSource\CricketAudio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

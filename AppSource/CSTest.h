@@ -46,12 +46,17 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(FollowerComponent);
     }
     
+    namespace CricketAudio
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
     namespace DownloadProgress
     {
         CS_FORWARDDECLARE_CLASS(State);
         CS_FORWARDDECLARE_CLASS(DownloadProgressTestSystem);
     }
-    
+
     namespace Gesture
     {
         CS_FORWARDDECLARE_CLASS(EventInfo);
@@ -72,6 +77,11 @@ namespace CSTest
     }
     
     namespace Lighting
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
+    namespace Particle
     {
         CS_FORWARDDECLARE_CLASS(State);
     }
