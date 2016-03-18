@@ -107,7 +107,16 @@ namespace CSTest
             ///
             /// @param in_text - The text to display.
             //------------------------------------------------------------------------------
-            void SetText(const std::string& in_text);
+            void SetCentreText(const std::string& in_text);
+            //------------------------------------------------------------------------------
+            /// Sets the text displayed by the presenter to the given string. The body is a
+            /// rendered left aligned, under the header.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_text - The text to display.
+            //------------------------------------------------------------------------------
+            void SetBodyText(const std::string& in_text);
             //------------------------------------------------------------------------------
             /// Initialises the report presenter.
             ///
@@ -121,7 +130,9 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnDestroy() override;
             
-            CSUI::WidgetSPtr m_text;
+            CSUI::WidgetSPtr m_presentationUI;
+            CSUI::WidgetSPtr m_bodyText;
+            CSUI::WidgetSPtr m_centreText;
         };
     }
 }

@@ -57,12 +57,12 @@
 /// @param in_timeoutSeconds - The time before the test fails.
 //------------------------------------------------------------------------------
 #define CSIT_TEST_TIMEOUT(in_name, in_timeoutSeconds) \
-    void in_name##IntegrationTest(const CSTest::IntegrationTest::TestSPtr& in_thisTest_); \
+    void in_name##IntegrationTest(const CSTest::IntegrationTest::TestSPtr& in_thisTest_) noexcept; \
     namespace \
     { \
         CSTest::IntegrationTest::AutoRegister in_name##IntegrationTest##AutoReg(CSTest::IntegrationTest::TestDesc(k_testCaseName_, #in_name, in_name##IntegrationTest, in_timeoutSeconds)); \
     } \
-    void in_name##IntegrationTest(const CSTest::IntegrationTest::TestSPtr& in_thisTest_)
+    void in_name##IntegrationTest(const CSTest::IntegrationTest::TestSPtr& in_thisTest_) noexcept
 //------------------------------------------------------------------------------
 /// A macro used to declare a new test with the default timeout.
 ///

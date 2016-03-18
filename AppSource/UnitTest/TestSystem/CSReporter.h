@@ -52,26 +52,26 @@ namespace CSTest
             ///
             /// @return A description of the the reporter.
             //------------------------------------------------------------------------------
-            static std::string getDescription();
+            static std::string getDescription() noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @return The report generated during the last test run.
             //------------------------------------------------------------------------------
-            static const Report& getReport();
+            static const Report& getReport() noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @param in_config - The configuration. Note that CSReport only supports a
             /// subset of available configs. It will assert if the config isn't supported.
             //------------------------------------------------------------------------------
-            CSReporter(const Catch::ReporterConfig& in_config);
+            CSReporter(const Catch::ReporterConfig& in_config) noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @return The reporter preferences.
             //------------------------------------------------------------------------------
-            Catch::ReporterPreferences getPreferences() const override;
+            Catch::ReporterPreferences getPreferences() const noexcept override;
             //------------------------------------------------------------------------------
             /// Called when an assertion begins.
             ///
@@ -79,7 +79,7 @@ namespace CSTest
             ///
             /// @param in_assertionInfo - The assertion info.
             //------------------------------------------------------------------------------
-            void assertionStarting(const Catch::AssertionInfo& in_assertionInfo) override {};
+            void assertionStarting(const Catch::AssertionInfo& in_assertionInfo) noexcept override {};
             //------------------------------------------------------------------------------
             /// Called when an assertion ends, with stats.
             ///
@@ -87,7 +87,15 @@ namespace CSTest
             ///
             /// @param in_assertionStats - The stats on the given assertion.
             //------------------------------------------------------------------------------
-            bool assertionEnded(const Catch::AssertionStats& in_assertionStats) override;
+            bool assertionEnded(const Catch::AssertionStats& in_assertionStats) noexcept override;
+            //------------------------------------------------------------------------------
+            /// Called when a section ends, with stats.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_sectionStats - The stats on how the section went.
+            //------------------------------------------------------------------------------
+            void sectionEnded(const Catch::SectionStats& in_sectionStats) noexcept override;
             //------------------------------------------------------------------------------
             /// Called when a test case ends, with stats.
             ///
@@ -95,7 +103,7 @@ namespace CSTest
             ///
             /// @param in_testCaseStats - The stats on how the test case went.
             //------------------------------------------------------------------------------
-            void testCaseEnded(const Catch::TestCaseStats& in_testCaseStats) override;
+            void testCaseEnded(const Catch::TestCaseStats& in_testCaseStats) noexcept override;
             //------------------------------------------------------------------------------
             /// Called when the test run ends, with stats.
             ///
@@ -103,11 +111,15 @@ namespace CSTest
             ///
             /// @param in_testRunStats - in_testRunStats
             //------------------------------------------------------------------------------
-            void testRunEnded(const Catch::TestRunStats& in_testRunStats) override;
+            void testRunEnded(const Catch::TestRunStats& in_testRunStats) noexcept override;
             
         private:
             std::vector<FailedAssertion> m_currentFailedAssertions;
-            std::vector<TestCase> m_currentFailedTestCases;
+            std::vector<FailedSection> m_currentFailedSections;
+            std::vector<FailedTestCase> m_currentFailedTestCases;
+            
+            u32 m_sectionsPerTestCaseCount = 0;
+            u32 m_totalSectionCount = 0;
             
             static Report s_report; //needs to be accessible from TestSystem
         };

@@ -60,7 +60,7 @@ namespace CSTest
                 
                 CS_LOG_ERROR("==========================================");
                 
-                CS_LOG_ERROR(CSCore::ToString(in_report.GetNumFailedTests()) + "/" + CSCore::ToString(in_report.GetNumTests()) + " tests failed!");
+                CS_LOG_ERROR(CSCore::ToString(in_report.GetNumFailedTests()) + "/" + CSCore::ToString(in_report.GetNumTests()) + " integration tests failed!");
                 CS_LOG_ERROR(" ");
                 
                 for (const auto& failedTest : in_report.GetFailedTests())
@@ -89,7 +89,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void ReportPresenter::PresentProgress(const TestDesc& in_testDesc, u32 in_testIndex, u32 in_numTests)
         {
-            SetText("Running test " + CSCore::ToString(in_testIndex) + " out of " + CSCore::ToString(in_numTests) + ": " + in_testDesc.GetTestName());
+            SetCentreText("Running test " + CSCore::ToString(in_testIndex) + " out of " + CSCore::ToString(in_numTests) + "\n" + in_testDesc.GetTestName());
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -97,11 +97,11 @@ namespace CSTest
         {
             if (in_report.GetNumTests() == 0)
             {
-                SetText(k_noTestsText);
+                SetCentreText(k_noTestsText);
             }
             else if (in_report.GetNumFailedTests() == 0)
             {
-                SetText("All " + CSCore::ToString(in_report.GetNumTests()) + " tests passed!");
+                SetCentreText("All " + CSCore::ToString(in_report.GetNumTests()) + " tests passed!");
             }
             else
             {
@@ -114,29 +114,46 @@ namespace CSTest
                     
                     if (count > k_maxTestsToDisplay)
                     {
-                        textBody += "\n...";
+                        textBody += "\n - ...";
                         break;
                     }
                     else
                     {
-                        textBody += "\n" + failedTest.GetDesc().GetTestName();
+                        textBody += "\n - " + failedTest.GetDesc().GetTestName();
                     }
                 }
                 
                 textBody += "\n \nPlease check the console for further information.";
                 
-                SetText(textBody);
+                SetBodyText(textBody);
                 
                 PrintDetailedReport(in_report);
             }
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void ReportPresenter::SetText(const std::string& in_text)
+        void ReportPresenter::SetCentreText(const std::string& in_text)
         {
-            CS_ASSERT(m_text, "Cannot set the text before the text widget is created.");
+            CS_ASSERT(m_centreText, "Cannot set the text before the text widgets are created.");
+            CS_ASSERT(m_bodyText, "Cannot set the text before the text widgets are created.");
             
-            auto textComponent = m_text->GetComponent<CSUI::TextComponent>();
+            auto textComponent = m_centreText->GetComponent<CSUI::TextComponent>();
+            textComponent->SetText(in_text);
+            
+            textComponent = m_bodyText->GetComponent<CSUI::TextComponent>();
+            textComponent->SetText("");
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void ReportPresenter::SetBodyText(const std::string& in_text)
+        {
+            CS_ASSERT(m_centreText, "Cannot set the text before the text widgets are created.");
+            CS_ASSERT(m_bodyText, "Cannot set the text before the text widgets are created.");
+            
+            auto textComponent = m_centreText->GetComponent<CSUI::TextComponent>();
+            textComponent->SetText("");
+            
+            textComponent = m_bodyText->GetComponent<CSUI::TextComponent>();
             textComponent->SetText(in_text);
         }
         //------------------------------------------------------------------------------
@@ -144,20 +161,32 @@ namespace CSTest
         void ReportPresenter::OnInit()
         {
             auto resourcePool = CSCore::Application::Get()->GetResourcePool();
+            auto smallFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
             auto mediumFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialMed.csfont");
-
-            auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
-            m_text = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 1.0f), mediumFont, "");
-            m_text->SetRelativePosition(CSCore::Vector2(0.0f, 0.05f));
             
-            GetState()->GetUICanvas()->AddWidget(m_text);
+            auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
+            m_centreText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 1.0f), mediumFont, "");
+            m_centreText->SetRelativePosition(CSCore::Vector2(0.0f, 0.05f));
+            
+            m_bodyText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 0.65f), smallFont, "", CSRendering::AlignmentAnchor::k_topCentre, CSRendering::HorizontalTextJustification::k_left, CSRendering::VerticalTextJustification::k_top);
+            m_bodyText->SetRelativePosition(CSCore::Vector2(0.0f, -0.15f));
+            
+            auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
+            m_presentationUI = widgetFactory->CreateWidget();
+            m_presentationUI->AddWidget(m_centreText);
+            m_presentationUI->AddWidget(m_bodyText);
+            
+            GetState()->GetUICanvas()->AddWidget(m_presentationUI);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void ReportPresenter::OnDestroy()
         {
-            m_text->RemoveFromParent();
-            m_text.reset();
+            m_centreText.reset();
+            m_bodyText.reset();
+            
+            m_presentationUI->RemoveFromParent();
+            m_presentationUI.reset();
         }
     }
 }

@@ -30,7 +30,7 @@
 #define _UNITTEST_TESTSYSTEM_REPORT_H_
 
 #include <CSTest.h>
-#include <UnitTest/TestSystem/TestCase.h>
+#include <UnitTest/TestSystem/FailedTestCase.h>
 
 namespace CSTest
 {
@@ -52,59 +52,68 @@ namespace CSTest
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            Report();
+            Report() = default;
             //------------------------------------------------------------------------------
             /// Construtor. Takes all input data for the Report.
             ///
             /// @author Ian Copland
             ///
-            /// @param in_numAssertions - The total number of assertions in the test run.
             /// @param in_numTestCases - The total number of test cases in the test run.
+            /// @param in_numSections - The total number of sections in the test run.
+            /// @param in_numAssertions - The total number of assertions in the test run.
             /// @param in_failedTestCases - The list of failed test cases.
             //------------------------------------------------------------------------------
-            Report(u32 in_numTestCases, u32 in_numAssertions, const std::vector<TestCase>& in_failedTestCases);
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return Whether or not all of the tests which were run passed.
-            //------------------------------------------------------------------------------
-            bool DidAllTestsPass() const;
+            Report(u32 in_numTestCases, u32 in_numSections, u32 in_numAssertions, const std::vector<FailedTestCase>& in_failedTestCases) noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @return The number of test cases that were run.
             //------------------------------------------------------------------------------
-            u32 GetNumTestCases() const;
+            u32 GetNumTestCases() const noexcept;
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return The number of test cases which failed.
+            //------------------------------------------------------------------------------
+            u32 GetNumFailedTestCases() const noexcept;
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return The number of sections that were run.
+            //------------------------------------------------------------------------------
+            u32 GetNumSections() const noexcept;
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return The number of sections which failed.
+            //------------------------------------------------------------------------------
+            u32 GetNumFailedSections() const noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @return The total number of assertions that were run.
             //------------------------------------------------------------------------------
-            u32 GetNumAssertions() const;
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return The number of test cases that failed.
-            //------------------------------------------------------------------------------
-            u32 GetNumFailedTestCases() const;
+            u32 GetNumAssertions() const noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @return The total number of failed assertions accross all tests cases.
             //------------------------------------------------------------------------------
-            u32 GetNumFailedAssertions() const;
+            u32 GetNumFailedAssertions() const noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @return The list of failed assertions.
             //------------------------------------------------------------------------------
-            const std::vector<TestCase>& GetFailedTestCases() const;
+            const std::vector<FailedTestCase>& GetFailedTestCases() const noexcept;
             
         private:
-            u32 m_numTestCases;
-            u32 m_numAssertions;
-            std::vector<TestCase> m_failedTestCases;
-            u32 m_numFailedAssertions;
+            u32 m_numTestCases = 0;
+            u32 m_numSections = 0;
+            u32 m_numAssertions = 0;
+            u32 m_numFailedSections = 0;
+            u32 m_numFailedAssertions = 0;
+            std::vector<FailedTestCase> m_failedTestCases;
         };
     }
 }

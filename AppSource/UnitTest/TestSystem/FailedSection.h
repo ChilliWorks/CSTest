@@ -1,11 +1,11 @@
 //
-//  FailedAssertion.h
+//  FailedSection.h
 //  CSTest
-//  Created by Ian Copland on 15/07/2015.
+//  Created by Ian Copland on 18/03/2016.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Tag Games Limited
+//  Copyright (c) 2016 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,58 +26,67 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _UNITTEST_TESTSYSTEM_FAILEDASSERTION_H_
-#define _UNITTEST_TESTSYSTEM_FAILEDASSERTION_H_
+#ifndef _UNITTEST_TESTSYSTEM_FAILEDSECTION_H_
+#define _UNITTEST_TESTSYSTEM_FAILEDSECTION_H_
 
 #include <CSTest.h>
+
+#include <UnitTest/TestSystem/FailedAssertion.h>
+
+#include <vector>
 
 namespace CSTest
 {
     namespace UnitTest
     {
         //------------------------------------------------------------------------------
-        /// A container for all information pertaining to a single failed test assertion.
+        /// A container for information on a single failed test section.
         ///
         /// This is immutable after construction.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class FailedAssertion final
+        class FailedSection final
         {
         public:
             //------------------------------------------------------------------------------
-            /// Constructor. Creates the assertion with failure information.
-            ///
             /// @author Ian Copland
             ///
-            /// @param in_filePath - The file the failed assertion is contained in.
-            /// @param in_line - The line the failed assertion is at within the file.
-            /// @param in_errorMessage - The error message associated with the assertion.
+            /// @param in_name - The name of the section.
+            /// @param in_numAssertions - The total number of assertions in the section.
+            /// @param in_failedAssertions - A list containing data on each of the failed
+            /// assertions.
             //------------------------------------------------------------------------------
-            FailedAssertion(const std::string& in_filePath, u32 in_line, const std::string& in_errorMessage) noexcept;
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return The file the failed assertion is contained in.
-            //------------------------------------------------------------------------------
-            const std::string& GetFilePath() const noexcept;
+            FailedSection(const std::string& in_name, u32 in_numAssertions, const std::vector<FailedAssertion>& in_failedAssertions) noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
-            /// @return The line the failed assertion is at within the file.
+            /// @return The name of the section.
             //------------------------------------------------------------------------------
-            u32 GetLine() const noexcept;
+            const std::string& GetName() const noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
-            /// @return The error message associated with the assertion.
+            /// @return The total number of assertions in the section.
             //------------------------------------------------------------------------------
-            const std::string& GetErrorMessage() const noexcept;
+            u32 GetNumAssertions() const noexcept;
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return The number of assertions which failed.
+            //------------------------------------------------------------------------------
+            u32 GetNumFailedAssertions() const noexcept;
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return A list containing data on each of the failed assertions.
+            //------------------------------------------------------------------------------
+            const std::vector<FailedAssertion>& GetFailedAssertions() const noexcept;
             
         private:
-            std::string m_filePath;
-            u32 m_line;
-            std::string m_errorMessage;
+            std::string m_name;
+            u32 m_numAssertions;
+            std::vector<FailedAssertion> m_failedAssertions;
         };
     }
 }

@@ -57,24 +57,32 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void PrintDetailedReport(const Report& in_report)
             {
-                CS_ASSERT(in_report.DidAllTestsPass() == false, "Must be failed report");
+                CS_ASSERT(in_report.GetNumFailedTestCases()  > 0, "Must be failed report");
                 
                 CS_LOG_ERROR("==========================================");
-                
-                CS_LOG_ERROR("Tests Failed!");
+                CS_LOG_ERROR("Unit tests failed!");
                 CS_LOG_ERROR(" ");
+                
                 CS_LOG_ERROR(CSCore::ToString(in_report.GetNumFailedTestCases()) + " test cases failed out of " + CSCore::ToString(in_report.GetNumTestCases()));
-                CS_LOG_ERROR(CSCore::ToString(in_report.GetNumFailedAssertions()) + " assertions failed out of " + CSCore::ToString(in_report.GetNumAssertions()));
+                CS_LOG_ERROR(CSCore::ToString(in_report.GetNumFailedSections()) + " test sections failed out of " + CSCore::ToString(in_report.GetNumSections()));
+                CS_LOG_ERROR(CSCore::ToString(in_report.GetNumFailedAssertions()) + " test assertions failed out of " + CSCore::ToString(in_report.GetNumAssertions()));
                 
                 for (const auto& testCase : in_report.GetFailedTestCases())
                 {
                     CS_LOG_ERROR(" ");
-                    CS_LOG_ERROR("'" + testCase.GetName() + "' failed " + CSCore::ToString(testCase.GetNumFailedAssertions()) + " out of " + CSCore::ToString(testCase.GetNumAssertions()) + " assertions: ");
+                    CS_LOG_ERROR("** Test case '" + testCase.GetName() + "' **");
                     
-                    for (const auto& assertion : testCase.GetFailedAssertions())
+                    for (const auto& section : testCase.GetFailedSections())
                     {
-                        CS_LOG_ERROR("  " + assertion.GetFilePath() + ": " + CSCore::ToString(assertion.GetLine()));
-                        CS_LOG_ERROR("    " + assertion.GetErrorMessage());
+                        CS_LOG_ERROR("Section '" + section.GetName() + "' failed " + CSCore::ToString(section.GetNumFailedAssertions()) + " out of " + CSCore::ToString(section.GetNumAssertions()) + " assertions: ");
+                        
+                        for (const auto& assertion : section.GetFailedAssertions())
+                        {
+                            std::string baseName, directoryPath;
+                            CSCore::StringUtils::SplitFilename(assertion.GetFilePath(), baseName, directoryPath);
+                            
+                            CS_LOG_ERROR("  " + baseName + ", ln " + CSCore::ToString(assertion.GetLine()) + ": " + assertion.GetErrorMessage());
+                        }
                     }
                 }
                 
@@ -103,26 +111,31 @@ namespace CSTest
             {
                 SetCentreText(k_noTestsText);
             }
-            else if (in_report.DidAllTestsPass() == true)
+            else if (in_report.GetNumFailedTestCases() == 0)
             {
-                SetCentreText("All " + CSCore::ToString(in_report.GetNumTestCases()) + " tests cases passed!");
+                SetCentreText("All " + CSCore::ToString(in_report.GetNumSections()) + " test sections passed!");
             }
             else
             {
                 std::string textBody = CSCore::ToString(in_report.GetNumFailedTestCases()) + " test cases failed out of " + CSCore::ToString(in_report.GetNumTestCases());
-                textBody += "\n" + CSCore::ToString(in_report.GetNumFailedAssertions()) + " assertions failed out of " + CSCore::ToString(in_report.GetNumAssertions());
+                textBody += "\n" + CSCore::ToString(in_report.GetNumFailedSections()) + " test sections failed out of " + CSCore::ToString(in_report.GetNumSections());
+                textBody += "\n" + CSCore::ToString(in_report.GetNumFailedAssertions()) + " test assertions failed out of " + CSCore::ToString(in_report.GetNumAssertions());
                 
-                textBody += "\n \nThe following tests cases failed:";
+                textBody += "\n \nThe following test cases failed:";
                 
                 int count = 0;
                 for (const auto& testCase : in_report.GetFailedTestCases())
                 {
-                    textBody += "\n - " + testCase.GetName();
+                    ++count;
                     
-                    if (++count >= k_maxTestCasesToDisplay)
+                    if (count > k_maxTestCasesToDisplay)
                     {
                         textBody += "\n - ...";
                         break;
+                    }
+                    else
+                    {
+                        textBody += "\n - " + testCase.GetName();
                     }
                 }
                 

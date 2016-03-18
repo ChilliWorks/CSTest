@@ -1,11 +1,11 @@
 //
-//  Report.cpp
+//  FailedSection.cpp
 //  CSTest
-//  Created by Ian Copland on 15/07/2015.
+//  Created by Ian Copland on 18/03/2016.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Tag Games Limited
+//  Copyright (c) 2016 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@
 //  THE SOFTWARE.
 //
 
-#include <UnitTest/TestSystem/Report.h>
+#include <UnitTest/TestSystem/FailedSection.h>
 
 namespace CSTest
 {
@@ -34,57 +34,35 @@ namespace CSTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        Report::Report(u32 in_numTestCases, u32 in_numSections, u32 in_numAssertions, const std::vector<FailedTestCase>& in_failedTestCases) noexcept
-            : m_numTestCases(in_numTestCases), m_numSections(in_numSections), m_numAssertions(in_numAssertions), m_failedTestCases(in_failedTestCases)
+        FailedSection::FailedSection(const std::string& in_name, u32 in_numAssertions, const std::vector<FailedAssertion>& in_failedAssertions) noexcept
+            : m_name(in_name), m_numAssertions(in_numAssertions), m_failedAssertions(in_failedAssertions)
         {
-            m_numFailedAssertions = 0;
-            for (const auto& testCase : m_failedTestCases)
-            {
-                m_numFailedAssertions += testCase.GetNumFailedAssertions();
-                m_numFailedSections += testCase.GetNumFailedSections();
-            }
+            CS_ASSERT(in_failedAssertions.size() > 0, "Failed section cannot contain zero failed assertions.");
+            CS_ASSERT(in_numAssertions >= in_failedAssertions.size(), "There cannot be more failed assertions than there are assertions.");
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        u32 Report::GetNumTestCases() const noexcept
+        const std::string& FailedSection::GetName() const noexcept
         {
-            return m_numTestCases;
+            return m_name;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        u32 Report::GetNumFailedTestCases() const noexcept
-        {
-            return static_cast<u32>(m_failedTestCases.size());
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        u32 Report::GetNumSections() const noexcept
-        {
-            return m_numSections;
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        u32 Report::GetNumFailedSections() const noexcept
-        {
-            return m_numFailedSections;
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        u32 Report::GetNumAssertions() const noexcept
+        u32 FailedSection::GetNumAssertions() const noexcept
         {
             return m_numAssertions;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        u32 Report::GetNumFailedAssertions() const noexcept
+        u32 FailedSection::GetNumFailedAssertions() const noexcept
         {
-            return m_numFailedAssertions;
+            return u32(m_failedAssertions.size());
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        const std::vector<FailedTestCase>& Report::GetFailedTestCases() const noexcept
+        const std::vector<FailedAssertion>& FailedSection::GetFailedAssertions() const noexcept
         {
-            return m_failedTestCases;
+            return m_failedAssertions;
         }
     }
 }

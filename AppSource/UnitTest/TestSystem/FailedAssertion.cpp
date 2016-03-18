@@ -34,25 +34,25 @@ namespace CSTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        FailedAssertion::FailedAssertion(const std::string& in_filePath, u32 in_line, const std::string& in_errorMessage)
+        FailedAssertion::FailedAssertion(const std::string& in_filePath, u32 in_line, const std::string& in_errorMessage) noexcept
             : m_filePath(in_filePath), m_line(in_line), m_errorMessage(in_errorMessage)
         {
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        const std::string& FailedAssertion::GetFilePath() const
+        const std::string& FailedAssertion::GetFilePath() const noexcept
         {
             return m_filePath;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        u32 FailedAssertion::GetLine() const
+        u32 FailedAssertion::GetLine() const noexcept
         {
             return m_line;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        const std::string& FailedAssertion::GetErrorMessage() const
+        const std::string& FailedAssertion::GetErrorMessage() const noexcept
         {
             return m_errorMessage;
         }

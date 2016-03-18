@@ -40,19 +40,19 @@ namespace CSTest
         
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        std::string CSReporter::getDescription()
+        std::string CSReporter::getDescription() noexcept
         {
             return "Generates a report accessible in code.";
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        const Report& CSReporter::getReport()
+        const Report& CSReporter::getReport() noexcept
         {
             return s_report;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CSReporter::CSReporter(const Catch::ReporterConfig& in_config)
+        CSReporter::CSReporter(const Catch::ReporterConfig& in_config) noexcept
             : StreamingReporterBase(in_config)
         {
             CS_ASSERT(m_config->includeSuccessfulResults() == false, "CSReporter doesn't support reporting successful results.");
@@ -64,7 +64,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        Catch::ReporterPreferences CSReporter::getPreferences() const
+        Catch::ReporterPreferences CSReporter::getPreferences() const noexcept
         {
             Catch::ReporterPreferences prefs;
             prefs.shouldRedirectStdOut = true;
@@ -72,32 +72,48 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool CSReporter::assertionEnded(const Catch::AssertionStats& in_assertionStats)
+        bool CSReporter::assertionEnded(const Catch::AssertionStats& in_assertionStats) noexcept
         {
             const Catch::AssertionResult& assertionResult = in_assertionStats.assertionResult;
             
             if (isOk(assertionResult.getResultType()) == false)
             {
-                m_currentFailedAssertions.push_back(FailedAssertion(assertionResult.getSourceInfo().file, static_cast<u32>(assertionResult.getSourceInfo().line), assertionResult.getExpression()));
+                m_currentFailedAssertions.push_back(FailedAssertion(assertionResult.getSourceInfo().file, u32(assertionResult.getSourceInfo().line), assertionResult.getExpression()));
             }
             
             return true;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void CSReporter::testCaseEnded(const Catch::TestCaseStats& in_testCaseStats)
+        void CSReporter::sectionEnded(const Catch::SectionStats& in_sectionStats) noexcept
         {
-            StreamingReporterBase::testCaseEnded(in_testCaseStats);
+            StreamingReporterBase::sectionEnded(in_sectionStats);
+            
+            ++m_sectionsPerTestCaseCount;
+            ++m_totalSectionCount;
             
             if (m_currentFailedAssertions.empty() == false)
             {
-                m_currentFailedTestCases.push_back(TestCase(in_testCaseStats.testInfo.name, static_cast<u32>(in_testCaseStats.totals.assertions.total()), m_currentFailedAssertions));
+                m_currentFailedSections.push_back(FailedSection(in_sectionStats.sectionInfo.name, u32(in_sectionStats.assertions.total()), m_currentFailedAssertions));
                 m_currentFailedAssertions.clear();
             }
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void CSReporter::testRunEnded(const Catch::TestRunStats& in_testRunStats)
+        void CSReporter::testCaseEnded(const Catch::TestCaseStats& in_testCaseStats) noexcept
+        {
+            StreamingReporterBase::testCaseEnded(in_testCaseStats);
+            
+            if (m_currentFailedSections.empty() == false)
+            {
+                m_currentFailedTestCases.push_back(FailedTestCase(in_testCaseStats.testInfo.name, m_sectionsPerTestCaseCount, u32(in_testCaseStats.totals.assertions.total()), m_currentFailedSections));
+                m_currentFailedSections.clear();
+                m_sectionsPerTestCaseCount = 0;
+            }
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void CSReporter::testRunEnded(const Catch::TestRunStats& in_testRunStats) noexcept
         {
             StreamingReporterBase::testRunEnded(in_testRunStats);
             
@@ -106,8 +122,9 @@ namespace CSTest
                 CS_LOG_FATAL("Failed to run tests, aborting.");
             }
             
-            s_report = Report(static_cast<u32>(in_testRunStats.totals.testCases.total()), static_cast<u32>(in_testRunStats.totals.assertions.total()), m_currentFailedTestCases);
+            s_report = Report(u32(in_testRunStats.totals.testCases.total()), m_totalSectionCount, u32(in_testRunStats.totals.assertions.total()), m_currentFailedTestCases);
             m_currentFailedTestCases.clear();
+            m_totalSectionCount = 0;
         }
     }
 }

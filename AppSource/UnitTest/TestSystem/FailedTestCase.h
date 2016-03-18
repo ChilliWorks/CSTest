@@ -1,5 +1,5 @@
 //
-//  TestCase.h
+//  FailedTestCase.h
 //  CSTest
 //  Created by Ian Copland on 15/07/2015.
 //
@@ -26,12 +26,12 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _UNITTEST_TESTSYSTEM_TESTCASE_H_
-#define _UNITTEST_TESTSYSTEM_TESTCASE_H_
+#ifndef _UNITTEST_TESTSYSTEM_FAILEDTESTCASE_H_
+#define _UNITTEST_TESTSYSTEM_FAILEDTESTCASE_H_
 
 #include <CSTest.h>
 
-#include <UnitTest/TestSystem/FailedAssertion.h>
+#include <UnitTest/TestSystem/FailedSection.h>
 
 #include <vector>
 
@@ -40,59 +40,68 @@ namespace CSTest
     namespace UnitTest
     {
         //------------------------------------------------------------------------------
-        /// A container for information on a single test case.
+        /// A container for information on a single failed test case.
         ///
         /// This is immutable after construction.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class TestCase final
+        class FailedTestCase final
         {
         public:
-            //------------------------------------------------------------------------------
-            /// Construtor. Creates a blank test case.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            TestCase();
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @param in_name - The name of the test case.
+            /// @param in_numSections - The total number of sections in the test case.
             /// @param in_numAssertions - The total number of assertions in the test case.
-            /// @param in_failedAssertions - A list containing data on each of the failed
-            /// assertions.
+            /// @param in_failedSections - A list containing data on each failed section.
             //------------------------------------------------------------------------------
-            TestCase(const std::string& in_name, u32 in_numAssertions, const std::vector<FailedAssertion>& in_failedAssertions);
+            FailedTestCase(const std::string& in_name, u32 in_numSections, u32 in_numAssertions, const std::vector<FailedSection>& in_failedSections) noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @return The name of the test case.
             //------------------------------------------------------------------------------
-            const std::string& GetName() const;
+            const std::string& GetName() const noexcept;
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return The total number of test sections in the test case.
+            //------------------------------------------------------------------------------
+            u32 GetNumSections() const noexcept;
+            //------------------------------------------------------------------------------
+            /// @author Ian Copland
+            ///
+            /// @return The total number of test sections with at least one failed assertion.
+            //------------------------------------------------------------------------------
+            u32 GetNumFailedSections() const noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @return The total number of assertions in the test case.
             //------------------------------------------------------------------------------
-            u32 GetNumAssertions() const;
+            u32 GetNumAssertions() const noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @return The number of assertions which failed.
             //------------------------------------------------------------------------------
-            u32 GetNumFailedAssertions() const;
+            u32 GetNumFailedAssertions() const noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
-            /// @return A list containing data on each of the failed assertions.
+            /// @return A list containing data on each of the failed sections in the test
+            /// case.
             //------------------------------------------------------------------------------
-            const std::vector<FailedAssertion>& GetFailedAssertions() const;
+            const std::vector<FailedSection>& GetFailedSections() const noexcept;
             
         private:
             std::string m_name;
+            u32 m_numSections;
             u32 m_numAssertions;
-            std::vector<FailedAssertion> m_failedAssertions;
+            u32 m_numFailedAssertions = 0;
+            std::vector<FailedSection> m_failedSections;
         };
     }
 }

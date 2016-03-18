@@ -1,5 +1,5 @@
 //
-//  TestCase.cpp
+//  FailedTestCase.cpp
 //  CSTest
 //  Created by Ian Copland on 15/07/2015.
 //
@@ -26,7 +26,7 @@
 //  THE SOFTWARE.
 //
 
-#include <UnitTest/TestSystem/TestCase.h>
+#include <UnitTest/TestSystem/FailedTestCase.h>
 
 namespace CSTest
 {
@@ -34,39 +34,52 @@ namespace CSTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        TestCase::TestCase()
-        : m_name(""), m_numAssertions(0)
+        FailedTestCase::FailedTestCase(const std::string& in_name, u32 in_numSections, u32 in_numAssertions, const std::vector<FailedSection>& in_failedSections) noexcept
+            : m_name(in_name), m_numSections(in_numSections), m_numAssertions(in_numAssertions), m_failedSections(in_failedSections)
         {
+            CS_ASSERT(in_failedSections.size() > 0, "A failed test case cannot contain zero failed sections.");
+            CS_ASSERT(in_numSections >= in_failedSections.size(), "There cannot be more failed sections than there are sections.");
+            
+            for (const auto& section : in_failedSections)
+            {
+                m_numFailedAssertions += section.GetNumFailedAssertions();
+            }
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        TestCase::TestCase(const std::string& in_name, u32 in_numAssertions, const std::vector<FailedAssertion>& in_failedAssertions)
-            : m_name(in_name), m_numAssertions(in_numAssertions), m_failedAssertions(in_failedAssertions)
-        {
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        const std::string& TestCase::GetName() const
+        const std::string& FailedTestCase::GetName() const noexcept
         {
             return m_name;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        u32 TestCase::GetNumAssertions() const
+        u32 FailedTestCase::GetNumSections() const noexcept
         {
             return m_numAssertions;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        u32 TestCase::GetNumFailedAssertions() const
+        u32 FailedTestCase::GetNumFailedSections() const noexcept
         {
-            return static_cast<u32>(m_failedAssertions.size());
+            return m_failedSections.size();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        const std::vector<FailedAssertion>& TestCase::GetFailedAssertions() const
+        u32 FailedTestCase::GetNumAssertions() const noexcept
         {
-            return m_failedAssertions;
+            return m_numAssertions;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        u32 FailedTestCase::GetNumFailedAssertions() const noexcept
+        {
+            return m_numFailedAssertions;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        const std::vector<FailedSection>& FailedTestCase::GetFailedSections() const noexcept
+        {
+            return m_failedSections;
         }
     }
 }

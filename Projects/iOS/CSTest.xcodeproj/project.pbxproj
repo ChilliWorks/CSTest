@@ -41,7 +41,7 @@
 		81B190911C9B16BE002EC8AC /* FailedAssertion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190641C9B16BE002EC8AC /* FailedAssertion.cpp */; };
 		81B190921C9B16BE002EC8AC /* Report.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190661C9B16BE002EC8AC /* Report.cpp */; };
 		81B190931C9B16BE002EC8AC /* ReportPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190681C9B16BE002EC8AC /* ReportPresenter.cpp */; };
-		81B190941C9B16BE002EC8AC /* TestCase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1906A1C9B16BE002EC8AC /* TestCase.cpp */; };
+		81B190941C9B16BE002EC8AC /* FailedTestCase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1906A1C9B16BE002EC8AC /* FailedTestCase.cpp */; };
 		81B190951C9B16BE002EC8AC /* TestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1906C1C9B16BE002EC8AC /* TestSystem.cpp */; };
 		81B190961C9B16BE002EC8AC /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1906F1C9B16BE002EC8AC /* State.cpp */; };
 		81C63AF01C9C138F00E1A669 /* OptionsMenuDesc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AEC1C9C138F00E1A669 /* OptionsMenuDesc.cpp */; };
@@ -49,6 +49,7 @@
 		81C63AF81C9C196700E1A669 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AF31C9C196700E1A669 /* State.cpp */; };
 		81C63AF91C9C196700E1A669 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AF61C9C196700E1A669 /* State.cpp */; };
 		81C63AFC1C9C1C3400E1A669 /* TestNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AFA1C9C1C3400E1A669 /* TestNavigator.cpp */; };
+		81C63B001C9C498000E1A669 /* FailedSection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AFE1C9C498000E1A669 /* FailedSection.cpp */; };
 		81C7000A1C89E9F300D306F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C700041C89E9F300D306F9 /* LaunchScreen.storyboard */; };
 		81C700321C89ECA400D306F9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700151C89ECA400D306F9 /* Accounts.framework */; };
 		81C700331C89ECA400D306F9 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700161C89ECA400D306F9 /* AddressBook.framework */; };
@@ -161,8 +162,8 @@
 		81B190671C9B16BE002EC8AC /* Report.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Report.h; sourceTree = "<group>"; };
 		81B190681C9B16BE002EC8AC /* ReportPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReportPresenter.cpp; sourceTree = "<group>"; };
 		81B190691C9B16BE002EC8AC /* ReportPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportPresenter.h; sourceTree = "<group>"; };
-		81B1906A1C9B16BE002EC8AC /* TestCase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestCase.cpp; sourceTree = "<group>"; };
-		81B1906B1C9B16BE002EC8AC /* TestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCase.h; sourceTree = "<group>"; };
+		81B1906A1C9B16BE002EC8AC /* FailedTestCase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FailedTestCase.cpp; sourceTree = "<group>"; };
+		81B1906B1C9B16BE002EC8AC /* FailedTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedTestCase.h; sourceTree = "<group>"; };
 		81B1906C1C9B16BE002EC8AC /* TestSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestSystem.cpp; sourceTree = "<group>"; };
 		81B1906D1C9B16BE002EC8AC /* TestSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSystem.h; sourceTree = "<group>"; };
 		81B1906F1C9B16BE002EC8AC /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
@@ -177,6 +178,8 @@
 		81C63AF71C9C196700E1A669 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81C63AFA1C9C1C3400E1A669 /* TestNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestNavigator.cpp; sourceTree = "<group>"; };
 		81C63AFB1C9C1C3400E1A669 /* TestNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestNavigator.h; sourceTree = "<group>"; };
+		81C63AFE1C9C498000E1A669 /* FailedSection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FailedSection.cpp; sourceTree = "<group>"; };
+		81C63AFF1C9C498000E1A669 /* FailedSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedSection.h; sourceTree = "<group>"; };
 		81C700051C89E9F300D306F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81C700081C89E9F300D306F9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81C700151C89ECA400D306F9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -457,12 +460,14 @@
 				81B190631C9B16BE002EC8AC /* CSReporter.h */,
 				81B190641C9B16BE002EC8AC /* FailedAssertion.cpp */,
 				81B190651C9B16BE002EC8AC /* FailedAssertion.h */,
+				81C63AFE1C9C498000E1A669 /* FailedSection.cpp */,
+				81C63AFF1C9C498000E1A669 /* FailedSection.h */,
+				81B1906A1C9B16BE002EC8AC /* FailedTestCase.cpp */,
+				81B1906B1C9B16BE002EC8AC /* FailedTestCase.h */,
 				81B190661C9B16BE002EC8AC /* Report.cpp */,
 				81B190671C9B16BE002EC8AC /* Report.h */,
 				81B190681C9B16BE002EC8AC /* ReportPresenter.cpp */,
 				81B190691C9B16BE002EC8AC /* ReportPresenter.h */,
-				81B1906A1C9B16BE002EC8AC /* TestCase.cpp */,
-				81B1906B1C9B16BE002EC8AC /* TestCase.h */,
 				81B1906C1C9B16BE002EC8AC /* TestSystem.cpp */,
 				81B1906D1C9B16BE002EC8AC /* TestSystem.h */,
 			);
@@ -691,6 +696,7 @@
 				81B190881C9B16BE002EC8AC /* TestRegistry.cpp in Sources */,
 				81B1907F1C9B16BE002EC8AC /* GesturePresenter.cpp in Sources */,
 				81B190741C9B16BE002EC8AC /* Approx.cpp in Sources */,
+				81C63B001C9C498000E1A669 /* FailedSection.cpp in Sources */,
 				81B190751C9B16BE002EC8AC /* BasicEntityFactory.cpp in Sources */,
 				81B1907E1C9B16BE002EC8AC /* EventInfo.cpp in Sources */,
 				81B190901C9B16BE002EC8AC /* CSReporter.cpp in Sources */,
@@ -712,7 +718,7 @@
 				81B190811C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190831C9B16BE002EC8AC /* Report.cpp in Sources */,
 				81B190721C9B16BE002EC8AC /* FollowerComponent.cpp in Sources */,
-				81B190941C9B16BE002EC8AC /* TestCase.cpp in Sources */,
+				81B190941C9B16BE002EC8AC /* FailedTestCase.cpp in Sources */,
 				81C63AF91C9C196700E1A669 /* State.cpp in Sources */,
 				81B1907A1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190801C9B16BE002EC8AC /* State.cpp in Sources */,
