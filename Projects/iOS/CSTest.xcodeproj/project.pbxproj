@@ -50,6 +50,7 @@
 		81C63AF91C9C196700E1A669 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AF61C9C196700E1A669 /* State.cpp */; };
 		81C63AFC1C9C1C3400E1A669 /* TestNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AFA1C9C1C3400E1A669 /* TestNavigator.cpp */; };
 		81C63B001C9C498000E1A669 /* FailedSection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AFE1C9C498000E1A669 /* FailedSection.cpp */; };
+		81C63B031C9C63E500E1A669 /* FileSystemTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63B021C9C63E500E1A669 /* FileSystemTest.cpp */; };
 		81C7000A1C89E9F300D306F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C700041C89E9F300D306F9 /* LaunchScreen.storyboard */; };
 		81C700321C89ECA400D306F9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700151C89ECA400D306F9 /* Accounts.framework */; };
 		81C700331C89ECA400D306F9 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700161C89ECA400D306F9 /* AddressBook.framework */; };
@@ -180,6 +181,7 @@
 		81C63AFB1C9C1C3400E1A669 /* TestNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestNavigator.h; sourceTree = "<group>"; };
 		81C63AFE1C9C498000E1A669 /* FailedSection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FailedSection.cpp; sourceTree = "<group>"; };
 		81C63AFF1C9C498000E1A669 /* FailedSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedSection.h; sourceTree = "<group>"; };
+		81C63B021C9C63E500E1A669 /* FileSystemTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystemTest.cpp; sourceTree = "<group>"; };
 		81C700051C89E9F300D306F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81C700081C89E9F300D306F9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81C700151C89ECA400D306F9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -388,6 +390,7 @@
 			isa = PBXGroup;
 			children = (
 				81B190431C9B16BE002EC8AC /* HttpRequestTest.cpp */,
+				81C63B021C9C63E500E1A669 /* FileSystemTest.cpp */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -692,6 +695,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81B190731C9B16BE002EC8AC /* OrbiterComponent.cpp in Sources */,
+				81C63B031C9C63E500E1A669 /* FileSystemTest.cpp in Sources */,
 				81B190921C9B16BE002EC8AC /* Report.cpp in Sources */,
 				81B190881C9B16BE002EC8AC /* TestRegistry.cpp in Sources */,
 				81B1907F1C9B16BE002EC8AC /* GesturePresenter.cpp in Sources */,
