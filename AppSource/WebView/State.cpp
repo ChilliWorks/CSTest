@@ -29,9 +29,9 @@
 #include <WebView/State.h>
 
 #include <Common/Core/ResultPresenter.h>
-#include <Common/Core/SmokeTester.h>
-#include <Common/Core/SmokeTestSet.h>
-#include <Common/Core/StateNavigator.h>
+#include <Common/UI/OptionsMenuPresenter.h>
+#include <Common/UI/OptionsMenuDesc.h>
+#include <Common/Core/TestNavigator.h>
 #include <EmailComposer/State.h>
 
 #include <ChilliSource/Core/Scene.h>
@@ -45,8 +45,8 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::StateNavigator<EmailComposer::State>>();
-            m_smokeTester = CreateSystem<Common::SmokeTester>();
+            CreateSystem<Common::TestNavigator>("Web View");
+            m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
             m_webView = CreateSystem<CSWeb::WebView>();
         }
@@ -56,11 +56,11 @@ namespace CSTest
         {
             GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
-            Common::SmokeTestSet testSet("Web View");
+            Common::OptionsMenuDesc optionsMenuDesc;
             
             if (m_webView != nullptr)
             {
-                testSet.AddTest("From Disk", [=]()
+                optionsMenuDesc.AddButton("From Disk", [=]()
                 {
                     m_webView->PresentFromFile(CSCore::StorageLocation::k_package, "WebView/ExampleWebView.html", CSCore::UnifiedVector2(1.0f, 1.0f, 0.0f, 0.0f), 0.1f, [=]()
                     {
@@ -68,7 +68,7 @@ namespace CSTest
                     });
                 });
                 
-                testSet.AddTest("From Web", [=]()
+                optionsMenuDesc.AddButton("From Web", [=]()
                 {
                     m_webView->Present("https://google.com", CSCore::UnifiedVector2(0.8f, 0.8f, 0.0f, 0.0f), 0.1f, [=]()
                     {
@@ -76,13 +76,13 @@ namespace CSTest
                     });
                 });
                 
-                testSet.AddTest("External Browser", [=]()
+                optionsMenuDesc.AddButton("External Browser", [=]()
                 {
                     m_webView->PresentInExternalBrowser("https://google.com");
                 });
             }
             
-            m_smokeTester->Present(testSet);
+            m_optionsMenuPresenter->Present(optionsMenuDesc);
         }
     }
 }

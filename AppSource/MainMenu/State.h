@@ -1,11 +1,11 @@
 //
-//  SmokeTestSet.cpp
+//  State.h
 //  CSTest
-//  Created by Ian Copland on 28/07/2015.
+//  Created by Ian Copland on 18/03/2016.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Tag Games Limited
+//  Copyright (c) 2016 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,39 +26,43 @@
 //  THE SOFTWARE.
 //
 
-#include <Common/Core/SmokeTestSet.h>
+#ifndef _MAINMENU_STATE_H_
+#define _MAINMENU_STATE_H_
+
+#include <CSTest.h>
+
+#include <ChilliSource/Core/State.h>
 
 namespace CSTest
 {
-    namespace Common
+    namespace MainMenu
     {
         //------------------------------------------------------------------------------
+        /// A state which presents the top level menu of the test application. This
+        /// provides options for each of the different types of test: Unit, Integration
+        /// and Smoke.
+        ///
+        /// @author Ian Copland
         //------------------------------------------------------------------------------
-        SmokeTestSet::SmokeTestSet(const std::string& in_setName)
-            : m_name(in_setName)
+        class State final : public CSCore::State
         {
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        void SmokeTestSet::AddTest(const std::string& in_testName, const std::function<void()>& in_action)
-        {
-            Test test;
-            test.m_name = in_testName;
-            test.m_action = in_action;
+            //------------------------------------------------------------------------------
+            /// The life-cycle event for creating all state systems.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void CreateSystems() noexcept override;
+            //------------------------------------------------------------------------------
+            /// Initialises the state.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            void OnInit() noexcept override;
             
-            m_tests.push_back(test);
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        const std::string& SmokeTestSet::GetName() const
-        {
-            return m_name;
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        const std::vector<SmokeTestSet::Test>& SmokeTestSet::GetTests() const
-        {
-            return m_tests;
-        }
+            Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
+            Common::TestNavigator* m_testNavigator = nullptr;
+        };
     }
 }
+
+#endif

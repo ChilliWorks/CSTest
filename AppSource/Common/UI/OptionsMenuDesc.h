@@ -1,5 +1,5 @@
 //
-//  SmokeTestSet.h
+//  OptionsMenuDesc.h
 //  CSTest
 //  Created by Ian Copland on 28/07/2015.
 //
@@ -26,8 +26,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_SMOKETESTSET_H_
-#define _COMMON_CORE_SMOKETESTSET_H_
+#ifndef _COMMON_CORE_OPTIONSMENUDESC_H_
+#define _COMMON_CORE_OPTIONSMENUDESC_H_
 
 #include <CSTest.h>
 
@@ -39,27 +39,28 @@ namespace CSTest
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A container for information which the Smoke Tester will use to present
-        /// buttons. This includes the title of the smoke test set, and a name and
-        /// action for each of the tests.
+        /// A description for an options menu. This consists of a series of named
+        /// buttons, each with an action delegate.
+        ///
+        /// This is not thread safe.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class SmokeTestSet final
+        class OptionsMenuDesc final
         {
         public:
             //------------------------------------------------------------------------------
-            /// The delegate called each time the button associated with the test is pressed.
+            /// The delegate called each time the associated button is pressed.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            using Action = std::function<void()>;
+            using Action = std::function<void() noexcept>;
             //------------------------------------------------------------------------------
-            /// @author Ian Copland
+            /// A container for information on a single button.
             ///
-            /// @param in_setName - The name of the test set.
+            /// @author Ian Copland
             //------------------------------------------------------------------------------
-            struct Test final
+            struct Button final
             {
                 std::string m_name;
                 Action m_action;
@@ -67,32 +68,19 @@ namespace CSTest
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
-            /// @param in_setName - The name of the test set.
-            //------------------------------------------------------------------------------
-            SmokeTestSet(const std::string& in_setName);
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @param in_name - The name of the test
+            /// @param in_name - The name of the button
             /// @param in_action - The action to perform when the test is selected.
             //------------------------------------------------------------------------------
-            void AddTest(const std::string& in_testName, const Action& in_action);
-            //------------------------------------------------------------------------------
-            /// @author Ian Copland
-            ///
-            /// @return The name of the smoke test set.
-            //------------------------------------------------------------------------------
-            const std::string& GetName() const;
+            void AddButton(const std::string& in_name, const Action& in_action) noexcept;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @param The list of tests within the set.
             //------------------------------------------------------------------------------
-            const std::vector<Test>& GetTests() const;
+            const std::vector<Button>& GetButtons() const noexcept;
             
         private:
-            std::string m_name;
-            std::vector<Test> m_tests;
+            std::vector<Button> m_buttons;
         };
     }
 }

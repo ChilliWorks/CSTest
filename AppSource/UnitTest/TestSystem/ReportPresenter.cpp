@@ -44,10 +44,9 @@ namespace CSTest
     {
         namespace
         {
-            const char k_defaultText[] = "Running tests...";
-            const char k_successText[] = "All tests successful!";
-            const char k_failureText[] = "Tests failed!";
-            const u32 k_maxTestCasesToDisplay = 3;
+            constexpr char k_defaultText[] = "Running tests...";
+            constexpr char k_noTestsText[] = "No tests to run.";
+            constexpr u32 k_maxTestCasesToDisplay = 3;
             
             //------------------------------------------------------------------------------
             /// Prints details on a failed test report to console.
@@ -100,12 +99,13 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void ReportPresenter::PresentReport(const Report& in_report)
         {
-            if (in_report.DidAllTestsPass() == true)
+            if (in_report.GetNumTestCases() == 0)
             {
-                std::string textBody = CSCore::ToString(in_report.GetNumTestCases()) + " test cases successful.";
-                textBody += "\n" + CSCore::ToString(in_report.GetNumAssertions()) + " assertions successful.";
-                
-                SetText(k_successText, textBody);
+                SetCentreText(k_noTestsText);
+            }
+            else if (in_report.DidAllTestsPass() == true)
+            {
+                SetCentreText("All " + CSCore::ToString(in_report.GetNumTestCases()) + " tests cases passed!");
             }
             else
             {
@@ -128,44 +128,36 @@ namespace CSTest
                 
                 textBody += "\n \nPlease check the console for further information.";
                 
-                SetText(k_failureText, textBody);
+                SetBodyText(textBody);
                 
                 PrintDetailedReport(in_report);
             }
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void ReportPresenter::SetText(const std::string& in_text)
+        void ReportPresenter::SetCentreText(const std::string& in_text)
         {
             CS_ASSERT(m_centreText, "Cannot set the text before the text widgets are created.");
-            CS_ASSERT(m_headerText, "Cannot set the text before the text widgets are created.");
             CS_ASSERT(m_bodyText, "Cannot set the text before the text widgets are created.");
             
             auto textComponent = m_centreText->GetComponent<CSUI::TextComponent>();
             textComponent->SetText(in_text);
-            
-            textComponent = m_headerText->GetComponent<CSUI::TextComponent>();
-            textComponent->SetText("");
             
             textComponent = m_bodyText->GetComponent<CSUI::TextComponent>();
             textComponent->SetText("");
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void ReportPresenter::SetText(const std::string& in_header, const std::string& in_body)
+        void ReportPresenter::SetBodyText(const std::string& in_text)
         {
             CS_ASSERT(m_centreText, "Cannot set the text before the text widgets are created.");
-            CS_ASSERT(m_headerText, "Cannot set the text before the text widgets are created.");
             CS_ASSERT(m_bodyText, "Cannot set the text before the text widgets are created.");
             
             auto textComponent = m_centreText->GetComponent<CSUI::TextComponent>();
             textComponent->SetText("");
             
-            textComponent = m_headerText->GetComponent<CSUI::TextComponent>();
-            textComponent->SetText(in_header);
-            
             textComponent = m_bodyText->GetComponent<CSUI::TextComponent>();
-            textComponent->SetText(in_body);
+            textComponent->SetText(in_text);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -177,26 +169,25 @@ namespace CSTest
 
             auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
             m_centreText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 1.0f), mediumFont, "");
-            m_headerText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 0.15f), mediumFont, "", CSRendering::AlignmentAnchor::k_topCentre);
+            m_centreText->SetRelativePosition(CSCore::Vector2(0.0f, 0.05f));
+            
             m_bodyText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 0.65f), smallFont, "", CSRendering::AlignmentAnchor::k_topCentre, CSRendering::HorizontalTextJustification::k_left, CSRendering::VerticalTextJustification::k_top);
             m_bodyText->SetRelativePosition(CSCore::Vector2(0.0f, -0.15f));
 
             auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
             m_presentationUI = widgetFactory->CreateWidget();
             m_presentationUI->AddWidget(m_centreText);
-            m_presentationUI->AddWidget(m_headerText);
             m_presentationUI->AddWidget(m_bodyText);
             
             GetState()->GetUICanvas()->AddWidget(m_presentationUI);
             
-            SetText(k_defaultText);
+            SetCentreText(k_defaultText);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void ReportPresenter::OnDestroy()
         {
             m_centreText.reset();
-            m_headerText.reset();
             m_bodyText.reset();
             
             m_presentationUI->RemoveFromParent();

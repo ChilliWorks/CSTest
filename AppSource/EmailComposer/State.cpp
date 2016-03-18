@@ -29,13 +29,14 @@
 #include <EmailComposer/State.h>
 
 #include <Common/Core/ResultPresenter.h>
-#include <Common/Core/SmokeTester.h>
-#include <Common/Core/SmokeTestSet.h>
-#include <Common/Core/StateNavigator.h>
+#include <Common/UI/OptionsMenuPresenter.h>
+#include <Common/UI/OptionsMenuDesc.h>
+#include <Common/Core/TestNavigator.h>
 
 #include <UnitTest/State.h>
 
 #include <ChilliSource/Core/DialogueBox.h>
+#include <ChilliSource/Core/File.h>
 #include <ChilliSource/Core/Scene.h>
 #include <ChilliSource/Social/Communications.h>
 
@@ -73,8 +74,8 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::StateNavigator<UnitTest::State>>();
-            m_smokeTester = CreateSystem<Common::SmokeTester>();
+            CreateSystem<Common::TestNavigator>("Email Composer");
+            m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
             m_emailComposer = CreateSystem<CSSocial::EmailComposer>();
         }
@@ -84,11 +85,11 @@ namespace CSTest
         {
             GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
-            Common::SmokeTestSet testSet("Email Composer");
+            Common::OptionsMenuDesc optionsMenuDesc;
             
             if (m_emailComposer != nullptr)
             {
-                testSet.AddTest("Text Email", [=]()
+                optionsMenuDesc.AddButton("Text Email", [=]()
                 {
                     std::vector<std::string> addresses;
                     addresses.push_back("test.01@test.com");
@@ -103,7 +104,7 @@ namespace CSTest
                     });
                 });
                 
-                testSet.AddTest("HTML Email", [=]()
+                optionsMenuDesc.AddButton("HTML Email", [=]()
                 {
                     std::vector<std::string> addresses;
                     addresses.push_back("test.01@test.com");
@@ -118,7 +119,7 @@ namespace CSTest
                     });
                 });
                 
-                testSet.AddTest("Email With Attachment", [=]()
+                optionsMenuDesc.AddButton("Email With Attachment", [=]()
                 {
                     std::vector<std::string> addresses;
                     addresses.push_back("test.01@test.com");
@@ -138,7 +139,7 @@ namespace CSTest
                 });
             }
             
-            m_smokeTester->Present(testSet);
+            m_optionsMenuPresenter->Present(optionsMenuDesc);
         }
     }
 }

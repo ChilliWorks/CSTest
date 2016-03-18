@@ -28,7 +28,7 @@
 
 #include <IntegrationTest/State.h>
 
-#include <Common/Core/StateNavigator.h>
+#include <Common/Core/TestNavigator.h>
 #include <IntegrationTest/TestSystem/ReportPresenter.h>
 #include <IntegrationTest/TestSystem/Tester.h>
 #include <Lighting/State.h>
@@ -48,7 +48,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::StateNavigator<NextState>>();
+            m_testNavigator = CreateSystem<Common::TestNavigator>("Integration Tests");
             m_reportPresenter = CreateSystem<ReportPresenter>();
         }
         //------------------------------------------------------------------------------
@@ -57,8 +57,7 @@ namespace CSTest
         {
             GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
-			auto stateNavigator = GetSystem<Common::StateNavigator<NextState>>();
-			stateNavigator->SetNextButtonVisible(false);
+			m_testNavigator->SetBackButtonVisible(false);
             
             auto progressUpdateDelegate = [=](const TestDesc& in_testDesc, u32 in_testIndex, u32 in_numTests)
             {
@@ -68,7 +67,7 @@ namespace CSTest
             auto completionDelegate = [=](const Report& in_report)
             {
                 m_reportPresenter->PresentReport(in_report);
-				stateNavigator->SetNextButtonVisible(true);
+				m_testNavigator->SetBackButtonVisible(true);
             };
             
             m_tester = TesterUPtr(new Tester(progressUpdateDelegate, completionDelegate));

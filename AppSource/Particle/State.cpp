@@ -28,7 +28,7 @@
 
 #include <Particle/State.h>
 
-#include <Common/Core/StateNavigator.h>
+#include <Common/Core/TestNavigator.h>
 #include <Common/Core/BasicEntityFactory.h>
 #include <Gesture/State.h>
 
@@ -90,7 +90,7 @@ namespace CSTest
 		//------------------------------------------------------------------------------
 		void State::CreateSystems()
 		{
-			CreateSystem<Common::StateNavigator<Gesture::State>>();
+			CreateSystem<Common::TestNavigator>("Particles");
 		}
 		//------------------------------------------------------------------------------
 		//------------------------------------------------------------------------------

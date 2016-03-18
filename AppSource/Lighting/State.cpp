@@ -28,7 +28,7 @@
 
 #include <Lighting/State.h>
 
-#include <Common/Core/StateNavigator.h>
+#include <Common/Core/TestNavigator.h>
 #include <Common/Core/BasicEntityFactory.h>
 #include <Common/Behaviour/FollowerComponent.h>
 #include <Common/Behaviour/OrbiterComponent.h>
@@ -36,6 +36,8 @@
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
+
+#include <array>
 
 namespace CSTest
 {
@@ -101,7 +103,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::StateNavigator<Particle::State>>();
+            CreateSystem<Common::TestNavigator>("Lighting");
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

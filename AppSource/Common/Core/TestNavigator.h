@@ -1,5 +1,5 @@
 //
-//  StateNavigator.h
+//  TestNavigator.h
 //  CSTest
 //  Created by Ian Copland on 28/07/2015.
 //
@@ -26,8 +26,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_STATENAVIGATOR_H_
-#define _COMMON_CORE_STATENAVIGATOR_H_
+#ifndef _COMMON_CORE_TESTNAVIGATOR_H_
+#define _COMMON_CORE_TESTNAVIGATOR_H_
 
 #include <CSTest.h>
 #include <ChilliSource/Core/System.h>
@@ -37,17 +37,15 @@ namespace CSTest
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A system which provides navigation between the different test states. This
-        /// will present an on screen next button which can be used to navigate to the
-        /// state after this one. The next state type is specified by the system template
-        /// parameter.
+        /// A system which provides navigation back to the previous test menu. It also
+        /// provides the test with title text.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        template <typename TNextState> class StateNavigator final : public CSCore::StateSystem
+       class TestNavigator final : public CSCore::StateSystem
         {
         public:
-            CS_DECLARE_NAMEDTYPE(StateNavigator);
+            CS_DECLARE_NAMEDTYPE(TestNavigator);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly
@@ -59,23 +57,23 @@ namespace CSTest
             ///
             /// @return Whether or not the interface is implemented.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            bool IsA(CSCore::InterfaceIDType in_interfaceId) const noexcept override;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
-            /// @return Whether or not the next button is visible. If the button is not
+            /// @return Whether or not the back button is visible. If the button is not
             /// visible, it cannot be pressed.
             //------------------------------------------------------------------------------
-            bool IsNextButtonVisible() const;
+            bool IsBackButtonVisible() const noexcept;
             //------------------------------------------------------------------------------
-            /// Whether or not the next button is visible. If the button is not visible,
+            /// Whether or not the back button is visible. If the button is not visible,
             /// it cannot be pressed.
             ///
             /// @author Ian Copland
             ///
-            /// @param in_visibile - Whether or not to make the button visible.
+            /// @param in_visible - Whether or not to make the button visible.
             //------------------------------------------------------------------------------
-            void SetNextButtonVisible(bool in_visibile);
+            void SetBackButtonVisible(bool in_visible) noexcept;
             
         private:
             friend class CSCore::State;
@@ -84,37 +82,42 @@ namespace CSTest
             ///
             /// @author Ian Copland
             ///
+            /// @param in_title - The title.
+            ///
             /// @return The new instance.
             //------------------------------------------------------------------------------
-            static std::unique_ptr<StateNavigator<TNextState>> Create();
+            static TestNavigatorUPtr Create(const std::string& in_title) noexcept;
             //------------------------------------------------------------------------------
-            /// Default constructor. Declared private to ensure the system is created
-            /// through State::CreateSystem<StateNavigator>().
+            /// Constructor. Declared private to ensure the system is created
+            /// through State::CreateSystem<TestNavigator>().
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_title - The title.
+            //------------------------------------------------------------------------------
+            TestNavigator(const std::string& in_title) noexcept;
+            //------------------------------------------------------------------------------
+            /// Initialises the Test Navigator.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            StateNavigator() = default;
+            void OnInit() noexcept override;
             //------------------------------------------------------------------------------
-            /// Initialises the State Navigator.
+            /// Destroys the Test Navigator.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnInit() override;
-            //------------------------------------------------------------------------------
-            /// Destroys the State Navigator.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            void OnDestroy() override;
+            void OnDestroy() noexcept override;
+            
+            std::string m_title;
             
             CSUI::WidgetSPtr m_ui;
-            CSUI::WidgetSPtr m_nextButton;
+            CSUI::WidgetSPtr m_titleLabel;
+            CSUI::WidgetSPtr m_backButton;
             
-            CSCore::EventConnectionUPtr m_nextPressedConnection;
+            CSCore::EventConnectionUPtr m_backPressedConnection;
         };
     }
 }
-
-#include <Common/Core/StateNavigatorImpl.h>
 
 #endif

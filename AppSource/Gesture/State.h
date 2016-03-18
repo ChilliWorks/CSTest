@@ -58,7 +58,6 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnInit() override;
             
-            Common::SmokeTester* m_smokeTester = nullptr;
             CSInput::GestureSystem* m_gestureSystem = nullptr;
         };
     }

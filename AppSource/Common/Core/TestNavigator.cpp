@@ -1,5 +1,5 @@
 //
-//  StateNavigator.cpp
+//  TestNavigator.cpp
 //  CSTest
 //  Created by Ian Copland on 28/07/2015.
 //
@@ -26,10 +26,7 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_TESTNAVIGATORIMPL_H_
-#define _COMMON_CORE_TESTNAVIGATORIMPL_H_
-
-#include <Common/Core/StateNavigator.h>
+#include <Common/Core/TestNavigator.h>
 #include <Common/UI/BasicWidgetFactory.h>
 
 #include <ChilliSource/Core/Base.h>
@@ -43,67 +40,77 @@ namespace CSTest
 {
     namespace Common
     {
-        CS_DEFINE_NAMEDTYPETEMPLATED(StateNavigator, TNextState);
+        CS_DEFINE_NAMEDTYPE(TestNavigator);
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        template <typename TNextState> std::unique_ptr<StateNavigator<TNextState>> StateNavigator<TNextState>::Create()
+        TestNavigatorUPtr TestNavigator::Create(const std::string& in_title) noexcept
         {
-            return std::unique_ptr<StateNavigator<TNextState>>(new StateNavigator<TNextState>());
+            return std::unique_ptr<TestNavigator>(new TestNavigator(in_title));
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        template <typename TNextState> bool StateNavigator<TNextState>::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        TestNavigator::TestNavigator(const std::string& in_title) noexcept
+            : m_title(in_title)
         {
-            return (StateNavigator::InterfaceID == in_interfaceId);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        template <typename TNextState> bool StateNavigator<TNextState>::IsNextButtonVisible() const
+        bool TestNavigator::IsA(CSCore::InterfaceIDType in_interfaceId) const noexcept
         {
-            CS_ASSERT(m_nextButton != nullptr, "Cannot test next button visibility prior to next button being created.");
+            return (TestNavigator::InterfaceID == in_interfaceId);
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        bool TestNavigator::IsBackButtonVisible() const noexcept
+        {
+            CS_ASSERT(m_backButton != nullptr, "Cannot test next button visibility prior to next button being created.");
             
-            return m_nextButton->IsVisible();
+            return m_backButton->IsVisible();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        template <typename TNextState> void StateNavigator<TNextState>::SetNextButtonVisible(bool in_visible)
+        void TestNavigator::SetBackButtonVisible(bool in_visible) noexcept
         {
-            CS_ASSERT(m_nextButton != nullptr, "Cannot change next button visibility prior to next button being created.");
-            CS_ASSERT(m_nextButton->IsVisible() != in_visible, "Cannot change to the current visibility.");
+            CS_ASSERT(m_backButton != nullptr, "Cannot change next button visibility prior to next button being created.");
+            CS_ASSERT(m_backButton->IsVisible() != in_visible, "Cannot change to the current visibility.");
             
-            m_nextButton->SetVisible(in_visible);
-            m_nextButton->SetInputEnabled(in_visible);
+            m_backButton->SetVisible(in_visible);
+            m_backButton->SetInputEnabled(in_visible);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        template <typename TNextState> void StateNavigator<TNextState>::OnInit()
+        void TestNavigator::OnInit() noexcept
         {
+            auto resourcePool = CSCore::Application::Get()->GetResourcePool();
+            auto mediumFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialMed.csfont");
+            
             auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
-            m_nextButton = basicWidgetFactory->CreateButton(CSCore::Vector2(0.0f, 0.1f), "Next", CSRendering::AlignmentAnchor::k_bottomRight, CSCore::Colour::k_green);
-            m_nextButton->SetRelativePosition(CSCore::Vector2(-0.05f, 0.05f));
+            m_titleLabel = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 0.15f), mediumFont, m_title, CSRendering::AlignmentAnchor::k_topCentre);
+
+            m_backButton = basicWidgetFactory->CreateButton(CSCore::Vector2(0.0f, 0.1f), "Back", CSRendering::AlignmentAnchor::k_bottomLeft, CSCore::Colour::k_cornflowerBlue);
+            m_backButton->SetRelativePosition(CSCore::Vector2(0.05f, 0.05f));
             
             auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
             m_ui = widgetFactory->CreateWidget();
-            m_ui->AddWidget(m_nextButton);
+            m_ui->AddWidget(m_titleLabel);
+            m_ui->AddWidget(m_backButton);
             
             GetState()->GetUICanvas()->AddWidget(m_ui);
             
-            m_nextPressedConnection = m_nextButton->GetReleasedInsideEvent().OpenConnection([](CSUI::Widget* in_widget, const CSInput::Pointer& in_pointer, CSInput::Pointer::InputType in_inputType)
+            m_backPressedConnection = m_backButton->GetReleasedInsideEvent().OpenConnection([](CSUI::Widget* in_widget, const CSInput::Pointer& in_pointer, CSInput::Pointer::InputType in_inputType)
             {
-                CSCore::Application::Get()->GetStateManager()->Change(std::make_shared<TNextState>());
+                CSCore::Application::Get()->GetStateManager()->Pop();
             });
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        template <typename TNextState> void StateNavigator<TNextState>::OnDestroy()
+        void TestNavigator::OnDestroy() noexcept
         {
-            m_nextPressedConnection.reset();
-            m_nextButton.reset();
+            m_backPressedConnection.reset();
+            m_backButton.reset();
             
             m_ui->RemoveFromParent();
             m_ui.reset();
         }
     }
 }
-
-#endif

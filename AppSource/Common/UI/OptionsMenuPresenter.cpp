@@ -1,5 +1,5 @@
 //
-//  SmokeTester.cpp
+//  OptionsMenuPresenter.cpp
 //  CSTest
 //  Created by Ian Copland on 28/07/2015.
 //
@@ -26,9 +26,9 @@
 //  THE SOFTWARE.
 //
 
-#include <Common/Core/SmokeTester.h>
+#include <Common/UI/OptionsMenuPresenter.h>
 
-#include <Common/Core/SmokeTestSet.h>
+#include <Common/UI/OptionsMenuDesc.h>
 #include <Common/UI/BasicWidgetFactory.h>
 
 #include <ChilliSource/Core/Base.h>
@@ -45,53 +45,54 @@ namespace CSTest
     {
         namespace
         {
-            const f32 k_relativeSpacing = 0.065f;
-            const f32 k_listMargins = 0.2f;
+            constexpr f32 k_relativeSpacing = 0.065f;
+            constexpr f32 k_listMargins = 0.2f;
+            constexpr u32 k_numItemsPerColumn = 5;
+            constexpr u32 k_numColumns = 2;
+            constexpr u32 k_maxItems = k_numItemsPerColumn * k_numColumns;
         }
         
-        CS_DEFINE_NAMEDTYPE(SmokeTester);
+        CS_DEFINE_NAMEDTYPE(OptionsMenuPresenter);
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        SmokeTesterUPtr SmokeTester::Create()
+        OptionsMenuPresenterUPtr OptionsMenuPresenter::Create() noexcept
         {
-            return SmokeTesterUPtr(new SmokeTester());
+            return OptionsMenuPresenterUPtr(new OptionsMenuPresenter());
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool SmokeTester::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool OptionsMenuPresenter::IsA(CSCore::InterfaceIDType in_interfaceId) const noexcept
         {
-            return (SmokeTester::InterfaceID == in_interfaceId);
+            return (OptionsMenuPresenter::InterfaceID == in_interfaceId);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void SmokeTester::Present(const SmokeTestSet& in_testSet)
+        void OptionsMenuPresenter::Present(const OptionsMenuDesc& in_desc) noexcept
         {
-            CS_ASSERT(in_testSet.GetTests().size() <= 10, "Too many tests");
+            CS_ASSERT(in_desc.GetButtons().size() <= k_maxItems, "Too many options. The system will need upgraded to support pages.");
             
             Dismiss();
-            
-            m_titleText->GetComponent<CSUI::TextComponent>()->SetText(in_testSet.GetName());
-            
-			if (in_testSet.GetTests().size() < 4)
+
+			if (in_desc.GetButtons().size() < k_numItemsPerColumn)
 			{
 				auto layoutComponent = m_buttonContainer->GetComponent<CSUI::LayoutComponent>();
-				layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::VListLayoutDef(5, CSCore::Vector4(0.0f, k_listMargins, 0.0f, k_listMargins), CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f)));
+				layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::VListLayoutDef(k_numItemsPerColumn, CSCore::Vector4(0.0f, k_listMargins, 0.0f, k_listMargins), CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f)));
 			}
 			else
 			{
 				auto layoutComponent = m_buttonContainer->GetComponent<CSUI::LayoutComponent>();
-				layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::GridLayoutDef(CSUI::GridLayout::CellOrder::k_rowMajor, 5, 2, CSCore::Vector4::k_zero, CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f, k_relativeSpacing, 0.0f)));
+				layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::GridLayoutDef(CSUI::GridLayout::CellOrder::k_rowMajor, k_numItemsPerColumn, k_numColumns, CSCore::Vector4::k_zero, CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f, k_relativeSpacing, 0.0f)));
 			}
 
             auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
-            for (const auto& test : in_testSet.GetTests())
+            for (const auto& buttonDesc : in_desc.GetButtons())
             {
-                CSUI::WidgetSPtr button = basicWidgetFactory->CreateStretchableButton(CSCore::Vector2::k_one, test.m_name, CSRendering::AlignmentAnchor::k_middleCentre, CSCore::Colour(0.92f, 0.95f, 0.98f, 1.0f));
+                CSUI::WidgetSPtr button = basicWidgetFactory->CreateStretchableButton(CSCore::Vector2::k_one, buttonDesc.m_name, CSRendering::AlignmentAnchor::k_middleCentre, CSCore::Colour(0.92f, 0.95f, 0.98f, 1.0f));
                 m_buttonContainer->AddWidget(button);
                 
                 auto connection = button->GetReleasedInsideEvent().OpenConnection([=](CSUI::Widget* in_widget, const CSInput::Pointer& in_pointer, CSInput::Pointer::InputType in_inputType)
                 {
-                    test.m_action();
+                    buttonDesc.m_action();
                 });
                 
                 m_buttons.push_back(button);
@@ -100,7 +101,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void SmokeTester::Dismiss()
+        void OptionsMenuPresenter::Dismiss() noexcept
         {
             m_connectionContainer.clear();
             
@@ -110,19 +111,14 @@ namespace CSTest
             }
             
             auto layoutComponent = m_buttonContainer->GetComponent<CSUI::LayoutComponent>();
-            layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::VListLayoutDef(5, CSCore::Vector4::k_zero, CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f)));
-            
-            m_titleText->GetComponent<CSUI::TextComponent>()->SetText("");
+            layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::VListLayoutDef(k_numItemsPerColumn, CSCore::Vector4::k_zero, CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f)));
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void SmokeTester::OnInit()
+        void OptionsMenuPresenter::OnInit() noexcept
         {
             auto resourcePool = CSCore::Application::Get()->GetResourcePool();
             auto mediumFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialMed.csfont");
-            
-            auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
-            m_titleText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 0.15f), mediumFont, "", CSRendering::AlignmentAnchor::k_topCentre);
             
             auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
             m_buttonContainer = widgetFactory->CreateLayout();
@@ -131,25 +127,18 @@ namespace CSTest
             m_buttonContainer->SetRelativePosition(CSCore::Vector2(0.0f, -0.15f));
             m_buttonContainer->SetRelativeSize(CSCore::Vector2(0.75f, 0.65f));
             
-            m_ui = widgetFactory->CreateWidget();
-            m_ui->AddWidget(m_titleText);
-            m_ui->AddWidget(m_buttonContainer);
-            
             Dismiss();
             
-            GetState()->GetUICanvas()->AddWidget(m_ui);
+            GetState()->GetUICanvas()->AddWidget(m_buttonContainer);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void SmokeTester::OnDestroy()
+        void OptionsMenuPresenter::OnDestroy() noexcept
         {
             Dismiss();
-            
-            m_titleText.reset();
+
+            m_buttonContainer->RemoveFromParent();
             m_buttonContainer.reset();
-            
-            m_ui->RemoveFromParent();
-            m_ui.reset();
         }
     }
 }

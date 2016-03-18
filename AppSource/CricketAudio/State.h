@@ -58,7 +58,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnInit() override;
             
-            Common::SmokeTester* m_smokeTester = nullptr;
+            Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
             CSAudio::CkAudioPlayer* m_audioPlayer = nullptr;
         };
     }

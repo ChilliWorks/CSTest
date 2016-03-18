@@ -1,11 +1,11 @@
 //
 //  State.cpp
 //  CSTest
-//  Created by Ian Copland on 13/07/2015.
+//  Created by Ian Copland on 18/03/2016.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Tag Games Limited
+//  Copyright (c) 2016 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,59 +26,56 @@
 //  THE SOFTWARE.
 //
 
-#include <UnitTest/State.h>
+#include <MainMenu/State.h>
 
 #include <Common/Core/TestNavigator.h>
+#include <Common/UI/OptionsMenuPresenter.h>
+#include <Common/UI/OptionsMenuDesc.h>
 #include <IntegrationTest/State.h>
-#include <UnitTest/TestSystem/ReportPresenter.h>
-#include <UnitTest/TestSystem/TestSystem.h>
+#include <SmokeTest/State.h>
+#include <UnitTest/State.h>
 
+#include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
+#include <ChilliSource/Core/State.h>
 
 namespace CSTest
 {
-    namespace UnitTest
+    namespace MainMenu
     {
-        namespace
-        {
-            const f32 k_timeBeforeTests = 0.5f;
-        }
-        
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::CreateSystems()
+        void State::CreateSystems() noexcept
         {
-            m_testNavigator = CreateSystem<Common::TestNavigator>("Unit Tests");
-            m_testSystem = CreateSystem<TestSystem>();
-            m_reportPresenter = CreateSystem<ReportPresenter>();
+            m_testNavigator = CreateSystem<Common::TestNavigator>("Main Menu");
+            m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnInit()
+        void State::OnInit() noexcept
         {
             GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
             m_testNavigator->SetBackButtonVisible(false);
-        }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        void State::OnUpdate(f32 in_deltaTime)
-        {
-            // The start of the tests are delayed to give time for the UI to update and display the progress message.
-            if (m_testsPerformed == false)
+            
+            Common::OptionsMenuDesc optionsMenuDesc;
+            
+            optionsMenuDesc.AddButton("Unit Tests", [=]()
             {
-                m_timer += in_deltaTime;
-                
-                if (m_timer > k_timeBeforeTests)
-                {
-                    m_timer = 0.0f;
-                    m_testsPerformed = true;
-                    
-                    auto report = m_testSystem->PerformTests();
-                    m_reportPresenter->PresentReport(report);
-                    m_testNavigator->SetBackButtonVisible(true);
-                }
-            }
+                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<UnitTest::State>());
+            });
+            
+            optionsMenuDesc.AddButton("Integration Tests", [=]()
+            {
+                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<IntegrationTest::State>());
+            });
+            
+            optionsMenuDesc.AddButton("Smoke Tests", [=]()
+            {
+                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<SmokeTest::State>());
+            });
+            
+            m_optionsMenuPresenter->Present(optionsMenuDesc);
         }
     }
 }

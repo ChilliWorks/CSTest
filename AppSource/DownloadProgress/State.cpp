@@ -29,12 +29,13 @@
 #include <DownloadProgress/State.h>
 
 #include <Common/Core/ResultPresenter.h>
-#include <Common/Core/SmokeTester.h>
-#include <Common/Core/SmokeTestSet.h>
-#include <Common/Core/StateNavigator.h>
+#include <Common/UI/OptionsMenuPresenter.h>
+#include <Common/UI/OptionsMenuDesc.h>
+#include <Common/Core/TestNavigator.h>
 #include <DownloadProgress/DownloadProgressTestSystem.h>
 #include <WebView/State.h>
 
+#include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
 #include <ChilliSource/Networking/Http.h>
 #include <ChilliSource/UI/Base.h>
@@ -74,8 +75,8 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::StateNavigator<WebView::State>>();
-            m_smokeTester = CreateSystem<Common::SmokeTester>();
+            CreateSystem<Common::TestNavigator>("Download Progress");
+            m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
             m_downloadProgressTestSystem = CreateSystem<DownloadProgressTestSystem>();
         }
@@ -91,17 +92,18 @@ namespace CSTest
             const u32 k_downloadBufferSize = 100 * 1024;
             m_httpRequestSystem->SetMaxBufferSize(k_downloadBufferSize);
             
-            Common::SmokeTestSet testSet("Download Progress");
+            Common::OptionsMenuDesc optionsMenuDesc;
 
-            testSet.AddTest("Test download progress", [=]()
+            optionsMenuDesc.AddButton("Test download progress", [=]()
             {
+                //TODO: This doesn't work on iOS as HTTP requests aren't allowed. We need to find a file that can be downloaded over HTTPS for testing.
                 m_downloadProgressTestSystem->StartDownloadTest("http://download.thinkbroadband.com/5MB.zip", [=](const CSNetworking::HttpResponse& in_completeResponse)
                 {
                     PresentHttpResponse(in_completeResponse);
                 });
             });
             
-            m_smokeTester->Present(testSet);
+            m_optionsMenuPresenter->Present(optionsMenuDesc);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

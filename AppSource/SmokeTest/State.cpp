@@ -1,7 +1,7 @@
 //
 //  State.cpp
 //  CSTest
-//  Created by Ian Copland on 14/03/2016.
+//  Created by Ian Copland on 18/03/2016.
 //
 //  The MIT License (MIT)
 //
@@ -26,69 +26,82 @@
 //  THE SOFTWARE.
 //
 
-#include <CricketAudio/State.h>
+#include <SmokeTest/State.h>
 
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
 #include <Common/Core/TestNavigator.h>
+#include <CricketAudio/State.h>
 #include <DownloadProgress/State.h>
+#include <EmailComposer/State.h>
+#include <Gesture/State.h>
+#include <Lighting/State.h>
+#include <Particle/State.h>
+#include <WebView/State.h>
 
-#include <ChilliSource/Audio/CricketAudio.h>
 #include <ChilliSource/Core/Base.h>
-#include <ChilliSource/Core/Resource.h>
 #include <ChilliSource/Core/Scene.h>
+#include <ChilliSource/Core/State.h>
 
 namespace CSTest
 {
-    namespace CricketAudio
+    namespace SmokeTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::CreateSystems()
+        void State::CreateSystems() noexcept
         {
-            CreateSystem<Common::TestNavigator>("Cricket Audio");
+            CreateSystem<Common::TestNavigator>("Smoke Tests");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
-
-#ifndef CS_TARGETPLATFORM_WINDOWS
-            m_audioPlayer = CreateSystem<CSAudio::CkAudioPlayer>();
-#endif
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnInit()
+        void State::OnInit() noexcept
         {
             GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
-			
-
-#ifndef CS_TARGETPLATFORM_WINDOWS
-            auto resourcePool = CSCore::Application::Get()->GetResourcePool();
-            auto bank = resourcePool->LoadResource<CSAudio::CkBank>(CSCore::StorageLocation::k_package, "SFX/SFX.ckb");
-            
             Common::OptionsMenuDesc optionsMenuDesc;
             
-            optionsMenuDesc.AddButton("Play Music", [=]()
+            optionsMenuDesc.AddButton("Lighting", [=]()
             {
-                m_audioPlayer->PlayMusic(CSCore::StorageLocation::k_package, "Music/Music01.cks");
+               CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<Lighting::State>());
             });
             
-            optionsMenuDesc.AddButton("Stop Music", [=]()
+            optionsMenuDesc.AddButton("Particles", [=]()
             {
-                m_audioPlayer->StopMusic();
+                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<Particle::State>());
             });
-            
-            optionsMenuDesc.AddButton("Play SFX 1", [=]()
+
+            optionsMenuDesc.AddButton("Gestures", [=]()
             {
-                m_audioPlayer->PlayEffect(bank, "Beep01");
+                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<Gesture::State>());
             });
-            
-            optionsMenuDesc.AddButton("Play SFX 2", [=]()
+
+#ifndef CS_TARGETPLATFORM_WINDOWS
+            optionsMenuDesc.AddButton("Cricket Audio", [=]()
             {
-                m_audioPlayer->PlayEffect(bank, "Beep02");
+                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<CricketAudio::State>());
             });
+#endif
+
+            optionsMenuDesc.AddButton("Download Progress", [=]()
+            {
+                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<DownloadProgress::State>());
+            });
+
+#ifndef CS_TARGETPLATFORM_WINDOWS
+            optionsMenuDesc.AddButton("Web View", [=]()
+            {
+                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<WebView::State>());
+            });
+
+            optionsMenuDesc.AddButton("Email Composer", [=]()
+            {
+                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<EmailComposer::State>());
+            });
+#endif
             
             m_optionsMenuPresenter->Present(optionsMenuDesc);
-#endif
         }
     }
 }

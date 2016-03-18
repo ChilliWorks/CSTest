@@ -1,11 +1,11 @@
 //
 //  State.h
 //  CSTest
-//  Created by HMcLaughlin on 28/07/2015.
+//  Created by Ian Copland on 18/03/2016.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Tag Games Limited
+//  Copyright (c) 2016 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +26,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _DOWNLOADPROGRESS_STATE_H_
-#define _DOWNLOADPROGRESS_STATE_H_
+#ifndef _SMOKETEST_STATE_H_
+#define _SMOKETEST_STATE_H_
 
 #include <CSTest.h>
 
@@ -35,42 +35,30 @@
 
 namespace CSTest
 {
-    namespace DownloadProgress
+    namespace SmokeTest
     {
         //------------------------------------------------------------------------------
-        /// A state for testing HTTP request download progress.
+        /// A state which presents all of the available smoke tests that the user can
+        /// view on the current platform.
         ///
-        /// @author HMcLaughlin
+        /// @author Ian Copland
         //------------------------------------------------------------------------------
         class State final : public CSCore::State
         {
-        private:
             //------------------------------------------------------------------------------
             /// The life-cycle event for creating all state systems.
             ///
-            /// @author HMcLaughlin
+            /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void CreateSystems() override;
-            //------------------------------------------------------------------------------
-            /// Displays the results of a http response
-            ///
-            /// @author HMcLaughlin
-            ///
-            /// @param in_response - The HTTP response.
-            //------------------------------------------------------------------------------
-            void PresentHttpResponse(const CSNetworking::HttpResponse& in_response);
+            void CreateSystems() noexcept override;
             //------------------------------------------------------------------------------
             /// Initialises the state.
             ///
-            /// @author HMcLaughlin
+            /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnInit() override;
+            void OnInit() noexcept override;
             
-        private:
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
-            Common::ResultPresenter* m_resultPresenter = nullptr;
-            CSNetworking::HttpRequestSystem* m_httpRequestSystem = nullptr;
-            DownloadProgressTestSystem* m_downloadProgressTestSystem = nullptr;
         };
     }
 }

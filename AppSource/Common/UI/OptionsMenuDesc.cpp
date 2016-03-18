@@ -1,11 +1,11 @@
 //
-//  State.cpp
+//  OptionsMenuDesc.cpp
 //  CSTest
-//  Created by Ian Copland on 03/03/2016.
+//  Created by Ian Copland on 28/07/2015.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2016 Tag Games Limited
+//  Copyright (c) 2015 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,34 +26,27 @@
 //  THE SOFTWARE.
 //
 
-#include <Gesture/State.h>
-
-#include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
-#include <Common/Core/TestNavigator.h>
-#include <Gesture/GesturePresenter.h>
-#include <CricketAudio/State.h>
-
-#include <ChilliSource/Core/Scene.h>
-#include <ChilliSource/Input/Gesture.h>
 
 namespace CSTest
 {
-    namespace Gesture
+    namespace Common
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::CreateSystems()
+        void OptionsMenuDesc::AddButton(const std::string& in_name, const Action& in_action) noexcept
         {
-            CreateSystem<Common::TestNavigator>("Gestures");
-            m_gestureSystem = CreateSystem<CSInput::GestureSystem>();
-            CreateSystem<GesturePresenter>();
+            Button button;
+            button.m_name = in_name;
+            button.m_action = in_action;
+            
+            m_buttons.push_back(button);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::OnInit()
+        const std::vector<OptionsMenuDesc::Button>& OptionsMenuDesc::GetButtons() const noexcept
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            return m_buttons;
         }
     }
 }

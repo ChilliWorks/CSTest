@@ -1,5 +1,5 @@
 //
-//  SmokeTester.h
+//  OptionsMenuPresenter.h
 //  CSTest
 //  Created by Ian Copland on 28/07/2015.
 //
@@ -26,8 +26,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _COMMON_CORE_SMOKETESTER_H_
-#define _COMMON_CORE_SMOKETESTER_H_
+#ifndef _COMMON_CORE_OPTIONSMENUPRESENTER_H_
+#define _COMMON_CORE_OPTIONSMENUPRESENTER_H_
 
 #include <CSTest.h>
 
@@ -38,16 +38,18 @@ namespace CSTest
     namespace Common
     {
         //------------------------------------------------------------------------------
-        /// A system for presenting the user with different smoke test options. This
-        /// presents a title and a series of user defined buttons, each of which can have
-        /// an action associated with it.
+        /// A system for presenting the user with a series of options. For each option
+        /// a named button is displayed which a defined action when the button is
+        /// pressed.
+        ///
+        /// This is not thread safe.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class SmokeTester final : public CSCore::StateSystem
+        class OptionsMenuPresenter final : public CSCore::StateSystem
         {
         public:
-            CS_DECLARE_NAMEDTYPE(SmokeTester);
+            CS_DECLARE_NAMEDTYPE(OptionsMenuPresenter);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly
@@ -59,22 +61,22 @@ namespace CSTest
             ///
             /// @return Whether or not the interface is implemented.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            bool IsA(CSCore::InterfaceIDType in_interfaceId) const noexcept override;
             //------------------------------------------------------------------------------
-            /// Presents a series of buttons, each associated with a test.
+            /// Presents a series of buttons, each with an associated action.
             ///
             /// @author Ian Copland
             ///
-            /// @param in_testSet - The information on the tests which should be presented.
+            /// @param in_desc - The information on the options which should be presented.
             //------------------------------------------------------------------------------
-            void Present(const SmokeTestSet& in_testSet);
+            void Present(const OptionsMenuDesc& in_desc) noexcept;
             //------------------------------------------------------------------------------
             /// Cleans up all existing buttons, and resets the system back into a reusable
             /// state.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void Dismiss();
+            void Dismiss() noexcept;
             
         private:
             friend class CSCore::State;
@@ -85,29 +87,27 @@ namespace CSTest
             ///
             /// @return The new instance.
             //------------------------------------------------------------------------------
-            static SmokeTesterUPtr Create();
+            static OptionsMenuPresenterUPtr Create() noexcept;
             //------------------------------------------------------------------------------
             /// Default constructor. Declared private to ensure the system is created
-            /// through State::CreateSystem<SmokeTester>().
+            /// through State::CreateSystem<OptionsMenuPresenter>().
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            SmokeTester() = default;
+            OptionsMenuPresenter() = default;
             //------------------------------------------------------------------------------
-            /// Initialises the Smoke Tester.
+            /// Initialises the system.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnInit() override;
+            void OnInit() noexcept override;
             //------------------------------------------------------------------------------
-            /// Destroys the Smoke Tester.
+            /// Destroys the system.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            void OnDestroy() override;
+            void OnDestroy() noexcept override;
             
-            CSUI::WidgetSPtr m_ui;
-            CSUI::WidgetSPtr m_titleText;
             CSUI::WidgetSPtr m_buttonContainer;
             
             std::vector<CSUI::WidgetSPtr> m_buttons;

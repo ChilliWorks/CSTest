@@ -39,11 +39,12 @@ namespace CSTest
     {
         CS_FORWARDDECLARE_CLASS(BasicEntityFactory);
         CS_FORWARDDECLARE_CLASS(BasicWidgetFactory);
+        CS_FORWARDDECLARE_CLASS(FollowerComponent);
+        CS_FORWARDDECLARE_CLASS(OptionsMenuPresenter);
+        CS_FORWARDDECLARE_CLASS(OptionsMenuDesc);
         CS_FORWARDDECLARE_CLASS(OrbiterComponent);
         CS_FORWARDDECLARE_CLASS(ResultPresenter);
-        CS_FORWARDDECLARE_CLASS(SmokeTester);
-        CS_FORWARDDECLARE_CLASS(SmokeTestSet);
-        CS_FORWARDDECLARE_CLASS(FollowerComponent);
+        CS_FORWARDDECLARE_CLASS(TestNavigator);
     }
     
     namespace CricketAudio
@@ -81,7 +82,17 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(State);
     }
     
+    namespace MainMenu
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
     namespace Particle
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
+    namespace SmokeTest
     {
         CS_FORWARDDECLARE_CLASS(State);
     }

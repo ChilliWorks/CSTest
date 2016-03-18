@@ -148,6 +148,7 @@ namespace CSTest
 
             auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
             m_text = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 1.0f), mediumFont, "");
+            m_text->SetRelativePosition(CSCore::Vector2(0.0f, 0.05f));
             
             GetState()->GetUICanvas()->AddWidget(m_text);
         }

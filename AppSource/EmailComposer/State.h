@@ -58,7 +58,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnInit() override;
             
-            Common::SmokeTester* m_smokeTester = nullptr;
+            Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
             Common::ResultPresenter* m_resultPresenter = nullptr;
             CSSocial::EmailComposer* m_emailComposer = nullptr;
         };

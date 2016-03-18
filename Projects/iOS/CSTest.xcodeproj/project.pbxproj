@@ -14,8 +14,6 @@
 		81B190741C9B16BE002EC8AC /* Approx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1901D1C9B16BE002EC8AC /* Approx.cpp */; };
 		81B190751C9B16BE002EC8AC /* BasicEntityFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1901F1C9B16BE002EC8AC /* BasicEntityFactory.cpp */; };
 		81B190761C9B16BE002EC8AC /* ResultPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190211C9B16BE002EC8AC /* ResultPresenter.cpp */; };
-		81B190771C9B16BE002EC8AC /* SmokeTester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190231C9B16BE002EC8AC /* SmokeTester.cpp */; };
-		81B190781C9B16BE002EC8AC /* SmokeTestSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190251C9B16BE002EC8AC /* SmokeTestSet.cpp */; };
 		81B190791C9B16BE002EC8AC /* BasicWidgetFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1902A1C9B16BE002EC8AC /* BasicWidgetFactory.cpp */; };
 		81B1907A1C9B16BE002EC8AC /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1902D1C9B16BE002EC8AC /* State.cpp */; };
 		81B1907B1C9B16BE002EC8AC /* DownloadProgressTestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190311C9B16BE002EC8AC /* DownloadProgressTestSystem.cpp */; };
@@ -46,6 +44,11 @@
 		81B190941C9B16BE002EC8AC /* TestCase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1906A1C9B16BE002EC8AC /* TestCase.cpp */; };
 		81B190951C9B16BE002EC8AC /* TestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1906C1C9B16BE002EC8AC /* TestSystem.cpp */; };
 		81B190961C9B16BE002EC8AC /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1906F1C9B16BE002EC8AC /* State.cpp */; };
+		81C63AF01C9C138F00E1A669 /* OptionsMenuDesc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AEC1C9C138F00E1A669 /* OptionsMenuDesc.cpp */; };
+		81C63AF11C9C138F00E1A669 /* OptionsMenuPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AEE1C9C138F00E1A669 /* OptionsMenuPresenter.cpp */; };
+		81C63AF81C9C196700E1A669 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AF31C9C196700E1A669 /* State.cpp */; };
+		81C63AF91C9C196700E1A669 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AF61C9C196700E1A669 /* State.cpp */; };
+		81C63AFC1C9C1C3400E1A669 /* TestNavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AFA1C9C1C3400E1A669 /* TestNavigator.cpp */; };
 		81C7000A1C89E9F300D306F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C700041C89E9F300D306F9 /* LaunchScreen.storyboard */; };
 		81C700321C89ECA400D306F9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700151C89ECA400D306F9 /* Accounts.framework */; };
 		81C700331C89ECA400D306F9 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700161C89ECA400D306F9 /* AddressBook.framework */; };
@@ -106,12 +109,6 @@
 		81B190201C9B16BE002EC8AC /* BasicEntityFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicEntityFactory.h; sourceTree = "<group>"; };
 		81B190211C9B16BE002EC8AC /* ResultPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResultPresenter.cpp; sourceTree = "<group>"; };
 		81B190221C9B16BE002EC8AC /* ResultPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultPresenter.h; sourceTree = "<group>"; };
-		81B190231C9B16BE002EC8AC /* SmokeTester.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SmokeTester.cpp; sourceTree = "<group>"; };
-		81B190241C9B16BE002EC8AC /* SmokeTester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmokeTester.h; sourceTree = "<group>"; };
-		81B190251C9B16BE002EC8AC /* SmokeTestSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SmokeTestSet.cpp; sourceTree = "<group>"; };
-		81B190261C9B16BE002EC8AC /* SmokeTestSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmokeTestSet.h; sourceTree = "<group>"; };
-		81B190271C9B16BE002EC8AC /* StateNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateNavigator.h; sourceTree = "<group>"; };
-		81B190281C9B16BE002EC8AC /* StateNavigatorImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateNavigatorImpl.h; sourceTree = "<group>"; };
 		81B1902A1C9B16BE002EC8AC /* BasicWidgetFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicWidgetFactory.cpp; sourceTree = "<group>"; };
 		81B1902B1C9B16BE002EC8AC /* BasicWidgetFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicWidgetFactory.h; sourceTree = "<group>"; };
 		81B1902D1C9B16BE002EC8AC /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
@@ -170,6 +167,16 @@
 		81B1906D1C9B16BE002EC8AC /* TestSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSystem.h; sourceTree = "<group>"; };
 		81B1906F1C9B16BE002EC8AC /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81B190701C9B16BE002EC8AC /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81C63AEC1C9C138F00E1A669 /* OptionsMenuDesc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OptionsMenuDesc.cpp; sourceTree = "<group>"; };
+		81C63AED1C9C138F00E1A669 /* OptionsMenuDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsMenuDesc.h; sourceTree = "<group>"; };
+		81C63AEE1C9C138F00E1A669 /* OptionsMenuPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OptionsMenuPresenter.cpp; sourceTree = "<group>"; };
+		81C63AEF1C9C138F00E1A669 /* OptionsMenuPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsMenuPresenter.h; sourceTree = "<group>"; };
+		81C63AF31C9C196700E1A669 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81C63AF41C9C196700E1A669 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81C63AF61C9C196700E1A669 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81C63AF71C9C196700E1A669 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81C63AFA1C9C1C3400E1A669 /* TestNavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestNavigator.cpp; sourceTree = "<group>"; };
+		81C63AFB1C9C1C3400E1A669 /* TestNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestNavigator.h; sourceTree = "<group>"; };
 		81C700051C89E9F300D306F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81C700081C89E9F300D306F9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81C700151C89ECA400D306F9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -262,7 +269,9 @@
 				81B190381C9B16BE002EC8AC /* Gesture */,
 				81B1903F1C9B16BE002EC8AC /* IntegrationTest */,
 				81B190531C9B16BE002EC8AC /* Lighting */,
+				81C63AF21C9C196700E1A669 /* MainMenu */,
 				81B190561C9B16BE002EC8AC /* Particle */,
+				81C63AF51C9C196700E1A669 /* SmokeTest */,
 				81B190591C9B16BE002EC8AC /* UnitTest */,
 				81B1906E1C9B16BE002EC8AC /* WebView */,
 			);
@@ -294,18 +303,14 @@
 		81B1901C1C9B16BE002EC8AC /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				81C63AFA1C9C1C3400E1A669 /* TestNavigator.cpp */,
+				81C63AFB1C9C1C3400E1A669 /* TestNavigator.h */,
 				81B1901D1C9B16BE002EC8AC /* Approx.cpp */,
 				81B1901E1C9B16BE002EC8AC /* Approx.h */,
 				81B1901F1C9B16BE002EC8AC /* BasicEntityFactory.cpp */,
 				81B190201C9B16BE002EC8AC /* BasicEntityFactory.h */,
 				81B190211C9B16BE002EC8AC /* ResultPresenter.cpp */,
 				81B190221C9B16BE002EC8AC /* ResultPresenter.h */,
-				81B190231C9B16BE002EC8AC /* SmokeTester.cpp */,
-				81B190241C9B16BE002EC8AC /* SmokeTester.h */,
-				81B190251C9B16BE002EC8AC /* SmokeTestSet.cpp */,
-				81B190261C9B16BE002EC8AC /* SmokeTestSet.h */,
-				81B190271C9B16BE002EC8AC /* StateNavigator.h */,
-				81B190281C9B16BE002EC8AC /* StateNavigatorImpl.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -313,6 +318,10 @@
 		81B190291C9B16BE002EC8AC /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				81C63AEC1C9C138F00E1A669 /* OptionsMenuDesc.cpp */,
+				81C63AED1C9C138F00E1A669 /* OptionsMenuDesc.h */,
+				81C63AEE1C9C138F00E1A669 /* OptionsMenuPresenter.cpp */,
+				81C63AEF1C9C138F00E1A669 /* OptionsMenuPresenter.h */,
 				81B1902A1C9B16BE002EC8AC /* BasicWidgetFactory.cpp */,
 				81B1902B1C9B16BE002EC8AC /* BasicWidgetFactory.h */,
 			);
@@ -467,6 +476,24 @@
 				81B190701C9B16BE002EC8AC /* State.h */,
 			);
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		81C63AF21C9C196700E1A669 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				81C63AF31C9C196700E1A669 /* State.cpp */,
+				81C63AF41C9C196700E1A669 /* State.h */,
+			);
+			path = MainMenu;
+			sourceTree = "<group>";
+		};
+		81C63AF51C9C196700E1A669 /* SmokeTest */ = {
+			isa = PBXGroup;
+			children = (
+				81C63AF61C9C196700E1A669 /* State.cpp */,
+				81C63AF71C9C196700E1A669 /* State.h */,
+			);
+			path = SmokeTest;
 			sourceTree = "<group>";
 		};
 		81C700021C89E9F300D306F9 /* ProjectResources */ = {
@@ -661,15 +688,14 @@
 			files = (
 				81B190731C9B16BE002EC8AC /* OrbiterComponent.cpp in Sources */,
 				81B190921C9B16BE002EC8AC /* Report.cpp in Sources */,
-				81B190771C9B16BE002EC8AC /* SmokeTester.cpp in Sources */,
 				81B190881C9B16BE002EC8AC /* TestRegistry.cpp in Sources */,
 				81B1907F1C9B16BE002EC8AC /* GesturePresenter.cpp in Sources */,
 				81B190741C9B16BE002EC8AC /* Approx.cpp in Sources */,
 				81B190751C9B16BE002EC8AC /* BasicEntityFactory.cpp in Sources */,
 				81B1907E1C9B16BE002EC8AC /* EventInfo.cpp in Sources */,
-				81B190781C9B16BE002EC8AC /* SmokeTestSet.cpp in Sources */,
 				81B190901C9B16BE002EC8AC /* CSReporter.cpp in Sources */,
 				81B1908B1C9B16BE002EC8AC /* State.cpp in Sources */,
+				81C63AF01C9C138F00E1A669 /* OptionsMenuDesc.cpp in Sources */,
 				81B190931C9B16BE002EC8AC /* ReportPresenter.cpp in Sources */,
 				81B190951C9B16BE002EC8AC /* TestSystem.cpp in Sources */,
 				81B1908D1C9B16BE002EC8AC /* Vector2.cpp in Sources */,
@@ -678,6 +704,7 @@
 				81B190871C9B16BE002EC8AC /* Tester.cpp in Sources */,
 				81B190851C9B16BE002EC8AC /* Test.cpp in Sources */,
 				81B190891C9B16BE002EC8AC /* State.cpp in Sources */,
+				81C63AF11C9C138F00E1A669 /* OptionsMenuPresenter.cpp in Sources */,
 				81B190861C9B16BE002EC8AC /* TestDesc.cpp in Sources */,
 				81B1908F1C9B16BE002EC8AC /* Vector4.cpp in Sources */,
 				81B1908E1C9B16BE002EC8AC /* Vector3.cpp in Sources */,
@@ -686,11 +713,14 @@
 				81B190831C9B16BE002EC8AC /* Report.cpp in Sources */,
 				81B190721C9B16BE002EC8AC /* FollowerComponent.cpp in Sources */,
 				81B190941C9B16BE002EC8AC /* TestCase.cpp in Sources */,
+				81C63AF91C9C196700E1A669 /* State.cpp in Sources */,
 				81B1907A1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190801C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B1908A1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190791C9B16BE002EC8AC /* BasicWidgetFactory.cpp in Sources */,
 				81B1907B1C9B16BE002EC8AC /* DownloadProgressTestSystem.cpp in Sources */,
+				81C63AF81C9C196700E1A669 /* State.cpp in Sources */,
+				81C63AFC1C9C1C3400E1A669 /* TestNavigator.cpp in Sources */,
 				81B190841C9B16BE002EC8AC /* ReportPresenter.cpp in Sources */,
 				81B190961C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B1908C1C9B16BE002EC8AC /* FileSystem.cpp in Sources */,
