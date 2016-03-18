@@ -25,9 +25,10 @@
     <ClCompile Include="..\..\AppSource\Common\Core\Approx.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\BasicEntityFactory.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\ResultPresenter.cpp" />
-    <ClCompile Include="..\..\AppSource\Common\Core\SmokeTester.cpp" />
-    <ClCompile Include="..\..\AppSource\Common\Core\SmokeTestSet.cpp" />
+    <ClCompile Include="..\..\AppSource\Common\Core\TestNavigator.cpp" />
     <ClCompile Include="..\..\AppSource\Common\UI\BasicWidgetFactory.cpp" />
+    <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuDesc.cpp" />
+    <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\CricketAudio\State.cpp" />
     <ClCompile Include="..\..\AppSource\DownloadProgress\DownloadProgressTestSystem.cpp" />
     <ClCompile Include="..\..\AppSource\DownloadProgress\State.cpp" />
@@ -44,7 +45,9 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestRegistry.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\HttpRequestTest.cpp" />
     <ClCompile Include="..\..\AppSource\Lighting\State.cpp" />
+    <ClCompile Include="..\..\AppSource\MainMenu\State.cpp" />
     <ClCompile Include="..\..\AppSource\Particle\State.cpp" />
+    <ClCompile Include="..\..\AppSource\SmokeTest\State.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\State.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.cpp" />
@@ -65,11 +68,10 @@
     <ClInclude Include="..\..\AppSource\Common\Core\Approx.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\BasicEntityFactory.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\ResultPresenter.h" />
-    <ClInclude Include="..\..\AppSource\Common\Core\SmokeTester.h" />
-    <ClInclude Include="..\..\AppSource\Common\Core\SmokeTestSet.h" />
-    <ClInclude Include="..\..\AppSource\Common\Core\StateNavigator.h" />
-    <ClInclude Include="..\..\AppSource\Common\Core\StateNavigatorImpl.h" />
+    <ClInclude Include="..\..\AppSource\Common\Core\TestNavigator.h" />
     <ClInclude Include="..\..\AppSource\Common\UI\BasicWidgetFactory.h" />
+    <ClInclude Include="..\..\AppSource\Common\UI\OptionsMenuDesc.h" />
+    <ClInclude Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.h" />
     <ClInclude Include="..\..\AppSource\CricketAudio\State.h" />
     <ClInclude Include="..\..\AppSource\CSTest.h" />
     <ClInclude Include="..\..\AppSource\DownloadProgress\DownloadProgressTestSystem.h" />
@@ -88,7 +90,9 @@
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\Tester.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestRegistry.h" />
     <ClInclude Include="..\..\AppSource\Lighting\State.h" />
+    <ClInclude Include="..\..\AppSource\MainMenu\State.h" />
     <ClInclude Include="..\..\AppSource\Particle\State.h" />
+    <ClInclude Include="..\..\AppSource\SmokeTest\State.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\State.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.h" />

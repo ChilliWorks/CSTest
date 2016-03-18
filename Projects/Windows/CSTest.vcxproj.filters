@@ -55,6 +55,12 @@
     <Filter Include="AppSource\UnitTest\Tests">
       <UniqueIdentifier>{467e313a-305a-4c9c-93d4-ccd260124044}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\MainMenu">
+      <UniqueIdentifier>{cd4f945b-b498-48c7-8e55-29d28dc8f1fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\SmokeTest">
+      <UniqueIdentifier>{0e49f6fb-035d-4c26-8d32-1ff3cfa458de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -73,12 +79,6 @@
       <Filter>AppSource\Common\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\AppSource\Common\Core\ResultPresenter.cpp">
-      <Filter>AppSource\Common\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\Common\Core\SmokeTester.cpp">
-      <Filter>AppSource\Common\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\Common\Core\SmokeTestSet.cpp">
       <Filter>AppSource\Common\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\AppSource\Common\UI\BasicWidgetFactory.cpp">
@@ -171,6 +171,21 @@
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.cpp">
       <Filter>AppSource\UnitTest\TestSystem</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\Core\TestNavigator.cpp">
+      <Filter>AppSource\Common\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuDesc.cpp">
+      <Filter>AppSource\Common\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.cpp">
+      <Filter>AppSource\Common\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\MainMenu\State.cpp">
+      <Filter>AppSource\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\SmokeTest\State.cpp">
+      <Filter>AppSource\SmokeTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -192,18 +207,6 @@
       <Filter>AppSource\Common\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Common\Core\ResultPresenter.h">
-      <Filter>AppSource\Common\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\Common\Core\SmokeTester.h">
-      <Filter>AppSource\Common\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\Common\Core\SmokeTestSet.h">
-      <Filter>AppSource\Common\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\Common\Core\StateNavigator.h">
-      <Filter>AppSource\Common\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\Common\Core\StateNavigatorImpl.h">
       <Filter>AppSource\Common\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Common\UI\BasicWidgetFactory.h">
@@ -286,6 +289,21 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.h">
       <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\Core\TestNavigator.h">
+      <Filter>AppSource\Common\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\UI\OptionsMenuDesc.h">
+      <Filter>AppSource\Common\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.h">
+      <Filter>AppSource\Common\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\MainMenu\State.h">
+      <Filter>AppSource\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\SmokeTest\State.h">
+      <Filter>AppSource\SmokeTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

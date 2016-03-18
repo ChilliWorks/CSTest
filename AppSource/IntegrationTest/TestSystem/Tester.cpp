@@ -40,7 +40,7 @@ namespace CSTest
             : m_progressUpdateDelegate(in_progressUpdateDelegate), m_completionDelegate(in_completionDelegate)
         {
             auto tests = TestRegistry::Get().GetTests();
-            m_numTests = tests.size();
+            m_numTests = u32(tests.size());
             
             for (const auto& test : tests)
             {
