@@ -153,24 +153,6 @@
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector4.cpp">
       <Filter>AppSource\UnitTest\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.cpp">
-      <Filter>AppSource\UnitTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.cpp">
-      <Filter>AppSource\UnitTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\Report.cpp">
-      <Filter>AppSource\UnitTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\ReportPresenter.cpp">
-      <Filter>AppSource\UnitTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\TestCase.cpp">
-      <Filter>AppSource\UnitTest\TestSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.cpp">
-      <Filter>AppSource\UnitTest\TestSystem</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\AppSource\Common\Core\TestNavigator.cpp">
       <Filter>AppSource\Common\Core</Filter>
     </ClCompile>
@@ -185,6 +167,27 @@
     </ClCompile>
     <ClCompile Include="..\..\AppSource\SmokeTest\State.cpp">
       <Filter>AppSource\SmokeTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\FailedSection.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\FailedTestCase.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\Report.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\ReportPresenter.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.cpp">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -272,24 +275,6 @@
     <ClInclude Include="..\..\AppSource\UnitTest\State.h">
       <Filter>AppSource\UnitTest</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.h">
-      <Filter>AppSource\UnitTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.h">
-      <Filter>AppSource\UnitTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\Report.h">
-      <Filter>AppSource\UnitTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\ReportPresenter.h">
-      <Filter>AppSource\UnitTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestCase.h">
-      <Filter>AppSource\UnitTest\TestSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.h">
-      <Filter>AppSource\UnitTest\TestSystem</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\AppSource\Common\Core\TestNavigator.h">
       <Filter>AppSource\Common\Core</Filter>
     </ClInclude>
@@ -304,6 +289,27 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\SmokeTest\State.h">
       <Filter>AppSource\SmokeTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\FailedSection.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\FailedTestCase.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\Report.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\ReportPresenter.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.h">
+      <Filter>AppSource\UnitTest\TestSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

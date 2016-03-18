@@ -51,9 +51,10 @@
     <ClCompile Include="..\..\AppSource\UnitTest\State.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.cpp" />
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\FailedSection.cpp" />
+    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\FailedTestCase.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\Report.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\ReportPresenter.cpp" />
-    <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\TestCase.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\FileSystem.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector2.cpp" />
@@ -96,9 +97,10 @@
     <ClInclude Include="..\..\AppSource\UnitTest\State.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.h" />
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\FailedSection.h" />
+    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\FailedTestCase.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\Report.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\ReportPresenter.h" />
-    <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestCase.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.h" />
     <ClInclude Include="..\..\AppSource\WebView\State.h" />
   </ItemGroup>
