@@ -57,7 +57,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         Report TestSystem::PerformTests()
         {
-            s_session.configData().reporterName = "cs";
+            s_session.configData().reporterNames = { "cs" };
 
             s_session.run();
             

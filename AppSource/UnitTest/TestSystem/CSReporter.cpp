@@ -55,12 +55,12 @@ namespace CSTest
         CSReporter::CSReporter(const Catch::ReporterConfig& in_config) noexcept
             : StreamingReporterBase(in_config)
         {
-            CS_ASSERT(m_config->includeSuccessfulResults() == false, "CSReporter doesn't support reporting successful results.");
-            CS_ASSERT(m_config->warnAboutMissingAssertions() == false, "CSReporter doesn't support warning about missing assertions.");
-            CS_ASSERT(m_config->showInvisibles() == false, "CSReporter doesn't support showing invisibles.");
-            CS_ASSERT(m_config->showDurations() == false, "CSReporter doesn't support showing durations.");
-            CS_ASSERT(m_config->forceColour() == false, "CSReporter doesn't support coloured output.");
-            CS_ASSERT(m_config->shouldDebugBreak() == false, "CSReporter doesn't support debug break.");
+            CS_ASSERT(!m_config->includeSuccessfulResults(), "CSReporter doesn't support reporting successful results.");
+            CS_ASSERT(!m_config->warnAboutMissingAssertions(), "CSReporter doesn't support warning about missing assertions.");
+            CS_ASSERT(!m_config->showInvisibles(), "CSReporter doesn't support showing invisibles.");
+            CS_ASSERT(!m_config->showDurations(), "CSReporter doesn't support showing durations.");
+            CS_ASSERT(!m_config->useColour(), "CSReporter doesn't support coloured output.");
+            CS_ASSERT(!m_config->shouldDebugBreak(), "CSReporter doesn't support debug break.");
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
