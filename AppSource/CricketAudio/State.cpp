@@ -49,9 +49,7 @@ namespace CSTest
             CreateSystem<Common::TestNavigator>("Cricket Audio");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
 
-#ifndef CS_TARGETPLATFORM_WINDOWS
             m_audioPlayer = CreateSystem<CSAudio::CkAudioPlayer>();
-#endif
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -59,9 +57,6 @@ namespace CSTest
         {
             GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
-			
-
-#ifndef CS_TARGETPLATFORM_WINDOWS
             auto resourcePool = CSCore::Application::Get()->GetResourcePool();
             auto bank = resourcePool->LoadResource<CSAudio::CkBank>(CSCore::StorageLocation::k_package, "SFX/SFX.ckb");
             
@@ -88,7 +83,6 @@ namespace CSTest
             });
             
             m_optionsMenuPresenter->Present(optionsMenuDesc);
-#endif
         }
     }
 }
