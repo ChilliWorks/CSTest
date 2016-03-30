@@ -73,10 +73,9 @@ namespace CSTest
     //------------------------------------------------------------------------------
     void App::CreateSystems()
     {
-#ifndef CS_TARGETPLATFORM_WINDOWS
         CreateSystem<CSAudio::CricketAudioSystem>();
 		CreateSystem<CSAudio::CkBankProvider>();
-#endif
+
         CreateSystem<CSCore::PrimitiveEntityFactory>();
         CreateSystem<CSNetworking::HttpRequestSystem>();
         CreateSystem<CSRendering::PrimitiveModelFactory>();

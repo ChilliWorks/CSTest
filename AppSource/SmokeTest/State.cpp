@@ -77,12 +77,10 @@ namespace CSTest
                 CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<Gesture::State>());
             });
 
-#ifndef CS_TARGETPLATFORM_WINDOWS
             optionsMenuDesc.AddButton("Cricket Audio", [=]()
             {
                 CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<CricketAudio::State>());
             });
-#endif
 
             optionsMenuDesc.AddButton("Download Progress", [=]()
             {
