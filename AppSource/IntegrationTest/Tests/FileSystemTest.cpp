@@ -33,6 +33,7 @@
 #include <IntegrationTest/TestSystem/TestCase.h>
 
 #include <ChilliSource/Core/Base.h>
+#include <ChilliSource/Core/Container.h>
 #include <ChilliSource/Core/Cryptographic.h>
 #include <ChilliSource/Core/File.h>
 
@@ -42,11 +43,12 @@ namespace CSTest
     {
         namespace
         {
-            const std::string k_rootDirecory = "UnitTest/FileSystem/";
+            const std::string k_rootDirecory = "IntegrationTest/FileSystem/";
             
-            const std::string k_textFilePath = k_rootDirecory + "TextFileA.txt";
-            const std::string k_binaryFilePath = k_rootDirecory + "BinaryFileA.bin";
-            const std::string k_directoryPath = k_rootDirecory + "DirectoryA/";
+            const std::string k_textFilePath = k_rootDirecory + "TextFile.txt";
+            const std::string k_binaryFilePath = k_rootDirecory + "BinaryFile.bin";
+            const std::string k_directoryPath = k_rootDirecory + "Directory/";
+            const std::string k_nestedDirectoryPath = k_rootDirecory + "Directory/DirectoryA/Directory/";
             
             const std::string k_fakeFilePath = k_rootDirecory + "FAKE.txt";
             const std::string k_fakeDirectoryPath = k_rootDirecory + "FAKE/";
@@ -55,6 +57,16 @@ namespace CSTest
             const u32 k_binaryFileLength = 4;
             const char k_binaryFileContents[] = "\x0F\x27\x00\x00";
             const std::string k_binaryFileChecksum = "EBAB98776D1DE85288E0EE94F3B92DD74DD8C0D6";
+            
+            const std::vector<std::string> k_filePathsInDirectory =
+            {
+                "DirectoryA/BinaryFile.bin",
+                "DirectoryA/TextFile.txt",
+                "DirectoryA/Directory/BinaryFile.bin",
+                "DirectoryA/Directory/TextFile.txt",
+                "DirectoryB/BinaryFile.bin",
+                "DirectoryB/TextFile.txt"
+            };
             
             //------------------------------------------------------------------------------
             /// Clears out the given directory. If the directory couldn't be cleared out
@@ -488,57 +500,331 @@ namespace CSTest
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a file can be copied
+            /// Confirms that a file can be copied from the package storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            CSIT_TEST(CopyFile)
+            CSIT_TEST(CopyFilePackage)
             {
-                //TODO:
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_textFilePath), "File does not exist.");
+                
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_textFilePath), "File does not exist.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a file can be deleted
+            /// Confirms that a file can be copied from the cache storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            CSIT_TEST(DeleteFile)
+            CSIT_TEST(CopyFileCache)
             {
-                //TODO:
+                const std::string k_cacheDestTextFilePath = k_rootDirecory + "TextFile-Copy.txt";
+                
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath);
+                
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_cache, k_textFilePath, CSCore::StorageLocation::k_cache, k_cacheDestTextFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_cacheDestTextFilePath), "File does not exist.");
+                
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_cache, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_textFilePath), "File does not exist.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that directories can be created
+            /// Confirms that a file can be copied from the save data storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            CSIT_TEST(CreateDirectory)
+            CSIT_TEST(CopyFileSaveData)
             {
-                //TODO:
+                const std::string k_saveDataDestTextFilePath = k_rootDirecory + "TextFile-Copy.txt";
+                
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath);
+                
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_saveData, k_textFilePath, CSCore::StorageLocation::k_saveData, k_saveDataDestTextFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_saveDataDestTextFilePath), "File does not exist.");
+                
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_saveData, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_textFilePath), "File does not exist.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a directory can be copied
+            /// Confirms that a file can be copied from the ChilliSource storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            CSIT_TEST(CopyDirectory)
+            CSIT_TEST(CopyFileChilliSource)
             {
-                //TODO:
+                const std::string k_csTextFilePath = "Widgets/Widget.csuidef";
+                
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_chilliSource, k_csTextFilePath, CSCore::StorageLocation::k_cache, k_textFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_textFilePath), "File does not exist.");
+                
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_chilliSource, k_csTextFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_textFilePath), "File does not exist.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a directory can be deleted
+            /// Confirms that a file can be deleted from the cache storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            CSIT_TEST(DeleteDirectory)
+            CSIT_TEST(DeleteFileCache)
             {
-                //TODO:
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath);
+
+                CSIT_ASSERT(fileSystem->DeleteFile(CSCore::StorageLocation::k_cache, k_textFilePath), "Failed to delete file.");
+                CSIT_ASSERT(!fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_textFilePath), "File still exists.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that a file can be deleted from the save data storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(DeleteFileSaveData)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath);
+                
+                CSIT_ASSERT(fileSystem->DeleteFile(CSCore::StorageLocation::k_saveData, k_textFilePath), "Failed to delete file.");
+                CSIT_ASSERT(!fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_textFilePath), "File still exists.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that directories can be created in the cache storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(CreateDirectoryCache)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                
+                CSIT_ASSERT(fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_cache, k_directoryPath), "Failed to create directory.");
+                CSIT_ASSERT(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_cache, k_directoryPath), "Directory doesn't exist.");
+                
+                CSIT_ASSERT(fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_cache, k_nestedDirectoryPath), "Failed to create directory.");
+                CSIT_ASSERT(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_cache, k_nestedDirectoryPath), "Directory doesn't exist.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that directories can be created in the save data storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(CreateDirectorySaveData)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_ASSERT(fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_saveData, k_directoryPath), "Failed to create directory.");
+                CSIT_ASSERT(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_saveData, k_directoryPath), "Directory doesn't exist.");
+                
+                CSIT_ASSERT(fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_saveData, k_nestedDirectoryPath), "Failed to create directory.");
+                CSIT_ASSERT(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_saveData, k_nestedDirectoryPath), "Directory doesn't exist.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that a directory can be copied from the package storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(CopyDirectoryPackage)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_directoryPath, true), k_filePathsInDirectory), "Directory has incorrect contents.");
+                
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_directoryPath, true), k_filePathsInDirectory), "Directory has incorrect contents.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that a directory can be copied from the cache storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(CopyDirectoryCache)
+            {
+                const std::string k_cacheDestDirectoryPath = k_rootDirecory + "Directory-Copy/";
+                
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath);
+                
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_cache, k_directoryPath, CSCore::StorageLocation::k_cache, k_cacheDestDirectoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_cacheDestDirectoryPath, true), k_filePathsInDirectory), "Directory has incorrect contents.");
+                
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_cache, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_directoryPath, true), k_filePathsInDirectory), "Directory has incorrect contents.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that a directory can be copied from the save data storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(CopyDirectorySaveData)
+            {
+                const std::string k_saveDataDestDirectoryPath = k_rootDirecory + "Directory-Copy/";
+                
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath);
+                
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_saveData, k_directoryPath, CSCore::StorageLocation::k_saveData, k_saveDataDestDirectoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_saveDataDestDirectoryPath, true), k_filePathsInDirectory), "Directory has incorrect contents.");
+                
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_saveData, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_directoryPath, true), k_filePathsInDirectory), "Directory has incorrect contents.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that a directory can be copied from the ChiliSource storage
+            /// location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(CopyDirectoryChilliSource)
+            {
+                const std::string k_csDirectoryPath = "Fonts/";
+                
+                const std::vector<std::string> k_csFilePathsInDirectory =
+                {
+                    "CarlitoMed.high.csfont",
+                    "CarlitoMed.high.csimage",
+                    "CarlitoMed.low.csfont",
+                    "CarlitoMed.low.csimage",
+                    "CarlitoMed.med.csfont",
+                    "CarlitoMed.med.csimage"
+                };
+                
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_chilliSource, k_csDirectoryPath, CSCore::StorageLocation::k_cache, k_csDirectoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_csDirectoryPath, true), k_csFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_chilliSource, k_csDirectoryPath, CSCore::StorageLocation::k_saveData, k_csDirectoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_csDirectoryPath, true), k_csFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that a directory can be deleted from the cache.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(DeleteDirectoryCache)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath);
+                
+                CSIT_ASSERT(fileSystem->DeleteDirectory(CSCore::StorageLocation::k_cache, k_directoryPath), "Failed to delete directory.");
+                CSIT_ASSERT(!fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_cache, k_directoryPath), "Directory still exists.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that a directory can be deleted from the cache.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(DeleteDirectorySaveData)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath);
+                
+                CSIT_ASSERT(fileSystem->DeleteDirectory(CSCore::StorageLocation::k_saveData, k_directoryPath), "Failed to delete directory.");
+                CSIT_ASSERT(!fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_saveData, k_directoryPath), "Directory still exists.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
                 
                 CSIT_PASS();
             }
@@ -549,7 +835,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(GetFilePaths)
             {
-                //TODO:
+                //TODO:!
                 
                 CSIT_PASS();
             }
