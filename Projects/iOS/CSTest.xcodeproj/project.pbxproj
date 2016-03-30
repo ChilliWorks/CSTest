@@ -33,7 +33,6 @@
 		81B190891C9B16BE002EC8AC /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190541C9B16BE002EC8AC /* State.cpp */; };
 		81B1908A1C9B16BE002EC8AC /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190571C9B16BE002EC8AC /* State.cpp */; };
 		81B1908B1C9B16BE002EC8AC /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1905A1C9B16BE002EC8AC /* State.cpp */; };
-		81B1908C1C9B16BE002EC8AC /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1905D1C9B16BE002EC8AC /* FileSystem.cpp */; };
 		81B1908D1C9B16BE002EC8AC /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1905E1C9B16BE002EC8AC /* Vector2.cpp */; };
 		81B1908E1C9B16BE002EC8AC /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1905F1C9B16BE002EC8AC /* Vector3.cpp */; };
 		81B1908F1C9B16BE002EC8AC /* Vector4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190601C9B16BE002EC8AC /* Vector4.cpp */; };
@@ -151,7 +150,6 @@
 		81B190581C9B16BE002EC8AC /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81B1905A1C9B16BE002EC8AC /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81B1905B1C9B16BE002EC8AC /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
-		81B1905D1C9B16BE002EC8AC /* FileSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
 		81B1905E1C9B16BE002EC8AC /* Vector2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2.cpp; sourceTree = "<group>"; };
 		81B1905F1C9B16BE002EC8AC /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3.cpp; sourceTree = "<group>"; };
 		81B190601C9B16BE002EC8AC /* Vector4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector4.cpp; sourceTree = "<group>"; };
@@ -448,7 +446,6 @@
 		81B1905C1C9B16BE002EC8AC /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				81B1905D1C9B16BE002EC8AC /* FileSystem.cpp */,
 				81B1905E1C9B16BE002EC8AC /* Vector2.cpp */,
 				81B1905F1C9B16BE002EC8AC /* Vector3.cpp */,
 				81B190601C9B16BE002EC8AC /* Vector4.cpp */,
@@ -733,7 +730,6 @@
 				81C63AFC1C9C1C3400E1A669 /* TestNavigator.cpp in Sources */,
 				81B190841C9B16BE002EC8AC /* ReportPresenter.cpp in Sources */,
 				81B190961C9B16BE002EC8AC /* State.cpp in Sources */,
-				81B1908C1C9B16BE002EC8AC /* FileSystem.cpp in Sources */,
 				81B190761C9B16BE002EC8AC /* ResultPresenter.cpp in Sources */,
 				81B1907C1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190821C9B16BE002EC8AC /* HttpRequestTest.cpp in Sources */,
