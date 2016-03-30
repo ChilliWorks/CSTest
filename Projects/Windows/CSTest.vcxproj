@@ -43,6 +43,7 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestDesc.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\Tester.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestRegistry.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystemTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\HttpRequestTest.cpp" />
     <ClCompile Include="..\..\AppSource\Lighting\State.cpp" />
     <ClCompile Include="..\..\AppSource\MainMenu\State.cpp" />
@@ -56,7 +57,6 @@
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\Report.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\ReportPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.cpp" />
-    <ClCompile Include="..\..\AppSource\UnitTest\Tests\FileSystem.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector2.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector3.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector4.cpp" />

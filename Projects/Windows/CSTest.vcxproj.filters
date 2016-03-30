@@ -141,9 +141,6 @@
     <ClCompile Include="..\..\AppSource\UnitTest\State.cpp">
       <Filter>AppSource\UnitTest</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\UnitTest\Tests\FileSystem.cpp">
-      <Filter>AppSource\UnitTest\Tests</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector2.cpp">
       <Filter>AppSource\UnitTest\Tests</Filter>
     </ClCompile>
@@ -188,6 +185,9 @@
     </ClCompile>
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.cpp">
       <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystemTest.cpp">
+      <Filter>AppSource\IntegrationTest\Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
