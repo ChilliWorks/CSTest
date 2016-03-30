@@ -60,12 +60,55 @@ namespace CSTest
             
             const std::vector<std::string> k_filePathsInDirectory =
             {
-                "DirectoryA/BinaryFile.bin",
-                "DirectoryA/TextFile.txt",
+                "BinaryFile.bin",
+                "TextFile.txt"
+            };
+            
+            const std::vector<std::string> k_filePathsInDirectoryRecursive =
+            {
+                "BinaryFile.bin",
+                "TextFile.txt",
                 "DirectoryA/Directory/BinaryFile.bin",
                 "DirectoryA/Directory/TextFile.txt",
                 "DirectoryB/BinaryFile.bin",
                 "DirectoryB/TextFile.txt"
+            };
+            
+            const std::vector<std::string> k_binaryFilePathsInDirectory =
+            {
+                "BinaryFile.bin"
+            };
+            
+            const std::vector<std::string> k_binaryFilePathsInDirectoryRecursive =
+            {
+                "BinaryFile.bin",
+                "DirectoryA/Directory/BinaryFile.bin",
+                "DirectoryB/BinaryFile.bin"
+            };
+            
+            const std::vector<std::string> k_textFilePathsInDirectory =
+            {
+                "TextFile.txt"
+            };
+            
+            const std::vector<std::string> k_textFilePathsInDirectoryRecursive =
+            {
+                "TextFile.txt",
+                "DirectoryA/Directory/TextFile.txt",
+                "DirectoryB/TextFile.txt"
+            };
+            
+            const std::vector<std::string> k_directoryPathsInDirectory =
+            {
+                "DirectoryA/",
+                "DirectoryB/"
+            };
+            
+            const std::vector<std::string> k_directoryPathsInDirectoryRecursive =
+            {
+                "DirectoryA/",
+                "DirectoryA/Directory/",
+                "DirectoryB/"
             };
             
             //------------------------------------------------------------------------------
@@ -204,11 +247,11 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(DoesFileExistChilliSource)
             {
-                const std::string k_csTextFilePath = "Widgets/Widget.csuidef";
+                const std::string csTextFilePath = "Widgets/Widget.csuidef";
                 
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_chilliSource, k_csTextFilePath), "File doesn't exist.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_chilliSource, csTextFilePath), "File doesn't exist.");
                 CSIT_ASSERT(!fileSystem->DoesFileExist(CSCore::StorageLocation::k_chilliSource, k_fakeFilePath), "File exists.");
                 
                 CSIT_PASS();
@@ -276,11 +319,11 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(DoesDirectoryExistChilliSource)
             {
-                const std::string k_csDirectoryPath = "Fonts/";
+                const std::string csDirectoryPath = "Fonts/";
                 
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                CSIT_ASSERT(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_chilliSource, k_csDirectoryPath), "File doesn't exist.");
+                CSIT_ASSERT(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_chilliSource, csDirectoryPath), "File doesn't exist.");
                 CSIT_ASSERT(!fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_chilliSource, k_fakeDirectoryPath), "File exists.");
                 
                 CSIT_PASS();
@@ -347,13 +390,13 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(ReadTextFileChilliSource)
             {
-                const std::string k_csTextFilePath = "Widgets/Widget.csuidef";
-                const std::string k_fileContents = "{\n  \"Type\": \"Widget\",\n  \n  \"DefaultPropertyValues\": {\n    \"Name\": \"Widget\"\n  }\n}";
+                const std::string csTextFilePath = "Widgets/Widget.csuidef";
+                const std::string fileContents = "{\n  \"Type\": \"Widget\",\n  \n  \"DefaultPropertyValues\": {\n    \"Name\": \"Widget\"\n  }\n}";
                 
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
                 std::string textFileOutput;
-                CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_chilliSource, k_csTextFilePath, textFileOutput) && textFileOutput == k_fileContents), "Failed to read file.");
+                CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_chilliSource, csTextFilePath, textFileOutput) && textFileOutput == fileContents), "Failed to read file.");
                 CSIT_ASSERT(!fileSystem->ReadFile(CSCore::StorageLocation::k_chilliSource, k_fakeFilePath, textFileOutput), "File exists.");
                 
                 CSIT_PASS();
@@ -455,10 +498,10 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(ReadBinaryFileChilliSource)
             {
-                const std::string k_csBinaryFilePath = "Fonts/CarlitoMed.low.csfont";
-                const std::string k_csBinaryFileChecksum = "AF722ED69AC29A53402ABF006C4CFD80B4D808CE";
+                const std::string csBinaryFilePath = "Fonts/CarlitoMed.low.csfont";
+                const std::string csBinaryFileChecksum = "AF722ED69AC29A53402ABF006C4CFD80B4D808CE";
                 
-                CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_chilliSource, k_csBinaryFilePath) == k_csBinaryFileChecksum, "Failed to read file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_chilliSource, csBinaryFilePath) == csBinaryFileChecksum, "Failed to read file.");
                 CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_chilliSource, k_fakeFilePath) == "", "File exists.");
                 
                 CSIT_PASS();
@@ -529,7 +572,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(CopyFileCache)
             {
-                const std::string k_cacheDestTextFilePath = k_rootDirecory + "TextFile-Copy.txt";
+                const std::string cacheDestTextFilePath = k_rootDirecory + "TextFile-Copy.txt";
                 
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
@@ -537,8 +580,8 @@ namespace CSTest
                 ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath);
                 
-                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_cache, k_textFilePath, CSCore::StorageLocation::k_cache, k_cacheDestTextFilePath), "Failed to copy file.");
-                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_cacheDestTextFilePath), "File does not exist.");
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_cache, k_textFilePath, CSCore::StorageLocation::k_cache, cacheDestTextFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, cacheDestTextFilePath), "File does not exist.");
                 
                 CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_cache, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath), "Failed to copy file.");
                 CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_textFilePath), "File does not exist.");
@@ -555,7 +598,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(CopyFileSaveData)
             {
-                const std::string k_saveDataDestTextFilePath = k_rootDirecory + "TextFile-Copy.txt";
+                const std::string saveDataDestTextFilePath = k_rootDirecory + "TextFile-Copy.txt";
                 
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
@@ -563,8 +606,8 @@ namespace CSTest
                 ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath);
                 
-                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_saveData, k_textFilePath, CSCore::StorageLocation::k_saveData, k_saveDataDestTextFilePath), "Failed to copy file.");
-                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_saveDataDestTextFilePath), "File does not exist.");
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_saveData, k_textFilePath, CSCore::StorageLocation::k_saveData, saveDataDestTextFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, saveDataDestTextFilePath), "File does not exist.");
                 
                 CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_saveData, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath), "Failed to copy file.");
                 CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_textFilePath), "File does not exist.");
@@ -581,17 +624,17 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(CopyFileChilliSource)
             {
-                const std::string k_csTextFilePath = "Widgets/Widget.csuidef";
+                const std::string csTextFilePath = "Widgets/Widget.csuidef";
                 
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
                 ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
                 ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 
-                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_chilliSource, k_csTextFilePath, CSCore::StorageLocation::k_cache, k_textFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_chilliSource, csTextFilePath, CSCore::StorageLocation::k_cache, k_textFilePath), "Failed to copy file.");
                 CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_textFilePath), "File does not exist.");
                 
-                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_chilliSource, k_csTextFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_chilliSource, csTextFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath), "Failed to copy file.");
                 CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_textFilePath), "File does not exist.");
                 
                 ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
@@ -692,10 +735,10 @@ namespace CSTest
                 ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 
                 CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath), "Failed to copy directory.");
-                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_directoryPath, true), k_filePathsInDirectory), "Directory has incorrect contents.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_directoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
                 CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath), "Failed to copy directory.");
-                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_directoryPath, true), k_filePathsInDirectory), "Directory has incorrect contents.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_directoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
                 ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
                 ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
@@ -709,7 +752,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(CopyDirectoryCache)
             {
-                const std::string k_cacheDestDirectoryPath = k_rootDirecory + "Directory-Copy/";
+                const std::string cacheDestDirectoryPath = k_rootDirecory + "Directory-Copy/";
                 
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
@@ -717,11 +760,11 @@ namespace CSTest
                 ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath);
                 
-                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_cache, k_directoryPath, CSCore::StorageLocation::k_cache, k_cacheDestDirectoryPath), "Failed to copy directory.");
-                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_cacheDestDirectoryPath, true), k_filePathsInDirectory), "Directory has incorrect contents.");
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_cache, k_directoryPath, CSCore::StorageLocation::k_cache, cacheDestDirectoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, cacheDestDirectoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
                 CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_cache, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath), "Failed to copy directory.");
-                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_directoryPath, true), k_filePathsInDirectory), "Directory has incorrect contents.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_directoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
                 ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
                 ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
@@ -735,7 +778,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(CopyDirectorySaveData)
             {
-                const std::string k_saveDataDestDirectoryPath = k_rootDirecory + "Directory-Copy/";
+                const std::string saveDataDestDirectoryPath = k_rootDirecory + "Directory-Copy/";
                 
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
@@ -743,11 +786,11 @@ namespace CSTest
                 ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath);
                 
-                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_saveData, k_directoryPath, CSCore::StorageLocation::k_saveData, k_saveDataDestDirectoryPath), "Failed to copy directory.");
-                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_saveDataDestDirectoryPath, true), k_filePathsInDirectory), "Directory has incorrect contents.");
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_saveData, k_directoryPath, CSCore::StorageLocation::k_saveData, saveDataDestDirectoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, saveDataDestDirectoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
                 CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_saveData, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath), "Failed to copy directory.");
-                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_directoryPath, true), k_filePathsInDirectory), "Directory has incorrect contents.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_directoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
                 ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
                 ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
@@ -762,9 +805,9 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(CopyDirectoryChilliSource)
             {
-                const std::string k_csDirectoryPath = "Fonts/";
+                const std::string csDirectoryPath = "Fonts/";
                 
-                const std::vector<std::string> k_csFilePathsInDirectory =
+                const std::vector<std::string> csFilePathsInDirectory =
                 {
                     "CarlitoMed.high.csfont",
                     "CarlitoMed.high.csimage",
@@ -779,11 +822,11 @@ namespace CSTest
                 ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
                 ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 
-                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_chilliSource, k_csDirectoryPath, CSCore::StorageLocation::k_cache, k_csDirectoryPath), "Failed to copy directory.");
-                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_csDirectoryPath, true), k_csFilePathsInDirectory), "Directory has incorrect contents.");
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_chilliSource, csDirectoryPath, CSCore::StorageLocation::k_cache, csDirectoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, csDirectoryPath, true), csFilePathsInDirectory), "Directory has incorrect contents.");
                 
-                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_chilliSource, k_csDirectoryPath, CSCore::StorageLocation::k_saveData, k_csDirectoryPath), "Failed to copy directory.");
-                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_csDirectoryPath, true), k_csFilePathsInDirectory), "Directory has incorrect contents.");
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_chilliSource, csDirectoryPath, CSCore::StorageLocation::k_saveData, csDirectoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, csDirectoryPath, true), csFilePathsInDirectory), "Directory has incorrect contents.");
                 
                 ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
                 ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
@@ -791,7 +834,7 @@ namespace CSTest
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a directory can be deleted from the cache.
+            /// Confirms that a directory can be deleted from the cache storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -810,7 +853,7 @@ namespace CSTest
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a directory can be deleted from the cache.
+            /// Confirms that a directory can be deleted from the save data storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -829,24 +872,242 @@ namespace CSTest
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that file paths can be queried.
+            /// Confirms that file paths can be queried in the package storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            CSIT_TEST(GetFilePaths)
+            CSIT_TEST(GetFilePathsPackage)
             {
-                //TODO:!
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                auto contents = fileSystem->GetFilePaths(CSCore::StorageLocation::k_package, k_directoryPath, false);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_filePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePaths(CSCore::StorageLocation::k_package, k_directoryPath, true);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_package, k_directoryPath, false, "bin");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_binaryFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_package, k_directoryPath, true, "bin");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_binaryFilePathsInDirectoryRecursive), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_package, k_directoryPath, false, "TextFile.txt");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_textFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_package, k_directoryPath, true, "TextFile.txt");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_textFilePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that directory paths can be queried.
+            /// Confirms that file paths can be queried in the cache storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            CSIT_TEST(GetDirectoryPaths)
+            CSIT_TEST(GetFilePathsCache)
             {
-                //TODO:
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath);
+                
+                auto contents = fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_directoryPath, false);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_filePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_directoryPath, true);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_cache, k_directoryPath, false, "bin");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_binaryFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_cache, k_directoryPath, true, "bin");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_binaryFilePathsInDirectoryRecursive), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_cache, k_directoryPath, false, "TextFile.txt");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_textFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_cache, k_directoryPath, true, "TextFile.txt");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_textFilePathsInDirectoryRecursive), "Directory has incorrect contents.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that file paths can be queried in the save data storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(GetFilePathsSaveData)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath);
+                
+                auto contents = fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_directoryPath, false);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_filePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_directoryPath, true);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_saveData, k_directoryPath, false, "bin");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_binaryFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_saveData, k_directoryPath, true, "bin");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_binaryFilePathsInDirectoryRecursive), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_saveData, k_directoryPath, false, "TextFile.txt");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_textFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_saveData, k_directoryPath, true, "TextFile.txt");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_textFilePathsInDirectoryRecursive), "Directory has incorrect contents.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that file paths can be queried in the ChilliSource storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(GetFilePathsChilliSource)
+            {
+                const std::string csDirectoryPath = "Fonts/";
+                
+                const std::vector<std::string> csFilePathsInDirectory =
+                {
+                    "CarlitoMed.high.csfont",
+                    "CarlitoMed.high.csimage",
+                    "CarlitoMed.low.csfont",
+                    "CarlitoMed.low.csimage",
+                    "CarlitoMed.med.csfont",
+                    "CarlitoMed.med.csimage"
+                };
+                
+                const std::vector<std::string> csfontFilePathsInDirectory =
+                {
+                    "CarlitoMed.high.csfont",
+                    "CarlitoMed.low.csfont",
+                    "CarlitoMed.med.csfont"
+                };
+                
+                const std::vector<std::string> csCarlitoMedHighImageFilePathsInDirectory =
+                {
+                    "CarlitoMed.high.csimage"
+                };
+                
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                auto contents = fileSystem->GetFilePaths(CSCore::StorageLocation::k_chilliSource, csDirectoryPath, false);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, csFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePaths(CSCore::StorageLocation::k_chilliSource, csDirectoryPath, true);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, csFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_chilliSource, csDirectoryPath, false, "csfont");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, csfontFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithExtension(CSCore::StorageLocation::k_chilliSource, csDirectoryPath, true, "csfont");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, csfontFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_chilliSource, csDirectoryPath, false, "CarlitoMed.high.csimage");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, csCarlitoMedHighImageFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_chilliSource, csDirectoryPath, true, "CarlitoMed.high.csimage");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, csCarlitoMedHighImageFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that directory paths can be queried in the package storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(GetDirectoryPathsPackage)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                auto contents = fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_package, k_directoryPath, false);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_directoryPathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_package, k_directoryPath, true);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_directoryPathsInDirectoryRecursive), "Directory has incorrect contents.");
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that directory paths can be queried in the cache storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(GetDirectoryPathsCache)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath);
+                
+                auto contents = fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_cache, k_directoryPath, false);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_directoryPathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_cache, k_directoryPath, true);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_directoryPathsInDirectoryRecursive), "Directory has incorrect contents.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that directory paths can be queried in the save data storage
+            /// location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(GetDirectoryPathsSaveData)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath);
+                
+                auto contents = fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_saveData, k_directoryPath, false);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_directoryPathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_saveData, k_directoryPath, true);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_directoryPathsInDirectoryRecursive), "Directory has incorrect contents.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that directory paths can be queried in the ChilliSource storage
+            /// location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(GetDirectoryPathsChilliSource)
+            {
+                const std::string csDirectoryPath = "";
+                
+                const std::vector<std::string> csFilePathsInDirectory =
+                {
+                    "Fonts/",
+                    "Shaders/",
+                    "Textures/",
+                    "Widgets/"
+                };
+                
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                auto contents = fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_chilliSource, csDirectoryPath, false);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, csFilePathsInDirectory), "Directory has incorrect contents.");
+                
+                contents = fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_chilliSource, csDirectoryPath, true);
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, csFilePathsInDirectory), "Directory has incorrect contents.");
                 
                 CSIT_PASS();
             }
