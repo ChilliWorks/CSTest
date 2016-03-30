@@ -33,6 +33,7 @@
 #include <IntegrationTest/TestSystem/TestCase.h>
 
 #include <ChilliSource/Core/Base.h>
+#include <ChilliSource/Core/Cryptographic.h>
 #include <ChilliSource/Core/File.h>
 
 namespace CSTest
@@ -44,9 +45,16 @@ namespace CSTest
             const std::string k_rootDirecory = "UnitTest/FileSystem/";
             
             const std::string k_textFilePath = k_rootDirecory + "TextFileA.txt";
-            const std::string k_fakeFilePath = k_rootDirecory + "FAKE.txt";
+            const std::string k_binaryFilePath = k_rootDirecory + "BinaryFileA.bin";
             const std::string k_directoryPath = k_rootDirecory + "DirectoryA/";
+            
+            const std::string k_fakeFilePath = k_rootDirecory + "FAKE.txt";
             const std::string k_fakeDirectoryPath = k_rootDirecory + "FAKE/";
+            
+            const std::string k_textFileContents = "Test";
+            const u32 k_binaryFileLength = 4;
+            const char k_binaryFileContents[] = "\x0F\x27\x00\x00";
+            const std::string k_binaryFileChecksum = "EBAB98776D1DE85288E0EE94F3B92DD74DD8C0D6";
             
             //------------------------------------------------------------------------------
             /// Clears out the given directory. If the directory couldn't be cleared out
@@ -75,6 +83,42 @@ namespace CSTest
                 bool created = fileSystem->CreateDirectoryPath(in_storageLocation, in_directoryPath);
                 CS_ASSERT(created == true, "Cannot perform integration tests because test directory couldn't be created.");
             }
+            //------------------------------------------------------------------------------
+            /// Calculates the SHA1 checksum of the given file. If the file cannot be read
+            /// an empty checksum will be returned.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_storageLocation - The storage location
+            /// @param in_filePath - The file path
+            ///
+            /// @return The checksum of the binary file.
+            //------------------------------------------------------------------------------
+            std::string CalculateFileChecksumSHA1(CSCore::StorageLocation in_storageLocation, const std::string& in_filePath)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                auto fileStream = fileSystem->CreateFileStream(in_storageLocation, in_filePath, CSCore::FileMode::k_readBinary);
+                if (!fileStream.get())
+                {
+                    return "";
+                }
+                
+                fileStream->SeekG(0, CSCore::SeekDir::k_end);
+                u32 length = fileStream->TellG();
+                
+                if (length == 0)
+                {
+                    return "";
+                }
+                
+                fileStream->SeekG(0, CSCore::SeekDir::k_beginning);
+                
+                std::unique_ptr<s8[]> fileContents(new s8[length]);
+                fileStream->Read(fileContents.get(), length);
+                
+                return CSCore::HashSHA1::GenerateHexHashCode(fileContents.get(), length);
+            }
         }
         
         //------------------------------------------------------------------------------
@@ -88,7 +132,7 @@ namespace CSTest
         CSIT_TESTCASE(HttpRequest)
         {
             //------------------------------------------------------------------------------
-            /// Confirms that file existence can be queried in package.
+            /// Confirms that file existence can be queried in the package storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -102,7 +146,7 @@ namespace CSTest
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that file existence can be queried in cache.
+            /// Confirms that file existence can be queried in the cache storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -121,7 +165,8 @@ namespace CSTest
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that file existence can be queried in save data.
+            /// Confirms that file existence can be queried in the save data storage
+            /// location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -140,7 +185,8 @@ namespace CSTest
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that file existence can be queried in ChilliSource.
+            /// Confirms that file existence can be queried in the ChilliSource storage
+            /// location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -156,7 +202,8 @@ namespace CSTest
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that directory existence can be queried in package
+            /// Confirms that directory existence can be queried in the package storage
+            /// location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -170,7 +217,8 @@ namespace CSTest
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that directory existence can be queried in cache.
+            /// Confirms that directory existence can be queried in the cache storage
+            /// location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -189,7 +237,8 @@ namespace CSTest
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that directory existence can be queried in save data.
+            /// Confirms that directory existence can be queried in the save data storage
+            /// location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -208,7 +257,8 @@ namespace CSTest
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that directory existence can be queried in ChilliSource.
+            /// Confirms that directory existence can be queried in the ChilliSource storage
+            /// location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -224,7 +274,7 @@ namespace CSTest
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a text file can be read in Package.
+            /// Confirms that a text file can be read in the package storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -233,13 +283,13 @@ namespace CSTest
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
                 std::string textFileOutput;
-                CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_package, k_textFilePath, textFileOutput) == true && textFileOutput == "Test"), "Failed to read file.");
-                CSIT_ASSERT(fileSystem->ReadFile(CSCore::StorageLocation::k_package, k_fakeFilePath, textFileOutput) == false, "File exists.");
+                CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_package, k_textFilePath, textFileOutput) && textFileOutput == k_textFileContents), "Failed to read file.");
+                CSIT_ASSERT(!fileSystem->ReadFile(CSCore::StorageLocation::k_package, k_fakeFilePath, textFileOutput), "File exists.");
                 
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a text file can be read in cache.
+            /// Confirms that a text file can be read in the cache storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -251,15 +301,15 @@ namespace CSTest
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath);
                 
                 std::string textFileOutput;
-                CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_cache, k_textFilePath, textFileOutput) == true && textFileOutput == "Test"), "Failed to read file.");
-                CSIT_ASSERT(fileSystem->ReadFile(CSCore::StorageLocation::k_cache, k_fakeFilePath, textFileOutput) == false, "File exists.");
+                CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_cache, k_textFilePath, textFileOutput) && textFileOutput == k_textFileContents), "Failed to read file.");
+                CSIT_ASSERT(!fileSystem->ReadFile(CSCore::StorageLocation::k_cache, k_fakeFilePath, textFileOutput), "File exists.");
                 
                 ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
                 
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a text file can be read in save data.
+            /// Confirms that a text file can be read in the save data storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -271,15 +321,15 @@ namespace CSTest
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath);
                 
                 std::string textFileOutput;
-                CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_saveData, k_textFilePath, textFileOutput) == true && textFileOutput == "Test"), "Failed to read file.");
-                CSIT_ASSERT(fileSystem->ReadFile(CSCore::StorageLocation::k_saveData, k_fakeFilePath, textFileOutput) == false, "File exists.");
+                CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_saveData, k_textFilePath, textFileOutput) && textFileOutput == k_textFileContents), "Failed to read file.");
+                CSIT_ASSERT(!fileSystem->ReadFile(CSCore::StorageLocation::k_saveData, k_fakeFilePath, textFileOutput), "File exists.");
                 
                 ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a text file can be read in save data.
+            /// Confirms that a text file can be read in the ChilliSource storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
@@ -291,41 +341,149 @@ namespace CSTest
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
                 std::string textFileOutput;
-                CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_chilliSource, k_csTextFilePath, textFileOutput) == true && textFileOutput == k_fileContents), "Failed to read file.");
-                CSIT_ASSERT(fileSystem->ReadFile(CSCore::StorageLocation::k_chilliSource, k_fakeFilePath, textFileOutput) == false, "File exists.");
+                CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_chilliSource, k_csTextFilePath, textFileOutput) && textFileOutput == k_fileContents), "Failed to read file.");
+                CSIT_ASSERT(!fileSystem->ReadFile(CSCore::StorageLocation::k_chilliSource, k_fakeFilePath, textFileOutput), "File exists.");
                 
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a text file can be written.
+            /// Confirms that a text file can be written in the cache storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            CSIT_TEST(WriteTextFile)
+            CSIT_TEST(WriteTextFileCache)
             {
-                //TODO:
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                
+                CSIT_ASSERT(fileSystem->WriteFile(CSCore::StorageLocation::k_cache, k_textFilePath, k_textFileContents), "Failed to write file.");
+                
+                std::string textFileOutput;
+                CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_cache, k_textFilePath, textFileOutput) && textFileOutput == k_textFileContents), "Failed to read file.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
                 
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a binary file can be read.
+            /// Confirms that a text file can be written in the save data storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            CSIT_TEST(ReadBinaryFile)
+            CSIT_TEST(WriteTextFileSaveData)
             {
-                //TODO:
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_ASSERT(fileSystem->WriteFile(CSCore::StorageLocation::k_saveData, k_textFilePath, k_textFileContents), "Failed to write file.");
+                
+                std::string textFileOutput;
+                CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_saveData, k_textFilePath, textFileOutput) && textFileOutput == k_textFileContents), "Failed to read file.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 
                 CSIT_PASS();
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a binary file can be written.
+            /// Confirms that a binary file can be read in the package storage location.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
-            CSIT_TEST(WriteBinaryFile)
+            CSIT_TEST(ReadBinaryFilePackage)
             {
-                //TODO:
+                CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_package, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_package, k_fakeFilePath) == "", "File exists.");
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that a binary file can be read in the cache storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(ReadBinaryFileCache)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_binaryFilePath, CSCore::StorageLocation::k_cache, k_binaryFilePath);
+                
+                CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_cache, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_cache, k_fakeFilePath) == "", "File exists.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that a binary file can be read in the save data storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(ReadBinaryFileSaveData)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_binaryFilePath, CSCore::StorageLocation::k_saveData, k_binaryFilePath);
+                
+                CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_saveData, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_saveData, k_fakeFilePath) == "", "File exists.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that a binary file can be read in the ChilliSource storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(ReadBinaryFileChilliSource)
+            {
+                const std::string k_csBinaryFilePath = "Fonts/CarlitoMed.low.csfont";
+                const std::string k_csBinaryFileChecksum = "AF722ED69AC29A53402ABF006C4CFD80B4D808CE";
+                
+                CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_chilliSource, k_csBinaryFilePath) == k_csBinaryFileChecksum, "Failed to read file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_chilliSource, k_fakeFilePath) == "", "File exists.");
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that a binary file can be written to the cache storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(WriteBinaryFileCache)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                
+                CSIT_ASSERT(fileSystem->WriteFile(CSCore::StorageLocation::k_cache, k_binaryFilePath, k_binaryFileContents, k_binaryFileLength), "Failed to write file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_cache, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                
+                CSIT_PASS();
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that a binary file can be written to the save data storage location.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST(WriteBinaryFileSaveData)
+            {
+                auto fileSystem = CSCore::Application::Get()->GetFileSystem();
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                
+                CSIT_ASSERT(fileSystem->WriteFile(CSCore::StorageLocation::k_saveData, k_binaryFilePath, k_binaryFileContents, k_binaryFileLength), "Failed to write file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_saveData, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
+                
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
                 
                 CSIT_PASS();
             }

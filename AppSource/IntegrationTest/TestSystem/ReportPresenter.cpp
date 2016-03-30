@@ -119,7 +119,7 @@ namespace CSTest
                     }
                     else
                     {
-                        textBody += "\n - " + failedTest.GetDesc().GetTestName();
+                        textBody += "\n - " + failedTest.GetDesc().GetTestCaseName() + ": " + failedTest.GetDesc().GetTestName();
                     }
                 }
                 
