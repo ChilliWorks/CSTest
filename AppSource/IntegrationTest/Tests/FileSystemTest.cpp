@@ -43,15 +43,17 @@ namespace CSTest
     {
         namespace
         {
-            const std::string k_rootDirecory = "IntegrationTest/FileSystem/";
+            const std::string k_rootDirectory = "IntegrationTest/FileSystem/";
             
-            const std::string k_textFilePath = k_rootDirecory + "TextFile.txt";
-            const std::string k_binaryFilePath = k_rootDirecory + "BinaryFile.bin";
-            const std::string k_directoryPath = k_rootDirecory + "Directory/";
-            const std::string k_nestedDirectoryPath = k_rootDirecory + "Directory/DirectoryA/Directory/";
+            const std::string k_textFilePath = k_rootDirectory + "TextFile.txt";
+            const std::string k_binaryFilePath = k_rootDirectory + "BinaryFile.bin";
+            const std::string k_copiedTextFilePath = k_rootDirectory + "TextFile-Copy.txt";
+            const std::string k_directoryPath = k_rootDirectory + "Directory/";
+            const std::string k_copiedDirectoryPath = k_rootDirectory + "Directory-Copy/";
+            const std::string k_nestedDirectoryPath = k_rootDirectory + "Directory/DirectoryA/Directory/";
             
-            const std::string k_fakeFilePath = k_rootDirecory + "FAKE.txt";
-            const std::string k_fakeDirectoryPath = k_rootDirecory + "FAKE/";
+            const std::string k_fakeFilePath = k_rootDirectory + "FAKE.txt";
+            const std::string k_fakeDirectoryPath = k_rootDirectory + "FAKE/";
             
             const std::string k_textFileContents = "Test";
             const u32 k_binaryFileLength = 4;
@@ -134,7 +136,6 @@ namespace CSTest
                     CS_ASSERT(deleted == true, "Cannot perform integration tests because test directory couldn't be deleted.");
                 }
                 
-                
                 bool created = fileSystem->CreateDirectoryPath(in_storageLocation, in_directoryPath);
                 CS_ASSERT(created == true, "Cannot perform integration tests because test directory couldn't be created.");
             }
@@ -209,13 +210,13 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath);
                 
                 CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_textFilePath), "File doesn't exist.");
                 CSIT_ASSERT(!fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_fakeFilePath), "File exists.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -229,13 +230,13 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath);
                 
                 CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_textFilePath), "File doesn't exist.");
                 CSIT_ASSERT(!fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_fakeFilePath), "File exists.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -281,13 +282,13 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_cache, k_directoryPath);
                 
                 CSIT_ASSERT(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_cache, k_directoryPath), "File doesn't exist.");
                 CSIT_ASSERT(!fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_cache, k_fakeDirectoryPath), "File exists.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -301,13 +302,13 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_saveData, k_directoryPath);
                 
                 CSIT_ASSERT(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_saveData, k_directoryPath), "File doesn't exist.");
                 CSIT_ASSERT(!fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_saveData, k_fakeDirectoryPath), "File exists.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -352,14 +353,14 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath);
                 
                 std::string textFileOutput;
                 CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_cache, k_textFilePath, textFileOutput) && textFileOutput == k_textFileContents), "Failed to read file.");
                 CSIT_ASSERT(!fileSystem->ReadFile(CSCore::StorageLocation::k_cache, k_fakeFilePath, textFileOutput), "File exists.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -372,14 +373,14 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath);
                 
                 std::string textFileOutput;
                 CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_saveData, k_textFilePath, textFileOutput) && textFileOutput == k_textFileContents), "Failed to read file.");
                 CSIT_ASSERT(!fileSystem->ReadFile(CSCore::StorageLocation::k_saveData, k_fakeFilePath, textFileOutput), "File exists.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -410,14 +411,14 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_ASSERT(fileSystem->WriteFile(CSCore::StorageLocation::k_cache, k_textFilePath, k_textFileContents), "Failed to write file.");
                 
                 std::string textFileOutput;
                 CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_cache, k_textFilePath, textFileOutput) && textFileOutput == k_textFileContents), "Failed to read file.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -430,14 +431,14 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_ASSERT(fileSystem->WriteFile(CSCore::StorageLocation::k_saveData, k_textFilePath, k_textFileContents), "Failed to write file.");
                 
                 std::string textFileOutput;
                 CSIT_ASSERT((fileSystem->ReadFile(CSCore::StorageLocation::k_saveData, k_textFilePath, textFileOutput) && textFileOutput == k_textFileContents), "Failed to read file.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -462,13 +463,13 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_binaryFilePath, CSCore::StorageLocation::k_cache, k_binaryFilePath);
                 
                 CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_cache, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
                 CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_cache, k_fakeFilePath) == "", "File exists.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -481,13 +482,13 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_binaryFilePath, CSCore::StorageLocation::k_saveData, k_binaryFilePath);
                 
                 CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_saveData, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
                 CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_saveData, k_fakeFilePath) == "", "File exists.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -515,12 +516,12 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_ASSERT(fileSystem->WriteFile(CSCore::StorageLocation::k_cache, k_binaryFilePath, k_binaryFileContents, k_binaryFileLength), "Failed to write file.");
                 CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_cache, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -533,12 +534,12 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_ASSERT(fileSystem->WriteFile(CSCore::StorageLocation::k_saveData, k_binaryFilePath, k_binaryFileContents, k_binaryFileLength), "Failed to write file.");
                 CSIT_ASSERT(CalculateFileChecksumSHA1(CSCore::StorageLocation::k_saveData, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -551,8 +552,8 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath), "Failed to copy file.");
                 CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_textFilePath), "File does not exist.");
@@ -560,8 +561,8 @@ namespace CSTest
                 CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath), "Failed to copy file.");
                 CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_textFilePath), "File does not exist.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -572,22 +573,20 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(CopyFileCache)
             {
-                const std::string cacheDestTextFilePath = k_rootDirecory + "TextFile-Copy.txt";
-                
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath);
                 
-                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_cache, k_textFilePath, CSCore::StorageLocation::k_cache, cacheDestTextFilePath), "Failed to copy file.");
-                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, cacheDestTextFilePath), "File does not exist.");
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_cache, k_textFilePath, CSCore::StorageLocation::k_cache, k_copiedTextFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_copiedTextFilePath), "File does not exist.");
                 
                 CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_cache, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath), "Failed to copy file.");
                 CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_textFilePath), "File does not exist.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -598,22 +597,20 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(CopyFileSaveData)
             {
-                const std::string saveDataDestTextFilePath = k_rootDirecory + "TextFile-Copy.txt";
-                
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath);
                 
-                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_saveData, k_textFilePath, CSCore::StorageLocation::k_saveData, saveDataDestTextFilePath), "Failed to copy file.");
-                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, saveDataDestTextFilePath), "File does not exist.");
+                CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_saveData, k_textFilePath, CSCore::StorageLocation::k_saveData, k_copiedTextFilePath), "Failed to copy file.");
+                CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_copiedTextFilePath), "File does not exist.");
                 
                 CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_saveData, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath), "Failed to copy file.");
                 CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_textFilePath), "File does not exist.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -628,8 +625,8 @@ namespace CSTest
                 
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_chilliSource, csTextFilePath, CSCore::StorageLocation::k_cache, k_textFilePath), "Failed to copy file.");
                 CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_textFilePath), "File does not exist.");
@@ -637,8 +634,8 @@ namespace CSTest
                 CSIT_ASSERT(fileSystem->CopyFile(CSCore::StorageLocation::k_chilliSource, csTextFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath), "Failed to copy file.");
                 CSIT_ASSERT(fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_textFilePath), "File does not exist.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -651,13 +648,13 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_cache, k_textFilePath);
 
                 CSIT_ASSERT(fileSystem->DeleteFile(CSCore::StorageLocation::k_cache, k_textFilePath), "Failed to delete file.");
                 CSIT_ASSERT(!fileSystem->DoesFileExist(CSCore::StorageLocation::k_cache, k_textFilePath), "File still exists.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -670,13 +667,13 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 fileSystem->CopyFile(CSCore::StorageLocation::k_package, k_textFilePath, CSCore::StorageLocation::k_saveData, k_textFilePath);
                 
                 CSIT_ASSERT(fileSystem->DeleteFile(CSCore::StorageLocation::k_saveData, k_textFilePath), "Failed to delete file.");
                 CSIT_ASSERT(!fileSystem->DoesFileExist(CSCore::StorageLocation::k_saveData, k_textFilePath), "File still exists.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -689,7 +686,7 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_ASSERT(fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_cache, k_directoryPath), "Failed to create directory.");
                 CSIT_ASSERT(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_cache, k_directoryPath), "Directory doesn't exist.");
@@ -697,7 +694,7 @@ namespace CSTest
                 CSIT_ASSERT(fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_cache, k_nestedDirectoryPath), "Failed to create directory.");
                 CSIT_ASSERT(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_cache, k_nestedDirectoryPath), "Directory doesn't exist.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -710,7 +707,7 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_ASSERT(fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_saveData, k_directoryPath), "Failed to create directory.");
                 CSIT_ASSERT(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_saveData, k_directoryPath), "Directory doesn't exist.");
@@ -718,7 +715,7 @@ namespace CSTest
                 CSIT_ASSERT(fileSystem->CreateDirectoryPath(CSCore::StorageLocation::k_saveData, k_nestedDirectoryPath), "Failed to create directory.");
                 CSIT_ASSERT(fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_saveData, k_nestedDirectoryPath), "Directory doesn't exist.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -731,8 +728,8 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath), "Failed to copy directory.");
                 CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_directoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
@@ -740,8 +737,8 @@ namespace CSTest
                 CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath), "Failed to copy directory.");
                 CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_directoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -752,22 +749,20 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(CopyDirectoryCache)
             {
-                const std::string cacheDestDirectoryPath = k_rootDirecory + "Directory-Copy/";
-                
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath);
                 
-                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_cache, k_directoryPath, CSCore::StorageLocation::k_cache, cacheDestDirectoryPath), "Failed to copy directory.");
-                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, cacheDestDirectoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_cache, k_directoryPath, CSCore::StorageLocation::k_cache, k_copiedDirectoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_copiedDirectoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
                 CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_cache, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath), "Failed to copy directory.");
                 CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_directoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -778,22 +773,20 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(CopyDirectorySaveData)
             {
-                const std::string saveDataDestDirectoryPath = k_rootDirecory + "Directory-Copy/";
-                
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath);
                 
-                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_saveData, k_directoryPath, CSCore::StorageLocation::k_saveData, saveDataDestDirectoryPath), "Failed to copy directory.");
-                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, saveDataDestDirectoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
+                CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_saveData, k_directoryPath, CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath), "Failed to copy directory.");
+                CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_copiedDirectoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
                 CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_saveData, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath), "Failed to copy directory.");
                 CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_directoryPath, true), k_filePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -819,8 +812,8 @@ namespace CSTest
                 
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_chilliSource, csDirectoryPath, CSCore::StorageLocation::k_cache, csDirectoryPath), "Failed to copy directory.");
                 CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, csDirectoryPath, true), csFilePathsInDirectory), "Directory has incorrect contents.");
@@ -828,8 +821,8 @@ namespace CSTest
                 CSIT_ASSERT(fileSystem->CopyDirectory(CSCore::StorageLocation::k_chilliSource, csDirectoryPath, CSCore::StorageLocation::k_saveData, csDirectoryPath), "Failed to copy directory.");
                 CSIT_ASSERT(CSCore::VectorUtils::EqualContents(fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, csDirectoryPath, true), csFilePathsInDirectory), "Directory has incorrect contents.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -842,13 +835,13 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath);
                 
                 CSIT_ASSERT(fileSystem->DeleteDirectory(CSCore::StorageLocation::k_cache, k_directoryPath), "Failed to delete directory.");
                 CSIT_ASSERT(!fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_cache, k_directoryPath), "Directory still exists.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -861,13 +854,13 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath);
                 
                 CSIT_ASSERT(fileSystem->DeleteDirectory(CSCore::StorageLocation::k_saveData, k_directoryPath), "Failed to delete directory.");
                 CSIT_ASSERT(!fileSystem->DoesDirectoryExist(CSCore::StorageLocation::k_saveData, k_directoryPath), "Directory still exists.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -909,7 +902,7 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath);
                 
                 auto contents = fileSystem->GetFilePaths(CSCore::StorageLocation::k_cache, k_directoryPath, false);
@@ -930,7 +923,7 @@ namespace CSTest
                 contents = fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_cache, k_directoryPath, true, "TextFile.txt");
                 CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_textFilePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -943,7 +936,7 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath);
                 
                 auto contents = fileSystem->GetFilePaths(CSCore::StorageLocation::k_saveData, k_directoryPath, false);
@@ -964,7 +957,7 @@ namespace CSTest
                 contents = fileSystem->GetFilePathsWithFileName(CSCore::StorageLocation::k_saveData, k_directoryPath, true, "TextFile.txt");
                 CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_textFilePathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -1047,7 +1040,7 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_cache, k_directoryPath);
                 
                 auto contents = fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_cache, k_directoryPath, false);
@@ -1056,7 +1049,7 @@ namespace CSTest
                 contents = fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_cache, k_directoryPath, true);
                 CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_directoryPathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_PASS();
             }
@@ -1070,7 +1063,7 @@ namespace CSTest
             {
                 auto fileSystem = CSCore::Application::Get()->GetFileSystem();
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 fileSystem->CopyDirectory(CSCore::StorageLocation::k_package, k_directoryPath, CSCore::StorageLocation::k_saveData, k_directoryPath);
                 
                 auto contents = fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_saveData, k_directoryPath, false);
@@ -1079,7 +1072,7 @@ namespace CSTest
                 contents = fileSystem->GetDirectoryPaths(CSCore::StorageLocation::k_saveData, k_directoryPath, true);
                 CSIT_ASSERT(CSCore::VectorUtils::EqualContents(contents, k_directoryPathsInDirectoryRecursive), "Directory has incorrect contents.");
                 
-                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirecory);
+                ClearDirectory(CSCore::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_PASS();
             }
