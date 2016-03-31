@@ -22,5 +22,7 @@ Projects/Android/cstest/app/build
 Projects/Android/cstest/app/src/main/assets
 Projects/Android/cstest/app/src/main/libs/armeabi-v7a
 Projects/Android/cstest/app/src/main/libs/armeabi
+Projects/Android/cstest/app/src/main/libs/arm64-v8a
 Projects/Android/cstest/app/src/main/libs/x86
+Projects/Android/cstest/app/src/main/libs/x86_64
 Projects/Android/cstest/build
