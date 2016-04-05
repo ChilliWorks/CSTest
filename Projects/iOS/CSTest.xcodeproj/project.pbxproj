@@ -43,6 +43,7 @@
 		81B190941C9B16BE002EC8AC /* FailedTestCase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1906A1C9B16BE002EC8AC /* FailedTestCase.cpp */; };
 		81B190951C9B16BE002EC8AC /* TestSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1906C1C9B16BE002EC8AC /* TestSystem.cpp */; };
 		81B190961C9B16BE002EC8AC /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1906F1C9B16BE002EC8AC /* State.cpp */; };
+		81C58C281CB3D88300EA58A0 /* TaskSchedulerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C58C271CB3D88300EA58A0 /* TaskSchedulerTest.cpp */; };
 		81C63AF01C9C138F00E1A669 /* OptionsMenuDesc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AEC1C9C138F00E1A669 /* OptionsMenuDesc.cpp */; };
 		81C63AF11C9C138F00E1A669 /* OptionsMenuPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AEE1C9C138F00E1A669 /* OptionsMenuPresenter.cpp */; };
 		81C63AF81C9C196700E1A669 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81C63AF31C9C196700E1A669 /* State.cpp */; };
@@ -167,6 +168,7 @@
 		81B1906D1C9B16BE002EC8AC /* TestSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSystem.h; sourceTree = "<group>"; };
 		81B1906F1C9B16BE002EC8AC /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81B190701C9B16BE002EC8AC /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81C58C271CB3D88300EA58A0 /* TaskSchedulerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskSchedulerTest.cpp; sourceTree = "<group>"; };
 		81C63AEC1C9C138F00E1A669 /* OptionsMenuDesc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OptionsMenuDesc.cpp; sourceTree = "<group>"; };
 		81C63AED1C9C138F00E1A669 /* OptionsMenuDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsMenuDesc.h; sourceTree = "<group>"; };
 		81C63AEE1C9C138F00E1A669 /* OptionsMenuPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OptionsMenuPresenter.cpp; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 			children = (
 				81B190431C9B16BE002EC8AC /* HttpRequestTest.cpp */,
 				81C63B021C9C63E500E1A669 /* FileSystemTest.cpp */,
+				81C58C271CB3D88300EA58A0 /* TaskSchedulerTest.cpp */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 				81B190891C9B16BE002EC8AC /* State.cpp in Sources */,
 				81C63AF11C9C138F00E1A669 /* OptionsMenuPresenter.cpp in Sources */,
 				81B190861C9B16BE002EC8AC /* TestDesc.cpp in Sources */,
+				81C58C281CB3D88300EA58A0 /* TaskSchedulerTest.cpp in Sources */,
 				81B1908F1C9B16BE002EC8AC /* Vector4.cpp in Sources */,
 				81B1908E1C9B16BE002EC8AC /* Vector3.cpp in Sources */,
 				81B190911C9B16BE002EC8AC /* FailedAssertion.cpp in Sources */,
