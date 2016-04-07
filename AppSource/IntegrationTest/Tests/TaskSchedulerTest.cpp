@@ -301,16 +301,16 @@ namespace CSTest
                     CSIT_ASSERT(in_parentTaskContext.GetType() == CSCore::TaskType::k_mainThread, "Incorrect task type.");
                     CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                    std::shared_ptr<std::atomic<u32>> executedTaskCount(new std::atomic<u32>(0));
-                    in_parentTaskContext.ProcessChildTask([=](const CSCore::TaskContext& in_childTaskContext) noexcept
+                    std::atomic<bool> taskExecuted(false);
+                    in_parentTaskContext.ProcessChildTask([=, &taskExecuted](const CSCore::TaskContext& in_childTaskContext) noexcept
                     {
                         CSIT_ASSERT(in_childTaskContext.GetType() == CSCore::TaskType::k_mainThread, "Incorrect task type.");
                         CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                        ++(*executedTaskCount);
+                        taskExecuted = true;
                     });
 
-                    CSIT_ASSERT(*executedTaskCount == 1, "The child task hasn't run.");
+                    CSIT_ASSERT(taskExecuted, "The child task hasn't run.");
 
                     CSIT_PASS();
                 });
@@ -333,16 +333,16 @@ namespace CSTest
                         CSIT_ASSERT(in_parentTaskContext.GetType() == taskType, "Incorrect task type.");
                         CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                        std::shared_ptr<std::atomic<u32>> executedTaskCount(new std::atomic<u32>(0));
-                        in_parentTaskContext.ProcessChildTask([=](const CSCore::TaskContext& in_childTaskContext) noexcept
+                        std::atomic<bool> taskExecuted(false);
+                        in_parentTaskContext.ProcessChildTask([=, &taskExecuted](const CSCore::TaskContext& in_childTaskContext) noexcept
                         {
                             CSIT_ASSERT(in_childTaskContext.GetType() == taskType, "Incorrect task type.");
                             CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                             
-                            ++(*executedTaskCount);
+                            taskExecuted = true;
                         });
                         
-                        CSIT_ASSERT(*executedTaskCount == 1, "The child task hasn't run.");
+                        CSIT_ASSERT(taskExecuted, "The child task hasn't run.");
                         
                         if (++(*taskTypesPassed) >= k_backgroundTaskTypes.size())
                         {
@@ -365,15 +365,15 @@ namespace CSTest
                     CSIT_ASSERT(in_parentTaskContext.GetType() == CSCore::TaskType::k_mainThread, "Incorrect task type.");
                     CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                    std::shared_ptr<std::atomic<u32>> executedTaskCount(new std::atomic<u32>(0));
-                    in_parentTaskContext.ProcessChildTask([=]() noexcept
+                    std::atomic<bool> taskExecuted(false);
+                    in_parentTaskContext.ProcessChildTask([=, &taskExecuted]() noexcept
                     {
                         CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                        ++(*executedTaskCount);
+                        taskExecuted = true;
                     });
 
-                    CSIT_ASSERT(*executedTaskCount == 1, "The child task hasn't run.");
+                    CSIT_ASSERT(taskExecuted, "The child task hasn't run.");
 
                     CSIT_PASS();
                 });
@@ -397,15 +397,15 @@ namespace CSTest
                         CSIT_ASSERT(in_parentTaskContext.GetType() == taskType, "Incorrect task type.");
                         CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                        std::shared_ptr<std::atomic<u32>> executedTaskCount(new std::atomic<u32>(0));
-                        in_parentTaskContext.ProcessChildTask([=]() noexcept
+                        std::atomic<bool> taskExecuted(false);
+                        in_parentTaskContext.ProcessChildTask([=, &taskExecuted]() noexcept
                         {
                             CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                            ++(*executedTaskCount);
+                            taskExecuted = true;
                         });
 
-                        CSIT_ASSERT(*executedTaskCount == 1, "The child task hasn't run.");
+                        CSIT_ASSERT(taskExecuted, "The child task hasn't run.");
 
                         if (++(*taskTypesPassed) >= k_backgroundTaskTypes.size())
                         {
@@ -430,23 +430,22 @@ namespace CSTest
                     CSIT_ASSERT(in_parentTaskContext.GetType() == CSCore::TaskType::k_mainThread, "Incorrect task type.");
                     CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                    std::shared_ptr<std::atomic<u32>> executedTaskCount(new std::atomic<u32>(0));
-                    
+                    std::atomic<u32> executedTaskCount(0);
                     std::vector<CSCore::TaskSchedulerNew::Task> tasks;
                     for (u32 i = 0; i < k_numTasks; ++i)
                     {
-                        tasks.push_back([=](const CSCore::TaskContext& in_taskContext) noexcept
+                        tasks.push_back([=, &executedTaskCount](const CSCore::TaskContext& in_taskContext) noexcept
                         {
                             CSIT_ASSERT(in_taskContext.GetType() == CSCore::TaskType::k_mainThread, "Incorrect task type.");
                             CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                             
-                            ++(*executedTaskCount);
+                            ++executedTaskCount;
                         });
                     }
                     
                     in_parentTaskContext.ProcessChildTasks(tasks);
                     
-                    CSIT_ASSERT(*executedTaskCount == k_numTasks, "An incorrect amount of tasks were run.");
+                    CSIT_ASSERT(executedTaskCount == k_numTasks, "An incorrect amount of tasks were run.");
                     
                     CSIT_PASS();
                 });
@@ -472,23 +471,22 @@ namespace CSTest
                         CSIT_ASSERT(in_parentTaskContext.GetType() == taskType, "Incorrect task type.");
                         CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                        std::shared_ptr<std::atomic<u32>> executedTaskCount(new std::atomic<u32>(0));
-
+                        std::atomic<u32> executedTaskCount(0);
                         std::vector<CSCore::TaskSchedulerNew::Task> tasks;
                         for (u32 i = 0; i < k_numTasksPerTaskType; ++i)
                         {
-                            tasks.push_back([=](const CSCore::TaskContext& in_taskContext) noexcept
+                            tasks.push_back([=, &executedTaskCount](const CSCore::TaskContext& in_taskContext) noexcept
                             {
                                 CSIT_ASSERT(in_taskContext.GetType() == taskType, "Incorrect task type.");
                                 CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                                ++(*executedTaskCount);
+                                ++executedTaskCount;
                             });
                         }
 
                         in_parentTaskContext.ProcessChildTasks(tasks);
 
-                        CSIT_ASSERT(*executedTaskCount == k_numTasksPerTaskType, "An incorrect amount of tasks were run.");
+                        CSIT_ASSERT(executedTaskCount == k_numTasksPerTaskType, "An incorrect amount of tasks were run.");
 
                         if (++(*taskTypesPassed) >= k_backgroundTaskTypes.size())
                         {
@@ -514,22 +512,21 @@ namespace CSTest
                     CSIT_ASSERT(in_parentTaskContext.GetType() == CSCore::TaskType::k_mainThread, "Incorrect task type.");
                     CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                    std::shared_ptr<std::atomic<u32>> executedTaskCount(new std::atomic<u32>(0));
-
+                    std::atomic<u32> executedTaskCount(0);
                     std::vector<CSCore::TaskSchedulerNew::SimpleTask> tasks;
                     for (u32 i = 0; i < k_numTasks; ++i)
                     {
-                        tasks.push_back([=]() noexcept
+                        tasks.push_back([=, &executedTaskCount]() noexcept
                         {
                             CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                            ++(*executedTaskCount);
+                            ++executedTaskCount;
                         });
                     }
 
                     in_parentTaskContext.ProcessChildTasks(tasks);
 
-                    CSIT_ASSERT(*executedTaskCount == k_numTasks, "An incorrect amount of tasks were run.");
+                    CSIT_ASSERT(executedTaskCount == k_numTasks, "An incorrect amount of tasks were run.");
 
                     CSIT_PASS();
                 });
@@ -555,22 +552,21 @@ namespace CSTest
                         CSIT_ASSERT(in_parentTaskContext.GetType() == taskType, "Incorrect task type.");
                         CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                        std::shared_ptr<std::atomic<u32>> executedTaskCount(new std::atomic<u32>(0));
-
+                        std::atomic<u32> executedTaskCount(0);
                         std::vector<CSCore::TaskSchedulerNew::SimpleTask> tasks;
                         for (u32 i = 0; i < k_numTasksPerTaskType; ++i)
                         {
-                            tasks.push_back([=]() noexcept
+                            tasks.push_back([=, &executedTaskCount]() noexcept
                             {
                                 CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
-                                ++(*executedTaskCount);
+                                ++executedTaskCount;
                             });
                         }
 
                         in_parentTaskContext.ProcessChildTasks(tasks);
 
-                        CSIT_ASSERT(*executedTaskCount == k_numTasksPerTaskType, "An incorrect amount of tasks were run.");
+                        CSIT_ASSERT(executedTaskCount == k_numTasksPerTaskType, "An incorrect amount of tasks were run.");
 
                         if (++(*taskTypesPassed) >= k_backgroundTaskTypes.size())
                         {
@@ -632,7 +628,7 @@ namespace CSTest
                 {
                     CSIT_ASSERT(in_taskContext.GetType() == CSCore::TaskType::k_small, "Incorrect task type.");
                     CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-                    CSIT_ASSERT(*executedLevel3TaskCount == k_numLevels * k_numTasksPerLevel, "An incorrect amount of tasks were run.");
+                    CSIT_ASSERT(*executedLevel3TaskCount == u32(std::pow(k_numTasksPerLevel, k_numLevels)), "An incorrect amount of tasks were run.");
 
                     CSIT_PASS();
                 });
