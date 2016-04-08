@@ -110,7 +110,7 @@ namespace CSTest
                 
                 std::shared_ptr<std::atomic<u32>> executedTaskCount(new std::atomic<u32>(0));
                 
-                std::vector<CSCore::TaskScheduler::Task> tasks;
+                std::vector<CSCore::Task> tasks;
                 for (u32 i = 0; i < k_numTasks; ++i)
                 {
                     tasks.push_back([=](const CSCore::TaskContext& in_taskContext) noexcept
@@ -149,7 +149,7 @@ namespace CSTest
                 {
                     std::shared_ptr<std::atomic<u32>> executedTaskCount(new std::atomic<u32>(0));
                     
-                    std::vector<CSCore::TaskScheduler::Task> tasks;
+                    std::vector<CSCore::Task> tasks;
                     for (u32 i = 0; i < k_numTasksPerTaskType; ++i)
                     {
                         tasks.push_back([=](const CSCore::TaskContext& in_taskContext) noexcept
@@ -255,7 +255,7 @@ namespace CSTest
                     CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
                     std::atomic<u32> executedTaskCount(0);
-                    std::vector<CSCore::TaskScheduler::Task> tasks;
+                    std::vector<CSCore::Task> tasks;
                     for (u32 i = 0; i < k_numTasks; ++i)
                     {
                         tasks.push_back([=, &executedTaskCount](const CSCore::TaskContext& in_taskContext) noexcept
@@ -296,7 +296,7 @@ namespace CSTest
                         CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
                         std::atomic<u32> executedTaskCount(0);
-                        std::vector<CSCore::TaskScheduler::Task> tasks;
+                        std::vector<CSCore::Task> tasks;
                         for (u32 i = 0; i < k_numTasksPerTaskType; ++i)
                         {
                             tasks.push_back([=, &executedTaskCount](const CSCore::TaskContext& in_taskContext) noexcept
@@ -333,7 +333,7 @@ namespace CSTest
                 
                 std::shared_ptr<std::atomic<u32>> executedLevel3TaskCount(new std::atomic<u32>(0));
                 
-                std::vector<CSCore::TaskScheduler::Task> level1Tasks;
+                std::vector<CSCore::Task> level1Tasks;
                 for (u32 level1TaskIndex = 0; level1TaskIndex < k_numTasksPerLevel; ++level1TaskIndex)
                 {
                     level1Tasks.push_back([=](const CSCore::TaskContext& in_level1TaskContext) noexcept
@@ -341,7 +341,7 @@ namespace CSTest
                         CSIT_ASSERT(in_level1TaskContext.GetType() == CSCore::TaskType::k_small, "Incorrect task type.");
                         CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                         
-                        std::vector<CSCore::TaskScheduler::Task> level2Tasks;
+                        std::vector<CSCore::Task> level2Tasks;
                         for (u32 level2TaskIndex = 0; level2TaskIndex < k_numTasksPerLevel; ++level2TaskIndex)
                         {
                             level2Tasks.push_back([=](const CSCore::TaskContext& in_level2TaskContext) noexcept
@@ -349,7 +349,7 @@ namespace CSTest
                                 CSIT_ASSERT(in_level2TaskContext.GetType() == CSCore::TaskType::k_small, "Incorrect task type.");
                                 CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                                 
-                                std::vector<CSCore::TaskScheduler::Task> level3Tasks;
+                                std::vector<CSCore::Task> level3Tasks;
                                 for (u32 level3TaskIndex = 0; level3TaskIndex < k_numTasksPerLevel; ++level3TaskIndex)
                                 {
                                     level3Tasks.push_back([=](const CSCore::TaskContext&) noexcept
