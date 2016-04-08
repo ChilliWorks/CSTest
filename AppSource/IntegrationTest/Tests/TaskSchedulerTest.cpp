@@ -98,46 +98,6 @@ namespace CSTest
                 }
             }
             //------------------------------------------------------------------------------
-            /// Tests that a simple task can be scheduled on the main thread.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            CSIT_TEST(ScheduleMainThreadSimpleTask)
-            {
-                auto taskScheduler = CSCore::Application::Get()->GetTaskSchedulerNew();
-                
-                taskScheduler->ScheduleTask(CSCore::TaskType::k_mainThread, [=]() noexcept
-                {
-                    CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-                    CSIT_PASS();
-                });
-            }
-            //------------------------------------------------------------------------------
-            /// Tests that each type of background simple task can be scheduled on a
-            /// background thread.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            CSIT_TEST(ScheduleBackgroundSimpleTask)
-            {
-                auto taskScheduler = CSCore::Application::Get()->GetTaskSchedulerNew();
-                
-                std::shared_ptr<std::atomic<u32>> taskTypesPassed(new std::atomic<u32>(0));
-                
-                for (const auto & taskType : k_backgroundTaskTypes)
-                {
-                    taskScheduler->ScheduleTask(taskType, [=]() noexcept
-                    {
-                        CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-
-                        if (++(*taskTypesPassed) >= k_backgroundTaskTypes.size())
-                        {
-                            CSIT_PASS();
-                        }
-                    });
-                }
-            }
-            //------------------------------------------------------------------------------
             /// Confirms that a batch of main thread tasks can be scheduled.
             ///
             /// @author Ian Copland
@@ -215,79 +175,6 @@ namespace CSTest
                 }
             }
             //------------------------------------------------------------------------------
-            /// Confirms that a batch of simple main thread tasks can be scheduled.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            CSIT_TEST(ScheduleMainThreadSimpleTaskBatch)
-            {
-                constexpr u32 k_numTasks = 5;
-                
-                auto taskScheduler = CSCore::Application::Get()->GetTaskSchedulerNew();
-                
-                std::shared_ptr<std::atomic<u32>> executedTaskCount(new std::atomic<u32>(0));
-                
-                std::vector<CSCore::TaskSchedulerNew::SimpleTask> tasks;
-                for (u32 i = 0; i < k_numTasks; ++i)
-                {
-                    tasks.push_back([=]() noexcept
-                    {
-                        CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-
-                        ++(*executedTaskCount);
-                    });
-                }
-                
-                taskScheduler->ScheduleTasks(CSCore::TaskType::k_mainThread, tasks, [=]() noexcept
-                {
-                    CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-                    CSIT_ASSERT(*executedTaskCount == k_numTasks, "An incorrect amount of tasks were run.");
-
-                    CSIT_PASS();
-                });
-            }
-            //------------------------------------------------------------------------------
-            /// Confirms that each type of background simple task can be scheduled as a
-            /// batch on a background thread.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            CSIT_TEST(ScheduleBackgroundSimpleTaskBatch)
-            {
-                constexpr u32 k_numTasksPerTaskType = 5;
-                
-                auto taskScheduler = CSCore::Application::Get()->GetTaskSchedulerNew();
-                
-                std::shared_ptr<std::atomic<u32>> taskTypesPassed(new std::atomic<u32>(0));
-                
-                for (const auto & taskType : k_backgroundTaskTypes)
-                {
-                    std::shared_ptr<std::atomic<u32>> executedTaskCount(new std::atomic<u32>(0));
-                    
-                    std::vector<CSCore::TaskSchedulerNew::SimpleTask> tasks;
-                    for (u32 i = 0; i < k_numTasksPerTaskType; ++i)
-                    {
-                        tasks.push_back([=]() noexcept
-                        {
-                            CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-
-                            ++(*executedTaskCount);
-                        });
-                    }
-                    
-                    taskScheduler->ScheduleTasks(taskType, tasks, [=]() noexcept
-                    {
-                        CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-                        CSIT_ASSERT(*executedTaskCount == k_numTasksPerTaskType, "An incorrect amount of tasks were run.");
-
-                        if (++(*taskTypesPassed) >= k_backgroundTaskTypes.size())
-                        {
-                            CSIT_PASS();
-                        }
-                    });
-                }
-            }
-            //------------------------------------------------------------------------------
             /// Confirms that main thread tasks can be scheduled as a child task.
             ///
             /// @author Ian Copland
@@ -344,69 +231,6 @@ namespace CSTest
                         
                         CSIT_ASSERT(taskExecuted, "The child task hasn't run.");
                         
-                        if (++(*taskTypesPassed) >= k_backgroundTaskTypes.size())
-                        {
-                            CSIT_PASS();
-                        }
-                    });
-                }
-            }
-            //------------------------------------------------------------------------------
-            /// Confirms that main thread tasks can be scheduled as a child simple task.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            CSIT_TEST(ScheduleMainThreadChildSimpleTask)
-            {
-                auto taskScheduler = CSCore::Application::Get()->GetTaskSchedulerNew();
-                
-                taskScheduler->ScheduleTask(CSCore::TaskType::k_mainThread, [=](const CSCore::TaskContext& in_parentTaskContext) noexcept
-                {
-                    CSIT_ASSERT(in_parentTaskContext.GetType() == CSCore::TaskType::k_mainThread, "Incorrect task type.");
-                    CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-
-                    std::atomic<bool> taskExecuted(false);
-                    in_parentTaskContext.ProcessChildTask([=, &taskExecuted]() noexcept
-                    {
-                        CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-
-                        taskExecuted = true;
-                    });
-
-                    CSIT_ASSERT(taskExecuted, "The child task hasn't run.");
-
-                    CSIT_PASS();
-                });
-            }
-            //------------------------------------------------------------------------------
-            /// Confirms that all background simple task types can be scheduled as a child
-            /// simple task.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            CSIT_TEST(ScheduleBackgroundChildSimpleTask)
-            {
-                auto taskScheduler = CSCore::Application::Get()->GetTaskSchedulerNew();
-                
-                std::shared_ptr<std::atomic<u32>> taskTypesPassed(new std::atomic<u32>(0));
-                
-                for (const auto & taskType : k_backgroundTaskTypes)
-                {
-                    taskScheduler->ScheduleTask(taskType, [=](const CSCore::TaskContext& in_parentTaskContext) noexcept
-                    {
-                        CSIT_ASSERT(in_parentTaskContext.GetType() == taskType, "Incorrect task type.");
-                        CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-
-                        std::atomic<bool> taskExecuted(false);
-                        in_parentTaskContext.ProcessChildTask([=, &taskExecuted]() noexcept
-                        {
-                            CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-
-                            taskExecuted = true;
-                        });
-
-                        CSIT_ASSERT(taskExecuted, "The child task hasn't run.");
-
                         if (++(*taskTypesPassed) >= k_backgroundTaskTypes.size())
                         {
                             CSIT_PASS();
@@ -496,86 +320,6 @@ namespace CSTest
                 }
             }
             //------------------------------------------------------------------------------
-            /// Confirms that main thread tasks can be scheduled as a batch of child simple
-            /// tasks.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            CSIT_TEST(ScheduleMainThreadChildSimpleTaskBatch)
-            {
-                constexpr u32 k_numTasks = 5;
-
-                auto taskScheduler = CSCore::Application::Get()->GetTaskSchedulerNew();
-
-                taskScheduler->ScheduleTask(CSCore::TaskType::k_mainThread, [=](const CSCore::TaskContext& in_parentTaskContext) noexcept
-                {
-                    CSIT_ASSERT(in_parentTaskContext.GetType() == CSCore::TaskType::k_mainThread, "Incorrect task type.");
-                    CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-
-                    std::atomic<u32> executedTaskCount(0);
-                    std::vector<CSCore::TaskSchedulerNew::SimpleTask> tasks;
-                    for (u32 i = 0; i < k_numTasks; ++i)
-                    {
-                        tasks.push_back([=, &executedTaskCount]() noexcept
-                        {
-                            CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-
-                            ++executedTaskCount;
-                        });
-                    }
-
-                    in_parentTaskContext.ProcessChildTasks(tasks);
-
-                    CSIT_ASSERT(executedTaskCount == k_numTasks, "An incorrect amount of tasks were run.");
-
-                    CSIT_PASS();
-                });
-            }
-            //------------------------------------------------------------------------------
-            /// Confirms that all background task types can be scheduled as a batch of child
-            /// simple tasks.
-            ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
-            CSIT_TEST(ScheduleBackgroundChildSimpleTaskBatch)
-            {
-                constexpr u32 k_numTasksPerTaskType = 5;
-
-                auto taskScheduler = CSCore::Application::Get()->GetTaskSchedulerNew();
-
-                std::shared_ptr<std::atomic<u32>> taskTypesPassed(new std::atomic<u32>(0));
-
-                for (const auto & taskType : k_backgroundTaskTypes)
-                {
-                    taskScheduler->ScheduleTask(taskType, [=](const CSCore::TaskContext& in_parentTaskContext) noexcept
-                    {
-                        CSIT_ASSERT(in_parentTaskContext.GetType() == taskType, "Incorrect task type.");
-                        CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-
-                        std::atomic<u32> executedTaskCount(0);
-                        std::vector<CSCore::TaskSchedulerNew::SimpleTask> tasks;
-                        for (u32 i = 0; i < k_numTasksPerTaskType; ++i)
-                        {
-                            tasks.push_back([=, &executedTaskCount]() noexcept
-                            {
-                                CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
-
-                                ++executedTaskCount;
-                            });
-                        }
-
-                        in_parentTaskContext.ProcessChildTasks(tasks);
-
-                        CSIT_ASSERT(executedTaskCount == k_numTasksPerTaskType, "An incorrect amount of tasks were run.");
-
-                        if (++(*taskTypesPassed) >= k_backgroundTaskTypes.size())
-                        {
-                            CSIT_PASS();
-                        }
-                    });
-                }
-            }
-            //------------------------------------------------------------------------------
             /// Confirms that a task batches can be triple nested.
             ///
             /// @author Ian Copland
@@ -605,10 +349,10 @@ namespace CSTest
                                 CSIT_ASSERT(in_level2TaskContext.GetType() == CSCore::TaskType::k_small, "Incorrect task type.");
                                 CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                                 
-                                std::vector<CSCore::TaskSchedulerNew::SimpleTask> level3Tasks;
+                                std::vector<CSCore::TaskSchedulerNew::Task> level3Tasks;
                                 for (u32 level3TaskIndex = 0; level3TaskIndex < k_numTasksPerLevel; ++level3TaskIndex)
                                 {
-                                    level3Tasks.push_back([=]() noexcept
+                                    level3Tasks.push_back([=](const CSCore::TaskContext&) noexcept
                                     {
                                         CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
@@ -647,11 +391,11 @@ namespace CSTest
                 
                 auto scheduledFrameIndex = app->GetFrameIndex();
                 
-                taskScheduler->ScheduleTask(CSCore::TaskType::k_gameLogic, [=]() noexcept
+                taskScheduler->ScheduleTask(CSCore::TaskType::k_gameLogic, [=](const CSCore::TaskContext&) noexcept
                 {
                     CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                     
-                    taskScheduler->ScheduleTask(CSCore::TaskType::k_mainThread, [=]() noexcept
+                    taskScheduler->ScheduleTask(CSCore::TaskType::k_mainThread, [=](const CSCore::TaskContext&) noexcept
                     {
                         CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                         CSIT_ASSERT(scheduledFrameIndex == app->GetFrameIndex(), "Task was not run within the same frame as it was scheduled.");
