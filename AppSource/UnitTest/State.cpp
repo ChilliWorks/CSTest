@@ -41,7 +41,7 @@ namespace CSTest
     {
         namespace
         {
-            const f32 k_timeBeforeTests = 0.5f;
+            const f32 k_timeBeforeTests = 0.1f;
         }
         
         //------------------------------------------------------------------------------

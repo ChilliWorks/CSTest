@@ -89,7 +89,7 @@ namespace CSTest
             {
                 m_active = false;
                 
-                m_taskScheduler->ScheduleMainThreadTask([=]() noexcept
+                m_taskScheduler->ScheduleTask(CSCore::TaskType::k_mainThread, [=](const CSCore::TaskContext&) noexcept
                 {
                     m_timer.Stop();
                     m_timerEventConnection.reset();
@@ -108,7 +108,7 @@ namespace CSTest
             {
                 m_active = false;
                 
-                m_taskScheduler->ScheduleMainThreadTask([=]() noexcept
+                m_taskScheduler->ScheduleTask(CSCore::TaskType::k_mainThread, [=](const CSCore::TaskContext&) noexcept
                 {
                     m_timer.Stop();
                     m_timerEventConnection.reset();
