@@ -1,23 +1,22 @@
 ################################
-# Windows Ignore Files
+# Visual Studio Ignore Files
 ################################
-*.suo
+Projects/Windows/Build/
+.vs/
 *.user
 *.opensdf
 *.opendb
 *.sdf
-Projects/Windows/.vs
-Projects/Windows/Build/
 
 ################################
-# iOS Ignore Files
+# XCode Ignore Files
 ################################
 xcuserdata/
 Projects/iOS/XcodeBuiltAssets/
 *.xcscmblueprint
 
 ################################
-# Android Ignore Files
+# Android Studio Ignore Files
 ################################
 Projects/Android/cstest/.gradle/
 Projects/Android/cstest/.idea/libraries/
