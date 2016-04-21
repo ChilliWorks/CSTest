@@ -46,6 +46,58 @@ namespace CSTest
                 CSCore::TaskType::k_gameLogic,
                 CSCore::TaskType::k_file
             };
+            
+            //------------------------------------------------------------------------------
+            /// Chains a series of child tasks recursively. Each parent task is finished
+            /// prior to launching the next parent.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_taskType - The type of task to launch.
+            /// @param in_successCallback - Called once the tasks have finished. This is
+            /// called on the main thread.
+            /// @param taskCounter - [Optional] The current task count. This is only used
+            /// for recursion.
+            //------------------------------------------------------------------------------
+            void ChainChildTasksRecursively(CSCore::TaskType in_taskType, const std::function<void()>& in_successCallback, const std::shared_ptr<std::atomic<u32>> taskCounter = std::make_shared<std::atomic<u32>>(0))
+            {
+                constexpr u32 k_numParentTasks = 10000;
+                constexpr u32 k_numChildTasks = 5;
+                
+                auto taskScheduler = CSCore::Application::Get()->GetTaskScheduler();
+                
+                taskScheduler->ScheduleTask(in_taskType, [=](const CSCore::TaskContext& in_parentTaskContext)
+                {
+                    CS_ASSERT(in_parentTaskContext.GetType() == CSCore::TaskType::k_small, "Incorrect task type.");
+                    CS_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                    
+                    std::atomic<u32> childTaskCounter(0);
+                    std::vector<CSCore::Task> tasks;
+                    for (u32 i = 0; i < k_numChildTasks; ++i)
+                    {
+                        tasks.push_back([=, &childTaskCounter](const CSCore::TaskContext& in_childTaskContext) noexcept
+                        {
+                            CS_ASSERT(in_childTaskContext.GetType() == in_taskType, "Incorrect task type.");
+                            CS_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                            
+                            ++childTaskCounter;
+                        });
+                    }
+                    
+                    in_parentTaskContext.ProcessChildTasks(tasks);
+                    CS_ASSERT(childTaskCounter == k_numChildTasks, "An incorrect amount of tasks were run.");
+                    
+                    if (++(*taskCounter) < k_numParentTasks)
+                    {
+                        ChainChildTasksRecursively(in_taskType, in_successCallback, taskCounter);
+                    }
+                    else
+                    {
+                        in_successCallback();
+                    }
+                });
+
+            }
         }
         
         //------------------------------------------------------------------------------
@@ -374,6 +426,18 @@ namespace CSTest
                     CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                     CSIT_ASSERT(*executedLevel3TaskCount == u32(std::pow(k_numTasksPerLevel, k_numLevels)), "An incorrect amount of tasks were run.");
 
+                    CSIT_PASS();
+                });
+            }
+            //------------------------------------------------------------------------------
+            /// Confirms that chained tasks containing background tasks work as intended.
+            ///
+            /// @author Ian Copland
+            //------------------------------------------------------------------------------
+            CSIT_TEST_TIMEOUT(ScheduleChainedBatch, 60.0f)
+            {
+                ChainChildTasksRecursively(CSCore::TaskType::k_small, [=]()
+                {
                     CSIT_PASS();
                 });
             }
