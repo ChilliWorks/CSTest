@@ -56,7 +56,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
             m_testNavigator->SetBackButtonVisible(false);
         }

@@ -55,7 +55,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool TestNavigator::IsA(CSCore::InterfaceIDType in_interfaceId) const noexcept
+        bool TestNavigator::IsA(CS::InterfaceIDType in_interfaceId) const noexcept
         {
             return (TestNavigator::InterfaceID == in_interfaceId);
         }
@@ -81,25 +81,25 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void TestNavigator::OnInit() noexcept
         {
-            auto resourcePool = CSCore::Application::Get()->GetResourcePool();
-            auto mediumFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialMed.csfont");
+            auto resourcePool = CS::Application::Get()->GetResourcePool();
+            auto mediumFont = resourcePool->LoadResource<CS::Font>(CS::StorageLocation::k_package, "Fonts/ArialMed.csfont");
             
-            auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
-            m_titleLabel = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 0.15f), mediumFont, m_title, CSRendering::AlignmentAnchor::k_topCentre);
+            auto basicWidgetFactory = CS::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
+            m_titleLabel = basicWidgetFactory->CreateLabel(CS::Vector2(0.9f, 0.15f), mediumFont, m_title, CS::AlignmentAnchor::k_topCentre);
 
-            m_backButton = basicWidgetFactory->CreateButton(CSCore::Vector2(0.0f, 0.1f), "Back", CSRendering::AlignmentAnchor::k_bottomLeft, CSCore::Colour::k_cornflowerBlue);
-            m_backButton->SetRelativePosition(CSCore::Vector2(0.05f, 0.05f));
+            m_backButton = basicWidgetFactory->CreateButton(CS::Vector2(0.0f, 0.1f), "Back", CS::AlignmentAnchor::k_bottomLeft, CS::Colour::k_cornflowerBlue);
+            m_backButton->SetRelativePosition(CS::Vector2(0.05f, 0.05f));
             
-            auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
+            auto widgetFactory = CS::Application::Get()->GetWidgetFactory();
             m_ui = widgetFactory->CreateWidget();
             m_ui->AddWidget(m_titleLabel);
             m_ui->AddWidget(m_backButton);
             
             GetState()->GetUICanvas()->AddWidget(m_ui);
             
-            m_backPressedConnection = m_backButton->GetReleasedInsideEvent().OpenConnection([](CSUI::Widget* in_widget, const CSInput::Pointer& in_pointer, CSInput::Pointer::InputType in_inputType)
+            m_backPressedConnection = m_backButton->GetReleasedInsideEvent().OpenConnection([](CS::Widget* in_widget, const CS::Pointer& in_pointer, CS::Pointer::InputType in_inputType)
             {
-                CSCore::Application::Get()->GetStateManager()->Pop();
+                CS::Application::Get()->GetStateManager()->Pop();
             });
         }
         //------------------------------------------------------------------------------

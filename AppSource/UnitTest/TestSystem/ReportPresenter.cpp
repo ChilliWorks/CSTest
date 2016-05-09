@@ -63,9 +63,9 @@ namespace CSTest
                 CS_LOG_ERROR("Unit tests failed!");
                 CS_LOG_ERROR(" ");
                 
-                CS_LOG_ERROR(CSCore::ToString(in_report.GetNumFailedTestCases()) + " test cases failed out of " + CSCore::ToString(in_report.GetNumTestCases()));
-                CS_LOG_ERROR(CSCore::ToString(in_report.GetNumFailedSections()) + " test sections failed out of " + CSCore::ToString(in_report.GetNumSections()));
-                CS_LOG_ERROR(CSCore::ToString(in_report.GetNumFailedAssertions()) + " test assertions failed out of " + CSCore::ToString(in_report.GetNumAssertions()));
+                CS_LOG_ERROR(CS::ToString(in_report.GetNumFailedTestCases()) + " test cases failed out of " + CS::ToString(in_report.GetNumTestCases()));
+                CS_LOG_ERROR(CS::ToString(in_report.GetNumFailedSections()) + " test sections failed out of " + CS::ToString(in_report.GetNumSections()));
+                CS_LOG_ERROR(CS::ToString(in_report.GetNumFailedAssertions()) + " test assertions failed out of " + CS::ToString(in_report.GetNumAssertions()));
                 
                 for (const auto& testCase : in_report.GetFailedTestCases())
                 {
@@ -74,14 +74,14 @@ namespace CSTest
                     
                     for (const auto& section : testCase.GetFailedSections())
                     {
-                        CS_LOG_ERROR("Section '" + section.GetName() + "' failed " + CSCore::ToString(section.GetNumFailedAssertions()) + " out of " + CSCore::ToString(section.GetNumAssertions()) + " assertions: ");
+                        CS_LOG_ERROR("Section '" + section.GetName() + "' failed " + CS::ToString(section.GetNumFailedAssertions()) + " out of " + CS::ToString(section.GetNumAssertions()) + " assertions: ");
                         
                         for (const auto& assertion : section.GetFailedAssertions())
                         {
                             std::string baseName, directoryPath;
-                            CSCore::StringUtils::SplitFilename(assertion.GetFilePath(), baseName, directoryPath);
+                            CS::StringUtils::SplitFilename(assertion.GetFilePath(), baseName, directoryPath);
                             
-                            CS_LOG_ERROR("  " + baseName + ", ln " + CSCore::ToString(assertion.GetLine()) + ": " + assertion.GetErrorMessage());
+                            CS_LOG_ERROR("  " + baseName + ", ln " + CS::ToString(assertion.GetLine()) + ": " + assertion.GetErrorMessage());
                         }
                     }
                 }
@@ -99,7 +99,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool ReportPresenter::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool ReportPresenter::IsA(CS::InterfaceIDType in_interfaceId) const
         {
             return (ReportPresenter::InterfaceID == in_interfaceId);
         }
@@ -113,13 +113,13 @@ namespace CSTest
             }
             else if (in_report.GetNumFailedTestCases() == 0)
             {
-                SetCentreText("All " + CSCore::ToString(in_report.GetNumSections()) + " test sections passed!");
+                SetCentreText("All " + CS::ToString(in_report.GetNumSections()) + " test sections passed!");
             }
             else
             {
-                std::string textBody = CSCore::ToString(in_report.GetNumFailedTestCases()) + " test cases failed out of " + CSCore::ToString(in_report.GetNumTestCases());
-                textBody += "\n" + CSCore::ToString(in_report.GetNumFailedSections()) + " test sections failed out of " + CSCore::ToString(in_report.GetNumSections());
-                textBody += "\n" + CSCore::ToString(in_report.GetNumFailedAssertions()) + " test assertions failed out of " + CSCore::ToString(in_report.GetNumAssertions());
+                std::string textBody = CS::ToString(in_report.GetNumFailedTestCases()) + " test cases failed out of " + CS::ToString(in_report.GetNumTestCases());
+                textBody += "\n" + CS::ToString(in_report.GetNumFailedSections()) + " test sections failed out of " + CS::ToString(in_report.GetNumSections());
+                textBody += "\n" + CS::ToString(in_report.GetNumFailedAssertions()) + " test assertions failed out of " + CS::ToString(in_report.GetNumAssertions());
                 
                 textBody += "\n \nThe following test cases failed:";
                 
@@ -153,10 +153,10 @@ namespace CSTest
             CS_ASSERT(m_centreText, "Cannot set the text before the text widgets are created.");
             CS_ASSERT(m_bodyText, "Cannot set the text before the text widgets are created.");
             
-            auto textComponent = m_centreText->GetComponent<CSUI::TextComponent>();
+            auto textComponent = m_centreText->GetComponent<CS::TextComponent>();
             textComponent->SetText(in_text);
             
-            textComponent = m_bodyText->GetComponent<CSUI::TextComponent>();
+            textComponent = m_bodyText->GetComponent<CS::TextComponent>();
             textComponent->SetText("");
         }
         //------------------------------------------------------------------------------
@@ -166,28 +166,28 @@ namespace CSTest
             CS_ASSERT(m_centreText, "Cannot set the text before the text widgets are created.");
             CS_ASSERT(m_bodyText, "Cannot set the text before the text widgets are created.");
             
-            auto textComponent = m_centreText->GetComponent<CSUI::TextComponent>();
+            auto textComponent = m_centreText->GetComponent<CS::TextComponent>();
             textComponent->SetText("");
             
-            textComponent = m_bodyText->GetComponent<CSUI::TextComponent>();
+            textComponent = m_bodyText->GetComponent<CS::TextComponent>();
             textComponent->SetText(in_text);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void ReportPresenter::OnInit()
         {
-            auto resourcePool = CSCore::Application::Get()->GetResourcePool();
-            auto smallFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
-            auto mediumFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialMed.csfont");
+            auto resourcePool = CS::Application::Get()->GetResourcePool();
+            auto smallFont = resourcePool->LoadResource<CS::Font>(CS::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
+            auto mediumFont = resourcePool->LoadResource<CS::Font>(CS::StorageLocation::k_package, "Fonts/ArialMed.csfont");
 
-            auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
-            m_centreText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 1.0f), mediumFont, "");
-            m_centreText->SetRelativePosition(CSCore::Vector2(0.0f, 0.05f));
+            auto basicWidgetFactory = CS::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
+            m_centreText = basicWidgetFactory->CreateLabel(CS::Vector2(0.9f, 1.0f), mediumFont, "");
+            m_centreText->SetRelativePosition(CS::Vector2(0.0f, 0.05f));
             
-            m_bodyText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 0.65f), smallFont, "", CSRendering::AlignmentAnchor::k_topCentre, CSRendering::HorizontalTextJustification::k_left, CSRendering::VerticalTextJustification::k_top);
-            m_bodyText->SetRelativePosition(CSCore::Vector2(0.0f, -0.15f));
+            m_bodyText = basicWidgetFactory->CreateLabel(CS::Vector2(0.9f, 0.65f), smallFont, "", CS::AlignmentAnchor::k_topCentre, CS::HorizontalTextJustification::k_left, CS::VerticalTextJustification::k_top);
+            m_bodyText->SetRelativePosition(CS::Vector2(0.0f, -0.15f));
 
-            auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
+            auto widgetFactory = CS::Application::Get()->GetWidgetFactory();
             m_presentationUI = widgetFactory->CreateWidget();
             m_presentationUI->AddWidget(m_centreText);
             m_presentationUI->AddWidget(m_bodyText);

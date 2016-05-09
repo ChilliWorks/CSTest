@@ -46,14 +46,14 @@ namespace CSTest
         void State::CreateSystems()
         {
             CreateSystem<Common::TestNavigator>("Gestures");
-            m_gestureSystem = CreateSystem<CSInput::GestureSystem>();
+            m_gestureSystem = CreateSystem<CS::GestureSystem>();
             CreateSystem<GesturePresenter>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
         }
     }
 }

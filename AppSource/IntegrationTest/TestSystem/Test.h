@@ -136,11 +136,11 @@ namespace CSTest
             const PassDelegate m_passDelegate;
             const FailDelegate m_failDelegate;
             
-            CSCore::TaskScheduler* m_taskScheduler = nullptr;
+            CS::TaskScheduler* m_taskScheduler = nullptr;
             bool m_active = true;
             std::mutex m_mutex;
-            CSCore::Timer m_timer;
-            CSCore::EventConnectionUPtr m_timerEventConnection;
+            CS::Timer m_timer;
+            CS::EventConnectionUPtr m_timerEventConnection;
         };
     }
 }

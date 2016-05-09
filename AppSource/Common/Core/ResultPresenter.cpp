@@ -44,7 +44,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool ResultPresenter::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool ResultPresenter::IsA(CS::InterfaceIDType in_interfaceId) const
         {
             return (ResultPresenter::InterfaceID == in_interfaceId);
         }
@@ -58,7 +58,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void ResultPresenter::OnInit()
         {
-            m_dialogueBoxSystem = CSCore::Application::Get()->GetSystem<CSCore::DialogueBoxSystem>();
+            m_dialogueBoxSystem = CS::Application::Get()->GetSystem<CS::DialogueBoxSystem>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

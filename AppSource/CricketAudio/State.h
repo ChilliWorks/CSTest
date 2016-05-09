@@ -43,7 +43,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        class State final : public CS::State
         {
             //------------------------------------------------------------------------------
             /// The life-cycle event for creating all state systems.
@@ -59,7 +59,7 @@ namespace CSTest
             void OnInit() override;
             
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
-            CSAudio::CkAudioPlayer* m_audioPlayer = nullptr;
+            CS::CkAudioPlayer* m_audioPlayer = nullptr;
         };
     }
 }

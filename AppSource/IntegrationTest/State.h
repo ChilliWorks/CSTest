@@ -45,7 +45,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        class State final : public CS::State
         {
         private:
             //------------------------------------------------------------------------------

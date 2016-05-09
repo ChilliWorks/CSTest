@@ -44,7 +44,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class ResultPresenter final : public CSCore::StateSystem
+        class ResultPresenter final : public CS::StateSystem
         {
         public:
             CS_DECLARE_NAMEDTYPE(ResultPresenter);
@@ -59,7 +59,7 @@ namespace CSTest
             ///
             /// @return Whether or not the interface is implemented.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            bool IsA(CS::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
             /// Presents the results of a test. For now this simply presents a dialogue box.
             ///
@@ -70,7 +70,7 @@ namespace CSTest
             void Present(const std::string& in_result);
             
         private:
-            friend class CSCore::State;
+            friend class CS::State;
             //------------------------------------------------------------------------------
             /// A factory method for creating new instances of the system.
             ///
@@ -99,7 +99,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnDestroy() override;
             
-            CSCore::DialogueBoxSystem* m_dialogueBoxSystem = nullptr;
+            CS::DialogueBoxSystem* m_dialogueBoxSystem = nullptr;
         };
     }
 }

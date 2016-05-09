@@ -48,13 +48,13 @@ namespace CSTest
             CreateSystem<Common::TestNavigator>("Web View");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
-            m_webView = CreateSystem<CSWeb::WebView>();
+            m_webView = CreateSystem<CS::WebView>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
             Common::OptionsMenuDesc optionsMenuDesc;
             
@@ -62,7 +62,7 @@ namespace CSTest
             {
                 optionsMenuDesc.AddButton("From Disk", [=]()
                 {
-                    m_webView->PresentFromFile(CSCore::StorageLocation::k_package, "WebView/ExampleWebView.html", CSCore::UnifiedVector2(1.0f, 1.0f, 0.0f, 0.0f), 0.1f, [=]()
+                    m_webView->PresentFromFile(CS::StorageLocation::k_package, "WebView/ExampleWebView.html", CS::UnifiedVector2(1.0f, 1.0f, 0.0f, 0.0f), 0.1f, [=]()
                     {
                         m_resultPresenter->Present("WebView dismissed.");
                     });
@@ -70,7 +70,7 @@ namespace CSTest
                 
                 optionsMenuDesc.AddButton("From Web", [=]()
                 {
-                    m_webView->Present("https://google.com", CSCore::UnifiedVector2(0.8f, 0.8f, 0.0f, 0.0f), 0.1f, [=]()
+                    m_webView->Present("https://google.com", CS::UnifiedVector2(0.8f, 0.8f, 0.0f, 0.0f), 0.1f, [=]()
                     {
                         m_resultPresenter->Present("WebView dismissed.");
                     });

@@ -45,24 +45,24 @@ namespace CSTest
     {
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::CreateLights(const CSCore::EntitySPtr& in_room)
+        void State::CreateLights(const CS::EntitySPtr& in_room)
         {
-            const CSCore::Vector3 k_offset(0.0f, -10.0f, 0.0f);
+            const CS::Vector3 k_offset(0.0f, -10.0f, 0.0f);
             const f32 k_distance = 10.0f;
-            const f32 k_lowerVerticalAngle = CSCore::MathUtils::k_pi / 4.0f;
-            const f32 k_upperVerticalAngle = CSCore::MathUtils::k_pi / 3.0f;
+            const f32 k_lowerVerticalAngle = CS::MathUtils::k_pi / 4.0f;
+            const f32 k_upperVerticalAngle = CS::MathUtils::k_pi / 3.0f;
             
-            auto basicEntityFactory = CSCore::Application::Get()->GetSystem<Common::BasicEntityFactory>();
+            auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
             
-            CSCore::EntitySPtr ambientLight = basicEntityFactory->CreateAmbientLight(CSCore::Colour(0.3f, 0.3f, 0.3f, 1.0f));
+            CS::EntitySPtr ambientLight = basicEntityFactory->CreateAmbientLight(CS::Colour(0.3f, 0.3f, 0.3f, 1.0f));
             GetScene()->Add(ambientLight);
             
             //TODO: We should provide multiple spinning lights, however issues with shadows in the engine mean we cannot for the time being.
-            f32 horizontalAngle = CSCore::Random::Generate<f32>(0.0f, CSCore::MathUtils::k_pi * 2.0f);
-            f32 verticalAngle = CSCore::Random::Generate<f32>(k_lowerVerticalAngle, k_upperVerticalAngle);
+            f32 horizontalAngle = CS::Random::Generate<f32>(0.0f, CS::MathUtils::k_pi * 2.0f);
+            f32 verticalAngle = CS::Random::Generate<f32>(k_lowerVerticalAngle, k_upperVerticalAngle);
             auto followerComponent = std::make_shared<Common::FollowerComponent>(in_room, k_offset, k_distance, horizontalAngle, verticalAngle);
             
-            CSCore::EntitySPtr directionalLight = basicEntityFactory->CreateDirectionalLight(CSCore::Colour(0.8f, 0.5f, 0.4f));
+            CS::EntitySPtr directionalLight = basicEntityFactory->CreateDirectionalLight(CS::Colour(0.8f, 0.5f, 0.4f));
             directionalLight->AddComponent(followerComponent);
             GetScene()->Add(directionalLight);
         }
@@ -75,25 +75,25 @@ namespace CSTest
             const f32 k_offset = -7.0f;
             const f32 k_stride = 3.0f;
             
-            static const std::array<CSCore::Colour, 4> k_boxColours =
+            static const std::array<CS::Colour, 4> k_boxColours =
             {{
-                CSCore::Colour(1.0f, 0.1f, 0.1f, 1.0f),
-                CSCore::Colour(0.1f, 1.0f, 0.1f, 1.0f),
-                CSCore::Colour(0.1f, 0.1f, 1.0f, 1.0f),
-                CSCore::Colour(1.0f, 1.0f, 1.0f, 1.0f)
+                CS::Colour(1.0f, 0.1f, 0.1f, 1.0f),
+                CS::Colour(0.1f, 1.0f, 0.1f, 1.0f),
+                CS::Colour(0.1f, 0.1f, 1.0f, 1.0f),
+                CS::Colour(1.0f, 1.0f, 1.0f, 1.0f)
             }};
             
-            auto primitiveEntityFactory = CSCore::Application::Get()->GetSystem<CSCore::PrimitiveEntityFactory>();
+            auto primitiveEntityFactory = CS::Application::Get()->GetSystem<CS::PrimitiveEntityFactory>();
             
             for (u32 x = 0; x < k_numX; ++x)
             {
                 for (u32 z = 0; z < k_numZ; ++z)
                 {
-                    CSCore::Vector3 positionInGrid(k_offset + x * k_stride, 0.0f, k_offset + z * k_stride);
-                    CSCore::Vector3 size(1.0f, CSCore::Random::Generate<f32>(1.0f, 3.0f), 1.0f);
-                    CSCore::Vector3 worldPosition = positionInGrid + 0.5f * size;
+                    CS::Vector3 positionInGrid(k_offset + x * k_stride, 0.0f, k_offset + z * k_stride);
+                    CS::Vector3 size(1.0f, CS::Random::Generate<f32>(1.0f, 3.0f), 1.0f);
+                    CS::Vector3 worldPosition = positionInGrid + 0.5f * size;
                     
-                    CSCore::EntitySPtr box = primitiveEntityFactory->CreateBox(k_boxColours[CSCore::Random::Generate<u32>(0, u32(k_boxColours.size()) - 1)], size);
+                    CS::EntitySPtr box = primitiveEntityFactory->CreateBox(k_boxColours[CS::Random::Generate<u32>(0, u32(k_boxColours.size()) - 1)], size);
                     box->GetTransform().SetPosition(worldPosition);
                     GetScene()->Add(box);
                 }
@@ -109,15 +109,15 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
-            GetScene()->SetClearColour(CSCore::Colour::k_black);
+            GetScene()->SetClearColour(CS::Colour::k_black);
             
-            auto basicEntityFactory = CSCore::Application::Get()->GetSystem<Common::BasicEntityFactory>();
+            auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
             
-            CSCore::EntitySPtr room = basicEntityFactory->CreateRoom();
+            CS::EntitySPtr room = basicEntityFactory->CreateRoom();
             room->GetTransform().SetPosition(0.0f, 10.0f, 0.0f);
             GetScene()->Add(room);
             
-            CSCore::EntitySPtr camera = basicEntityFactory->CreateThirdPersonCamera(room, CSCore::Vector3(0.0f, -9.0f, 0.0f));
+            CS::EntitySPtr camera = basicEntityFactory->CreateThirdPersonCamera(room, CS::Vector3(0.0f, -9.0f, 0.0f));
             GetScene()->Add(camera);
             
             CreateLights(room);

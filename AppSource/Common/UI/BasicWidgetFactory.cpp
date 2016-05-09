@@ -51,24 +51,24 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool BasicWidgetFactory::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool BasicWidgetFactory::IsA(CS::InterfaceIDType in_interfaceId) const
         {
             return (BasicWidgetFactory::InterfaceID == in_interfaceId);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CSUI::WidgetUPtr BasicWidgetFactory::CreateButton(const CSCore::Vector2& in_size, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment, const CSCore::Colour& in_colour, CSUI::SizePolicy in_sizePolicy)
+        CS::WidgetUPtr BasicWidgetFactory::CreateButton(const CS::Vector2& in_size, const std::string& in_text, CS::AlignmentAnchor in_alignment, const CS::Colour& in_colour, CS::SizePolicy in_sizePolicy)
         {
-            CS_ASSERT(CSCore::Application::Get()->GetTaskScheduler()->IsMainThread(), "Cannot create widgets on background threads.");
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Cannot create widgets on background threads.");
             
-            auto resourcePool = CSCore::Application::Get()->GetResourcePool();
-            auto font = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
-            auto atlas = resourcePool->LoadResource<CSRendering::TextureAtlas>(CSCore::StorageLocation::k_package, "TextureAtlases/UI/UI.csatlas");
-            auto texture = resourcePool->LoadResource<CSRendering::Texture>(CSCore::StorageLocation::k_package, "TextureAtlases/UI/UI.csimage");
+            auto resourcePool = CS::Application::Get()->GetResourcePool();
+            auto font = resourcePool->LoadResource<CS::Font>(CS::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
+            auto atlas = resourcePool->LoadResource<CS::TextureAtlas>(CS::StorageLocation::k_package, "TextureAtlases/UI/UI.csatlas");
+            auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_package, "TextureAtlases/UI/UI.csimage");
             
-            auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
+            auto widgetFactory = CS::Application::Get()->GetWidgetFactory();
             
-            CSUI::WidgetSPtr text = CreateLabel(CSCore::Vector2::k_one, font, in_text);
+            CS::WidgetSPtr text = CreateLabel(CS::Vector2::k_one, font, in_text);
             
             auto button = widgetFactory->CreateHighlightButton();
             button->SetParentalAnchor(in_alignment);
@@ -76,9 +76,9 @@ namespace CSTest
             button->SetSizePolicy(in_sizePolicy);
             button->SetRelativeSize(in_size);
             
-            auto buttonComponent = button->GetComponent<CSUI::HighlightComponent>();
-            buttonComponent->SetHighlightColour(CSCore::Colour::k_lightGrey);
-            buttonComponent->SetNormalDrawableDef(CSUI::DrawableDefCSPtr(new CSUI::StandardDrawableDef(texture, atlas, "Button01", in_colour)));
+            auto buttonComponent = button->GetComponent<CS::HighlightComponent>();
+            buttonComponent->SetHighlightColour(CS::Colour::k_lightGrey);
+            buttonComponent->SetNormalDrawableDef(CS::DrawableDefCSPtr(new CS::StandardDrawableDef(texture, atlas, "Button01", in_colour)));
             
             button->AddWidget(text);
             
@@ -86,27 +86,27 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CSUI::WidgetUPtr BasicWidgetFactory::CreateStretchableButton(const CSCore::Vector2& in_size, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment, const CSCore::Colour& in_colour)
+        CS::WidgetUPtr BasicWidgetFactory::CreateStretchableButton(const CS::Vector2& in_size, const std::string& in_text, CS::AlignmentAnchor in_alignment, const CS::Colour& in_colour)
         {
-            CS_ASSERT(CSCore::Application::Get()->GetTaskScheduler()->IsMainThread(), "Cannot create widgets on background threads.");
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Cannot create widgets on background threads.");
             
-            auto resourcePool = CSCore::Application::Get()->GetResourcePool();
-            auto font = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
-            auto atlas = resourcePool->LoadResource<CSRendering::TextureAtlas>(CSCore::StorageLocation::k_package, "TextureAtlases/UI/UI.csatlas");
-            auto texture = resourcePool->LoadResource<CSRendering::Texture>(CSCore::StorageLocation::k_package, "TextureAtlases/UI/UI.csimage");
+            auto resourcePool = CS::Application::Get()->GetResourcePool();
+            auto font = resourcePool->LoadResource<CS::Font>(CS::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
+            auto atlas = resourcePool->LoadResource<CS::TextureAtlas>(CS::StorageLocation::k_package, "TextureAtlases/UI/UI.csatlas");
+            auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_package, "TextureAtlases/UI/UI.csimage");
             
-            auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
+            auto widgetFactory = CS::Application::Get()->GetWidgetFactory();
             
-            CSUI::WidgetSPtr text = CreateLabel(CSCore::Vector2::k_one, font, in_text);
+            CS::WidgetSPtr text = CreateLabel(CS::Vector2::k_one, font, in_text);
             
             auto button = widgetFactory->CreateHighlightButton();
             button->SetParentalAnchor(in_alignment);
             button->SetOriginAnchor(in_alignment);
             button->SetRelativeSize(in_size);
             
-            auto buttonComponent = button->GetComponent<CSUI::HighlightComponent>();
-            buttonComponent->SetHighlightColour(CSCore::Colour::k_lightGrey);
-            buttonComponent->SetNormalDrawableDef(CSUI::DrawableDefCSPtr(new CSUI::NinePatchDrawableDef(texture, atlas, "Button01", CSCore::Vector4(0.15f, 0.15f, 0.15f, 0.15f), in_colour)));
+            auto buttonComponent = button->GetComponent<CS::HighlightComponent>();
+            buttonComponent->SetHighlightColour(CS::Colour::k_lightGrey);
+            buttonComponent->SetNormalDrawableDef(CS::DrawableDefCSPtr(new CS::NinePatchDrawableDef(texture, atlas, "Button01", CS::Vector4(0.15f, 0.15f, 0.15f, 0.15f), in_colour)));
             
             button->AddWidget(text);
             
@@ -114,22 +114,22 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CSUI::WidgetUPtr BasicWidgetFactory::CreateLabel(const CSCore::Vector2& in_size, const CSRendering::FontCSPtr& in_font, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment,
-                                     CSRendering::HorizontalTextJustification in_horizontalTextJustification, CSRendering::VerticalTextJustification in_verticalTextJustification)
+        CS::WidgetUPtr BasicWidgetFactory::CreateLabel(const CS::Vector2& in_size, const CS::FontCSPtr& in_font, const std::string& in_text, CS::AlignmentAnchor in_alignment,
+                                     CS::HorizontalTextJustification in_horizontalTextJustification, CS::VerticalTextJustification in_verticalTextJustification)
         {
-            CS_ASSERT(CSCore::Application::Get()->GetTaskScheduler()->IsMainThread(), "Cannot create widgets on background threads.");
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Cannot create widgets on background threads.");
             
-            auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
+            auto widgetFactory = CS::Application::Get()->GetWidgetFactory();
             
             auto text = widgetFactory->CreateLabel();
             text->SetParentalAnchor(in_alignment);
             text->SetOriginAnchor(in_alignment);
             text->SetRelativeSize(in_size);
             
-            auto textComponent = text->GetComponent<CSUI::TextComponent>();
+            auto textComponent = text->GetComponent<CS::TextComponent>();
             textComponent->SetFont(in_font);
             textComponent->SetText(in_text);
-            textComponent->SetTextColour(CSCore::Colour::k_black);
+            textComponent->SetTextColour(CS::Colour::k_black);
             textComponent->SetHorizontalJustification(in_horizontalTextJustification);
             textComponent->SetVerticalJustification(in_verticalTextJustification);
             

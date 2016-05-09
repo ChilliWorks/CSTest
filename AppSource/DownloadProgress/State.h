@@ -42,7 +42,7 @@ namespace CSTest
         ///
         /// @author HMcLaughlin
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        class State final : public CS::State
         {
         private:
             //------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ namespace CSTest
             ///
             /// @param in_response - The HTTP response.
             //------------------------------------------------------------------------------
-            void PresentHttpResponse(const CSNetworking::HttpResponse& in_response);
+            void PresentHttpResponse(const CS::HttpResponse& in_response);
             //------------------------------------------------------------------------------
             /// Initialises the state.
             ///
@@ -69,7 +69,7 @@ namespace CSTest
         private:
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
             Common::ResultPresenter* m_resultPresenter = nullptr;
-            CSNetworking::HttpRequestSystem* m_httpRequestSystem = nullptr;
+            CS::HttpRequestSystem* m_httpRequestSystem = nullptr;
             DownloadProgressTestSystem* m_downloadProgressTestSystem = nullptr;
         };
     }

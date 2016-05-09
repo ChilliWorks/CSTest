@@ -45,19 +45,19 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool Approx(const CSCore::Vector2& in_a, const CSCore::Vector2& in_b, f32 in_epsilon)
+        bool Approx(const CS::Vector2& in_a, const CS::Vector2& in_b, f32 in_epsilon)
         {
             return (Approx(in_a.x, in_b.x, in_epsilon) && Approx(in_a.y, in_b.y, in_epsilon));
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool Approx(const CSCore::Vector3& in_a, const CSCore::Vector3& in_b, f32 in_epsilon)
+        bool Approx(const CS::Vector3& in_a, const CS::Vector3& in_b, f32 in_epsilon)
         {
             return (Approx(in_a.x, in_b.x, in_epsilon) && Approx(in_a.y, in_b.y, in_epsilon) && Approx(in_a.z, in_b.z, in_epsilon));
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool Approx(const CSCore::Vector4& in_a, const CSCore::Vector4& in_b, f32 in_epsilon)
+        bool Approx(const CS::Vector4& in_a, const CS::Vector4& in_b, f32 in_epsilon)
         {
             return (Approx(in_a.x, in_b.x, in_epsilon) && Approx(in_a.y, in_b.y, in_epsilon) && Approx(in_a.z, in_b.z, in_epsilon) && Approx(in_a.w, in_b.w, in_epsilon));
         }

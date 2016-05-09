@@ -47,7 +47,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class ReportPresenter final : public CSCore::StateSystem
+        class ReportPresenter final : public CS::StateSystem
         {
         public:
             CS_DECLARE_NAMEDTYPE(ReportPresenter);
@@ -62,7 +62,7 @@ namespace CSTest
             ///
             /// @return Whether or not the interface is implemented.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            bool IsA(CS::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
             /// Presents the given report on screen. Further details of the report will also
             /// be printed to the console if appropriate.
@@ -74,7 +74,7 @@ namespace CSTest
             void PresentReport(const Report& in_report);
             
         private:
-            friend class CSCore::State;
+            friend class CS::State;
             //------------------------------------------------------------------------------
             /// A factory method for creating new instances of the system.
             ///
@@ -121,9 +121,9 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnDestroy() override;
             
-            CSUI::WidgetSPtr m_presentationUI;
-            CSUI::WidgetSPtr m_bodyText;
-            CSUI::WidgetSPtr m_centreText;
+            CS::WidgetSPtr m_presentationUI;
+            CS::WidgetSPtr m_bodyText;
+            CS::WidgetSPtr m_centreText;
         };
     }
 }

@@ -44,7 +44,7 @@
 ///
 /// @return The new Application instance.
 //------------------------------------------------------------------------------
-CSCore::Application* CreateApplication()
+CS::Application* CreateApplication()
 {
     return new CSTest::App();
 }
@@ -73,12 +73,12 @@ namespace CSTest
     //------------------------------------------------------------------------------
     void App::CreateSystems()
     {
-        CreateSystem<CSAudio::CricketAudioSystem>();
-		CreateSystem<CSAudio::CkBankProvider>();
+        CreateSystem<CS::CricketAudioSystem>();
+		CreateSystem<CS::CkBankProvider>();
 
-        CreateSystem<CSCore::PrimitiveEntityFactory>();
-        CreateSystem<CSNetworking::HttpRequestSystem>();
-        CreateSystem<CSRendering::PrimitiveModelFactory>();
+        CreateSystem<CS::PrimitiveEntityFactory>();
+        CreateSystem<CS::HttpRequestSystem>();
+        CreateSystem<CS::PrimitiveModelFactory>();
         
         CreateSystem<Common::BasicEntityFactory>();
         CreateSystem<Common::BasicWidgetFactory>();
@@ -92,7 +92,7 @@ namespace CSTest
     //------------------------------------------------------------------------------
     void App::PushInitialState()
     {
-        GetStateManager()->Push(CSCore::StateSPtr(new MainMenu::State()));
+        GetStateManager()->Push(CS::StateSPtr(new MainMenu::State()));
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------

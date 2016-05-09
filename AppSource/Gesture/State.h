@@ -43,7 +43,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        class State final : public CS::State
         {
             //------------------------------------------------------------------------------
             /// The life-cycle event for creating all state systems.
@@ -58,7 +58,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnInit() override;
             
-            CSInput::GestureSystem* m_gestureSystem = nullptr;
+            CS::GestureSystem* m_gestureSystem = nullptr;
         };
     }
 }

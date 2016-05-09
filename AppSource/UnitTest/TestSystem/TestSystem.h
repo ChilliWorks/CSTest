@@ -46,7 +46,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class TestSystem final : public CSCore::StateSystem
+        class TestSystem final : public CS::StateSystem
         {
         public:
             CS_DECLARE_NAMEDTYPE(TestSystem);
@@ -61,7 +61,7 @@ namespace CSTest
             ///
             /// @return Whether or not the interface is implemented.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            bool IsA(CS::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
             /// Performs all integration tests and returns a report detailing whether or not
             /// they were successful.
@@ -73,7 +73,7 @@ namespace CSTest
             Report PerformTests();
             
         private:
-            friend class CSCore::State;
+            friend class CS::State;
             //------------------------------------------------------------------------------
             /// A factory method for creating new instances of the system.
             ///

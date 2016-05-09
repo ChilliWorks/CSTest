@@ -49,22 +49,22 @@ namespace CSTest
             CreateSystem<Common::TestNavigator>("Cricket Audio");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
 
-            m_audioPlayer = CreateSystem<CSAudio::CkAudioPlayer>();
+            m_audioPlayer = CreateSystem<CS::CkAudioPlayer>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
-            auto resourcePool = CSCore::Application::Get()->GetResourcePool();
-            auto bank = resourcePool->LoadResource<CSAudio::CkBank>(CSCore::StorageLocation::k_package, "SFX/SFX.ckb");
+            auto resourcePool = CS::Application::Get()->GetResourcePool();
+            auto bank = resourcePool->LoadResource<CS::CkBank>(CS::StorageLocation::k_package, "SFX/SFX.ckb");
             
             Common::OptionsMenuDesc optionsMenuDesc;
             
             optionsMenuDesc.AddButton("Play Music", [=]()
             {
-                m_audioPlayer->PlayMusic(CSCore::StorageLocation::k_package, "Music/Music01.cks");
+                m_audioPlayer->PlayMusic(CS::StorageLocation::k_package, "Music/Music01.cks");
             });
             
             optionsMenuDesc.AddButton("Stop Music", [=]()

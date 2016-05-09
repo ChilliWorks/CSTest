@@ -34,13 +34,13 @@ namespace CSTest
             ///
             /// @return Widget
             //------------------------------------------------------------------------------
-            CSUI::WidgetSPtr CreateProgressWidget()
+            CS::WidgetSPtr CreateProgressWidget()
             {
-                CSUI::WidgetFactory* widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
+                CS::WidgetFactory* widgetFactory = CS::Application::Get()->GetWidgetFactory();
                 CS_ASSERT(widgetFactory, "No widget factory");
-                CSCore::ResourcePool* resPool = CSCore::Application::Get()->GetResourcePool();
+                CS::ResourcePool* resPool = CS::Application::Get()->GetResourcePool();
                 CS_ASSERT(resPool, "No resource pool");
-                CSUI::WidgetTemplateCSPtr widgetTemplate = resPool->LoadResource<CSUI::WidgetTemplate>(CSCore::StorageLocation::k_package, k_downloadProgressCSUIPath);
+                CS::WidgetTemplateCSPtr widgetTemplate = resPool->LoadResource<CS::WidgetTemplate>(CS::StorageLocation::k_package, k_downloadProgressCSUIPath);
                 CS_ASSERT(widgetTemplate, "Widget template failed to load");
                 return widgetFactory->Create(widgetTemplate);
             }
@@ -56,7 +56,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool DownloadProgressTestSystem::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool DownloadProgressTestSystem::IsA(CS::InterfaceIDType in_interfaceId) const
         {
             return DownloadProgressTestSystem::InterfaceID == in_interfaceId;
         }
@@ -64,7 +64,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void DownloadProgressTestSystem::OnInit()
         {
-            m_downloadProgressUpdateTimer = CSCore::TimerUPtr(new CSCore::Timer());
+            m_downloadProgressUpdateTimer = CS::TimerUPtr(new CS::Timer());
             
             m_downloadProgressWidget = CreateProgressWidget();
             CS_ASSERT(m_downloadProgressWidget, "DownloadProgress widget cannot be NULL");
@@ -73,18 +73,18 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void DownloadProgressTestSystem::StartDownloadTest(const std::string& in_downloadURL, const DownloadCompleteDelegate& in_completeDelegate)
         {
-            auto httpRequestSystem = CSCore::Application::Get()->GetSystem<CSNetworking::HttpRequestSystem>();
+            auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
             
             auto progressBar = m_downloadProgressWidget->GetWidgetRecursive("ProgressBar");
-            auto progressBarComponent = progressBar->GetComponent<CSUI::ProgressBarComponent>();
+            auto progressBarComponent = progressBar->GetComponent<CS::ProgressBarComponent>();
             auto progressLabel = m_downloadProgressWidget->GetWidgetRecursive("ProgressText");
-            auto progressTextComponent = progressLabel->GetComponent<CSUI::TextComponent>();
+            auto progressTextComponent = progressLabel->GetComponent<CS::TextComponent>();
             
             GetState()->GetUICanvas()->AddWidget(m_downloadProgressWidget);
             
-            auto request = httpRequestSystem->MakeGetRequest(in_downloadURL, [=](const CSNetworking::HttpRequest* in_request, const CSNetworking::HttpResponse& in_response)
+            auto request = httpRequestSystem->MakeGetRequest(in_downloadURL, [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
             {
-                if(in_response.GetResult() != CSNetworking::HttpResponse::Result::k_flushed)
+                if(in_response.GetResult() != CS::HttpResponse::Result::k_flushed)
                 {
                     m_downloadProgressUpdateTimer->Stop();
                     
@@ -109,8 +109,8 @@ namespace CSTest
                     f32 progress = (f32)request->GetDownloadedBytes() / (f32)request->GetExpectedSize();
                     progressBarComponent->SetProgress(progress);
                     
-                    std::string percentageProgress = CSCore::ToString((u32)(progress * 100)) + "%";
-                    progressTextComponent->SetText("Total Size - " + CSCore::ToString(request->GetExpectedSize()) + "\nDownloaded - " + CSCore::ToString(request->GetDownloadedBytes()) + "\nProgress - " + percentageProgress);
+                    std::string percentageProgress = CS::ToString((u32)(progress * 100)) + "%";
+                    progressTextComponent->SetText("Total Size - " + CS::ToString(request->GetExpectedSize()) + "\nDownloaded - " + CS::ToString(request->GetDownloadedBytes()) + "\nProgress - " + percentageProgress);
                 }
             });
             

@@ -55,7 +55,7 @@ namespace CSTest
             CS_ASSERT(m_passDelegate, "A valid pass delegate must be supplied.");
             CS_ASSERT(m_failDelegate, "A valid fail delegate must be supplied.");
             
-            m_taskScheduler = CSCore::Application::Get()->GetTaskScheduler();
+            m_taskScheduler = CS::Application::Get()->GetTaskScheduler();
             
             m_timerEventConnection = m_timer.OpenConnection(in_desc.GetTimeoutSeconds(), [=]()
             {
@@ -89,7 +89,7 @@ namespace CSTest
             {
                 m_active = false;
                 
-                m_taskScheduler->ScheduleTask(CSCore::TaskType::k_mainThread, [=](const CSCore::TaskContext&) noexcept
+                m_taskScheduler->ScheduleTask(CS::TaskType::k_mainThread, [=](const CS::TaskContext&) noexcept
                 {
                     m_timer.Stop();
                     m_timerEventConnection.reset();
@@ -108,7 +108,7 @@ namespace CSTest
             {
                 m_active = false;
                 
-                m_taskScheduler->ScheduleTask(CSCore::TaskType::k_mainThread, [=](const CSCore::TaskContext&) noexcept
+                m_taskScheduler->ScheduleTask(CS::TaskType::k_mainThread, [=](const CS::TaskContext&) noexcept
                 {
                     m_timer.Stop();
                     m_timerEventConnection.reset();

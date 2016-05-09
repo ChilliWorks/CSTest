@@ -42,7 +42,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        class State final : public CS::State
         {
             //------------------------------------------------------------------------------
             /// The life-cycle event for creating all state systems.
@@ -59,7 +59,7 @@ namespace CSTest
             
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
             Common::ResultPresenter* m_resultPresenter = nullptr;
-            CSWeb::WebView* m_webView = nullptr;
+            CS::WebView* m_webView = nullptr;
         };
     }
 }

@@ -45,7 +45,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class BasicEntityFactory final : public CSCore::AppSystem
+        class BasicEntityFactory final : public CS::AppSystem
         {
         public:
             CS_DECLARE_NAMEDTYPE(BasicEntityFactory);
@@ -60,7 +60,7 @@ namespace CSTest
             ///
             /// @return Whether or not the interface is implemented.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            bool IsA(CS::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
             /// Creates a basic third person camera which will follow the given entity.
             ///
@@ -80,8 +80,8 @@ namespace CSTest
             ///
             /// @return The entity.
             //------------------------------------------------------------------------------
-            CSCore::EntityUPtr CreateThirdPersonCamera(const CSCore::EntitySPtr& in_target, const CSCore::Vector3& in_targetOffset = CSCore::Vector3::k_zero, f32 in_distance = 7.5f, f32 in_horizontalAngle = 0.0f,
-                                                       f32 in_verticalAngle = CSCore::MathUtils::k_pi / 6.0f, f32 in_horizontalAngularVelocity = 0.1f);
+            CS::EntityUPtr CreateThirdPersonCamera(const CS::EntitySPtr& in_target, const CS::Vector3& in_targetOffset = CS::Vector3::k_zero, f32 in_distance = 7.5f, f32 in_horizontalAngle = 0.0f,
+                                                       f32 in_verticalAngle = CS::MathUtils::k_pi / 6.0f, f32 in_horizontalAngularVelocity = 0.1f);
             //------------------------------------------------------------------------------
             /// Creates an ambient light with the given colour.
             ///
@@ -91,7 +91,7 @@ namespace CSTest
             ///
             /// @return The entity.
             //------------------------------------------------------------------------------
-            CSCore::EntityUPtr CreateAmbientLight(const CSCore::Colour& in_colour);
+            CS::EntityUPtr CreateAmbientLight(const CS::Colour& in_colour);
             //------------------------------------------------------------------------------
             /// Creates a directional light with the given colour.
             ///
@@ -103,7 +103,7 @@ namespace CSTest
             ///
             /// @return The entity.
             //------------------------------------------------------------------------------
-            CSCore::EntityUPtr CreateDirectionalLight(const CSCore::Colour& in_colour, const CSCore::Vector4& in_shadowVolume = CSCore::Vector4(30.0f, 30.0f, 1.0f, 30.0f));
+            CS::EntityUPtr CreateDirectionalLight(const CS::Colour& in_colour, const CS::Vector4& in_shadowVolume = CS::Vector4(30.0f, 30.0f, 1.0f, 30.0f));
             //------------------------------------------------------------------------------
             /// Creates a grey checkered room for graphical tests to take place in.
             ///
@@ -114,10 +114,10 @@ namespace CSTest
             ///
             /// @return The entity.
             //------------------------------------------------------------------------------
-            CSCore::EntityUPtr CreateRoom(const CSCore::Vector3& in_size = CSCore::Vector3(20.0f, 20.0f, 20.0f));
+            CS::EntityUPtr CreateRoom(const CS::Vector3& in_size = CS::Vector3(20.0f, 20.0f, 20.0f));
             
         private:
-            friend class CSCore::Application;
+            friend class CS::Application;
             //------------------------------------------------------------------------------
             /// A factory method for creating new instances of the system.
             ///
@@ -146,9 +146,9 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnDestroy() override;
             
-            CSCore::ResourcePool* m_resourcePool = nullptr;
-            CSRendering::RenderComponentFactory* m_renderComponentFactory = nullptr;
-            CSRendering::PrimitiveModelFactory* m_primitiveModelFactory = nullptr;
+            CS::ResourcePool* m_resourcePool = nullptr;
+            CS::RenderComponentFactory* m_renderComponentFactory = nullptr;
+            CS::PrimitiveModelFactory* m_primitiveModelFactory = nullptr;
             u32 m_entityCount = 0;
         };
     }

@@ -42,7 +42,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        class State final : public CS::State
         {
             //------------------------------------------------------------------------------
             /// Creates a series of lights.
@@ -51,7 +51,7 @@ namespace CSTest
             ///
             /// @param in_room - The room the lights are in.
             //------------------------------------------------------------------------------
-            void CreateLights(const CSCore::EntitySPtr& in_room);
+            void CreateLights(const CS::EntitySPtr& in_room);
             //------------------------------------------------------------------------------
             /// Creates a grid of randomly sized and coloured boxes and added them to the
             /// scene.

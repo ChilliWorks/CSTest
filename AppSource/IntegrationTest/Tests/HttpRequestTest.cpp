@@ -52,11 +52,11 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(SuccessHttpsGet)
             {
-                auto httpRequestSystem = CSCore::Application::Get()->GetSystem<CSNetworking::HttpRequestSystem>();
+                auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 
-                httpRequestSystem->MakeGetRequest("https://httpbin.org/get", [=](const CSNetworking::HttpRequest* in_request, const CSNetworking::HttpResponse& in_response)
+                httpRequestSystem->MakeGetRequest("https://httpbin.org/get", [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
                 {
-                    CSIT_ASSERT(in_response.GetResult() == CSNetworking::HttpResponse::Result::k_completed, "The HTTP request failed.");
+                    CSIT_ASSERT(in_response.GetResult() == CS::HttpResponse::Result::k_completed, "The HTTP request failed.");
                     CSIT_ASSERT(in_response.GetCode() == 200, "Recieved incorrect response code.");
                     
                     CSIT_PASS();
@@ -69,14 +69,14 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(SuccessHttpsGetHeaders)
             {
-                auto httpRequestSystem = CSCore::Application::Get()->GetSystem<CSNetworking::HttpRequestSystem>();
+                auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 
-                CSCore::ParamDictionary headers;
+                CS::ParamDictionary headers;
                 headers["Example-Header"] = "ExampleValue";
                 
-                httpRequestSystem->MakeGetRequest("https://httpbin.org/headers", headers, [=](const CSNetworking::HttpRequest* in_request, const CSNetworking::HttpResponse& in_response)
+                httpRequestSystem->MakeGetRequest("https://httpbin.org/headers", headers, [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
                 {
-                    CSIT_ASSERT(in_response.GetResult() == CSNetworking::HttpResponse::Result::k_completed, "The HTTP request failed.");
+                    CSIT_ASSERT(in_response.GetResult() == CS::HttpResponse::Result::k_completed, "The HTTP request failed.");
                     CSIT_ASSERT(in_response.GetCode() == 200, "Recieved incorrect response code.");
 
                     CSIT_PASS();
@@ -89,11 +89,11 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(SuccessHttpsGetResponseCode)
             {
-                auto httpRequestSystem = CSCore::Application::Get()->GetSystem<CSNetworking::HttpRequestSystem>();
+                auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 
-                httpRequestSystem->MakeGetRequest("https://httpbin.org/status/418", [=](const CSNetworking::HttpRequest* in_request, const CSNetworking::HttpResponse& in_response)
+                httpRequestSystem->MakeGetRequest("https://httpbin.org/status/418", [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
                 {
-                    CSIT_ASSERT(in_response.GetResult() == CSNetworking::HttpResponse::Result::k_completed, "The HTTP request failed.");
+                    CSIT_ASSERT(in_response.GetResult() == CS::HttpResponse::Result::k_completed, "The HTTP request failed.");
                     CSIT_ASSERT(in_response.GetCode() == 418, "Recieved incorrect response code.");
 
                     CSIT_PASS();
@@ -106,11 +106,11 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(SuccessHttpsPost)
             {
-                auto httpRequestSystem = CSCore::Application::Get()->GetSystem<CSNetworking::HttpRequestSystem>();
+                auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 
-                httpRequestSystem->MakePostRequest("https://httpbin.org/post", "SomeData", [=](const CSNetworking::HttpRequest* in_request, const CSNetworking::HttpResponse& in_response)
+                httpRequestSystem->MakePostRequest("https://httpbin.org/post", "SomeData", [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
                 {
-                    CSIT_ASSERT(in_response.GetResult() == CSNetworking::HttpResponse::Result::k_completed, "The HTTP request failed.");
+                    CSIT_ASSERT(in_response.GetResult() == CS::HttpResponse::Result::k_completed, "The HTTP request failed.");
                     CSIT_ASSERT(in_response.GetCode() == 200, "Recieved incorrect response code.");
 
                     CSIT_PASS();
@@ -123,14 +123,14 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(SuccessHttpsPostHeaders)
             {
-                auto httpRequestSystem = CSCore::Application::Get()->GetSystem<CSNetworking::HttpRequestSystem>();
+                auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 
-                CSCore::ParamDictionary headers;
+                CS::ParamDictionary headers;
                 headers["Example-Header"] = "ExampleValue";
                 
-                httpRequestSystem->MakePostRequest("https://httpbin.org/post", "SomeData", headers, [=](const CSNetworking::HttpRequest* in_request, const CSNetworking::HttpResponse& in_response)
+                httpRequestSystem->MakePostRequest("https://httpbin.org/post", "SomeData", headers, [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
                 {
-                    CSIT_ASSERT(in_response.GetResult() == CSNetworking::HttpResponse::Result::k_completed, "The HTTP request failed.");
+                    CSIT_ASSERT(in_response.GetResult() == CS::HttpResponse::Result::k_completed, "The HTTP request failed.");
                     CSIT_ASSERT(in_response.GetCode() == 200, "Recieved incorrect response code.");
 
                     CSIT_PASS();
@@ -143,11 +143,11 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(SuccessHttpsPostReponseCode)
             {
-                auto httpRequestSystem = CSCore::Application::Get()->GetSystem<CSNetworking::HttpRequestSystem>();
+                auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 
-                httpRequestSystem->MakePostRequest("https://httpbin.org/status/418", "SomeData", [=](const CSNetworking::HttpRequest* in_request, const CSNetworking::HttpResponse& in_response)
+                httpRequestSystem->MakePostRequest("https://httpbin.org/status/418", "SomeData", [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
                 {
-                    CSIT_ASSERT(in_response.GetResult() == CSNetworking::HttpResponse::Result::k_completed, "The HTTP request failed.");
+                    CSIT_ASSERT(in_response.GetResult() == CS::HttpResponse::Result::k_completed, "The HTTP request failed.");
                     CSIT_ASSERT(in_response.GetCode() == 418, "Recieved incorrect response code.");
 
                     CSIT_PASS();
@@ -160,7 +160,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(SuccessReachability)
             {
-                auto httpRequestSystem = CSCore::Application::Get()->GetSystem<CSNetworking::HttpRequestSystem>();
+                auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 
                 CSIT_ASSERT(httpRequestSystem->CheckReachability(), "Reachability check failed.");
                 

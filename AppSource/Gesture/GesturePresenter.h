@@ -45,7 +45,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class GesturePresenter final : public CSCore::StateSystem
+        class GesturePresenter final : public CS::StateSystem
         {
         public:
             CS_DECLARE_NAMEDTYPE(GesturePresenter);
@@ -59,10 +59,10 @@ namespace CSTest
             ///
             /// @return Whether the object implements the given interface.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            bool IsA(CS::InterfaceIDType in_interfaceId) const override;
             
         private:
-            friend class CSCore::State;
+            friend class CS::State;
             //------------------------------------------------------------------------------
             /// Creates a new instance of the system.
             ///
@@ -157,13 +157,13 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnDestroy() override;
             
-            std::vector<CSInput::GestureSPtr> m_gestures;
-            std::vector<CSCore::EventConnectionSPtr> m_eventConnections;
+            std::vector<CS::GestureSPtr> m_gestures;
+            std::vector<CS::EventConnectionSPtr> m_eventConnections;
             EventInfo m_gestureEventInfo;
             
             bool m_uiDirty = true;
-            CSUI::WidgetSPtr m_rootUI;
-            CSUI::TextComponent* m_textComponent;
+            CS::WidgetSPtr m_rootUI;
+            CS::TextComponent* m_textComponent;
         };
     }
 }

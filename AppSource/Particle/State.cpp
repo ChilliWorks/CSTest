@@ -51,33 +51,33 @@ namespace CSTest
 			///
 			/// @return The fire effect entity.
 			//------------------------------------------------------------------------------
-			CSCore::EntityUPtr CreateFire()
+			CS::EntityUPtr CreateFire()
 			{
-				auto app = CSCore::Application::Get();
+				auto app = CS::Application::Get();
 
 				auto resourcePool = app->GetResourcePool();
-				auto fireEffect = resourcePool->LoadResource<CSRendering::ParticleEffect>(CSCore::StorageLocation::k_package, "Particle/Fire.csparticle");
-				auto embersEffect = resourcePool->LoadResource<CSRendering::ParticleEffect>(CSCore::StorageLocation::k_package, "Particle/Embers.csparticle");
-				auto smokeEffect = resourcePool->LoadResource<CSRendering::ParticleEffect>(CSCore::StorageLocation::k_package, "Particle/Smoke.csparticle");
+				auto fireEffect = resourcePool->LoadResource<CS::ParticleEffect>(CS::StorageLocation::k_package, "Particle/Fire.csparticle");
+				auto embersEffect = resourcePool->LoadResource<CS::ParticleEffect>(CS::StorageLocation::k_package, "Particle/Embers.csparticle");
+				auto smokeEffect = resourcePool->LoadResource<CS::ParticleEffect>(CS::StorageLocation::k_package, "Particle/Smoke.csparticle");
 
-				CSRendering::RenderComponentFactory* renderComponentFactory = app->GetSystem<CSRendering::RenderComponentFactory>();
+				CS::RenderComponentFactory* renderComponentFactory = app->GetSystem<CS::RenderComponentFactory>();
 
 				auto fireComponent = renderComponentFactory->CreateParticleEffectComponent(fireEffect);
-				fireComponent->SetPlaybackType(CSRendering::ParticleEffectComponent::PlaybackType::k_looping);
-				auto fireEntity = CSCore::Entity::Create();
+				fireComponent->SetPlaybackType(CS::ParticleEffectComponent::PlaybackType::k_looping);
+				auto fireEntity = CS::Entity::Create();
 				fireEntity->AddComponent(std::move(fireComponent));
 
 				auto embersComponent = renderComponentFactory->CreateParticleEffectComponent(embersEffect);
-				embersComponent->SetPlaybackType(CSRendering::ParticleEffectComponent::PlaybackType::k_looping);
-				auto embersEntity = CSCore::Entity::Create();
+				embersComponent->SetPlaybackType(CS::ParticleEffectComponent::PlaybackType::k_looping);
+				auto embersEntity = CS::Entity::Create();
 				embersEntity->AddComponent(std::move(embersComponent));
 
 				auto smokeComponent = renderComponentFactory->CreateParticleEffectComponent(smokeEffect);
-				smokeComponent->SetPlaybackType(CSRendering::ParticleEffectComponent::PlaybackType::k_looping);
-				auto smokeEntity = CSCore::Entity::Create();
+				smokeComponent->SetPlaybackType(CS::ParticleEffectComponent::PlaybackType::k_looping);
+				auto smokeEntity = CS::Entity::Create();
 				smokeEntity->AddComponent(std::move(smokeComponent));
 
-				auto effectEntity = CSCore::Entity::Create();
+				auto effectEntity = CS::Entity::Create();
 				effectEntity->AddEntity(std::move(fireEntity));
 				effectEntity->AddEntity(std::move(embersEntity));
 				effectEntity->AddEntity(std::move(smokeEntity));
@@ -96,18 +96,18 @@ namespace CSTest
 		//------------------------------------------------------------------------------
 		void State::OnInit()
 		{
-			GetScene()->SetClearColour(CSCore::Colour::k_black);
+			GetScene()->SetClearColour(CS::Colour::k_black);
 
-			auto basicEntityFactory = CSCore::Application::Get()->GetSystem<Common::BasicEntityFactory>();
+			auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
 
-			CSCore::EntitySPtr room = basicEntityFactory->CreateRoom();
+			CS::EntitySPtr room = basicEntityFactory->CreateRoom();
 			room->GetTransform().SetPosition(0.0f, 10.0f, 0.0f);
 			GetScene()->Add(room);
 
-			auto camera = basicEntityFactory->CreateThirdPersonCamera(room, CSCore::Vector3(0.0f, -9.0f, 0.0f));
+			auto camera = basicEntityFactory->CreateThirdPersonCamera(room, CS::Vector3(0.0f, -9.0f, 0.0f));
 			GetScene()->Add(std::move(camera));
 
-			CSCore::EntitySPtr ambientLight = basicEntityFactory->CreateAmbientLight(CSCore::Colour(0.65f, 0.65f, 0.65f, 1.0f));
+			CS::EntitySPtr ambientLight = basicEntityFactory->CreateAmbientLight(CS::Colour(0.65f, 0.65f, 0.65f, 1.0f));
 			GetScene()->Add(ambientLight);
 
 			auto fire = CreateFire();

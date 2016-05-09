@@ -43,7 +43,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class State final : public CSCore::State
+        class State final : public CS::State
         {
             //------------------------------------------------------------------------------
             /// The life-cycle event for creating all state systems.

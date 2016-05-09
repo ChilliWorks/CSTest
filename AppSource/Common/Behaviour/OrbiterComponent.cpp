@@ -43,7 +43,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool OrbiterComponent::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool OrbiterComponent::IsA(CS::InterfaceIDType in_interfaceId) const
         {
             return (OrbiterComponent::InterfaceID == in_interfaceId);
         }

@@ -41,7 +41,7 @@ namespace CSTest
     ///
     /// @author Ian Copland
     //------------------------------------------------------------------------------
-    class App final : public CSCore::Application
+    class App final : public CS::Application
     {
         //------------------------------------------------------------------------------
         /// The life-cycle event for creating all application systems.

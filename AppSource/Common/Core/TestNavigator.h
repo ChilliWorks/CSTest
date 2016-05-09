@@ -42,7 +42,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-       class TestNavigator final : public CSCore::StateSystem
+       class TestNavigator final : public CS::StateSystem
         {
         public:
             CS_DECLARE_NAMEDTYPE(TestNavigator);
@@ -57,7 +57,7 @@ namespace CSTest
             ///
             /// @return Whether or not the interface is implemented.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const noexcept override;
+            bool IsA(CS::InterfaceIDType in_interfaceId) const noexcept override;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
@@ -76,7 +76,7 @@ namespace CSTest
             void SetBackButtonVisible(bool in_visible) noexcept;
             
         private:
-            friend class CSCore::State;
+            friend class CS::State;
             //------------------------------------------------------------------------------
             /// A factory method for creating new instances of the system.
             ///
@@ -111,11 +111,11 @@ namespace CSTest
             
             std::string m_title;
             
-            CSUI::WidgetSPtr m_ui;
-            CSUI::WidgetSPtr m_titleLabel;
-            CSUI::WidgetSPtr m_backButton;
+            CS::WidgetSPtr m_ui;
+            CS::WidgetSPtr m_titleLabel;
+            CS::WidgetSPtr m_backButton;
             
-            CSCore::EventConnectionUPtr m_backPressedConnection;
+            CS::EventConnectionUPtr m_backPressedConnection;
         };
     }
 }

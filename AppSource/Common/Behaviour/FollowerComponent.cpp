@@ -35,20 +35,20 @@ namespace CSTest
         CS_DEFINE_NAMEDTYPE(FollowerComponent);
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        FollowerComponent::FollowerComponent(const CSCore::EntitySPtr& in_target, const CSCore::Vector3& in_offset, f32 in_distance, f32 in_horizontalAngle, f32 in_verticalAngle)
+        FollowerComponent::FollowerComponent(const CS::EntitySPtr& in_target, const CS::Vector3& in_offset, f32 in_distance, f32 in_horizontalAngle, f32 in_verticalAngle)
         : m_offset(in_offset), m_distance(in_distance), m_horizontalAngle(in_horizontalAngle), m_verticalAngle(in_verticalAngle)
         {
             SetTarget(in_target);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool FollowerComponent::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool FollowerComponent::IsA(CS::InterfaceIDType in_interfaceId) const
         {
             return (FollowerComponent::InterfaceID == in_interfaceId);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        const CSCore::Vector3& FollowerComponent::GetOffset() const
+        const CS::Vector3& FollowerComponent::GetOffset() const
         {
             return m_offset;
         }
@@ -72,9 +72,9 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void FollowerComponent::SetTarget(const CSCore::EntitySPtr& in_target)
+        void FollowerComponent::SetTarget(const CS::EntitySPtr& in_target)
         {
-            m_target = CSCore::EntityWPtr(in_target);
+            m_target = CS::EntityWPtr(in_target);
             m_transformChangedConnection = in_target->GetTransform().GetTransformChangedEvent().OpenConnection([=]()
             {
                 UpdatePosition();
@@ -84,7 +84,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void FollowerComponent::SetOffset(const CSCore::Vector3& in_offset)
+        void FollowerComponent::SetOffset(const CS::Vector3& in_offset)
         {
             m_offset = in_offset;
             
@@ -122,15 +122,15 @@ namespace CSTest
             {
                 if (auto target = m_target.lock())
                 {
-                    auto rotation = CSCore::Quaternion(CSCore::Vector3(1.0f, 0.0f, 0.0f), m_verticalAngle) * CSCore::Quaternion(CSCore::Vector3(0, 1.0f, 0.0f), m_horizontalAngle);
+                    auto rotation = CS::Quaternion(CS::Vector3(1.0f, 0.0f, 0.0f), m_verticalAngle) * CS::Quaternion(CS::Vector3(0, 1.0f, 0.0f), m_horizontalAngle);
                     
-                    CSCore::Vector3 direction(0.0f, 0.0f, 1.0f);
+                    CS::Vector3 direction(0.0f, 0.0f, 1.0f);
                     direction.Rotate(rotation);
                     
-                    CSCore::Vector3 targetPosition = m_offset * target->GetTransform().GetWorldTransform();
-                    CSCore::Vector3 cameraPosition = targetPosition - direction * m_distance;
+                    CS::Vector3 targetPosition = m_offset * target->GetTransform().GetWorldTransform();
+                    CS::Vector3 cameraPosition = targetPosition - direction * m_distance;
                     
-                    GetEntity()->GetTransform().SetLookAt(cameraPosition, targetPosition, CSCore::Vector3::k_unitPositiveY);
+                    GetEntity()->GetTransform().SetLookAt(cameraPosition, targetPosition, CS::Vector3::k_unitPositiveY);
                 }
             }
         }

@@ -53,15 +53,15 @@ namespace CSTest
             ///
             /// @return The result represented as a string.
             //------------------------------------------------------------------------------
-            std::string ToString(CSSocial::EmailComposer::SendResult in_result)
+            std::string ToString(CS::EmailComposer::SendResult in_result)
             {
                 switch (in_result)
                 {
-                    case CSSocial::EmailComposer::SendResult::k_succeed:
+                    case CS::EmailComposer::SendResult::k_succeed:
                         return "Success";
-                    case CSSocial::EmailComposer::SendResult::k_failed:
+                    case CS::EmailComposer::SendResult::k_failed:
                         return "Failed";
-                    case CSSocial::EmailComposer::SendResult::k_cancelled:
+                    case CS::EmailComposer::SendResult::k_cancelled:
                         return "Cancelled";
                     default:
                         CS_LOG_FATAL("Invalid result.");
@@ -77,13 +77,13 @@ namespace CSTest
             CreateSystem<Common::TestNavigator>("Email Composer");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
-            m_emailComposer = CreateSystem<CSSocial::EmailComposer>();
+            m_emailComposer = CreateSystem<CS::EmailComposer>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
             Common::OptionsMenuDesc optionsMenuDesc;
             
@@ -98,7 +98,7 @@ namespace CSTest
                     std::string subject = "Example email subject.";
                     std::string contents = "This is an example email contents.";
                     
-                    m_emailComposer->Present(addresses, subject, contents, CSSocial::EmailComposer::ContentFormat::k_plainText, [=](CSSocial::EmailComposer::SendResult in_result)
+                    m_emailComposer->Present(addresses, subject, contents, CS::EmailComposer::ContentFormat::k_plainText, [=](CS::EmailComposer::SendResult in_result)
                     {
                         m_resultPresenter->Present("Email composer dismissed with result: " + ToString(in_result));
                     });
@@ -113,7 +113,7 @@ namespace CSTest
                     std::string subject = "Example email subject.";
                     std::string contents = "<ul><li>This</li><li>Is</li><li>Some</li><li>HTML</li></ul>";
 
-                    m_emailComposer->Present(addresses, subject, contents, CSSocial::EmailComposer::ContentFormat::k_html, [=](CSSocial::EmailComposer::SendResult in_result)
+                    m_emailComposer->Present(addresses, subject, contents, CS::EmailComposer::ContentFormat::k_html, [=](CS::EmailComposer::SendResult in_result)
                     {
                         m_resultPresenter->Present("Email composer dismissed with result: " + ToString(in_result));
                     });
@@ -127,12 +127,12 @@ namespace CSTest
                     std::string subject = "Example email subject.";
                     std::string contents = "This is an example email contents.";
 
-                    CSSocial::EmailComposer::Attachment attachment;
+                    CS::EmailComposer::Attachment attachment;
                     attachment.m_filename = "EmailComposer/Attachment.zip";
-                    attachment.m_storageLocation = CSCore::StorageLocation::k_chilliSource;
+                    attachment.m_storageLocation = CS::StorageLocation::k_chilliSource;
                     attachment.m_mimeType = "application/zip";
 
-                    m_emailComposer->PresentWithAttachment(addresses, subject, contents, CSSocial::EmailComposer::ContentFormat::k_plainText, attachment, [=](CSSocial::EmailComposer::SendResult in_result)
+                    m_emailComposer->PresentWithAttachment(addresses, subject, contents, CS::EmailComposer::ContentFormat::k_plainText, attachment, [=](CS::EmailComposer::SendResult in_result)
                     {
                         m_resultPresenter->Present("Email composer dismissed with result: " + ToString(in_result));
                     });

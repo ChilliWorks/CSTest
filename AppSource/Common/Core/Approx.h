@@ -60,7 +60,7 @@ namespace CSTest
         /// @return Whether or not the two vectors are approximately equal. This allows
         /// for a very small small delta to avoid floating point precision issues.
         //------------------------------------------------------------------------------
-        bool Approx(const CSCore::Vector2& in_a, const CSCore::Vector2& in_b, f32 in_epsilon = std::numeric_limits<f32>::epsilon() * 100.0f);
+        bool Approx(const CS::Vector2& in_a, const CS::Vector2& in_b, f32 in_epsilon = std::numeric_limits<f32>::epsilon() * 100.0f);
         //------------------------------------------------------------------------------
         /// @author Ian Copland
         ///
@@ -72,7 +72,7 @@ namespace CSTest
         /// @return Whether or not the two vectors are approximately equal. This allows
         /// for a very small small delta to avoid floating point precision issues.
         //------------------------------------------------------------------------------
-        bool Approx(const CSCore::Vector3& in_a, const CSCore::Vector3& in_b, f32 in_epsilon = std::numeric_limits<f32>::epsilon() * 100.0f);
+        bool Approx(const CS::Vector3& in_a, const CS::Vector3& in_b, f32 in_epsilon = std::numeric_limits<f32>::epsilon() * 100.0f);
         //------------------------------------------------------------------------------
         /// @author Ian Copland
         ///
@@ -84,7 +84,7 @@ namespace CSTest
         /// @return Whether or not the two vectors are approximately equal. This allows
         /// for a very small small delta to avoid floating point precision issues.
         //------------------------------------------------------------------------------
-        bool Approx(const CSCore::Vector4& in_a, const CSCore::Vector4& in_b, f32 in_epsilon = std::numeric_limits<f32>::epsilon() * 100.0f);
+        bool Approx(const CS::Vector4& in_a, const CS::Vector4& in_b, f32 in_epsilon = std::numeric_limits<f32>::epsilon() * 100.0f);
     }
 }
 

@@ -46,7 +46,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class BasicWidgetFactory final : public CSCore::AppSystem
+        class BasicWidgetFactory final : public CS::AppSystem
         {
         public:
             CS_DECLARE_NAMEDTYPE(BasicWidgetFactory);
@@ -61,7 +61,7 @@ namespace CSTest
             ///
             /// @return Whether or not the interface is implemented.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            bool IsA(CS::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
@@ -74,8 +74,8 @@ namespace CSTest
             /// @param in_sizePolicy - [Optional] The size policy for the button. Defaults
             /// to UseHeightMaintainingAspect.
             //------------------------------------------------------------------------------
-            CSUI::WidgetUPtr CreateButton(const CSCore::Vector2& in_size, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment = CSRendering::AlignmentAnchor::k_middleCentre,
-                                          const CSCore::Colour& in_colour = CSCore::Colour::k_white, CSUI::SizePolicy in_sizePolicy = CSUI::SizePolicy::k_useHeightMaintainingAspect);
+            CS::WidgetUPtr CreateButton(const CS::Vector2& in_size, const std::string& in_text, CS::AlignmentAnchor in_alignment = CS::AlignmentAnchor::k_middleCentre,
+                                          const CS::Colour& in_colour = CS::Colour::k_white, CS::SizePolicy in_sizePolicy = CS::SizePolicy::k_useHeightMaintainingAspect);
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
@@ -86,8 +86,8 @@ namespace CSTest
             /// @param in_colour - [Optional] The colour of the button. Note that this does
             /// not affect the colour of the text. Defaults to white.
             //------------------------------------------------------------------------------
-            CSUI::WidgetUPtr CreateStretchableButton(const CSCore::Vector2& in_size, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment = CSRendering::AlignmentAnchor::k_middleCentre,
-                                                     const CSCore::Colour& in_colour = CSCore::Colour::k_white);
+            CS::WidgetUPtr CreateStretchableButton(const CS::Vector2& in_size, const std::string& in_text, CS::AlignmentAnchor in_alignment = CS::AlignmentAnchor::k_middleCentre,
+                                                     const CS::Colour& in_colour = CS::Colour::k_white);
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
@@ -101,12 +101,12 @@ namespace CSTest
             /// @param in_verticalTextJustification - [Optional] The vertical justification
             /// of the text. Defaults to centre.
             //------------------------------------------------------------------------------
-            CSUI::WidgetUPtr CreateLabel(const CSCore::Vector2& in_size, const CSRendering::FontCSPtr& in_font, const std::string& in_text, CSRendering::AlignmentAnchor in_alignment = CSRendering::AlignmentAnchor::k_middleCentre,
-                                         CSRendering::HorizontalTextJustification in_horizontalTextJustification = CSRendering::HorizontalTextJustification::k_centre,
-                                         CSRendering::VerticalTextJustification in_verticalTextJustification = CSRendering::VerticalTextJustification::k_centre);
+            CS::WidgetUPtr CreateLabel(const CS::Vector2& in_size, const CS::FontCSPtr& in_font, const std::string& in_text, CS::AlignmentAnchor in_alignment = CS::AlignmentAnchor::k_middleCentre,
+                                         CS::HorizontalTextJustification in_horizontalTextJustification = CS::HorizontalTextJustification::k_centre,
+                                         CS::VerticalTextJustification in_verticalTextJustification = CS::VerticalTextJustification::k_centre);
             
         private:
-            friend class CSCore::Application;
+            friend class CS::Application;
             //------------------------------------------------------------------------------
             /// A factory method for creating new instances of the system.
             ///

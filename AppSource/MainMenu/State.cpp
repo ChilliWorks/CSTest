@@ -54,7 +54,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit() noexcept
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
             m_testNavigator->SetBackButtonVisible(false);
             
@@ -62,17 +62,17 @@ namespace CSTest
             
             optionsMenuDesc.AddButton("Unit Tests", [=]()
             {
-                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<UnitTest::State>());
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<UnitTest::State>());
             });
             
             optionsMenuDesc.AddButton("Integration Tests", [=]()
             {
-                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<IntegrationTest::State>());
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<IntegrationTest::State>());
             });
             
             optionsMenuDesc.AddButton("Smoke Tests", [=]()
             {
-                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<SmokeTest::State>());
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<SmokeTest::State>());
             });
             
             m_optionsMenuPresenter->Present(optionsMenuDesc);

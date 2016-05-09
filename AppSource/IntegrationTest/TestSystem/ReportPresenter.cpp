@@ -60,7 +60,7 @@ namespace CSTest
                 
                 CS_LOG_ERROR("==========================================");
                 
-                CS_LOG_ERROR(CSCore::ToString(in_report.GetNumFailedTests()) + "/" + CSCore::ToString(in_report.GetNumTests()) + " integration tests failed!");
+                CS_LOG_ERROR(CS::ToString(in_report.GetNumFailedTests()) + "/" + CS::ToString(in_report.GetNumTests()) + " integration tests failed!");
                 CS_LOG_ERROR(" ");
                 
                 for (const auto& failedTest : in_report.GetFailedTests())
@@ -81,7 +81,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool ReportPresenter::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool ReportPresenter::IsA(CS::InterfaceIDType in_interfaceId) const
         {
             return (ReportPresenter::InterfaceID == in_interfaceId);
         }
@@ -89,7 +89,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void ReportPresenter::PresentProgress(const TestDesc& in_testDesc, u32 in_testIndex, u32 in_numTests)
         {
-            SetCentreText("Running test " + CSCore::ToString(in_testIndex) + " out of " + CSCore::ToString(in_numTests) + "\n" + in_testDesc.GetTestName());
+            SetCentreText("Running test " + CS::ToString(in_testIndex) + " out of " + CS::ToString(in_numTests) + "\n" + in_testDesc.GetTestName());
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -101,11 +101,11 @@ namespace CSTest
             }
             else if (in_report.GetNumFailedTests() == 0)
             {
-                SetCentreText("All " + CSCore::ToString(in_report.GetNumTests()) + " tests passed!");
+                SetCentreText("All " + CS::ToString(in_report.GetNumTests()) + " tests passed!");
             }
             else
             {
-                std::string textBody = CSCore::ToString(in_report.GetNumFailedTests()) + " tests failed out of " + CSCore::ToString(in_report.GetNumTests()) + ":";
+                std::string textBody = CS::ToString(in_report.GetNumFailedTests()) + " tests failed out of " + CS::ToString(in_report.GetNumTests()) + ":";
                 
                 int count = 0;
                 for (const auto& failedTest : in_report.GetFailedTests())
@@ -137,10 +137,10 @@ namespace CSTest
             CS_ASSERT(m_centreText, "Cannot set the text before the text widgets are created.");
             CS_ASSERT(m_bodyText, "Cannot set the text before the text widgets are created.");
             
-            auto textComponent = m_centreText->GetComponent<CSUI::TextComponent>();
+            auto textComponent = m_centreText->GetComponent<CS::TextComponent>();
             textComponent->SetText(in_text);
             
-            textComponent = m_bodyText->GetComponent<CSUI::TextComponent>();
+            textComponent = m_bodyText->GetComponent<CS::TextComponent>();
             textComponent->SetText("");
         }
         //------------------------------------------------------------------------------
@@ -150,28 +150,28 @@ namespace CSTest
             CS_ASSERT(m_centreText, "Cannot set the text before the text widgets are created.");
             CS_ASSERT(m_bodyText, "Cannot set the text before the text widgets are created.");
             
-            auto textComponent = m_centreText->GetComponent<CSUI::TextComponent>();
+            auto textComponent = m_centreText->GetComponent<CS::TextComponent>();
             textComponent->SetText("");
             
-            textComponent = m_bodyText->GetComponent<CSUI::TextComponent>();
+            textComponent = m_bodyText->GetComponent<CS::TextComponent>();
             textComponent->SetText(in_text);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void ReportPresenter::OnInit()
         {
-            auto resourcePool = CSCore::Application::Get()->GetResourcePool();
-            auto smallFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
-            auto mediumFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialMed.csfont");
+            auto resourcePool = CS::Application::Get()->GetResourcePool();
+            auto smallFont = resourcePool->LoadResource<CS::Font>(CS::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
+            auto mediumFont = resourcePool->LoadResource<CS::Font>(CS::StorageLocation::k_package, "Fonts/ArialMed.csfont");
             
-            auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
-            m_centreText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 1.0f), mediumFont, "");
-            m_centreText->SetRelativePosition(CSCore::Vector2(0.0f, 0.05f));
+            auto basicWidgetFactory = CS::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
+            m_centreText = basicWidgetFactory->CreateLabel(CS::Vector2(0.9f, 1.0f), mediumFont, "");
+            m_centreText->SetRelativePosition(CS::Vector2(0.0f, 0.05f));
             
-            m_bodyText = basicWidgetFactory->CreateLabel(CSCore::Vector2(0.9f, 0.65f), smallFont, "", CSRendering::AlignmentAnchor::k_topCentre, CSRendering::HorizontalTextJustification::k_left, CSRendering::VerticalTextJustification::k_top);
-            m_bodyText->SetRelativePosition(CSCore::Vector2(0.0f, -0.15f));
+            m_bodyText = basicWidgetFactory->CreateLabel(CS::Vector2(0.9f, 0.65f), smallFont, "", CS::AlignmentAnchor::k_topCentre, CS::HorizontalTextJustification::k_left, CS::VerticalTextJustification::k_top);
+            m_bodyText->SetRelativePosition(CS::Vector2(0.0f, -0.15f));
             
-            auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
+            auto widgetFactory = CS::Application::Get()->GetWidgetFactory();
             m_presentationUI = widgetFactory->CreateWidget();
             m_presentationUI->AddWidget(m_centreText);
             m_presentationUI->AddWidget(m_bodyText);

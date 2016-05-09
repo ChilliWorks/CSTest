@@ -44,7 +44,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class FollowerComponent final : public CSCore::Component
+        class FollowerComponent final : public CS::Component
         {
         public:
             CS_DECLARE_NAMEDTYPE(FollowerComponent);
@@ -61,7 +61,7 @@ namespace CSTest
             /// target.
             /// @param in_verticalAngle - The vertical angle of the camera from the target.
             //------------------------------------------------------------------------------
-            FollowerComponent(const CSCore::EntitySPtr& in_target, const CSCore::Vector3& in_offset, f32 in_distance, f32 in_horizontalAngle, f32 in_verticalAngle);
+            FollowerComponent(const CS::EntitySPtr& in_target, const CS::Vector3& in_offset, f32 in_distance, f32 in_horizontalAngle, f32 in_verticalAngle);
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not this system implements the interface
             /// described by the given interface Id. Typically this is not called directly
@@ -73,14 +73,14 @@ namespace CSTest
             ///
             /// @return Whether or not the interface is implemented.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            bool IsA(CS::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @return The offset from the target (in it's local space) that the camera
             /// will follow.
             //------------------------------------------------------------------------------
-            const CSCore::Vector3& GetOffset() const;
+            const CS::Vector3& GetOffset() const;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
@@ -104,14 +104,14 @@ namespace CSTest
             ///
             /// @param in_target - The target to follow.
             //------------------------------------------------------------------------------
-            void SetTarget(const CSCore::EntitySPtr& in_target);
+            void SetTarget(const CS::EntitySPtr& in_target);
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
             /// @param in_offset - The offset from the target (in it's local space) that
             /// the camera will follow.
             //------------------------------------------------------------------------------
-            void SetOffset(const CSCore::Vector3& in_offset);
+            void SetOffset(const CS::Vector3& in_offset);
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///
@@ -147,9 +147,9 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnAddedToEntity() override;
             
-            CSCore::EntityWPtr m_target;
-            CSCore::EventConnectionUPtr m_transformChangedConnection;
-            CSCore::Vector3 m_offset;
+            CS::EntityWPtr m_target;
+            CS::EventConnectionUPtr m_transformChangedConnection;
+            CS::Vector3 m_offset;
             f32 m_distance = 0.0f;
             f32 m_horizontalAngle = 0.0f;
             f32 m_verticalAngle = 0.0f;

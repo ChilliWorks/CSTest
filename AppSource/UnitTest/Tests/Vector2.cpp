@@ -52,8 +52,8 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Construction and component validation")
             {
-                CSCore::Vector2 a;
-                CSCore::Vector2 b(1.0f, 2.0f);
+                CS::Vector2 a;
+                CS::Vector2 b(1.0f, 2.0f);
                 
                 REQUIRE(Common::Approx(a.x, 0.0f));
                 REQUIRE(Common::Approx(a.y, 0.0f));
@@ -67,28 +67,28 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Basic arithmatic")
             {
-                CSCore::Vector2 a1(1.0f, 1.0f);
-                CSCore::Vector2 a2(1.0f, 1.0f);
-                CSCore::Vector2 a3(1.0f, 1.0f);
-                CSCore::Vector2 a4(1.0f, 1.0f);
-                CSCore::Vector2 a5(1.0f, 2.0f);
-                CSCore::Vector2 a6(1.0f, 1.0f);
-                CSCore::Vector2 a7(1.0f, 1.0f);
-                CSCore::Vector2 b1(2.0f, 3.0f);
-                auto b2 = CSCore::Matrix3::CreateTransform(CSCore::Vector2(1.0f, 2.0f), CSCore::Vector2(3.0f, 4.0f), 5.0f);
+                CS::Vector2 a1(1.0f, 1.0f);
+                CS::Vector2 a2(1.0f, 1.0f);
+                CS::Vector2 a3(1.0f, 1.0f);
+                CS::Vector2 a4(1.0f, 1.0f);
+                CS::Vector2 a5(1.0f, 2.0f);
+                CS::Vector2 a6(1.0f, 1.0f);
+                CS::Vector2 a7(1.0f, 1.0f);
+                CS::Vector2 b1(2.0f, 3.0f);
+                auto b2 = CS::Matrix3::CreateTransform(CS::Vector2(1.0f, 2.0f), CS::Vector2(3.0f, 4.0f), 5.0f);
                 f32 b3 = 2.0f;
                 
                 REQUIRE(a1 == a2);
                 REQUIRE(a1 != a5);
-                REQUIRE(Common::Approx(-a1, CSCore::Vector2(-1.0f, -1.0f)));
-                REQUIRE(Common::Approx(a1 + b1, CSCore::Vector2(3.0f, 4.0f)));
-                REQUIRE(Common::Approx(a2 - b1, CSCore::Vector2(-1.0f, -2.0f)));
-                REQUIRE(Common::Approx(a3 * b1, CSCore::Vector2(2.0f, 3.0f)));
-                REQUIRE(Common::Approx(a4 / b1, CSCore::Vector2(0.5f, 1.0f / 3.0f)));
-                REQUIRE(Common::Approx(a5 * b2, CSCore::Vector2(9.52238082f, 1.39252472f)));
-                REQUIRE(Common::Approx(a6 * b3, CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(b3 * a6, CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(a7 / b3, CSCore::Vector2(0.5f, 0.5f)));
+                REQUIRE(Common::Approx(-a1, CS::Vector2(-1.0f, -1.0f)));
+                REQUIRE(Common::Approx(a1 + b1, CS::Vector2(3.0f, 4.0f)));
+                REQUIRE(Common::Approx(a2 - b1, CS::Vector2(-1.0f, -2.0f)));
+                REQUIRE(Common::Approx(a3 * b1, CS::Vector2(2.0f, 3.0f)));
+                REQUIRE(Common::Approx(a4 / b1, CS::Vector2(0.5f, 1.0f / 3.0f)));
+                REQUIRE(Common::Approx(a5 * b2, CS::Vector2(9.52238082f, 1.39252472f)));
+                REQUIRE(Common::Approx(a6 * b3, CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(b3 * a6, CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(a7 / b3, CS::Vector2(0.5f, 0.5f)));
                 
                 a1 += b1;
                 a2 -= b1;
@@ -98,13 +98,13 @@ namespace CSTest
                 a6 *= b3;
                 a7 /= b3;
                 
-                REQUIRE(Common::Approx(a1, CSCore::Vector2(3.0f, 4.0f)));
-                REQUIRE(Common::Approx(a2, CSCore::Vector2(-1.0f, -2.0f)));
-                REQUIRE(Common::Approx(a3, CSCore::Vector2(2.0f, 3.0f)));
-                REQUIRE(Common::Approx(a4, CSCore::Vector2(0.5f, 1.0f / 3.0f)));
-                REQUIRE(Common::Approx(a5, CSCore::Vector2(9.52238082f, 1.39252472f)));
-                REQUIRE(Common::Approx(a6, CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(a7, CSCore::Vector2(0.5f, 0.5f)));
+                REQUIRE(Common::Approx(a1, CS::Vector2(3.0f, 4.0f)));
+                REQUIRE(Common::Approx(a2, CS::Vector2(-1.0f, -2.0f)));
+                REQUIRE(Common::Approx(a3, CS::Vector2(2.0f, 3.0f)));
+                REQUIRE(Common::Approx(a4, CS::Vector2(0.5f, 1.0f / 3.0f)));
+                REQUIRE(Common::Approx(a5, CS::Vector2(9.52238082f, 1.39252472f)));
+                REQUIRE(Common::Approx(a6, CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(a7, CS::Vector2(0.5f, 0.5f)));
             }
             //------------------------------------------------------------------------------
             /// Confirms that vector length can be successfully calculated.
@@ -113,8 +113,8 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Length")
             {
-                CSCore::Vector2 a(3.0f, 4.0f);
-                CSCore::Vector2 b(0.0f, 0.0f);
+                CS::Vector2 a(3.0f, 4.0f);
+                CS::Vector2 b(0.0f, 0.0f);
                 
                 REQUIRE(Common::Approx(a.Length(), 5.0f));
                 REQUIRE(Common::Approx(b.Length(), 0.0f));
@@ -128,17 +128,17 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Normalise")
             {
-                CSCore::Vector2 a(3.0f, 4.0f);
-                CSCore::Vector2 b(0.0f, 0.0f);
+                CS::Vector2 a(3.0f, 4.0f);
+                CS::Vector2 b(0.0f, 0.0f);
                 
-                REQUIRE(Common::Approx(CSCore::Vector2::Normalise(a), CSCore::Vector2(0.6f, 0.8f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Normalise(b), CSCore::Vector2(0.0f, 0.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Normalise(a), CS::Vector2(0.6f, 0.8f)));
+                REQUIRE(Common::Approx(CS::Vector2::Normalise(b), CS::Vector2(0.0f, 0.0f)));
                 
                 a.Normalise();
                 b.Normalise();
                 
-                REQUIRE(Common::Approx(a, CSCore::Vector2(0.6f, 0.8f)));
-                REQUIRE(Common::Approx(b, CSCore::Vector2(0.0f, 0.0f)));
+                REQUIRE(Common::Approx(a, CS::Vector2(0.6f, 0.8f)));
+                REQUIRE(Common::Approx(b, CS::Vector2(0.0f, 0.0f)));
             }
             //------------------------------------------------------------------------------
             /// Confirms that the inverse of a vector can be correctly calculated.
@@ -147,17 +147,17 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Inverse")
             {
-                CSCore::Vector2 a(2.0f, 4.0f);
-                CSCore::Vector2 b(0.0f, 0.0f);
+                CS::Vector2 a(2.0f, 4.0f);
+                CS::Vector2 b(0.0f, 0.0f);
                 
-                REQUIRE(Common::Approx(CSCore::Vector2::Inverse(a), CSCore::Vector2(0.5f, 0.25f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Inverse(b), CSCore::Vector2(0.0f, 0.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Inverse(a), CS::Vector2(0.5f, 0.25f)));
+                REQUIRE(Common::Approx(CS::Vector2::Inverse(b), CS::Vector2(0.0f, 0.0f)));
                 
                 a.Inverse();
                 b.Inverse();
                 
-                REQUIRE(Common::Approx(a, CSCore::Vector2(0.5f, 0.25f)));
-                REQUIRE(Common::Approx(b, CSCore::Vector2(0.0f, 0.0f)));
+                REQUIRE(Common::Approx(a, CS::Vector2(0.5f, 0.25f)));
+                REQUIRE(Common::Approx(b, CS::Vector2(0.0f, 0.0f)));
             }
             //------------------------------------------------------------------------------
             /// Confirms that the absolute value of a vector can be correctly calculated.
@@ -166,21 +166,21 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Absolute")
             {
-                CSCore::Vector2 a(1.0f, 1.0f);
-                CSCore::Vector2 b(-1.0f, -1.0f);
-                CSCore::Vector2 c(0.0f, 0.0f);
+                CS::Vector2 a(1.0f, 1.0f);
+                CS::Vector2 b(-1.0f, -1.0f);
+                CS::Vector2 c(0.0f, 0.0f);
                 
-                REQUIRE(Common::Approx(CSCore::Vector2::Abs(a), CSCore::Vector2(1.0f, 1.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Abs(b), CSCore::Vector2(1.0f, 1.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Abs(c), CSCore::Vector2(0.0f, 0.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Abs(a), CS::Vector2(1.0f, 1.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Abs(b), CS::Vector2(1.0f, 1.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Abs(c), CS::Vector2(0.0f, 0.0f)));
                 
                 a.Abs();
                 b.Abs();
                 c.Abs();
                 
-                REQUIRE(Common::Approx(a, CSCore::Vector2(1.0f, 1.0f)));
-                REQUIRE(Common::Approx(b, CSCore::Vector2(1.0f, 1.0f)));
-                REQUIRE(Common::Approx(c, CSCore::Vector2(0.0f, 0.0f)));
+                REQUIRE(Common::Approx(a, CS::Vector2(1.0f, 1.0f)));
+                REQUIRE(Common::Approx(b, CS::Vector2(1.0f, 1.0f)));
+                REQUIRE(Common::Approx(c, CS::Vector2(0.0f, 0.0f)));
             }
             //------------------------------------------------------------------------------
             /// Confirms that the minimum value of two vectors can be correctly evaluated.
@@ -189,29 +189,29 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Minimum")
             {
-                CSCore::Vector2 a1(1.0f, 1.0f);
-                CSCore::Vector2 a2(2.0f, 2.0f);
-                CSCore::Vector2 a3(1.0f, 2.0f);
-                CSCore::Vector2 a4(-1.0f, -1.0f);
-                CSCore::Vector2 b1(2.0f, 2.0f);
-                CSCore::Vector2 b2(1.0f, 1.0f);
-                CSCore::Vector2 b3(2.0f, 1.0f);
-                CSCore::Vector2 b4(-2.0f, -2.0f);
+                CS::Vector2 a1(1.0f, 1.0f);
+                CS::Vector2 a2(2.0f, 2.0f);
+                CS::Vector2 a3(1.0f, 2.0f);
+                CS::Vector2 a4(-1.0f, -1.0f);
+                CS::Vector2 b1(2.0f, 2.0f);
+                CS::Vector2 b2(1.0f, 1.0f);
+                CS::Vector2 b3(2.0f, 1.0f);
+                CS::Vector2 b4(-2.0f, -2.0f);
                 
-                REQUIRE(Common::Approx(CSCore::Vector2::Min(a1, b1), CSCore::Vector2(1.0f, 1.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Min(a2, b2), CSCore::Vector2(1.0f, 1.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Min(a3, b3), CSCore::Vector2(1.0f, 1.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Min(a4, b4), CSCore::Vector2(-2.0f, -2.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Min(a1, b1), CS::Vector2(1.0f, 1.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Min(a2, b2), CS::Vector2(1.0f, 1.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Min(a3, b3), CS::Vector2(1.0f, 1.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Min(a4, b4), CS::Vector2(-2.0f, -2.0f)));
                 
                 a1.Min(b1);
                 a2.Min(b2);
                 a3.Min(b3);
                 a4.Min(b4);
                 
-                REQUIRE(Common::Approx(a1, CSCore::Vector2(1.0f, 1.0f)));
-                REQUIRE(Common::Approx(a2, CSCore::Vector2(1.0f, 1.0f)));
-                REQUIRE(Common::Approx(a3, CSCore::Vector2(1.0f, 1.0f)));
-                REQUIRE(Common::Approx(a4, CSCore::Vector2(-2.0f, -2.0f)));
+                REQUIRE(Common::Approx(a1, CS::Vector2(1.0f, 1.0f)));
+                REQUIRE(Common::Approx(a2, CS::Vector2(1.0f, 1.0f)));
+                REQUIRE(Common::Approx(a3, CS::Vector2(1.0f, 1.0f)));
+                REQUIRE(Common::Approx(a4, CS::Vector2(-2.0f, -2.0f)));
             }
             //------------------------------------------------------------------------------
             /// Confirms that the maximum value of two vectors can be correctly evaluated.
@@ -220,29 +220,29 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Maximum")
             {
-                CSCore::Vector2 a1(1.0f, 1.0f);
-                CSCore::Vector2 a2(2.0f, 2.0f);
-                CSCore::Vector2 a3(1.0f, 2.0f);
-                CSCore::Vector2 a4(-1.0f, -1.0f);
-                CSCore::Vector2 b1(2.0f, 2.0f);
-                CSCore::Vector2 b2(1.0f, 1.0f);
-                CSCore::Vector2 b3(2.0f, 1.0f);
-                CSCore::Vector2 b4(-2.0f, -2.0f);
+                CS::Vector2 a1(1.0f, 1.0f);
+                CS::Vector2 a2(2.0f, 2.0f);
+                CS::Vector2 a3(1.0f, 2.0f);
+                CS::Vector2 a4(-1.0f, -1.0f);
+                CS::Vector2 b1(2.0f, 2.0f);
+                CS::Vector2 b2(1.0f, 1.0f);
+                CS::Vector2 b3(2.0f, 1.0f);
+                CS::Vector2 b4(-2.0f, -2.0f);
                 
-                REQUIRE(Common::Approx(CSCore::Vector2::Max(a1, b1), CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Max(a2, b2), CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Max(a3, b3), CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Max(a4, b4), CSCore::Vector2(-1.0f, -1.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Max(a1, b1), CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Max(a2, b2), CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Max(a3, b3), CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Max(a4, b4), CS::Vector2(-1.0f, -1.0f)));
                 
                 a1.Max(b1);
                 a2.Max(b2);
                 a3.Max(b3);
                 a4.Max(b4);
                 
-                REQUIRE(Common::Approx(a1, CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(a2, CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(a3, CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(a4, CSCore::Vector2(-1.0f, -1.0f)));
+                REQUIRE(Common::Approx(a1, CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(a2, CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(a3, CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(a4, CS::Vector2(-1.0f, -1.0f)));
             }
             //------------------------------------------------------------------------------
             /// Confirms that a vectors components can be clamped within a range.
@@ -251,25 +251,25 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Clamp")
             {
-                CSCore::Vector2 value1(0.0f, 0.0f);
-                CSCore::Vector2 value2(2.0f, 2.0f);
-                CSCore::Vector2 value3(4.0f, 4.0f);
-                CSCore::Vector2 value4(4.0f, 0.0f);
-                CSCore::Vector2 value5(0.0f, 0.0f);
-                CSCore::Vector2 value6(-2.0f, -2.0f);
-                CSCore::Vector2 value7(-4.0f, -4.0f);
-                CSCore::Vector2 min1(1.0f, 1.0f);
-                CSCore::Vector2 min2(-3.0f, -3.0f);
-                CSCore::Vector2 max1(3.0f, 3.0f);
-                CSCore::Vector2 max2(-1.0f, -1.0f);
+                CS::Vector2 value1(0.0f, 0.0f);
+                CS::Vector2 value2(2.0f, 2.0f);
+                CS::Vector2 value3(4.0f, 4.0f);
+                CS::Vector2 value4(4.0f, 0.0f);
+                CS::Vector2 value5(0.0f, 0.0f);
+                CS::Vector2 value6(-2.0f, -2.0f);
+                CS::Vector2 value7(-4.0f, -4.0f);
+                CS::Vector2 min1(1.0f, 1.0f);
+                CS::Vector2 min2(-3.0f, -3.0f);
+                CS::Vector2 max1(3.0f, 3.0f);
+                CS::Vector2 max2(-1.0f, -1.0f);
                 
-                REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value1, min1, max1), CSCore::Vector2(1.0f, 1.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value2, min1, max1), CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value3, min1, max1), CSCore::Vector2(3.0f, 3.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value4, min1, max1), CSCore::Vector2(3.0f, 1.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value5, min2, max2), CSCore::Vector2(-1.0f, -1.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value6, min2, max2), CSCore::Vector2(-2.0f, -2.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Clamp(value7, min2, max2), CSCore::Vector2(-3.0f, -3.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Clamp(value1, min1, max1), CS::Vector2(1.0f, 1.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Clamp(value2, min1, max1), CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Clamp(value3, min1, max1), CS::Vector2(3.0f, 3.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Clamp(value4, min1, max1), CS::Vector2(3.0f, 1.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Clamp(value5, min2, max2), CS::Vector2(-1.0f, -1.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Clamp(value6, min2, max2), CS::Vector2(-2.0f, -2.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Clamp(value7, min2, max2), CS::Vector2(-3.0f, -3.0f)));
                 
                 value1.Clamp(min1, max1);
                 value2.Clamp(min1, max1);
@@ -279,13 +279,13 @@ namespace CSTest
                 value6.Clamp(min2, max2);
                 value7.Clamp(min2, max2);
                 
-                REQUIRE(Common::Approx(value1, CSCore::Vector2(1.0f, 1.0f)));
-                REQUIRE(Common::Approx(value2, CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(value3, CSCore::Vector2(3.0f, 3.0f)));
-                REQUIRE(Common::Approx(value4, CSCore::Vector2(3.0f, 1.0f)));
-                REQUIRE(Common::Approx(value5, CSCore::Vector2(-1.0f, -1.0f)));
-                REQUIRE(Common::Approx(value6, CSCore::Vector2(-2.0f, -2.0f)));
-                REQUIRE(Common::Approx(value7, CSCore::Vector2(-3.0f, -3.0f)));
+                REQUIRE(Common::Approx(value1, CS::Vector2(1.0f, 1.0f)));
+                REQUIRE(Common::Approx(value2, CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(value3, CS::Vector2(3.0f, 3.0f)));
+                REQUIRE(Common::Approx(value4, CS::Vector2(3.0f, 1.0f)));
+                REQUIRE(Common::Approx(value5, CS::Vector2(-1.0f, -1.0f)));
+                REQUIRE(Common::Approx(value6, CS::Vector2(-2.0f, -2.0f)));
+                REQUIRE(Common::Approx(value7, CS::Vector2(-3.0f, -3.0f)));
             }
             //------------------------------------------------------------------------------
             /// Confirms that a vector can be linearly interpolated.
@@ -294,19 +294,19 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Lerp")
             {
-                CSCore::Vector2 a1(1.0f, 1.0f);
-                CSCore::Vector2 a2(-1.0f, -1.0f);
-                CSCore::Vector2 b1(3.0f, 3.0f);
-                CSCore::Vector2 b2(-3.0f, -3.0f);
+                CS::Vector2 a1(1.0f, 1.0f);
+                CS::Vector2 a2(-1.0f, -1.0f);
+                CS::Vector2 b1(3.0f, 3.0f);
+                CS::Vector2 b2(-3.0f, -3.0f);
                 
-                REQUIRE(Common::Approx(CSCore::Vector2::Lerp(a1, b1, 0.5f), CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Lerp(a2, b2, 0.5f), CSCore::Vector2(-2.0f, -2.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Lerp(a1, b1, 0.5f), CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(CS::Vector2::Lerp(a2, b2, 0.5f), CS::Vector2(-2.0f, -2.0f)));
                 
                 a1.Lerp(b1, 0.5f);
                 a2.Lerp(b2, 0.5f);
                 
-                REQUIRE(Common::Approx(a1, CSCore::Vector2(2.0f, 2.0f)));
-                REQUIRE(Common::Approx(a2, CSCore::Vector2(-2.0f, -2.0f)));
+                REQUIRE(Common::Approx(a1, CS::Vector2(2.0f, 2.0f)));
+                REQUIRE(Common::Approx(a2, CS::Vector2(-2.0f, -2.0f)));
             }
             //------------------------------------------------------------------------------
             /// Confirms that the dot product of two vectors can be correctly calculated.
@@ -315,16 +315,16 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Dot Product")
             {
-                CSCore::Vector2 a(1.0f, 0.0f);
-                CSCore::Vector2 b(0.0f, 1.0f);
-                CSCore::Vector2 c(-1.0f, 0.0f);
-                CSCore::Vector2 d(1.0f, 2.0f);
-                CSCore::Vector2 e(3.0f, 4.0f);
+                CS::Vector2 a(1.0f, 0.0f);
+                CS::Vector2 b(0.0f, 1.0f);
+                CS::Vector2 c(-1.0f, 0.0f);
+                CS::Vector2 d(1.0f, 2.0f);
+                CS::Vector2 e(3.0f, 4.0f);
                 
-                REQUIRE(Common::Approx(CSCore::Vector2::DotProduct(a, a), 1.0f));
-                REQUIRE(Common::Approx(CSCore::Vector2::DotProduct(a, b), 0.0f));
-                REQUIRE(Common::Approx(CSCore::Vector2::DotProduct(a, c), -1.0f));
-                REQUIRE(Common::Approx(CSCore::Vector2::DotProduct(d, e), 11.0f));
+                REQUIRE(Common::Approx(CS::Vector2::DotProduct(a, a), 1.0f));
+                REQUIRE(Common::Approx(CS::Vector2::DotProduct(a, b), 0.0f));
+                REQUIRE(Common::Approx(CS::Vector2::DotProduct(a, c), -1.0f));
+                REQUIRE(Common::Approx(CS::Vector2::DotProduct(d, e), 11.0f));
             }
             //------------------------------------------------------------------------------
             /// Confirms that the z component of the cross product of two vectors can be
@@ -334,10 +334,10 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Cross Product Z")
             {
-                CSCore::Vector2 a(1.0f, 2.0f);
-                CSCore::Vector2 b(3.0f, 4.0f);
+                CS::Vector2 a(1.0f, 2.0f);
+                CS::Vector2 b(3.0f, 4.0f);
                 
-                REQUIRE(Common::Approx(CSCore::Vector2::CrossProductZ(a, b), -2.0f));
+                REQUIRE(Common::Approx(CS::Vector2::CrossProductZ(a, b), -2.0f));
             }
             //------------------------------------------------------------------------------
             /// Confirms that the angle between two vectors can be correctly calculated.
@@ -346,12 +346,12 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Angle")
             {
-                CSCore::Vector2 a(1.0f, 2.0f);
-                CSCore::Vector2 b(3.0f, 4.0f);
+                CS::Vector2 a(1.0f, 2.0f);
+                CS::Vector2 b(3.0f, 4.0f);
                 
-                REQUIRE(Common::Approx(CSCore::Vector2::Angle(a, a), 0.0f));
-                REQUIRE(Common::Approx(CSCore::Vector2::Angle(a, b), 0.179853559f));
-                REQUIRE(Common::Approx(CSCore::Vector2::Angle(b, a), 0.179853559f));
+                REQUIRE(Common::Approx(CS::Vector2::Angle(a, a), 0.0f));
+                REQUIRE(Common::Approx(CS::Vector2::Angle(a, b), 0.179853559f));
+                REQUIRE(Common::Approx(CS::Vector2::Angle(b, a), 0.179853559f));
             }
             //------------------------------------------------------------------------------
             /// Confirms that a vector can be rotated correctly.
@@ -360,19 +360,19 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Rotate")
             {
-                CSCore::Vector2 pointA(1.0f, 2.0f);
-                CSCore::Vector2 pointB(-3.0f, -4.0f);
+                CS::Vector2 pointA(1.0f, 2.0f);
+                CS::Vector2 pointB(-3.0f, -4.0f);
                 f32 angleA = 0.5f;
                 f32 angleB = -0.5f;
                 
-                REQUIRE(Common::Approx(CSCore::Vector2::Rotate(pointA, angleA), CSCore::Vector2(1.83643365f, 1.27573955f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Rotate(pointB, angleB), CSCore::Vector2(-0.715045452f, -4.94860697f)));
+                REQUIRE(Common::Approx(CS::Vector2::Rotate(pointA, angleA), CS::Vector2(1.83643365f, 1.27573955f)));
+                REQUIRE(Common::Approx(CS::Vector2::Rotate(pointB, angleB), CS::Vector2(-0.715045452f, -4.94860697f)));
                 
                 pointA.Rotate(angleA);
                 pointB.Rotate(angleB);
                 
-                REQUIRE(Common::Approx(pointA, CSCore::Vector2(1.83643365f, 1.27573955f)));
-                REQUIRE(Common::Approx(pointB, CSCore::Vector2(-0.715045452f, -4.94860697f)));
+                REQUIRE(Common::Approx(pointA, CS::Vector2(1.83643365f, 1.27573955f)));
+                REQUIRE(Common::Approx(pointB, CS::Vector2(-0.715045452f, -4.94860697f)));
             }
             //------------------------------------------------------------------------------
             /// Confirms that the fast transform method can be calculated correctly.
@@ -381,19 +381,19 @@ namespace CSTest
             //------------------------------------------------------------------------------
             SECTION("Transform2x3")
             {
-                CSCore::Vector2 pointA(1.0f, 2.0f);
-                CSCore::Vector2 pointB(-3.0f, -4.0f);
-                auto transformA = CSCore::Matrix3::CreateTransform(CSCore::Vector2(1.0f, 2.0f), CSCore::Vector2(3.0f, 4.0f), 5.0f);
-                auto transformB = CSCore::Matrix3::CreateTransform(CSCore::Vector2(-1.0f, -2.0f), CSCore::Vector2(-3.0f, -4.0f), -5.0f);
+                CS::Vector2 pointA(1.0f, 2.0f);
+                CS::Vector2 pointB(-3.0f, -4.0f);
+                auto transformA = CS::Matrix3::CreateTransform(CS::Vector2(1.0f, 2.0f), CS::Vector2(3.0f, 4.0f), 5.0f);
+                auto transformB = CS::Matrix3::CreateTransform(CS::Vector2(-1.0f, -2.0f), CS::Vector2(-3.0f, -4.0f), -5.0f);
                 
-                REQUIRE(Common::Approx(CSCore::Vector2::Transform2x3(pointA, transformA), CSCore::Vector2(9.52238082f, 1.39252472f)));
-                REQUIRE(Common::Approx(CSCore::Vector2::Transform2x3(pointB, transformB), CSCore::Vector2(-13.7898293f, 11.1689138f)));
+                REQUIRE(Common::Approx(CS::Vector2::Transform2x3(pointA, transformA), CS::Vector2(9.52238082f, 1.39252472f)));
+                REQUIRE(Common::Approx(CS::Vector2::Transform2x3(pointB, transformB), CS::Vector2(-13.7898293f, 11.1689138f)));
                 
                 pointA.Transform2x3(transformA);
                 pointB.Transform2x3(transformB);
                 
-                REQUIRE(Common::Approx(pointA, CSCore::Vector2(9.52238082f, 1.39252472f)));
-                REQUIRE(Common::Approx(pointB, CSCore::Vector2(-13.7898293f, 11.1689138f)));
+                REQUIRE(Common::Approx(pointA, CS::Vector2(9.52238082f, 1.39252472f)));
+                REQUIRE(Common::Approx(pointB, CS::Vector2(-13.7898293f, 11.1689138f)));
             }
         }
     }

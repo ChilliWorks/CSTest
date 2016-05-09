@@ -58,44 +58,44 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit() noexcept
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
             Common::OptionsMenuDesc optionsMenuDesc;
             
             optionsMenuDesc.AddButton("Lighting", [=]()
             {
-               CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<Lighting::State>());
+               CS::Application::Get()->GetStateManager()->Push(std::make_shared<Lighting::State>());
             });
             
             optionsMenuDesc.AddButton("Particles", [=]()
             {
-                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<Particle::State>());
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Particle::State>());
             });
 
             optionsMenuDesc.AddButton("Gestures", [=]()
             {
-                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<Gesture::State>());
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Gesture::State>());
             });
 
             optionsMenuDesc.AddButton("Cricket Audio", [=]()
             {
-                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<CricketAudio::State>());
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<CricketAudio::State>());
             });
 
             optionsMenuDesc.AddButton("Download Progress", [=]()
             {
-                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<DownloadProgress::State>());
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<DownloadProgress::State>());
             });
 
 #ifndef CS_TARGETPLATFORM_WINDOWS
             optionsMenuDesc.AddButton("Web View", [=]()
             {
-                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<WebView::State>());
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<WebView::State>());
             });
 
             optionsMenuDesc.AddButton("Email Composer", [=]()
             {
-                CSCore::Application::Get()->GetStateManager()->Push(std::make_shared<EmailComposer::State>());
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<EmailComposer::State>());
             });
 #endif
             

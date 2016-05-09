@@ -54,23 +54,23 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool BasicEntityFactory::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool BasicEntityFactory::IsA(CS::InterfaceIDType in_interfaceId) const
         {
             return (BasicEntityFactory::InterfaceID == in_interfaceId);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CSCore::EntityUPtr BasicEntityFactory::CreateThirdPersonCamera(const CSCore::EntitySPtr& in_target, const CSCore::Vector3& in_targetOffset, f32 in_distance, f32 in_horizontalAngle, f32 in_verticalAngle,
+        CS::EntityUPtr BasicEntityFactory::CreateThirdPersonCamera(const CS::EntitySPtr& in_target, const CS::Vector3& in_targetOffset, f32 in_distance, f32 in_horizontalAngle, f32 in_verticalAngle,
                                                                        f32 in_horizontalAngularVelocity)
         {
-            CS_ASSERT(CSCore::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            CSRendering::CameraComponentSPtr camComponent = m_renderComponentFactory->CreatePerspectiveCameraComponent(3.14f / 3.0f, 1.0f, 30.0f);
+            CS::CameraComponentSPtr camComponent = m_renderComponentFactory->CreatePerspectiveCameraComponent(3.14f / 3.0f, 1.0f, 30.0f);
             auto followerComponent = std::make_shared<FollowerComponent>(in_target, in_targetOffset, in_distance, in_horizontalAngle, in_verticalAngle);
             auto orbiterComponent = std::make_shared<OrbiterComponent>(in_horizontalAngularVelocity);
             
-            CSCore::EntityUPtr entity = CSCore::Entity::Create();
-            entity->SetName(CSCore::ToString(m_entityCount++) + "-ThirdPersonCamera");
+            CS::EntityUPtr entity = CS::Entity::Create();
+            entity->SetName(CS::ToString(m_entityCount++) + "-ThirdPersonCamera");
             entity->AddComponent(camComponent);
             entity->AddComponent(followerComponent);
             entity->AddComponent(orbiterComponent);
@@ -79,51 +79,51 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CSCore::EntityUPtr BasicEntityFactory::CreateAmbientLight(const CSCore::Colour& in_colour)
+        CS::EntityUPtr BasicEntityFactory::CreateAmbientLight(const CS::Colour& in_colour)
         {
-            CS_ASSERT(CSCore::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            CSRendering::AmbientLightComponentSPtr ambientLightComponent = m_renderComponentFactory->CreateAmbientLightComponent();
+            CS::AmbientLightComponentSPtr ambientLightComponent = m_renderComponentFactory->CreateAmbientLightComponent();
             ambientLightComponent->SetColour(in_colour);
             
-            auto entity = CSCore::Entity::Create();
-            entity->SetName(CSCore::ToString(m_entityCount++) + "-AmbientLight");
+            auto entity = CS::Entity::Create();
+            entity->SetName(CS::ToString(m_entityCount++) + "-AmbientLight");
             entity->AddComponent(ambientLightComponent);
             return entity;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CSCore::EntityUPtr BasicEntityFactory::CreateDirectionalLight(const CSCore::Colour& in_colour, const CSCore::Vector4& in_shadowVolume)
+        CS::EntityUPtr BasicEntityFactory::CreateDirectionalLight(const CS::Colour& in_colour, const CS::Vector4& in_shadowVolume)
         {
-            CS_ASSERT(CSCore::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            CSRendering::DirectionalLightComponentSPtr directionalLightComponent = m_renderComponentFactory->CreateDirectionalLightComponent(2048);
+            CS::DirectionalLightComponentSPtr directionalLightComponent = m_renderComponentFactory->CreateDirectionalLightComponent(2048);
             directionalLightComponent->SetColour(in_colour);
             directionalLightComponent->SetShadowVolume(in_shadowVolume.x, in_shadowVolume.y, in_shadowVolume.z, in_shadowVolume.w);
             directionalLightComponent->SetShadowTolerance(0.005f);
             
-            auto entity = CSCore::Entity::Create();
-            entity->SetName(CSCore::ToString(m_entityCount++) + "-DirectionalLight");
+            auto entity = CS::Entity::Create();
+            entity->SetName(CS::ToString(m_entityCount++) + "-DirectionalLight");
             entity->AddComponent(directionalLightComponent);
             return entity;
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CSCore::EntityUPtr BasicEntityFactory::CreateRoom(const CSCore::Vector3& in_size)
+        CS::EntityUPtr BasicEntityFactory::CreateRoom(const CS::Vector3& in_size)
         {
-            CS_ASSERT(CSCore::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
             const f32 k_textureRepeatFactor = 0.5f;
-            CSCore::Vector2 textureRepeat(in_size.x * k_textureRepeatFactor, in_size.z * k_textureRepeatFactor);
+            CS::Vector2 textureRepeat(in_size.x * k_textureRepeatFactor, in_size.z * k_textureRepeatFactor);
             
-            CSRendering::MeshCSPtr mesh = m_primitiveModelFactory->CreateBox(in_size, textureRepeat, true);
-            CSRendering::MaterialCSPtr material = m_resourcePool->LoadResource<CSRendering::Material>(CSCore::StorageLocation::k_package, "Materials/CheckeredLit.csmaterial");
+            CS::MeshCSPtr mesh = m_primitiveModelFactory->CreateBox(in_size, textureRepeat, true);
+            CS::MaterialCSPtr material = m_resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, "Materials/CheckeredLit.csmaterial");
             
-            CSRendering::StaticMeshComponentSPtr meshComponent = m_renderComponentFactory->CreateStaticMeshComponent(mesh, material);
+            CS::StaticMeshComponentSPtr meshComponent = m_renderComponentFactory->CreateStaticMeshComponent(mesh, material);
             meshComponent->SetShadowCastingEnabled(false);
             
-            auto entity = CSCore::Entity::Create();
-            entity->SetName(CSCore::ToString(m_entityCount++) + "-Room");
+            auto entity = CS::Entity::Create();
+            entity->SetName(CS::ToString(m_entityCount++) + "-Room");
             entity->AddComponent(meshComponent);
             return entity;
         }
@@ -131,12 +131,12 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void BasicEntityFactory::OnInit()
         {
-            m_resourcePool = CSCore::Application::Get()->GetResourcePool();
+            m_resourcePool = CS::Application::Get()->GetResourcePool();
             
-            m_renderComponentFactory = CSCore::Application::Get()->GetSystem<CSRendering::RenderComponentFactory>();
+            m_renderComponentFactory = CS::Application::Get()->GetSystem<CS::RenderComponentFactory>();
             CS_ASSERT(m_renderComponentFactory, "BasicEntityFactory is missing required app system: RenderComponentFactory");
             
-            m_primitiveModelFactory = CSCore::Application::Get()->GetSystem<CSRendering::PrimitiveModelFactory>();
+            m_primitiveModelFactory = CS::Application::Get()->GetSystem<CS::PrimitiveModelFactory>();
             CS_ASSERT(m_renderComponentFactory, "BasicEntityFactory is missing required app system: PrimitiveModelFactory");
 
             m_entityCount = 0;

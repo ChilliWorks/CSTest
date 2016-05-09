@@ -46,7 +46,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class OptionsMenuPresenter final : public CSCore::StateSystem
+        class OptionsMenuPresenter final : public CS::StateSystem
         {
         public:
             CS_DECLARE_NAMEDTYPE(OptionsMenuPresenter);
@@ -61,7 +61,7 @@ namespace CSTest
             ///
             /// @return Whether or not the interface is implemented.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const noexcept override;
+            bool IsA(CS::InterfaceIDType in_interfaceId) const noexcept override;
             //------------------------------------------------------------------------------
             /// Presents a series of buttons, each with an associated action.
             ///
@@ -79,7 +79,7 @@ namespace CSTest
             void Dismiss() noexcept;
             
         private:
-            friend class CSCore::State;
+            friend class CS::State;
             //------------------------------------------------------------------------------
             /// A factory method for creating new instances of the system.
             ///
@@ -108,10 +108,10 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnDestroy() noexcept override;
             
-            CSUI::WidgetSPtr m_buttonContainer;
+            CS::WidgetSPtr m_buttonContainer;
             
-            std::vector<CSUI::WidgetSPtr> m_buttons;
-            std::vector<CSCore::EventConnectionUPtr> m_connectionContainer;
+            std::vector<CS::WidgetSPtr> m_buttons;
+            std::vector<CS::EventConnectionUPtr> m_connectionContainer;
         };
     }
 }

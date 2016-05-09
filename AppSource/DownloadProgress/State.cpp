@@ -53,17 +53,17 @@ namespace CSTest
             ///
             /// @return The string representation of the given HTTP result.
             //------------------------------------------------------------------------------
-            std::string ToString(CSNetworking::HttpResponse::Result in_result)
+            std::string ToString(CS::HttpResponse::Result in_result)
             {
                 switch (in_result)
                 {
-                    case ChilliSource::Networking::HttpResponse::Result::k_completed:
+                    case CS::HttpResponse::Result::k_completed:
                         return "Completed";
-                    case ChilliSource::Networking::HttpResponse::Result::k_failed:
+                    case CS::HttpResponse::Result::k_failed:
                         return "Failed";
-                    case ChilliSource::Networking::HttpResponse::Result::k_flushed:
+                    case CS::HttpResponse::Result::k_flushed:
                         return "Flushed";
-                    case ChilliSource::Networking::HttpResponse::Result::k_timeout:
+                    case CS::HttpResponse::Result::k_timeout:
                         return "Timeout";
                     default:
                         return "Unknown result type";
@@ -84,9 +84,9 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
-            GetScene()->SetClearColour(CSCore::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
-            m_httpRequestSystem = CSCore::Application::Get()->GetSystem<CSNetworking::HttpRequestSystem>();
+            m_httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
             CS_ASSERT(m_httpRequestSystem, "Cannot complete HttpRequest smoke test as the system could not be created!");
             
             const u32 k_downloadBufferSize = 100 * 1024;
@@ -97,7 +97,7 @@ namespace CSTest
             optionsMenuDesc.AddButton("Test download progress", [=]()
             {
                 //TODO: This doesn't work on iOS as HTTP requests aren't allowed. We need to find a file that can be downloaded over HTTPS for testing.
-                m_downloadProgressTestSystem->StartDownloadTest("http://download.thinkbroadband.com/5MB.zip", [=](const CSNetworking::HttpResponse& in_completeResponse)
+                m_downloadProgressTestSystem->StartDownloadTest("http://download.thinkbroadband.com/5MB.zip", [=](const CS::HttpResponse& in_completeResponse)
                 {
                     PresentHttpResponse(in_completeResponse);
                 });
@@ -107,12 +107,12 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void State::PresentHttpResponse(const CSNetworking::HttpResponse& in_response)
+        void State::PresentHttpResponse(const CS::HttpResponse& in_response)
         {
             //Ignore flush responses
-            if(in_response.GetResult() != CSNetworking::HttpResponse::Result::k_flushed)
+            if(in_response.GetResult() != CS::HttpResponse::Result::k_flushed)
             {
-                m_resultPresenter->Present("Request Status: " + ToString(in_response.GetResult()) + "\nResponse Code: " + CSCore::ToString(in_response.GetCode()));
+                m_resultPresenter->Present("Request Status: " + ToString(in_response.GetResult()) + "\nResponse Code: " + CS::ToString(in_response.GetCode()));
             }
         }
     }

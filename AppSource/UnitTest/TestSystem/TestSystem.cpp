@@ -49,7 +49,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool TestSystem::IsA(CSCore::InterfaceIDType in_interfaceId) const
+        bool TestSystem::IsA(CS::InterfaceIDType in_interfaceId) const
         {
             return (TestSystem::InterfaceID == in_interfaceId);
         }

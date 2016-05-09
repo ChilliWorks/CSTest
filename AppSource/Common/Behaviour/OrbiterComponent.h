@@ -43,7 +43,7 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        class OrbiterComponent final : public CSCore::Component
+        class OrbiterComponent final : public CS::Component
         {
         public:
             CS_DECLARE_NAMEDTYPE(OrbiterComponent);
@@ -64,7 +64,7 @@ namespace CSTest
             ///
             /// @return Whether or not the interface is implemented.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            bool IsA(CS::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
             /// @author Ian Copland
             ///

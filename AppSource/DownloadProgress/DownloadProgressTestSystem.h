@@ -46,7 +46,7 @@ namespace CSTest
         ///
         /// @author Hugh McLaughlin
         //------------------------------------------------------------------------------
-        class DownloadProgressTestSystem final : public CSCore::StateSystem
+        class DownloadProgressTestSystem final : public CS::StateSystem
         {
         public:
             CS_DECLARE_NAMEDTYPE(DownloadProgressTestSystem);
@@ -58,7 +58,7 @@ namespace CSTest
             ///
             /// @param in_response - Http Response
             //------------------------------------------------------------------------------
-            using DownloadCompleteDelegate = std::function<void(const CSNetworking::HttpResponse& in_response)>;
+            using DownloadCompleteDelegate = std::function<void(const CS::HttpResponse& in_response)>;
             
             //------------------------------------------------------------------------------
             /// Allows querying of whether or not the component implements the
@@ -70,7 +70,7 @@ namespace CSTest
             ///
             /// @return Whether the object implements the given interface.
             //------------------------------------------------------------------------------
-            bool IsA(CSCore::InterfaceIDType in_interfaceId) const override;
+            bool IsA(CS::InterfaceIDType in_interfaceId) const override;
             //------------------------------------------------------------------------------
             /// Start the download test
             ///
@@ -83,7 +83,7 @@ namespace CSTest
             
         private:
             
-            friend class CSCore::State;
+            friend class CS::State;
             
             //------------------------------------------------------------------------------
             /// Creates a new instance of the system.
@@ -114,10 +114,10 @@ namespace CSTest
             
         private:
             
-            CSUI::WidgetSPtr m_downloadProgressWidget;
+            CS::WidgetSPtr m_downloadProgressWidget;
             
-            CSCore::TimerUPtr m_downloadProgressUpdateTimer;
-            CSCore::EventConnectionUPtr m_downloadProgressEventConnection;
+            CS::TimerUPtr m_downloadProgressUpdateTimer;
+            CS::EventConnectionUPtr m_downloadProgressEventConnection;
         };
     }
 }

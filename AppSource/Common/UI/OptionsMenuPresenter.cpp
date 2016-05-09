@@ -61,7 +61,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        bool OptionsMenuPresenter::IsA(CSCore::InterfaceIDType in_interfaceId) const noexcept
+        bool OptionsMenuPresenter::IsA(CS::InterfaceIDType in_interfaceId) const noexcept
         {
             return (OptionsMenuPresenter::InterfaceID == in_interfaceId);
         }
@@ -75,22 +75,22 @@ namespace CSTest
 
 			if (in_desc.GetButtons().size() < k_numItemsPerColumn)
 			{
-				auto layoutComponent = m_buttonContainer->GetComponent<CSUI::LayoutComponent>();
-				layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::VListLayoutDef(k_numItemsPerColumn, CSCore::Vector4(0.0f, k_listMargins, 0.0f, k_listMargins), CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f)));
+				auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutComponent>();
+				layoutComponent->ApplyLayoutDef(CS::LayoutDefSPtr(new CS::VListLayoutDef(k_numItemsPerColumn, CS::Vector4(0.0f, k_listMargins, 0.0f, k_listMargins), CS::Vector4::k_zero, k_relativeSpacing, 0.0f)));
 			}
 			else
 			{
-				auto layoutComponent = m_buttonContainer->GetComponent<CSUI::LayoutComponent>();
-				layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::GridLayoutDef(CSUI::GridLayout::CellOrder::k_rowMajor, k_numItemsPerColumn, k_numColumns, CSCore::Vector4::k_zero, CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f, k_relativeSpacing, 0.0f)));
+				auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutComponent>();
+				layoutComponent->ApplyLayoutDef(CS::LayoutDefSPtr(new CS::GridLayoutDef(CS::GridLayout::CellOrder::k_rowMajor, k_numItemsPerColumn, k_numColumns, CS::Vector4::k_zero, CS::Vector4::k_zero, k_relativeSpacing, 0.0f, k_relativeSpacing, 0.0f)));
 			}
 
-            auto basicWidgetFactory = CSCore::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
+            auto basicWidgetFactory = CS::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
             for (const auto& buttonDesc : in_desc.GetButtons())
             {
-                CSUI::WidgetSPtr button = basicWidgetFactory->CreateStretchableButton(CSCore::Vector2::k_one, buttonDesc.m_name, CSRendering::AlignmentAnchor::k_middleCentre, CSCore::Colour(0.92f, 0.95f, 0.98f, 1.0f));
+                CS::WidgetSPtr button = basicWidgetFactory->CreateStretchableButton(CS::Vector2::k_one, buttonDesc.m_name, CS::AlignmentAnchor::k_middleCentre, CS::Colour(0.92f, 0.95f, 0.98f, 1.0f));
                 m_buttonContainer->AddWidget(button);
                 
-                auto connection = button->GetReleasedInsideEvent().OpenConnection([=](CSUI::Widget* in_widget, const CSInput::Pointer& in_pointer, CSInput::Pointer::InputType in_inputType)
+                auto connection = button->GetReleasedInsideEvent().OpenConnection([=](CS::Widget* in_widget, const CS::Pointer& in_pointer, CS::Pointer::InputType in_inputType)
                 {
                     buttonDesc.m_action();
                 });
@@ -110,22 +110,22 @@ namespace CSTest
                 button->RemoveFromParent();
             }
             
-            auto layoutComponent = m_buttonContainer->GetComponent<CSUI::LayoutComponent>();
-            layoutComponent->ApplyLayoutDef(CSUI::LayoutDefSPtr(new CSUI::VListLayoutDef(k_numItemsPerColumn, CSCore::Vector4::k_zero, CSCore::Vector4::k_zero, k_relativeSpacing, 0.0f)));
+            auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutComponent>();
+            layoutComponent->ApplyLayoutDef(CS::LayoutDefSPtr(new CS::VListLayoutDef(k_numItemsPerColumn, CS::Vector4::k_zero, CS::Vector4::k_zero, k_relativeSpacing, 0.0f)));
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void OptionsMenuPresenter::OnInit() noexcept
         {
-            auto resourcePool = CSCore::Application::Get()->GetResourcePool();
-            auto mediumFont = resourcePool->LoadResource<CSRendering::Font>(CSCore::StorageLocation::k_package, "Fonts/ArialMed.csfont");
+            auto resourcePool = CS::Application::Get()->GetResourcePool();
+            auto mediumFont = resourcePool->LoadResource<CS::Font>(CS::StorageLocation::k_package, "Fonts/ArialMed.csfont");
             
-            auto widgetFactory = CSCore::Application::Get()->GetWidgetFactory();
+            auto widgetFactory = CS::Application::Get()->GetWidgetFactory();
             m_buttonContainer = widgetFactory->CreateLayout();
-            m_buttonContainer->SetParentalAnchor(CSRendering::AlignmentAnchor::k_topCentre);
-            m_buttonContainer->SetOriginAnchor(CSRendering::AlignmentAnchor::k_topCentre);
-            m_buttonContainer->SetRelativePosition(CSCore::Vector2(0.0f, -0.15f));
-            m_buttonContainer->SetRelativeSize(CSCore::Vector2(0.75f, 0.65f));
+            m_buttonContainer->SetParentalAnchor(CS::AlignmentAnchor::k_topCentre);
+            m_buttonContainer->SetOriginAnchor(CS::AlignmentAnchor::k_topCentre);
+            m_buttonContainer->SetRelativePosition(CS::Vector2(0.0f, -0.15f));
+            m_buttonContainer->SetRelativeSize(CS::Vector2(0.75f, 0.65f));
             
             Dismiss();
             
