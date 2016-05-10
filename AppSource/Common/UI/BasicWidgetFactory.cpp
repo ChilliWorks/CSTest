@@ -78,7 +78,7 @@ namespace CSTest
             
             auto buttonComponent = button->GetComponent<CS::HighlightComponent>();
             buttonComponent->SetHighlightColour(CS::Colour::k_lightGrey);
-            buttonComponent->SetNormalDrawableDef(CS::DrawableDefCSPtr(new CS::StandardDrawableDef(texture, atlas, "Button01", in_colour)));
+            buttonComponent->SetNormalDrawableDef(CS::UIDrawableDefCSPtr(new CS::StandardUIDrawableDef(texture, atlas, "Button01", in_colour)));
             
             button->AddWidget(text);
             
@@ -106,7 +106,7 @@ namespace CSTest
             
             auto buttonComponent = button->GetComponent<CS::HighlightComponent>();
             buttonComponent->SetHighlightColour(CS::Colour::k_lightGrey);
-            buttonComponent->SetNormalDrawableDef(CS::DrawableDefCSPtr(new CS::NinePatchDrawableDef(texture, atlas, "Button01", CS::Vector4(0.15f, 0.15f, 0.15f, 0.15f), in_colour)));
+            buttonComponent->SetNormalDrawableDef(CS::UIDrawableDefCSPtr(new CS::NinePatchUIDrawableDef(texture, atlas, "Button01", CS::Vector4(0.15f, 0.15f, 0.15f, 0.15f), in_colour)));
             
             button->AddWidget(text);
             
