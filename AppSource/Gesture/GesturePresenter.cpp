@@ -238,7 +238,7 @@ namespace CSTest
             auto basicWidgetFactory = CS::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
             auto label = basicWidgetFactory->CreateLabel(CS::Vector2(0.9f, 0.8f), smallFont, "", CS::AlignmentAnchor::k_middleCentre,
                                                          CS::HorizontalTextJustification::k_left, CS::VerticalTextJustification::k_top);
-            m_textComponent = label->GetComponent<CS::TextComponent>();
+            m_textComponent = label->GetComponent<CS::TextUIComponent>();
 
             auto uiCanvas = GetState()->GetUICanvas();
             uiCanvas->AddWidget(std::move(label));

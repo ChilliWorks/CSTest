@@ -163,7 +163,7 @@ namespace CSTest
             
             bool m_uiDirty = true;
             CS::WidgetSPtr m_rootUI;
-            CS::TextComponent* m_textComponent;
+            CS::TextUIComponent* m_textComponent;
         };
     }
 }

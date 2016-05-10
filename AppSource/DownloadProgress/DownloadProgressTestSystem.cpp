@@ -76,9 +76,9 @@ namespace CSTest
             auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
             
             auto progressBar = m_downloadProgressWidget->GetWidgetRecursive("ProgressBar");
-            auto progressBarComponent = progressBar->GetComponent<CS::ProgressBarComponent>();
+            auto progressBarComponent = progressBar->GetComponent<CS::ProgressBarUIComponent>();
             auto progressLabel = m_downloadProgressWidget->GetWidgetRecursive("ProgressText");
-            auto progressTextComponent = progressLabel->GetComponent<CS::TextComponent>();
+            auto progressTextComponent = progressLabel->GetComponent<CS::TextUIComponent>();
             
             GetState()->GetUICanvas()->AddWidget(m_downloadProgressWidget);
             

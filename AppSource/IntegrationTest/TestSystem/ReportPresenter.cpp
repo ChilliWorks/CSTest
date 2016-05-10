@@ -137,10 +137,10 @@ namespace CSTest
             CS_ASSERT(m_centreText, "Cannot set the text before the text widgets are created.");
             CS_ASSERT(m_bodyText, "Cannot set the text before the text widgets are created.");
             
-            auto textComponent = m_centreText->GetComponent<CS::TextComponent>();
+            auto textComponent = m_centreText->GetComponent<CS::TextUIComponent>();
             textComponent->SetText(in_text);
             
-            textComponent = m_bodyText->GetComponent<CS::TextComponent>();
+            textComponent = m_bodyText->GetComponent<CS::TextUIComponent>();
             textComponent->SetText("");
         }
         //------------------------------------------------------------------------------
@@ -150,10 +150,10 @@ namespace CSTest
             CS_ASSERT(m_centreText, "Cannot set the text before the text widgets are created.");
             CS_ASSERT(m_bodyText, "Cannot set the text before the text widgets are created.");
             
-            auto textComponent = m_centreText->GetComponent<CS::TextComponent>();
+            auto textComponent = m_centreText->GetComponent<CS::TextUIComponent>();
             textComponent->SetText("");
             
-            textComponent = m_bodyText->GetComponent<CS::TextComponent>();
+            textComponent = m_bodyText->GetComponent<CS::TextUIComponent>();
             textComponent->SetText(in_text);
         }
         //------------------------------------------------------------------------------

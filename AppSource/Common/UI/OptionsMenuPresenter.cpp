@@ -75,12 +75,12 @@ namespace CSTest
 
 			if (in_desc.GetButtons().size() < k_numItemsPerColumn)
 			{
-				auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutComponent>();
+				auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutUIComponent>();
 				layoutComponent->ApplyLayoutDef(CS::UILayoutDefSPtr(new CS::VListUILayoutDef(k_numItemsPerColumn, CS::Vector4(0.0f, k_listMargins, 0.0f, k_listMargins), CS::Vector4::k_zero, k_relativeSpacing, 0.0f)));
 			}
 			else
 			{
-				auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutComponent>();
+				auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutUIComponent>();
 				layoutComponent->ApplyLayoutDef(CS::UILayoutDefSPtr(new CS::GridUILayoutDef(CS::GridUILayout::CellOrder::k_rowMajor, k_numItemsPerColumn, k_numColumns, CS::Vector4::k_zero, CS::Vector4::k_zero, k_relativeSpacing, 0.0f, k_relativeSpacing, 0.0f)));
 			}
 
@@ -110,7 +110,7 @@ namespace CSTest
                 button->RemoveFromParent();
             }
             
-            auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutComponent>();
+            auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutUIComponent>();
             layoutComponent->ApplyLayoutDef(CS::UILayoutDefSPtr(new CS::VListUILayoutDef(k_numItemsPerColumn, CS::Vector4::k_zero, CS::Vector4::k_zero, k_relativeSpacing, 0.0f)));
         }
         //------------------------------------------------------------------------------

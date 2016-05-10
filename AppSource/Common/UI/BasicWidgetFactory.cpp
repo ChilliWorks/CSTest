@@ -76,7 +76,7 @@ namespace CSTest
             button->SetSizePolicy(in_sizePolicy);
             button->SetRelativeSize(in_size);
             
-            auto buttonComponent = button->GetComponent<CS::HighlightComponent>();
+            auto buttonComponent = button->GetComponent<CS::HighlightUIComponent>();
             buttonComponent->SetHighlightColour(CS::Colour::k_lightGrey);
             buttonComponent->SetNormalDrawableDef(CS::UIDrawableDefCSPtr(new CS::StandardUIDrawableDef(texture, atlas, "Button01", in_colour)));
             
@@ -104,7 +104,7 @@ namespace CSTest
             button->SetOriginAnchor(in_alignment);
             button->SetRelativeSize(in_size);
             
-            auto buttonComponent = button->GetComponent<CS::HighlightComponent>();
+            auto buttonComponent = button->GetComponent<CS::HighlightUIComponent>();
             buttonComponent->SetHighlightColour(CS::Colour::k_lightGrey);
             buttonComponent->SetNormalDrawableDef(CS::UIDrawableDefCSPtr(new CS::NinePatchUIDrawableDef(texture, atlas, "Button01", CS::Vector4(0.15f, 0.15f, 0.15f, 0.15f), in_colour)));
             
@@ -126,7 +126,7 @@ namespace CSTest
             text->SetOriginAnchor(in_alignment);
             text->SetRelativeSize(in_size);
             
-            auto textComponent = text->GetComponent<CS::TextComponent>();
+            auto textComponent = text->GetComponent<CS::TextUIComponent>();
             textComponent->SetFont(in_font);
             textComponent->SetText(in_text);
             textComponent->SetTextColour(CS::Colour::k_black);
