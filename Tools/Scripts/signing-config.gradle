@@ -30,7 +30,7 @@ ext {
     cstKeyStoreFileProperty = "signing.properties.file"
 
     /**
-     * Reads the property file described by the 'signing.property.file' property in
+     * Reads the property file described by the 'signing.properties.file' property in
      * gradle.properties to get the signing config data. This is then applied to
      * the release signing config. If no property file can be found, then blank
      * values will be left, which will mean the release build will fail.
