@@ -48,26 +48,26 @@ namespace CSTest
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        void CreateSystems() override;
+        void CreateSystems() noexcept override;
         //------------------------------------------------------------------------------
         /// Initialisation event called immediately after create systems and before
         /// push initial state.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        void OnInit() override;
+        void OnInit() noexcept override;
         //------------------------------------------------------------------------------
         /// Creates the first state that will be added to the state stack.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        void PushInitialState() override;
+        void PushInitialState() noexcept override;
         //------------------------------------------------------------------------------
         /// Called when the application is about to be destroyed.
         ///
         /// @author Ian Copland
         //------------------------------------------------------------------------------
-        void OnDestroy() override;
+        void OnDestroy() noexcept override;
     };
 }
 
