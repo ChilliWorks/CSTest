@@ -192,6 +192,9 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TaskSchedulerTest.cpp">
       <Filter>AppSource\IntegrationTest\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\InputTextStreamTest.cpp">
+      <Filter>AppSource\IntegrationTest\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
