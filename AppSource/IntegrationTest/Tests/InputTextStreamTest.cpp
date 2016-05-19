@@ -71,7 +71,7 @@ namespace CSTest
             
             /// Validate that a file stream created with an invalid path is handled
             ///
-            CSIT_TEST(SuccessTextInputStreamCreateBadStream)
+            CSIT_TEST(ErrorTextInputStreamCreateBadStream)
             {
                 auto fileSystem = CS::Application::Get()->GetFileSystem();
                 auto inputFileStream = fileSystem->CreateTextInputStream(CS::StorageLocation::k_package, k_testBadTextFileName);
@@ -111,7 +111,7 @@ namespace CSTest
             
             /// Validate the fail cases for the readLine function
             ///
-            CSIT_TEST(SuccessTextInputStreamFailedReadLine)
+            CSIT_TEST(ErrorTextInputStreamFailedReadLine)
             {
                 auto inputFileStream = OpenTestTextFile();
                 CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
@@ -209,7 +209,7 @@ namespace CSTest
             
             /// Validate the fail cases for the read function
             ///
-            CSIT_TEST(SuccessTextInputStreamFailedRead)
+            CSIT_TEST(ErrorTextInputStreamFailedRead)
             {
                 auto inputFileStream = OpenTestTextFile();
                 CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
