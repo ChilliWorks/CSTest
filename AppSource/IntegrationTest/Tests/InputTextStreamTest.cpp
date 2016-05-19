@@ -1,7 +1,4 @@
 //
-//  InputTextStreamTest.cpp
-//  CSTest
-//
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2016 Tag Games Limited
@@ -35,24 +32,27 @@ namespace CSTest
 {
     namespace IntegrationTest
     {
-        const std::string k_rootDirectory = "IntegrationTest/FileStream/";
-        const std::string k_testTextFileName = k_rootDirectory + "TestFile.txt";
-        const std::string k_testBadTextFileName = k_rootDirectory + "BadTestFile.txt";
-        
-        const std::string k_testTextFileFirstLine = "This is a test file.";
-        const std::string k_testTextFileSecondLine = "I am on another line!";
-        const std::string k_testTextFileContents = k_testTextFileFirstLine + "\n" + k_testTextFileSecondLine;
-        
         namespace
         {
+            const std::string k_rootDirectory = "IntegrationTest/FileStream/";
+            const std::string k_testTextFileName = k_rootDirectory + "TestFile.txt";
+            const std::string k_testBadTextFileName = k_rootDirectory + "BadTestFile.txt";
+            
+            const std::string k_testTextFileFirstLine = "This is a test file.";
+            const std::string k_testTextFileSecondLine = "I am on another line!";
+            const std::string k_testTextFileContents = k_testTextFileFirstLine + "\n" + k_testTextFileSecondLine;
+            
+            constexpr u32 k_streamReadStartingPosition = 8;
+            constexpr u32 k_streamFailedReadLength = 8;
+            
             /// Opens the test text file
             ///
             /// @return Input Text Stream
             ///
-            static ChilliSource::IInputTextStreamUPtr OpenTestTextFile()
+            CS::IInputTextStreamUPtr OpenTestTextFile()
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                return fileSystem->CreateInputTextStream(ChilliSource::StorageLocation::k_package, k_testTextFileName);
+                return fileSystem->CreateInputTextStream(CS::StorageLocation::k_package, k_testTextFileName);
             }
         }
         
@@ -65,14 +65,8 @@ namespace CSTest
             CSIT_TEST(SuccessInputTextStreamCreate)
             {
                 auto inputFileStream = OpenTestTextFile();
-                if(inputFileStream != nullptr)
-                {
-                    CSIT_PASS();
-                }
-                else
-                {
-                    CSIT_FAIL("Cannot open input stream to file - " + k_testTextFileName);
-                }
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                CSIT_PASS();
             }
             
             /// Validate that a file stream created with an invalid path is handled
@@ -80,16 +74,9 @@ namespace CSTest
             CSIT_TEST(SuccessInputTextStreamCreateBadStream)
             {
                 auto fileSystem = CS::Application::Get()->GetFileSystem();
-                auto inputFileStream = fileSystem->CreateInputTextStream(ChilliSource::StorageLocation::k_package, k_testBadTextFileName);
-                
-                if(inputFileStream == nullptr)
-                {
-                    CSIT_PASS();
-                }
-                else
-                {
-                    CSIT_FAIL("File should not exist - " + k_testBadTextFileName);
-                }
+                auto inputFileStream = fileSystem->CreateInputTextStream(CS::StorageLocation::k_package, k_testBadTextFileName);
+                CSIT_ASSERT(!inputFileStream, "File should not exist: " + k_testBadTextFileName);
+                CSIT_PASS();
             }
             
             /// Validate that the whole file can be read
@@ -97,22 +84,11 @@ namespace CSTest
             CSIT_TEST(SuccessInputTextStreamReadAll)
             {
                 auto inputFileStream = OpenTestTextFile();
-                if(inputFileStream != nullptr)
-                {
-                    auto fileContents = inputFileStream->ReadAll();
-                    if(fileContents == k_testTextFileContents)
-                    {
-                        CSIT_PASS();
-                    }
-                    else
-                    {
-                        CSIT_FAIL("File contents do not match expected contents - " + fileContents);
-                    }
-                }
-                else
-                {
-                    CSIT_FAIL("Cannot open input stream to file - " + k_testTextFileName);
-                }
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                
+                auto fileContents = inputFileStream->ReadAll();
+                CSIT_ASSERT(fileContents == k_testTextFileContents, "File contents do not match expected contents: " + fileContents);
+                CSIT_PASS();
             }
             
             /// Validate that a line can be read
@@ -120,29 +96,17 @@ namespace CSTest
             CSIT_TEST(SuccessInputTextStreamReadLine)
             {
                 auto inputFileStream = OpenTestTextFile();
-                if(inputFileStream != nullptr)
-                {
-                    std::string firstLine, secondLine, expectedFailureLine = "";
-                    
-                    //Try 3 readlines, first 2 should be successfull, third is expected to fail as it should be passed E.O.F.
-                    auto firstLineSuccess = inputFileStream->ReadLine(firstLine);
-                    auto secondLineSuccess = inputFileStream->ReadLine(secondLine);
-                    auto expectedFailure = inputFileStream->ReadLine(expectedFailureLine);
-                    
-                    bool readsSuccessfull = firstLineSuccess && secondLineSuccess && !expectedFailure;
-                    if(readsSuccessfull && firstLine == k_testTextFileFirstLine && secondLine == k_testTextFileSecondLine && expectedFailureLine.empty())
-                    {
-                        CSIT_PASS();
-                    }
-                    else
-                    {
-                        CSIT_FAIL("File line contents do not match expected contents.");
-                    }
-                }
-                else
-                {
-                    CSIT_FAIL("Cannot open input stream to file - " + k_testTextFileName);
-                }
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                
+                std::string firstLine, secondLine, expectedFailureLine = "";
+                
+                CSIT_ASSERT(inputFileStream->ReadLine(firstLine), "Failed to read first line.");
+                CSIT_ASSERT(firstLine == k_testTextFileFirstLine, "First line does not match expected line.");
+                CSIT_ASSERT(inputFileStream->ReadLine(secondLine), "Failed to read second line.");
+                CSIT_ASSERT(secondLine == k_testTextFileSecondLine, "Second line does not match expected line.");
+                CSIT_ASSERT(!inputFileStream->ReadLine(expectedFailureLine), "Should not have been able to read a third line.");
+                CSIT_ASSERT(expectedFailureLine.empty(), "Failure line should be empty.");
+                CSIT_PASS();
             }
             
             /// Validate that the length of the file
@@ -151,23 +115,9 @@ namespace CSTest
             CSIT_TEST(SuccessInputTextStreamLength)
             {
                 auto inputFileStream = OpenTestTextFile();
-                if(inputFileStream != nullptr)
-                {
-                    auto length = inputFileStream->GetLength();
-                    
-                    if(length == k_testTextFileContents.length())
-                    {
-                        CSIT_PASS();
-                    }
-                    else
-                    {
-                        CSIT_FAIL("File length does not match expected length.");
-                    }
-                }
-                else
-                {
-                    CSIT_FAIL("Cannot open input stream to file - " + k_testTextFileName);
-                }
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                CSIT_ASSERT(inputFileStream->GetLength() == k_testTextFileContents.length(), "File length does not match expected length.");
+                CSIT_PASS();
             }
             
             /// Validate that the starting read position can be set
@@ -175,40 +125,26 @@ namespace CSTest
             CSIT_TEST(SuccessInputTextStreamSetReadPosition)
             {
                 auto inputFileStream = OpenTestTextFile();
-                if(inputFileStream != nullptr)
-                {
-                    std::string firstLine, secondLine;
-                    
-                    //Read in the two lines to set the read pointer to end of file
-                    auto firstLineSuccess = inputFileStream->ReadLine(firstLine);
-                    auto secondLineSuccess = inputFileStream->ReadLine(secondLine);
-                    
-                    //Set the read position to the beginning
-                    inputFileStream->SetReadPosition(0);
-                    
-                    std::string reFirstLine, reSecondLine;
-                    
-                    //Get the first line again
-                    auto reFirstLineSuccess = inputFileStream->ReadLine(reFirstLine);
-                    
-                    //Set the read position to after the first line, +1 so not on the newline
-                    inputFileStream->SetReadPosition(k_testTextFileFirstLine.length() + 1);
-                    auto reSecondLineSuccess = inputFileStream->ReadLine(reSecondLine);
-                    
-                    bool readsSuccessfull = firstLineSuccess && secondLineSuccess && reFirstLineSuccess && reSecondLineSuccess;
-                    if(readsSuccessfull && firstLine == reFirstLine && secondLine == reSecondLine)
-                    {
-                        CSIT_PASS();
-                    }
-                    else
-                    {
-                        CSIT_FAIL("File line contents do not match expected contents.");
-                    }
-                }
-                else
-                {
-                    CSIT_FAIL("Cannot open input stream to file - " + k_testTextFileName);
-                }
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                
+                std::string firstLine, secondLine;
+                std::string reFirstLine, reSecondLine;
+                
+                CSIT_ASSERT(inputFileStream->ReadLine(firstLine), "Failed to read first line.");
+                CSIT_ASSERT(firstLine == k_testTextFileFirstLine, "First line does not match expected line.");
+                CSIT_ASSERT(inputFileStream->ReadLine(secondLine), "Failed to read second line.");
+                CSIT_ASSERT(secondLine == k_testTextFileSecondLine, "Second line does not match expected line.");
+                
+                inputFileStream->SetReadPosition(0);
+                
+                CSIT_ASSERT(inputFileStream->ReadLine(reFirstLine), "Failed to re-read first line.");
+                CSIT_ASSERT(reFirstLine == firstLine, "Re-read of first line does not match!");
+                
+                inputFileStream->SetReadPosition(k_testTextFileFirstLine.length() + 1);
+                
+                CSIT_ASSERT(inputFileStream->ReadLine(reSecondLine), "Failed to re-read second line.");
+                CSIT_ASSERT(reSecondLine == secondLine, "Re-read of second line does not match!");
+                CSIT_PASS();
             }
             
             /// Validate that the starting read position can be read
@@ -216,117 +152,59 @@ namespace CSTest
             CSIT_TEST(SuccessInputTextStreamGetReadPosition)
             {
                 auto inputFileStream = OpenTestTextFile();
-                if(inputFileStream != nullptr)
-                {
-                    std::string firstLine;
-                    
-                    //Read in the two lines to set the read pointer to end of file
-                    auto firstLineSuccess = inputFileStream->ReadLine(firstLine);
-                    
-                    //Get the read position
-                    auto readPosition = inputFileStream->GetReadPosition();
-                    
-                    //Use +1 as the readpointer will not settle on the newline
-                    if(firstLineSuccess && firstLine == k_testTextFileFirstLine && readPosition == k_testTextFileFirstLine.length() + 1)
-                    {
-                        CSIT_PASS();
-                    }
-                    else
-                    {
-                        CSIT_FAIL("File line contents do not match expected contents.");
-                    }
-                }
-                else
-                {
-                    CSIT_FAIL("Cannot open input stream to file - " + k_testTextFileName);
-                }
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                
+                std::string firstLine;
+                
+                CSIT_ASSERT(inputFileStream->ReadLine(firstLine), "Failed to read first line.");
+                CSIT_ASSERT(firstLine == k_testTextFileFirstLine, "First line does not match expected line.");
+                
+                auto readPosition = inputFileStream->GetReadPosition();
+                
+                CSIT_ASSERT(readPosition == k_testTextFileFirstLine.length() + 1, "Read position is not in the expected place.");
+                CSIT_PASS();
             }
             
-            /// Validate that the read function
+            /// Validate the read function
             ///
             CSIT_TEST(SuccessInputTextStreamRead)
             {
                 auto inputFileStream = OpenTestTextFile();
-                if(inputFileStream != nullptr)
-                {
-                    u32 startingPos = 8;
-                    u32 endingPos = (u32)k_testTextFileFirstLine.length();
-					u32 length = (u32)(endingPos - startingPos);
-                    
-                    //Try to read the latter half of the first sentence
-                    const std::string expectedResult = k_testTextFileFirstLine.substr(startingPos, endingPos);
-                    std::string actualResult;
-                    std::string overrunResult;
-                    
-                    inputFileStream->SetReadPosition(startingPos);
-                    
-                    //First read up to the end of the first line
-                    bool firstReadSuccess = inputFileStream->Read(length, actualResult);
-                    
-                    //Move the starting position past the newline
-                    inputFileStream->SetReadPosition(inputFileStream->GetReadPosition() + 1);
-                    
-                    //Then we try to read past the second line, purposefully overrunning the stream buffer, the resulting
-                    //string should be the 2nd line only
-                    bool overrunReadSuccess = inputFileStream->Read(k_testTextFileSecondLine.length() * 2, overrunResult);
-                    
-                    //Evaluate the results
-                    bool normalSuccess = (firstReadSuccess && (actualResult == expectedResult));
-                    bool overrunSuccess = (overrunReadSuccess && (overrunResult == k_testTextFileSecondLine));
-                    
-                    if(normalSuccess && overrunSuccess)
-                    {
-                        CSIT_PASS();
-                    }
-                    else
-                    {
-                        std::string failedString = "";
-                        
-                        if(!normalSuccess)
-                        {
-                            failedString += "Normal file read contents do not match expected contents.\n";
-                        }
-                        
-                        if(!overrunSuccess)
-                        {
-                            failedString += "Overrun file read contents do not match expected contents.\n";
-                        }
-                        
-                        CSIT_FAIL(failedString);
-                    }
-                }
-                else
-                {
-                    CSIT_FAIL("Cannot open input stream to file - " + k_testTextFileName);
-                }
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                
+                u32 startingPos = k_streamReadStartingPosition;
+                u32 endingPos = u32(k_testTextFileFirstLine.length());
+				u32 length = u32(endingPos - startingPos);
+                
+                const std::string expectedResult = k_testTextFileFirstLine.substr(startingPos, endingPos);
+                std::string actualResult;
+                std::string overrunResult;
+                
+                inputFileStream->SetReadPosition(startingPos);
+                
+                CSIT_ASSERT(inputFileStream->Read(length, actualResult), "Failed to carry out read.");
+                CSIT_ASSERT(actualResult == expectedResult, "Read result does not match expected result.");
+                
+                inputFileStream->SetReadPosition(inputFileStream->GetReadPosition() + 1);
+                
+                CSIT_ASSERT(inputFileStream->Read(k_testTextFileSecondLine.length() * 2, overrunResult), "Failed to carry out overrun read.");
+                CSIT_ASSERT(overrunResult == k_testTextFileSecondLine, "Overrun read result does not match expected result.");
+                CSIT_PASS();
             }
-            /// Validate that the fail cases for the read function
+            
+            /// Validate the fail cases for the read function
             ///
             CSIT_TEST(SuccessInputTextStreamFailedRead)
             {
                 auto inputFileStream = OpenTestTextFile();
-                if(inputFileStream != nullptr)
-                {
-                    //The only fail case for the read is when you try to read chars from the end of the buffer
-                    //so set the current position to the last position in the stream
-                    inputFileStream->SetReadPosition(inputFileStream->GetLength());
-                    
-                    std::string failedString;
-                    
-                    bool failedResult = inputFileStream->Read(8, failedString);
-                    if(failedResult == false && failedString.size() == 0)
-                    {
-                        CSIT_PASS();
-                    }
-                    else
-                    {
-                        CSIT_FAIL("Read did not handle error case as expected");
-                    }
-                }
-                else
-                {
-                    CSIT_FAIL("Cannot open input stream to file - " + k_testTextFileName);
-                }
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                
+                inputFileStream->SetReadPosition(inputFileStream->GetLength());
+                std::string failedString;
+                
+                CSIT_ASSERT(!inputFileStream->Read(k_streamFailedReadLength, failedString), "Read did not handle error case as expected, operation should have failed.");
+                CSIT_ASSERT(failedString.empty(), "Failed string should be empty");
+                CSIT_PASS();
             }
         }
     }
