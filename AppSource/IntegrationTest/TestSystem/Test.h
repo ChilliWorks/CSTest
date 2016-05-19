@@ -107,17 +107,6 @@ namespace CSTest
             /// @param in_message - An error message detailing why the test failed.
             //------------------------------------------------------------------------------
             void Fail(const std::string& in_message) noexcept;
-            //------------------------------------------------------------------------------
-            /// Test code can use this to assert that the given condition is indeed true.
-            /// Failure will call Fail() with the given failure message.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @param in_condition - The condition to check.
-            /// @param in_failureMessage - The message which will be passed to fail if the
-            /// condition is not true.
-            //------------------------------------------------------------------------------
-            void Assert(bool in_condition, const std::string& in_failureMessage = "") noexcept;
             
         private:
             //------------------------------------------------------------------------------
