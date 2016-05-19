@@ -49,20 +49,20 @@ namespace CSTest
             ///
             /// @return Input Text Stream
             ///
-            CS::IInputTextStreamUPtr OpenTestTextFile()
+            CS::ITextInputStreamUPtr OpenTestTextFile()
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                return fileSystem->CreateInputTextStream(CS::StorageLocation::k_package, k_testTextFileName);
+                return fileSystem->CreateTextInputStream(CS::StorageLocation::k_package, k_testTextFileName);
             }
         }
         
-        /// A series of integration tests to verify the functionality of an InputTextStream.
+        /// A series of integration tests to verify the functionality of an TextInputStream.
         ///
-        CSIT_TESTCASE(InputTextStream)
+        CSIT_TESTCASE(TextInputStream)
         {
             /// Validate that a file stream can be opened
             ///
-            CSIT_TEST(SuccessInputTextStreamCreate)
+            CSIT_TEST(SuccessTextInputStreamCreate)
             {
                 auto inputFileStream = OpenTestTextFile();
                 CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
@@ -71,17 +71,17 @@ namespace CSTest
             
             /// Validate that a file stream created with an invalid path is handled
             ///
-            CSIT_TEST(SuccessInputTextStreamCreateBadStream)
+            CSIT_TEST(SuccessTextInputStreamCreateBadStream)
             {
                 auto fileSystem = CS::Application::Get()->GetFileSystem();
-                auto inputFileStream = fileSystem->CreateInputTextStream(CS::StorageLocation::k_package, k_testBadTextFileName);
+                auto inputFileStream = fileSystem->CreateTextInputStream(CS::StorageLocation::k_package, k_testBadTextFileName);
                 CSIT_ASSERT(!inputFileStream, "File should not exist: " + k_testBadTextFileName);
                 CSIT_PASS();
             }
             
             /// Validate that the whole file can be read
             ///
-            CSIT_TEST(SuccessInputTextStreamReadAll)
+            CSIT_TEST(SuccessTextInputStreamReadAll)
             {
                 auto inputFileStream = OpenTestTextFile();
                 CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
@@ -93,7 +93,7 @@ namespace CSTest
             
             /// Validate that a line can be read
             ///
-            CSIT_TEST(SuccessInputTextStreamReadLine)
+            CSIT_TEST(SuccessTextInputStreamReadLine)
             {
                 auto inputFileStream = OpenTestTextFile();
                 CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
@@ -111,7 +111,7 @@ namespace CSTest
             
             /// Validate the fail cases for the readLine function
             ///
-            CSIT_TEST(SuccessInputTextStreamFailedReadLine)
+            CSIT_TEST(SuccessTextInputStreamFailedReadLine)
             {
                 auto inputFileStream = OpenTestTextFile();
                 CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
@@ -127,7 +127,7 @@ namespace CSTest
             /// Validate that the length of the file
             /// can be read
             ///
-            CSIT_TEST(SuccessInputTextStreamLength)
+            CSIT_TEST(SuccessTextInputStreamLength)
             {
                 auto inputFileStream = OpenTestTextFile();
                 CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
@@ -137,7 +137,7 @@ namespace CSTest
             
             /// Validate that the starting read position can be set
             ///
-            CSIT_TEST(SuccessInputTextStreamSetReadPosition)
+            CSIT_TEST(SuccessTextInputStreamSetReadPosition)
             {
                 auto inputFileStream = OpenTestTextFile();
                 CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
@@ -164,7 +164,7 @@ namespace CSTest
             
             /// Validate that the starting read position can be read
             ///
-            CSIT_TEST(SuccessInputTextStreamGetReadPosition)
+            CSIT_TEST(SuccessTextInputStreamGetReadPosition)
             {
                 auto inputFileStream = OpenTestTextFile();
                 CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
@@ -182,7 +182,7 @@ namespace CSTest
             
             /// Validate the read function
             ///
-            CSIT_TEST(SuccessInputTextStreamRead)
+            CSIT_TEST(SuccessTextInputStreamRead)
             {
                 auto inputFileStream = OpenTestTextFile();
                 CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
@@ -209,7 +209,7 @@ namespace CSTest
             
             /// Validate the fail cases for the read function
             ///
-            CSIT_TEST(SuccessInputTextStreamFailedRead)
+            CSIT_TEST(SuccessTextInputStreamFailedRead)
             {
                 auto inputFileStream = OpenTestTextFile();
                 CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
