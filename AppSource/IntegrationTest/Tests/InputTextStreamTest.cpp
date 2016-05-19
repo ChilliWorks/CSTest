@@ -109,6 +109,21 @@ namespace CSTest
                 CSIT_PASS();
             }
             
+            /// Validate the fail cases for the readLine function
+            ///
+            CSIT_TEST(SuccessInputTextStreamFailedReadLine)
+            {
+                auto inputFileStream = OpenTestTextFile();
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                
+                inputFileStream->SetReadPosition(inputFileStream->GetLength());
+                std::string failedString;
+                
+                CSIT_ASSERT(!inputFileStream->ReadLine(failedString), "Read did not handle error case as expected, operation should have failed.");
+                CSIT_ASSERT(failedString.empty(), "Failed string should be empty");
+                CSIT_PASS();
+            }
+            
             /// Validate that the length of the file
             /// can be read
             ///
