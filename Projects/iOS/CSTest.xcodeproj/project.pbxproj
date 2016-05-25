@@ -84,8 +84,9 @@
 		81C700571C89EDA200D306F9 /* libChilliSource.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700541C89ECB600D306F9 /* libChilliSource.a */; };
 		81C7010B1C89EF9A00D306F9 /* AppResources in Resources */ = {isa = PBXBuildFile; fileRef = 81C701091C89EF9A00D306F9 /* AppResources */; };
 		81C7010C1C89EF9A00D306F9 /* CSResources in Resources */ = {isa = PBXBuildFile; fileRef = 81C7010A1C89EF9A00D306F9 /* CSResources */; };
-		81CA60E81CE5D44000080533 /* InputTextStreamTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CA60E71CE5D44000080533 /* InputTextStreamTest.cpp */; };
+		81CA60E81CE5D44000080533 /* TextInputStreamTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81CA60E71CE5D44000080533 /* TextInputStreamTest.cpp */; };
 		81CF6EAA1C8F1378000DDF92 /* WebViewCloseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 81CF6EA91C8F1378000DDF92 /* WebViewCloseButton.png */; };
+		81EA870C1CEE1DE700DB798C /* TextOutputStreamTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81EA870B1CEE1DE700DB798C /* TextOutputStreamTest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -218,8 +219,9 @@
 		81C701091C89EF9A00D306F9 /* AppResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppResources; path = XcodeBuiltAssets/AppResources; sourceTree = "<group>"; };
 		81C7010A1C89EF9A00D306F9 /* CSResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CSResources; path = XcodeBuiltAssets/CSResources; sourceTree = "<group>"; };
 		81C7FFE41C89E86400D306F9 /* CSTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		81CA60E71CE5D44000080533 /* InputTextStreamTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputTextStreamTest.cpp; sourceTree = "<group>"; };
+		81CA60E71CE5D44000080533 /* TextInputStreamTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextInputStreamTest.cpp; sourceTree = "<group>"; };
 		81CF6EA91C8F1378000DDF92 /* WebViewCloseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WebViewCloseButton.png; sourceTree = "<group>"; };
+		81EA870B1CEE1DE700DB798C /* TextOutputStreamTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextOutputStreamTest.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,7 +396,8 @@
 				81B190431C9B16BE002EC8AC /* HttpRequestTest.cpp */,
 				81C63B021C9C63E500E1A669 /* FileSystemTest.cpp */,
 				81C58C271CB3D88300EA58A0 /* TaskSchedulerTest.cpp */,
-				81CA60E71CE5D44000080533 /* InputTextStreamTest.cpp */,
+				81CA60E71CE5D44000080533 /* TextInputStreamTest.cpp */,
+				81EA870B1CEE1DE700DB798C /* TextOutputStreamTest.cpp */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -736,9 +739,10 @@
 				81C63AF81C9C196700E1A669 /* State.cpp in Sources */,
 				81C63AFC1C9C1C3400E1A669 /* TestNavigator.cpp in Sources */,
 				81B190841C9B16BE002EC8AC /* ReportPresenter.cpp in Sources */,
-				81CA60E81CE5D44000080533 /* InputTextStreamTest.cpp in Sources */,
+				81CA60E81CE5D44000080533 /* TextInputStreamTest.cpp in Sources */,
 				81B190961C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190761C9B16BE002EC8AC /* ResultPresenter.cpp in Sources */,
+				81EA870C1CEE1DE700DB798C /* TextOutputStreamTest.cpp in Sources */,
 				81B1907C1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190821C9B16BE002EC8AC /* HttpRequestTest.cpp in Sources */,
 			);
