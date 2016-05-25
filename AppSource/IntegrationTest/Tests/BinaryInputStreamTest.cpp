@@ -35,8 +35,8 @@ namespace CSTest
         namespace
         {
             const std::string k_rootDirectory = "IntegrationTest/FileStream/";
-            const std::string k_testTextFileName = k_rootDirectory + "TestBinaryFile.bin";
-            const std::string k_testBadTextFileName = k_rootDirectory + "BadTestBinaryFile.txt";
+            const std::string k_testBinaryFileName = k_rootDirectory + "TestBinaryFile.bin";
+            const std::string k_testBadBinaryFileName = k_rootDirectory + "BadTestBinaryFile.txt";
             
             const char k_binaryFileContents[] = "\x0F\x27\x0F\x27\x00\x00";
             const std::string k_testBinaryFileExpectedSHA1Hash = "0abb165dea1506edb46b14a8b82eb448f5593215";
@@ -46,49 +46,39 @@ namespace CSTest
             constexpr u32 k_streamReadStartingPosition = 1;
             constexpr u32 k_streamReadEndingPosition = 2;
             constexpr u32 k_streamFailedReadLength = 8;
-            
-            /// Opens the test text file
-            ///
-            /// @return Input Text Stream
-            ///
-            CS::IBinaryInputStreamUPtr OpenTestTextFile()
-            {
-                const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                return fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testTextFileName);
-            }
         }
         
-        /// A series of integration tests to verify the functionality of an TextInputStream.
+        /// A series of integration tests to verify the functionality of an BinaryInputStream.
         ///
         CSIT_TESTCASE(BinaryInputStream)
         {
             /// Validate that a file stream can be opened
             ///
-            CSIT_TEST(SuccessTextInputStreamCreate)
+            CSIT_TEST(SuccessBinaryInputStreamCreate)
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testTextFileName);
-                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testBinaryFileName);
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testBinaryFileName);
                 CSIT_PASS();
             }
             
             /// Validate that a file stream created with an invalid path is handled
             ///
-            CSIT_TEST(ErrorTextInputStreamCreateBadStream)
+            CSIT_TEST(ErrorBinaryInputStreamCreateBadStream)
             {
                 auto fileSystem = CS::Application::Get()->GetFileSystem();
-                auto inputFileStream = fileSystem->CreateTextInputStream(CS::StorageLocation::k_package, k_testBadTextFileName);
-                CSIT_ASSERT(!inputFileStream, "File should not exist: " + k_testBadTextFileName);
+                auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testBadBinaryFileName);
+                CSIT_ASSERT(!inputFileStream, "File should not exist: " + k_testBadBinaryFileName);
                 CSIT_PASS();
             }
             
             /// Validate that the whole file can be read
             ///
-            CSIT_TEST(SuccessTextInputStreamReadAll)
+            CSIT_TEST(SuccessBinaryInputStreamReadAll)
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testTextFileName);
-                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testBinaryFileName);
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testBinaryFileName);
 
                 auto fileContents = inputFileStream->ReadAll();
                 CSIT_ASSERT(fileContents->GetLength() == k_binaryFileContentsSizeBytes, "File contents size does not match what is expected.");
@@ -99,22 +89,22 @@ namespace CSTest
             /// Validate that the length of the file
             /// can be read
             ///
-            CSIT_TEST(SuccessTextInputStreamLength)
+            CSIT_TEST(SuccessBinaryInputStreamLength)
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testTextFileName);
-                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testBinaryFileName);
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testBinaryFileName);
                 CSIT_ASSERT(inputFileStream->GetLength() == k_binaryFileContentsSizeBytes, "File length does not match expected length.");
                 CSIT_PASS();
             }
             
             /// Validate that the starting read position can be set
             ///
-            CSIT_TEST(SuccessTextInputStreamSetReadPosition)
+            CSIT_TEST(SuccessBinaryInputStreamSetReadPosition)
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testTextFileName);
-                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testBinaryFileName);
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testBinaryFileName);
                 
                 inputFileStream->SetReadPosition(0);
                 
@@ -139,11 +129,11 @@ namespace CSTest
             
             /// Validate that the starting read position can be read
             ///
-            CSIT_TEST(SuccessTextInputStreamGetReadPosition)
+            CSIT_TEST(SuccessBinaryInputStreamGetReadPosition)
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testTextFileName);
-                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testBinaryFileName);
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testBinaryFileName);
                 
                 auto readResult = inputFileStream->Read(k_streamReadPositionLength);
                 
@@ -158,11 +148,11 @@ namespace CSTest
             
             /// Validate the read function
             ///
-            CSIT_TEST(SuccessTextInputStreamRead)
+            CSIT_TEST(SuccessBinaryInputStreamRead)
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testTextFileName);
-                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testBinaryFileName);
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testBinaryFileName);
                 
                 u32 startingPos = k_streamReadStartingPosition;
                 u32 endingPos = k_streamReadEndingPosition;
@@ -195,11 +185,11 @@ namespace CSTest
             
             /// Validate the fail cases for the read function
             ///
-            CSIT_TEST(ErrorTextInputStreamFailedRead)
+            CSIT_TEST(ErrorBinaryInputStreamFailedRead)
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testTextFileName);
-                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
+                const auto inputFileStream = fileSystem->CreateBinaryInputStream(CS::StorageLocation::k_package, k_testBinaryFileName);
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testBinaryFileName);
                 
                 inputFileStream->SetReadPosition(inputFileStream->GetLength());
                 auto readResult = inputFileStream->Read(k_streamFailedReadLength);
