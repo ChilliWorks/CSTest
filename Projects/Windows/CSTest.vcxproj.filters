@@ -201,6 +201,9 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\BinaryInputStreamTest.cpp">
       <Filter>AppSource\IntegrationTest\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\BinaryOutputStreamTest.cpp">
+      <Filter>AppSource\IntegrationTest\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
