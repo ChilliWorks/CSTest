@@ -42,34 +42,18 @@ namespace CSTest
             const std::string k_testTextFileContents = k_testTextFileFirstLine +  k_testTextFileSecondLine;
 
 			constexpr CS::StorageLocation k_storageLocation = CS::StorageLocation::k_saveData;
-
-            /// Opens the test text file for writing
+ 
+            /// Clears all written information from the test directory
             ///
-            /// @return Output Text Stream
-            ///
-            CS::TextOutputStreamUPtr OpenOutputTestTextFile()
-            {
-				const auto fileSystem = CS::Application::Get()->GetFileSystem();
-				CS_ASSERT(fileSystem->CreateDirectoryPath(k_storageLocation, k_rootDirectory), "Could not create directory!");
-                return fileSystem->CreateTextOutputStream(k_storageLocation, k_testTextFileName);
-            }
-
-			/// Opens the test text file for reading
-			///
-			/// @return Input Text Stream
-			///
-			CS::ITextInputStreamUPtr OpenInputTestTextFile()
-			{
-				const auto fileSystem = CS::Application::Get()->GetFileSystem();
-				return fileSystem->CreateTextInputStream(k_storageLocation, k_testTextFileName);
-			}
-            
-            /// Delete the test file
-            ///
-            bool DeleteTestFile()
+            void ClearTestDirectory()
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                return !fileSystem->DoesFileExist(k_storageLocation, k_testTextFileName) || fileSystem->DeleteFile(k_storageLocation, k_testTextFileName);
+                CS_ASSERT(fileSystem->CreateDirectoryPath(k_storageLocation, k_rootDirectory), "Could not create directory!");
+                
+                if(fileSystem->DoesFileExist(k_storageLocation, k_testTextFileName))
+                {
+                    fileSystem->DeleteFile(k_storageLocation, k_testTextFileName);
+                }
             }
         }
         
@@ -81,10 +65,14 @@ namespace CSTest
             ///
             CSIT_TEST(SuccessTextOutputStreamCreate)
             {
-                CSIT_ASSERT(DeleteTestFile(), "Could not delete test file.");
+                ClearTestDirectory();
                 
-                auto outputFileStream = OpenOutputTestTextFile();
+                const auto fileSystem = CS::Application::Get()->GetFileSystem();
+                auto outputFileStream = fileSystem->CreateTextOutputStream(k_storageLocation, k_testTextFileName);
                 CSIT_ASSERT(outputFileStream, "Cannot open output stream to file: " + k_testTextFileName);
+                
+                ClearTestDirectory();
+                
                 CSIT_PASS();
             }
             
@@ -92,18 +80,23 @@ namespace CSTest
             ///
             CSIT_TEST(SuccessTextOutputStreamWrite)
             {
-                CSIT_ASSERT(DeleteTestFile(), "Could not delete test file.");
+                ClearTestDirectory();
                 
-                auto outputFileStream = OpenOutputTestTextFile();
+                const auto fileSystem = CS::Application::Get()->GetFileSystem();
+                auto outputFileStream = fileSystem->CreateTextOutputStream(k_storageLocation, k_testTextFileName);
                 CSIT_ASSERT(outputFileStream, "Cannot open output stream to file: " + k_testTextFileName);
                 
                 outputFileStream->Write(k_testTextFileContents);
                 outputFileStream = nullptr;
 
-				auto inputFileStream = OpenInputTestTextFile();
+                const auto inputFileStream = fileSystem->CreateTextInputStream(k_storageLocation, k_testTextFileName);
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
 				auto contents = inputFileStream->ReadAll();
 
 				CSIT_ASSERT(contents == k_testTextFileContents, "Written text does not match expectations");
+                
+                ClearTestDirectory();
+                
                 CSIT_PASS();
             }
 
@@ -111,19 +104,24 @@ namespace CSTest
 			///
 			CSIT_TEST(SuccessTextOutputStreamWriteMultiple)
             {
-                CSIT_ASSERT(DeleteTestFile(), "Could not delete test file.");
+                ClearTestDirectory();
                 
-				auto outputFileStream = OpenOutputTestTextFile();
+                const auto fileSystem = CS::Application::Get()->GetFileSystem();
+                auto outputFileStream = fileSystem->CreateTextOutputStream(k_storageLocation, k_testTextFileName);
 				CSIT_ASSERT(outputFileStream, "Cannot open output stream to file: " + k_testTextFileName);
 
 				outputFileStream->Write(k_testTextFileFirstLine);
 				outputFileStream->Write(k_testTextFileSecondLine);
 				outputFileStream = nullptr;
 
-				auto inputFileStream = OpenInputTestTextFile();
+                const auto inputFileStream = fileSystem->CreateTextInputStream(k_storageLocation, k_testTextFileName);
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
 				auto contents = inputFileStream->ReadAll();
 
 				CSIT_ASSERT(contents == k_testTextFileContents, "Written text does not match expectations");
+                
+                ClearTestDirectory();
+                
 				CSIT_PASS();
 			}
 
@@ -132,23 +130,29 @@ namespace CSTest
 			///
 			CSIT_TEST(SuccessTextOutputStreamOverwrite)
             {
-                CSIT_ASSERT(DeleteTestFile(), "Could not delete test file.");
+                ClearTestDirectory();
                 
-				auto outputFileStream = OpenOutputTestTextFile();
+                const auto fileSystem = CS::Application::Get()->GetFileSystem();
+                auto outputFileStream = fileSystem->CreateTextOutputStream(k_storageLocation, k_testTextFileName);
 				CSIT_ASSERT(outputFileStream, "Cannot open output stream to file: " + k_testTextFileName);
 
 				outputFileStream->Write(k_testTextFileFirstLine);
 				outputFileStream->Write(k_testTextFileSecondLine);
 				outputFileStream = nullptr;
 
-				auto overwriteFileStream = OpenOutputTestTextFile();
+                auto overwriteFileStream = fileSystem->CreateTextOutputStream(k_storageLocation, k_testTextFileName);
+                CSIT_ASSERT(overwriteFileStream, "Cannot open output stream to file: " + k_testTextFileName);
 				overwriteFileStream->Write(k_testTextFileFirstLine);
 				overwriteFileStream = nullptr;
 
-				auto inputFileStream = OpenInputTestTextFile();
+                const auto inputFileStream = fileSystem->CreateTextInputStream(k_storageLocation, k_testTextFileName);
+                CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testTextFileName);
 				auto contents = inputFileStream->ReadAll();
 
 				CSIT_ASSERT(contents == k_testTextFileFirstLine, "Written text does not match expectations");
+                
+                ClearTestDirectory();
+                
 				CSIT_PASS();
 			}
         }
