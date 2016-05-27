@@ -44,6 +44,7 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\Tester.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestRegistry.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\BinaryInputStreamTest.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\BinaryOutputStreamTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystemTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\HttpRequestTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TaskSchedulerTest.cpp" />
