@@ -39,52 +39,26 @@ namespace CSTest
             
             constexpr char k_binaryFileContents[] = "\x0F\x27\x0F\x27\x00\x00";
             
-            constexpr int k_podData1 = 1;
-            constexpr float k_podData2 = 2.5f;
-            constexpr bool k_podData3 = true;
-            constexpr CS::StorageLocation k_podData4 = CS::StorageLocation::k_saveData;
+            constexpr int k_intData = 1;
+            constexpr float k_floatData = 2.5f;
+            constexpr bool k_boolData = true;
             
             constexpr CS::StorageLocation k_storageLocation = CS::StorageLocation::k_saveData;
             constexpr u32 k_binaryFileContentsSizeBytes = 6;
             
-            /// Simple class to test writing/reading a instance pointers data to/from file
+            /// Simple class to test writing/reading a classes data
             ///
-            class TestPODClass
+            class DataClass
             {
             public:
-                /// @param testInt
-                /// @param testFloat
-                /// @param testBool
-                ///
-                TestPODClass(int testInt, float testFloat, bool testBool)
-                :m_testInt(testInt)
-                ,m_testFloat(testFloat)
-                ,m_testBool(testBool)
-                {
-                }
-                
-                /// @param testInt
-                /// @param testFloat
-                /// @param testBool
-                ///
-                /// @return If the contents match the params
-                ///
-                bool ContentsEqual(int testInt, float testFloat, bool testBool)
-                {
-                    return testInt == m_testInt && m_testFloat == testFloat && m_testBool == testBool;
-                }
-                
-            private:
-                int m_testInt;
-                float m_testFloat;
-                bool m_testBool;
+                int m_data;
             };
             
-            /// Simple struct to test writing/reading a struct that contains an instance pointer
+            /// Simple class to test writing/reading a structs data
             ///
-            struct TestPODStruct
+            struct DataStruct
             {
-                TestPODClass* m_data;
+                int m_data;
             };
             
             /// Clears all written information from the test directory
@@ -168,7 +142,7 @@ namespace CSTest
                 CSIT_PASS();
             }
             
-            /// Validate that single buffer of contents can be written to file
+            /// Validate that the contents of a number of data types can be written to file
             ///
             CSIT_TEST(SuccessBinaryOutputStreamWritePOD)
             {
@@ -178,33 +152,30 @@ namespace CSTest
                 auto outputFileStream = fileSystem->CreateBinaryOutputStream(k_storageLocation, k_testBinaryFileName);
                 CSIT_ASSERT(outputFileStream, "Cannot open output stream to file: " + k_testBinaryFileName);
                 
-                TestPODClass* dataInstance = new TestPODClass(k_podData1, k_podData2, k_podData3);
-                TestPODStruct dataStruct;
-                dataStruct.m_data = dataInstance;
+                DataClass dataInstance;
+                dataInstance.m_data = k_intData;
+                DataStruct dataStruct;
+                dataStruct.m_data = k_intData;
                 
-                outputFileStream->Write(k_podData1);
-                outputFileStream->Write(k_podData2);
-                outputFileStream->Write(k_podData3);
-                outputFileStream->Write(k_podData4);
-                outputFileStream->Write<TestPODClass*>(dataInstance);
-                outputFileStream->Write<TestPODStruct>(dataStruct);
+                outputFileStream->Write(k_intData);
+                outputFileStream->Write(k_floatData);
+                outputFileStream->Write(k_boolData);
+                outputFileStream->Write<DataClass>(dataInstance);
+                outputFileStream->Write<DataStruct>(dataStruct);
                 outputFileStream = nullptr;
                 
                 auto inputFileStream = fileSystem->CreateBinaryInputStream(k_storageLocation, k_testBinaryFileName);
                 CSIT_ASSERT(inputFileStream, "Cannot open input stream to file: " + k_testBinaryFileName);
                 
-                CSIT_ASSERT(inputFileStream->Read<decltype(k_podData1)>() == k_podData1, "Could not read first POD Type correctly");
-                CSIT_ASSERT(inputFileStream->Read<decltype(k_podData2)>() == k_podData2, "Could not read second POD Type correctly");
-                CSIT_ASSERT(inputFileStream->Read<decltype(k_podData3)>() == k_podData3, "Could not read third POD Type correctly");
-                CSIT_ASSERT(inputFileStream->Read<decltype(k_podData4)>() == k_podData4, "Could not read fourth POD Type correctly");
+                CSIT_ASSERT(inputFileStream->Read<decltype(k_intData)>() == k_intData, "Could not read first data Type correctly");
+                CSIT_ASSERT(inputFileStream->Read<decltype(k_floatData)>() == k_floatData, "Could not read second data Type correctly");
+                CSIT_ASSERT(inputFileStream->Read<decltype(k_boolData)>() == k_boolData, "Could not read third data Type correctly");
                 
-                TestPODClass* resultInstance = inputFileStream->Read<TestPODClass*>();
-                CSIT_ASSERT(resultInstance->ContentsEqual(k_podData1, k_podData2, k_podData3), "Could not read fifth POD Type correctly");
-                TestPODStruct resultStruct = inputFileStream->Read<TestPODStruct>();
-                CSIT_ASSERT(resultStruct.m_data && resultStruct.m_data->ContentsEqual(k_podData1, k_podData2, k_podData3), "Could not read sixth POD Type correctly");
+                DataClass resultInstance = inputFileStream->Read<DataClass>();
+                CSIT_ASSERT(resultInstance.m_data == k_intData, "Could not read fourth data Type correctly");
+                DataStruct resultStruct = inputFileStream->Read<DataStruct>();
+                CSIT_ASSERT(resultStruct.m_data == k_intData, "Could not read fifth data Type correctly");
 
-                CS_SAFEDELETE(dataInstance);
-                
                 ClearTestDirectory();
                 
                 CSIT_PASS();
