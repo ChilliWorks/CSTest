@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8164FEE01CFF17C8004652E3 /* ForwardRendererFrameTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8164FEDF1CFF17C8004652E3 /* ForwardRendererFrameTest.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		81B190711C9B16BE002EC8AC /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190141C9B16BE002EC8AC /* App.cpp */; };
 		81B190721C9B16BE002EC8AC /* FollowerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190181C9B16BE002EC8AC /* FollowerComponent.cpp */; };
@@ -98,6 +99,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8164FEDF1CFF17C8004652E3 /* ForwardRendererFrameTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ForwardRendererFrameTest.cpp; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81B190141C9B16BE002EC8AC /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		81B190151C9B16BE002EC8AC /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				81B190431C9B16BE002EC8AC /* HttpRequestTest.cpp */,
 				81C63B021C9C63E500E1A669 /* FileSystemTest.cpp */,
 				81C58C271CB3D88300EA58A0 /* TaskSchedulerTest.cpp */,
+				8164FEDF1CFF17C8004652E3 /* ForwardRendererFrameTest.cpp */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				81B190901C9B16BE002EC8AC /* CSReporter.cpp in Sources */,
 				81B1908B1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81C63AF01C9C138F00E1A669 /* OptionsMenuDesc.cpp in Sources */,
+				8164FEE01CFF17C8004652E3 /* ForwardRendererFrameTest.cpp in Sources */,
 				81B190931C9B16BE002EC8AC /* ReportPresenter.cpp in Sources */,
 				81B190951C9B16BE002EC8AC /* TestSystem.cpp in Sources */,
 				81B1908D1C9B16BE002EC8AC /* Vector2.cpp in Sources */,
