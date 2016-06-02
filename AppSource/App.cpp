@@ -30,7 +30,7 @@
 
 #include <Common/Core/BasicEntityFactory.h>
 #include <Common/UI/BasicWidgetFactory.h>
-#include <MainMenu/State.h>
+#include <MultiThreadedRenderer/State.h>
 
 #include <ChilliSource/Audio/CricketAudio.h>
 #include <ChilliSource/Core/Entity.h>
@@ -92,7 +92,7 @@ namespace CSTest
     //------------------------------------------------------------------------------
     void App::PushInitialState() noexcept
     {
-        GetStateManager()->Push(CS::StateSPtr(new MainMenu::State()));
+        GetStateManager()->Push(CS::StateSPtr(new MultiThreadedRenderer::State()));
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------

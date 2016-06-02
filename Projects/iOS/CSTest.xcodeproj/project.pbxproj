@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		816D96C41CF7540B00D23969 /* FrameTimeCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 816D96BE1CF7540B00D23969 /* FrameTimeCalculator.cpp */; };
+		816D96C51CF7540B00D23969 /* SphereBounceComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 816D96C01CF7540B00D23969 /* SphereBounceComponent.cpp */; };
+		816D96C61CF7540B00D23969 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 816D96C21CF7540B00D23969 /* State.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		81B190711C9B16BE002EC8AC /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190141C9B16BE002EC8AC /* App.cpp */; };
 		81B190721C9B16BE002EC8AC /* FollowerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190181C9B16BE002EC8AC /* FollowerComponent.cpp */; };
@@ -98,6 +101,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		816D96BE1CF7540B00D23969 /* FrameTimeCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameTimeCalculator.cpp; sourceTree = "<group>"; };
+		816D96BF1CF7540B00D23969 /* FrameTimeCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameTimeCalculator.h; sourceTree = "<group>"; };
+		816D96C01CF7540B00D23969 /* SphereBounceComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereBounceComponent.cpp; sourceTree = "<group>"; };
+		816D96C11CF7540B00D23969 /* SphereBounceComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereBounceComponent.h; sourceTree = "<group>"; };
+		816D96C21CF7540B00D23969 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		816D96C31CF7540B00D23969 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81B190141C9B16BE002EC8AC /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		81B190151C9B16BE002EC8AC /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
@@ -261,9 +270,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		816D96BD1CF7540B00D23969 /* MultiThreadedRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				816D96BE1CF7540B00D23969 /* FrameTimeCalculator.cpp */,
+				816D96BF1CF7540B00D23969 /* FrameTimeCalculator.h */,
+				816D96C01CF7540B00D23969 /* SphereBounceComponent.cpp */,
+				816D96C11CF7540B00D23969 /* SphereBounceComponent.h */,
+				816D96C21CF7540B00D23969 /* State.cpp */,
+				816D96C31CF7540B00D23969 /* State.h */,
+			);
+			path = MultiThreadedRenderer;
+			sourceTree = "<group>";
+		};
 		81B190131C9B16BD002EC8AC /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
+				816D96BD1CF7540B00D23969 /* MultiThreadedRenderer */,
 				81B190141C9B16BE002EC8AC /* App.cpp */,
 				81B190151C9B16BE002EC8AC /* App.h */,
 				81B190161C9B16BE002EC8AC /* Common */,
@@ -704,6 +727,7 @@
 				81B190751C9B16BE002EC8AC /* BasicEntityFactory.cpp in Sources */,
 				81B1907E1C9B16BE002EC8AC /* EventInfo.cpp in Sources */,
 				81B190901C9B16BE002EC8AC /* CSReporter.cpp in Sources */,
+				816D96C51CF7540B00D23969 /* SphereBounceComponent.cpp in Sources */,
 				81B1908B1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81C63AF01C9C138F00E1A669 /* OptionsMenuDesc.cpp in Sources */,
 				81B190931C9B16BE002EC8AC /* ReportPresenter.cpp in Sources */,
@@ -718,7 +742,9 @@
 				81B190861C9B16BE002EC8AC /* TestDesc.cpp in Sources */,
 				81C58C281CB3D88300EA58A0 /* TaskSchedulerTest.cpp in Sources */,
 				81B1908F1C9B16BE002EC8AC /* Vector4.cpp in Sources */,
+				816D96C41CF7540B00D23969 /* FrameTimeCalculator.cpp in Sources */,
 				81B1908E1C9B16BE002EC8AC /* Vector3.cpp in Sources */,
+				816D96C61CF7540B00D23969 /* State.cpp in Sources */,
 				81B190911C9B16BE002EC8AC /* FailedAssertion.cpp in Sources */,
 				81B190811C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190831C9B16BE002EC8AC /* Report.cpp in Sources */,
