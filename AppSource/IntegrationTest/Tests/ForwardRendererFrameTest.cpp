@@ -311,7 +311,6 @@ namespace CSTest
                 std::vector<CS::RenderPointLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CS::RenderObject(CreateLitOpaqueMaterialGroup(), CreateRenderMesh(k_offScreenObjectTransform.GetTranslation()), k_offScreenObjectTransform) };
                 
-				auto mat = k_offScreenObjectTransform;
                 CS::RenderFrame renderFrame(renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
