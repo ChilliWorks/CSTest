@@ -61,6 +61,9 @@
     <Filter Include="AppSource\SmokeTest">
       <UniqueIdentifier>{0e49f6fb-035d-4c26-8d32-1ff3cfa458de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\MultiThreadedRenderer">
+      <UniqueIdentifier>{714d097d-d6ce-4726-b921-eb6fde70fcff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -192,8 +195,17 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TaskSchedulerTest.cpp">
       <Filter>AppSource\IntegrationTest\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\ForwardRendererFrameTest.cpp">
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\ForwardRenderPassCompilerTest.cpp">
       <Filter>AppSource\IntegrationTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\FrameTimeCalculator.cpp">
+      <Filter>AppSource\MultiThreadedRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\SphereBounceComponent.cpp">
+      <Filter>AppSource\MultiThreadedRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\State.cpp">
+      <Filter>AppSource\MultiThreadedRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +328,15 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.h">
       <Filter>AppSource\UnitTest\TestSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\FrameTimeCalculator.h">
+      <Filter>AppSource\MultiThreadedRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\SphereBounceComponent.h">
+      <Filter>AppSource\MultiThreadedRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\State.h">
+      <Filter>AppSource\MultiThreadedRenderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

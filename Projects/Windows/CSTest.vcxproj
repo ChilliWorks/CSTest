@@ -44,11 +44,14 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\Tester.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\TestSystem\TestRegistry.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystemTest.cpp" />
-    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\ForwardRendererFrameTest.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\ForwardRenderPassCompilerTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\HttpRequestTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TaskSchedulerTest.cpp" />
     <ClCompile Include="..\..\AppSource\Lighting\State.cpp" />
     <ClCompile Include="..\..\AppSource\MainMenu\State.cpp" />
+    <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\FrameTimeCalculator.cpp" />
+    <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\SphereBounceComponent.cpp" />
+    <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\State.cpp" />
     <ClCompile Include="..\..\AppSource\Particle\State.cpp" />
     <ClCompile Include="..\..\AppSource\SmokeTest\State.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\State.cpp" />
@@ -94,6 +97,9 @@
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestRegistry.h" />
     <ClInclude Include="..\..\AppSource\Lighting\State.h" />
     <ClInclude Include="..\..\AppSource\MainMenu\State.h" />
+    <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\FrameTimeCalculator.h" />
+    <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\SphereBounceComponent.h" />
+    <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\State.h" />
     <ClInclude Include="..\..\AppSource\Particle\State.h" />
     <ClInclude Include="..\..\AppSource\SmokeTest\State.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\State.h" />

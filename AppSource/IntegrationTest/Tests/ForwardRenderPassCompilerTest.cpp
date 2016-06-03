@@ -48,6 +48,7 @@ namespace CSTest
             constexpr f32 k_cameraDistanceFromLookAt = 10.0f;
             
             const CS::Vector3 k_cameraLookAt = CS::Vector3::k_zero;
+            const CS::Vector3 k_cameraPosition = k_cameraLookAt - CS::Vector3(0.0f, 0.0f, k_cameraDistanceFromLookAt);
             const CS::Matrix4 k_onScreenObjectTransform = CS::Matrix4::CreateTransform(k_cameraLookAt, CS::Vector3::k_one, CS::Quaternion::k_identity);
             const CS::Matrix4 k_offScreenObjectTransform = CS::Matrix4::CreateTransform(k_cameraLookAt - (2 * k_cameraDistanceFromLookAt * CS::Vector3(0.0f, 0.0f, 1.0f)), CS::Vector3::k_one, CS::Quaternion::k_identity);
             
@@ -58,51 +59,44 @@ namespace CSTest
                 CS::Vector2 m_texCoord;
             };
             
-            /// Creates an render camera
+            /// Creates an render camera at (0, 0, -10) and looking at the
+            /// origin.
+            ///
+            /// @return Created RenderCamera
             ///
             CS::RenderCamera CreateRenderCamera()
             {
-                auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
-                CS::EntitySPtr cameraTarget = CS::Entity::Create();
-                cameraTarget->GetTransform().SetPosition(k_cameraLookAt);
-                const auto cameraEntity = basicEntityFactory->CreateThirdPersonCamera(cameraTarget, CS::Vector3::k_zero, k_cameraDistanceFromLookAt, 0.0f, 0.0f, 0.0f);
-                const auto& cameraComponent = cameraEntity->GetComponent<CS::CameraComponent>();
-                const auto screenSystem = CS::Application::Get()->GetScreen();
-                CS::Integer2 dimensions(s32(screenSystem->GetResolution().x), s32(screenSystem->GetResolution().y));
-                return CS::RenderCamera(dimensions, cameraEntity->GetTransform().GetWorldTransform(), cameraComponent->GetProjection());
+                CS::Integer2 dimensions(100, 100);
+                auto worldMatrix = CS::Matrix4::CreateLookAt(k_cameraPosition, k_cameraLookAt, CS::Vector3::k_unitPositiveZ);
+                auto projectionMatrix = CS::Matrix4::CreatePerspectiveProjectionLH(75.0f, 1.0f, 1.0f, 10.0f);
+                return CS::RenderCamera(dimensions, worldMatrix, projectionMatrix);
             }
 
-            /// Creates an lit opaque material group
+            /// Creates an lit opaque material group with a blank texture
             ///
             /// @return RenderMaterialGroup
             ///
             const CS::RenderMaterialGroup* CreateLitOpaqueMaterialGroup()
             {
                 auto renderMaterialGroupManager = CS::Application::Get()->GetSystem<CS::RenderMaterialGroupManager>();
-                auto renderTextureGroupManager = CS::Application::Get()->GetSystem<CS::RenderTextureManager>();
+                auto resourcePool = CS::Application::Get()->GetResourcePool();
                 
-                constexpr u32 textureSize = 16;
-                u8* textureData = new u8[textureSize];
-                memset(textureData, 0, textureSize);
-                std::unique_ptr<const u8 []> uniqueTextureData(textureData);
-                auto renderTexture = renderTextureGroupManager->CreateRenderTexture(std::move(uniqueTextureData), textureSize, CS::Integer2(4, 4), CS::ImageFormat::k_Lum8, CS::ImageCompression::k_none, CS::TextureFilterMode::k_nearest, CS::TextureWrapMode::k_clamp, CS::TextureWrapMode::k_clamp, false);
+                auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_chilliSource, "Textures/Blank.csimage");
+                auto renderTexture = texture->GetRenderTexture();
                 return renderMaterialGroupManager->CreateBlinnRenderMaterialGroup(renderTexture, CS::Colour::k_white, CS::Colour::k_white, CS::Colour::k_white, CS::Colour::k_white);
             }
             
-            /// Creates an unlit transparent material group
+            /// Creates an unlit transparent material group with a blank texture
             ///
             /// @return RenderMaterialGroup
             ///
             const CS::RenderMaterialGroup* CreateUnlitTransparentMaterialGroup()
             {
                 auto renderMaterialGroupManager = CS::Application::Get()->GetSystem<CS::RenderMaterialGroupManager>();
-                auto renderTextureGroupManager = CS::Application::Get()->GetSystem<CS::RenderTextureManager>();
+                auto resourcePool = CS::Application::Get()->GetResourcePool();
                 
-                constexpr u32 textureSize = 16;
-                u8* textureData = new u8[textureSize];
-                memset(textureData, 0, textureSize);
-                std::unique_ptr<const u8 []> uniqueTextureData(textureData);
-                auto renderTexture = renderTextureGroupManager->CreateRenderTexture(std::move(uniqueTextureData), textureSize, CS::Integer2(4, 4), CS::ImageFormat::k_Lum8, CS::ImageCompression::k_none, CS::TextureFilterMode::k_nearest, CS::TextureWrapMode::k_clamp, CS::TextureWrapMode::k_clamp, false);
+                auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_chilliSource, "Textures/Blank.csimage");
+                auto renderTexture = texture->GetRenderTexture();
                 return renderMaterialGroupManager->CreateUnlitRenderMaterialGroup(renderTexture, true, true, true, true, false, CS::BlendMode::k_one, CS::BlendMode::k_oneMinusSourceAlpha, CS::CullFace::k_back, CS::Colour::k_white, CS::Colour::k_white);
             }
             
@@ -114,6 +108,10 @@ namespace CSTest
             ///
             const CS::RenderMesh* CreateRenderMesh(const CS::Vector3& boundingSpherePosition)
             {
+                //Uncomment and use this when RenderMesh BoundingSphere world calculation has been worked out
+//                const auto primitiveModelFactory = CS::Application::Get()->GetSystem<CS::PrimitiveModelFactory>();
+//                return primitiveModelFactory->CreateBox(CS::Vector3::k_one)->GetRenderMesh(0);
+                
                 constexpr u32 k_numVertices = 3;
                 constexpr u32 k_numIndices = 3;
                 
@@ -133,7 +131,7 @@ namespace CSTest
                 std::unique_ptr<const u8 []> vertexData(reinterpret_cast<u8*>(vertices));
                 std::unique_ptr<const u8 []> indexData(reinterpret_cast<u8*>(indices));
                 
-                return renderResourceManager->CreateRenderMesh(CS::PolygonType::k_short, ChilliSource::VertexFormat::k_staticMesh, CS::IndexType(0), 3, 3, boundingSphere, std::move(vertexData), k_numVertices, std::move(indexData), k_numIndices);
+                return renderResourceManager->CreateRenderMesh(CS::PolygonType::k_triangle, ChilliSource::VertexFormat::k_staticMesh, CS::IndexFormat::k_short, 3, 3, boundingSphere, std::move(vertexData), k_numVertices, std::move(indexData), k_numIndices);
             }
         }
         

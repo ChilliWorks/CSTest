@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		8164FEE01CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8164FEDF1CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
+		81A78D791D0180CA00871640 /* FrameTimeCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81A78D731D0180CA00871640 /* FrameTimeCalculator.cpp */; };
+		81A78D7A1D0180CA00871640 /* SphereBounceComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81A78D751D0180CA00871640 /* SphereBounceComponent.cpp */; };
+		81A78D7B1D0180CA00871640 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81A78D771D0180CA00871640 /* State.cpp */; };
 		81B190711C9B16BE002EC8AC /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190141C9B16BE002EC8AC /* App.cpp */; };
 		81B190721C9B16BE002EC8AC /* FollowerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190181C9B16BE002EC8AC /* FollowerComponent.cpp */; };
 		81B190731C9B16BE002EC8AC /* OrbiterComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1901A1C9B16BE002EC8AC /* OrbiterComponent.cpp */; };
@@ -101,6 +104,12 @@
 /* Begin PBXFileReference section */
 		8164FEDF1CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ForwardRenderPassCompilerTest.cpp; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		81A78D731D0180CA00871640 /* FrameTimeCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameTimeCalculator.cpp; sourceTree = "<group>"; };
+		81A78D741D0180CA00871640 /* FrameTimeCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameTimeCalculator.h; sourceTree = "<group>"; };
+		81A78D751D0180CA00871640 /* SphereBounceComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereBounceComponent.cpp; sourceTree = "<group>"; };
+		81A78D761D0180CA00871640 /* SphereBounceComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereBounceComponent.h; sourceTree = "<group>"; };
+		81A78D771D0180CA00871640 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81A78D781D0180CA00871640 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81B190141C9B16BE002EC8AC /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		81B190151C9B16BE002EC8AC /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		81B190181C9B16BE002EC8AC /* FollowerComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FollowerComponent.cpp; sourceTree = "<group>"; };
@@ -263,9 +272,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		81A78D721D0180CA00871640 /* MultiThreadedRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				81A78D731D0180CA00871640 /* FrameTimeCalculator.cpp */,
+				81A78D741D0180CA00871640 /* FrameTimeCalculator.h */,
+				81A78D751D0180CA00871640 /* SphereBounceComponent.cpp */,
+				81A78D761D0180CA00871640 /* SphereBounceComponent.h */,
+				81A78D771D0180CA00871640 /* State.cpp */,
+				81A78D781D0180CA00871640 /* State.h */,
+			);
+			path = MultiThreadedRenderer;
+			sourceTree = "<group>";
+		};
 		81B190131C9B16BD002EC8AC /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
+				81A78D721D0180CA00871640 /* MultiThreadedRenderer */,
 				81B190141C9B16BE002EC8AC /* App.cpp */,
 				81B190151C9B16BE002EC8AC /* App.h */,
 				81B190161C9B16BE002EC8AC /* Common */,
@@ -702,6 +725,7 @@
 				81B190921C9B16BE002EC8AC /* Report.cpp in Sources */,
 				81B190881C9B16BE002EC8AC /* TestRegistry.cpp in Sources */,
 				81B1907F1C9B16BE002EC8AC /* GesturePresenter.cpp in Sources */,
+				81A78D791D0180CA00871640 /* FrameTimeCalculator.cpp in Sources */,
 				81B190741C9B16BE002EC8AC /* Approx.cpp in Sources */,
 				81C63B001C9C498000E1A669 /* FailedSection.cpp in Sources */,
 				81B190751C9B16BE002EC8AC /* BasicEntityFactory.cpp in Sources */,
@@ -724,6 +748,7 @@
 				81B1908F1C9B16BE002EC8AC /* Vector4.cpp in Sources */,
 				81B1908E1C9B16BE002EC8AC /* Vector3.cpp in Sources */,
 				81B190911C9B16BE002EC8AC /* FailedAssertion.cpp in Sources */,
+				81A78D7A1D0180CA00871640 /* SphereBounceComponent.cpp in Sources */,
 				81B190811C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190831C9B16BE002EC8AC /* Report.cpp in Sources */,
 				81B190721C9B16BE002EC8AC /* FollowerComponent.cpp in Sources */,
@@ -734,6 +759,7 @@
 				81B1908A1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190791C9B16BE002EC8AC /* BasicWidgetFactory.cpp in Sources */,
 				81B1907B1C9B16BE002EC8AC /* DownloadProgressTestSystem.cpp in Sources */,
+				81A78D7B1D0180CA00871640 /* State.cpp in Sources */,
 				81C63AF81C9C196700E1A669 /* State.cpp in Sources */,
 				81C63AFC1C9C1C3400E1A669 /* TestNavigator.cpp in Sources */,
 				81B190841C9B16BE002EC8AC /* ReportPresenter.cpp in Sources */,
