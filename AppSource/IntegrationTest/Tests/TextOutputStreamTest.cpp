@@ -63,7 +63,7 @@ namespace CSTest
         {
             /// Validate that a file stream can be opened
             ///
-            CSIT_TEST(SuccessTextOutputStreamCreate)
+            CSIT_TEST(SuccessCreate)
             {
                 ClearTestDirectory();
                 
@@ -78,7 +78,7 @@ namespace CSTest
             
             /// Validate that single buffer of contents can be written to file
             ///
-            CSIT_TEST(SuccessTextOutputStreamWrite)
+            CSIT_TEST(SuccessWrite)
             {
                 ClearTestDirectory();
                 
@@ -102,7 +102,7 @@ namespace CSTest
 
 			/// Validate that contents can be written to stream multiple times, maintaining correct buffer position
 			///
-			CSIT_TEST(SuccessTextOutputStreamWriteMultiple)
+			CSIT_TEST(SuccessWriteMultiple)
             {
                 ClearTestDirectory();
                 
@@ -125,10 +125,34 @@ namespace CSTest
 				CSIT_PASS();
 			}
 
+            /// Validate that contents of a file can be appended to
+            ///
+            CSIT_TEST(SuccessAppend)
+            {
+                ClearTestDirectory();
+                
+                const auto fileSystem = CS::Application::Get()->GetFileSystem();
+                auto outputFileStream = fileSystem->CreateTextOutputStream(k_storageLocation, k_testTextFileName, CS::TextOutputFileMode::k_write);
+                CSIT_ASSERT(outputFileStream, "Cannot open output stream to file: " + k_testTextFileName);
+           
+                outputFileStream->Write(k_testTextFileFirstLine);
+                outputFileStream = nullptr;
+                
+                outputFileStream = fileSystem->CreateTextOutputStream(k_storageLocation, k_testTextFileName, CS::TextOutputFileMode::k_writeAppend);
+                outputFileStream->Write(k_testTextFileSecondLine);
+                outputFileStream = nullptr;
+                
+                auto inputFileStream = fileSystem->CreateTextInputStream(k_storageLocation, k_testTextFileName);
+                auto contents = inputFileStream->ReadAll();
+                
+                CSIT_ASSERT(contents == k_testTextFileContents, "File contents do not match expected contents.");
+                CSIT_PASS();
+            }
+            
 			/// Validate that contents of a larger size can be overwritten with shorter 
 			/// text without remnants of the first remaining
 			///
-			CSIT_TEST(SuccessTextOutputStreamOverwrite)
+			CSIT_TEST(SuccessOverwrite)
             {
                 ClearTestDirectory();
                 

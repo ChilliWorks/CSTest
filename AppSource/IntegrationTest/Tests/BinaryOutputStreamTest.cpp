@@ -81,7 +81,7 @@ namespace CSTest
         {
             /// Validate that a file stream can be opened
             ///
-            CSIT_TEST(SuccessBinaryOutputStreamCreate)
+            CSIT_TEST(SuccessCreate)
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
                 const auto outputFileStream = fileSystem->CreateBinaryOutputStream(k_storageLocation, k_testBinaryFileName);
@@ -91,7 +91,7 @@ namespace CSTest
             
             /// Validate that single buffer of contents can be written to file
             ///
-            CSIT_TEST(SuccessBinaryOutputStreamWriteRawData)
+            CSIT_TEST(SuccessWriteRawData)
             {
                 ClearTestDirectory();
                 
@@ -105,7 +105,7 @@ namespace CSTest
                 auto inputFileStream = fileSystem->CreateBinaryInputStream(k_storageLocation, k_testBinaryFileName);
                 auto readResult = inputFileStream->ReadAll();
                 
-                CSIT_ASSERT(strncmp(reinterpret_cast<const s8*>(readResult->GetData()), k_binaryFileContents, readResult->GetLength()) == 0, "File contents do not match expected contents.");
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(readResult->GetData()), k_binaryFileContents, readResult->GetLength()) == 0, "File contents do not match expected contents.");
                 
                 ClearTestDirectory();
                 
@@ -114,7 +114,7 @@ namespace CSTest
             
             /// Validate that single buffer of contents can be written to file
             ///
-            CSIT_TEST(SuccessBinaryOutputStreamWriteByteBuffer)
+            CSIT_TEST(SuccessWriteByteBuffer)
             {
                 ClearTestDirectory();
                 
@@ -135,7 +135,7 @@ namespace CSTest
                 auto inputFileStream = fileSystem->CreateBinaryInputStream(k_storageLocation, k_testBinaryFileName);
                 auto readResult = inputFileStream->ReadAll();
                 
-                CSIT_ASSERT(strncmp(reinterpret_cast<const s8*>(readResult->GetData()), k_binaryFileContents, readResult->GetLength()) == 0, "File contents do not match expected contents.");
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(readResult->GetData()), k_binaryFileContents, readResult->GetLength()) == 0, "File contents do not match expected contents.");
                 
                 ClearTestDirectory();
                 
@@ -144,7 +144,7 @@ namespace CSTest
             
             /// Validate that the contents of a number of data types can be written to file
             ///
-            CSIT_TEST(SuccessBinaryOutputStreamWritePOD)
+            CSIT_TEST(SuccessWritePOD)
             {
                 ClearTestDirectory();
                 
@@ -156,7 +156,7 @@ namespace CSTest
                 dataInstance.m_data = k_intData;
                 DataStruct dataStruct;
                 dataStruct.m_data = k_intData;
-                
+
                 outputFileStream->Write(k_intData);
                 outputFileStream->Write(k_floatData);
                 outputFileStream->Write(k_boolData);
@@ -181,10 +181,42 @@ namespace CSTest
                 CSIT_PASS();
             }
             
+            /// Validate that contents of a file can be appended to
+            ///
+            CSIT_TEST(SuccessAppend)
+            {
+                ClearTestDirectory();
+            
+                const auto fileSystem = CS::Application::Get()->GetFileSystem();
+                auto outputFileStream = fileSystem->CreateBinaryOutputStream(k_storageLocation, k_testBinaryFileName, CS::BinaryOutputFileMode::k_write);
+                CSIT_ASSERT(outputFileStream, "Cannot open output stream to file: " + k_testBinaryFileName);
+
+                outputFileStream->Write((void*)k_binaryFileContents, k_binaryFileContentsSizeBytes);
+                outputFileStream = nullptr;
+                
+                outputFileStream = fileSystem->CreateBinaryOutputStream(k_storageLocation, k_testBinaryFileName, CS::BinaryOutputFileMode::k_writeAppend);
+                outputFileStream->Write((void*)k_binaryFileContents, k_binaryFileContentsSizeBytes);
+                outputFileStream = nullptr;
+                
+                
+                s8 combinedResults[k_binaryFileContentsSizeBytes * 2];
+                memcpy(combinedResults, k_binaryFileContents, k_binaryFileContentsSizeBytes);
+                memcpy(&combinedResults[k_binaryFileContentsSizeBytes], k_binaryFileContents, k_binaryFileContentsSizeBytes);
+
+                auto inputFileStream = fileSystem->CreateBinaryInputStream(k_storageLocation, k_testBinaryFileName);
+                auto readResult = inputFileStream->ReadAll();
+                
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(readResult->GetData()), combinedResults, readResult->GetLength()) == 0, "File contents do not match expected contents.");
+                
+                ClearTestDirectory();
+                
+                CSIT_PASS();
+            }
+            
             /// Validate that contents of a larger size can be overwritten with shorter
             /// data without remnants of the first remaining
             ///
-            CSIT_TEST(SuccessBinaryOutputStreamOverwrite)
+            CSIT_TEST(SuccessOverwrite)
             {
                 ClearTestDirectory();
                 
@@ -208,7 +240,7 @@ namespace CSTest
                 auto contents = inputFileStream->ReadAll();
                 
                 CSIT_ASSERT(contents->GetLength() == k_binaryFileContentsSizeBytes, "File size does not match expected size!");
-                CSIT_ASSERT(strncmp(reinterpret_cast<const s8*>(contents->GetData()), k_binaryFileContents, contents->GetLength()) == 0, "File contents do not match expected contents.");
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(contents->GetData()), k_binaryFileContents, contents->GetLength()) == 0, "File contents do not match expected contents.");
                 
                 ClearTestDirectory();
                 

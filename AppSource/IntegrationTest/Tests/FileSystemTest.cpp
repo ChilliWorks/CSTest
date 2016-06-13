@@ -154,21 +154,18 @@ namespace CSTest
             {
                 auto fileSystem = CS::Application::Get()->GetFileSystem();
                 
-                auto fileStream = fileSystem->CreateFileStream(in_storageLocation, in_filePath, CS::FileMode::k_readBinary);
+                auto fileStream = fileSystem->CreateBinaryInputStream(in_storageLocation, in_filePath);
                 if (!fileStream.get())
                 {
                     return "";
                 }
                 
-                fileStream->SeekG(0, CS::SeekDir::k_end);
-                u32 length = fileStream->TellG();
+                u32 length = u32(fileStream->GetLength());
                 
                 if (length == 0)
                 {
                     return "";
                 }
-                
-                fileStream->SeekG(0, CS::SeekDir::k_beginning);
                 
                 std::unique_ptr<s8[]> fileContents(new s8[length]);
                 fileStream->Read(fileContents.get(), length);
