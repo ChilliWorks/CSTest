@@ -132,13 +132,13 @@ namespace CSTest
                 ClearTestDirectory();
                 
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                auto outputFileStream = fileSystem->CreateTextOutputStream(k_storageLocation, k_testTextFileName, CS::TextOutputFileMode::k_write);
+                auto outputFileStream = fileSystem->CreateTextOutputStream(k_storageLocation, k_testTextFileName, CS::FileWriteMode::k_overwrite);
                 CSIT_ASSERT(outputFileStream, "Cannot open output stream to file: " + k_testTextFileName);
            
                 outputFileStream->Write(k_testTextFileFirstLine);
                 outputFileStream = nullptr;
                 
-                outputFileStream = fileSystem->CreateTextOutputStream(k_storageLocation, k_testTextFileName, CS::TextOutputFileMode::k_writeAppend);
+                outputFileStream = fileSystem->CreateTextOutputStream(k_storageLocation, k_testTextFileName, CS::FileWriteMode::k_append);
                 outputFileStream->Write(k_testTextFileSecondLine);
                 outputFileStream = nullptr;
                 

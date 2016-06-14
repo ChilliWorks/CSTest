@@ -81,13 +81,19 @@ namespace CSTest
         {
             /// Validate that a file stream can be opened
             ///
-            CSIT_TEST(SuccessCreate)
+            CSIT_TEST(SuccessStreamCreate)
             {
+                ClearTestDirectory();
+                
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
                 const auto outputFileStream = fileSystem->CreateBinaryOutputStream(k_storageLocation, k_testBinaryFileName);
                 CSIT_ASSERT(outputFileStream, "Cannot open output stream to file: " + k_testBinaryFileName);
+                
+                ClearTestDirectory();
+                
                 CSIT_PASS();
             }
+
             
             /// Validate that single buffer of contents can be written to file
             ///
@@ -99,7 +105,7 @@ namespace CSTest
                 auto outputFileStream = fileSystem->CreateBinaryOutputStream(k_storageLocation, k_testBinaryFileName);
                 CSIT_ASSERT(outputFileStream, "Cannot open output stream to file: " + k_testBinaryFileName);
                 
-                outputFileStream->Write((void*)k_binaryFileContents, k_binaryFileContentsSizeBytes);
+                outputFileStream->Write(reinterpret_cast<const u8*>(k_binaryFileContents), k_binaryFileContentsSizeBytes);
                 outputFileStream = nullptr;
                 
                 auto inputFileStream = fileSystem->CreateBinaryInputStream(k_storageLocation, k_testBinaryFileName);
@@ -156,7 +162,7 @@ namespace CSTest
                 dataInstance.m_data = k_intData;
                 DataStruct dataStruct;
                 dataStruct.m_data = k_intData;
-
+                
                 outputFileStream->Write(k_intData);
                 outputFileStream->Write(k_floatData);
                 outputFileStream->Write(k_boolData);
@@ -188,14 +194,14 @@ namespace CSTest
                 ClearTestDirectory();
             
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                auto outputFileStream = fileSystem->CreateBinaryOutputStream(k_storageLocation, k_testBinaryFileName, CS::BinaryOutputFileMode::k_write);
+                auto outputFileStream = fileSystem->CreateBinaryOutputStream(k_storageLocation, k_testBinaryFileName, CS::FileWriteMode::k_overwrite);
                 CSIT_ASSERT(outputFileStream, "Cannot open output stream to file: " + k_testBinaryFileName);
 
-                outputFileStream->Write((void*)k_binaryFileContents, k_binaryFileContentsSizeBytes);
+                outputFileStream->Write(reinterpret_cast<const u8*>(k_binaryFileContents), k_binaryFileContentsSizeBytes);
                 outputFileStream = nullptr;
                 
-                outputFileStream = fileSystem->CreateBinaryOutputStream(k_storageLocation, k_testBinaryFileName, CS::BinaryOutputFileMode::k_writeAppend);
-                outputFileStream->Write((void*)k_binaryFileContents, k_binaryFileContentsSizeBytes);
+                outputFileStream = fileSystem->CreateBinaryOutputStream(k_storageLocation, k_testBinaryFileName, CS::FileWriteMode::k_append);
+                outputFileStream->Write(reinterpret_cast<const u8*>(k_binaryFileContents), k_binaryFileContentsSizeBytes);
                 outputFileStream = nullptr;
                 
                 
@@ -224,14 +230,14 @@ namespace CSTest
                 auto outputFileStream = fileSystem->CreateBinaryOutputStream(k_storageLocation, k_testBinaryFileName);
                 CSIT_ASSERT(outputFileStream, "Cannot open output stream to file: " + k_testBinaryFileName);
                 
-                outputFileStream->Write((void*)k_binaryFileContents, k_binaryFileContentsSizeBytes);
-                outputFileStream->Write((void*)k_binaryFileContents, k_binaryFileContentsSizeBytes);
+                outputFileStream->Write(reinterpret_cast<const u8*>(k_binaryFileContents), k_binaryFileContentsSizeBytes);
+                outputFileStream->Write(reinterpret_cast<const u8*>(k_binaryFileContents), k_binaryFileContentsSizeBytes);
                 outputFileStream = nullptr;
                 
                 auto overwriteFileStream = fileSystem->CreateBinaryOutputStream(k_storageLocation, k_testBinaryFileName);
                 CSIT_ASSERT(overwriteFileStream, "Cannot open output stream to file: " + k_testBinaryFileName);
                 
-                overwriteFileStream->Write((void*)k_binaryFileContents, k_binaryFileContentsSizeBytes);
+                overwriteFileStream->Write(reinterpret_cast<const u8*>(k_binaryFileContents), k_binaryFileContentsSizeBytes);
                 overwriteFileStream = nullptr;
                 
                 auto inputFileStream = fileSystem->CreateBinaryInputStream(k_storageLocation, k_testBinaryFileName);

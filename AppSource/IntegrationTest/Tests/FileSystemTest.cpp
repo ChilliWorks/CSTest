@@ -167,10 +167,10 @@ namespace CSTest
                     return "";
                 }
                 
-                std::unique_ptr<s8[]> fileContents(new s8[length]);
+                std::unique_ptr<u8[]> fileContents(new u8[length]);
                 fileStream->Read(fileContents.get(), length);
                 
-                return CS::HashSHA1::GenerateHexHashCode(fileContents.get(), length);
+                return CS::HashSHA1::GenerateHexHashCode(reinterpret_cast<s8*>(fileContents.get()), length);
             }
         }
         
