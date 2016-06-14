@@ -65,11 +65,19 @@ namespace CSTest
             //------------------------------------------------------------------------------
             /// Presents a series of buttons, each with an associated action.
             ///
-            /// @author Ian Copland
+            /// @author Ian Copland / Jordan Brown
             ///
-            /// @param in_desc - The information on the options which should be presented.
             //------------------------------------------------------------------------------
             void Present(const OptionsMenuDesc& in_desc) noexcept;
+            //------------------------------------------------------------------------------
+            /// Changes to the specified page, presenting new buttons to the user.
+            ///
+            /// @author Jordan Brown
+            ///
+            /// @param in_page - The desired page number, starting index 0.
+            //------------------------------------------------------------------------------
+            void ChangePage(const u32& in_pagek, const OptionsMenuDesc& in_desc) noexcept;
+            //------------------------------------------------------------------------------
             //------------------------------------------------------------------------------
             /// Cleans up all existing buttons, and resets the system back into a reusable
             /// state.
@@ -109,9 +117,15 @@ namespace CSTest
             void OnDestroy() noexcept override;
             
             CS::WidgetSPtr m_buttonContainer;
+            CS::WidgetSPtr m_paginationButtonContainer;
             
             std::vector<CS::WidgetSPtr> m_buttons;
+            std::vector<CS::WidgetSPtr> m_paginationButtons;
             std::vector<CS::EventConnectionUPtr> m_connectionContainer;
+            
+            u32 m_numPages;
+            u32 m_currentPage;
+
         };
     }
 }
