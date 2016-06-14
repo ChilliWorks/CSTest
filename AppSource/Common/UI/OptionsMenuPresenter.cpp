@@ -85,7 +85,6 @@ namespace CSTest
             if (in_desc.GetButtons().size() > k_maxItemsPerPage) //determine pagination
             {
                 m_numPages = 1 + (u32(in_desc.GetButtons().size()) / k_maxItemsPerPage);
-
                 ChangePage(0, in_desc);
             }
             else
@@ -105,17 +104,13 @@ namespace CSTest
                     m_buttons.push_back(button);
                     m_connectionContainer.push_back(std::move(connection));
                 }
-
             }
-
-
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void OptionsMenuPresenter::ChangePage(const u32& in_page, const OptionsMenuDesc& in_desc) noexcept
+        void OptionsMenuPresenter::ChangePage(u32 in_page, const OptionsMenuDesc& in_desc) noexcept
         {
             CS_ASSERT((in_page < m_numPages && in_page >= 0), "Error: Page does not exist.");
-
             m_currentPage = in_page;
             
             Dismiss();
@@ -195,16 +190,13 @@ namespace CSTest
                 m_paginationButtons.push_back(button);
                 m_connectionContainer.push_back(std::move(connection));
             }
-
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void OptionsMenuPresenter::Dismiss() noexcept
         {
             m_connectionContainer.clear();
-
-            
-            
+        
             for (const auto& button : m_buttons)
             {
                 button->RemoveFromParent();
@@ -217,12 +209,9 @@ namespace CSTest
 
             m_buttons.erase(m_buttons.begin(), m_buttons.end());
             m_paginationButtons.erase(m_paginationButtons.begin(), m_paginationButtons.end());
-
-            
-            
+          
             auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutUIComponent>();
             layoutComponent->ApplyLayoutDef(CS::UILayoutDefSPtr(new CS::VListUILayoutDef(k_numItemsPerColumn, CS::Vector4::k_zero, CS::Vector4::k_zero, k_relativeSpacing, 0.0f)));
-
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -242,7 +231,6 @@ namespace CSTest
             m_paginationButtonContainer->SetParentalAnchor(CS::AlignmentAnchor::k_bottomRight);
             m_paginationButtonContainer->SetRelativePosition(CS::Vector2(-0.25f, 0.10f));
             m_paginationButtonContainer->SetRelativeSize(CS::Vector2(0.25f, 0.10f));
-
             auto paginationLayout = m_paginationButtonContainer->GetComponent<CS::LayoutUIComponent>();
             paginationLayout->ApplyLayoutDef(CS::UILayoutDefSPtr(new CS::GridUILayoutDef(CS::GridUILayout::CellOrder::k_rowMajor, 1, 2, CS::Vector4::k_zero, CS::Vector4::k_zero, k_relativeSpacing, 0.0f, k_relativeSpacing, 0.0f)));
             
@@ -252,8 +240,7 @@ namespace CSTest
             Dismiss();
             
             GetState()->GetUICanvas()->AddWidget(m_buttonContainer);
-            GetState()->GetUICanvas()->AddWidget(m_paginationButtonContainer);
-            
+            GetState()->GetUICanvas()->AddWidget(m_paginationButtonContainer);         
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
