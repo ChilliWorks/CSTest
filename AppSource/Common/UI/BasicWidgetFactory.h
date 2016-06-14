@@ -107,11 +107,11 @@ namespace CSTest
             //------------------------------------------------------------------------------
             /// @author Jordan Brown
             ///
-            /// @param in_size - The size of the dummy widget.
+            /// @param in_size - The size of the blank widget.
             /// @param in_alignment - [Optional] Both the origin and parental alignment.
             /// Defaults to middle centre.
             //------------------------------------------------------------------------------
-            CS::WidgetUPtr CreateDummy(const CS::Vector2& in_size, CS::AlignmentAnchor in_alignment = CS::AlignmentAnchor::k_middleCentre);
+            CS::WidgetUPtr CreateBlank(const CS::Vector2& in_size, CS::AlignmentAnchor in_alignment = CS::AlignmentAnchor::k_middleCentre);
             
         private:
             friend class CS::Application;

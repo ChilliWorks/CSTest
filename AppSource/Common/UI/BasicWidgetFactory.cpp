@@ -137,19 +137,19 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CS::WidgetUPtr BasicWidgetFactory::CreateDummy(const CS::Vector2& in_size, CS::AlignmentAnchor in_alignment)
+        CS::WidgetUPtr BasicWidgetFactory::CreateBlank(const CS::Vector2& in_size, CS::AlignmentAnchor in_alignment)
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Cannot create widgets on background threads.");
 
             auto widgetFactory = CS::Application::Get()->GetWidgetFactory();
 
-            auto dummy = widgetFactory->CreateWidget();
-            dummy->SetParentalAnchor(in_alignment);
-            dummy->SetOriginAnchor(in_alignment);
-            dummy->SetRelativeSize(in_size);
-            dummy->SetVisible(false);
+            auto blank = widgetFactory->CreateWidget();
+            blank->SetParentalAnchor(in_alignment);
+            blank->SetOriginAnchor(in_alignment);
+            blank->SetRelativeSize(in_size);
+            blank->SetVisible(false);
 
-            return dummy;
+            return blank;
         }
     }
 }

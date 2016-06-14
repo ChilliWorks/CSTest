@@ -126,6 +126,14 @@ namespace CSTest
                 m_connectionContainer.push_back(std::move(connection));
             }
 
+            CreatePageNavigationButtons();
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        void OptionsMenuPresenter::CreatePageNavigationButtons() noexcept
+        {
+            auto basicWidgetFactory = CS::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
+
             if (m_currentPage > 0)
             {
                 CS::WidgetSPtr button = basicWidgetFactory->CreateStretchableButton(CS::Vector2::k_one, "Prev", CS::AlignmentAnchor::k_middleCentre, CS::Colour(0.92f, 0.95f, 0.98f, 1.0f));
@@ -141,7 +149,7 @@ namespace CSTest
             }
             else
             {
-                CS::WidgetSPtr dummy = basicWidgetFactory->CreateDummy(CS::Vector2::k_one); //create dummy widget to fill out blank space.
+                CS::WidgetSPtr dummy = basicWidgetFactory->CreateBlank(CS::Vector2::k_one); //create dummy widget to fill out blank space.
                 m_paginationButtonContainer->AddWidget(dummy);
                 m_paginationButtons.push_back(dummy);
             }
@@ -176,8 +184,8 @@ namespace CSTest
                 button->RemoveFromParent();
             }
 
-            m_buttons.erase(m_buttons.begin(), m_buttons.end());
-            m_paginationButtons.erase(m_paginationButtons.begin(), m_paginationButtons.end());
+            m_buttons.clear();
+            m_paginationButtons.clear();
           
             auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutUIComponent>();
             layoutComponent->ApplyLayoutDef(CS::UILayoutDefSPtr(new CS::VListUILayoutDef(k_numItemsPerColumn, CS::Vector4::k_zero, CS::Vector4::k_zero, k_relativeSpacing, 0.0f)));
