@@ -104,6 +104,14 @@ namespace CSTest
             CS::WidgetUPtr CreateLabel(const CS::Vector2& in_size, const CS::FontCSPtr& in_font, const std::string& in_text, CS::AlignmentAnchor in_alignment = CS::AlignmentAnchor::k_middleCentre,
                                          CS::HorizontalTextJustification in_horizontalTextJustification = CS::HorizontalTextJustification::k_centre,
                                          CS::VerticalTextJustification in_verticalTextJustification = CS::VerticalTextJustification::k_centre);
+            //------------------------------------------------------------------------------
+            /// @author Jordan Brown
+            ///
+            /// @param in_size - The size of the dummy widget.
+            /// @param in_alignment - [Optional] Both the origin and parental alignment.
+            /// Defaults to middle centre.
+            //------------------------------------------------------------------------------
+            CS::WidgetUPtr CreateDummy(const CS::Vector2& in_size, CS::AlignmentAnchor in_alignment = CS::AlignmentAnchor::k_middleCentre);
             
         private:
             friend class CS::Application;

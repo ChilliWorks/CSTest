@@ -69,53 +69,23 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void OptionsMenuPresenter::Present(const OptionsMenuDesc& in_desc) noexcept
         {
-            Dismiss(); 
-
-			if (in_desc.GetButtons().size() < k_numItemsPerColumn)
-			{
-				auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutUIComponent>();
-				layoutComponent->ApplyLayoutDef(CS::UILayoutDefSPtr(new CS::VListUILayoutDef(k_numItemsPerColumn, CS::Vector4(0.0f, k_listMargins, 0.0f, k_listMargins), CS::Vector4::k_zero, k_relativeSpacing, 0.0f)));
-			}
-			else
-			{
-				auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutUIComponent>();
-				layoutComponent->ApplyLayoutDef(CS::UILayoutDefSPtr(new CS::GridUILayoutDef(CS::GridUILayout::CellOrder::k_rowMajor, k_numItemsPerColumn, k_numColumns, CS::Vector4::k_zero, CS::Vector4::k_zero, k_relativeSpacing, 0.0f, k_relativeSpacing, 0.0f)));
-			}
-
-            if (in_desc.GetButtons().size() > k_maxItemsPerPage) //determine pagination
+            m_desc = in_desc;
+            m_numPages = (u32(m_desc.GetButtons().size() + k_maxItemsPerPage - 1) / k_maxItemsPerPage);
+            if (m_numPages > 0)
             {
-                m_numPages = 1 + (u32(in_desc.GetButtons().size()) / k_maxItemsPerPage);
-                ChangePage(0, in_desc);
-            }
-            else
-            {
-                m_paginationButtonContainer->SetVisible(false);
-                auto basicWidgetFactory = CS::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
-                for (const auto& buttonDesc : in_desc.GetButtons())
-                {
-                    CS::WidgetSPtr button = basicWidgetFactory->CreateStretchableButton(CS::Vector2::k_one, buttonDesc.m_name, CS::AlignmentAnchor::k_middleCentre, CS::Colour(0.92f, 0.95f, 0.98f, 1.0f));
-                    m_buttonContainer->AddWidget(button);
-
-                    auto connection = button->GetReleasedInsideEvent().OpenConnection([=](CS::Widget* in_widget, const CS::Pointer& in_pointer, CS::Pointer::InputType in_inputType)
-                    {
-                        buttonDesc.m_action();
-                    });
-
-                    m_buttons.push_back(button);
-                    m_connectionContainer.push_back(std::move(connection));
-                }
+                SetPage(0);
             }
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        void OptionsMenuPresenter::ChangePage(u32 in_page, const OptionsMenuDesc& in_desc) noexcept
+        void OptionsMenuPresenter::SetPage(u32 in_page) noexcept
         {
             CS_ASSERT((in_page < m_numPages && in_page >= 0), "Error: Page does not exist.");
             m_currentPage = in_page;
             
             Dismiss();
 
-            if (in_desc.GetButtons().size() < k_numItemsPerColumn)
+            if (m_desc.GetButtons().size() < k_numItemsPerColumn)
             {
                 auto layoutComponent = m_buttonContainer->GetComponent<CS::LayoutUIComponent>();
                 layoutComponent->ApplyLayoutDef(CS::UILayoutDefSPtr(new CS::VListUILayoutDef(k_numItemsPerColumn, CS::Vector4(0.0f, k_listMargins, 0.0f, k_listMargins), CS::Vector4::k_zero, k_relativeSpacing, 0.0f)));
@@ -128,16 +98,16 @@ namespace CSTest
 
             auto basicWidgetFactory = CS::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
 
-            auto iterBegin = in_desc.GetButtons().begin() + (in_page * k_maxItemsPerPage);
-            if (iterBegin > in_desc.GetButtons().end())
+            auto iterBegin = m_desc.GetButtons().begin() + (in_page * k_maxItemsPerPage);
+            if (iterBegin > m_desc.GetButtons().end())
             {
-                iterBegin = in_desc.GetButtons().end();
+                iterBegin = m_desc.GetButtons().end();
             }
 
-            auto iterEnd = iterBegin + std::min(k_maxItemsPerPage, u32(in_desc.GetButtons().size() - k_maxItemsPerPage * m_currentPage));
-            if (iterEnd > in_desc.GetButtons().end())
+            auto iterEnd = iterBegin + std::min(k_maxItemsPerPage, u32(m_desc.GetButtons().size() - k_maxItemsPerPage * m_currentPage));
+            if (iterEnd > m_desc.GetButtons().end())
             {
-                iterEnd = in_desc.GetButtons().end();
+                iterEnd = m_desc.GetButtons().end();
             }
 
             for (auto& buttonDesc = iterBegin; buttonDesc != iterEnd; ++buttonDesc)
@@ -145,11 +115,11 @@ namespace CSTest
                 CS::WidgetSPtr button = basicWidgetFactory->CreateStretchableButton(CS::Vector2::k_one, buttonDesc->m_name, CS::AlignmentAnchor::k_middleCentre, CS::Colour(0.92f, 0.95f, 0.98f, 1.0f));
                 m_buttonContainer->AddWidget(button);
 
-                u32 callbackIndex = u32(buttonDesc - in_desc.GetButtons().begin()); //index required as dereferencing iterator does not work in callbacks
+                u32 callbackIndex = u32(buttonDesc - m_desc.GetButtons().begin()); //index required as dereferencing iterator does not work in callbacks
 
                 auto connection = button->GetReleasedInsideEvent().OpenConnection([=](CS::Widget* in_widget, const CS::Pointer& in_pointer, CS::Pointer::InputType in_inputType)
                 {
-                    in_desc.GetButtons().at(callbackIndex).m_action();
+                    m_desc.GetButtons().at(callbackIndex).m_action();
                 });
 
                 m_buttons.push_back(button);
@@ -163,7 +133,7 @@ namespace CSTest
 
                 auto connection = button->GetReleasedInsideEvent().OpenConnection([=](CS::Widget* in_widget, const CS::Pointer& in_pointer, CS::Pointer::InputType in_inputType)
                 {
-                    ChangePage(m_currentPage - 1, in_desc);
+                    SetPage(m_currentPage - 1);
                 });
 
                 m_paginationButtons.push_back(button);
@@ -171,10 +141,9 @@ namespace CSTest
             }
             else
             {
-                CS::WidgetSPtr button = basicWidgetFactory->CreateStretchableButton(CS::Vector2::k_one, "Prev", CS::AlignmentAnchor::k_middleCentre, CS::Colour(0.92f, 0.95f, 0.98f, 1.0f));
-                m_paginationButtonContainer->AddWidget(button);
-                button->SetVisible(false); // create dummy button so that interface retains shape.
-                m_paginationButtons.push_back(button);
+                CS::WidgetSPtr dummy = basicWidgetFactory->CreateDummy(CS::Vector2::k_one); //create dummy widget to fill out blank space.
+                m_paginationButtonContainer->AddWidget(dummy);
+                m_paginationButtons.push_back(dummy);
             }
 
             if (m_currentPage < m_numPages - 1)
@@ -184,7 +153,7 @@ namespace CSTest
 
                 auto connection = button->GetReleasedInsideEvent().OpenConnection([=](CS::Widget* in_widget, const CS::Pointer& in_pointer, CS::Pointer::InputType in_inputType)
                 {
-                    ChangePage(m_currentPage + 1, in_desc);
+                    SetPage(m_currentPage + 1);
                 });
 
                 m_paginationButtons.push_back(button);

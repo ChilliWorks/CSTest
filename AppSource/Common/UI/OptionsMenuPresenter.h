@@ -31,6 +31,8 @@
 
 #include <CSTest.h>
 
+#include <Common/UI/OptionsMenuDesc.h>
+
 #include <ChilliSource/Core/System.h>
 
 namespace CSTest
@@ -71,15 +73,6 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void Present(const OptionsMenuDesc& in_desc) noexcept;
             //------------------------------------------------------------------------------
-            /// Changes to the specified page, presenting new buttons to the user.
-            ///
-            /// @author Jordan Brown
-            ///
-            /// @param in_page - The desired page number, starting index 0.
-            /// @param in_desc - The information on the options which should be presented.
-            //------------------------------------------------------------------------------
-            void ChangePage(u32 in_page, const OptionsMenuDesc& in_desc) noexcept;
-            //------------------------------------------------------------------------------
             /// Cleans up all existing buttons, and resets the system back into a reusable
             /// state.
             ///
@@ -111,12 +104,22 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnInit() noexcept override;
             //------------------------------------------------------------------------------
+            /// Switches to the specified page, presenting new buttons to the user.
+            ///
+            /// @author Jordan Brown
+            ///
+            /// @param in_page - The desired page number, starting index 0.
+            //------------------------------------------------------------------------------
+            void SetPage(u32 in_page) noexcept;
+            //------------------------------------------------------------------------------
             /// Destroys the system.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnDestroy() noexcept override;
-            
+
+            OptionsMenuDesc m_desc;
+
             CS::WidgetSPtr m_buttonContainer;
             CS::WidgetSPtr m_paginationButtonContainer;
             
