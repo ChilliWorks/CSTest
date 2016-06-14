@@ -137,7 +137,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CS::WidgetUPtr BasicWidgetFactory::CreateDummy(const CS::Vector2 & in_size, CS::AlignmentAnchor in_alignment)
+        CS::WidgetUPtr BasicWidgetFactory::CreateDummy(const CS::Vector2& in_size, CS::AlignmentAnchor in_alignment)
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Cannot create widgets on background threads.");
 
