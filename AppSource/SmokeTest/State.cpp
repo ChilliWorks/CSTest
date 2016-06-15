@@ -38,6 +38,7 @@
 #include <Lighting/State.h>
 #include <Particle/State.h>
 #include <WebView/State.h>
+#include <DialogueBox/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -98,7 +99,11 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<EmailComposer::State>());
             });
 #endif
-            
+            optionsMenuDesc.AddButton("Dialogue Boxes", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<DialogueBox::State>());
+            });
+
             m_optionsMenuPresenter->Present(optionsMenuDesc);
         }
     }
