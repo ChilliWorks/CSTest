@@ -82,7 +82,7 @@ namespace CSTest
 
                 auto fileContents = inputFileStream->ReadAll();
                 CSIT_ASSERT(fileContents->GetLength() == k_binaryFileContentsSizeBytes, "File contents size does not match what is expected.");
-                CSIT_ASSERT(strncmp(reinterpret_cast<const s8*>(fileContents->GetData()), k_binaryFileContents, fileContents->GetLength()) == 0, "File contents do not match expected contents.");
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(fileContents->GetData()), k_binaryFileContents, size_t(fileContents->GetLength())) == 0, "File contents do not match expected contents.");
                 CSIT_PASS();
             }
 
@@ -115,14 +115,14 @@ namespace CSTest
                 
                 CSIT_ASSERT(readResult, "Failed to read from file.");
                 CSIT_ASSERT(readResult->GetLength() == k_streamReadPositionLength, "File contents size does not match what is expected.");
-                CSIT_ASSERT(strncmp(reinterpret_cast<const s8*>(readResult->GetData()), expectedResult, readResult->GetLength()) == 0, "File contents do not match expected contents.");
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(readResult->GetData()), expectedResult, size_t(readResult->GetLength())) == 0, "File contents do not match expected contents.");
                 
                 inputFileStream->SetReadPosition(0);
                 auto reReadResult = inputFileStream->Read(k_streamReadPositionLength);
                 
                 CSIT_ASSERT(reReadResult, "Failed to read from file.");
                 CSIT_ASSERT(reReadResult->GetLength() == k_streamReadPositionLength, "File contents size does not match what is expected.");
-                CSIT_ASSERT(strncmp(reinterpret_cast<const s8*>(reReadResult->GetData()), expectedResult, reReadResult->GetLength()) == 0, "File contents do not match expected contents.");
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(reReadResult->GetData()), expectedResult, size_t(reReadResult->GetLength())) == 0, "File contents do not match expected contents.");
                 
                 CSIT_PASS();
             }
@@ -165,17 +165,17 @@ namespace CSTest
                 
                 CSIT_ASSERT(readResult, "Failed to carry out read.");
                 CSIT_ASSERT(readResult->GetLength() == length, "File contents size does not match what is expected.");
-                CSIT_ASSERT(strncmp(reinterpret_cast<const s8*>(readResult->GetData()), expectedResult, readResult->GetLength()) == 0, "File contents do not match expected contents.");
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(readResult->GetData()), expectedResult, size_t(readResult->GetLength())) == 0, "File contents do not match expected contents.");
                 
                 inputFileStream->SetReadPosition(inputFileStream->GetReadPosition());
                 u64 remainingLength = inputFileStream->GetLength() - inputFileStream->GetReadPosition();
                 char* overrunExpectedResult = new char[remainingLength];
-                memcpy(overrunExpectedResult, &k_binaryFileContents[inputFileStream->GetReadPosition()], remainingLength);
+                memcpy(overrunExpectedResult, &k_binaryFileContents[inputFileStream->GetReadPosition()], size_t(remainingLength));
                 auto overrunreadResult = inputFileStream->Read(k_streamFailedReadLength);
                 
                 CSIT_ASSERT(overrunreadResult, "Failed to carry out overrun read.");
                 CSIT_ASSERT(overrunreadResult->GetLength() == remainingLength, "File contents size does not match what is expected.");
-                CSIT_ASSERT(strncmp(reinterpret_cast<const s8*>(overrunreadResult->GetData()), overrunExpectedResult, overrunreadResult->GetLength()) == 0, "File contents do not match expected contents.");
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(overrunreadResult->GetData()), overrunExpectedResult, size_t(overrunreadResult->GetLength())) == 0, "File contents do not match expected contents.");
 
 				CS_SAFEDELETE_ARRAY(expectedResult);
 				CS_SAFEDELETE_ARRAY(overrunExpectedResult);

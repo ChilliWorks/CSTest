@@ -66,7 +66,8 @@ namespace CSTest
             void ClearTestDirectory()
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                CS_ASSERT(fileSystem->CreateDirectoryPath(k_storageLocation, k_rootDirectory), "Could not create directory!");
+                bool success = fileSystem->CreateDirectoryPath(k_storageLocation, k_rootDirectory);
+                CS_ASSERT(success, "Could not create directory!");
                 
                 if(fileSystem->DoesFileExist(k_storageLocation, k_testBinaryFileName))
                 {
@@ -111,7 +112,7 @@ namespace CSTest
                 auto inputFileStream = fileSystem->CreateBinaryInputStream(k_storageLocation, k_testBinaryFileName);
                 auto readResult = inputFileStream->ReadAll();
                 
-                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(readResult->GetData()), k_binaryFileContents, readResult->GetLength()) == 0, "File contents do not match expected contents.");
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(readResult->GetData()), k_binaryFileContents, size_t(readResult->GetLength())) == 0, "File contents do not match expected contents.");
                 
                 ClearTestDirectory();
                 
@@ -141,7 +142,7 @@ namespace CSTest
                 auto inputFileStream = fileSystem->CreateBinaryInputStream(k_storageLocation, k_testBinaryFileName);
                 auto readResult = inputFileStream->ReadAll();
                 
-                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(readResult->GetData()), k_binaryFileContents, readResult->GetLength()) == 0, "File contents do not match expected contents.");
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(readResult->GetData()), k_binaryFileContents, size_t(readResult->GetLength())) == 0, "File contents do not match expected contents.");
                 
                 ClearTestDirectory();
                 
@@ -212,7 +213,7 @@ namespace CSTest
                 auto inputFileStream = fileSystem->CreateBinaryInputStream(k_storageLocation, k_testBinaryFileName);
                 auto readResult = inputFileStream->ReadAll();
                 
-                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(readResult->GetData()), combinedResults, readResult->GetLength()) == 0, "File contents do not match expected contents.");
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(readResult->GetData()), combinedResults, size_t(readResult->GetLength())) == 0, "File contents do not match expected contents.");
                 
                 ClearTestDirectory();
                 
@@ -246,7 +247,7 @@ namespace CSTest
                 auto contents = inputFileStream->ReadAll();
                 
                 CSIT_ASSERT(contents->GetLength() == k_binaryFileContentsSizeBytes, "File size does not match expected size!");
-                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(contents->GetData()), k_binaryFileContents, contents->GetLength()) == 0, "File contents do not match expected contents.");
+                CSIT_ASSERT(memcmp(reinterpret_cast<const s8*>(contents->GetData()), k_binaryFileContents, size_t(contents->GetLength())) == 0, "File contents do not match expected contents.");
                 
                 ClearTestDirectory();
                 
