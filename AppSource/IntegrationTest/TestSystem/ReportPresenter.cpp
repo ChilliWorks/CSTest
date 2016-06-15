@@ -98,10 +98,12 @@ namespace CSTest
             if (in_report.GetNumTests() == 0)
             {
                 SetCentreText(k_noTestsText);
+                CS_LOG_VERBOSE(k_noTestsText);
             }
             else if (in_report.GetNumFailedTests() == 0)
             {
                 SetCentreText("All " + CS::ToString(in_report.GetNumTests()) + " tests passed!");
+                CS_LOG_VERBOSE("All " + CS::ToString(in_report.GetNumTests()) + " tests passed!");
             }
             else
             {

@@ -62,7 +62,7 @@
       <UniqueIdentifier>{0e49f6fb-035d-4c26-8d32-1ff3cfa458de}</UniqueIdentifier>
     </Filter>
     <Filter Include="AppSource\MultiThreadedRenderer">
-      <UniqueIdentifier>{a76913cd-d178-4862-8f76-d4d857589e71}</UniqueIdentifier>
+      <UniqueIdentifier>{714d097d-d6ce-4726-b921-eb6fde70fcff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +193,9 @@
       <Filter>AppSource\IntegrationTest\Tests</Filter>
     </ClCompile>
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TaskSchedulerTest.cpp">
+      <Filter>AppSource\IntegrationTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\ForwardRenderPassCompilerTest.cpp">
       <Filter>AppSource\IntegrationTest\Tests</Filter>
     </ClCompile>
     <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\FrameTimeCalculator.cpp">
