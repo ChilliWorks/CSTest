@@ -39,11 +39,12 @@ namespace CSTest
     {
         namespace
         {
-            constexpr std::array<CS::TaskType, 4> k_backgroundTaskTypes =
+            constexpr std::array<CS::TaskType, 5> k_backgroundTaskTypes =
             {
                 CS::TaskType::k_small,
                 CS::TaskType::k_large,
                 CS::TaskType::k_gameLogic,
+                CS::TaskType::k_system,
                 CS::TaskType::k_file
             };
             
@@ -140,7 +141,8 @@ namespace CSTest
                     taskScheduler->ScheduleTask(taskType, [=](const CS::TaskContext& in_taskContext) noexcept
                     {
                         CSIT_ASSERT(in_taskContext.GetType() == taskType, "Incorrect task type.");
-                        CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                        //TODO: Re-add this once main and system threads are seperated
+                        //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
                         if (++(*taskTypesPassed) == k_backgroundTaskTypes.size())
                         {
@@ -203,7 +205,8 @@ namespace CSTest
                         tasks.push_back([=](const CS::TaskContext& in_taskContext) noexcept
                         {
                             CSIT_ASSERT(in_taskContext.GetType() == taskType, "Incorrect task type.");
-                            CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                            //TODO: Re-add this once main and system threads are seperated
+                            //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                             
                             if (++(*executedTaskCount) == k_numTasksPerTaskType)
                             {
@@ -276,7 +279,8 @@ namespace CSTest
                         tasks.push_back([=](const CS::TaskContext& in_taskContext) noexcept
                         {
                             CSIT_ASSERT(in_taskContext.GetType() == taskType, "Incorrect task type.");
-                            CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                            //TODO: Re-add this once main and system threads are seperated
+                            //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                             
                             ++(*executedTaskCount);
                         });
@@ -285,7 +289,8 @@ namespace CSTest
                     taskScheduler->ScheduleTasks(taskType, tasks, [=](const CS::TaskContext& in_taskContext) noexcept
                     {
                         CSIT_ASSERT(in_taskContext.GetType() == taskType, "Incorrect task type.");
-                        CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                        //TODO: Re-add this once main and system threads are seperated
+                        //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                         CSIT_ASSERT(*executedTaskCount == k_numTasksPerTaskType, "An incorrect amount of tasks were run.");
                         
                         if (++(*taskTypesPassed) >= k_backgroundTaskTypes.size())
@@ -350,7 +355,8 @@ namespace CSTest
                     taskScheduler->ScheduleTask(taskType, [=](const CS::TaskContext& in_parentTaskContext) noexcept
                     {
                         CSIT_ASSERT(in_parentTaskContext.GetType() == taskType, "Incorrect task type.");
-                        CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                        //TODO: Re-add this once main and system threads are seperated
+                        //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
                         std::atomic<u32> executedTaskCount(0);
                         std::vector<CS::Task> tasks;
@@ -359,7 +365,8 @@ namespace CSTest
                             tasks.push_back([=, &executedTaskCount](const CS::TaskContext& in_taskContext) noexcept
                             {
                                 CSIT_ASSERT(in_taskContext.GetType() == taskType, "Incorrect task type.");
-                                CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                                //TODO: Re-add this once main and system threads are seperated
+                                //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
                                 ++executedTaskCount;
                             });
@@ -396,7 +403,8 @@ namespace CSTest
                     level1Tasks.push_back([=](const CS::TaskContext& in_level1TaskContext) noexcept
                     {
                         CSIT_ASSERT(in_level1TaskContext.GetType() == CS::TaskType::k_small, "Incorrect task type.");
-                        CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                        //TODO: Re-add this once main and system threads are seperated
+                        //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                         
                         std::vector<CS::Task> level2Tasks;
                         for (u32 level2TaskIndex = 0; level2TaskIndex < k_numTasksPerLevel; ++level2TaskIndex)
@@ -404,7 +412,8 @@ namespace CSTest
                             level2Tasks.push_back([=](const CS::TaskContext& in_level2TaskContext) noexcept
                             {
                                 CSIT_ASSERT(in_level2TaskContext.GetType() == CS::TaskType::k_small, "Incorrect task type.");
-                                CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                                //TODO: Re-add this once main and system threads are seperated
+                                //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                                 
                                 std::vector<CS::Task> level3Tasks;
                                 for (u32 level3TaskIndex = 0; level3TaskIndex < k_numTasksPerLevel; ++level3TaskIndex)
@@ -428,7 +437,8 @@ namespace CSTest
                 taskScheduler->ScheduleTasks(CS::TaskType::k_small, level1Tasks, [=](const CS::TaskContext& in_taskContext) noexcept
                 {
                     CSIT_ASSERT(in_taskContext.GetType() == CS::TaskType::k_small, "Incorrect task type.");
-                    CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                    //TODO: Re-add this once main and system threads are seperated
+                    //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");;
                     CSIT_ASSERT(*executedLevel3TaskCount == u32(std::pow(k_numTasksPerLevel, k_numLevels)), "An incorrect amount of tasks were run.");
 
                     CSIT_PASS();
@@ -463,11 +473,13 @@ namespace CSTest
                 
                 taskScheduler->ScheduleTask(CS::TaskType::k_gameLogic, [=](const CS::TaskContext&) noexcept
                 {
-                    CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                    //TODO: Re-add this once main and system threads are seperated
+                    //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                     
                     taskScheduler->ScheduleTask(CS::TaskType::k_mainThread, [=](const CS::TaskContext&) noexcept
                     {
-                        CSIT_ASSERT(taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                        //TODO: Re-add this once main and system threads are seperated
+                        //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
                         CSIT_ASSERT(scheduledFrameIndex == app->GetFrameIndex(), "Task was not run within the same frame as it was scheduled.");
                         
                         CSIT_PASS();
