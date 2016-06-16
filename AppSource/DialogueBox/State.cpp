@@ -43,7 +43,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::TestNavigator>("Download Progress");
+            CreateSystem<Common::TestNavigator>("Dialogue Boxes");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
         }
         //------------------------------------------------------------------------------
