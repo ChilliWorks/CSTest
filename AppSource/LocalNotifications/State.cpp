@@ -70,14 +70,19 @@ namespace CSTest
             notificationParams.SetValue("Body", "ChilliSource Notification: Test Successful.");
 #endif
 
-            optionsMenuDesc.AddButton("Queue Standard Notification for 5 seconds", [=]()
+            optionsMenuDesc.AddButton("Queue Standard Notification for 10 seconds", [=]()
             {
-                m_notificationManager->ScheduleLocalNotificationAfterTime(u32(1), notificationParams, TimeIntervalSecs(5));
+                m_notificationManager->ScheduleLocalNotificationAfterTime(u32(1), notificationParams, TimeIntervalSecs(10));
             });
 
-            optionsMenuDesc.AddButton("Queue High-Priority Notification for 5 seconds", [=]()
+            optionsMenuDesc.AddButton("Queue High-Priority Notification for 10 seconds", [=]()
             {
-                m_notificationManager->ScheduleLocalNotificationAfterTime(u32(1), notificationParams, TimeIntervalSecs(5), CS::Notification::Priority::k_high);
+                m_notificationManager->ScheduleLocalNotificationAfterTime(u32(1), notificationParams, TimeIntervalSecs(10), CS::Notification::Priority::k_high);
+            });
+
+            optionsMenuDesc.AddButton("Cancel all upcoming notifications", [=]()
+            {
+                m_notificationManager->CancelAll();
             });
 
             m_optionsMenuPresenter->Present(optionsMenuDesc);
