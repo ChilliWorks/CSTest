@@ -40,23 +40,20 @@ namespace CSTest
     namespace LocalNotifications
     {
         //------------------------------------------------------------------------------
-        void State::CreateSystems()
+        void State::CreateSystems() noexcept
         {
             CreateSystem<Common::TestNavigator>("Local Notifications");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
         }
         //------------------------------------------------------------------------------
-        void State::OnInit()
+        void State::OnInit() noexcept
         {
             GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
  
             m_notificationManager = CS::Application::Get()->GetSystem<CS::NotificationManager>();
 
-            if (m_notificationManager == nullptr)
-            {
-                CS_LOG_ERROR("Could not get Notification Manager!");
-            }
-
+            CS_ASSERT(m_notificationManager, "Could not get NotificationManager.");
+            
             Common::OptionsMenuDesc optionsMenuDesc;
             CS::ParamDictionary notificationParams;
 

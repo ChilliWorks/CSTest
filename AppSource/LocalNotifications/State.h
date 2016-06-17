@@ -40,10 +40,10 @@ namespace CSTest
         private:
             /// The life-cycle event for creating all state systems.
             ///
-            void CreateSystems() override;
+            void CreateSystems() noexcept override;
             /// Initialises the state.
             ///
-            void OnInit() override;
+            void OnInit() noexcept override;
             
         private:
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
