@@ -41,13 +41,19 @@ namespace CSTest
             /// The life-cycle event for creating all state systems.
             ///
             void CreateSystems() noexcept override;
+
             /// Initialises the state.
             ///
             void OnInit() noexcept override;
-            
+
+            /// Cleans up the state.
+            ///
+            void OnDestroy() noexcept override;
+
         private:
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
             CS::NotificationManager* m_notificationManager = nullptr;
+            std::vector<CS::EventConnectionSPtr> m_eventConnections;
         };
     }
 }

@@ -30,6 +30,7 @@
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
+#include <ChilliSource/Core/DialogueBox.h>
 #include <ChilliSource/Core/Notification.h>
 #include <ChilliSource/UI/Base.h>
 
@@ -45,6 +46,7 @@ namespace CSTest
             CreateSystem<Common::TestNavigator>("Local Notifications");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
         }
+
         //------------------------------------------------------------------------------
         void State::OnInit() noexcept
         {
@@ -66,22 +68,35 @@ namespace CSTest
             notificationParams.SetValue("Body", "ChilliSource Notification: Test Successful.");
 #endif
 
-            optionsMenuDesc.AddButton("Queue Standard Notification for 10 seconds", [=]()
+            optionsMenuDesc.AddButton("Queue Notification", [=]()
             {
                 m_notificationManager->ScheduleLocalNotificationAfterTime(u32(1), notificationParams, TimeIntervalSecs(10));
             });
 
-            optionsMenuDesc.AddButton("Queue High-Priority Notification for 10 seconds", [=]()
+            optionsMenuDesc.AddButton("Queue High-Priority Notification", [=]()
             {
                 m_notificationManager->ScheduleLocalNotificationAfterTime(u32(2), notificationParams, TimeIntervalSecs(10), CS::Notification::Priority::k_high);
             });
 
-            optionsMenuDesc.AddButton("Cancel all upcoming notifications", [=]()
+            optionsMenuDesc.AddButton("Cancel all Notifications", [=]()
             {
                 m_notificationManager->CancelAll();
             });
 
+            auto dialogueSystem = CS::Application::Get()->GetSystem<CS::DialogueBoxSystem>();
+            
+            m_eventConnections.push_back(m_notificationManager->GetReceivedEvent().OpenConnection([=](CS::NotificationManager* notificationManager, const CS::NotificationCSPtr& notification)
+            {
+                dialogueSystem->ShowSystemDialogue(0, nullptr, "Notification Received", notification->m_params.GetValueOrDefault("Body", "No Message"), "OK");
+            }));
+
             m_optionsMenuPresenter->Present(optionsMenuDesc);
+        }
+
+        //--------------------------------------------------------------------------------
+        void State::OnDestroy() noexcept
+        {
+            m_eventConnections.clear();
         }
     }
 }
