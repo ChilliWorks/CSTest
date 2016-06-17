@@ -147,7 +147,7 @@ namespace CSTest
                     auto renderCommandQueue = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, targetRenderPassGroups, CS::Integer2(10, 10), CS::Colour::k_black,
                                                                                                std::move(preRenderCommandList), std::move(postRenderCommandList));
                     
-                    //TODO: check render command queue is valid.
+                    //TODO: Implement checks to confirm that the render command queue contains the correct stuff.
                     
                     CSIT_PASS();
                 });

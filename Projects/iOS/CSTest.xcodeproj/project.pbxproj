@@ -298,7 +298,6 @@
 		81B190131C9B16BD002EC8AC /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
-				81A78D721D0180CA00871640 /* MultiThreadedRenderer */,
 				81B190141C9B16BE002EC8AC /* App.cpp */,
 				81B190151C9B16BE002EC8AC /* App.h */,
 				81B190161C9B16BE002EC8AC /* Common */,
@@ -310,6 +309,7 @@
 				81B1903F1C9B16BE002EC8AC /* IntegrationTest */,
 				81B190531C9B16BE002EC8AC /* Lighting */,
 				81C63AF21C9C196700E1A669 /* MainMenu */,
+				81A78D721D0180CA00871640 /* MultiThreadedRenderer */,
 				81B190561C9B16BE002EC8AC /* Particle */,
 				81C63AF51C9C196700E1A669 /* SmokeTest */,
 				81B190591C9B16BE002EC8AC /* UnitTest */,
