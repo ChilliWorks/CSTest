@@ -30,7 +30,6 @@
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
-#include <ChilliSource/Networking/Http.h>
 #include <ChilliSource/Core/Notification.h>
 #include <ChilliSource/UI/Base.h>
 
