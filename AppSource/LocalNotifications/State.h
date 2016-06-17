@@ -53,7 +53,7 @@ namespace CSTest
         private:
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
             CS::NotificationManager* m_notificationManager = nullptr;
-            std::vector<CS::EventConnectionSPtr> m_eventConnections;
+            std::vector<CS::EventConnectionUPtr> m_eventConnections;
         };
     }
 }
