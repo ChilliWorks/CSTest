@@ -59,10 +59,9 @@ namespace CSTest
             ///
             CS::RenderCamera CreateRenderCamera()
             {
-                CS::Integer2 dimensions(100, 100);
                 auto worldMatrix = CS::Matrix4::CreateLookAt(k_cameraPosition, k_cameraLookAt, CS::Vector3::k_unitPositiveZ);
                 auto projectionMatrix = CS::Matrix4::CreatePerspectiveProjectionLH(75.0f, 1.0f, 1.0f, 10.0f);
-                return CS::RenderCamera(dimensions, worldMatrix, projectionMatrix);
+                return CS::RenderCamera(worldMatrix, projectionMatrix);
             }
 
             /// Creates an lit opaque material group with a blank texture
