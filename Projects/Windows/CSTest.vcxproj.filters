@@ -64,6 +64,9 @@
     <Filter Include="AppSource\DialogueBox">
       <UniqueIdentifier>{8722d391-0531-4534-8951-1dde0ade1d89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\LocalNotifications">
+      <UniqueIdentifier>{3e65a144-e8be-4203-ae2c-1f0e3ccffc5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -198,6 +201,9 @@
     <ClCompile Include="..\..\AppSource\DialogueBox\State.cpp">
       <Filter>AppSource\DialogueBox</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\LocalNotifications\State.cpp">
+      <Filter>AppSource\LocalNotifications</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -322,6 +328,9 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\DialogueBox\State.h">
       <Filter>AppSource\DialogueBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\LocalNotifications\State.h">
+      <Filter>AppSource\LocalNotifications</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
