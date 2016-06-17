@@ -43,11 +43,6 @@ namespace CSTest
             /// Initialises the state.
             ///
             void OnInit() override;
-
-            /// Destroys the state.
-            ///
-            void OnDestroy() override;
-            
         };
     }
 }

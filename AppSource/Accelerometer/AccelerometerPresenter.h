@@ -39,17 +39,20 @@ namespace CSTest
         {
         public:
             CS_DECLARE_NAMEDTYPE(AccelerometerPresenter);
+
             /// Allows querying of whether or not the component implements the
             /// interface associated with the given interface Id.
             ///
-            /// @param in_interfaceId - The interface Id.
+            /// @param interfaceId 
+            ///     The interface Id.
             ///
             /// @return Whether the object implements the given interface.
             ///
-            bool IsA(CS::InterfaceIDType in_interfaceId) const noexcept override;
+            bool IsA(CS::InterfaceIDType interfaceId) const noexcept override;
             
         private:
             friend class CS::State;
+
             /// Creates a new instance of the system.
             ///
             /// @return The new instance.
@@ -72,10 +75,12 @@ namespace CSTest
             /// Called during init; adds event receiver for acceleration updates.
             ///
             void AddAccelerationHandler() noexcept;
-            
-            /// Updated every frame. Presents information on the gestures.
+
+            /// Displays acceleration value on screen.
             ///
-            void OnUpdate(f32 in_deltaTime) noexcept override;
+            /// @param acceleration
+            ///     The acceleration vector to display.
+            void DisplayAcceleration(const CS::Vector3& acceleration) noexcept;
             
             /// Called when the gesture presenter is about to be destroyed. This will clean
             /// up the gestures which were being presented.
@@ -85,7 +90,6 @@ namespace CSTest
             CS::Vector3 m_currentAcceleration;
             std::vector<CS::EventConnectionSPtr> m_eventConnections;
             
-            bool m_uiDirty = true;
             CS::WidgetSPtr m_rootUI;
             CS::TextUIComponent* m_textComponent;
         };

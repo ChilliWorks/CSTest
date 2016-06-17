@@ -52,14 +52,6 @@ namespace CSTest
         void State::OnInit()
         {
             GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
-            
-        }
-        
-        //------------------------------------------------------------------------------
-        void State::OnDestroy()
-        {
-            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
-            
         }
     }
 }

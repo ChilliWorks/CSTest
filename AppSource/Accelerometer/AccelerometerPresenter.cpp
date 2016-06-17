@@ -52,9 +52,9 @@ namespace CSTest
         }
 
         //------------------------------------------------------------------------------
-        bool AccelerometerPresenter::IsA(CS::InterfaceIDType in_interfaceId) const noexcept
+        bool AccelerometerPresenter::IsA(CS::InterfaceIDType interfaceId) const noexcept
         {
-            return (AccelerometerPresenter::InterfaceID == in_interfaceId);
+            return (AccelerometerPresenter::InterfaceID == interfaceId);
         }
 
         //------------------------------------------------------------------------------
@@ -79,11 +79,22 @@ namespace CSTest
             CS_ASSERT(accelerometerSystem, "Must have Accelerometer system to use AccelerometerPresenter.");
             accelerometerSystem->StartUpdating();
 
-            m_eventConnections.push_back(accelerometerSystem->GetAccelerationUpdatedEvent().OpenConnection([=](const CS::Vector3& in_acceleration)
+            m_eventConnections.push_back(accelerometerSystem->GetAccelerationUpdatedEvent().OpenConnection([=](const CS::Vector3& acceleration)
             {
-                m_currentAcceleration = in_acceleration;
-                m_uiDirty = true;
+                DisplayAcceleration(acceleration);
             }));
+        }
+
+        //------------------------------------------------------------------------------
+        void AccelerometerPresenter::DisplayAcceleration(const CS::Vector3& acceleration) noexcept
+        {
+            std::string text = "Device Acceleration: ";
+
+            text += "\nX: " + CS::ToString(acceleration.x);
+            text += "\nY: " + CS::ToString(acceleration.y);
+            text += "\nZ: " + CS::ToString(acceleration.z);
+
+            m_textComponent->SetText(text);
         }
 
         //------------------------------------------------------------------------------
@@ -91,21 +102,6 @@ namespace CSTest
         {
             InitUI();
             AddAccelerationHandler();
-        }
-
-        //------------------------------------------------------------------------------
-        void AccelerometerPresenter::OnUpdate(f32 in_deltaTime) noexcept
-        {
-            if (m_uiDirty)
-            {
-                std::string text = "Device Acceleration: ";
-
-                text += "\nX: " + CS::ToString(m_currentAcceleration.x);
-                text += "\nY: " + CS::ToString(m_currentAcceleration.y);
-                text += "\nZ: " + CS::ToString(m_currentAcceleration.z);
-
-                m_textComponent->SetText(text);
-            }
         }
 
         //------------------------------------------------------------------------------
