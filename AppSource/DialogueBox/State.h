@@ -41,6 +41,7 @@ namespace CSTest
             /// The life-cycle event for creating all state systems.
             ///
             void CreateSystems() override;
+
             /// Initialises the state.
             ///
             void OnInit() override;

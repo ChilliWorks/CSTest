@@ -30,7 +30,6 @@
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
-#include <ChilliSource/Networking/Http.h>
 #include <ChilliSource/Core/DialogueBox.h>
 #include <ChilliSource/UI/Base.h>
 
@@ -43,9 +42,10 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::TestNavigator>("Download Progress");
+            CreateSystem<Common::TestNavigator>("Dialogue Boxes");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
         }
+
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
@@ -62,7 +62,7 @@ namespace CSTest
 
             optionsMenuDesc.AddButton("Show Confirm Dialogue", [=]()
             {
-                m_dialogueBoxSystem->ShowSystemConfirmDialogue(1, [=](u32 in_id, CS::DialogueBoxSystem::DialogueResult in_result)
+                auto handleConfirmationDialogue = [=](u32 in_id, CS::DialogueBoxSystem::DialogueResult in_result)
                 {
                     if (in_result == CS::DialogueBoxSystem::DialogueResult::k_confirm)
                     {
@@ -72,7 +72,9 @@ namespace CSTest
                     {
                         m_dialogueBoxSystem->ShowSystemDialogue(0, nullptr, "Dialogue Result", "User clicked Cancel.", "OK");
                     }
-                }, "Confirmation Dialogue", "Confirmation Test?", "Confirm", "Cancel");
+                };
+
+                m_dialogueBoxSystem->ShowSystemConfirmDialogue(1, handleConfirmationDialogue, "Confirmation Dialogue", "Confirmation Test?", "Confirm", "Cancel");
             });
 
 #ifndef CS_TARGETPLATFORM_WINDOWS
