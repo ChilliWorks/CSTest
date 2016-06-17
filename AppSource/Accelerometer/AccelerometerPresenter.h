@@ -54,37 +54,27 @@ namespace CSTest
             /// @return The new instance.
             ///
             static AccelerometerPresenterUPtr Create();
-            //------------------------------------------------------------------------------
+  
             /// Constructor
             ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
             AccelerometerPresenter() = default;
-            //------------------------------------------------------------------------------
+            
             /// Initialises all of the UI on which the gesture information will be presented.
             ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
             void InitUI();
-            //------------------------------------------------------------------------------
+            
             /// Called when the gesture presenter is first created. This will set up the
             /// gestures which should be presented.
             ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
             void OnInit() override;
-            //------------------------------------------------------------------------------
+            
             /// Updated every frame. Presents information on the gestures.
             ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
             void OnUpdate(f32 in_deltaTime) override;
-            //------------------------------------------------------------------------------
+            
             /// Called when the gesture presenter is about to be destroyed. This will clean
             /// up the gestures which were being presented.
             ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
             void OnDestroy() override;
             
             CS::Vector3 m_currentAcceleration;
