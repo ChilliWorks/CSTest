@@ -63,6 +63,9 @@
     </Filter>
     <Filter Include="AppSource\Accelerometer">
       <UniqueIdentifier>{1f5fd4e8-c14d-4350-98db-91e7608345d6}</UniqueIdentifier>
+	</Filter>
+    <Filter Include="AppSource\DialogueBox">
+      <UniqueIdentifier>{8722d391-0531-4534-8951-1dde0ade1d89}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +203,9 @@
     </ClCompile>
     <ClCompile Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.cpp">
       <Filter>AppSource\Accelerometer</Filter>
+	</ClCompile>
+    <ClCompile Include="..\..\AppSource\DialogueBox\State.cpp">
+      <Filter>AppSource\DialogueBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -328,6 +334,9 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.h">
       <Filter>AppSource\Accelerometer</Filter>
+	</ClInclude>
+    <ClInclude Include="..\..\AppSource\DialogueBox\State.h">
+      <Filter>AppSource\DialogueBox</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
