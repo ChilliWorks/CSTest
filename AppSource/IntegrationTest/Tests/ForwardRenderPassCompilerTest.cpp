@@ -52,13 +52,6 @@ namespace CSTest
             const CS::Matrix4 k_onScreenObjectTransform = CS::Matrix4::CreateTransform(k_cameraLookAt, CS::Vector3::k_one, CS::Quaternion::k_identity);
             const CS::Matrix4 k_offScreenObjectTransform = CS::Matrix4::CreateTransform(k_cameraLookAt - (2 * k_cameraDistanceFromLookAt * CS::Vector3(0.0f, 0.0f, 1.0f)), CS::Vector3::k_one, CS::Quaternion::k_identity);
             
-            struct Vertex
-            {
-                CS::Vector4 m_position;
-                CS::Vector3 m_normal;
-                CS::Vector2 m_texCoord;
-            };
-            
             /// Creates an render camera at (0, 0, -10) and looking at the
             /// origin.
             ///
