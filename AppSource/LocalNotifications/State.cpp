@@ -77,7 +77,7 @@ namespace CSTest
 
             optionsMenuDesc.AddButton("Queue High-Priority Notification for 10 seconds", [=]()
             {
-                m_notificationManager->ScheduleLocalNotificationAfterTime(u32(1), notificationParams, TimeIntervalSecs(10), CS::Notification::Priority::k_high);
+                m_notificationManager->ScheduleLocalNotificationAfterTime(u32(2), notificationParams, TimeIntervalSecs(10), CS::Notification::Priority::k_high);
             });
 
             optionsMenuDesc.AddButton("Cancel all upcoming notifications", [=]()
