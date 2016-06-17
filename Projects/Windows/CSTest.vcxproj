@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.cpp" />
+    <ClCompile Include="..\..\AppSource\Accelerometer\State.cpp" />
     <ClCompile Include="..\..\AppSource\App.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Behaviour\FollowerComponent.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.cpp" />
@@ -64,6 +66,8 @@
     <ClCompile Include="..\..\AppSource\WebView\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.h" />
+    <ClInclude Include="..\..\AppSource\Accelerometer\State.h" />
     <ClInclude Include="..\..\AppSource\App.h" />
     <ClInclude Include="..\..\AppSource\Common\Behaviour\FollowerComponent.h" />
     <ClInclude Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.h" />
