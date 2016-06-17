@@ -68,6 +68,10 @@ namespace CSTest
             /// gestures which should be presented.
             ///
             void OnInit() noexcept override;
+
+            /// Called during init; adds event receiver for acceleration updates.
+            ///
+            void AddAccelerationHandler() noexcept;
             
             /// Updated every frame. Presents information on the gestures.
             ///

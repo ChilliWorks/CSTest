@@ -73,19 +73,31 @@ namespace CSTest
         }
 
         //------------------------------------------------------------------------------
+        void AccelerometerPresenter::AddAccelerationHandler() noexcept
+        {
+            auto accelerometerSystem = CS::Application::Get()->GetSystem<CS::Accelerometer>();
+            CS_ASSERT(accelerometerSystem, "Must have Accelerometer system to use AccelerometerPresenter.");
+            accelerometerSystem->StartUpdating();
+
+            m_eventConnections.push_back(accelerometerSystem->GetAccelerationUpdatedEvent().OpenConnection([=](const CS::Vector3& in_acceleration)
+            {
+                m_currentAcceleration = in_acceleration;
+                m_uiDirty = true;
+            }));
+        }
+
+        //------------------------------------------------------------------------------
         void AccelerometerPresenter::OnInit() noexcept
         {
             InitUI();
-            CS::Application::Get()->GetSystem<CS::Accelerometer>()->StartUpdating();
+            AddAccelerationHandler();
         }
 
         //------------------------------------------------------------------------------
         void AccelerometerPresenter::OnUpdate(f32 in_deltaTime) noexcept
         {
-            if (CS::Application::Get()->GetSystem<CS::Accelerometer>()->IsUpdating())
+            if (m_uiDirty)
             {
-                m_currentAcceleration = CS::Application::Get()->GetSystem<CS::Accelerometer>()->GetAcceleration();
-
                 std::string text = "Device Acceleration: ";
 
                 text += "\nX: " + CS::ToString(m_currentAcceleration.x);
@@ -93,10 +105,6 @@ namespace CSTest
                 text += "\nZ: " + CS::ToString(m_currentAcceleration.z);
 
                 m_textComponent->SetText(text);
-            }
-            else
-            {
-                std::string text = "Error: Accelerometer not active.";
             }
         }
 
