@@ -26,6 +26,7 @@
 
 #include <CSTest.h>
 
+#include <ChilliSource/Core/Math/Vector3.h>
 #include <ChilliSource/Core/System.h>
 
 namespace CSTest
@@ -45,7 +46,7 @@ namespace CSTest
             ///
             /// @return Whether the object implements the given interface.
             ///
-            bool IsA(CS::InterfaceIDType in_interfaceId) const override;
+            bool IsA(CS::InterfaceIDType in_interfaceId) const noexcept override;
             
         private:
             friend class CS::State;
@@ -53,7 +54,7 @@ namespace CSTest
             ///
             /// @return The new instance.
             ///
-            static AccelerometerPresenterUPtr Create();
+            static AccelerometerPresenterUPtr Create() noexcept;
   
             /// Constructor
             ///
@@ -61,21 +62,21 @@ namespace CSTest
             
             /// Initialises all of the UI on which the gesture information will be presented.
             ///
-            void InitUI();
+            void InitUI() noexcept;
             
             /// Called when the gesture presenter is first created. This will set up the
             /// gestures which should be presented.
             ///
-            void OnInit() override;
+            void OnInit() noexcept override;
             
             /// Updated every frame. Presents information on the gestures.
             ///
-            void OnUpdate(f32 in_deltaTime) override;
+            void OnUpdate(f32 in_deltaTime) noexcept override;
             
             /// Called when the gesture presenter is about to be destroyed. This will clean
             /// up the gestures which were being presented.
             ///
-            void OnDestroy() override;
+            void OnDestroy() noexcept override;
             
             CS::Vector3 m_currentAcceleration;
             std::vector<CS::EventConnectionSPtr> m_eventConnections;

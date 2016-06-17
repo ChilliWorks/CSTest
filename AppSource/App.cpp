@@ -34,6 +34,7 @@
 
 #include <ChilliSource/Audio/CricketAudio.h>
 #include <ChilliSource/Core/Entity.h>
+#include <ChilliSource/Input/Accelerometer.h>
 #include <ChilliSource/Rendering/Model.h>
 #include <ChilliSource/Networking/Http.h>
 
@@ -82,6 +83,10 @@ namespace CSTest
         
         CreateSystem<Common::BasicEntityFactory>();
         CreateSystem<Common::BasicWidgetFactory>();
+
+#ifndef CS_TARGETPLATFORM_WINDOWS
+        CreateSystem<CS::Accelerometer>();
+#endif
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------

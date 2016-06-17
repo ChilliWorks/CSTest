@@ -33,6 +33,7 @@
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Resource.h>
 #include <ChilliSource/Core/State.h>
+#include <ChilliSource/Core/Math/Vector3.h>
 #include <ChilliSource/Input/Accelerometer.h>
 #include <ChilliSource/Rendering/Font.h>
 #include <ChilliSource/UI/Base.h>
@@ -42,20 +43,22 @@ namespace CSTest
 {
     namespace Accelerometer
     {
-      
         CS_DEFINE_NAMEDTYPE(AccelerometerPresenter);
+
         //------------------------------------------------------------------------------
         AccelerometerPresenterUPtr AccelerometerPresenter::Create() noexcept
         {
             return AccelerometerPresenterUPtr(new AccelerometerPresenter());
         }
+
         //------------------------------------------------------------------------------
         bool AccelerometerPresenter::IsA(CS::InterfaceIDType in_interfaceId) const noexcept
         {
             return (AccelerometerPresenter::InterfaceID == in_interfaceId);
         }
+
         //------------------------------------------------------------------------------
-        void AccelerometerPresenter::InitUI()
+        void AccelerometerPresenter::InitUI() noexcept
         {
             auto resourcePool = CS::Application::Get()->GetResourcePool();
             auto smallFont = resourcePool->LoadResource<CS::Font>(CS::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
@@ -68,35 +71,39 @@ namespace CSTest
             auto uiCanvas = GetState()->GetUICanvas();
             uiCanvas->AddWidget(std::move(label));
         }
+
         //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        void AccelerometerPresenter::OnInit()
+        void AccelerometerPresenter::OnInit() noexcept
         {
             InitUI();
+            CS::Application::Get()->GetSystem<CS::Accelerometer>()->StartUpdating();
         }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        void AccelerometerPresenter::OnUpdate(f32 in_deltaTime)
-        {
-            //if (m_uiDirty)
-           // {
-           //     m_uiDirty = false;
 
+        //------------------------------------------------------------------------------
+        void AccelerometerPresenter::OnUpdate(f32 in_deltaTime) noexcept
+        {
+            if (CS::Application::Get()->GetSystem<CS::Accelerometer>()->IsUpdating())
+            {
                 m_currentAcceleration = CS::Application::Get()->GetSystem<CS::Accelerometer>()->GetAcceleration();
-                
+
                 std::string text = "Device Acceleration: ";
-                
+
                 text += "\nX: " + CS::ToString(m_currentAcceleration.x);
                 text += "\nY: " + CS::ToString(m_currentAcceleration.y);
                 text += "\nZ: " + CS::ToString(m_currentAcceleration.z);
-                
+
                 m_textComponent->SetText(text);
-           // }
+            }
+            else
+            {
+                std::string text = "Error: Accelerometer not active.";
+            }
         }
+
         //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        void AccelerometerPresenter::OnDestroy()
+        void AccelerometerPresenter::OnDestroy() noexcept
         {
+            CS::Application::Get()->GetSystem<CS::Accelerometer>()->StopUpdating();
             m_eventConnections.clear();
         }
     }

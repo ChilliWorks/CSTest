@@ -48,7 +48,6 @@ namespace CSTest
             ///
             void OnDestroy() override;
             
-            CS::Accelerometer* m_accelerometer = nullptr;
         };
     }
 }
