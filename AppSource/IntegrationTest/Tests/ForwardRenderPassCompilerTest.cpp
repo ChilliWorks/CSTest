@@ -57,10 +57,10 @@ namespace CSTest
             ///
             /// @return Created RenderCamera
             ///
-            CS::RenderCamera CreateRenderCamera()
+            CS::RenderCamera CreateRenderCamera() noexcept
             {
                 auto worldMatrix = CS::Matrix4::CreateLookAt(k_cameraPosition, k_cameraLookAt, CS::Vector3::k_unitPositiveZ);
-                auto projectionMatrix = CS::Matrix4::CreatePerspectiveProjectionLH(75.0f, 1.0f, 1.0f, 10.0f);
+                auto projectionMatrix = CS::Matrix4::CreatePerspectiveProjectionLH(CS::MathUtils::k_pi / 3.0f, 1.0f, 1.0f, 10.0f);
                 return CS::RenderCamera(worldMatrix, projectionMatrix);
             }
 
@@ -68,7 +68,7 @@ namespace CSTest
             ///
             /// @return RenderMaterialGroup
             ///
-            const CS::RenderMaterialGroup* CreateLitOpaqueMaterialGroup()
+            const CS::RenderMaterialGroup* CreateLitOpaqueMaterialGroup() noexcept
             {
                 auto renderMaterialGroupManager = CS::Application::Get()->GetSystem<CS::RenderMaterialGroupManager>();
                 auto resourcePool = CS::Application::Get()->GetResourcePool();
@@ -82,7 +82,7 @@ namespace CSTest
             ///
             /// @return RenderMaterialGroup
             ///
-            const CS::RenderMaterialGroup* CreateUnlitTransparentMaterialGroup()
+            const CS::RenderMaterialGroup* CreateUnlitTransparentMaterialGroup() noexcept
             {
                 auto renderMaterialGroupManager = CS::Application::Get()->GetSystem<CS::RenderMaterialGroupManager>();
                 auto resourcePool = CS::Application::Get()->GetResourcePool();
@@ -94,7 +94,7 @@ namespace CSTest
             
             /// Removes the material group from the manager and queue it for destruction.
             ///
-            void DestroyMaterialGroup(const CS::RenderMaterialGroup* materialGroup)
+            void DestroyMaterialGroup(const CS::RenderMaterialGroup* materialGroup) noexcept
             {
                 auto renderMaterialGroupManager = CS::Application::Get()->GetSystem<CS::RenderMaterialGroupManager>();
                 renderMaterialGroupManager->DestroyRenderMaterialGroup(materialGroup);
@@ -106,7 +106,7 @@ namespace CSTest
             ///     The position to create the bounding sphere for this mesh
             /// @return RenderMesh
             ///
-            const CS::RenderMesh* CreateRenderMesh(const CS::Vector3& boundingSpherePosition)
+            const CS::RenderMesh* CreateRenderMesh(const CS::Vector3& boundingSpherePosition) noexcept
             {
                 const auto primitiveModelFactory = CS::Application::Get()->GetSystem<CS::PrimitiveModelFactory>();
                 return primitiveModelFactory->CreateBox(CS::Vector3::k_one)->GetRenderMesh(0);
