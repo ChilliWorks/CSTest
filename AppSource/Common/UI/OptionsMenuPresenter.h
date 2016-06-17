@@ -31,6 +31,8 @@
 
 #include <CSTest.h>
 
+#include <Common/UI/OptionsMenuDesc.h>
+
 #include <ChilliSource/Core/System.h>
 
 namespace CSTest
@@ -65,7 +67,7 @@ namespace CSTest
             //------------------------------------------------------------------------------
             /// Presents a series of buttons, each with an associated action.
             ///
-            /// @author Ian Copland
+            /// @author Jordan Brown
             ///
             /// @param in_desc - The information on the options which should be presented.
             //------------------------------------------------------------------------------
@@ -102,16 +104,37 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnInit() noexcept override;
             //------------------------------------------------------------------------------
+            /// Switches to the specified page, presenting new buttons to the user.
+            ///
+            /// @author Jordan Brown
+            ///
+            /// @param in_page - The desired page number, starting index 0.
+            //------------------------------------------------------------------------------
+            void SetPage(u32 in_page) noexcept;
+            //------------------------------------------------------------------------------
+            /// Creates page navigation buttons.
+            ///
+            /// @author Jordan Brown
+            //------------------------------------------------------------------------------
+            void CreatePageNavigationButtons() noexcept;
+            //------------------------------------------------------------------------------
             /// Destroys the system.
             ///
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnDestroy() noexcept override;
-            
+
+            OptionsMenuDesc m_desc;
+
             CS::WidgetSPtr m_buttonContainer;
+            CS::WidgetSPtr m_paginationButtonContainer;
             
             std::vector<CS::WidgetSPtr> m_buttons;
+            std::vector<CS::WidgetSPtr> m_paginationButtons;
             std::vector<CS::EventConnectionUPtr> m_connectionContainer;
+            
+            u32 m_numPages = 0;
+            u32 m_currentPage = 0;
         };
     }
 }

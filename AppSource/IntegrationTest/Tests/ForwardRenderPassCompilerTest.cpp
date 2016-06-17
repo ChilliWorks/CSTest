@@ -47,10 +47,10 @@ namespace CSTest
         {
             constexpr f32 k_cameraDistanceFromLookAt = 10.0f;
             
-            const CS::Vector3 k_cameraLookAt = CS::Vector3::k_zero;
+            const CS::Vector3 k_cameraLookAt = CS::Vector3(0.0f, 0.0f, 0.0f);
             const CS::Vector3 k_cameraPosition = k_cameraLookAt - CS::Vector3(0.0f, 0.0f, k_cameraDistanceFromLookAt);
-            const CS::Matrix4 k_onScreenObjectTransform = CS::Matrix4::CreateTransform(k_cameraLookAt, CS::Vector3::k_one, CS::Quaternion::k_identity);
-            const CS::Matrix4 k_offScreenObjectTransform = CS::Matrix4::CreateTransform(k_cameraLookAt - (2 * k_cameraDistanceFromLookAt * CS::Vector3(0.0f, 0.0f, 1.0f)), CS::Vector3::k_one, CS::Quaternion::k_identity);
+            const CS::Matrix4 k_onScreenObjectTransform = CS::Matrix4::CreateTransform(k_cameraLookAt, CS::Vector3(1.0f, 1.0f, 1.0f), CS::Quaternion(0.0f, 0.0f, 0.0f, 1.0f));
+            const CS::Matrix4 k_offScreenObjectTransform = CS::Matrix4::CreateTransform(k_cameraLookAt - (2 * k_cameraDistanceFromLookAt * CS::Vector3(0.0f, 0.0f, 1.0f)), CS::Vector3(1.0f, 1.0f, 1.0f), CS::Quaternion(0.0f, 0.0f, 0.0f, 1.0f));
             
             /// Creates an render camera at (0, 0, -10) and looking at the
             /// origin.
