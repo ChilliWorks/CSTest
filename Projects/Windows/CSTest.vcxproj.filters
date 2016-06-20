@@ -67,6 +67,9 @@
     <Filter Include="AppSource\LocalNotifications">
       <UniqueIdentifier>{3e65a144-e8be-4203-ae2c-1f0e3ccffc5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\TextEntry">
+      <UniqueIdentifier>{4ea930f6-f40c-4347-8a0e-5620e9b7abfa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -204,6 +207,12 @@
     <ClCompile Include="..\..\AppSource\LocalNotifications\State.cpp">
       <Filter>AppSource\LocalNotifications</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\TextEntry\State.cpp">
+      <Filter>AppSource\TextEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\TextEntry\TextEntryPresenter.cpp">
+      <Filter>AppSource\TextEntry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -331,6 +340,12 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\LocalNotifications\State.h">
       <Filter>AppSource\LocalNotifications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\TextEntry\State.h">
+      <Filter>AppSource\TextEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\TextEntry\TextEntryPresenter.h">
+      <Filter>AppSource\TextEntry</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

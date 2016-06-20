@@ -151,5 +151,48 @@ namespace CSTest
 
             return blank;
         }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        CS::WidgetUPtr BasicWidgetFactory::CreateTextBox(const CS::Vector2 & in_size, const CS::FontCSPtr & in_font, const std::string & in_text, CS::AlignmentAnchor in_alignment, CS::HorizontalTextJustification in_horizontalTextJustification, CS::VerticalTextJustification in_verticalTextJustification)
+        {
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Cannot create widgets on background threads.");
+
+            auto widgetFactory = CS::Application::Get()->GetWidgetFactory();
+            auto resourcePool = CS::Application::Get()->GetResourcePool();
+            auto atlas = resourcePool->LoadResource<CS::TextureAtlas>(CS::StorageLocation::k_package, "TextureAtlases/UI/UI.csatlas");
+            auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_package, "TextureAtlases/UI/UI.csimage");
+
+
+            auto textBox = widgetFactory->CreateWidget();
+
+            auto bg = widgetFactory->CreateImage();
+            bg->SetParentalAnchor(in_alignment);
+            bg->SetOriginAnchor(in_alignment);
+            bg->SetRelativeSize(in_size);
+
+            auto bgDrawable = bg->GetComponent<CS::DrawableUIComponent>();
+            bgDrawable->ApplyDrawableDef(CS::UIDrawableDefCSPtr(new CS::NinePatchUIDrawableDef(texture, atlas, "Button01", CS::Vector4(0.15f, 0.15f, 0.15f, 0.15f), CS::Colour::k_white)));
+            
+            textBox->AddWidget(std::move(bg));
+
+            auto text = widgetFactory->CreateLabel();
+            text->SetParentalAnchor(in_alignment);
+            text->SetOriginAnchor(in_alignment);
+            text->SetRelativeSize(in_size);
+            text->SetName("TextBoxText");
+
+            auto textComponent = text->GetComponent<CS::TextUIComponent>();
+            textComponent->SetFont(in_font);
+            textComponent->SetText(in_text);
+            textComponent->SetTextColour(CS::Colour::k_black);
+            textComponent->SetHorizontalJustification(in_horizontalTextJustification);
+            textComponent->SetVerticalJustification(in_verticalTextJustification);
+
+            textBox->SetInputEnabled(true);
+
+            textBox->AddWidget(std::move(text));
+            
+            return textBox;
+        }
     }
 }

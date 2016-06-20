@@ -96,6 +96,12 @@ namespace CSTest
     {
         CS_FORWARDDECLARE_CLASS(State);
     }
+
+    namespace TextEntry
+    {
+        CS_FORWARDDECLARE_CLASS(TextEntryPresenter);
+        CS_FORWARDDECLARE_CLASS(State);
+    }
     
     namespace UnitTest
     {
