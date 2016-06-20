@@ -40,6 +40,7 @@
 #include <Particle/State.h>
 #include <WebView/State.h>
 #include <DialogueBox/State.h>
+#include <LocalNotifications/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -103,6 +104,11 @@ namespace CSTest
             optionsMenuDesc.AddButton("Accelerometer", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Accelerometer::State>());
+			});
+			
+			optionsMenuDesc.AddButton("Local Notifications", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<LocalNotifications::State>());
             });
 #endif
             optionsMenuDesc.AddButton("Dialogue Boxes", [=]()

@@ -35,8 +35,10 @@
 #include <ChilliSource/Audio/CricketAudio.h>
 #include <ChilliSource/Core/Entity.h>
 #include <ChilliSource/Input/Accelerometer.h>
+#include <ChilliSource/Core/Notification.h>
 #include <ChilliSource/Rendering/Model.h>
 #include <ChilliSource/Networking/Http.h>
+
 
 //------------------------------------------------------------------------------
 /// Creates the application instance for this app.
@@ -80,13 +82,17 @@ namespace CSTest
         CreateSystem<CS::PrimitiveEntityFactory>();
         CreateSystem<CS::HttpRequestSystem>();
         CreateSystem<CS::PrimitiveModelFactory>();
+
+#ifndef CS_TARGETPLATFORM_WINDOWS
+        CreateSystem<CS::AppNotificationSystem>();
+        CreateSystem<CS::LocalNotificationSystem>();
+        CreateSystem<CS::RemoteNotificationSystem>();
+        CreateSystem<CS::NotificationManager>();
+		CreateSystem<CS::Accelerometer>();
+#endif
         
         CreateSystem<Common::BasicEntityFactory>();
         CreateSystem<Common::BasicWidgetFactory>();
-
-#ifndef CS_TARGETPLATFORM_WINDOWS
-        CreateSystem<CS::Accelerometer>();
-#endif
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------

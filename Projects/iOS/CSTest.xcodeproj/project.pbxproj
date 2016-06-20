@@ -11,6 +11,8 @@
 		81AF89821D145EF100A02E99 /* AccelerometerPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF897E1D145EF100A02E99 /* AccelerometerPresenter.cpp */; };
 		81AF89831D145EF100A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF89801D145EF100A02E99 /* State.cpp */; };
 		81AF89881D14617E00A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF89861D14617E00A02E99 /* State.cpp */; };
+		81AF896C1D143FF500A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF896A1D143FF500A02E99 /* State.cpp */; };
+		81AF89741D1440C900A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF89721D1440C900A02E99 /* State.cpp */; };
 		81B190711C9B16BE002EC8AC /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190141C9B16BE002EC8AC /* App.cpp */; };
 		81B190721C9B16BE002EC8AC /* FollowerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190181C9B16BE002EC8AC /* FollowerComponent.cpp */; };
 		81B190731C9B16BE002EC8AC /* OrbiterComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1901A1C9B16BE002EC8AC /* OrbiterComponent.cpp */; };
@@ -108,6 +110,10 @@
 		81AF89811D145EF100A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81AF89861D14617E00A02E99 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81AF89871D14617E00A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81AF896A1D143FF500A02E99 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81AF896B1D143FF500A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81AF89721D1440C900A02E99 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81AF89731D1440C900A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81B190141C9B16BE002EC8AC /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		81B190151C9B16BE002EC8AC /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		81B190181C9B16BE002EC8AC /* FollowerComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FollowerComponent.cpp; sourceTree = "<group>"; };
@@ -281,11 +287,20 @@
 			path = Accelerometer;
 			sourceTree = "<group>";
 		};
-		81AF89851D14617E00A02E99 /* DialogueBox */ = {
+		81AF89691D143FF500A02E99 /* LocalNotifications */ = {
 			isa = PBXGroup;
 			children = (
-				81AF89861D14617E00A02E99 /* State.cpp */,
-				81AF89871D14617E00A02E99 /* State.h */,
+				81AF896A1D143FF500A02E99 /* State.cpp */,
+				81AF896B1D143FF500A02E99 /* State.h */,
+			);
+			path = LocalNotifications;
+			sourceTree = "<group>";
+		};
+		81AF89711D1440C900A02E99 /* DialogueBox */ = {
+			isa = PBXGroup;
+			children = (
+				81AF89721D1440C900A02E99 /* State.cpp */,
+				81AF89731D1440C900A02E99 /* State.h */,
 			);
 			path = DialogueBox;
 			sourceTree = "<group>";
@@ -299,12 +314,13 @@
 				81B190161C9B16BE002EC8AC /* Common */,
 				81B1902C1C9B16BE002EC8AC /* CricketAudio */,
 				81B1902F1C9B16BE002EC8AC /* CSTest.h */,
-				81AF89851D14617E00A02E99 /* DialogueBox */,
+				81AF89711D1440C900A02E99 /* DialogueBox */,
 				81B190301C9B16BE002EC8AC /* DownloadProgress */,
 				81B190351C9B16BE002EC8AC /* EmailComposer */,
 				81B190381C9B16BE002EC8AC /* Gesture */,
 				81B1903F1C9B16BE002EC8AC /* IntegrationTest */,
 				81B190531C9B16BE002EC8AC /* Lighting */,
+				81AF89691D143FF500A02E99 /* LocalNotifications */,
 				81C63AF21C9C196700E1A669 /* MainMenu */,
 				81B190561C9B16BE002EC8AC /* Particle */,
 				81C63AF51C9C196700E1A669 /* SmokeTest */,
@@ -743,6 +759,7 @@
 				81B190711C9B16BE002EC8AC /* App.cpp in Sources */,
 				81B1907D1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81AF89831D145EF100A02E99 /* State.cpp in Sources */,
+				81AF89741D1440C900A02E99 /* State.cpp in Sources */,
 				81B190871C9B16BE002EC8AC /* Tester.cpp in Sources */,
 				81B190851C9B16BE002EC8AC /* Test.cpp in Sources */,
 				81B190891C9B16BE002EC8AC /* State.cpp in Sources */,
@@ -763,6 +780,7 @@
 				81B190801C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B1908A1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190791C9B16BE002EC8AC /* BasicWidgetFactory.cpp in Sources */,
+				81AF896C1D143FF500A02E99 /* State.cpp in Sources */,
 				81B1907B1C9B16BE002EC8AC /* DownloadProgressTestSystem.cpp in Sources */,
 				81C63AF81C9C196700E1A669 /* State.cpp in Sources */,
 				81C63AFC1C9C1C3400E1A669 /* TestNavigator.cpp in Sources */,
