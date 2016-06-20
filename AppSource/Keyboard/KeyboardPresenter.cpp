@@ -70,23 +70,82 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void KeyboardPresenter::AddKeyPressHandler() noexcept
         {
+            auto keyboardSystem = CS::Application::Get()->GetSystem<CS::Keyboard>();
 
+            if (keyboardSystem == nullptr)
+            {
+                m_textComponent->SetText("No Keyboard.");
+                return;
+            }
+
+            m_eventConnections.push_back(keyboardSystem->GetKeyPressedEvent().OpenConnection([=](CS::KeyCode keyPressed, std::vector<CS::ModifierKeyCode> modifiers)
+            {
+                m_keysHeld.push_back(keyPressed);
+                m_modifiersHeld = modifiers;
+
+                DisplayKeys();
+            }));
         }
 
         //------------------------------------------------------------------------------
         void KeyboardPresenter::AddKeyReleaseHandler() noexcept
         {
+            auto keyboardSystem = CS::Application::Get()->GetSystem<CS::Keyboard>();
 
+            if (keyboardSystem == nullptr)
+            {
+                m_textComponent->SetText("No Keyboard.");
+                return;
+            }
+
+            m_eventConnections.push_back(keyboardSystem->GetKeyReleasedEvent().OpenConnection([=](CS::KeyCode keyReleased)
+            {
+                auto findIterator = std::find(m_keysHeld.begin(), m_keysHeld.end(), keyReleased);
+                if (findIterator != m_keysHeld.end())
+                {
+                    m_keysHeld.erase(findIterator);
+                }
+
+                DisplayKeys();
+            }));
+            
         }
 
         //------------------------------------------------------------------------------
         void KeyboardPresenter::DisplayKeys() noexcept
         {
-            std::string text = "Device Acceleration: ";
+            std::string text = "Keys Held: ";
 
-            text += "\nX: " + CS::ToString(acceleration.x);
-            text += "\nY: " + CS::ToString(acceleration.y);
-            text += "\nZ: " + CS::ToString(acceleration.z);
+            for (CS::KeyCode key : m_keysHeld)
+            {
+                text += CS::ToString(u32(key)) + ", ";
+            }
+
+            text += "\nModifiers Held: ";
+            // Not using m_modifiersHeld because release events are not generated for
+            // the modifier list in the same way.
+            for (CS::KeyCode mod : m_keysHeld)
+            {
+                switch (mod)
+                {
+                    case CS::KeyCode::k_leftAlt:
+                    case CS::KeyCode::k_rightAlt:
+                        text += "ALT, ";
+                        break;
+                    case CS::KeyCode::k_leftShift:
+                    case CS::KeyCode::k_rightShift:
+                        text += "SHIFT, ";
+                        break;
+                    case CS::KeyCode::k_leftCtrl:
+                    case CS::KeyCode::k_rightCtrl:
+                        text += "CTRL, ";
+                        break;
+                    case CS::KeyCode::k_leftSystem:
+                    case CS::KeyCode::k_rightSystem:
+                        text += "SYSTEM, ";
+                        break;
+               }
+            }
 
             m_textComponent->SetText(text);
         }
@@ -95,6 +154,7 @@ namespace CSTest
         void KeyboardPresenter::OnInit() noexcept
         {
             InitUI();
+            DisplayKeys();
             AddKeyPressHandler();
             AddKeyReleaseHandler();
         }

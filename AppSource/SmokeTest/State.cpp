@@ -40,6 +40,7 @@
 #include <WebView/State.h>
 #include <DialogueBox/State.h>
 #include <LocalNotifications/State.h>
+#include <Keyboard/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -109,6 +110,13 @@ namespace CSTest
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<DialogueBox::State>());
             });
+
+#ifdef CS_TARGETPLATFORM_WINDOWS
+            optionsMenuDesc.AddButton("Keyboard", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Keyboard::State>());
+            });
+#endif
 
             m_optionsMenuPresenter->Present(optionsMenuDesc);
         }
