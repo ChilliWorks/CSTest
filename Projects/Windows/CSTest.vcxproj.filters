@@ -67,6 +67,9 @@
     <Filter Include="AppSource\LocalNotifications">
       <UniqueIdentifier>{3e65a144-e8be-4203-ae2c-1f0e3ccffc5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\Keyboard">
+      <UniqueIdentifier>{676bf7b7-017f-44f3-bdee-a469cc8530a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -204,6 +207,12 @@
     <ClCompile Include="..\..\AppSource\LocalNotifications\State.cpp">
       <Filter>AppSource\LocalNotifications</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\Keyboard\KeyboardPresenter.cpp">
+      <Filter>AppSource\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Keyboard\State.cpp">
+      <Filter>AppSource\Keyboard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -331,6 +340,12 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\LocalNotifications\State.h">
       <Filter>AppSource\LocalNotifications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Keyboard\KeyboardPresenter.h">
+      <Filter>AppSource\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Keyboard\State.h">
+      <Filter>AppSource\Keyboard</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

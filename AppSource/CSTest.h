@@ -76,6 +76,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(Tester);
         CS_FORWARDDECLARE_CLASS(TestRegistry);
     }
+
+    namespace Keyboard
+    {
+        CS_FORWARDDECLARE_CLASS(KeyboardPresenter);
+    }
     
     namespace Lighting
     {

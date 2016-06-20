@@ -21,8 +21,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _ACCELEROMETER_ACCELEROMETERPRESENTER_H_
-#define _ACCELEROMETER_ACCELEROMETERPRESENTER_H_
+#ifndef _KEYBOARD_KEYBOARDPRESENTER_H_
+#define _KEYBOARD_KEYBOARDPRESENTER_H_
 
 #include <CSTest.h>
 
@@ -31,14 +31,14 @@
 
 namespace CSTest
 {
-    namespace Accelerometer
+    namespace Keyboard
     {
-        /// A system which displays acceleration information on-screen.
+        /// A system which displays keypress information on-screen.
         ///
-        class AccelerometerPresenter final : public CS::StateSystem
+        class KeyboardPresenter final : public CS::StateSystem
         {
         public:
-            CS_DECLARE_NAMEDTYPE(AccelerometerPresenter);
+            CS_DECLARE_NAMEDTYPE(KeyboardPresenter);
 
             /// Allows querying of whether or not the component implements the
             /// interface associated with the given interface Id.
@@ -57,38 +57,44 @@ namespace CSTest
             ///
             /// @return The new instance.
             ///
-            static AccelerometerPresenterUPtr Create() noexcept;
+            static KeyboardPresenterUPtr Create() noexcept;
   
             /// Constructor
             ///
-            AccelerometerPresenter() = default;
+            KeyboardPresenter() = default;
             
             /// Initialises all of the UI on which the gesture information will be presented.
             ///
             void InitUI() noexcept;
             
-            /// Called when the gesture presenter is first created. This will set up the
-            /// gestures which should be presented.
+            /// Called when the presenter is first created. This will set up the
+            /// information which should be presented.
             ///
             void OnInit() noexcept override;
 
-            /// Called during init; adds event receiver for acceleration updates.
+            /// Called during init; adds event receiver for key presses.
             ///
-            void AddAccelerationHandler() noexcept;
+            void AddKeyPressHandler() noexcept;
 
-            /// Displays acceleration value on screen.
+            /// Called during init; adds event receiver for key releases.
+            void AddKeyReleaseHandler() noexcept;
+
+            /// Displays held keys and modifiers on screen.
             ///
-            /// @param acceleration
-            ///     The acceleration vector to display.
-            void DisplayAcceleration(const CS::Vector3& acceleration) noexcept;
+            /// @param keys
+            ///     The vector of keycodes to display.
+            /// @param modifiers
+            ///     The vector of modifiers to display.
+            void DisplayKeys() noexcept;
             
-            /// Called when the gesture presenter is about to be destroyed. This will clean
-            /// up the gestures which were being presented.
+            /// Called when the presenter is about to be destroyed.
             ///
             void OnDestroy() noexcept override;
             
-            CS::Vector3 m_currentAcceleration;
-            CS::EventConnectionUPtr m_eventConnection;
+            std::vector<CS::KeyCode> m_keysHeld;
+            std::vector<CS::ModifierKeyCode> m_modifiersHeld;
+
+            std::vector<CS::EventConnectionUPtr> m_eventConnections;
             
             CS::WidgetSPtr m_rootUI;
             CS::TextUIComponent* m_textComponent;

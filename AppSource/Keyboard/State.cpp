@@ -21,26 +21,26 @@
 //  THE SOFTWARE.
 //
 
-#include <Accelerometer/State.h>
+#include <Keyboard/State.h>
 
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
 #include <Common/Core/TestNavigator.h>
-#include <Accelerometer/AccelerometerPresenter.h>
 #include <CricketAudio/State.h>
+#include <Keyboard/KeyboardPresenter.h>
 
 #include <ChilliSource/Core/Scene.h>
 #include <ChilliSource/Input/Accelerometer.h>
 
 namespace CSTest
 {
-    namespace Accelerometer
+    namespace Keyboard
     {
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::TestNavigator>("Accelerometer");
-            CreateSystem<AccelerometerPresenter>();
+            CreateSystem<Common::TestNavigator>("Keyboard");
+            CreateSystem<KeyboardPresenter>();
         }
 
         //------------------------------------------------------------------------------

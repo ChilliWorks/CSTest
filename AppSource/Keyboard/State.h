@@ -21,8 +21,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _ACCELEROMETER_STATE_H_
-#define _ACCELEROMETER_STATE_H_
+#ifndef _KEYBOARD_STATE_H_
+#define _KEYBOARD_STATE_H_
 
 #include <CSTest.h>
 
@@ -30,7 +30,7 @@
 
 namespace CSTest
 {
-    namespace Accelerometer
+    namespace Keyboard
     {
         /// A state for testing the accelerometer input device.
         ///

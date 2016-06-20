@@ -47,6 +47,8 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystemTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\HttpRequestTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TaskSchedulerTest.cpp" />
+    <ClCompile Include="..\..\AppSource\Keyboard\KeyboardPresenter.cpp" />
+    <ClCompile Include="..\..\AppSource\Keyboard\State.cpp" />
     <ClCompile Include="..\..\AppSource\Lighting\State.cpp" />
     <ClCompile Include="..\..\AppSource\LocalNotifications\State.cpp" />
     <ClCompile Include="..\..\AppSource\MainMenu\State.cpp" />
@@ -94,6 +96,8 @@
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestDesc.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\Tester.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestRegistry.h" />
+    <ClInclude Include="..\..\AppSource\Keyboard\KeyboardPresenter.h" />
+    <ClInclude Include="..\..\AppSource\Keyboard\State.h" />
     <ClInclude Include="..\..\AppSource\Lighting\State.h" />
     <ClInclude Include="..\..\AppSource\LocalNotifications\State.h" />
     <ClInclude Include="..\..\AppSource\MainMenu\State.h" />

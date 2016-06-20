@@ -21,7 +21,7 @@
 //  THE SOFTWARE.
 //
 
-#include <Accelerometer/AccelerometerPresenter.h>
+#include <Keyboard/KeyboardPresenter.h>
 
 #include <Common/UI/BasicWidgetFactory.h>
 
@@ -29,31 +29,31 @@
 #include <ChilliSource/Core/Resource.h>
 #include <ChilliSource/Core/State.h>
 #include <ChilliSource/Core/Math/Vector3.h>
-#include <ChilliSource/Input/Accelerometer.h>
+#include <ChilliSource/Input/Keyboard.h>
 #include <ChilliSource/Rendering/Font.h>
 #include <ChilliSource/UI/Base.h>
 #include <ChilliSource/UI/Text.h>
 
 namespace CSTest
 {
-    namespace Accelerometer
+    namespace Keyboard
     {
-        CS_DEFINE_NAMEDTYPE(AccelerometerPresenter);
+        CS_DEFINE_NAMEDTYPE(KeyboardPresenter);
 
         //------------------------------------------------------------------------------
-        AccelerometerPresenterUPtr AccelerometerPresenter::Create() noexcept
+        KeyboardPresenterUPtr KeyboardPresenter::Create() noexcept
         {
-            return AccelerometerPresenterUPtr(new AccelerometerPresenter());
+            return KeyboardPresenterUPtr(new KeyboardPresenter());
         }
 
         //------------------------------------------------------------------------------
-        bool AccelerometerPresenter::IsA(CS::InterfaceIDType interfaceId) const noexcept
+        bool KeyboardPresenter::IsA(CS::InterfaceIDType interfaceId) const noexcept
         {
-            return (AccelerometerPresenter::InterfaceID == interfaceId);
+            return (KeyboardPresenter::InterfaceID == interfaceId);
         }
 
         //------------------------------------------------------------------------------
-        void AccelerometerPresenter::InitUI() noexcept
+        void KeyboardPresenter::InitUI() noexcept
         {
             auto resourcePool = CS::Application::Get()->GetResourcePool();
             auto smallFont = resourcePool->LoadResource<CS::Font>(CS::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
@@ -68,26 +68,19 @@ namespace CSTest
         }
 
         //------------------------------------------------------------------------------
-        void AccelerometerPresenter::AddAccelerationHandler() noexcept
+        void KeyboardPresenter::AddKeyPressHandler() noexcept
         {
-            auto accelerometerSystem = CS::Application::Get()->GetSystem<CS::Accelerometer>();
-            
-            if (accelerometerSystem == nullptr)
-            {
-                m_textComponent->SetText("No Accelerometer.");
-                return;
-            }
-            
-            accelerometerSystem->StartUpdating();
 
-            m_eventConnection = accelerometerSystem->GetAccelerationUpdatedEvent().OpenConnection([=](const CS::Vector3& acceleration)
-            {
-                DisplayAcceleration(acceleration);
-            });
         }
 
         //------------------------------------------------------------------------------
-        void AccelerometerPresenter::DisplayAcceleration(const CS::Vector3& acceleration) noexcept
+        void KeyboardPresenter::AddKeyReleaseHandler() noexcept
+        {
+
+        }
+
+        //------------------------------------------------------------------------------
+        void KeyboardPresenter::DisplayKeys() noexcept
         {
             std::string text = "Device Acceleration: ";
 
@@ -99,17 +92,17 @@ namespace CSTest
         }
 
         //------------------------------------------------------------------------------
-        void AccelerometerPresenter::OnInit() noexcept
+        void KeyboardPresenter::OnInit() noexcept
         {
             InitUI();
-            AddAccelerationHandler();
+            AddKeyPressHandler();
+            AddKeyReleaseHandler();
         }
 
         //------------------------------------------------------------------------------
-        void AccelerometerPresenter::OnDestroy() noexcept
+        void KeyboardPresenter::OnDestroy() noexcept
         {
-            CS::Application::Get()->GetSystem<CS::Accelerometer>()->StopUpdating();
-            m_eventConnection.reset();
+            m_eventConnections.clear();
         }
     }
 }
