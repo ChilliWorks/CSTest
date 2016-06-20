@@ -67,8 +67,8 @@ namespace CSTest
             ///
             void InitUI() noexcept;
             
-            /// Called when the gesture presenter is first created. This will set up the
-            /// gestures which should be presented.
+            /// Called when the presenter is first created. This will set up the
+            /// information which should be presented.
             ///
             void OnInit() noexcept override;
 
@@ -82,8 +82,8 @@ namespace CSTest
             ///     The acceleration vector to display.
             void DisplayAcceleration(const CS::Vector3& acceleration) noexcept;
             
-            /// Called when the gesture presenter is about to be destroyed. This will clean
-            /// up the gestures which were being presented.
+            /// Called when the presenter is about to be destroyed. This will clean
+            /// up the events and elements which were being presented.
             ///
             void OnDestroy() noexcept override;
             
