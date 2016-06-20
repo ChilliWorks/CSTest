@@ -1,8 +1,3 @@
-//
-//  GesturePresenter.cpp
-//  CSTest
-//  Created by Ian Copland on 03/03/2016.
-//
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2016 Tag Games Limited
