@@ -113,7 +113,9 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void TextEntryPresenter::OnDestroy() noexcept
         {
-            m_eventConnections.clear();
+            auto textEntrySystem = CS::Application::Get()->GetSystem<CS::TextEntry>();
+
+            textEntrySystem->Deactivate();
         }
     }
 }
