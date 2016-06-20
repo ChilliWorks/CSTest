@@ -76,13 +76,19 @@ namespace CSTest
         void AccelerometerPresenter::AddAccelerationHandler() noexcept
         {
             auto accelerometerSystem = CS::Application::Get()->GetSystem<CS::Accelerometer>();
-            CS_ASSERT(accelerometerSystem, "Must have Accelerometer system to use AccelerometerPresenter.");
+            
+            if (accelerometerSystem == nullptr)
+            {
+                m_textComponent->SetText("No Accelerometer.");
+                return;
+            }
+            
             accelerometerSystem->StartUpdating();
 
-            m_eventConnections.push_back(accelerometerSystem->GetAccelerationUpdatedEvent().OpenConnection([=](const CS::Vector3& acceleration)
+            m_eventConnection = accelerometerSystem->GetAccelerationUpdatedEvent().OpenConnection([=](const CS::Vector3& acceleration)
             {
                 DisplayAcceleration(acceleration);
-            }));
+            });
         }
 
         //------------------------------------------------------------------------------
@@ -108,7 +114,7 @@ namespace CSTest
         void AccelerometerPresenter::OnDestroy() noexcept
         {
             CS::Application::Get()->GetSystem<CS::Accelerometer>()->StopUpdating();
-            m_eventConnections.clear();
+            m_eventConnection.reset();
         }
     }
 }

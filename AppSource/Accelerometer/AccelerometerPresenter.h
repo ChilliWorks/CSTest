@@ -88,7 +88,7 @@ namespace CSTest
             void OnDestroy() noexcept override;
             
             CS::Vector3 m_currentAcceleration;
-            std::vector<CS::EventConnectionSPtr> m_eventConnections;
+            CS::EventConnectionUPtr m_eventConnection;
             
             CS::WidgetSPtr m_rootUI;
             CS::TextUIComponent* m_textComponent;
