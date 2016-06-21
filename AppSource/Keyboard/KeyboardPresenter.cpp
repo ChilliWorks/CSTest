@@ -80,7 +80,7 @@ namespace CSTest
 
             m_eventConnections.push_back(keyboardSystem->GetKeyPressedEvent().OpenConnection([=](CS::KeyCode keyPressed, std::vector<CS::ModifierKeyCode> modifiers)
             {
-                m_keysHeld.insert(keyPressed);
+                m_keysHeld.push_back(keyPressed);
                 DisplayKeys();
             }));
         }
@@ -93,7 +93,7 @@ namespace CSTest
 
             m_eventConnections.push_back(keyboardSystem->GetKeyReleasedEvent().OpenConnection([=](CS::KeyCode keyReleased)
             {
-                auto findIterator = m_keysHeld.find(keyReleased);
+                auto findIterator = std::find(m_keysHeld.begin(), m_keysHeld.end(), keyReleased);
                 if (findIterator != m_keysHeld.end())
                 {
                     m_keysHeld.erase(findIterator);

@@ -29,8 +29,6 @@
 #include <ChilliSource/Core/Math/Vector3.h>
 #include <ChilliSource/Core/System.h>
 
-#include <unordered_set>
-
 namespace CSTest
 {
     namespace Keyboard
@@ -79,6 +77,7 @@ namespace CSTest
             void AddKeyPressHandler() noexcept;
 
             /// Called during init; adds event receiver for key releases.
+            ///
             void AddKeyReleaseHandler() noexcept;
 
             /// Displays held keys on screen.
@@ -89,7 +88,7 @@ namespace CSTest
             ///
             void OnDestroy() noexcept override;
             
-            std::unordered_set<CS::KeyCode> m_keysHeld;
+            std::vector<CS::KeyCode> m_keysHeld;
             std::vector<CS::EventConnectionUPtr> m_eventConnections;
             
             CS::WidgetSPtr m_rootUI;
