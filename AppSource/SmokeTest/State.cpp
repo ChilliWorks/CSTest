@@ -31,6 +31,7 @@
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
 #include <Common/Core/TestNavigator.h>
+#include <Accelerometer/State.h>
 #include <CricketAudio/State.h>
 #include <DownloadProgress/State.h>
 #include <EmailComposer/State.h>
@@ -100,7 +101,12 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<EmailComposer::State>());
             });
 
-            optionsMenuDesc.AddButton("Local Notifications", [=]()
+            optionsMenuDesc.AddButton("Accelerometer", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Accelerometer::State>());
+			});
+			
+			optionsMenuDesc.AddButton("Local Notifications", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<LocalNotifications::State>());
             });

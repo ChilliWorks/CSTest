@@ -61,6 +61,9 @@
     <Filter Include="AppSource\SmokeTest">
       <UniqueIdentifier>{0e49f6fb-035d-4c26-8d32-1ff3cfa458de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\Accelerometer">
+      <UniqueIdentifier>{1f5fd4e8-c14d-4350-98db-91e7608345d6}</UniqueIdentifier>
+	</Filter>
     <Filter Include="AppSource\DialogueBox">
       <UniqueIdentifier>{8722d391-0531-4534-8951-1dde0ade1d89}</UniqueIdentifier>
     </Filter>
@@ -198,6 +201,12 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TaskSchedulerTest.cpp">
       <Filter>AppSource\IntegrationTest\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\Accelerometer\State.cpp">
+      <Filter>AppSource\Accelerometer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.cpp">
+      <Filter>AppSource\Accelerometer</Filter>
+	</ClCompile>
     <ClCompile Include="..\..\AppSource\DialogueBox\State.cpp">
       <Filter>AppSource\DialogueBox</Filter>
     </ClCompile>
@@ -326,6 +335,12 @@
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.h">
       <Filter>AppSource\UnitTest\TestSystem</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\AppSource\Accelerometer\State.h">
+      <Filter>AppSource\Accelerometer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.h">
+      <Filter>AppSource\Accelerometer</Filter>
+	</ClInclude>
     <ClInclude Include="..\..\AppSource\DialogueBox\State.h">
       <Filter>AppSource\DialogueBox</Filter>
     </ClInclude>
