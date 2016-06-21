@@ -8,11 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
-		81AF89821D145EF100A02E99 /* AccelerometerPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF897E1D145EF100A02E99 /* AccelerometerPresenter.cpp */; };
-		81AF89831D145EF100A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF89801D145EF100A02E99 /* State.cpp */; };
-		81AF89881D14617E00A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF89861D14617E00A02E99 /* State.cpp */; };
 		81AF896C1D143FF500A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF896A1D143FF500A02E99 /* State.cpp */; };
 		81AF89741D1440C900A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF89721D1440C900A02E99 /* State.cpp */; };
+		81AF89821D145EF100A02E99 /* AccelerometerPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF897E1D145EF100A02E99 /* AccelerometerPresenter.cpp */; };
+		81AF89831D145EF100A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF89801D145EF100A02E99 /* State.cpp */; };
 		81B190711C9B16BE002EC8AC /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190141C9B16BE002EC8AC /* App.cpp */; };
 		81B190721C9B16BE002EC8AC /* FollowerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190181C9B16BE002EC8AC /* FollowerComponent.cpp */; };
 		81B190731C9B16BE002EC8AC /* OrbiterComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1901A1C9B16BE002EC8AC /* OrbiterComponent.cpp */; };
@@ -104,16 +103,14 @@
 
 /* Begin PBXFileReference section */
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		81AF897E1D145EF100A02E99 /* AccelerometerPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AccelerometerPresenter.cpp; sourceTree = "<group>"; };
-		81AF897F1D145EF100A02E99 /* AccelerometerPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometerPresenter.h; sourceTree = "<group>"; };
-		81AF89801D145EF100A02E99 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
-		81AF89811D145EF100A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
-		81AF89861D14617E00A02E99 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
-		81AF89871D14617E00A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81AF896A1D143FF500A02E99 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81AF896B1D143FF500A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81AF89721D1440C900A02E99 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81AF89731D1440C900A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81AF897E1D145EF100A02E99 /* AccelerometerPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AccelerometerPresenter.cpp; sourceTree = "<group>"; };
+		81AF897F1D145EF100A02E99 /* AccelerometerPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometerPresenter.h; sourceTree = "<group>"; };
+		81AF89801D145EF100A02E99 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81AF89811D145EF100A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81B190141C9B16BE002EC8AC /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		81B190151C9B16BE002EC8AC /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		81B190181C9B16BE002EC8AC /* FollowerComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FollowerComponent.cpp; sourceTree = "<group>"; };
@@ -276,17 +273,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		81AF897D1D145EF100A02E99 /* Accelerometer */ = {
-			isa = PBXGroup;
-			children = (
-				81AF897E1D145EF100A02E99 /* AccelerometerPresenter.cpp */,
-				81AF897F1D145EF100A02E99 /* AccelerometerPresenter.h */,
-				81AF89801D145EF100A02E99 /* State.cpp */,
-				81AF89811D145EF100A02E99 /* State.h */,
-			);
-			path = Accelerometer;
-			sourceTree = "<group>";
-		};
 		81AF89691D143FF500A02E99 /* LocalNotifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +289,17 @@
 				81AF89731D1440C900A02E99 /* State.h */,
 			);
 			path = DialogueBox;
+			sourceTree = "<group>";
+		};
+		81AF897D1D145EF100A02E99 /* Accelerometer */ = {
+			isa = PBXGroup;
+			children = (
+				81AF897E1D145EF100A02E99 /* AccelerometerPresenter.cpp */,
+				81AF897F1D145EF100A02E99 /* AccelerometerPresenter.h */,
+				81AF89801D145EF100A02E99 /* State.cpp */,
+				81AF89811D145EF100A02E99 /* State.h */,
+			);
+			path = Accelerometer;
 			sourceTree = "<group>";
 		};
 		81B190131C9B16BD002EC8AC /* AppSource */ = {
@@ -769,7 +766,6 @@
 				81B1908F1C9B16BE002EC8AC /* Vector4.cpp in Sources */,
 				81B1908E1C9B16BE002EC8AC /* Vector3.cpp in Sources */,
 				81B190911C9B16BE002EC8AC /* FailedAssertion.cpp in Sources */,
-				81AF89881D14617E00A02E99 /* State.cpp in Sources */,
 				81AF89821D145EF100A02E99 /* AccelerometerPresenter.cpp in Sources */,
 				81B190811C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190831C9B16BE002EC8AC /* Report.cpp in Sources */,
