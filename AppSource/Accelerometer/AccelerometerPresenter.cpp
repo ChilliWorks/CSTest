@@ -70,17 +70,18 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void AccelerometerPresenter::AddAccelerationHandler() noexcept
         {
-            auto accelerometerSystem = CS::Application::Get()->GetSystem<CS::Accelerometer>();
+            CS_ASSERT(!m_accelerometer, "Accelerometer reference unexpected - this method should only be called once.");
+            m_accelerometer = CS::Application::Get()->GetSystem<CS::Accelerometer>();
             
-            if (accelerometerSystem == nullptr)
+            if (m_accelerometer == nullptr)
             {
                 m_textComponent->SetText("No Accelerometer.");
                 return;
             }
             
-            accelerometerSystem->StartUpdating();
+            m_accelerometer->StartUpdating();
 
-            m_eventConnection = accelerometerSystem->GetAccelerationUpdatedEvent().OpenConnection([=](const CS::Vector3& acceleration)
+            m_eventConnection = m_accelerometer->GetAccelerationUpdatedEvent().OpenConnection([=](const CS::Vector3& acceleration)
             {
                 DisplayAcceleration(acceleration);
             });
@@ -108,7 +109,10 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void AccelerometerPresenter::OnDestroy() noexcept
         {
-            CS::Application::Get()->GetSystem<CS::Accelerometer>()->StopUpdating();
+            if (m_accelerometer)
+            {
+                m_accelerometer->StopUpdating();
+            }
             m_eventConnection.reset();
         }
     }

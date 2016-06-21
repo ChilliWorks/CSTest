@@ -89,9 +89,10 @@ namespace CSTest
             void OnDestroy() noexcept override;
             
             CS::EventConnectionUPtr m_eventConnection;
+            CS::Accelerometer* m_accelerometer = nullptr;
             
             CS::WidgetSPtr m_rootUI;
-            CS::TextUIComponent* m_textComponent;
+            CS::TextUIComponent* m_textComponent = nullptr;
         };
     }
 }
