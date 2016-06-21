@@ -48,6 +48,7 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystemTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\ForwardRenderPassCompilerTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\HttpRequestTest.cpp" />
+    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\RenderCommandCompilerTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TaskSchedulerTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TextInputStreamTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TextOutputStreamTest.cpp" />
