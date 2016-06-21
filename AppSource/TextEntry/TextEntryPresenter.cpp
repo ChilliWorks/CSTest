@@ -104,6 +104,17 @@ namespace CSTest
             {
                 auto textChangedDelegate = [=](const std::string& text) -> bool
                 {
+                    // Make sure the font can handle all the characters going in, otherwise reject text.
+                    for (auto character : text)
+                    {
+                        ChilliSource::Font::CharacterInfo info;
+                        if (!m_textUIComponent->GetFont()->TryGetCharacterInfo(character, info))
+                        {
+                            return false;
+                        }
+                    }
+
+                    // Reject text if it's too long.
                     return(text.size() < k_maxTextLength);
                 };
 
