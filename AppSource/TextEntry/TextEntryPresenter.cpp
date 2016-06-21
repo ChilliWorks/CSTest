@@ -64,6 +64,10 @@ namespace CSTest
                                                                           CS::HorizontalTextJustification::k_centre, CS::VerticalTextJustification::k_centre);
 
             textBox->SetRelativePosition(CS::Vector2(0.05f, -0.10f));
+            m_eventConnections.push_back(textBox->GetReleasedInsideEvent().OpenConnection([=](CS::Widget* widget, const CS::Pointer& pointer, CS::Pointer::InputType inputType)
+            {
+                ActivateTextBox();
+            }));
 
             m_textUIComponent = textBox->GetWidget("TextBoxText")->GetComponent<CS::TextUIComponent>();
 
@@ -96,18 +100,20 @@ namespace CSTest
         void TextEntryPresenter::ActivateTextBox() noexcept
         {
             auto textEntrySystem = CS::Application::Get()->GetSystem<CS::TextEntry>();
-
-            auto textChangedDelegate = [=](const std::string& text) -> bool
+            if (!textEntrySystem->IsActive())
             {
-                return(text.size() < k_maxTextLength);
-            };
+                auto textChangedDelegate = [=](const std::string& text) -> bool
+                {
+                    return(text.size() < k_maxTextLength);
+                };
 
-            auto textEntryDeactivatedDelegate = [=]()
-            {
-                // Do Nothing
-            };
+                auto textEntryDeactivatedDelegate = [=]()
+                {
+                    // Do Nothing
+                };
 
-            textEntrySystem->Activate("Enter Text Here", CS::TextEntry::Type::k_text, CS::TextEntry::Capitalisation::k_sentences, textChangedDelegate, textEntryDeactivatedDelegate);
+                textEntrySystem->Activate("Enter Text Here", CS::TextEntry::Type::k_text, CS::TextEntry::Capitalisation::k_sentences, textChangedDelegate, textEntryDeactivatedDelegate);
+            }
         }
 
         //------------------------------------------------------------------------------
