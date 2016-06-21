@@ -80,9 +80,7 @@ namespace CSTest
 
             m_eventConnections.push_back(keyboardSystem->GetKeyPressedEvent().OpenConnection([=](CS::KeyCode keyPressed, std::vector<CS::ModifierKeyCode> modifiers)
             {
-                m_keysHeld.push_back(keyPressed);
-                m_modifiersHeld = modifiers;
-
+                m_keysHeld.insert(keyPressed);
                 DisplayKeys();
             }));
         }
@@ -91,16 +89,11 @@ namespace CSTest
         void KeyboardPresenter::AddKeyReleaseHandler() noexcept
         {
             auto keyboardSystem = CS::Application::Get()->GetSystem<CS::Keyboard>();
-
-            if (keyboardSystem == nullptr)
-            {
-                m_textComponent->SetText("No Keyboard.");
-                return;
-            }
+            CS_ASSERT(keyboardSystem, "No keyboard detected.");
 
             m_eventConnections.push_back(keyboardSystem->GetKeyReleasedEvent().OpenConnection([=](CS::KeyCode keyReleased)
             {
-                auto findIterator = std::find(m_keysHeld.begin(), m_keysHeld.end(), keyReleased);
+                auto findIterator = m_keysHeld.find(keyReleased);
                 if (findIterator != m_keysHeld.end())
                 {
                     m_keysHeld.erase(findIterator);
@@ -115,36 +108,16 @@ namespace CSTest
         void KeyboardPresenter::DisplayKeys() noexcept
         {
             std::string text = "Keys Held: ";
-
-            for (CS::KeyCode key : m_keysHeld)
+            bool first = true;
+            for (auto key : m_keysHeld)
             {
-                text += CS::ToString(u32(key)) + ", ";
-            }
-
-            text += "\nModifiers Held: ";
-            // Not using m_modifiersHeld because release events are not generated for
-            // the modifier list in the same way.
-            for (CS::KeyCode mod : m_keysHeld)
-            {
-                switch (mod)
+                if (!first)
                 {
-                    case CS::KeyCode::k_leftAlt:
-                    case CS::KeyCode::k_rightAlt:
-                        text += "ALT, ";
-                        break;
-                    case CS::KeyCode::k_leftShift:
-                    case CS::KeyCode::k_rightShift:
-                        text += "SHIFT, ";
-                        break;
-                    case CS::KeyCode::k_leftCtrl:
-                    case CS::KeyCode::k_rightCtrl:
-                        text += "CTRL, ";
-                        break;
-                    case CS::KeyCode::k_leftSystem:
-                    case CS::KeyCode::k_rightSystem:
-                        text += "SYSTEM, ";
-                        break;
-               }
+                    text += ", ";
+                }
+
+                first = false;
+                text += CS::GetKeyName(key);
             }
 
             m_textComponent->SetText(text);
