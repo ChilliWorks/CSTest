@@ -80,6 +80,7 @@ namespace CSTest
             ///
             /// @param acceleration
             ///     The acceleration vector to display.
+            ///
             void DisplayAcceleration(const CS::Vector3& acceleration) noexcept;
             
             /// Called when the presenter is about to be destroyed. This will clean
@@ -87,7 +88,6 @@ namespace CSTest
             ///
             void OnDestroy() noexcept override;
             
-            CS::Vector3 m_currentAcceleration;
             CS::EventConnectionUPtr m_eventConnection;
             
             CS::WidgetSPtr m_rootUI;
