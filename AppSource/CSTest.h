@@ -34,6 +34,11 @@
 namespace CSTest
 {
     CS_FORWARDDECLARE_CLASS(App);
+
+    namespace Accelerometer
+    {
+        CS_FORWARDDECLARE_CLASS(AccelerometerPresenter);
+    }
     
     namespace Common
     {
