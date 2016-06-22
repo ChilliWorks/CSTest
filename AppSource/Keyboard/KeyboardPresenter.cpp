@@ -71,12 +71,7 @@ namespace CSTest
         void KeyboardPresenter::AddKeyPressHandler() noexcept
         {
             auto keyboardSystem = CS::Application::Get()->GetSystem<CS::Keyboard>();
-
-            if (keyboardSystem == nullptr)
-            {
-                m_textComponent->SetText("No Keyboard.");
-                return;
-            }
+            CS_ASSERT(keyboardSystem, "No keyboard detected.");
 
             m_eventConnections.push_back(keyboardSystem->GetKeyPressedEvent().OpenConnection([=](CS::KeyCode keyPressed, std::vector<CS::ModifierKeyCode> modifiers)
             {
