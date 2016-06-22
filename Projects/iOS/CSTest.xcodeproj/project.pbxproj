@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8126F1271D1AAD23004CB0BA /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8126F1231D1AAD23004CB0BA /* State.cpp */; };
+		8126F1281D1AAD23004CB0BA /* TextEntryPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8126F1251D1AAD23004CB0BA /* TextEntryPresenter.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		81AF896C1D143FF500A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF896A1D143FF500A02E99 /* State.cpp */; };
 		81AF89741D1440C900A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF89721D1440C900A02E99 /* State.cpp */; };
@@ -100,6 +102,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8126F1231D1AAD23004CB0BA /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		8126F1241D1AAD23004CB0BA /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		8126F1251D1AAD23004CB0BA /* TextEntryPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextEntryPresenter.cpp; sourceTree = "<group>"; };
+		8126F1261D1AAD23004CB0BA /* TextEntryPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextEntryPresenter.h; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81AF896A1D143FF500A02E99 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81AF896B1D143FF500A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
@@ -267,6 +273,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8126F1221D1AAD23004CB0BA /* TextEntry */ = {
+			isa = PBXGroup;
+			children = (
+				8126F1231D1AAD23004CB0BA /* State.cpp */,
+				8126F1241D1AAD23004CB0BA /* State.h */,
+				8126F1251D1AAD23004CB0BA /* TextEntryPresenter.cpp */,
+				8126F1261D1AAD23004CB0BA /* TextEntryPresenter.h */,
+			);
+			path = TextEntry;
+			sourceTree = "<group>";
+		};
 		81AF89691D143FF500A02E99 /* LocalNotifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +320,7 @@
 				81C63AF21C9C196700E1A669 /* MainMenu */,
 				81B190561C9B16BE002EC8AC /* Particle */,
 				81C63AF51C9C196700E1A669 /* SmokeTest */,
+				8126F1221D1AAD23004CB0BA /* TextEntry */,
 				81B190591C9B16BE002EC8AC /* UnitTest */,
 				81B1906E1C9B16BE002EC8AC /* WebView */,
 			);
@@ -747,10 +765,12 @@
 				81B1908F1C9B16BE002EC8AC /* Vector4.cpp in Sources */,
 				81B1908E1C9B16BE002EC8AC /* Vector3.cpp in Sources */,
 				81B190911C9B16BE002EC8AC /* FailedAssertion.cpp in Sources */,
+				8126F1271D1AAD23004CB0BA /* State.cpp in Sources */,
 				81B190811C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190831C9B16BE002EC8AC /* Report.cpp in Sources */,
 				81B190721C9B16BE002EC8AC /* FollowerComponent.cpp in Sources */,
 				81B190941C9B16BE002EC8AC /* FailedTestCase.cpp in Sources */,
+				8126F1281D1AAD23004CB0BA /* TextEntryPresenter.cpp in Sources */,
 				81C63AF91C9C196700E1A669 /* State.cpp in Sources */,
 				81B1907A1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190801C9B16BE002EC8AC /* State.cpp in Sources */,
