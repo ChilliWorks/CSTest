@@ -116,11 +116,11 @@ namespace CSTest
                 auto angularSpeed = k_minAngularSpeed + (k_maxAngularSpeed - k_minAngularSpeed) * CS::Random::GenerateNormalised<f32>();
                 
                 CS::EntitySPtr box;
-                if (i % 2 == 0)
-                {
-                    box = primitiveEntityFactory->CreateBox(colour, size);
-                }
-                else
+//                if (i % 2 == 0)
+//                {
+//                    box = primitiveEntityFactory->CreateBox(colour, size);
+//                }
+//                else
                 {
                     box = CreateStaticColourBox(colour * 0.75f, size);
                 }

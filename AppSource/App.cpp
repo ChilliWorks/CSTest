@@ -30,7 +30,7 @@
 
 #include <Common/Core/BasicEntityFactory.h>
 #include <Common/UI/BasicWidgetFactory.h>
-#include <IntegrationTest/State.h>
+#include <MultiThreadedRenderer/State.h>
 
 #include <ChilliSource/Audio/CricketAudio.h>
 #include <ChilliSource/Core/Entity.h>
@@ -93,7 +93,7 @@ namespace CSTest
     void App::PushInitialState() noexcept
     {
         //TODO: Switch this back to main menu once the UI is working again.
-        GetStateManager()->Push(CS::StateSPtr(new IntegrationTest::State()));
+        GetStateManager()->Push(CS::StateSPtr(new MultiThreadedRenderer::State()));
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
