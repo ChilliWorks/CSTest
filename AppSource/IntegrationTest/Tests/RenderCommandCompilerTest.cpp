@@ -46,7 +46,7 @@ namespace CSTest
             ///
             CS::MaterialCSPtr CreateOpaqueMaterial() noexcept
             {
-                constexpr char k_materialName[] = "RenderCommandCompiler_Unlit";
+                constexpr char k_materialName[] = "RenderCommandCompiler_Opaque";
                 
                 auto resourcePool = CS::Application::Get()->GetResourcePool();
                 auto materialFactory = CS::Application::Get()->GetSystem<CS::MaterialFactory>();
@@ -73,7 +73,7 @@ namespace CSTest
             ///
             CS::MaterialCSPtr CreateTransparentMaterial() noexcept
             {
-                constexpr char k_materialName[] = "RenderCommandCompiler_Unlit";
+                constexpr char k_materialName[] = "RenderCommandCompiler_Transparent";
                 
                 auto resourcePool = CS::Application::Get()->GetResourcePool();
                 auto materialFactory = CS::Application::Get()->GetSystem<CS::MaterialFactory>();
@@ -134,14 +134,14 @@ namespace CSTest
             {
                 const CS::Matrix4 k_worldPosition = CS::Matrix4::CreateTransform(CS::Vector3::k_zero, CS::Vector3::k_one, CS::Quaternion::k_identity);
                 
-                auto material = CreateOpaqueMaterial();
+                auto material = CreateTransparentMaterial();
                 
                 auto primitiveModelFactory = CS::Application::Get()->GetSystem<CS::PrimitiveModelFactory>();
                 auto model = primitiveModelFactory->CreateBox(CS::Vector3::k_one);
                 
                 //TODO: Handle deferred rendering
                 auto renderMaterialGroup = material->GetRenderMaterialGroup();
-                auto renderMaterial = renderMaterialGroup->GetRenderMaterial(CS::VertexFormat::k_staticMesh, static_cast<u32>(CS::ForwardRenderPasses::k_base));
+                auto renderMaterial = renderMaterialGroup->GetRenderMaterial(CS::VertexFormat::k_staticMesh, static_cast<u32>(CS::ForwardRenderPasses::k_transparent));
                 auto renderMesh = model->GetRenderMesh(0);
                 
                 return CS::RenderPassObject(renderMaterial, renderMesh, k_worldPosition);
@@ -207,7 +207,7 @@ namespace CSTest
         CSIT_TESTCASE(RenderCommandCompilerTest)
         {
             /// Confirms that a basic list of target render pass groups can be compiled into a render
-            /// command queue.
+            /// command buffer.
             ///
             CSIT_TEST(SuccessBasic)
             {
@@ -219,24 +219,24 @@ namespace CSTest
                     CS::RenderCommandListUPtr preRenderCommandList(new CS::RenderCommandList());
                     CS::RenderCommandListUPtr postRenderCommandList(new CS::RenderCommandList());
                     
-                    auto renderCommandQueue = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, targetRenderPassGroups, CS::Integer2(10, 10), CS::Colour::k_black,
+                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, targetRenderPassGroups, CS::Integer2(10, 10), CS::Colour::k_black,
                                                                                                std::move(preRenderCommandList), std::move(postRenderCommandList));
                     
-                    CSIT_ASSERT(renderCommandQueue->GetNumSlots() == 3, "Incorrect number of render command queue slots");
+                    CSIT_ASSERT(renderCommandBuffer->GetNumSlots() == 3, "Incorrect number of render command buffer slots");
                     
-                    auto renderCommandsA = renderCommandQueue->GetQueue()[0]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsA.size() == 1, "Incorrect number of render command queue slots");
+                    auto renderCommandsA = renderCommandBuffer->GetQueue()[0]->GetOrderedList();
+                    CSIT_ASSERT(renderCommandsA.size() == 1, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsA[0]->GetType() == CS::RenderCommand::Type::k_begin, "Invalid command type.");
                     
-                    auto renderCommandsB = renderCommandQueue->GetQueue()[1]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsB.size() == 4, "Incorrect number of render command queue slots");
+                    auto renderCommandsB = renderCommandBuffer->GetQueue()[1]->GetOrderedList();
+                    CSIT_ASSERT(renderCommandsB.size() == 4, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsB[0]->GetType() == CS::RenderCommand::Type::k_applyCamera, "Invalid command type.");
                     CSIT_ASSERT(renderCommandsB[1]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
                     CSIT_ASSERT(renderCommandsB[2]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
                     CSIT_ASSERT(renderCommandsB[3]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
                     
-                    auto renderCommandsC = renderCommandQueue->GetQueue()[2]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsC.size() == 1, "Incorrect number of render command queue slots");
+                    auto renderCommandsC = renderCommandBuffer->GetQueue()[2]->GetOrderedList();
+                    CSIT_ASSERT(renderCommandsC.size() == 1, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsC[0]->GetType() == CS::RenderCommand::Type::k_end, "Invalid command type.");
                     
                     CSIT_PASS();
@@ -244,7 +244,7 @@ namespace CSTest
             }
             
             /// Confirms that a more complex list of target render pass groups can be compiled into a render
-            /// command queue.
+            /// command buffer.
             ///
             CSIT_TEST(SuccessComplex)
             {
@@ -261,38 +261,38 @@ namespace CSTest
                     CS::RenderCommandListUPtr postRenderCommandList(new CS::RenderCommandList());
                     postRenderCommandList->AddApplyCameraCommand(CS::Vector3::k_zero, CS::Matrix4::k_identity);
                     
-                    auto renderCommandQueue = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, targetRenderPassGroups, CS::Integer2(10, 10), CS::Colour::k_black,
+                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, targetRenderPassGroups, CS::Integer2(10, 10), CS::Colour::k_black,
                                                                                                std::move(preRenderCommandList), std::move(postRenderCommandList));
                     
-                    CSIT_ASSERT(renderCommandQueue->GetNumSlots() == 6, "Incorrect number of render command queue slots");
+                    CSIT_ASSERT(renderCommandBuffer->GetNumSlots() == 6, "Incorrect number of render command buffer slots");
                     
-                    auto renderCommandsA = renderCommandQueue->GetQueue()[0]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsA.size() == 1, "Incorrect number of render command queue slots");
+                    auto renderCommandsA = renderCommandBuffer->GetQueue()[0]->GetOrderedList();
+                    CSIT_ASSERT(renderCommandsA.size() == 1, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsA[0]->GetType() == CS::RenderCommand::Type::k_applyCamera, "Invalid command type.");
                     
-                    auto renderCommandsB = renderCommandQueue->GetQueue()[1]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsB.size() == 1, "Incorrect number of render command queue slots");
+                    auto renderCommandsB = renderCommandBuffer->GetQueue()[1]->GetOrderedList();
+                    CSIT_ASSERT(renderCommandsB.size() == 1, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsB[0]->GetType() == CS::RenderCommand::Type::k_begin, "Invalid command type.");
                     
-                    auto renderCommandsC = renderCommandQueue->GetQueue()[2]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsC.size() == 4, "Incorrect number of render command queue slots");
+                    auto renderCommandsC = renderCommandBuffer->GetQueue()[2]->GetOrderedList();
+                    CSIT_ASSERT(renderCommandsC.size() == 4, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsC[0]->GetType() == CS::RenderCommand::Type::k_applyCamera, "Invalid command type.");
                     CSIT_ASSERT(renderCommandsC[1]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
                     CSIT_ASSERT(renderCommandsC[2]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
                     CSIT_ASSERT(renderCommandsC[3]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
                     
-                    auto renderCommandsD = renderCommandQueue->GetQueue()[3]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsD.size() == 3, "Incorrect number of render command queue slots");
+                    auto renderCommandsD = renderCommandBuffer->GetQueue()[3]->GetOrderedList();
+                    CSIT_ASSERT(renderCommandsD.size() == 3, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsD[0]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
                     CSIT_ASSERT(renderCommandsD[1]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
                     CSIT_ASSERT(renderCommandsD[2]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
                     
-                    auto renderCommandsE = renderCommandQueue->GetQueue()[4]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsE.size() == 1, "Incorrect number of render command queue slots");
+                    auto renderCommandsE = renderCommandBuffer->GetQueue()[4]->GetOrderedList();
+                    CSIT_ASSERT(renderCommandsE.size() == 1, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsE[0]->GetType() == CS::RenderCommand::Type::k_end, "Invalid command type.");
                     
-                    auto renderCommandsF = renderCommandQueue->GetQueue()[5]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsF.size() == 1, "Incorrect number of render command queue slots");
+                    auto renderCommandsF = renderCommandBuffer->GetQueue()[5]->GetOrderedList();
+                    CSIT_ASSERT(renderCommandsF.size() == 1, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsF[0]->GetType() == CS::RenderCommand::Type::k_applyCamera, "Invalid command type.");
                     
                     CSIT_PASS();
