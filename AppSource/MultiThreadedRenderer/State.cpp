@@ -116,21 +116,24 @@ namespace CSTest
                 auto angularSpeed = k_minAngularSpeed + (k_maxAngularSpeed - k_minAngularSpeed) * CS::Random::GenerateNormalised<f32>();
                 
                 CS::EntitySPtr box;
+                
+                //TODO: fix
+                box = CreateStaticColourBox(colour, size);
 //                if (i % 2 == 0)
 //                {
 //                    box = primitiveEntityFactory->CreateBox(colour, size);
 //                }
 //                else
-                {
-                    box = CreateStaticColourBox(colour * 0.75f, size);
-                }
+//                {
+//                    box = CreateStaticColourBox(colour * 0.75f, size);
+//                }
 
                 box->AddComponent(std::make_shared<SphereBounceComponent>(k_boundingRadius, speed, angularSpeed));
                 box->GetTransform().SetPosition(position);
                 box->GetTransform().SetOrientation(orientation);
                 GetScene()->Add(std::move(box));
             }
-
+            
             auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
             
             CS::EntitySPtr cameraTarget = CS::Entity::Create();
