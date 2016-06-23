@@ -161,25 +161,25 @@ namespace CSTest
             auto resourcePool = CS::Application::Get()->GetResourcePool();
             auto atlas = resourcePool->LoadResource<CS::TextureAtlas>(CS::StorageLocation::k_package, "TextureAtlases/UI/UI.csatlas");
             auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_package, "TextureAtlases/UI/UI.csimage");
-
-
+            
             auto textBox = widgetFactory->CreateWidget();
+            textBox->SetParentalAnchor(in_alignment);
+            textBox->SetOriginAnchor(in_alignment);
+            textBox->SetRelativeSize(in_size);
 
             auto bg = widgetFactory->CreateImage();
             bg->SetParentalAnchor(in_alignment);
             bg->SetOriginAnchor(in_alignment);
-            bg->SetRelativeSize(in_size);
-
+            
             auto bgDrawable = bg->GetComponent<CS::DrawableUIComponent>();
-            bgDrawable->ApplyDrawableDef(CS::UIDrawableDefCSPtr(new CS::NinePatchUIDrawableDef(texture, atlas, "Button01", CS::Vector4(0.15f, 0.15f, 0.15f, 0.15f), CS::Colour::k_white)));
+            bgDrawable->ApplyDrawableDef(CS::UIDrawableDefCSPtr(new CS::NinePatchUIDrawableDef(texture, atlas, "Textbox01", CS::Vector4(0.15f, 0.15f, 0.15f, 0.15f), CS::Colour::k_white)));
             
             textBox->AddWidget(std::move(bg));
 
-            auto text = widgetFactory->CreateLabel();
+            auto text = widgetFactory->CreateEditableLabel();
+            text->SetRelativePosition(CS::Vector2(0.10f, -0.10f));
             text->SetParentalAnchor(in_alignment);
             text->SetOriginAnchor(in_alignment);
-            text->SetRelativeSize(in_size);
-            text->SetName("TextBoxText");
 
             auto textComponent = text->GetComponent<CS::TextUIComponent>();
             textComponent->SetFont(in_font);
@@ -188,6 +188,10 @@ namespace CSTest
             textComponent->SetHorizontalJustification(in_horizontalTextJustification);
             textComponent->SetVerticalJustification(in_verticalTextJustification);
 
+            auto editableTextComponent = text->GetComponent<CS::EditableTextUIComponent>();
+            editableTextComponent->SetInitialText(in_text);
+            editableTextComponent->SetMaxCharacters(25);
+            
             textBox->SetInputEnabled(true);
 
             textBox->AddWidget(std::move(text));

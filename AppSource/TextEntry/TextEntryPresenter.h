@@ -72,32 +72,6 @@ namespace CSTest
             ///
             void OnInit() noexcept override;
 
-            /// Called when the presenter is first created. This will set up the
-            /// various event connections required for text entry.
-            ///
-            void CreateTextEntryEventHandlers() noexcept;
-
-            /// Called whenever the text input box is intended to become active.
-            /// On mobile devices this will invoke the virtual keyboard.
-            ///
-            void ActivateTextBox() noexcept;
-            
-            /// Updated every frame.
-            ///
-            void OnUpdate(f32 in_deltaTime) noexcept override;
-            
-            /// Called when the gesture presenter is about to be destroyed. This will clean
-            /// up the gestures which were being presented.
-            ///
-            void OnDestroy() noexcept override;
-            
-            std::vector<CS::EventConnectionSPtr> m_eventConnections;
-
-            u32 k_maxTextLength = 25;
-
-            CS::TextUIComponent* m_textUIComponent;
-            
-            bool m_uiDirty = true;
             CS::WidgetSPtr m_rootUI;
 
         };

@@ -60,79 +60,25 @@ namespace CSTest
             
             auto basicWidgetFactory = CS::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
 
-            auto textBox = basicWidgetFactory->CreateTextBox(CS::Vector2(0.35f, 0.10f), smallFont, "Enter Text Here", CS::AlignmentAnchor::k_topLeft,
-                                                                          CS::HorizontalTextJustification::k_centre, CS::VerticalTextJustification::k_centre);
+            auto textBox = basicWidgetFactory->CreateTextBox(CS::Vector2(0.35f, 0.10f), smallFont, "Enter Text Here", CS::AlignmentAnchor::k_middleCentre,
+                                                                          CS::HorizontalTextJustification::k_left, CS::VerticalTextJustification::k_centre);
 
-            textBox->SetRelativePosition(CS::Vector2(0.05f, -0.10f));
-            m_eventConnections.push_back(textBox->GetReleasedInsideEvent().OpenConnection([=](CS::Widget* widget, const CS::Pointer& pointer, CS::Pointer::InputType inputType)
-            {
-                ActivateTextBox();
-            }));
+            textBox->SetRelativePosition(CS::Vector2(0.0f, 0.20f));
 
-            m_textUIComponent = textBox->GetWidget("TextBoxText")->GetComponent<CS::TextUIComponent>();
+            auto editableText = textBox->GetWidget("EditableLabel")->GetComponent<CS::EditableTextUIComponent>();
+            editableText->Activate();
 
             auto uiCanvas = GetState()->GetUICanvas();
             uiCanvas->AddWidget(std::move(textBox));
+
+
         }
 
         //------------------------------------------------------------------------------
         void TextEntryPresenter::OnInit() noexcept
         {
             InitUI();
-            CreateTextEntryEventHandlers();
         }
 
-        //------------------------------------------------------------------------------
-        void TextEntryPresenter::OnUpdate(f32 in_deltaTime) noexcept
-        {
-            auto textEntrySystem = CS::Application::Get()->GetSystem<CS::TextEntry>();
-
-            m_textUIComponent->SetText(textEntrySystem->GetTextBuffer());
-        }
-
-        //------------------------------------------------------------------------------
-        void TextEntryPresenter::CreateTextEntryEventHandlers() noexcept
-        {
-            ActivateTextBox();            
-        }
-
-        //------------------------------------------------------------------------------
-        void TextEntryPresenter::ActivateTextBox() noexcept
-        {
-            auto textEntrySystem = CS::Application::Get()->GetSystem<CS::TextEntry>();
-            if (!textEntrySystem->IsActive())
-            {
-                auto textChangedDelegate = [=](const std::string& text) -> bool
-                {
-                    // Make sure the font can handle all the characters going in, otherwise reject text.
-                    for (auto character : text)
-                    {
-                        ChilliSource::Font::CharacterInfo info;
-                        if (!m_textUIComponent->GetFont()->TryGetCharacterInfo(character, info))
-                        {
-                            return false;
-                        }
-                    }
-
-                    // Reject text if it's too long.
-                    return(text.size() < k_maxTextLength);
-                };
-
-                auto textEntryDeactivatedDelegate = [=]()
-                {
-                    // Do Nothing
-                };
-
-                textEntrySystem->Activate("Enter Text Here", CS::TextEntry::Type::k_text, CS::TextEntry::Capitalisation::k_sentences, textChangedDelegate, textEntryDeactivatedDelegate);
-            }
-        }
-
-        //------------------------------------------------------------------------------
-        void TextEntryPresenter::OnDestroy() noexcept
-        {
-            auto textEntrySystem = CS::Application::Get()->GetSystem<CS::TextEntry>();
-
-            textEntrySystem->Deactivate();
-        }
     }
 }
