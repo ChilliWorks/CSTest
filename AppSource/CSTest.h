@@ -34,6 +34,11 @@
 namespace CSTest
 {
     CS_FORWARDDECLARE_CLASS(App);
+
+    namespace Accelerometer
+    {
+        CS_FORWARDDECLARE_CLASS(AccelerometerPresenter);
+    }
     
     namespace Common
     {
@@ -75,6 +80,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(TestDesc);
         CS_FORWARDDECLARE_CLASS(Tester);
         CS_FORWARDDECLARE_CLASS(TestRegistry);
+    }
+
+    namespace Keyboard
+    {
+        CS_FORWARDDECLARE_CLASS(KeyboardPresenter);
     }
     
     namespace Lighting

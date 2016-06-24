@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8126F1271D1AAD23004CB0BA /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8126F1231D1AAD23004CB0BA /* State.cpp */; };
-		8126F1281D1AAD23004CB0BA /* TextEntryPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8126F1251D1AAD23004CB0BA /* TextEntryPresenter.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		81AF896C1D143FF500A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF896A1D143FF500A02E99 /* State.cpp */; };
 		81AF89741D1440C900A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF89721D1440C900A02E99 /* State.cpp */; };
+		81AF89821D145EF100A02E99 /* AccelerometerPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF897E1D145EF100A02E99 /* AccelerometerPresenter.cpp */; };
+		81AF89831D145EF100A02E99 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81AF89801D145EF100A02E99 /* State.cpp */; };
 		81B190711C9B16BE002EC8AC /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190141C9B16BE002EC8AC /* App.cpp */; };
 		81B190721C9B16BE002EC8AC /* FollowerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B190181C9B16BE002EC8AC /* FollowerComponent.cpp */; };
 		81B190731C9B16BE002EC8AC /* OrbiterComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81B1901A1C9B16BE002EC8AC /* OrbiterComponent.cpp */; };
@@ -89,6 +89,8 @@
 		81C7010B1C89EF9A00D306F9 /* AppResources in Resources */ = {isa = PBXBuildFile; fileRef = 81C701091C89EF9A00D306F9 /* AppResources */; };
 		81C7010C1C89EF9A00D306F9 /* CSResources in Resources */ = {isa = PBXBuildFile; fileRef = 81C7010A1C89EF9A00D306F9 /* CSResources */; };
 		81CF6EAA1C8F1378000DDF92 /* WebViewCloseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 81CF6EA91C8F1378000DDF92 /* WebViewCloseButton.png */; };
+		81EEEC2F1D1948860092346C /* KeyboardPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81EEEC2B1D1948860092346C /* KeyboardPresenter.cpp */; };
+		81EEEC301D1948860092346C /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81EEEC2D1D1948860092346C /* State.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,15 +104,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8126F1231D1AAD23004CB0BA /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
-		8126F1241D1AAD23004CB0BA /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
-		8126F1251D1AAD23004CB0BA /* TextEntryPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextEntryPresenter.cpp; sourceTree = "<group>"; };
-		8126F1261D1AAD23004CB0BA /* TextEntryPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextEntryPresenter.h; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81AF896A1D143FF500A02E99 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81AF896B1D143FF500A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81AF89721D1440C900A02E99 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		81AF89731D1440C900A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		81AF897E1D145EF100A02E99 /* AccelerometerPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AccelerometerPresenter.cpp; sourceTree = "<group>"; };
+		81AF897F1D145EF100A02E99 /* AccelerometerPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometerPresenter.h; sourceTree = "<group>"; };
+		81AF89801D145EF100A02E99 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81AF89811D145EF100A02E99 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81B190141C9B16BE002EC8AC /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		81B190151C9B16BE002EC8AC /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		81B190181C9B16BE002EC8AC /* FollowerComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FollowerComponent.cpp; sourceTree = "<group>"; };
@@ -230,6 +232,10 @@
 		81C7010A1C89EF9A00D306F9 /* CSResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CSResources; path = XcodeBuiltAssets/CSResources; sourceTree = "<group>"; };
 		81C7FFE41C89E86400D306F9 /* CSTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81CF6EA91C8F1378000DDF92 /* WebViewCloseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WebViewCloseButton.png; sourceTree = "<group>"; };
+		81EEEC2B1D1948860092346C /* KeyboardPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyboardPresenter.cpp; sourceTree = "<group>"; };
+		81EEEC2C1D1948860092346C /* KeyboardPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardPresenter.h; sourceTree = "<group>"; };
+		81EEEC2D1D1948860092346C /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81EEEC2E1D1948860092346C /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,17 +279,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8126F1221D1AAD23004CB0BA /* TextEntry */ = {
-			isa = PBXGroup;
-			children = (
-				8126F1231D1AAD23004CB0BA /* State.cpp */,
-				8126F1241D1AAD23004CB0BA /* State.h */,
-				8126F1251D1AAD23004CB0BA /* TextEntryPresenter.cpp */,
-				8126F1261D1AAD23004CB0BA /* TextEntryPresenter.h */,
-			);
-			path = TextEntry;
-			sourceTree = "<group>";
-		};
 		81AF89691D143FF500A02E99 /* LocalNotifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,9 +297,21 @@
 			path = DialogueBox;
 			sourceTree = "<group>";
 		};
+		81AF897D1D145EF100A02E99 /* Accelerometer */ = {
+			isa = PBXGroup;
+			children = (
+				81AF897E1D145EF100A02E99 /* AccelerometerPresenter.cpp */,
+				81AF897F1D145EF100A02E99 /* AccelerometerPresenter.h */,
+				81AF89801D145EF100A02E99 /* State.cpp */,
+				81AF89811D145EF100A02E99 /* State.h */,
+			);
+			path = Accelerometer;
+			sourceTree = "<group>";
+		};
 		81B190131C9B16BD002EC8AC /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
+				81AF897D1D145EF100A02E99 /* Accelerometer */,
 				81B190141C9B16BE002EC8AC /* App.cpp */,
 				81B190151C9B16BE002EC8AC /* App.h */,
 				81B190161C9B16BE002EC8AC /* Common */,
@@ -315,12 +322,12 @@
 				81B190351C9B16BE002EC8AC /* EmailComposer */,
 				81B190381C9B16BE002EC8AC /* Gesture */,
 				81B1903F1C9B16BE002EC8AC /* IntegrationTest */,
+				81EEEC2A1D1948860092346C /* Keyboard */,
 				81B190531C9B16BE002EC8AC /* Lighting */,
 				81AF89691D143FF500A02E99 /* LocalNotifications */,
 				81C63AF21C9C196700E1A669 /* MainMenu */,
 				81B190561C9B16BE002EC8AC /* Particle */,
 				81C63AF51C9C196700E1A669 /* SmokeTest */,
-				8126F1221D1AAD23004CB0BA /* TextEntry */,
 				81B190591C9B16BE002EC8AC /* UnitTest */,
 				81B1906E1C9B16BE002EC8AC /* WebView */,
 			);
@@ -632,6 +639,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		81EEEC2A1D1948860092346C /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				81EEEC2B1D1948860092346C /* KeyboardPresenter.cpp */,
+				81EEEC2C1D1948860092346C /* KeyboardPresenter.h */,
+				81EEEC2D1D1948860092346C /* State.cpp */,
+				81EEEC2E1D1948860092346C /* State.h */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -741,6 +759,7 @@
 				81B190731C9B16BE002EC8AC /* OrbiterComponent.cpp in Sources */,
 				81C63B031C9C63E500E1A669 /* FileSystemTest.cpp in Sources */,
 				81B190921C9B16BE002EC8AC /* Report.cpp in Sources */,
+				81EEEC2F1D1948860092346C /* KeyboardPresenter.cpp in Sources */,
 				81B190881C9B16BE002EC8AC /* TestRegistry.cpp in Sources */,
 				81B1907F1C9B16BE002EC8AC /* GesturePresenter.cpp in Sources */,
 				81B190741C9B16BE002EC8AC /* Approx.cpp in Sources */,
@@ -755,6 +774,7 @@
 				81B1908D1C9B16BE002EC8AC /* Vector2.cpp in Sources */,
 				81B190711C9B16BE002EC8AC /* App.cpp in Sources */,
 				81B1907D1C9B16BE002EC8AC /* State.cpp in Sources */,
+				81AF89831D145EF100A02E99 /* State.cpp in Sources */,
 				81AF89741D1440C900A02E99 /* State.cpp in Sources */,
 				81B190871C9B16BE002EC8AC /* Tester.cpp in Sources */,
 				81B190851C9B16BE002EC8AC /* Test.cpp in Sources */,
@@ -765,12 +785,11 @@
 				81B1908F1C9B16BE002EC8AC /* Vector4.cpp in Sources */,
 				81B1908E1C9B16BE002EC8AC /* Vector3.cpp in Sources */,
 				81B190911C9B16BE002EC8AC /* FailedAssertion.cpp in Sources */,
-				8126F1271D1AAD23004CB0BA /* State.cpp in Sources */,
+				81AF89821D145EF100A02E99 /* AccelerometerPresenter.cpp in Sources */,
 				81B190811C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190831C9B16BE002EC8AC /* Report.cpp in Sources */,
 				81B190721C9B16BE002EC8AC /* FollowerComponent.cpp in Sources */,
 				81B190941C9B16BE002EC8AC /* FailedTestCase.cpp in Sources */,
-				8126F1281D1AAD23004CB0BA /* TextEntryPresenter.cpp in Sources */,
 				81C63AF91C9C196700E1A669 /* State.cpp in Sources */,
 				81B1907A1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190801C9B16BE002EC8AC /* State.cpp in Sources */,
@@ -778,6 +797,7 @@
 				81B190791C9B16BE002EC8AC /* BasicWidgetFactory.cpp in Sources */,
 				81AF896C1D143FF500A02E99 /* State.cpp in Sources */,
 				81B1907B1C9B16BE002EC8AC /* DownloadProgressTestSystem.cpp in Sources */,
+				81EEEC301D1948860092346C /* State.cpp in Sources */,
 				81C63AF81C9C196700E1A669 /* State.cpp in Sources */,
 				81C63AFC1C9C1C3400E1A669 /* TestNavigator.cpp in Sources */,
 				81B190841C9B16BE002EC8AC /* ReportPresenter.cpp in Sources */,

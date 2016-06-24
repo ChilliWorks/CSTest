@@ -34,7 +34,9 @@
 
 #include <ChilliSource/Audio/CricketAudio.h>
 #include <ChilliSource/Core/Entity.h>
+#include <ChilliSource/Input/Accelerometer.h>
 #include <ChilliSource/Core/Notification.h>
+#include <ChilliSource/Input/Keyboard.h>
 #include <ChilliSource/Rendering/Model.h>
 #include <ChilliSource/Networking/Http.h>
 
@@ -87,12 +89,15 @@ namespace CSTest
         CreateSystem<CS::LocalNotificationSystem>();
         CreateSystem<CS::RemoteNotificationSystem>();
         CreateSystem<CS::NotificationManager>();
+		CreateSystem<CS::Accelerometer>();
+#endif
+
+#ifdef CS_TARGETPLATFORM_WINDOWS
+        CreateSystem<CS::Keyboard>();
 #endif
         
         CreateSystem<Common::BasicEntityFactory>();
         CreateSystem<Common::BasicWidgetFactory>();
-
-        
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------

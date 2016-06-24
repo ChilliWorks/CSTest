@@ -31,6 +31,7 @@
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
 #include <Common/Core/TestNavigator.h>
+#include <Accelerometer/State.h>
 #include <CricketAudio/State.h>
 #include <DownloadProgress/State.h>
 #include <EmailComposer/State.h>
@@ -41,6 +42,7 @@
 #include <DialogueBox/State.h>
 #include <LocalNotifications/State.h>
 #include <TextEntry/State.h>
+#include <Keyboard/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -101,7 +103,12 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<EmailComposer::State>());
             });
 
-            optionsMenuDesc.AddButton("Local Notifications", [=]()
+            optionsMenuDesc.AddButton("Accelerometer", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Accelerometer::State>());
+			});
+			
+			optionsMenuDesc.AddButton("Local Notifications", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<LocalNotifications::State>());
             });
@@ -110,6 +117,13 @@ namespace CSTest
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<DialogueBox::State>());
             });
+
+#ifdef CS_TARGETPLATFORM_WINDOWS
+            optionsMenuDesc.AddButton("Keyboard", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Keyboard::State>());
+            });
+#endif
 
             optionsMenuDesc.AddButton("Text Entry", [=]()
             {
