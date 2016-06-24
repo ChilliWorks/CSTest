@@ -172,7 +172,7 @@ namespace CSTest
             bg->SetOriginAnchor(in_alignment);
             
             auto bgDrawable = bg->GetComponent<CS::DrawableUIComponent>();
-            bgDrawable->ApplyDrawableDef(CS::UIDrawableDefCSPtr(new CS::NinePatchUIDrawableDef(texture, atlas, "Textbox01", CS::Vector4(0.15f, 0.15f, 0.15f, 0.15f), CS::Colour::k_white)));
+            bgDrawable->ApplyDrawableDef(CS::UIDrawableDefCSPtr(new CS::NinePatchUIDrawableDef(texture, atlas, "Textbox01", CS::Vector4(0.15f, 0.05f, 0.05f, 0.15f), CS::Colour::k_white)));
             
             textBox->AddWidget(std::move(bg));
 
