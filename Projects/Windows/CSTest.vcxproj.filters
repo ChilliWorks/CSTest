@@ -63,7 +63,7 @@
     </Filter>
     <Filter Include="AppSource\Accelerometer">
       <UniqueIdentifier>{1f5fd4e8-c14d-4350-98db-91e7608345d6}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="AppSource\DialogueBox">
       <UniqueIdentifier>{8722d391-0531-4534-8951-1dde0ade1d89}</UniqueIdentifier>
     </Filter>
@@ -72,9 +72,12 @@
     </Filter>
     <Filter Include="AppSource\TextEntry">
       <UniqueIdentifier>{4ea930f6-f40c-4347-8a0e-5620e9b7abfa}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="AppSource\Keyboard">
       <UniqueIdentifier>{676bf7b7-017f-44f3-bdee-a469cc8530a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Common\Input">
+      <UniqueIdentifier>{ed25a6e6-68fa-480d-8c51-73c2202acf5a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -212,7 +215,7 @@
     </ClCompile>
     <ClCompile Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.cpp">
       <Filter>AppSource\Accelerometer</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="..\..\AppSource\DialogueBox\State.cpp">
       <Filter>AppSource\DialogueBox</Filter>
     </ClCompile>
@@ -224,12 +227,15 @@
     </ClCompile>
     <ClCompile Include="..\..\AppSource\TextEntry\TextEntryPresenter.cpp">
       <Filter>AppSource\TextEntry</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="..\..\AppSource\Keyboard\KeyboardPresenter.cpp">
       <Filter>AppSource\Keyboard</Filter>
     </ClCompile>
     <ClCompile Include="..\..\AppSource\Keyboard\State.cpp">
       <Filter>AppSource\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\Input\BackButton.cpp">
+      <Filter>AppSource\Common\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -358,7 +364,7 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.h">
       <Filter>AppSource\Accelerometer</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="..\..\AppSource\DialogueBox\State.h">
       <Filter>AppSource\DialogueBox</Filter>
     </ClInclude>
@@ -370,12 +376,15 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\TextEntry\TextEntryPresenter.h">
       <Filter>AppSource\TextEntry</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="..\..\AppSource\Keyboard\KeyboardPresenter.h">
       <Filter>AppSource\Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Keyboard\State.h">
       <Filter>AppSource\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\Input\BackButton.h">
+      <Filter>AppSource\Common\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
