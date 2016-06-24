@@ -70,8 +70,6 @@ namespace CSTest
 
             auto uiCanvas = GetState()->GetUICanvas();
             uiCanvas->AddWidget(std::move(textBox));
-
-
         }
 
         //------------------------------------------------------------------------------
