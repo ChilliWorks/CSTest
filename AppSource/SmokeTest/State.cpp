@@ -114,11 +114,13 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<LocalNotifications::State>());
             });
 
+#endif
+
             optionsMenuDesc.AddButton("Video Player", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<VideoPlayer::State>());
             });
-#endif
+
             optionsMenuDesc.AddButton("Dialogue Boxes", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<DialogueBox::State>());

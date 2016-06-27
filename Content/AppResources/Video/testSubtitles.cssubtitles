@@ -1,0 +1,35 @@
+{
+	"VersionNumber" : 1,
+	"Styles": {
+		"Style": {
+			"Name" : "Default",
+			"Font" : "Arial",
+			"FontSize" : 18,
+			"FontColour" : "1.0 1.0 0.5 1.0",
+			"FadeTime" : 250,
+			"Alignment" : "MiddleCentre",
+			"Bounds": {
+				"Top" : 0.0,
+				"Left" : 0.0,
+				"Bottom" : 1.0,
+				"Right" : 1.0
+			}
+		}
+	},
+	"LocalisedText" :{
+		"Location" : "package",
+		"Path" : "Text/Common.cstext"
+	},
+	"Subtitles": {
+		"Subtitle1" :
+		{
+			"Style" : "Default",
+			"StartTime" : "00:00:01:00",
+			"EndTime" : "00:00:02:00",
+			"LocalisedTextID" : "EMPTY_TEXT_ID"
+		}
+	}
+
+	
+	
+}

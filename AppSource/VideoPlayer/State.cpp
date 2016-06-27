@@ -30,9 +30,12 @@
 #include <CricketAudio/State.h>
 
 
+#include <ChilliSource/Core/Base/Application.h>
+#include <ChilliSource/Core/Resource.h>
 #include <ChilliSource/Core/Scene.h>
 #include <ChilliSource/Core/Delegate.h>
 #include <ChilliSource/Video/Base.h>
+#include <ChilliSource/Video/ForwardDeclarations.h>
 
 namespace CSTest
 {
@@ -54,11 +57,19 @@ namespace CSTest
             Common::OptionsMenuDesc optionsMenuDesc;
 
             m_videoDismissConnection = CS::MakeConnectableDelegate(this, &State::OnVideoDismissed).OpenConnection();
+            m_videoSubtitledDismissConnection = CS::MakeConnectableDelegate(this, &State::OnVideoDismissed).OpenConnection();
 
             optionsMenuDesc.AddButton("Play Video", [=]()
             {
-                
                 m_videoPlayer->Present(CS::StorageLocation::k_package, "Video/testVideo.mp4", std::move(m_videoDismissConnection));
+            });
+                    
+            auto resourcePool = CS::Application::Get()->GetResourcePool();
+            m_videoSubtitles = resourcePool->LoadResource<CS::Subtitles>(CS::StorageLocation::k_package, "Video/testSubtitles.cssubtitles");
+            
+            optionsMenuDesc.AddButton("Play Video Subtitled", [=]()
+            {
+                m_videoPlayer->PresentWithSubtitles(CS::StorageLocation::k_package, "Video/testVideo.mp4", m_videoSubtitles, std::move(m_videoSubtitledDismissConnection), true);
             });
 
             m_optionsMenuPresenter->Present(optionsMenuDesc);

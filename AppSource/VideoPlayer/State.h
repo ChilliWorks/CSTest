@@ -52,6 +52,8 @@ namespace CSTest
             CS::VideoPlayer* m_videoPlayer = nullptr;
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
             CS::VideoPlayer::VideoCompleteDelegate::Connection m_videoDismissConnection = nullptr;
+            CS::VideoPlayer::VideoCompleteDelegate::Connection m_videoSubtitledDismissConnection = nullptr;
+            CS::SubtitlesCSPtr m_videoSubtitles = nullptr;
         };
     }
 }
