@@ -43,6 +43,7 @@
 #include <LocalNotifications/State.h>
 #include <TextEntry/State.h>
 #include <Keyboard/State.h>
+#include <VideoPlayer/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -111,6 +112,11 @@ namespace CSTest
 			optionsMenuDesc.AddButton("Local Notifications", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<LocalNotifications::State>());
+            });
+
+            optionsMenuDesc.AddButton("Video Player", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<VideoPlayer::State>());
             });
 #endif
             optionsMenuDesc.AddButton("Dialogue Boxes", [=]()

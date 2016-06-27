@@ -21,28 +21,37 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _KEYBOARD_STATE_H_
-#define _KEYBOARD_STATE_H_
+#ifndef _VIDEOPLAYER_STATE_H_
+#define _VIDEOPLAYER_STATE_H_
 
 #include <CSTest.h>
 
 #include <ChilliSource/Core/State.h>
+#include <ChilliSource/Video/Base.h>
 
 namespace CSTest
 {
-    namespace Keyboard
+    namespace VideoPlayer
     {
-        /// A state for testing the keyboard input device.
+        /// A state for testing the video player system.
         ///
         class State final : public CS::State
         {
             /// The life-cycle event for creating all state systems.
             ///
-            void CreateSystems() override;
+            void CreateSystems()noexcept override;
 
             /// Initialises the state.
             ///
-            void OnInit() override;
+            void OnInit() noexcept override;
+
+            /// Called when the video stops playing or is dismissed.
+            ///
+            void OnVideoDismissed() noexcept;
+            
+            CS::VideoPlayer* m_videoPlayer = nullptr;
+            Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
+            CS::VideoPlayer::VideoCompleteDelegate::Connection m_videoDismissConnection = nullptr;
         };
     }
 }

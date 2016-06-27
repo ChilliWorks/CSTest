@@ -69,6 +69,7 @@
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector2.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector3.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector4.cpp" />
+    <ClCompile Include="..\..\AppSource\VideoPlayer\State.cpp" />
     <ClCompile Include="..\..\AppSource\WebView\State.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +120,7 @@
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\Report.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\ReportPresenter.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.h" />
+    <ClInclude Include="..\..\AppSource\VideoPlayer\State.h" />
     <ClInclude Include="..\..\AppSource\WebView\State.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

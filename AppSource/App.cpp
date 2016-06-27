@@ -91,10 +91,6 @@ namespace CSTest
         CreateSystem<CS::NotificationManager>();
 		CreateSystem<CS::Accelerometer>();
 #endif
-
-#ifdef CS_TARGETPLATFORM_WINDOWS
-        CreateSystem<CS::Keyboard>();
-#endif
         
         CreateSystem<Common::BasicEntityFactory>();
         CreateSystem<Common::BasicWidgetFactory>();
