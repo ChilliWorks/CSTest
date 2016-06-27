@@ -59,6 +59,7 @@ namespace CSTest
             void OnInit() override;
             
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
+            Common::BackButtonSystem* m_backButtonSystem = nullptr;
             CS::CkAudioPlayer* m_audioPlayer = nullptr;
         };
     }

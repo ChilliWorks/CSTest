@@ -32,7 +32,7 @@ namespace CSTest
 {
     namespace Keyboard
     {
-        /// A state for testing the accelerometer input device.
+        /// A state for testing the keyboard input device.
         ///
         class State final : public CS::State
         {
@@ -43,6 +43,8 @@ namespace CSTest
             /// Initialises the state.
             ///
             void OnInit() override;
+
+            Common::BackButtonSystem* m_backButtonSystem = nullptr;
         };
     }
 }

@@ -50,6 +50,7 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(OrbiterComponent);
         CS_FORWARDDECLARE_CLASS(ResultPresenter);
         CS_FORWARDDECLARE_CLASS(TestNavigator);
+        CS_FORWARDDECLARE_CLASS(BackButtonSystem);
     }
     
     namespace CricketAudio

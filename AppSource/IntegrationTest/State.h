@@ -68,6 +68,7 @@ namespace CSTest
             void OnDestroy() override;
             
             ReportPresenter* m_reportPresenter = nullptr;
+            Common::BackButtonSystem* m_backButtonSystem = nullptr;
             Common::TestNavigator* m_testNavigator = nullptr;
             TesterUPtr m_tester;
         };

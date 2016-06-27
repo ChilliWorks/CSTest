@@ -24,6 +24,7 @@
 #include <LocalNotifications/State.h>
 
 #include <Common/Core/ResultPresenter.h>
+#include <Common/Input/BackButton.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
 #include <Common/Core/TestNavigator.h>
@@ -45,6 +46,7 @@ namespace CSTest
         {
             CreateSystem<Common::TestNavigator>("Local Notifications");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
+            m_backButtonSystem = CreateSystem<Common::BackButtonSystem>();
         }
 
         //------------------------------------------------------------------------------

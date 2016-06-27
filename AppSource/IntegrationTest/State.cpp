@@ -29,6 +29,7 @@
 #include <IntegrationTest/State.h>
 
 #include <Common/Core/TestNavigator.h>
+#include <Common/Input/BackButton.h>
 #include <IntegrationTest/TestSystem/ReportPresenter.h>
 #include <IntegrationTest/TestSystem/Tester.h>
 #include <Lighting/State.h>
@@ -50,6 +51,7 @@ namespace CSTest
         {
             m_testNavigator = CreateSystem<Common::TestNavigator>("Integration Tests");
             m_reportPresenter = CreateSystem<ReportPresenter>();
+            m_backButtonSystem = CreateSystem<Common::BackButtonSystem>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

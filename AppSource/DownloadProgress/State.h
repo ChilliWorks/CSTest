@@ -69,6 +69,7 @@ namespace CSTest
         private:
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
             Common::ResultPresenter* m_resultPresenter = nullptr;
+            Common::BackButtonSystem* m_backButtonSystem = nullptr;
             CS::HttpRequestSystem* m_httpRequestSystem = nullptr;
             DownloadProgressTestSystem* m_downloadProgressTestSystem = nullptr;
         };

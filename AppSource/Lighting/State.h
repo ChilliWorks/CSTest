@@ -71,6 +71,8 @@ namespace CSTest
             /// @author Ian Copland
             //------------------------------------------------------------------------------
             void OnInit() override;
+
+            Common::BackButtonSystem* m_backButtonSystem = nullptr;
         };
     }
 }

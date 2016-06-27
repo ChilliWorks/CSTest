@@ -30,13 +30,33 @@ namespace CSTest
 {
     namespace Common
     {
+        CS_DEFINE_NAMEDTYPE(BackButtonSystem);
+
         //-----------------------------------------------------
-        void BackButtonSystem::OnInit() noexcept
+        BackButtonSystemUPtr BackButtonSystem::Create() noexcept
+        {
+            return BackButtonSystemUPtr(new BackButtonSystem());
+        }
+
+        //-----------------------------------------------------
+        bool BackButtonSystem::IsA(CS::InterfaceIDType interfaceId) const noexcept
+        {
+            return (BackButtonSystem::InterfaceID == interfaceId);
+        }
+
+        //-----------------------------------------------------
+        void BackButtonSystem::OnResume() noexcept
         {
             auto deviceButtonSystem = CS::Application::Get()->GetSystem<ChilliSource::DeviceButtonSystem>();
             CS_ASSERT(deviceButtonSystem, "No device button system active.");
 
-            deviceButtonSystem->GetTriggeredEvent().OpenConnection(ChilliSource::MakeDelegate(this, &BackButtonSystem::OnDeviceButtonPressed));
+            m_deviceButtonConnection = deviceButtonSystem->GetTriggeredEvent().OpenConnection(ChilliSource::MakeDelegate(this, &BackButtonSystem::OnDeviceButtonPressed));
+        }
+
+        //-----------------------------------------------------
+        void BackButtonSystem::OnSuspend() noexcept
+        {
+            m_deviceButtonConnection = nullptr;
         }
 
         //-----------------------------------------------------
@@ -56,6 +76,12 @@ namespace CSTest
                     CS::Application::Get()->Quit();
                 }
             }
+        }
+
+        //-------------------------------------------------------
+        void BackButtonSystem::OnDestroy() noexcept
+        {
+            m_deviceButtonConnection = nullptr;
         }
     }
 }

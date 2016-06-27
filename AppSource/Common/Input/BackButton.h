@@ -33,25 +33,62 @@ namespace CSTest
 {
     namespace Common
     {
-        
         /// This is a state system which listens for a press of
-        /// the back button on Android, allowing for simple navigation
+        /// the back device button, allowing for simple navigation
         /// of the testing menus, while doubling as a smoke test for
         /// DeviceButtonSystem.
         ///
         class BackButtonSystem final : public CS::StateSystem
         {
         public:
+            CS_DECLARE_NAMEDTYPE(BackButtonSystem);
+
+            /// Allows querying of whether or not this system implements the interface
+            /// described by the given interface Id. Typically this is not called directly
+            /// as the templated equivalent IsA<Interface>() is preferred.
+            ///
+            /// @param interfaceId 
+            ///    The interface Id.
+            ///
+            /// @return Whether or not the interface is implemented.
+            ///
+            bool IsA(CS::InterfaceIDType interfaceId) const noexcept override;
 
         private:
-            /// Called when the system is initialized.
+            friend class CS::State;
+
+            /// A factory method for creating new instances of the system.
+            ///
+            /// @return The new instance.
+            ///
+            static BackButtonSystemUPtr Create() noexcept;
+
+            /// Default constructor. Declared private to ensure the system is created
+            /// through State::CreateSystem<ResultPresenter>().
+            ///
+            BackButtonSystem() = default;
+
+            /// Called when the state is resumed.
             /// Sets up the DeviceButtonSystem delegate.
             ///
-            void OnInit() noexcept override;
+            void OnResume() noexcept override;
+
+            /// Called when the state is suspended.
+            /// Removes the button press delegate.
+            ///
+            void OnSuspend() noexcept override;
+
+            /// Called when the system is destroyed,
+            /// and removes the button press delegate.
+            ///
+            void OnDestroy() noexcept override;
 
             /// Called when a device button is pressed.
             ///
             void OnDeviceButtonPressed(const ChilliSource::DeviceButtonSystem::DeviceButton& buttonPressed) noexcept;
+
+            CS::EventConnectionUPtr m_deviceButtonConnection;
+            
 
         };
     }
