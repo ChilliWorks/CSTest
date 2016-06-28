@@ -234,7 +234,7 @@
     <ClCompile Include="..\..\AppSource\Keyboard\State.cpp">
       <Filter>AppSource\Keyboard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\Common\Input\BackButton.cpp">
+    <ClCompile Include="..\..\AppSource\Common\Input\BackButtonSystem.cpp">
       <Filter>AppSource\Common\Input</Filter>
     </ClCompile>
   </ItemGroup>
@@ -383,7 +383,7 @@
     <ClInclude Include="..\..\AppSource\Keyboard\State.h">
       <Filter>AppSource\Keyboard</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppSource\Common\Input\BackButton.h">
+    <ClInclude Include="..\..\AppSource\Common\Input\BackButtonSystem.h">
       <Filter>AppSource\Common\Input</Filter>
     </ClInclude>
   </ItemGroup>

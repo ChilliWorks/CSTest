@@ -58,7 +58,6 @@ namespace CSTest
             //------------------------------------------------------------------------------
             void OnInit() override;
             
-            Common::BackButtonSystem* m_backButtonSystem = nullptr;
             CS::GestureSystem* m_gestureSystem = nullptr;
         };
     }

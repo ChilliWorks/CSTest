@@ -48,7 +48,6 @@ namespace CSTest
             
         private:
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
-            Common::BackButtonSystem* m_backButtonSystem = nullptr;
             CS::DialogueBoxSystem* m_dialogueBoxSystem = nullptr;
 
         };

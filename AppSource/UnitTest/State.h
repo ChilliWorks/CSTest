@@ -70,10 +70,8 @@ namespace CSTest
             TestSystem* m_testSystem = nullptr;
             ReportPresenter* m_reportPresenter = nullptr;
             Common::TestNavigator* m_testNavigator = nullptr;
-            Common::BackButtonSystem* m_backButtonSystem = nullptr;
             bool m_testsPerformed = false;
             f32 m_timer = 0.0f;
-
         };
     }
 }

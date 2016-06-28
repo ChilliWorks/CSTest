@@ -28,7 +28,7 @@
     <ClCompile Include="..\..\AppSource\Common\Core\BasicEntityFactory.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\ResultPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\TestNavigator.cpp" />
-    <ClCompile Include="..\..\AppSource\Common\Input\BackButton.cpp" />
+    <ClCompile Include="..\..\AppSource\Common\Input\BackButtonSystem.cpp" />
     <ClCompile Include="..\..\AppSource\Common\UI\BasicWidgetFactory.cpp" />
     <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuDesc.cpp" />
     <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.cpp" />
@@ -82,7 +82,7 @@
     <ClInclude Include="..\..\AppSource\Common\Core\BasicEntityFactory.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\ResultPresenter.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\TestNavigator.h" />
-    <ClInclude Include="..\..\AppSource\Common\Input\BackButton.h" />
+    <ClInclude Include="..\..\AppSource\Common\Input\BackButtonSystem.h" />
     <ClInclude Include="..\..\AppSource\Common\UI\BasicWidgetFactory.h" />
     <ClInclude Include="..\..\AppSource\Common\UI\OptionsMenuDesc.h" />
     <ClInclude Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.h" />

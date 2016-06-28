@@ -32,7 +32,7 @@
 #include <Common/Core/BasicEntityFactory.h>
 #include <Common/Behaviour/FollowerComponent.h>
 #include <Common/Behaviour/OrbiterComponent.h>
-#include <Common/Input/BackButton.h>
+#include <Common/Input/BackButtonSystem.h>
 #include <Particle/State.h>
 
 #include <ChilliSource/Core/Base.h>
@@ -105,7 +105,7 @@ namespace CSTest
         void State::CreateSystems()
         {
             CreateSystem<Common::TestNavigator>("Lighting");
-            m_backButtonSystem = CreateSystem<Common::BackButtonSystem>();
+            CreateSystem<Common::BackButtonSystem>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

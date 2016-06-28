@@ -21,7 +21,7 @@
 //  THE SOFTWARE.
 //
 
-#include <Common/Input/BackButton.h>
+#include <Common/Input/BackButtonSystem.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Delegate.h>
@@ -47,10 +47,10 @@ namespace CSTest
         //-----------------------------------------------------
         void BackButtonSystem::OnResume() noexcept
         {
-            auto deviceButtonSystem = CS::Application::Get()->GetSystem<ChilliSource::DeviceButtonSystem>();
+            auto deviceButtonSystem = CS::Application::Get()->GetSystem<CS::DeviceButtonSystem>();
             CS_ASSERT(deviceButtonSystem, "No device button system active.");
 
-            m_deviceButtonConnection = deviceButtonSystem->GetTriggeredEvent().OpenConnection(ChilliSource::MakeDelegate(this, &BackButtonSystem::OnDeviceButtonPressed));
+            m_deviceButtonConnection = deviceButtonSystem->GetTriggeredEvent().OpenConnection(CS::MakeDelegate(this, &BackButtonSystem::OnDeviceButtonPressed));
         }
 
         //-----------------------------------------------------
@@ -60,9 +60,9 @@ namespace CSTest
         }
 
         //-----------------------------------------------------
-        void BackButtonSystem::OnDeviceButtonPressed(const ChilliSource::DeviceButtonSystem::DeviceButton& buttonPressed) noexcept
+        void BackButtonSystem::OnDeviceButtonPressed(const CS::DeviceButtonSystem::DeviceButton& buttonPressed) noexcept
         {
-            if (buttonPressed == ChilliSource::DeviceButtonSystem::DeviceButton::k_backButton)
+            if (buttonPressed == CS::DeviceButtonSystem::DeviceButton::k_backButton)
             {
                 auto stateManager = CS::Application::Get()->GetStateManager();
                 CS_ASSERT(stateManager, "No state manager active.");
@@ -76,12 +76,6 @@ namespace CSTest
                     CS::Application::Get()->Quit();
                 }
             }
-        }
-
-        //-------------------------------------------------------
-        void BackButtonSystem::OnDestroy() noexcept
-        {
-            m_deviceButtonConnection = nullptr;
         }
     }
 }

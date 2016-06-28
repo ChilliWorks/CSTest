@@ -68,28 +68,22 @@ namespace CSTest
             ///
             BackButtonSystem() = default;
 
-            /// Called when the state is resumed.
-            /// Sets up the DeviceButtonSystem delegate.
+            /// Called when the state is resumed. Sets up the DeviceButtonSystem
+            /// delegate.
             ///
             void OnResume() noexcept override;
 
-            /// Called when the state is suspended.
-            /// Removes the button press delegate.
+            /// Called when the state is suspended. Removes the button press delegate.
             ///
             void OnSuspend() noexcept override;
 
-            /// Called when the system is destroyed,
-            /// and removes the button press delegate.
-            ///
-            void OnDestroy() noexcept override;
-
             /// Called when a device button is pressed.
             ///
-            void OnDeviceButtonPressed(const ChilliSource::DeviceButtonSystem::DeviceButton& buttonPressed) noexcept;
+            /// @param buttonPressed
+            ///     The button which was pressed.
+            void OnDeviceButtonPressed(const CS::DeviceButtonSystem::DeviceButton& buttonPressed) noexcept;
 
             CS::EventConnectionUPtr m_deviceButtonConnection;
-            
-
         };
     }
 }

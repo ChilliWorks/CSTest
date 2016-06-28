@@ -23,10 +23,10 @@
 
 #include <TextEntry/State.h>
 
-#include <Common/Input/BackButton.h>
+#include <Common/Core/TestNavigator.h>
+#include <Common/Input/BackButtonSystem.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
-#include <Common/Core/TestNavigator.h>
 #include <TextEntry/TextEntryPresenter.h>
 #include <CricketAudio/State.h>
 
@@ -43,7 +43,7 @@ namespace CSTest
         {
             CreateSystem<Common::TestNavigator>("Text Entry");
             CreateSystem<TextEntryPresenter>();
-            m_backButtonSystem = CreateSystem<Common::BackButtonSystem>();
+            CreateSystem<Common::BackButtonSystem>();
         }
  
         //------------------------------------------------------------------------------

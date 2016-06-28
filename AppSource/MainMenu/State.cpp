@@ -29,7 +29,7 @@
 #include <MainMenu/State.h>
 
 #include <Common/Core/TestNavigator.h>
-#include <Common/Input/BackButton.h>
+#include <Common/Input/BackButtonSystem.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
 #include <IntegrationTest/State.h>
@@ -50,7 +50,7 @@ namespace CSTest
         {
             m_testNavigator = CreateSystem<Common::TestNavigator>("Main Menu");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
-            m_backButtonSystem = CreateSystem<Common::BackButtonSystem>();
+            CreateSystem<Common::BackButtonSystem>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

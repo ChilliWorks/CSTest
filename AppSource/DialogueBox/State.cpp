@@ -24,10 +24,10 @@
 #include <DialogueBox/State.h>
 
 #include <Common/Core/ResultPresenter.h>
+#include <Common/Core/TestNavigator.h>
+#include <Common/Input/BackButtonSystem.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
-#include <Common/Input/BackButton.h>
-#include <Common/Core/TestNavigator.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -45,7 +45,7 @@ namespace CSTest
         {
             CreateSystem<Common::TestNavigator>("Dialogue Boxes");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
-            m_backButtonSystem = CreateSystem<Common::BackButtonSystem>();
+            CreateSystem<Common::BackButtonSystem>();
         }
 
         //------------------------------------------------------------------------------

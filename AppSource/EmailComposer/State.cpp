@@ -29,7 +29,7 @@
 #include <EmailComposer/State.h>
 
 #include <Common/Core/ResultPresenter.h>
-#include <Common/Input/BackButton.h>
+#include <Common/Input/BackButtonSystem.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
 #include <Common/Core/TestNavigator.h>
@@ -79,7 +79,7 @@ namespace CSTest
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
             m_emailComposer = CreateSystem<CS::EmailComposer>();
-            m_backButtonSystem = CreateSystem<Common::BackButtonSystem>();
+            CreateSystem<Common::BackButtonSystem>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

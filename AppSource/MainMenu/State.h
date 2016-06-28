@@ -61,7 +61,6 @@ namespace CSTest
             
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
             Common::TestNavigator* m_testNavigator = nullptr;
-            Common::BackButtonSystem* m_backButtonSystem = nullptr;
         };
     }
 }

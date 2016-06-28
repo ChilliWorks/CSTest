@@ -60,7 +60,6 @@ namespace CSTest
             
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
             Common::ResultPresenter* m_resultPresenter = nullptr;
-            Common::BackButtonSystem* m_backButtonSystem = nullptr;
             CS::EmailComposer* m_emailComposer = nullptr;
         };
     }

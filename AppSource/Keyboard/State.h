@@ -43,8 +43,6 @@ namespace CSTest
             /// Initialises the state.
             ///
             void OnInit() override;
-
-            Common::BackButtonSystem* m_backButtonSystem = nullptr;
         };
     }
 }

@@ -29,10 +29,10 @@
 #include <DownloadProgress/State.h>
 
 #include <Common/Core/ResultPresenter.h>
-#include <Common/Input/BackButton.h>
+#include <Common/Core/TestNavigator.h>
+#include <Common/Input/BackButtonSystem.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
-#include <Common/Core/TestNavigator.h>
 #include <DownloadProgress/DownloadProgressTestSystem.h>
 #include <WebView/State.h>
 
@@ -80,7 +80,7 @@ namespace CSTest
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
             m_resultPresenter = CreateSystem<Common::ResultPresenter>();
             m_downloadProgressTestSystem = CreateSystem<DownloadProgressTestSystem>();
-            m_backButtonSystem = CreateSystem<Common::BackButtonSystem>();
+            CreateSystem<Common::BackButtonSystem>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

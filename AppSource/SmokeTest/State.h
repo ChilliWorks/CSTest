@@ -59,7 +59,6 @@ namespace CSTest
             void OnInit() noexcept override;
             
             Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
-            Common::BackButtonSystem* m_backButtonSystem = nullptr;
         };
     }
 }
