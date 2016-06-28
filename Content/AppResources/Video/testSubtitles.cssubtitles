@@ -3,10 +3,10 @@
 	"Styles": {
 		"Style": {
 			"Name" : "Default",
-			"Font" : "Arial",
+			"Font" : "Droid Sans",
 			"FontSize" : 18,
-			"FontColour" : "1.0 1.0 0.5 1.0",
-			"FadeTime" : 250,
+			"FontColour" : "1.0 0.0 0.0 1.0",
+			"FadeTime" : "00:00:00:250",
 			"Alignment" : "MiddleCentre",
 			"Bounds": {
 				"Top" : 0.0,
@@ -24,8 +24,8 @@
 		"Subtitle1" :
 		{
 			"Style" : "Default",
-			"StartTime" : "00:00:01:00",
-			"EndTime" : "00:00:02:00",
+			"StartTime" : "00:00:00:00",
+			"EndTime" : "00:00:03:00",
 			"LocalisedTextID" : "EMPTY_TEXT_ID"
 		}
 	}
