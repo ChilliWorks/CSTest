@@ -133,7 +133,7 @@ namespace CSTest
                 s8* data = new s8[k_binaryFileContentsSizeBytes];
                 memcpy(data, k_binaryFileContents, k_binaryFileContentsSizeBytes);
                 
-                std::unique_ptr<const u8> uniqueData(reinterpret_cast<const u8*>(data));
+                std::unique_ptr<const u8[]> uniqueData(reinterpret_cast<const u8*>(data));
                 auto byteBuffer = CS::ByteBufferUPtr(new CS::ByteBuffer(std::move(uniqueData), k_binaryFileContentsSizeBytes));
                 
                 outputFileStream->Write(byteBuffer);

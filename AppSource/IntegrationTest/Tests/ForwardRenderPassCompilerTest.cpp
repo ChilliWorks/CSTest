@@ -100,16 +100,25 @@ namespace CSTest
                 renderMaterialGroupManager->DestroyRenderMaterialGroup(materialGroup);
             }
             
-            /// Creates a simple render mesh
+            /// Creates a simple render object at the given position with the given render material
+            /// group.
             ///
-            /// @param boundingSpherePosition
-            ///     The position to create the bounding sphere for this mesh
-            /// @return RenderMesh
+            /// @param renderMaterialGroup
+            ///     The render material group that should be used to render the object.
+            /// @param worldMatrix
+            ///     The world space transform of the render object.
             ///
-            const CS::RenderMesh* CreateRenderMesh(const CS::Vector3& boundingSpherePosition) noexcept
+            /// @return The render object.
+            ///
+            CS::RenderObject CreateRenderObject(const CS::RenderMaterialGroup* renderMaterialGroup, const CS::Matrix4& worldMatrix) noexcept
             {
-                const auto primitiveModelFactory = CS::Application::Get()->GetSystem<CS::PrimitiveModelFactory>();
-                return primitiveModelFactory->CreateBox(CS::Vector3::k_one)->GetRenderMesh(0);
+                auto primitiveModelFactory = CS::Application::Get()->GetSystem<CS::PrimitiveModelFactory>();
+                auto renderMesh = primitiveModelFactory->CreateBox(CS::Vector3::k_one)->GetRenderMesh(0);
+                
+                const auto& localBoundingSphere = renderMesh->GetBoundingSphere();
+                CS::Sphere worldBoundingSphere(worldMatrix.GetTranslation() + localBoundingSphere.vOrigin, localBoundingSphere.fRadius);
+                
+                return CS::RenderObject(renderMaterialGroup, renderMesh, worldMatrix, worldBoundingSphere);
             }
         }
         
@@ -125,7 +134,7 @@ namespace CSTest
                 auto materialGroup = CreateLitOpaqueMaterialGroup();
                 std::vector<CS::RenderDirectionalLight> directionalLights;
                 std::vector<CS::RenderPointLight> pointLights;
-                std::vector<CS::RenderObject> renderObjects { CS::RenderObject(materialGroup, CreateRenderMesh(k_onScreenObjectTransform.GetTranslation()), k_onScreenObjectTransform) };
+                std::vector<CS::RenderObject> renderObjects { CreateRenderObject(materialGroup, k_onScreenObjectTransform) };
                 
                 CS::RenderFrame renderFrame(renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
@@ -160,7 +169,7 @@ namespace CSTest
                 
                 std::vector<CS::RenderDirectionalLight> directionalLights;
                 std::vector<CS::RenderPointLight> pointLights;
-                std::vector<CS::RenderObject> renderObjects { CS::RenderObject(materialGroup, CreateRenderMesh(k_onScreenObjectTransform.GetTranslation()), k_onScreenObjectTransform) };
+                std::vector<CS::RenderObject> renderObjects { CreateRenderObject(materialGroup, k_onScreenObjectTransform) };
                 
                 CS::RenderFrame renderFrame(renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
@@ -196,7 +205,7 @@ namespace CSTest
                 
                 std::vector<CS::RenderDirectionalLight> directionalLights { directionalLight };
                 std::vector<CS::RenderPointLight> pointLights;
-                std::vector<CS::RenderObject> renderObjects { CS::RenderObject(materialGroup, CreateRenderMesh(k_onScreenObjectTransform.GetTranslation()), k_onScreenObjectTransform) };
+                std::vector<CS::RenderObject> renderObjects { CreateRenderObject(materialGroup, k_onScreenObjectTransform) };
                 
                 CS::RenderFrame renderFrame(renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
@@ -234,7 +243,7 @@ namespace CSTest
                 
                 std::vector<CS::RenderDirectionalLight> directionalLights { directionalLight };
                 std::vector<CS::RenderPointLight> pointLights;
-                std::vector<CS::RenderObject> renderObjects { CS::RenderObject(materialGroup, CreateRenderMesh(k_onScreenObjectTransform.GetTranslation()), k_onScreenObjectTransform) };
+                std::vector<CS::RenderObject> renderObjects { CreateRenderObject(materialGroup, k_onScreenObjectTransform) };
                 
                 CS::RenderFrame renderFrame(renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
@@ -271,8 +280,8 @@ namespace CSTest
                 auto transparentMaterialGroup = CreateUnlitTransparentMaterialGroup();
                 auto opaqueMaterialGroup = CreateLitOpaqueMaterialGroup();
                 
-                CS::RenderObject transparentObject(transparentMaterialGroup, CreateRenderMesh(k_onScreenObjectTransform.GetTranslation()), k_onScreenObjectTransform);
-                CS::RenderObject opaqueObject(opaqueMaterialGroup, CreateRenderMesh(k_onScreenObjectTransform.GetTranslation()), k_onScreenObjectTransform);
+                auto transparentObject = CreateRenderObject(transparentMaterialGroup, k_onScreenObjectTransform);
+                auto opaqueObject = CreateRenderObject(opaqueMaterialGroup, k_onScreenObjectTransform);
                 
                 std::vector<CS::RenderDirectionalLight> directionalLights { directionalLight };
                 std::vector<CS::RenderPointLight> pointLights;
@@ -314,7 +323,7 @@ namespace CSTest
                 
                 std::vector<CS::RenderDirectionalLight> directionalLights;
                 std::vector<CS::RenderPointLight> pointLights;
-                std::vector<CS::RenderObject> renderObjects { CS::RenderObject(materialGroup, CreateRenderMesh(k_offScreenObjectTransform.GetTranslation()), k_offScreenObjectTransform) };
+                std::vector<CS::RenderObject> renderObjects { CreateRenderObject(materialGroup, k_offScreenObjectTransform) };
                 
                 CS::RenderFrame renderFrame(renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 

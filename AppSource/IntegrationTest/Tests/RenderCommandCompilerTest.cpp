@@ -124,8 +124,9 @@ namespace CSTest
                 auto renderMaterialGroup = material->GetRenderMaterialGroup();
                 auto renderMaterial = renderMaterialGroup->GetRenderMaterial(CS::VertexFormat::k_staticMesh, static_cast<u32>(CS::ForwardRenderPasses::k_base));
                 auto renderMesh = model->GetRenderMesh(0);
+                auto worldBoundingSphere = renderMesh->GetBoundingSphere();
                 
-                return CS::RenderPassObject(renderMaterial, renderMesh, k_worldPosition);
+                return CS::RenderPassObject(renderMaterial, renderMesh, k_worldPosition, worldBoundingSphere);
             }
             
             /// @return A transparent opaque unlit render pass object.
@@ -143,8 +144,9 @@ namespace CSTest
                 auto renderMaterialGroup = material->GetRenderMaterialGroup();
                 auto renderMaterial = renderMaterialGroup->GetRenderMaterial(CS::VertexFormat::k_staticMesh, static_cast<u32>(CS::ForwardRenderPasses::k_transparent));
                 auto renderMesh = model->GetRenderMesh(0);
+                auto worldBoundingSphere = renderMesh->GetBoundingSphere();
                 
-                return CS::RenderPassObject(renderMaterial, renderMesh, k_worldPosition);
+                return CS::RenderPassObject(renderMaterial, renderMesh, k_worldPosition, worldBoundingSphere);
             }
             
             /// @return A basic render pass with a single object in it.
@@ -220,7 +222,7 @@ namespace CSTest
                     CS::RenderCommandListUPtr postRenderCommandList(new CS::RenderCommandList());
                     
                     auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, targetRenderPassGroups, CS::Integer2(10, 10), CS::Colour::k_black,
-                                                                                               std::move(preRenderCommandList), std::move(postRenderCommandList));
+                                                                                                std::vector<CS::RenderDynamicMeshUPtr>(), std::move(preRenderCommandList), std::move(postRenderCommandList));
                     
                     CSIT_ASSERT(renderCommandBuffer->GetNumSlots() == 3, "Incorrect number of render command buffer slots");
                     
@@ -262,7 +264,7 @@ namespace CSTest
                     postRenderCommandList->AddApplyCameraCommand(CS::Vector3::k_zero, CS::Matrix4::k_identity);
                     
                     auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, targetRenderPassGroups, CS::Integer2(10, 10), CS::Colour::k_black,
-                                                                                               std::move(preRenderCommandList), std::move(postRenderCommandList));
+                                                                                               std::vector<CS::RenderDynamicMeshUPtr>(), std::move(preRenderCommandList), std::move(postRenderCommandList));
                     
                     CSIT_ASSERT(renderCommandBuffer->GetNumSlots() == 6, "Incorrect number of render command buffer slots");
                     
