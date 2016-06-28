@@ -5,9 +5,9 @@
 			"Name" : "Default",
 			"Font" : "Droid Sans",
 			"FontSize" : 18,
-			"FontColour" : "1.0 0.0 0.0 1.0",
+			"FontColour" : "1.0 1.0 0.0 1.0",
 			"FadeTime" : "00:00:00:250",
-			"Alignment" : "MiddleCentre",
+			"Alignment" : "BottomCentre",
 			"Bounds": {
 				"Top" : 0.0,
 				"Left" : 0.0,
