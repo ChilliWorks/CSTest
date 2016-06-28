@@ -97,7 +97,6 @@ namespace CSTest
 
         CreateSystem<Common::BasicEntityFactory>();
         CreateSystem<Common::BasicWidgetFactory>();
-                
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
