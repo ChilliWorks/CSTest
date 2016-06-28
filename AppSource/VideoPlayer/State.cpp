@@ -34,6 +34,7 @@
 #include <ChilliSource/Core/Resource.h>
 #include <ChilliSource/Core/Scene.h>
 #include <ChilliSource/Core/Delegate.h>
+#include <ChilliSource/Core/DialogueBox.h>
 #include <ChilliSource/Video/Base.h>
 #include <ChilliSource/Video/ForwardDeclarations.h>
 
@@ -56,20 +57,23 @@ namespace CSTest
 
             Common::OptionsMenuDesc optionsMenuDesc;
 
-            m_videoDismissConnection = CS::MakeConnectableDelegate(this, &State::OnVideoDismissed).OpenConnection();
-            m_videoSubtitledDismissConnection = CS::MakeConnectableDelegate(this, &State::OnVideoDismissed).OpenConnection();
+            m_videoDismissDelegate = CS::MakeConnectableDelegate(this, &State::OnVideoDismissed);
 
             optionsMenuDesc.AddButton("Play Video", [=]()
             {
-                m_videoPlayer->Present(CS::StorageLocation::k_package, "Video/testVideo.mp4", std::move(m_videoDismissConnection));
+                auto videoDismissConnection = m_videoDismissDelegate.OpenConnection();
+
+                m_videoPlayer->Present(CS::StorageLocation::k_package, "Video/testVideo.mp4", std::move(videoDismissConnection));
             });
                     
-            auto resourcePool = CS::Application::Get()->GetResourcePool();
-            m_videoSubtitles = resourcePool->LoadResource<CS::Subtitles>(CS::StorageLocation::k_package, "Video/testSubtitles.cssubtitles");
             
             optionsMenuDesc.AddButton("Play Video Subtitled", [=]()
             {
-                m_videoPlayer->PresentWithSubtitles(CS::StorageLocation::k_package, "Video/testVideo.mp4", m_videoSubtitles, std::move(m_videoSubtitledDismissConnection), true);
+                auto resourcePool = CS::Application::Get()->GetResourcePool();
+                auto videoSubtitles = resourcePool->LoadResource<CS::Subtitles>(CS::StorageLocation::k_package, "Video/testSubtitles.cssubtitles");
+                auto videoDismissConnection = m_videoDismissDelegate.OpenConnection();
+
+                m_videoPlayer->PresentWithSubtitles(CS::StorageLocation::k_package, "Video/ChilliSourceLogo01.mp4", videoSubtitles, std::move(videoDismissConnection), true);
             });
 
             m_optionsMenuPresenter->Present(optionsMenuDesc);
@@ -78,7 +82,10 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnVideoDismissed() noexcept
         {
-            // Pop up box?
+            auto dialogueBoxSystem = CS::Application::Get()->GetSystem<CS::DialogueBoxSystem>();
+            CS_ASSERT(dialogueBoxSystem, "No dialogue box system.");
+
+            dialogueBoxSystem->ShowSystemDialogue(0, nullptr, "Video Player Test", "Video Dismissed.", "OK");
         }
     }
 }

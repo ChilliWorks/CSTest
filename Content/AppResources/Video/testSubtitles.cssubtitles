@@ -24,8 +24,8 @@
 		"Subtitle1" :
 		{
 			"Style" : "Default",
-			"StartTime" : "00:00:00:00",
-			"EndTime" : "00:00:03:00",
+			"StartTime" : "00:00:00:000",
+			"EndTime" : "00:00:03:000",
 			"LocalisedTextID" : "EMPTY_TEXT_ID"
 		}
 	}
