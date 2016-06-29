@@ -63,7 +63,7 @@ namespace CSTest
             {
                 auto videoDismissConnection = m_videoDismissDelegate.OpenConnection();
 
-                m_videoPlayer->Present(CS::StorageLocation::k_package, "Video/testVideo.mp4", std::move(videoDismissConnection));
+                m_videoPlayer->Present(CS::StorageLocation::k_package, "Video/ChilliSourceLogo01.mp4", std::move(videoDismissConnection));
             });
                     
             
