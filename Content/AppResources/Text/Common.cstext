@@ -1,7 +1,7 @@
 {
   "Version": 1,
   "Text": {
-    "Example": "Example",
+    "EXAMPLE_SUBTITLE": "Example subtitle text.",
     "EMPTY_TEXT_ID": "EMPTY TEXT"
   }
 }
