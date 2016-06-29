@@ -92,7 +92,6 @@ namespace CSTest
     //------------------------------------------------------------------------------
     void App::PushInitialState() noexcept
     {
-        //TODO: Switch this back to main menu once the UI is working again.
         GetStateManager()->Push(CS::StateSPtr(new MainMenu::State()));
     }
     //------------------------------------------------------------------------------

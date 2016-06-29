@@ -126,7 +126,7 @@ namespace CSTest
                 auto renderMesh = model->GetRenderMesh(0);
                 auto worldBoundingSphere = renderMesh->GetBoundingSphere();
                 
-                return CS::RenderPassObject(renderMaterial, renderMesh, k_worldPosition, worldBoundingSphere);
+                return CS::RenderPassObject(renderMaterial, renderMesh, k_worldPosition, worldBoundingSphere, 0);
             }
             
             /// @return A transparent opaque unlit render pass object.
@@ -146,7 +146,7 @@ namespace CSTest
                 auto renderMesh = model->GetRenderMesh(0);
                 auto worldBoundingSphere = renderMesh->GetBoundingSphere();
                 
-                return CS::RenderPassObject(renderMaterial, renderMesh, k_worldPosition, worldBoundingSphere);
+                return CS::RenderPassObject(renderMaterial, renderMesh, k_worldPosition, worldBoundingSphere, 0);
             }
             
             /// @return A basic render pass with a single object in it.
