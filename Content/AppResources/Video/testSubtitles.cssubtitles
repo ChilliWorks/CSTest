@@ -3,7 +3,7 @@
 	"Styles": {
 		"Style": {
 			"Name" : "Default",
-			"Font" : "Droid Sans",
+			"Font" : "Arial",
 			"FontSize" : 18,
 			"FontColour" : "1.0 1.0 0.0 1.0",
 			"FadeTime" : "00:00:00:250",
