@@ -1,4 +1,4 @@
-<Material type="Static">
+<Material type="Sprite">
     <Lighting>
         <Emissive value="1.0 1.0 1.0 1.0" />
         <Ambient value="0.0 0.0 0.0 1.0" />
@@ -7,10 +7,10 @@
         <Shinniness value="0.0" />
     </Lighting>
     <RenderStates>
-        <Transparency enabled="false" />
+        <Transparency enabled="true" />
         <Culling enabled="false" />
     </RenderStates>
     <Textures>
-        <Texture image-name="Textures/Checkered.csimage" mipmapped="true" wrap-mode-u="Repeat" wrap-mode-v="Repeat" />
+        <Texture image-name="TextureAtlases/Sprites/Sprites.csimage" />
     </Textures>
 </Material>

@@ -37,6 +37,7 @@
 #include <Gesture/State.h>
 #include <Lighting/State.h>
 #include <Particle/State.h>
+#include <Sprite/State.h>
 #include <WebView/State.h>
 
 #include <ChilliSource/Core/Base.h>
@@ -65,6 +66,11 @@ namespace CSTest
             optionsMenuDesc.AddButton("Lighting", [=]()
             {
                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Lighting::State>());
+            });
+
+            optionsMenuDesc.AddButton("Sprites", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Sprite::State>());
             });
             
             optionsMenuDesc.AddButton("Particles", [=]()

@@ -40,6 +40,7 @@
 #include <ChilliSource/Rendering/Lighting.h>
 #include <ChilliSource/Rendering/Material.h>
 #include <ChilliSource/Rendering/Model.h>
+#include <ChilliSource/Rendering/Texture.h>
 
 namespace CSTest
 {
@@ -125,6 +126,23 @@ namespace CSTest
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-Room");
             entity->AddComponent(meshComponent);
+            return entity;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        CS::EntityUPtr BasicEntityFactory::CreateSprite(const std::string& in_imageId, const CS::Colour& in_colour, const CS::Vector2& in_size) noexcept
+        {
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
+            
+            auto material = m_resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, "Materials/Sprites.csmaterial");
+            auto textureAtlas = m_resourcePool->LoadResource<CS::TextureAtlas>(CS::StorageLocation::k_package, "TextureAtlases/Sprites/Sprites.csatlas");
+            
+            auto spriteComponent = m_renderComponentFactory->CreateSpriteComponent(in_size, textureAtlas, in_imageId, material, CS::SizePolicy::k_fitMaintainingAspect);
+            spriteComponent->SetColour(in_colour);
+            
+            auto entity = CS::Entity::Create();
+            entity->SetName(CS::ToString(m_entityCount++) + "-Sprite");
+            entity->AddComponent(std::move(spriteComponent));
             return entity;
         }
         //------------------------------------------------------------------------------

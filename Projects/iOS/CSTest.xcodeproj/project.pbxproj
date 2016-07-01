@@ -94,6 +94,7 @@
 		81C7010B1C89EF9A00D306F9 /* AppResources in Resources */ = {isa = PBXBuildFile; fileRef = 81C701091C89EF9A00D306F9 /* AppResources */; };
 		81C7010C1C89EF9A00D306F9 /* CSResources in Resources */ = {isa = PBXBuildFile; fileRef = 81C7010A1C89EF9A00D306F9 /* CSResources */; };
 		81CF6EAA1C8F1378000DDF92 /* WebViewCloseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 81CF6EA91C8F1378000DDF92 /* WebViewCloseButton.png */; };
+		81E230D91D25309700628581 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E230D71D25309700628581 /* State.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -239,6 +240,8 @@
 		81C7010A1C89EF9A00D306F9 /* CSResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CSResources; path = XcodeBuiltAssets/CSResources; sourceTree = "<group>"; };
 		81C7FFE41C89E86400D306F9 /* CSTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81CF6EA91C8F1378000DDF92 /* WebViewCloseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WebViewCloseButton.png; sourceTree = "<group>"; };
+		81E230D71D25309700628581 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81E230D81D25309700628581 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +315,7 @@
 				81A78D721D0180CA00871640 /* MultiThreadedRenderer */,
 				81B190561C9B16BE002EC8AC /* Particle */,
 				81C63AF51C9C196700E1A669 /* SmokeTest */,
+				81E230D61D25309700628581 /* Sprite */,
 				81B190591C9B16BE002EC8AC /* UnitTest */,
 				81B1906E1C9B16BE002EC8AC /* WebView */,
 			);
@@ -629,6 +633,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		81E230D61D25309700628581 /* Sprite */ = {
+			isa = PBXGroup;
+			children = (
+				81E230D71D25309700628581 /* State.cpp */,
+				81E230D81D25309700628581 /* State.h */,
+			);
+			path = Sprite;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -736,6 +749,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81B190731C9B16BE002EC8AC /* OrbiterComponent.cpp in Sources */,
+				81E230D91D25309700628581 /* State.cpp in Sources */,
 				81C63B031C9C63E500E1A669 /* FileSystemTest.cpp in Sources */,
 				81B190921C9B16BE002EC8AC /* Report.cpp in Sources */,
 				81B190881C9B16BE002EC8AC /* TestRegistry.cpp in Sources */,

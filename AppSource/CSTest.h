@@ -97,6 +97,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(State);
     }
     
+    namespace Sprite
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
     namespace UnitTest
     {
         CS_FORWARDDECLARE_CLASS(CSReporter);

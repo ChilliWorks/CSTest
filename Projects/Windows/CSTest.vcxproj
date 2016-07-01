@@ -59,6 +59,7 @@
     <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\State.cpp" />
     <ClCompile Include="..\..\AppSource\Particle\State.cpp" />
     <ClCompile Include="..\..\AppSource\SmokeTest\State.cpp" />
+    <ClCompile Include="..\..\AppSource\Sprite\State.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\State.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\State.h" />
     <ClInclude Include="..\..\AppSource\Particle\State.h" />
     <ClInclude Include="..\..\AppSource\SmokeTest\State.h" />
+    <ClInclude Include="..\..\AppSource\Sprite\State.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\State.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.h" />
