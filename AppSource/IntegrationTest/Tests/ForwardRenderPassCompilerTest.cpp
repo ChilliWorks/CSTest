@@ -64,7 +64,12 @@ namespace CSTest
             {
                 auto worldMatrix = CS::Matrix4::CreateLookAt(k_cameraPosition, k_cameraLookAt, CS::Vector3::k_unitPositiveZ);
                 auto projectionMatrix = CS::Matrix4::CreatePerspectiveProjectionLH(CS::MathUtils::k_pi / 3.0f, 1.0f, 1.0f, 10.0f);
-                return CS::RenderCamera(worldMatrix, projectionMatrix);
+                
+                CS::Vector3 position, scale;
+                CS::Quaternion orientation;
+                worldMatrix.Decompose(position, scale, orientation);
+                
+                return CS::RenderCamera(worldMatrix, projectionMatrix, orientation);
             }
 
             /// Creates an lit opaque material group with a blank texture
