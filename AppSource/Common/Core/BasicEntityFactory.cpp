@@ -40,6 +40,7 @@
 #include <ChilliSource/Rendering/Lighting.h>
 #include <ChilliSource/Rendering/Material.h>
 #include <ChilliSource/Rendering/Model.h>
+#include <ChilliSource/Rendering/Texture.h>
 
 namespace CSTest
 {
@@ -116,15 +117,32 @@ namespace CSTest
             const f32 k_textureRepeatFactor = 0.5f;
             CS::Vector2 textureRepeat(in_size.x * k_textureRepeatFactor, in_size.z * k_textureRepeatFactor);
             
-            CS::MeshCSPtr mesh = m_primitiveModelFactory->CreateBox(in_size, textureRepeat, true);
+            CS::ModelCSPtr mesh = m_primitiveModelFactory->CreateBox(in_size, textureRepeat, true);
             CS::MaterialCSPtr material = m_resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, "Materials/CheckeredLit.csmaterial");
             
-            CS::StaticMeshComponentSPtr meshComponent = m_renderComponentFactory->CreateStaticMeshComponent(mesh, material);
+            CS::StaticModelComponentSPtr meshComponent = m_renderComponentFactory->CreateStaticModelComponent(mesh, material);
             meshComponent->SetShadowCastingEnabled(false);
             
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-Room");
             entity->AddComponent(meshComponent);
+            return entity;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        CS::EntityUPtr BasicEntityFactory::CreateSprite(const std::string& in_imageId, const CS::Colour& in_colour, const CS::Vector2& in_size) noexcept
+        {
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
+            
+            auto material = m_resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, "Materials/Sprites.csmaterial");
+            auto textureAtlas = m_resourcePool->LoadResource<CS::TextureAtlas>(CS::StorageLocation::k_package, "TextureAtlases/Sprites/Sprites.csatlas");
+            
+            auto spriteComponent = m_renderComponentFactory->CreateSpriteComponent(in_size, textureAtlas, in_imageId, material, CS::SizePolicy::k_fitMaintainingAspect);
+            spriteComponent->SetColour(in_colour);
+            
+            auto entity = CS::Entity::Create();
+            entity->SetName(CS::ToString(m_entityCount++) + "-Sprite");
+            entity->AddComponent(std::move(spriteComponent));
             return entity;
         }
         //------------------------------------------------------------------------------
