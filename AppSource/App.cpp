@@ -39,6 +39,7 @@
 #include <ChilliSource/Input/Keyboard.h>
 #include <ChilliSource/Rendering/Model.h>
 #include <ChilliSource/Networking/Http.h>
+#include <ChilliSource/Video/Base.h>
 
 
 //------------------------------------------------------------------------------
@@ -92,6 +93,8 @@ namespace CSTest
 		CreateSystem<CS::Accelerometer>();
 #endif
         
+        CreateSystem<CS::CSSubtitlesProvider>();
+
         CreateSystem<Common::BasicEntityFactory>();
         CreateSystem<Common::BasicWidgetFactory>();
     }

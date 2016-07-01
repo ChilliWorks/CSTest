@@ -125,6 +125,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(State);
         CS_FORWARDDECLARE_CLASS(TestSystem);
     }
+
+    namespace VideoPlayer
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
     
     namespace WebView
     {

@@ -78,6 +78,9 @@
     </Filter>
     <Filter Include="AppSource\Common\Input">
       <UniqueIdentifier>{ed25a6e6-68fa-480d-8c51-73c2202acf5a}</UniqueIdentifier>
+	</Filter>
+    <Filter Include="AppSource\VideoPlayer">
+      <UniqueIdentifier>{8bf4dc53-591f-4820-96d7-e9fa59e2b1e0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +239,9 @@
     </ClCompile>
     <ClCompile Include="..\..\AppSource\Common\Input\BackButtonSystem.cpp">
       <Filter>AppSource\Common\Input</Filter>
+	</ClCompile>
+    <ClCompile Include="..\..\AppSource\VideoPlayer\State.cpp">
+      <Filter>AppSource\VideoPlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Common\Input\BackButtonSystem.h">
       <Filter>AppSource\Common\Input</Filter>
+	</ClInclude>
+    <ClInclude Include="..\..\AppSource\VideoPlayer\State.h">
+      <Filter>AppSource\VideoPlayer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
