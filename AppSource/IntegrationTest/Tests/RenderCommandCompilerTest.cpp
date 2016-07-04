@@ -52,18 +52,10 @@ namespace CSTest
                 auto materialFactory = CS::Application::Get()->GetSystem<CS::MaterialFactory>();
                 
                 auto material = resourcePool->GetResource<CS::Material>(k_materialName);
-                if (material == nullptr)
+                if (!material)
                 {
                     auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_chilliSource, "Textures/Blank.csimage");
-                    
-                    auto mutableMaterial = materialFactory->CreateStatic(k_materialName, texture);
-                    mutableMaterial->SetEmissive(CS::Colour::k_white);
-                    mutableMaterial->SetAmbient(CS::Colour::k_black);
-                    mutableMaterial->SetDiffuse(CS::Colour::k_black);
-                    mutableMaterial->SetSpecular(CS::Colour::k_black);
-                    mutableMaterial->SetLoadState(CS::Resource::LoadState::k_loaded);
-                    
-                    material = mutableMaterial;
+                    material = materialFactory->CreateUnlit(k_materialName, texture, false);
                 }
                 
                 return material;
@@ -79,19 +71,10 @@ namespace CSTest
                 auto materialFactory = CS::Application::Get()->GetSystem<CS::MaterialFactory>();
                 
                 auto material = resourcePool->GetResource<CS::Material>(k_materialName);
-                if (material == nullptr)
+                if (!material)
                 {
                     auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_chilliSource, "Textures/Blank.csimage");
-                    
-                    auto mutableMaterial = materialFactory->CreateStatic(k_materialName, texture);
-                    mutableMaterial->SetTransparencyEnabled(true);
-                    mutableMaterial->SetEmissive(CS::Colour::k_white);
-                    mutableMaterial->SetAmbient(CS::Colour::k_black);
-                    mutableMaterial->SetDiffuse(CS::Colour::k_black);
-                    mutableMaterial->SetSpecular(CS::Colour::k_black);
-                    mutableMaterial->SetLoadState(CS::Resource::LoadState::k_loaded);
-                    
-                    material = mutableMaterial;
+                    material = materialFactory->CreateUnlit(k_materialName, texture, true);
                 }
                 
                 return material;

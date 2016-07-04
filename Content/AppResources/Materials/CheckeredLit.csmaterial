@@ -8,7 +8,6 @@
     </Lighting>
     <RenderStates>
         <Transparency enabled="false" />
-        <Culling enabled="false" />
     </RenderStates>
     <Textures>
         <Texture image-name="Textures/Checkered.csimage" mipmapped="true" wrap-mode-u="Repeat" wrap-mode-v="Repeat" />

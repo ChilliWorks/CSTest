@@ -84,8 +84,7 @@ namespace CSTest
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            CS::AmbientLightComponentSPtr ambientLightComponent = m_renderComponentFactory->CreateAmbientLightComponent();
-            ambientLightComponent->SetColour(in_colour);
+            CS::AmbientLightComponentSPtr ambientLightComponent = m_renderComponentFactory->CreateAmbientLightComponent(in_colour);
             
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-AmbientLight");

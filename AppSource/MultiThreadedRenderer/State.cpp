@@ -41,26 +41,12 @@ namespace CSTest
                 auto materialName = "_StaticColour(" + ToString(in_colour) + ")";
                 auto material = resourcePool->GetResource<CS::Material>(materialName);
                 
-                if (material == nullptr)
+                if (!material)
                 {
-                    auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_chilliSource, "Textures/Blank.csimage");
-                    
                     auto materialFactory = CS::Application::Get()->GetSystem<CS::MaterialFactory>();
                     
-                    auto mutableMaterial = materialFactory->CreateStatic(materialName, texture);
-                    
-                    mutableMaterial->SetEmissive(in_colour);
-                    mutableMaterial->SetAmbient(CS::Colour::k_black);
-                    mutableMaterial->SetDiffuse(CS::Colour::k_black);
-                    mutableMaterial->SetSpecular(CS::Colour::k_black);
-                    
-                    if (in_colour.a < 0.99f)
-                    {
-                        mutableMaterial->SetTransparencyEnabled(true);
-                    }
-                    
-                    mutableMaterial->SetLoadState(CS::Resource::LoadState::k_loaded);
-                    material = mutableMaterial;
+                    auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_chilliSource, "Textures/Blank.csimage");
+                    material = materialFactory->CreateUnlit(materialName, texture, (in_colour.a < 0.99f), in_colour);
                 }
                 
                 return material;
@@ -96,7 +82,7 @@ namespace CSTest
         {
             GetScene()->SetClearColour(CS::Colour::k_black);
 
-            auto primitiveEntityFactory = CS::Application::Get()->GetSystem<CS::PrimitiveEntityFactory>();
+//            auto primitiveEntityFactory = CS::Application::Get()->GetSystem<CS::PrimitiveEntityFactory>();
             
             static const std::array<CS::Colour, 5> k_boxColours =
             {{
