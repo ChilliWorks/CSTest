@@ -127,7 +127,7 @@ namespace CSTest
                 const auto& localBoundingSphere = renderMesh->GetBoundingSphere();
                 CS::Sphere worldBoundingSphere(worldMatrix.GetTranslation() + localBoundingSphere.vOrigin, localBoundingSphere.fRadius);
                 
-                return CS::RenderObject(renderMaterialGroup, renderMesh, worldMatrix, worldBoundingSphere, CS::RenderLayer::k_standard);
+                return CS::RenderObject(renderMaterialGroup, renderMesh, worldMatrix, worldBoundingSphere, false, CS::RenderLayer::k_standard);
             }
             
             /// Creates a new UI render object with the given material group, dynamic mesh
@@ -149,7 +149,7 @@ namespace CSTest
                 const auto& localBoundingSphere = renderDynamicMesh->GetBoundingSphere();
                 CS::Sphere worldBoundingSphere(worldMatrix.GetTranslation() + localBoundingSphere.vOrigin, localBoundingSphere.fRadius);
                 
-                return CS::RenderObject(renderMaterialGroup, renderDynamicMesh, worldMatrix, worldBoundingSphere, CS::RenderLayer::k_ui);
+                return CS::RenderObject(renderMaterialGroup, renderDynamicMesh, worldMatrix, worldBoundingSphere, false, CS::RenderLayer::k_ui);
             }
         }
         

@@ -99,10 +99,8 @@ namespace CSTest
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
             //TODO: Change back to creating shadowed component
-            CS::DirectionalLightComponentSPtr directionalLightComponent = m_renderComponentFactory->CreateDirectionalLightComponent(in_colour);
-            //CS::DirectionalLightComponentSPtr directionalLightComponent = m_renderComponentFactory->CreateDirectionalLightComponent(CS::DirectionalLightComponent::ShadowQuality::k_high, in_colour);
-            //directionalLightComponent->SetShadowVolume(in_shadowVolume.x, in_shadowVolume.y, in_shadowVolume.z, in_shadowVolume.w);
-            //directionalLightComponent->SetShadowTolerance(0.005f);
+            CS::DirectionalLightComponentSPtr directionalLightComponent = m_renderComponentFactory->CreateDirectionalLightComponent(CS::DirectionalLightComponent::ShadowQuality::k_high, in_colour);
+            directionalLightComponent->SetShadowVolume(in_shadowVolume.x, in_shadowVolume.y, in_shadowVolume.z, in_shadowVolume.w);
             
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-DirectionalLight");
