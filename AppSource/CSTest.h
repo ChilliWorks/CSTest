@@ -50,6 +50,7 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(OrbiterComponent);
         CS_FORWARDDECLARE_CLASS(ResultPresenter);
         CS_FORWARDDECLARE_CLASS(TestNavigator);
+        CS_FORWARDDECLARE_CLASS(BackButtonSystem);
     }
     
     namespace CricketAudio
@@ -113,6 +114,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(State);
     }
     
+    namespace Sprite
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
     namespace UnitTest
     {
         CS_FORWARDDECLARE_CLASS(CSReporter);
@@ -123,6 +129,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(ReportPresenter);
         CS_FORWARDDECLARE_CLASS(State);
         CS_FORWARDDECLARE_CLASS(TestSystem);
+    }
+
+    namespace VideoPlayer
+    {
+        CS_FORWARDDECLARE_CLASS(State);
     }
     
     namespace WebView

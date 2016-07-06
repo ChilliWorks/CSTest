@@ -28,9 +28,10 @@
 
 #include <SmokeTest/State.h>
 
+#include <Common/Core/TestNavigator.h>
+#include <Common/Input/BackButtonSystem.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
-#include <Common/Core/TestNavigator.h>
 #include <Accelerometer/State.h>
 #include <CricketAudio/State.h>
 #include <DownloadProgress/State.h>
@@ -38,11 +39,13 @@
 #include <Gesture/State.h>
 #include <Lighting/State.h>
 #include <Particle/State.h>
+#include <Sprite/State.h>
 #include <WebView/State.h>
 #include <DialogueBox/State.h>
 #include <LocalNotifications/State.h>
 #include <TextEntry/State.h>
 #include <Keyboard/State.h>
+#include <VideoPlayer/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -58,6 +61,7 @@ namespace CSTest
         {
             CreateSystem<Common::TestNavigator>("Smoke Tests");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
+            CreateSystem<Common::BackButtonSystem>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -70,6 +74,11 @@ namespace CSTest
             optionsMenuDesc.AddButton("Lighting", [=]()
             {
                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Lighting::State>());
+            });
+
+            optionsMenuDesc.AddButton("Sprites", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Sprite::State>());
             });
             
             optionsMenuDesc.AddButton("Particles", [=]()
@@ -112,7 +121,14 @@ namespace CSTest
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<LocalNotifications::State>());
             });
+
 #endif
+
+            optionsMenuDesc.AddButton("Video Player", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<VideoPlayer::State>());
+            });
+
             optionsMenuDesc.AddButton("Dialogue Boxes", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<DialogueBox::State>());

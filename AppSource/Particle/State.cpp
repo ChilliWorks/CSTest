@@ -30,6 +30,7 @@
 
 #include <Common/Core/TestNavigator.h>
 #include <Common/Core/BasicEntityFactory.h>
+#include <Common/Input/BackButtonSystem.h>
 #include <Gesture/State.h>
 
 #include <ChilliSource/Core/Base.h>
@@ -91,6 +92,7 @@ namespace CSTest
 		void State::CreateSystems()
 		{
 			CreateSystem<Common::TestNavigator>("Particles");
+            CreateSystem<Common::BackButtonSystem>();
 		}
 		//------------------------------------------------------------------------------
 		//------------------------------------------------------------------------------

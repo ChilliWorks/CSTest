@@ -1,8 +1,4 @@
 //
-//  BasicEntityFactory.h
-//  CSTest
-//  Created by Ian Copland on 28/07/2015.
-//
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2015 Tag Games Limited
@@ -31,6 +27,7 @@
 
 #include <CSTest.h>
 
+#include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Math.h>
 #include <ChilliSource/Core/System.h>
 
@@ -115,7 +112,21 @@ namespace CSTest
             /// @return The entity.
             //------------------------------------------------------------------------------
             CS::EntityUPtr CreateRoom(const CS::Vector3& in_size = CS::Vector3(20.0f, 20.0f, 20.0f));
-            
+            //------------------------------------------------------------------------------
+            /// Creates a sprite with the requested size, colour and image id. Sprite images
+            /// are loaded from the sprite texture atlas.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_imageId - The Id of the image of the texture atlas.
+            /// @param in_colour - [Optional] The colour of the sprite. Defaults to white.
+            /// @param in_size - [Optional] The size of the sprite world space size of the
+            ///     sprite. Defaults to (1, 1)
+            ///
+            /// @return The sprite entity.
+            //------------------------------------------------------------------------------
+            CS::EntityUPtr CreateSprite(const std::string& in_imageId, const CS::Colour& in_colour = CS::Colour::k_white, const CS::Vector2& in_size = CS::Vector2::k_one) noexcept;
+    
         private:
             friend class CS::Application;
             //------------------------------------------------------------------------------

@@ -28,9 +28,10 @@
 
 #include <Gesture/State.h>
 
+#include <Common/Core/TestNavigator.h>
+#include <Common/Input/BackButtonSystem.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
-#include <Common/Core/TestNavigator.h>
 #include <Gesture/GesturePresenter.h>
 #include <CricketAudio/State.h>
 
@@ -48,6 +49,7 @@ namespace CSTest
             CreateSystem<Common::TestNavigator>("Gestures");
             m_gestureSystem = CreateSystem<CS::GestureSystem>();
             CreateSystem<GesturePresenter>();
+            CreateSystem<Common::BackButtonSystem>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

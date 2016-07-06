@@ -117,14 +117,5 @@ namespace CSTest
                 });
             }
         }
-        //------------------------------------------------------------------------------
-        //------------------------------------------------------------------------------
-        void Test::Assert(bool in_condition, const std::string& in_failureMessage) noexcept
-        {
-            if (!in_condition)
-            {
-                Fail(in_failureMessage);
-            }
-        }
     }
 }

@@ -1,0 +1,16 @@
+<Material type="Sprite">
+    <Lighting>
+        <Emissive value="1.0 1.0 1.0 1.0" />
+        <Ambient value="0.0 0.0 0.0 1.0" />
+        <Diffuse value="0.0 0.0 0.0 1.0" />
+        <Specular value="0.0 0.0 0.0 1.0" />
+        <Shinniness value="0.0" />
+    </Lighting>
+    <RenderStates>
+        <Transparency enabled="true" />
+        <Culling enabled="false" />
+    </RenderStates>
+    <Textures>
+        <Texture image-name="TextureAtlases/Sprites/Sprites.csimage" />
+    </Textures>
+</Material>

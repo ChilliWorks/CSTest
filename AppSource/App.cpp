@@ -39,6 +39,7 @@
 #include <ChilliSource/Input/Keyboard.h>
 #include <ChilliSource/Rendering/Model.h>
 #include <ChilliSource/Networking/Http.h>
+#include <ChilliSource/Video/Base.h>
 
 
 //------------------------------------------------------------------------------
@@ -48,7 +49,7 @@
 ///
 /// @return The new Application instance.
 //------------------------------------------------------------------------------
-CS::Application* CreateApplication()
+CS::Application* CreateApplication() noexcept
 {
     return new CSTest::App();
 }
@@ -75,7 +76,7 @@ namespace CSTest
 {
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
-    void App::CreateSystems()
+    void App::CreateSystems() noexcept
     {
         CreateSystem<CS::CricketAudioSystem>();
 		CreateSystem<CS::CkBankProvider>();
@@ -91,28 +92,26 @@ namespace CSTest
         CreateSystem<CS::NotificationManager>();
 		CreateSystem<CS::Accelerometer>();
 #endif
-
-#ifdef CS_TARGETPLATFORM_WINDOWS
-        CreateSystem<CS::Keyboard>();
-#endif
         
+        CreateSystem<CS::CSSubtitlesProvider>();
+
         CreateSystem<Common::BasicEntityFactory>();
         CreateSystem<Common::BasicWidgetFactory>();
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
-    void App::OnInit()
+    void App::OnInit() noexcept
     {
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
-    void App::PushInitialState()
+    void App::PushInitialState() noexcept
     {
         GetStateManager()->Push(CS::StateSPtr(new MainMenu::State()));
     }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
-    void App::OnDestroy()
+    void App::OnDestroy() noexcept
     {
     }
 }

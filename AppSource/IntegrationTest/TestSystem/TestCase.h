@@ -76,7 +76,7 @@
 ///
 /// @author Ian Copland
 //------------------------------------------------------------------------------
-#define CSIT_PASS() in_thisTest_->Pass();
+#define CSIT_PASS() in_thisTest_->Pass()
 //------------------------------------------------------------------------------
 /// A macro used to flag a test as failed, providing an error message detailing
 /// what went wrong. This can be called on any thread.
@@ -85,7 +85,7 @@
 ///
 /// @param in_message - The error message detailing why it failed.
 //------------------------------------------------------------------------------
-#define CSIT_FAIL(in_message) in_thisTest_->Fail(in_message);
+#define CSIT_FAIL(in_message) in_thisTest_->Fail(in_message)
 //------------------------------------------------------------------------------
 /// An assertion macro which will call Fail() if the given condition is not true.
 ///
@@ -95,6 +95,6 @@
 /// @param in_failureMessage - The message to pass to Fail() if the condition is
 /// not true.
 //------------------------------------------------------------------------------
-#define CSIT_ASSERT(in_condition, in_failureMessage) in_thisTest_->Assert(in_condition, in_failureMessage);
+#define CSIT_ASSERT(in_condition, in_failureMessage) do{if(!(in_condition)){in_thisTest_->Fail(in_failureMessage);}} while(false)
 
 #endif
