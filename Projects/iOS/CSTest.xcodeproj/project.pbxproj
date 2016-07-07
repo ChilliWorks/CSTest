@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		815612501D2EAB25000DD01B /* LinearAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8156124E1D2EAB25000DD01B /* LinearAllocator.cpp */; };
+		815612511D2EAB25000DD01B /* PagedLinearAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8156124F1D2EAB25000DD01B /* PagedLinearAllocator.cpp */; };
 		8164FEE01CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8164FEDF1CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		81A78D791D0180CA00871640 /* FrameTimeCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81A78D731D0180CA00871640 /* FrameTimeCalculator.cpp */; };
@@ -108,6 +110,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8156124E1D2EAB25000DD01B /* LinearAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinearAllocator.cpp; sourceTree = "<group>"; };
+		8156124F1D2EAB25000DD01B /* PagedLinearAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PagedLinearAllocator.cpp; sourceTree = "<group>"; };
 		8164FEDF1CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ForwardRenderPassCompilerTest.cpp; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81A78D731D0180CA00871640 /* FrameTimeCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameTimeCalculator.cpp; sourceTree = "<group>"; };
@@ -494,6 +498,8 @@
 		81B1905C1C9B16BE002EC8AC /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				8156124E1D2EAB25000DD01B /* LinearAllocator.cpp */,
+				8156124F1D2EAB25000DD01B /* PagedLinearAllocator.cpp */,
 				81B1905E1C9B16BE002EC8AC /* Vector2.cpp */,
 				81B1905F1C9B16BE002EC8AC /* Vector3.cpp */,
 				81B190601C9B16BE002EC8AC /* Vector4.cpp */,
@@ -754,6 +760,7 @@
 				81B190921C9B16BE002EC8AC /* Report.cpp in Sources */,
 				81B190881C9B16BE002EC8AC /* TestRegistry.cpp in Sources */,
 				81B1907F1C9B16BE002EC8AC /* GesturePresenter.cpp in Sources */,
+				815612501D2EAB25000DD01B /* LinearAllocator.cpp in Sources */,
 				81A78D791D0180CA00871640 /* FrameTimeCalculator.cpp in Sources */,
 				81B190741C9B16BE002EC8AC /* Approx.cpp in Sources */,
 				81C63B001C9C498000E1A669 /* FailedSection.cpp in Sources */,
@@ -798,6 +805,7 @@
 				81AF89451D13FED800A02E99 /* BinaryInputStreamTest.cpp in Sources */,
 				81B190961C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190761C9B16BE002EC8AC /* ResultPresenter.cpp in Sources */,
+				815612511D2EAB25000DD01B /* PagedLinearAllocator.cpp in Sources */,
 				81B1907C1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190821C9B16BE002EC8AC /* HttpRequestTest.cpp in Sources */,
 				81AF89471D13FED800A02E99 /* TextInputStreamTest.cpp in Sources */,
