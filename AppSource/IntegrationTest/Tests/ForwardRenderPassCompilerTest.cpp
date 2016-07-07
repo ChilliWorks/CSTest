@@ -331,7 +331,7 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the first pass, should contain 0 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the second pass, should contain 0 directional RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 1, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type for UI render pass.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_none, "Unexpected light type for UI render pass.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the UI render pass.");
                     
                     DestroyMaterialGroup(transparentMaterialGroup);

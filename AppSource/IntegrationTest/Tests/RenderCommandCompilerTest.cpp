@@ -220,11 +220,12 @@ namespace CSTest
                     CSIT_ASSERT(renderCommandsA[0]->GetType() == CS::RenderCommand::Type::k_begin, "Invalid command type.");
                     
                     auto renderCommandsB = renderCommandBuffer->GetQueue()[1]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsB.size() == 4, "Incorrect number of render command buffer slots");
+                    CSIT_ASSERT(renderCommandsB.size() == 5, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsB[0]->GetType() == CS::RenderCommand::Type::k_applyCamera, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsB[1]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsB[2]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsB[3]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsB[1]->GetType() == CS::RenderCommand::Type::k_applyAmbientLight, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsB[2]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsB[3]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsB[4]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
                     
                     auto renderCommandsC = renderCommandBuffer->GetQueue()[2]->GetOrderedList();
                     CSIT_ASSERT(renderCommandsC.size() == 1, "Incorrect number of render command buffer slots");
@@ -267,17 +268,19 @@ namespace CSTest
                     CSIT_ASSERT(renderCommandsB[0]->GetType() == CS::RenderCommand::Type::k_begin, "Invalid command type.");
                     
                     auto renderCommandsC = renderCommandBuffer->GetQueue()[2]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsC.size() == 4, "Incorrect number of render command buffer slots");
+                    CSIT_ASSERT(renderCommandsC.size() == 5, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsC[0]->GetType() == CS::RenderCommand::Type::k_applyCamera, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsC[1]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsC[2]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsC[3]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsC[1]->GetType() == CS::RenderCommand::Type::k_applyAmbientLight, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsC[2]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsC[3]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsC[4]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
                     
                     auto renderCommandsD = renderCommandBuffer->GetQueue()[3]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsD.size() == 3, "Incorrect number of render command buffer slots");
-                    CSIT_ASSERT(renderCommandsD[0]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsD[1]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsD[2]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsD.size() == 4, "Incorrect number of render command buffer slots");
+                    CSIT_ASSERT(renderCommandsD[0]->GetType() == CS::RenderCommand::Type::k_applyAmbientLight, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsD[1]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsD[2]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsD[3]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
                     
                     auto renderCommandsE = renderCommandBuffer->GetQueue()[4]->GetOrderedList();
                     CSIT_ASSERT(renderCommandsE.size() == 1, "Incorrect number of render command buffer slots");
