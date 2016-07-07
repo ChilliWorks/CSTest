@@ -1,14 +1,13 @@
-<Material type="Static">
+<Material type="Blinn">
     <Lighting>
-        <Emissive value="1.0 1.0 1.0 1.0" />
-        <Ambient value="0.0 0.0 0.0 1.0" />
-        <Diffuse value="0.0 0.0 0.0 1.0" />
-        <Specular value="0.0 0.0 0.0 1.0" />
-        <Shinniness value="0.0" />
+        <Emissive value="0.0 0.0 0.0 1.0" />
+        <Ambient value="1.0 1.0 1.0 1.0" />
+        <Diffuse value="1.0 1.0 1.0 1.0" />
+        <Specular value="0.25 0.25 0.25 0.25" />
+        <Shinniness value="10.0" />
     </Lighting>
     <RenderStates>
         <Transparency enabled="false" />
-        <Culling enabled="false" />
     </RenderStates>
     <Textures>
         <Texture image-name="Textures/Checkered.csimage" mipmapped="true" wrap-mode-u="Repeat" wrap-mode-v="Repeat" />

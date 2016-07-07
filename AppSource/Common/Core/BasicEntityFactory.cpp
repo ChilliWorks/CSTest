@@ -41,6 +41,7 @@
 #include <ChilliSource/Rendering/Material.h>
 #include <ChilliSource/Rendering/Model.h>
 #include <ChilliSource/Rendering/Texture.h>
+#include <ChilliSource/Rendering/Sprite.h>
 
 namespace CSTest
 {
@@ -84,8 +85,7 @@ namespace CSTest
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            CS::AmbientLightComponentSPtr ambientLightComponent = m_renderComponentFactory->CreateAmbientLightComponent();
-            ambientLightComponent->SetColour(in_colour);
+            CS::AmbientLightComponentSPtr ambientLightComponent = m_renderComponentFactory->CreateAmbientLightComponent(in_colour);
             
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-AmbientLight");
@@ -98,14 +98,28 @@ namespace CSTest
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            CS::DirectionalLightComponentSPtr directionalLightComponent = m_renderComponentFactory->CreateDirectionalLightComponent(2048);
-            directionalLightComponent->SetColour(in_colour);
-            directionalLightComponent->SetShadowVolume(in_shadowVolume.x, in_shadowVolume.y, in_shadowVolume.z, in_shadowVolume.w);
-            directionalLightComponent->SetShadowTolerance(0.005f);
+            //TODO: Change back to creating shadowed component
+            CS::DirectionalLightComponentSPtr directionalLightComponent = m_renderComponentFactory->CreateDirectionalLightComponent(in_colour);
+            //CS::DirectionalLightComponentSPtr directionalLightComponent = m_renderComponentFactory->CreateDirectionalLightComponent(CS::DirectionalLightComponent::ShadowQuality::k_high, in_colour);
+            //directionalLightComponent->SetShadowVolume(in_shadowVolume.x, in_shadowVolume.y, in_shadowVolume.z, in_shadowVolume.w);
+            //directionalLightComponent->SetShadowTolerance(0.005f);
             
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-DirectionalLight");
             entity->AddComponent(directionalLightComponent);
+            return entity;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        CS::EntityUPtr BasicEntityFactory::CreatePointLight(const CS::Colour& in_colour, f32 in_radius, f32 in_intensity) noexcept
+        {
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
+            
+            auto pointLightComponent = m_renderComponentFactory->CreatePointLightComponent(in_colour, in_radius, in_intensity);
+            
+            auto entity = CS::Entity::Create();
+            entity->SetName(CS::ToString(m_entityCount++) + "-PointLight");
+            entity->AddComponent(std::move(pointLightComponent));
             return entity;
         }
         //------------------------------------------------------------------------------

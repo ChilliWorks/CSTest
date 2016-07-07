@@ -102,6 +102,18 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CS::EntityUPtr CreateDirectionalLight(const CS::Colour& in_colour, const CS::Vector4& in_shadowVolume = CS::Vector4(30.0f, 30.0f, 1.0f, 30.0f));
             //------------------------------------------------------------------------------
+            /// Creates a point light with the given colour and radius.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_colour - The colour of the point light.
+            /// @param in_radius - [Optional] The radius of the point light.
+            /// @param in_intensity - [Optional] The intensity of the point light.
+            ///
+            /// @return The entity.
+            //------------------------------------------------------------------------------
+            CS::EntityUPtr CreatePointLight(const CS::Colour& in_colour, f32 in_radius = 3.0f, f32 in_intensity = 3.0f) noexcept;
+            //------------------------------------------------------------------------------
             /// Creates a grey checkered room for graphical tests to take place in.
             ///
             /// @author Ian Copland

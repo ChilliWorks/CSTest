@@ -160,11 +160,11 @@ namespace CSTest
             CSIT_TEST(SuccessAmbientLitOpaque)
             {
                 CS::RenderCamera renderCamera = CreateRenderCamera();
-                CS::RenderAmbientLight ambientLight(CS::Colour::k_red);
+                CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
                 
                 auto materialGroup = CreateLitOpaqueMaterialGroup();
-                std::vector<CS::RenderDirectionalLight> directionalLights;
-                std::vector<CS::RenderPointLight> pointLights;
+                std::vector<CS::DirectionalRenderLight> directionalLights;
+                std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
                 CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
@@ -178,8 +178,8 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup list.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 2, "Unexpected size of CameraRenderPassGroup group. Expecting only base and transparent passes");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of first pass, should contain ambient light");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of second pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of second pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the first pass, should contain 1 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the second pass, should contain 0 transparent RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
@@ -195,12 +195,12 @@ namespace CSTest
             CSIT_TEST(SuccessAmbientUnlitTransparent)
             {
                 CS::RenderCamera renderCamera = CreateRenderCamera();
-                CS::RenderAmbientLight ambientLight(CS::Colour::k_red);
+                CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
                 
                 auto materialGroup = CreateUnlitTransparentMaterialGroup();
                 
-                std::vector<CS::RenderDirectionalLight> directionalLights;
-                std::vector<CS::RenderPointLight> pointLights;
+                std::vector<CS::DirectionalRenderLight> directionalLights;
+                std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
                 CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
@@ -214,8 +214,8 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 2, "Unexpected size of CameraRenderPassGroup group. Expecting only base and transparent passes");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of first pass, should contain ambient light");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of second pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of second pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the first pass, should contain 0 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the second pass, should contain 1 transparent RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
@@ -231,13 +231,13 @@ namespace CSTest
             CSIT_TEST(SuccessDirectionalLitOpaque)
             {
                 CS::RenderCamera renderCamera = CreateRenderCamera();
-                CS::RenderAmbientLight ambientLight(CS::Colour::k_red);
-                CS::RenderDirectionalLight directionalLight(CS::Colour::k_red, CS::Vector3::k_unitNegativeZ);
+                CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
+                CS::DirectionalRenderLight directionalLight(CS::Colour::k_red, CS::Vector3::k_unitNegativeZ);
                 
                 auto materialGroup = CreateLitOpaqueMaterialGroup();
                 
-                std::vector<CS::RenderDirectionalLight> directionalLights { directionalLight };
-                std::vector<CS::RenderPointLight> pointLights;
+                std::vector<CS::DirectionalRenderLight> directionalLights { directionalLight };
+                std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
                 CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
@@ -251,9 +251,9 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 3, "Unexpected size of CameraRenderPassGroup group. Expecting only base, directional and transparent passes");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of first pass, should contain ambient light");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::k_directional, "Unexpected light type of second pass, should contain directional light");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[2].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of second pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_directional, "Unexpected light type of second pass, should contain directional light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[2].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of second pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the first pass, should contain 1 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the second pass, should contain 1 directional RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[2].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the third pass, should contain 0 transparent RenderObjects");
@@ -270,13 +270,13 @@ namespace CSTest
             CSIT_TEST(SuccessDirectionalUnilitTransparent)
             {
                 CS::RenderCamera renderCamera = CreateRenderCamera();
-                CS::RenderAmbientLight ambientLight(CS::Colour::k_red);
-                CS::RenderDirectionalLight directionalLight(CS::Colour::k_red, CS::Vector3::k_unitNegativeZ);
+                CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
+                CS::DirectionalRenderLight directionalLight(CS::Colour::k_red, CS::Vector3::k_unitNegativeZ);
                 
                 auto materialGroup = CreateUnlitTransparentMaterialGroup();
                 
-                std::vector<CS::RenderDirectionalLight> directionalLights { directionalLight };
-                std::vector<CS::RenderPointLight> pointLights;
+                std::vector<CS::DirectionalRenderLight> directionalLights { directionalLight };
+                std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
                 CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
@@ -290,9 +290,9 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 3, "Unexpected size of CameraRenderPassGroup group. Expecting only base, directional and transparent passes");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of first pass, should contain ambient light");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::k_directional, "Unexpected light type of second pass, should contain directional light");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[2].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of second pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_directional, "Unexpected light type of second pass, should contain directional light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[2].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of second pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the first pass, should contain 0 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the second pass, should contain 0 directional RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[2].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the third pass, should contain 1 transparent RenderObjects");
@@ -312,7 +312,7 @@ namespace CSTest
                 CS::RenderDynamicMeshSPtr renderDynamicMesh = CS::SpriteMeshBuilder::Build(CS::Vector3::k_zero, CS::Vector2::k_one, CS::UVs(), CS::Colour::k_red, CS::AlignmentAnchor::k_middleCentre);
                 
                 std::vector<CS::RenderObject> renderObjects { CreateUIRenderObject(transparentMaterialGroup, renderDynamicMesh.get(), k_uiObjectPosition) };
-                CS::RenderFrame renderFrame(k_resolution, CreateRenderCamera(), CS::RenderAmbientLight(CS::Colour::k_red), std::vector<CS::RenderDirectionalLight>(), std::vector<CS::RenderPointLight>(), renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CreateRenderCamera(), CS::AmbientRenderLight(CS::Colour::k_red), std::vector<CS::DirectionalRenderLight>(), std::vector<CS::PointRenderLight>(), renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -326,12 +326,12 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 2, "Unexpected size of CameraRenderPassGroup group. Expecting only base, directional and transparent passes");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of first pass, should contain ambient light");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of second pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of second pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the first pass, should contain 0 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the second pass, should contain 0 directional RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 1, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses()[0].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type for UI render pass.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type for UI render pass.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the UI render pass.");
                     
                     DestroyMaterialGroup(transparentMaterialGroup);
@@ -345,8 +345,8 @@ namespace CSTest
             CSIT_TEST(SuccessMultipleRenderObjectTypes)
             {
                 CS::RenderCamera renderCamera = CreateRenderCamera();
-                CS::RenderAmbientLight ambientLight(CS::Colour::k_red);
-                CS::RenderDirectionalLight directionalLight(CS::Colour::k_red, CS::Vector3::k_unitNegativeZ);
+                CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
+                CS::DirectionalRenderLight directionalLight(CS::Colour::k_red, CS::Vector3::k_unitNegativeZ);
                 
                 auto transparentMaterialGroup = CreateUnlitTransparentMaterialGroup();
                 auto opaqueMaterialGroup = CreateLitOpaqueMaterialGroup();
@@ -354,8 +354,8 @@ namespace CSTest
                 auto transparentObject = CreateStandardRenderObject(transparentMaterialGroup, k_onScreenObjectPosition);
                 auto opaqueObject = CreateStandardRenderObject(opaqueMaterialGroup, k_onScreenObjectPosition);
                 
-                std::vector<CS::RenderDirectionalLight> directionalLights { directionalLight };
-                std::vector<CS::RenderPointLight> pointLights;
+                std::vector<CS::DirectionalRenderLight> directionalLights { directionalLight };
+                std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { transparentObject, opaqueObject };
                 
                 CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
@@ -369,9 +369,9 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 3, "Unexpected size of CameraRenderPassGroup group. Expecting only base, directional and transparent passes");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of first pass, should contain ambient light");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::k_directional, "Unexpected light type of second pass, should contain directional light");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[2].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of second pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_directional, "Unexpected light type of second pass, should contain directional light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[2].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of second pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the first pass, should contain 1 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the second pass, should contain 1 directional RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[2].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the third pass, should contain 1 transparent RenderObjects");
@@ -389,12 +389,12 @@ namespace CSTest
             CSIT_TEST(SuccessFrustrumCull)
             {
                 CS::RenderCamera renderCamera = CreateRenderCamera();
-                CS::RenderAmbientLight ambientLight(CS::Colour::k_red);
+                CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
                 
                 auto materialGroup = CreateLitOpaqueMaterialGroup();
                 
-                std::vector<CS::RenderDirectionalLight> directionalLights;
-                std::vector<CS::RenderPointLight> pointLights;
+                std::vector<CS::DirectionalRenderLight> directionalLights;
+                std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_offScreenObjectPosition) };
                 
                 CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
@@ -408,8 +408,8 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 2, "Unexpected size of CameraRenderPassGroup group. Expecting only base, directional and transparent passes");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of first pass, should contain ambient light");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::k_ambient, "Unexpected light type of second pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of second pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the first pass, should contain 0 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the second pass, should contain 0 transparent RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
