@@ -167,7 +167,7 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -203,7 +203,7 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -240,7 +240,7 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -279,7 +279,7 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -312,7 +312,7 @@ namespace CSTest
                 CS::RenderDynamicMeshSPtr renderDynamicMesh = CS::SpriteMeshBuilder::Build(CS::Vector3::k_zero, CS::Vector2::k_one, CS::UVs(), CS::Colour::k_red, CS::AlignmentAnchor::k_middleCentre);
                 
                 std::vector<CS::RenderObject> renderObjects { CreateUIRenderObject(transparentMaterialGroup, renderDynamicMesh.get(), k_uiObjectPosition) };
-                CS::RenderFrame renderFrame(k_resolution, CreateRenderCamera(), CS::AmbientRenderLight(CS::Colour::k_red), std::vector<CS::DirectionalRenderLight>(), std::vector<CS::PointRenderLight>(), renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, CreateRenderCamera(), CS::AmbientRenderLight(CS::Colour::k_red), std::vector<CS::DirectionalRenderLight>(), std::vector<CS::PointRenderLight>(), renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -358,7 +358,7 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { transparentObject, opaqueObject };
                 
-                CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -397,7 +397,7 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_offScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)

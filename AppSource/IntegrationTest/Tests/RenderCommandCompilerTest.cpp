@@ -138,7 +138,7 @@ namespace CSTest
             {
                 const std::vector<CS::RenderPassObject> renderPassObjects { CreateOpaqueRenderPassObject() };
                 
-                return CS::RenderPass(renderPassObjects);
+                return CS::RenderPass(std::move(renderPassObjects));
             }
             
             /// @return A transparent render pass with a single object in it.
@@ -147,25 +147,28 @@ namespace CSTest
             {
                 const std::vector<CS::RenderPassObject> renderPassObjects { CreateTransparentRenderPassObject() };
                 
-                return CS::RenderPass(renderPassObjects);
+                return CS::RenderPass(std::move(renderPassObjects));
             }
             
             /// @return A basic camera render pass group with a single render pass in it.
             ///
             CS::CameraRenderPassGroup CreateBasicCameraRenderPassGroup() noexcept
             {
-                const std::vector<CS::RenderPass> renderPasses { CreateOpaqueRenderPass() };
+                std::vector<CS::RenderPass> renderPasses;
+                renderPasses.push_back(CreateOpaqueRenderPass());
                 
-                return CS::CameraRenderPassGroup(CreateRenderCamera(), renderPasses);
+                return CS::CameraRenderPassGroup(CreateRenderCamera(), std::move(renderPasses));
             }
             
             /// @return A compex camera render pass group with two render passes in it.
             ///
             CS::CameraRenderPassGroup CreateComplexCameraRenderPassGroup() noexcept
             {
-                const std::vector<CS::RenderPass> renderPasses { CreateOpaqueRenderPass(), CreateTransparentRenderPass() };
+                std::vector<CS::RenderPass> renderPasses;
+                renderPasses.push_back(CreateOpaqueRenderPass());
+                renderPasses.push_back(CreateTransparentRenderPass());
                 
-                return CS::CameraRenderPassGroup(CreateRenderCamera(), renderPasses);
+                return CS::CameraRenderPassGroup(CreateRenderCamera(), std::move(renderPasses));
             }
             
             /// Creates a basic target render pass group with contains a single camera render pass
@@ -173,9 +176,10 @@ namespace CSTest
             ///
             CS::TargetRenderPassGroup CreateBasicTargetRenderPassGroup() noexcept
             {
-                const std::vector<CS::CameraRenderPassGroup> cameraRenderPassGroups { CreateBasicCameraRenderPassGroup() };
+                std::vector<CS::CameraRenderPassGroup> cameraRenderPassGroups;
+                cameraRenderPassGroups.push_back(CreateBasicCameraRenderPassGroup());
                 
-                return CS::TargetRenderPassGroup(cameraRenderPassGroups);
+                return CS::TargetRenderPassGroup(CS::Integer2(100, 100), CS::Colour::k_white, std::move(cameraRenderPassGroups));
             }
             
             /// Creates a complex target render pass group with contains a single camera render pass
@@ -183,9 +187,10 @@ namespace CSTest
             ///
             CS::TargetRenderPassGroup CreateComplexTargetRenderPassGroup() noexcept
             {
-                const std::vector<CS::CameraRenderPassGroup> cameraRenderPassGroups { CreateComplexCameraRenderPassGroup() };
+                std::vector<CS::CameraRenderPassGroup> cameraRenderPassGroups;
+                cameraRenderPassGroups.push_back(CreateComplexCameraRenderPassGroup());
                 
-                return CS::TargetRenderPassGroup(cameraRenderPassGroups);
+                return CS::TargetRenderPassGroup(CS::Integer2(100, 100), CS::Colour::k_white, std::move(cameraRenderPassGroups));
             }
         }
         
@@ -196,7 +201,8 @@ namespace CSTest
             ///
             CSIT_TEST(SuccessBasic)
             {
-                const std::vector<CS::TargetRenderPassGroup> targetRenderPassGroups { CreateBasicTargetRenderPassGroup() };
+                auto targetRenderPassGroups = std::make_shared<std::vector<CS::TargetRenderPassGroup>>();
+                targetRenderPassGroups->push_back(CreateBasicTargetRenderPassGroup());
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -204,8 +210,8 @@ namespace CSTest
                     CS::RenderCommandListUPtr preRenderCommandList(new CS::RenderCommandList());
                     CS::RenderCommandListUPtr postRenderCommandList(new CS::RenderCommandList());
                     
-                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, targetRenderPassGroups, CS::Integer2(10, 10), CS::Colour::k_black,
-                                                                                                std::vector<CS::RenderDynamicMeshUPtr>(), std::move(preRenderCommandList), std::move(postRenderCommandList));
+                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, *targetRenderPassGroups, std::vector<CS::RenderDynamicMeshUPtr>(),
+                                                                                                std::move(preRenderCommandList), std::move(postRenderCommandList));
                     
                     CSIT_ASSERT(renderCommandBuffer->GetNumSlots() == 3, "Incorrect number of render command buffer slots");
                     
@@ -233,7 +239,8 @@ namespace CSTest
             ///
             CSIT_TEST(SuccessComplex)
             {
-                const std::vector<CS::TargetRenderPassGroup> targetRenderPassGroups { CreateComplexTargetRenderPassGroup() };
+                auto targetRenderPassGroups = std::make_shared<std::vector<CS::TargetRenderPassGroup>>();
+                targetRenderPassGroups->push_back(CreateComplexTargetRenderPassGroup());
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -246,8 +253,8 @@ namespace CSTest
                     CS::RenderCommandListUPtr postRenderCommandList(new CS::RenderCommandList());
                     postRenderCommandList->AddApplyCameraCommand(CS::Vector3::k_zero, CS::Matrix4::k_identity);
                     
-                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, targetRenderPassGroups, CS::Integer2(10, 10), CS::Colour::k_black,
-                                                                                               std::vector<CS::RenderDynamicMeshUPtr>(), std::move(preRenderCommandList), std::move(postRenderCommandList));
+                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, *targetRenderPassGroups, std::vector<CS::RenderDynamicMeshUPtr>(), std::move(preRenderCommandList),
+                                                                                                std::move(postRenderCommandList));
                     
                     CSIT_ASSERT(renderCommandBuffer->GetNumSlots() == 6, "Incorrect number of render command buffer slots");
                     
