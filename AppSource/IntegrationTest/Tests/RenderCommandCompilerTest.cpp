@@ -176,10 +176,12 @@ namespace CSTest
             ///
             CS::TargetRenderPassGroup CreateBasicTargetRenderPassGroup() noexcept
             {
+                const CS::Integer2 resolution(100, 100);
+                
                 std::vector<CS::CameraRenderPassGroup> cameraRenderPassGroups;
                 cameraRenderPassGroups.push_back(CreateBasicCameraRenderPassGroup());
                 
-                return CS::TargetRenderPassGroup(CS::Integer2(100, 100), CS::Colour::k_white, std::move(cameraRenderPassGroups));
+                return CS::TargetRenderPassGroup(resolution, CS::Colour::k_white, std::move(cameraRenderPassGroups));
             }
             
             /// Creates a complex target render pass group with contains a single camera render pass
@@ -187,10 +189,12 @@ namespace CSTest
             ///
             CS::TargetRenderPassGroup CreateComplexTargetRenderPassGroup() noexcept
             {
+                const CS::Integer2 resolution(100, 100);
+                
                 std::vector<CS::CameraRenderPassGroup> cameraRenderPassGroups;
                 cameraRenderPassGroups.push_back(CreateComplexCameraRenderPassGroup());
                 
-                return CS::TargetRenderPassGroup(CS::Integer2(100, 100), CS::Colour::k_white, std::move(cameraRenderPassGroups));
+                return CS::TargetRenderPassGroup(resolution, CS::Colour::k_white, std::move(cameraRenderPassGroups));
             }
         }
         
