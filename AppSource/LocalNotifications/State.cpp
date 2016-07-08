@@ -82,7 +82,7 @@ namespace CSTest
             
             optionsMenuDesc.AddButton("Get Scheduled Notifications", [=]()
             {
-                m_notificationManager->GetScheduledLocalNotifications([=](const std::vector<ChilliSource::NotificationCSPtr>& notificationList)
+                m_notificationManager->GetScheduledNotifications([=](const std::vector<ChilliSource::NotificationCSPtr>& notificationList)
                 {
                     auto dialogueSystem = CS::Application::Get()->GetSystem<CS::DialogueBoxSystem>();
                     dialogueSystem->ShowSystemDialogue(0, nullptr, "Scheduled Notifications", "There are " + CS::ToString(notificationList.size()) + " scheduled notifications.", "OK");
