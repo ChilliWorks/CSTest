@@ -127,7 +127,7 @@ namespace CSTest
                 const auto& localBoundingSphere = renderMesh->GetBoundingSphere();
                 CS::Sphere worldBoundingSphere(worldMatrix.GetTranslation() + localBoundingSphere.vOrigin, localBoundingSphere.fRadius);
                 
-                return CS::RenderObject(renderMaterialGroup, renderMesh, worldMatrix, worldBoundingSphere, CS::RenderLayer::k_standard);
+                return CS::RenderObject(renderMaterialGroup, renderMesh, worldMatrix, worldBoundingSphere, false, CS::RenderLayer::k_standard);
             }
             
             /// Creates a new UI render object with the given material group, dynamic mesh
@@ -149,7 +149,7 @@ namespace CSTest
                 const auto& localBoundingSphere = renderDynamicMesh->GetBoundingSphere();
                 CS::Sphere worldBoundingSphere(worldMatrix.GetTranslation() + localBoundingSphere.vOrigin, localBoundingSphere.fRadius);
                 
-                return CS::RenderObject(renderMaterialGroup, renderDynamicMesh, worldMatrix, worldBoundingSphere, CS::RenderLayer::k_ui);
+                return CS::RenderObject(renderMaterialGroup, renderDynamicMesh, worldMatrix, worldBoundingSphere, false, CS::RenderLayer::k_ui);
             }
         }
         
@@ -167,7 +167,7 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -203,7 +203,7 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -240,7 +240,7 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -279,7 +279,7 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -312,7 +312,7 @@ namespace CSTest
                 CS::RenderDynamicMeshSPtr renderDynamicMesh = CS::SpriteMeshBuilder::Build(CS::Vector3::k_zero, CS::Vector2::k_one, CS::UVs(), CS::Colour::k_red, CS::AlignmentAnchor::k_middleCentre);
                 
                 std::vector<CS::RenderObject> renderObjects { CreateUIRenderObject(transparentMaterialGroup, renderDynamicMesh.get(), k_uiObjectPosition) };
-                CS::RenderFrame renderFrame(k_resolution, CreateRenderCamera(), CS::AmbientRenderLight(CS::Colour::k_red), std::vector<CS::DirectionalRenderLight>(), std::vector<CS::PointRenderLight>(), renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, CreateRenderCamera(), CS::AmbientRenderLight(CS::Colour::k_red), std::vector<CS::DirectionalRenderLight>(), std::vector<CS::PointRenderLight>(), renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -331,7 +331,7 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the first pass, should contain 0 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the second pass, should contain 0 directional RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 1, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type for UI render pass.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_none, "Unexpected light type for UI render pass.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the UI render pass.");
                     
                     DestroyMaterialGroup(transparentMaterialGroup);
@@ -358,7 +358,7 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { transparentObject, opaqueObject };
                 
-                CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -397,7 +397,7 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_offScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
