@@ -308,8 +308,10 @@ namespace CSTest
             ///
             CSIT_TEST(SuccessUI)
             {
+                auto allocator = std::make_shared<CS::PagedLinearAllocator>(1024 * 1024);
+                
                 auto transparentMaterialGroup = CreateUnlitTransparentMaterialGroup();
-                CS::RenderDynamicMeshSPtr renderDynamicMesh = CS::SpriteMeshBuilder::Build(CS::Vector3::k_zero, CS::Vector2::k_one, CS::UVs(), CS::Colour::k_red, CS::AlignmentAnchor::k_middleCentre);
+                CS::RenderDynamicMeshASPtr renderDynamicMesh = CS::SpriteMeshBuilder::Build(allocator.get(), CS::Vector3::k_zero, CS::Vector2::k_one, CS::UVs(), CS::Colour::k_red, CS::AlignmentAnchor::k_middleCentre);
                 
                 std::vector<CS::RenderObject> renderObjects { CreateUIRenderObject(transparentMaterialGroup, renderDynamicMesh.get(), k_uiObjectPosition) };
                 CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, CreateRenderCamera(), CS::AmbientRenderLight(CS::Colour::k_red), std::vector<CS::DirectionalRenderLight>(), std::vector<CS::PointRenderLight>(), renderObjects);
@@ -317,7 +319,8 @@ namespace CSTest
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
                 {
-                    //Need to force this to be captured so it isn't deleted.
+                    //Need to force these to be captured so these aren't deleted.
+                    auto allocatorRef = allocator;
                     auto renderDynamicMeshRef = renderDynamicMesh;
                     
                     CS::ForwardRenderPassCompiler renderCompiler;

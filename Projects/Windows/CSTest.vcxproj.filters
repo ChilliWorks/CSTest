@@ -228,6 +228,12 @@
     <ClCompile Include="..\..\AppSource\Sprite\State.cpp">
       <Filter>AppSource\Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\Tests\LinearAllocator.cpp">
+      <Filter>AppSource\UnitTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\Tests\PagedLinearAllocator.cpp">
+      <Filter>AppSource\UnitTest\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
