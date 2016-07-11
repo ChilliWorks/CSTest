@@ -278,6 +278,12 @@
     </ClCompile>
     <ClCompile Include="..\..\AppSource\Common\Input\BackButtonSystem.cpp">
       <Filter>AppSource\Common\Input</Filter>
+	</ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\Tests\LinearAllocator.cpp">
+      <Filter>AppSource\UnitTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\Tests\PagedLinearAllocator.cpp">
+      <Filter>AppSource\UnitTest\Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

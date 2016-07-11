@@ -77,6 +77,8 @@
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\Report.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\ReportPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.cpp" />
+    <ClCompile Include="..\..\AppSource\UnitTest\Tests\LinearAllocator.cpp" />
+    <ClCompile Include="..\..\AppSource\UnitTest\Tests\PagedLinearAllocator.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector2.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector3.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector4.cpp" />

@@ -42,6 +42,11 @@ namespace CSTest
     {
         namespace
         {
+            namespace
+            {
+                const u32 k_allocatorSize = 1024 * 1024;
+            }
+            
             /// @return a new opaque, unlit, white material.
             ///
             CS::MaterialCSPtr CreateOpaqueMaterial() noexcept
@@ -52,18 +57,10 @@ namespace CSTest
                 auto materialFactory = CS::Application::Get()->GetSystem<CS::MaterialFactory>();
                 
                 auto material = resourcePool->GetResource<CS::Material>(k_materialName);
-                if (material == nullptr)
+                if (!material)
                 {
                     auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_chilliSource, "Textures/Blank.csimage");
-                    
-                    auto mutableMaterial = materialFactory->CreateStatic(k_materialName, texture);
-                    mutableMaterial->SetEmissive(CS::Colour::k_white);
-                    mutableMaterial->SetAmbient(CS::Colour::k_black);
-                    mutableMaterial->SetDiffuse(CS::Colour::k_black);
-                    mutableMaterial->SetSpecular(CS::Colour::k_black);
-                    mutableMaterial->SetLoadState(CS::Resource::LoadState::k_loaded);
-                    
-                    material = mutableMaterial;
+                    material = materialFactory->CreateUnlit(k_materialName, texture, false);
                 }
                 
                 return material;
@@ -79,19 +76,10 @@ namespace CSTest
                 auto materialFactory = CS::Application::Get()->GetSystem<CS::MaterialFactory>();
                 
                 auto material = resourcePool->GetResource<CS::Material>(k_materialName);
-                if (material == nullptr)
+                if (!material)
                 {
                     auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_chilliSource, "Textures/Blank.csimage");
-                    
-                    auto mutableMaterial = materialFactory->CreateStatic(k_materialName, texture);
-                    mutableMaterial->SetTransparencyEnabled(true);
-                    mutableMaterial->SetEmissive(CS::Colour::k_white);
-                    mutableMaterial->SetAmbient(CS::Colour::k_black);
-                    mutableMaterial->SetDiffuse(CS::Colour::k_black);
-                    mutableMaterial->SetSpecular(CS::Colour::k_black);
-                    mutableMaterial->SetLoadState(CS::Resource::LoadState::k_loaded);
-                    
-                    material = mutableMaterial;
+                    material = materialFactory->CreateUnlit(k_materialName, texture, true);
                 }
                 
                 return material;
@@ -106,7 +94,7 @@ namespace CSTest
                 
                 auto worldMatrix = CS::Matrix4::CreateLookAt(k_cameraPosition, k_cameraLookAt, CS::Vector3::k_unitPositiveZ);
                 auto projectionMatrix = CS::Matrix4::CreatePerspectiveProjectionLH(CS::MathUtils::k_pi / 3.0f, 1.0f, 1.0f, 100.0f);
-                return CS::RenderCamera(worldMatrix, projectionMatrix);
+                return CS::RenderCamera(worldMatrix, projectionMatrix, CS::Quaternion::k_identity);
             }
             
             /// @return A new opaque unlit render pass object.
@@ -155,7 +143,7 @@ namespace CSTest
             {
                 const std::vector<CS::RenderPassObject> renderPassObjects { CreateOpaqueRenderPassObject() };
                 
-                return CS::RenderPass(renderPassObjects);
+                return CS::RenderPass(std::move(renderPassObjects));
             }
             
             /// @return A transparent render pass with a single object in it.
@@ -164,25 +152,28 @@ namespace CSTest
             {
                 const std::vector<CS::RenderPassObject> renderPassObjects { CreateTransparentRenderPassObject() };
                 
-                return CS::RenderPass(renderPassObjects);
+                return CS::RenderPass(std::move(renderPassObjects));
             }
             
             /// @return A basic camera render pass group with a single render pass in it.
             ///
             CS::CameraRenderPassGroup CreateBasicCameraRenderPassGroup() noexcept
             {
-                const std::vector<CS::RenderPass> renderPasses { CreateOpaqueRenderPass() };
+                std::vector<CS::RenderPass> renderPasses;
+                renderPasses.push_back(CreateOpaqueRenderPass());
                 
-                return CS::CameraRenderPassGroup(CreateRenderCamera(), renderPasses);
+                return CS::CameraRenderPassGroup(CreateRenderCamera(), std::move(renderPasses));
             }
             
             /// @return A compex camera render pass group with two render passes in it.
             ///
             CS::CameraRenderPassGroup CreateComplexCameraRenderPassGroup() noexcept
             {
-                const std::vector<CS::RenderPass> renderPasses { CreateOpaqueRenderPass(), CreateTransparentRenderPass() };
+                std::vector<CS::RenderPass> renderPasses;
+                renderPasses.push_back(CreateOpaqueRenderPass());
+                renderPasses.push_back(CreateTransparentRenderPass());
                 
-                return CS::CameraRenderPassGroup(CreateRenderCamera(), renderPasses);
+                return CS::CameraRenderPassGroup(CreateRenderCamera(), std::move(renderPasses));
             }
             
             /// Creates a basic target render pass group with contains a single camera render pass
@@ -190,9 +181,12 @@ namespace CSTest
             ///
             CS::TargetRenderPassGroup CreateBasicTargetRenderPassGroup() noexcept
             {
-                const std::vector<CS::CameraRenderPassGroup> cameraRenderPassGroups { CreateBasicCameraRenderPassGroup() };
+                const CS::Integer2 resolution(100, 100);
                 
-                return CS::TargetRenderPassGroup(cameraRenderPassGroups);
+                std::vector<CS::CameraRenderPassGroup> cameraRenderPassGroups;
+                cameraRenderPassGroups.push_back(CreateBasicCameraRenderPassGroup());
+                
+                return CS::TargetRenderPassGroup(resolution, CS::Colour::k_white, std::move(cameraRenderPassGroups));
             }
             
             /// Creates a complex target render pass group with contains a single camera render pass
@@ -200,9 +194,12 @@ namespace CSTest
             ///
             CS::TargetRenderPassGroup CreateComplexTargetRenderPassGroup() noexcept
             {
-                const std::vector<CS::CameraRenderPassGroup> cameraRenderPassGroups { CreateComplexCameraRenderPassGroup() };
+                const CS::Integer2 resolution(100, 100);
                 
-                return CS::TargetRenderPassGroup(cameraRenderPassGroups);
+                std::vector<CS::CameraRenderPassGroup> cameraRenderPassGroups;
+                cameraRenderPassGroups.push_back(CreateComplexCameraRenderPassGroup());
+                
+                return CS::TargetRenderPassGroup(resolution, CS::Colour::k_white, std::move(cameraRenderPassGroups));
             }
         }
         
@@ -213,16 +210,19 @@ namespace CSTest
             ///
             CSIT_TEST(SuccessBasic)
             {
-                const std::vector<CS::TargetRenderPassGroup> targetRenderPassGroups { CreateBasicTargetRenderPassGroup() };
+                auto targetRenderPassGroups = std::make_shared<std::vector<CS::TargetRenderPassGroup>>();
+                targetRenderPassGroups->push_back(CreateBasicTargetRenderPassGroup());
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
                 {
+                    CS::PagedLinearAllocator allocator(k_allocatorSize);
+                    
                     CS::RenderCommandListUPtr preRenderCommandList(new CS::RenderCommandList());
                     CS::RenderCommandListUPtr postRenderCommandList(new CS::RenderCommandList());
                     
-                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, targetRenderPassGroups, CS::Integer2(10, 10), CS::Colour::k_black,
-                                                                                                std::vector<CS::RenderDynamicMeshUPtr>(), std::move(preRenderCommandList), std::move(postRenderCommandList));
+                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, &allocator, *targetRenderPassGroups, std::vector<CS::RenderDynamicMeshAUPtr>(),
+                                                                                                std::move(preRenderCommandList), std::move(postRenderCommandList));
                     
                     CSIT_ASSERT(renderCommandBuffer->GetNumSlots() == 3, "Incorrect number of render command buffer slots");
                     
@@ -231,11 +231,12 @@ namespace CSTest
                     CSIT_ASSERT(renderCommandsA[0]->GetType() == CS::RenderCommand::Type::k_begin, "Invalid command type.");
                     
                     auto renderCommandsB = renderCommandBuffer->GetQueue()[1]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsB.size() == 4, "Incorrect number of render command buffer slots");
+                    CSIT_ASSERT(renderCommandsB.size() == 5, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsB[0]->GetType() == CS::RenderCommand::Type::k_applyCamera, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsB[1]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsB[2]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsB[3]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsB[1]->GetType() == CS::RenderCommand::Type::k_applyAmbientLight, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsB[2]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsB[3]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsB[4]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
                     
                     auto renderCommandsC = renderCommandBuffer->GetQueue()[2]->GetOrderedList();
                     CSIT_ASSERT(renderCommandsC.size() == 1, "Incorrect number of render command buffer slots");
@@ -250,11 +251,14 @@ namespace CSTest
             ///
             CSIT_TEST(SuccessComplex)
             {
-                const std::vector<CS::TargetRenderPassGroup> targetRenderPassGroups { CreateComplexTargetRenderPassGroup() };
+                auto targetRenderPassGroups = std::make_shared<std::vector<CS::TargetRenderPassGroup>>();
+                targetRenderPassGroups->push_back(CreateComplexTargetRenderPassGroup());
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
                 {
+                    CS::PagedLinearAllocator allocator(k_allocatorSize);
+                    
                     // In a more real work case, the pre and post list would only contain load and unload commands, however we are using
                     // apply camera commands as they're easier to setup for testing.
                     CS::RenderCommandListUPtr preRenderCommandList(new CS::RenderCommandList());
@@ -263,8 +267,8 @@ namespace CSTest
                     CS::RenderCommandListUPtr postRenderCommandList(new CS::RenderCommandList());
                     postRenderCommandList->AddApplyCameraCommand(CS::Vector3::k_zero, CS::Matrix4::k_identity);
                     
-                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, targetRenderPassGroups, CS::Integer2(10, 10), CS::Colour::k_black,
-                                                                                               std::vector<CS::RenderDynamicMeshUPtr>(), std::move(preRenderCommandList), std::move(postRenderCommandList));
+                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, &allocator, *targetRenderPassGroups, std::vector<CS::RenderDynamicMeshAUPtr>(), std::move(preRenderCommandList),
+                                                                                                std::move(postRenderCommandList));
                     
                     CSIT_ASSERT(renderCommandBuffer->GetNumSlots() == 6, "Incorrect number of render command buffer slots");
                     
@@ -277,17 +281,19 @@ namespace CSTest
                     CSIT_ASSERT(renderCommandsB[0]->GetType() == CS::RenderCommand::Type::k_begin, "Invalid command type.");
                     
                     auto renderCommandsC = renderCommandBuffer->GetQueue()[2]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsC.size() == 4, "Incorrect number of render command buffer slots");
+                    CSIT_ASSERT(renderCommandsC.size() == 5, "Incorrect number of render command buffer slots");
                     CSIT_ASSERT(renderCommandsC[0]->GetType() == CS::RenderCommand::Type::k_applyCamera, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsC[1]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsC[2]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsC[3]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsC[1]->GetType() == CS::RenderCommand::Type::k_applyAmbientLight, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsC[2]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsC[3]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsC[4]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
                     
                     auto renderCommandsD = renderCommandBuffer->GetQueue()[3]->GetOrderedList();
-                    CSIT_ASSERT(renderCommandsD.size() == 3, "Incorrect number of render command buffer slots");
-                    CSIT_ASSERT(renderCommandsD[0]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsD[1]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
-                    CSIT_ASSERT(renderCommandsD[2]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsD.size() == 4, "Incorrect number of render command buffer slots");
+                    CSIT_ASSERT(renderCommandsD[0]->GetType() == CS::RenderCommand::Type::k_applyAmbientLight, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsD[1]->GetType() == CS::RenderCommand::Type::k_applyMaterial, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsD[2]->GetType() == CS::RenderCommand::Type::k_applyMesh, "Invalid command type.");
+                    CSIT_ASSERT(renderCommandsD[3]->GetType() == CS::RenderCommand::Type::k_renderInstance, "Invalid command type.");
                     
                     auto renderCommandsE = renderCommandBuffer->GetQueue()[4]->GetOrderedList();
                     CSIT_ASSERT(renderCommandsE.size() == 1, "Incorrect number of render command buffer slots");

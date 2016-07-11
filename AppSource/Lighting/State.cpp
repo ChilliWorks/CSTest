@@ -55,9 +55,11 @@ namespace CSTest
             
             auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
             
+            // ambient light
             CS::EntitySPtr ambientLight = basicEntityFactory->CreateAmbientLight(CS::Colour(0.3f, 0.3f, 0.3f, 1.0f));
             GetScene()->Add(ambientLight);
             
+            // directional light
             //TODO: We should provide multiple spinning lights, however issues with shadows in the engine mean we cannot for the time being.
             f32 horizontalAngle = CS::Random::Generate<f32>(0.0f, CS::MathUtils::k_pi * 2.0f);
             f32 verticalAngle = CS::Random::Generate<f32>(k_lowerVerticalAngle, k_upperVerticalAngle);
@@ -66,6 +68,11 @@ namespace CSTest
             CS::EntitySPtr directionalLight = basicEntityFactory->CreateDirectionalLight(CS::Colour(0.8f, 0.5f, 0.4f));
             directionalLight->AddComponent(followerComponent);
             GetScene()->Add(directionalLight);
+            
+            // point light
+            CS::EntitySPtr pointLight = basicEntityFactory->CreatePointLight(CS::Colour(0.1f, 1.0f, 0.2f));
+            pointLight->GetTransform().SetPosition(7.0f, 3.0f, 7.0f);
+            GetScene()->Add(pointLight);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

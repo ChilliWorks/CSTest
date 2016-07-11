@@ -7,14 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		273866D01D2D0B8500C8BFF1 /* AccelerometerPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273866CC1D2D0B8500C8BFF1 /* AccelerometerPresenter.cpp */; };
-		273866D11D2D0B8500C8BFF1 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273866CE1D2D0B8500C8BFF1 /* State.cpp */; };
-		273866D41D2D0B9100C8BFF1 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273866D21D2D0B9100C8BFF1 /* State.cpp */; };
-		273866D71D2D0B9A00C8BFF1 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273866D51D2D0B9A00C8BFF1 /* State.cpp */; };
-		273866DC1D2D0BA700C8BFF1 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273866D81D2D0BA700C8BFF1 /* State.cpp */; };
-		273866DD1D2D0BA700C8BFF1 /* TextEntryPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273866DA1D2D0BA700C8BFF1 /* TextEntryPresenter.cpp */; };
-		273866E11D2D0BB900C8BFF1 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273866DF1D2D0BB900C8BFF1 /* State.cpp */; };
-		273866E51D2D0BD800C8BFF1 /* BackButtonSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273866E31D2D0BD800C8BFF1 /* BackButtonSystem.cpp */; };
+		815612501D2EAB25000DD01B /* LinearAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8156124E1D2EAB25000DD01B /* LinearAllocator.cpp */; };
+		815612511D2EAB25000DD01B /* PagedLinearAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8156124F1D2EAB25000DD01B /* PagedLinearAllocator.cpp */; };
 		8164FEE01CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8164FEDF1CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		81A78D791D0180CA00871640 /* FrameTimeCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81A78D731D0180CA00871640 /* FrameTimeCalculator.cpp */; };
@@ -116,22 +110,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		273866CC1D2D0B8500C8BFF1 /* AccelerometerPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AccelerometerPresenter.cpp; path = Accelerometer/AccelerometerPresenter.cpp; sourceTree = "<group>"; };
-		273866CD1D2D0B8500C8BFF1 /* AccelerometerPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccelerometerPresenter.h; path = Accelerometer/AccelerometerPresenter.h; sourceTree = "<group>"; };
-		273866CE1D2D0B8500C8BFF1 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Accelerometer/State.cpp; sourceTree = "<group>"; };
-		273866CF1D2D0B8500C8BFF1 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Accelerometer/State.h; sourceTree = "<group>"; };
-		273866D21D2D0B9100C8BFF1 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = DialogueBox/State.cpp; sourceTree = "<group>"; };
-		273866D31D2D0B9100C8BFF1 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = DialogueBox/State.h; sourceTree = "<group>"; };
-		273866D51D2D0B9A00C8BFF1 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = LocalNotifications/State.cpp; sourceTree = "<group>"; };
-		273866D61D2D0B9A00C8BFF1 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = LocalNotifications/State.h; sourceTree = "<group>"; };
-		273866D81D2D0BA700C8BFF1 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = TextEntry/State.cpp; sourceTree = "<group>"; };
-		273866D91D2D0BA700C8BFF1 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = TextEntry/State.h; sourceTree = "<group>"; };
-		273866DA1D2D0BA700C8BFF1 /* TextEntryPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextEntryPresenter.cpp; path = TextEntry/TextEntryPresenter.cpp; sourceTree = "<group>"; };
-		273866DB1D2D0BA700C8BFF1 /* TextEntryPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextEntryPresenter.h; path = TextEntry/TextEntryPresenter.h; sourceTree = "<group>"; };
-		273866DF1D2D0BB900C8BFF1 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = VideoPlayer/State.cpp; sourceTree = "<group>"; };
-		273866E01D2D0BB900C8BFF1 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = VideoPlayer/State.h; sourceTree = "<group>"; };
-		273866E31D2D0BD800C8BFF1 /* BackButtonSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BackButtonSystem.cpp; path = Input/BackButtonSystem.cpp; sourceTree = "<group>"; };
-		273866E41D2D0BD800C8BFF1 /* BackButtonSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BackButtonSystem.h; path = Input/BackButtonSystem.h; sourceTree = "<group>"; };
+		8156124E1D2EAB25000DD01B /* LinearAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinearAllocator.cpp; sourceTree = "<group>"; };
+		8156124F1D2EAB25000DD01B /* PagedLinearAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PagedLinearAllocator.cpp; sourceTree = "<group>"; };
 		8164FEDF1CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ForwardRenderPassCompilerTest.cpp; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81A78D731D0180CA00871640 /* FrameTimeCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameTimeCalculator.cpp; sourceTree = "<group>"; };
@@ -309,64 +289,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		273866C61D2D0AEC00C8BFF1 /* Accelerometer */ = {
-			isa = PBXGroup;
-			children = (
-				273866CC1D2D0B8500C8BFF1 /* AccelerometerPresenter.cpp */,
-				273866CD1D2D0B8500C8BFF1 /* AccelerometerPresenter.h */,
-				273866CE1D2D0B8500C8BFF1 /* State.cpp */,
-				273866CF1D2D0B8500C8BFF1 /* State.h */,
-			);
-			name = Accelerometer;
-			sourceTree = "<group>";
-		};
-		273866C91D2D0AFF00C8BFF1 /* DialogueBox */ = {
-			isa = PBXGroup;
-			children = (
-				273866D21D2D0B9100C8BFF1 /* State.cpp */,
-				273866D31D2D0B9100C8BFF1 /* State.h */,
-			);
-			name = DialogueBox;
-			sourceTree = "<group>";
-		};
-		273866CA1D2D0B1100C8BFF1 /* LocalNotifications */ = {
-			isa = PBXGroup;
-			children = (
-				273866D51D2D0B9A00C8BFF1 /* State.cpp */,
-				273866D61D2D0B9A00C8BFF1 /* State.h */,
-			);
-			name = LocalNotifications;
-			sourceTree = "<group>";
-		};
-		273866CB1D2D0B7100C8BFF1 /* TextEntry */ = {
-			isa = PBXGroup;
-			children = (
-				273866D81D2D0BA700C8BFF1 /* State.cpp */,
-				273866D91D2D0BA700C8BFF1 /* State.h */,
-				273866DA1D2D0BA700C8BFF1 /* TextEntryPresenter.cpp */,
-				273866DB1D2D0BA700C8BFF1 /* TextEntryPresenter.h */,
-			);
-			name = TextEntry;
-			sourceTree = "<group>";
-		};
-		273866DE1D2D0BAB00C8BFF1 /* VideoPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				273866DF1D2D0BB900C8BFF1 /* State.cpp */,
-				273866E01D2D0BB900C8BFF1 /* State.h */,
-			);
-			name = VideoPlayer;
-			sourceTree = "<group>";
-		};
-		273866E21D2D0BCC00C8BFF1 /* Input */ = {
-			isa = PBXGroup;
-			children = (
-				273866E31D2D0BD800C8BFF1 /* BackButtonSystem.cpp */,
-				273866E41D2D0BD800C8BFF1 /* BackButtonSystem.h */,
-			);
-			name = Input;
-			sourceTree = "<group>";
-		};
 		81A78D721D0180CA00871640 /* MultiThreadedRenderer */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,11 +305,6 @@
 		81B190131C9B16BD002EC8AC /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
-				273866DE1D2D0BAB00C8BFF1 /* VideoPlayer */,
-				273866CB1D2D0B7100C8BFF1 /* TextEntry */,
-				273866CA1D2D0B1100C8BFF1 /* LocalNotifications */,
-				273866C91D2D0AFF00C8BFF1 /* DialogueBox */,
-				273866C61D2D0AEC00C8BFF1 /* Accelerometer */,
 				81B190141C9B16BE002EC8AC /* App.cpp */,
 				81B190151C9B16BE002EC8AC /* App.h */,
 				81B190161C9B16BE002EC8AC /* Common */,
@@ -413,7 +330,6 @@
 		81B190161C9B16BE002EC8AC /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				273866E21D2D0BCC00C8BFF1 /* Input */,
 				81B190171C9B16BE002EC8AC /* Behaviour */,
 				81B1901C1C9B16BE002EC8AC /* Core */,
 				81B190291C9B16BE002EC8AC /* UI */,
@@ -582,6 +498,8 @@
 		81B1905C1C9B16BE002EC8AC /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				8156124E1D2EAB25000DD01B /* LinearAllocator.cpp */,
+				8156124F1D2EAB25000DD01B /* PagedLinearAllocator.cpp */,
 				81B1905E1C9B16BE002EC8AC /* Vector2.cpp */,
 				81B1905F1C9B16BE002EC8AC /* Vector3.cpp */,
 				81B190601C9B16BE002EC8AC /* Vector4.cpp */,
@@ -838,26 +756,21 @@
 			files = (
 				81B190731C9B16BE002EC8AC /* OrbiterComponent.cpp in Sources */,
 				81E230D91D25309700628581 /* State.cpp in Sources */,
-				273866D11D2D0B8500C8BFF1 /* State.cpp in Sources */,
 				81C63B031C9C63E500E1A669 /* FileSystemTest.cpp in Sources */,
 				81B190921C9B16BE002EC8AC /* Report.cpp in Sources */,
 				81B190881C9B16BE002EC8AC /* TestRegistry.cpp in Sources */,
 				81B1907F1C9B16BE002EC8AC /* GesturePresenter.cpp in Sources */,
+				815612501D2EAB25000DD01B /* LinearAllocator.cpp in Sources */,
 				81A78D791D0180CA00871640 /* FrameTimeCalculator.cpp in Sources */,
 				81B190741C9B16BE002EC8AC /* Approx.cpp in Sources */,
 				81C63B001C9C498000E1A669 /* FailedSection.cpp in Sources */,
 				81B190751C9B16BE002EC8AC /* BasicEntityFactory.cpp in Sources */,
-				273866E51D2D0BD800C8BFF1 /* BackButtonSystem.cpp in Sources */,
-				273866D41D2D0B9100C8BFF1 /* State.cpp in Sources */,
 				81AF89481D13FED800A02E99 /* TextOutputStreamTest.cpp in Sources */,
 				81B1907E1C9B16BE002EC8AC /* EventInfo.cpp in Sources */,
-				273866D71D2D0B9A00C8BFF1 /* State.cpp in Sources */,
 				81B190901C9B16BE002EC8AC /* CSReporter.cpp in Sources */,
 				81B1908B1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81C63AF01C9C138F00E1A669 /* OptionsMenuDesc.cpp in Sources */,
 				8164FEE01CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp in Sources */,
-				273866DD1D2D0BA700C8BFF1 /* TextEntryPresenter.cpp in Sources */,
-				273866D01D2D0B8500C8BFF1 /* AccelerometerPresenter.cpp in Sources */,
 				81B190931C9B16BE002EC8AC /* ReportPresenter.cpp in Sources */,
 				81B190951C9B16BE002EC8AC /* TestSystem.cpp in Sources */,
 				81B1908D1C9B16BE002EC8AC /* Vector2.cpp in Sources */,
@@ -881,10 +794,8 @@
 				81C63AF91C9C196700E1A669 /* State.cpp in Sources */,
 				81B1907A1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190801C9B16BE002EC8AC /* State.cpp in Sources */,
-				273866DC1D2D0BA700C8BFF1 /* State.cpp in Sources */,
 				81B1908A1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190791C9B16BE002EC8AC /* BasicWidgetFactory.cpp in Sources */,
-				273866E11D2D0BB900C8BFF1 /* State.cpp in Sources */,
 				81B1907B1C9B16BE002EC8AC /* DownloadProgressTestSystem.cpp in Sources */,
 				81A78D7B1D0180CA00871640 /* State.cpp in Sources */,
 				81C63AF81C9C196700E1A669 /* State.cpp in Sources */,
@@ -894,6 +805,7 @@
 				81AF89451D13FED800A02E99 /* BinaryInputStreamTest.cpp in Sources */,
 				81B190961C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190761C9B16BE002EC8AC /* ResultPresenter.cpp in Sources */,
+				815612511D2EAB25000DD01B /* PagedLinearAllocator.cpp in Sources */,
 				81B1907C1C9B16BE002EC8AC /* State.cpp in Sources */,
 				81B190821C9B16BE002EC8AC /* HttpRequestTest.cpp in Sources */,
 				81AF89471D13FED800A02E99 /* TextInputStreamTest.cpp in Sources */,
