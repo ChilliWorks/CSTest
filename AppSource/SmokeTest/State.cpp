@@ -101,7 +101,17 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<DownloadProgress::State>());
             });
 
-#ifndef CS_TARGETPLATFORM_WINDOWS
+            optionsMenuDesc.AddButton("Dialogue Boxes", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<DialogueBox::State>());
+            });
+
+            optionsMenuDesc.AddButton("Text Entry", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<TextEntry::State>());
+            });
+
+#if defined(CS_TARGETPLATFORM_IOS) || defined(CS_TARGETPLATFORM_ANDROID)
             optionsMenuDesc.AddButton("Web View", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<WebView::State>());
@@ -122,17 +132,11 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<LocalNotifications::State>());
             });
 
-#endif
-
             optionsMenuDesc.AddButton("Video Player", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<VideoPlayer::State>());
             });
-
-            optionsMenuDesc.AddButton("Dialogue Boxes", [=]()
-            {
-                CS::Application::Get()->GetStateManager()->Push(std::make_shared<DialogueBox::State>());
-            });
+#endif
 
 #ifdef CS_TARGETPLATFORM_WINDOWS
             optionsMenuDesc.AddButton("Keyboard", [=]()
@@ -140,11 +144,6 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Keyboard::State>());
             });
 #endif
-
-            optionsMenuDesc.AddButton("Text Entry", [=]()
-            {
-                CS::Application::Get()->GetStateManager()->Push(std::make_shared<TextEntry::State>());
-            });
 
             m_optionsMenuPresenter->Present(optionsMenuDesc);
         }
