@@ -35,6 +35,11 @@ namespace CSTest
 {
     CS_FORWARDDECLARE_CLASS(App);
     
+    namespace AnimatedModel
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
     namespace Common
     {
         CS_FORWARDDECLARE_CLASS(BasicEntityFactory);

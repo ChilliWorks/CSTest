@@ -28,6 +28,7 @@
 
 #include <SmokeTest/State.h>
 
+#include <AnimatedModel/State.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
 #include <Common/Core/TestNavigator.h>
@@ -78,6 +79,11 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Particle::State>());
             });
 
+            optionsMenuDesc.AddButton("Animated Model", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<AnimatedModel::State>());
+            });
+            
             optionsMenuDesc.AddButton("Gestures", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Gesture::State>());

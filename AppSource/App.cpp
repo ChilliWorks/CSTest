@@ -73,6 +73,9 @@ namespace CSTest
     //------------------------------------------------------------------------------
     void App::CreateSystems() noexcept
     {
+        CreateSystem<CS::CSModelProvider>();
+        CreateSystem<CS::CSAnimProvider>();
+        
         CreateSystem<CS::CricketAudioSystem>();
 		CreateSystem<CS::CkBankProvider>();
 

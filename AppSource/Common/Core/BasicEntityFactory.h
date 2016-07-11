@@ -138,6 +138,19 @@ namespace CSTest
             /// @return The sprite entity.
             //------------------------------------------------------------------------------
             CS::EntityUPtr CreateSprite(const std::string& in_imageId, const CS::Colour& in_colour = CS::Colour::k_white, const CS::Vector2& in_size = CS::Vector2::k_one) noexcept;
+            //------------------------------------------------------------------------------
+            /// Creates a model with skinned animation from the given model, material and
+            /// animation resources.
+            ///
+            /// @author Ian Copland
+            ///
+            /// @param in_model - The model which should be used.
+            /// @param in_material - The material that should be used.
+            /// @param in_animation - The animation which should be used.
+            ///
+            /// @return The animated model entity.
+            //------------------------------------------------------------------------------
+            CS::EntityUPtr CreateAnimatedModel(const CS::ModelCSPtr& in_model, const CS::MaterialCSPtr& in_material, const CS::SkinnedAnimationCSPtr& in_animation) noexcept;
     
         private:
             friend class CS::Application;
