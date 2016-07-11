@@ -88,6 +88,9 @@
     <Filter Include="AppSource\Common\Input">
       <UniqueIdentifier>{fef1fcb4-5a5d-45c7-ae8a-a2fc83f94eb4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\RemoteNotifications">
+      <UniqueIdentifier>{330c07b7-66f4-43b1-b24e-c42178bde530}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -278,12 +281,18 @@
     </ClCompile>
     <ClCompile Include="..\..\AppSource\Common\Input\BackButtonSystem.cpp">
       <Filter>AppSource\Common\Input</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\LinearAllocator.cpp">
       <Filter>AppSource\UnitTest\Tests</Filter>
     </ClCompile>
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\PagedLinearAllocator.cpp">
       <Filter>AppSource\UnitTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\RemoteNotifications\RemoteNotificationsPresenter.cpp">
+      <Filter>AppSource\RemoteNotifications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\RemoteNotifications\State.cpp">
+      <Filter>AppSource\RemoteNotifications</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -448,6 +457,12 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Common\Input\BackButtonSystem.h">
       <Filter>AppSource\Common\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\RemoteNotifications\RemoteNotificationsPresenter.h">
+      <Filter>AppSource\RemoteNotifications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\RemoteNotifications\State.h">
+      <Filter>AppSource\RemoteNotifications</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

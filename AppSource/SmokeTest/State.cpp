@@ -43,9 +43,11 @@
 #include <WebView/State.h>
 #include <DialogueBox/State.h>
 #include <LocalNotifications/State.h>
+#include <RemoteNotifications/State.h>
 #include <TextEntry/State.h>
 #include <Keyboard/State.h>
 #include <VideoPlayer/State.h>
+
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -130,6 +132,11 @@ namespace CSTest
 			optionsMenuDesc.AddButton("Local Notifications", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<LocalNotifications::State>());
+            });
+
+            optionsMenuDesc.AddButton("Remote Notifications", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<RemoteNotifications::State>());
             });
 
             optionsMenuDesc.AddButton("Video Player", [=]()

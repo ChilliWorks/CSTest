@@ -102,6 +102,12 @@ namespace CSTest
     {
         CS_FORWARDDECLARE_CLASS(State);
     }
+
+    namespace RemoteNotifications
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+        CS_FORWARDDECLARE_CLASS(RemoteNotificationsPresenter);
+    }
     
     namespace SmokeTest
     {
