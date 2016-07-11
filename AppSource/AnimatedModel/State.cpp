@@ -77,7 +77,7 @@ namespace CSTest
                 auto animation = resourcePool->LoadResource<CS::SkinnedAnimation>(CS::StorageLocation::k_package, "Animations/CylinderFlex.csanim");
                 
                 auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
-                auto entity = basicEntityFactory->CreateAnimatedModel(model, material, animation);
+                auto entity = basicEntityFactory->CreateAnimatedModel(model, material, animation, CS::AnimatedModelComponent::PlaybackType::k_looping);
                 scene->Add(std::move(entity));
             }
         }

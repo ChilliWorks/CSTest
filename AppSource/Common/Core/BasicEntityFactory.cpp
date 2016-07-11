@@ -158,13 +158,12 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CS::EntityUPtr BasicEntityFactory::CreateAnimatedModel(const CS::ModelCSPtr& in_model, const CS::MaterialCSPtr& in_material, const CS::SkinnedAnimationCSPtr& in_animation) noexcept
+        CS::EntityUPtr BasicEntityFactory::CreateAnimatedModel(const CS::ModelCSPtr& in_model, const CS::MaterialCSPtr& in_material, const CS::SkinnedAnimationCSPtr& in_animation,
+                                                               CS::AnimatedModelComponent::PlaybackType in_playbackType) noexcept
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            auto animatedModelComponent = m_renderComponentFactory->CreateAnimatedModelComponent(in_model, in_material);
-            animatedModelComponent->AttachAnimation(in_animation);
-            animatedModelComponent->SetPlaybackType(CS::AnimationPlaybackType::k_looping);
+            auto animatedModelComponent = m_renderComponentFactory->CreateAnimatedModelComponent(in_model, in_material, in_animation, in_playbackType);
             
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-AnimatedModel");

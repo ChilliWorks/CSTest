@@ -216,13 +216,11 @@ namespace CSTest
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
                 {
-                    CS::PagedLinearAllocator allocator(k_allocatorSize);
-                    
                     CS::RenderCommandListUPtr preRenderCommandList(new CS::RenderCommandList());
                     CS::RenderCommandListUPtr postRenderCommandList(new CS::RenderCommandList());
                     
-                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, &allocator, *targetRenderPassGroups, std::vector<CS::RenderDynamicMeshAUPtr>(),
-                                                                                                std::vector<CS::RenderSkinnedAnimationAUPtr>(), std::move(preRenderCommandList), std::move(postRenderCommandList));
+                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, *targetRenderPassGroups, std::move(preRenderCommandList), std::move(postRenderCommandList),
+                                                                                                CS::RenderFrameData(nullptr));
                     
                     CSIT_ASSERT(renderCommandBuffer->GetNumSlots() == 3, "Incorrect number of render command buffer slots");
                     
@@ -257,8 +255,6 @@ namespace CSTest
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
                 {
-                    CS::PagedLinearAllocator allocator(k_allocatorSize);
-                    
                     // In a more real work case, the pre and post list would only contain load and unload commands, however we are using
                     // apply camera commands as they're easier to setup for testing.
                     CS::RenderCommandListUPtr preRenderCommandList(new CS::RenderCommandList());
@@ -267,8 +263,8 @@ namespace CSTest
                     CS::RenderCommandListUPtr postRenderCommandList(new CS::RenderCommandList());
                     postRenderCommandList->AddApplyCameraCommand(CS::Vector3::k_zero, CS::Matrix4::k_identity);
                     
-                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, &allocator, *targetRenderPassGroups, std::vector<CS::RenderDynamicMeshAUPtr>(),
-                                                                                                std::vector<CS::RenderSkinnedAnimationAUPtr>(),  std::move(preRenderCommandList), std::move(postRenderCommandList));
+                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, *targetRenderPassGroups, std::move(preRenderCommandList), std::move(postRenderCommandList),
+                                                                                                CS::RenderFrameData(nullptr));
                     
                     CSIT_ASSERT(renderCommandBuffer->GetNumSlots() == 6, "Incorrect number of render command buffer slots");
                     

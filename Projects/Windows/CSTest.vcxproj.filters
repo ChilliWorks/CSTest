@@ -67,6 +67,9 @@
     <Filter Include="AppSource\Sprite">
       <UniqueIdentifier>{7bf62ce1-bc7a-479f-81aa-5f4b00861d16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\AnimatedModel">
+      <UniqueIdentifier>{7fa3f44a-1e9e-48b3-b8c6-00e3781c56dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -234,6 +237,9 @@
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\PagedLinearAllocator.cpp">
       <Filter>AppSource\UnitTest\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\AnimatedModel\State.cpp">
+      <Filter>AppSource\AnimatedModel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -367,6 +373,9 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Sprite\State.h">
       <Filter>AppSource\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\AnimatedModel\State.h">
+      <Filter>AppSource\AnimatedModel</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

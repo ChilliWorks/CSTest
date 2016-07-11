@@ -30,6 +30,7 @@
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Math.h>
 #include <ChilliSource/Core/System.h>
+#include <ChilliSource/Rendering/Model.h>
 
 namespace CSTest
 {
@@ -147,10 +148,12 @@ namespace CSTest
             /// @param in_model - The model which should be used.
             /// @param in_material - The material that should be used.
             /// @param in_animation - The animation which should be used.
+            /// @param in_playbackType - The animation playback type.
             ///
             /// @return The animated model entity.
             //------------------------------------------------------------------------------
-            CS::EntityUPtr CreateAnimatedModel(const CS::ModelCSPtr& in_model, const CS::MaterialCSPtr& in_material, const CS::SkinnedAnimationCSPtr& in_animation) noexcept;
+            CS::EntityUPtr CreateAnimatedModel(const CS::ModelCSPtr& in_model, const CS::MaterialCSPtr& in_material, const CS::SkinnedAnimationCSPtr& in_animation,
+                                               CS::AnimatedModelComponent::PlaybackType in_playbackType) noexcept;
     
         private:
             friend class CS::Application;
