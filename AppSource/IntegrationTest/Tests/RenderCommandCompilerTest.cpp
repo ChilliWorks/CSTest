@@ -222,7 +222,7 @@ namespace CSTest
                     CS::RenderCommandListUPtr postRenderCommandList(new CS::RenderCommandList());
                     
                     auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, &allocator, *targetRenderPassGroups, std::vector<CS::RenderDynamicMeshAUPtr>(),
-                                                                                                std::move(preRenderCommandList), std::move(postRenderCommandList));
+                                                                                                std::vector<CS::RenderSkinnedAnimationAUPtr>(), std::move(preRenderCommandList), std::move(postRenderCommandList));
                     
                     CSIT_ASSERT(renderCommandBuffer->GetNumSlots() == 3, "Incorrect number of render command buffer slots");
                     
@@ -267,8 +267,8 @@ namespace CSTest
                     CS::RenderCommandListUPtr postRenderCommandList(new CS::RenderCommandList());
                     postRenderCommandList->AddApplyCameraCommand(CS::Vector3::k_zero, CS::Matrix4::k_identity);
                     
-                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, &allocator, *targetRenderPassGroups, std::vector<CS::RenderDynamicMeshAUPtr>(), std::move(preRenderCommandList),
-                                                                                                std::move(postRenderCommandList));
+                    auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, &allocator, *targetRenderPassGroups, std::vector<CS::RenderDynamicMeshAUPtr>(),
+                                                                                                std::vector<CS::RenderSkinnedAnimationAUPtr>(),  std::move(preRenderCommandList), std::move(postRenderCommandList));
                     
                     CSIT_ASSERT(renderCommandBuffer->GetNumSlots() == 6, "Incorrect number of render command buffer slots");
                     

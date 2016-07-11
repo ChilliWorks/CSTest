@@ -164,6 +164,7 @@ namespace CSTest
             
             auto animatedModelComponent = m_renderComponentFactory->CreateAnimatedModelComponent(in_model, in_material);
             animatedModelComponent->AttachAnimation(in_animation);
+            animatedModelComponent->SetPlaybackType(CS::AnimationPlaybackType::k_looping);
             
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-AnimatedModel");
