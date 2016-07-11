@@ -112,6 +112,23 @@ namespace CSTest
             /// Defaults to middle centre.
             //------------------------------------------------------------------------------
             CS::WidgetUPtr CreateBlank(const CS::Vector2& in_size, CS::AlignmentAnchor in_alignment = CS::AlignmentAnchor::k_middleCentre);
+            //------------------------------------------------------------------------------
+            /// @author Jordan Brown
+            ///
+            /// @param in_size - The size of the text box.
+            /// @param in_font - The font that the text will be rendered with.
+            /// @param in_text - The default text in the box.
+            /// @param in_alignment - [Optional] Both the origin and parental alignment.
+            /// Defaults to middle centre.
+            /// @param in_horizontalTextJustification - [Optional] The horizontal
+            /// justification of the text. Defaults to centre.
+            /// @param in_verticalTextJustification - [Optional] The vertical justification
+            /// of the text. Defaults to centre.
+            //------------------------------------------------------------------------------
+            CS::WidgetUPtr CreateTextBox(const CS::Vector2& in_size, const CS::FontCSPtr& in_font, const std::string& in_text, CS::AlignmentAnchor in_alignment = CS::AlignmentAnchor::k_middleCentre,
+                                           CS::HorizontalTextJustification in_horizontalTextJustification = CS::HorizontalTextJustification::k_centre,
+                                           CS::VerticalTextJustification in_verticalTextJustification = CS::VerticalTextJustification::k_centre);
+
             
         private:
             friend class CS::Application;

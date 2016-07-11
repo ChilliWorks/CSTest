@@ -28,9 +28,11 @@
 
 #include <SmokeTest/State.h>
 
+#include <Common/Core/TestNavigator.h>
+#include <Common/Input/BackButtonSystem.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
-#include <Common/Core/TestNavigator.h>
+#include <Accelerometer/State.h>
 #include <CricketAudio/State.h>
 #include <DownloadProgress/State.h>
 #include <EmailComposer/State.h>
@@ -39,6 +41,11 @@
 #include <Particle/State.h>
 #include <Sprite/State.h>
 #include <WebView/State.h>
+#include <DialogueBox/State.h>
+#include <LocalNotifications/State.h>
+#include <TextEntry/State.h>
+#include <Keyboard/State.h>
+#include <VideoPlayer/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -54,6 +61,7 @@ namespace CSTest
         {
             CreateSystem<Common::TestNavigator>("Smoke Tests");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
+            CreateSystem<Common::BackButtonSystem>();
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -103,8 +111,41 @@ namespace CSTest
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<EmailComposer::State>());
             });
+
+            optionsMenuDesc.AddButton("Accelerometer", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Accelerometer::State>());
+			});
+			
+			optionsMenuDesc.AddButton("Local Notifications", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<LocalNotifications::State>());
+            });
+
 #endif
-            
+
+            optionsMenuDesc.AddButton("Video Player", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<VideoPlayer::State>());
+            });
+
+            optionsMenuDesc.AddButton("Dialogue Boxes", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<DialogueBox::State>());
+            });
+
+#ifdef CS_TARGETPLATFORM_WINDOWS
+            optionsMenuDesc.AddButton("Keyboard", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Keyboard::State>());
+            });
+#endif
+
+            optionsMenuDesc.AddButton("Text Entry", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<TextEntry::State>());
+            });
+
             m_optionsMenuPresenter->Present(optionsMenuDesc);
         }
     }

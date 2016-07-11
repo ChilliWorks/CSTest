@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.cpp" />
+    <ClCompile Include="..\..\AppSource\Accelerometer\State.cpp" />
     <ClCompile Include="..\..\AppSource\App.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Behaviour\FollowerComponent.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.cpp" />
@@ -26,10 +28,12 @@
     <ClCompile Include="..\..\AppSource\Common\Core\BasicEntityFactory.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\ResultPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Core\TestNavigator.cpp" />
+    <ClCompile Include="..\..\AppSource\Common\Input\BackButtonSystem.cpp" />
     <ClCompile Include="..\..\AppSource\Common\UI\BasicWidgetFactory.cpp" />
     <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuDesc.cpp" />
     <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\CricketAudio\State.cpp" />
+    <ClCompile Include="..\..\AppSource\DialogueBox\State.cpp" />
     <ClCompile Include="..\..\AppSource\DownloadProgress\DownloadProgressTestSystem.cpp" />
     <ClCompile Include="..\..\AppSource\DownloadProgress\State.cpp" />
     <ClCompile Include="..\..\AppSource\EmailComposer\State.cpp" />
@@ -52,7 +56,10 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TaskSchedulerTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TextInputStreamTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TextOutputStreamTest.cpp" />
+    <ClCompile Include="..\..\AppSource\Keyboard\KeyboardPresenter.cpp" />
+    <ClCompile Include="..\..\AppSource\Keyboard\State.cpp" />
     <ClCompile Include="..\..\AppSource\Lighting\State.cpp" />
+    <ClCompile Include="..\..\AppSource\LocalNotifications\State.cpp" />
     <ClCompile Include="..\..\AppSource\MainMenu\State.cpp" />
     <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\FrameTimeCalculator.cpp" />
     <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\SphereBounceComponent.cpp" />
@@ -60,6 +67,8 @@
     <ClCompile Include="..\..\AppSource\Particle\State.cpp" />
     <ClCompile Include="..\..\AppSource\SmokeTest\State.cpp" />
     <ClCompile Include="..\..\AppSource\Sprite\State.cpp" />
+    <ClCompile Include="..\..\AppSource\TextEntry\State.cpp" />
+    <ClCompile Include="..\..\AppSource\TextEntry\TextEntryPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\State.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.cpp" />
@@ -73,9 +82,12 @@
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector2.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector3.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector4.cpp" />
+    <ClCompile Include="..\..\AppSource\VideoPlayer\State.cpp" />
     <ClCompile Include="..\..\AppSource\WebView\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.h" />
+    <ClInclude Include="..\..\AppSource\Accelerometer\State.h" />
     <ClInclude Include="..\..\AppSource\App.h" />
     <ClInclude Include="..\..\AppSource\Common\Behaviour\FollowerComponent.h" />
     <ClInclude Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.h" />
@@ -83,11 +95,13 @@
     <ClInclude Include="..\..\AppSource\Common\Core\BasicEntityFactory.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\ResultPresenter.h" />
     <ClInclude Include="..\..\AppSource\Common\Core\TestNavigator.h" />
+    <ClInclude Include="..\..\AppSource\Common\Input\BackButtonSystem.h" />
     <ClInclude Include="..\..\AppSource\Common\UI\BasicWidgetFactory.h" />
     <ClInclude Include="..\..\AppSource\Common\UI\OptionsMenuDesc.h" />
     <ClInclude Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.h" />
     <ClInclude Include="..\..\AppSource\CricketAudio\State.h" />
     <ClInclude Include="..\..\AppSource\CSTest.h" />
+    <ClInclude Include="..\..\AppSource\DialogueBox\State.h" />
     <ClInclude Include="..\..\AppSource\DownloadProgress\DownloadProgressTestSystem.h" />
     <ClInclude Include="..\..\AppSource\DownloadProgress\State.h" />
     <ClInclude Include="..\..\AppSource\EmailComposer\State.h" />
@@ -103,7 +117,10 @@
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestDesc.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\Tester.h" />
     <ClInclude Include="..\..\AppSource\IntegrationTest\TestSystem\TestRegistry.h" />
+    <ClInclude Include="..\..\AppSource\Keyboard\KeyboardPresenter.h" />
+    <ClInclude Include="..\..\AppSource\Keyboard\State.h" />
     <ClInclude Include="..\..\AppSource\Lighting\State.h" />
+    <ClInclude Include="..\..\AppSource\LocalNotifications\State.h" />
     <ClInclude Include="..\..\AppSource\MainMenu\State.h" />
     <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\FrameTimeCalculator.h" />
     <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\SphereBounceComponent.h" />
@@ -111,6 +128,8 @@
     <ClInclude Include="..\..\AppSource\Particle\State.h" />
     <ClInclude Include="..\..\AppSource\SmokeTest\State.h" />
     <ClInclude Include="..\..\AppSource\Sprite\State.h" />
+    <ClInclude Include="..\..\AppSource\TextEntry\State.h" />
+    <ClInclude Include="..\..\AppSource\TextEntry\TextEntryPresenter.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\State.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.h" />
@@ -119,6 +138,7 @@
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\Report.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\ReportPresenter.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.h" />
+    <ClInclude Include="..\..\AppSource\VideoPlayer\State.h" />
     <ClInclude Include="..\..\AppSource\WebView\State.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -28,9 +28,11 @@
 
 #include <CricketAudio/State.h>
 
+#include <Common/Core/TestNavigator.h>
+#include <Common/Input/BackButtonSystem.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
-#include <Common/Core/TestNavigator.h>
+
 #include <DownloadProgress/State.h>
 
 #include <ChilliSource/Audio/CricketAudio.h>
@@ -48,6 +50,7 @@ namespace CSTest
         {
             CreateSystem<Common::TestNavigator>("Cricket Audio");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
+            CreateSystem<Common::BackButtonSystem>();
 
             m_audioPlayer = CreateSystem<CS::CkAudioPlayer>();
         }

@@ -67,6 +67,27 @@
     <Filter Include="AppSource\Sprite">
       <UniqueIdentifier>{7bf62ce1-bc7a-479f-81aa-5f4b00861d16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\Accelerometer">
+      <UniqueIdentifier>{7e969241-dc30-4852-bb7f-49ad254607f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\DialogueBox">
+      <UniqueIdentifier>{e1719dc2-ca8c-4f21-9865-480fe0fb74e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Keyboard">
+      <UniqueIdentifier>{9826d840-95d0-4865-ad06-5987450f5391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\LocalNotifications">
+      <UniqueIdentifier>{01aa7529-841e-4f28-83bd-e7514225bb88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\TextEntry">
+      <UniqueIdentifier>{c512a7e0-9a4d-4b5b-9ac0-768a00c3586f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\VideoPlayer">
+      <UniqueIdentifier>{77a9d87b-47c6-4705-a884-14b086090d9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Common\Input">
+      <UniqueIdentifier>{fef1fcb4-5a5d-45c7-ae8a-a2fc83f94eb4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -228,6 +249,36 @@
     <ClCompile Include="..\..\AppSource\Sprite\State.cpp">
       <Filter>AppSource\Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.cpp">
+      <Filter>AppSource\Accelerometer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Accelerometer\State.cpp">
+      <Filter>AppSource\Accelerometer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\DialogueBox\State.cpp">
+      <Filter>AppSource\DialogueBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Keyboard\KeyboardPresenter.cpp">
+      <Filter>AppSource\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Keyboard\State.cpp">
+      <Filter>AppSource\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\LocalNotifications\State.cpp">
+      <Filter>AppSource\LocalNotifications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\TextEntry\State.cpp">
+      <Filter>AppSource\TextEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\TextEntry\TextEntryPresenter.cpp">
+      <Filter>AppSource\TextEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\VideoPlayer\State.cpp">
+      <Filter>AppSource\VideoPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Common\Input\BackButtonSystem.cpp">
+      <Filter>AppSource\Common\Input</Filter>
+	</ClCompile>
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\LinearAllocator.cpp">
       <Filter>AppSource\UnitTest\Tests</Filter>
     </ClCompile>
@@ -367,6 +418,36 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Sprite\State.h">
       <Filter>AppSource\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.h">
+      <Filter>AppSource\Accelerometer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Accelerometer\State.h">
+      <Filter>AppSource\Accelerometer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\DialogueBox\State.h">
+      <Filter>AppSource\DialogueBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Keyboard\KeyboardPresenter.h">
+      <Filter>AppSource\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Keyboard\State.h">
+      <Filter>AppSource\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\LocalNotifications\State.h">
+      <Filter>AppSource\LocalNotifications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\TextEntry\State.h">
+      <Filter>AppSource\TextEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\TextEntry\TextEntryPresenter.h">
+      <Filter>AppSource\TextEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\VideoPlayer\State.h">
+      <Filter>AppSource\VideoPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Common\Input\BackButtonSystem.h">
+      <Filter>AppSource\Common\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
