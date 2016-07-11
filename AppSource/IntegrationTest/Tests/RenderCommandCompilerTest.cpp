@@ -42,11 +42,6 @@ namespace CSTest
     {
         namespace
         {
-            namespace
-            {
-                const u32 k_allocatorSize = 1024 * 1024;
-            }
-            
             /// @return a new opaque, unlit, white material.
             ///
             CS::MaterialCSPtr CreateOpaqueMaterial() noexcept

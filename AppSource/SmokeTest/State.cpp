@@ -33,6 +33,7 @@
 #include <Common/UI/OptionsMenuDesc.h>
 #include <Common/Core/TestNavigator.h>
 #include <CricketAudio/State.h>
+#include <CustomShader/State.h>
 #include <DownloadProgress/State.h>
 #include <EmailComposer/State.h>
 #include <Gesture/State.h>
@@ -82,6 +83,11 @@ namespace CSTest
             optionsMenuDesc.AddButton("Animated Model", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<AnimatedModel::State>());
+            });
+
+            optionsMenuDesc.AddButton("Custom Shader", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<CustomShader::State>());
             });
             
             optionsMenuDesc.AddButton("Gestures", [=]()

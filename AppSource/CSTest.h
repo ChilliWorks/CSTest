@@ -57,6 +57,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(State);
     }
     
+    namespace CustomShader
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
     namespace DownloadProgress
     {
         CS_FORWARDDECLARE_CLASS(State);
