@@ -1,6 +1,6 @@
 //  The MIT License (MIT)
 //
-//  Copyright © 2016 Tag Games. All rights reserved.
+//  Copyright ï¿½ 2016 Tag Games. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -78,6 +78,15 @@ namespace CSTest
             optionsMenuDesc.AddButton("Queue High-Priority Notification", [=]()
             {
                 m_notificationManager->ScheduleLocalNotificationAfterTime(u32(2), notificationParams, TimeIntervalSecs(10), CS::Notification::Priority::k_high);
+            });
+            
+            optionsMenuDesc.AddButton("Get Scheduled Notifications", [=]()
+            {
+                m_notificationManager->GetScheduledNotifications([=](const std::vector<ChilliSource::NotificationCSPtr>& notificationList)
+                {
+                    auto dialogueSystem = CS::Application::Get()->GetSystem<CS::DialogueBoxSystem>();
+                    dialogueSystem->ShowSystemDialogue(0, nullptr, "Scheduled Notifications", "There are " + CS::ToString(notificationList.size()) + " scheduled notifications.", "OK");
+                });
             });
 
             optionsMenuDesc.AddButton("Cancel all Notifications", [=]()
