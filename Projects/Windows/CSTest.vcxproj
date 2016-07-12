@@ -31,6 +31,7 @@
     <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuDesc.cpp" />
     <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\CricketAudio\State.cpp" />
+    <ClCompile Include="..\..\AppSource\CustomShader\State.cpp" />
     <ClCompile Include="..\..\AppSource\DownloadProgress\DownloadProgressTestSystem.cpp" />
     <ClCompile Include="..\..\AppSource\DownloadProgress\State.cpp" />
     <ClCompile Include="..\..\AppSource\EmailComposer\State.cpp" />
@@ -90,6 +91,7 @@
     <ClInclude Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.h" />
     <ClInclude Include="..\..\AppSource\CricketAudio\State.h" />
     <ClInclude Include="..\..\AppSource\CSTest.h" />
+    <ClInclude Include="..\..\AppSource\CustomShader\State.h" />
     <ClInclude Include="..\..\AppSource\DownloadProgress\DownloadProgressTestSystem.h" />
     <ClInclude Include="..\..\AppSource\DownloadProgress\State.h" />
     <ClInclude Include="..\..\AppSource\EmailComposer\State.h" />

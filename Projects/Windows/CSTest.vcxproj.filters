@@ -70,6 +70,9 @@
     <Filter Include="AppSource\AnimatedModel">
       <UniqueIdentifier>{7fa3f44a-1e9e-48b3-b8c6-00e3781c56dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\CustomShader">
+      <UniqueIdentifier>{f7004021-ce4e-462e-8e7a-ed12751f84a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -240,6 +243,9 @@
     <ClCompile Include="..\..\AppSource\AnimatedModel\State.cpp">
       <Filter>AppSource\AnimatedModel</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\CustomShader\State.cpp">
+      <Filter>AppSource\CustomShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -376,6 +382,9 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\AnimatedModel\State.h">
       <Filter>AppSource\AnimatedModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\CustomShader\State.h">
+      <Filter>AppSource\CustomShader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

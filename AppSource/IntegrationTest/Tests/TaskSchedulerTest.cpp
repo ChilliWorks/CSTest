@@ -40,12 +40,12 @@ namespace CSTest
         namespace
         {
             constexpr std::array<CS::TaskType, 4> k_backgroundTaskTypes =
-            {
+            {{
                 CS::TaskType::k_small,
                 CS::TaskType::k_large,
                 CS::TaskType::k_gameLogic,
                 CS::TaskType::k_file
-            };
+            }};
             
             //------------------------------------------------------------------------------
             /// Chains a series of child tasks recursively. Each parent task is finished
