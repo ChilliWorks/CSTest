@@ -34,6 +34,11 @@
 namespace CSTest
 {
     CS_FORWARDDECLARE_CLASS(App);
+
+    namespace Accelerometer
+    {
+        CS_FORWARDDECLARE_CLASS(AccelerometerPresenter);
+    }
     
     namespace AnimatedModel
     {
@@ -50,6 +55,7 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(OrbiterComponent);
         CS_FORWARDDECLARE_CLASS(ResultPresenter);
         CS_FORWARDDECLARE_CLASS(TestNavigator);
+        CS_FORWARDDECLARE_CLASS(BackButtonSystem);
     }
     
     namespace CricketAudio
@@ -86,6 +92,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(Tester);
         CS_FORWARDDECLARE_CLASS(TestRegistry);
     }
+
+    namespace Keyboard
+    {
+        CS_FORWARDDECLARE_CLASS(KeyboardPresenter);
+    }
     
     namespace Lighting
     {
@@ -106,6 +117,12 @@ namespace CSTest
     {
         CS_FORWARDDECLARE_CLASS(State);
     }
+
+    namespace TextEntry
+    {
+        CS_FORWARDDECLARE_CLASS(TextEntryPresenter);
+        CS_FORWARDDECLARE_CLASS(State);
+    }
     
     namespace Sprite
     {
@@ -122,6 +139,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(ReportPresenter);
         CS_FORWARDDECLARE_CLASS(State);
         CS_FORWARDDECLARE_CLASS(TestSystem);
+    }
+
+    namespace VideoPlayer
+    {
+        CS_FORWARDDECLARE_CLASS(State);
     }
     
     namespace WebView

@@ -39,11 +39,12 @@ namespace CSTest
     {
         namespace
         {
-            constexpr std::array<CS::TaskType, 4> k_backgroundTaskTypes =
+            constexpr std::array<CS::TaskType, 5> k_backgroundTaskTypes =
             {{
                 CS::TaskType::k_small,
                 CS::TaskType::k_large,
                 CS::TaskType::k_gameLogic,
+                CS::TaskType::k_system,
                 CS::TaskType::k_file
             }};
             
@@ -140,7 +141,8 @@ namespace CSTest
                     taskScheduler->ScheduleTask(taskType, [=](const CS::TaskContext& in_taskContext) noexcept
                     {
                         CSIT_ASSERT(in_taskContext.GetType() == taskType, "Incorrect task type.");
-                        CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                        //TODO: Re-add this once main and system threads are seperated
+                        //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
                         if (++(*taskTypesPassed) == k_backgroundTaskTypes.size())
                         {
@@ -428,7 +430,7 @@ namespace CSTest
                 taskScheduler->ScheduleTasks(CS::TaskType::k_small, level1Tasks, [=](const CS::TaskContext& in_taskContext) noexcept
                 {
                     CSIT_ASSERT(in_taskContext.GetType() == CS::TaskType::k_small, "Incorrect task type.");
-                    CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                    CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");;
                     CSIT_ASSERT(*executedLevel3TaskCount == u32(std::pow(k_numTasksPerLevel, k_numLevels)), "An incorrect amount of tasks were run.");
 
                     CSIT_PASS();
