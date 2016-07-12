@@ -15,6 +15,8 @@
 		273EA00A1D33E17400BB21FB /* TextEntryPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273EA0071D33E17400BB21FB /* TextEntryPresenter.cpp */; };
 		273EA00D1D33E18200BB21FB /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273EA00B1D33E18200BB21FB /* State.cpp */; };
 		273EA01A1D33E21E00BB21FB /* BackButtonSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273EA0181D33E21E00BB21FB /* BackButtonSystem.cpp */; };
+		274C122C1D35223100820A4B /* RemoteNotificationsPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274C12281D35223100820A4B /* RemoteNotificationsPresenter.cpp */; };
+		274C122D1D35223100820A4B /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274C122A1D35223100820A4B /* State.cpp */; };
 		815612501D2EAB25000DD01B /* LinearAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8156124E1D2EAB25000DD01B /* LinearAllocator.cpp */; };
 		815612511D2EAB25000DD01B /* PagedLinearAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8156124F1D2EAB25000DD01B /* PagedLinearAllocator.cpp */; };
 		8164FEE01CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8164FEDF1CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp */; };
@@ -134,6 +136,10 @@
 		273EA00C1D33E18200BB21FB /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = VideoPlayer/State.h; sourceTree = "<group>"; };
 		273EA0181D33E21E00BB21FB /* BackButtonSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BackButtonSystem.cpp; path = Input/BackButtonSystem.cpp; sourceTree = "<group>"; };
 		273EA0191D33E21E00BB21FB /* BackButtonSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BackButtonSystem.h; path = Input/BackButtonSystem.h; sourceTree = "<group>"; };
+		274C12281D35223100820A4B /* RemoteNotificationsPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RemoteNotificationsPresenter.cpp; path = RemoteNotifications/RemoteNotificationsPresenter.cpp; sourceTree = "<group>"; };
+		274C12291D35223100820A4B /* RemoteNotificationsPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoteNotificationsPresenter.h; path = RemoteNotifications/RemoteNotificationsPresenter.h; sourceTree = "<group>"; };
+		274C122A1D35223100820A4B /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = RemoteNotifications/State.cpp; sourceTree = "<group>"; };
+		274C122B1D35223100820A4B /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = RemoteNotifications/State.h; sourceTree = "<group>"; };
 		8156124E1D2EAB25000DD01B /* LinearAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinearAllocator.cpp; sourceTree = "<group>"; };
 		8156124F1D2EAB25000DD01B /* PagedLinearAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PagedLinearAllocator.cpp; sourceTree = "<group>"; };
 		8164FEDF1CFF17C8004652E3 /* ForwardRenderPassCompilerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ForwardRenderPassCompilerTest.cpp; sourceTree = "<group>"; };
@@ -371,6 +377,17 @@
 			name = Input;
 			sourceTree = "<group>";
 		};
+		274C12261D35221800820A4B /* RemoteNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				274C12281D35223100820A4B /* RemoteNotificationsPresenter.cpp */,
+				274C12291D35223100820A4B /* RemoteNotificationsPresenter.h */,
+				274C122A1D35223100820A4B /* State.cpp */,
+				274C122B1D35223100820A4B /* State.h */,
+			);
+			name = RemoteNotifications;
+			sourceTree = "<group>";
+		};
 		81A78D721D0180CA00871640 /* MultiThreadedRenderer */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,6 +420,7 @@
 				81C63AF21C9C196700E1A669 /* MainMenu */,
 				81A78D721D0180CA00871640 /* MultiThreadedRenderer */,
 				81B190561C9B16BE002EC8AC /* Particle */,
+				274C12261D35221800820A4B /* RemoteNotifications */,
 				81C63AF51C9C196700E1A669 /* SmokeTest */,
 				81E230D61D25309700628581 /* Sprite */,
 				273E9FF71D33E12B00BB21FB /* TextEntry */,
@@ -872,7 +890,9 @@
 				81B190891C9B16BE002EC8AC /* State.cpp in Sources */,
 				81C63AF11C9C138F00E1A669 /* OptionsMenuPresenter.cpp in Sources */,
 				81AF89781D1447F000A02E99 /* RenderCommandCompilerTest.cpp in Sources */,
+				274C122C1D35223100820A4B /* RemoteNotificationsPresenter.cpp in Sources */,
 				81B190861C9B16BE002EC8AC /* TestDesc.cpp in Sources */,
+				274C122D1D35223100820A4B /* State.cpp in Sources */,
 				81C58C281CB3D88300EA58A0 /* TaskSchedulerTest.cpp in Sources */,
 				81B1908F1C9B16BE002EC8AC /* Vector4.cpp in Sources */,
 				81B1908E1C9B16BE002EC8AC /* Vector3.cpp in Sources */,

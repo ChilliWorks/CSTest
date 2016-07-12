@@ -26,11 +26,11 @@
 #include <Common/UI/BasicWidgetFactory.h>
 
 #include <ChilliSource/Core/Base.h>
+#include <ChilliSource/Core/Cryptographic/BaseEncoding.h>
 #include <ChilliSource/Core/DialogueBox.h>
+#include <ChilliSource/Core/Notification.h>
 #include <ChilliSource/Core/Resource.h>
 #include <ChilliSource/Core/State.h>
-#include <ChilliSource/Core/Math/Vector3.h>
-#include <ChilliSource/Input/Accelerometer.h>
 #include <ChilliSource/Rendering/Font.h>
 #include <ChilliSource/UI/Base.h>
 #include <ChilliSource/UI/Text.h>
@@ -67,7 +67,7 @@ namespace CSTest
             auto uiCanvas = GetState()->GetUICanvas();
             uiCanvas->AddWidget(std::move(label));
 
-            m_textComponent->SetText("No connection.");
+            m_textComponent->SetText("No connection. Token not generated.");
         }
 
         //------------------------------------------------------------------------------
@@ -77,14 +77,18 @@ namespace CSTest
 
             m_remoteNotificationSystem = CS::Application::Get()->GetSystem<CS::RemoteNotificationSystem>();
 
-            m_remoteNotificationSystem->GetReceivedEvent().OpenConnection([=](const CS::NotificationCSPtr& notification)
+            m_eventConnection = m_remoteNotificationSystem->GetReceivedEvent().OpenConnection([=](const CS::NotificationCSPtr& notification)
             {
-                CS::Application::Get()->GetSystem<CS::DialogueBoxSystem>()->ShowSystemDialogue(0, nullptr, "Notification Received", "Remote Notification Received!", "OK");
+                CS::Application::Get()->GetTaskScheduler()->ScheduleTask(ChilliSource::TaskType::k_mainThread, [=](const ChilliSource::TaskContext& taskContext)
+                {
+                    CS::Application::Get()->GetSystem<CS::DialogueBoxSystem>()->ShowSystemDialogue(0, nullptr, "Remote Notification Received", notification->m_params.GetValueOrDefault("Body", "No Message"), "OK");
+                });
             });
 
             m_remoteNotificationSystem->RequestRemoteToken([=](const std::string& token)
             {
-                m_textComponent->SetText("Device Token: " + token);
+                CS_LOG_WARNING("Base64 Device Token: " + token);
+                m_textComponent->SetText("Device token can be retrieved from device log.");
             });
 
             m_remoteNotificationSystem->SetEnabled(true);
