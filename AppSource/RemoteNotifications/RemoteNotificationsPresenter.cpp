@@ -86,6 +86,8 @@ namespace CSTest
             {
                 m_textComponent->SetText("Device Token: " + token);
             });
+
+            m_remoteNotificationSystem->SetEnabled(true);
         }
 
         //------------------------------------------------------------------------------
