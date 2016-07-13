@@ -74,7 +74,7 @@ namespace CSTest
             deviceInfo += "\nDevice Locale: " + device->GetLocale();
             deviceInfo += "\nDevice Language: " + device->GetLanguage();
             deviceInfo += "\nDevice OS Version: " + device->GetOSVersion();
-            deviceInfo += "\nNumber of CPU Cores: " + device->GetNumberOfCPUCores();
+            deviceInfo += "\nNumber of CPU Cores: " + CS::ToString(device->GetNumberOfCPUCores());
 
             m_textComponent->SetText(deviceInfo);
         }
