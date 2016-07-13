@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27408C171D3673DB00A0B003 /* DevicePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C131D3673DB00A0B003 /* DevicePresenter.cpp */; };
+		27408C181D3673DB00A0B003 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C151D3673DB00A0B003 /* State.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		818463191D350422004B0C46 /* AccelerometerPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462811D350421004B0C46 /* AccelerometerPresenter.cpp */; };
 		8184631A1D350422004B0C46 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462831D350421004B0C46 /* State.cpp */; };
@@ -122,6 +124,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27408C131D3673DB00A0B003 /* DevicePresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DevicePresenter.cpp; path = Device/DevicePresenter.cpp; sourceTree = "<group>"; };
+		27408C141D3673DB00A0B003 /* DevicePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DevicePresenter.h; path = Device/DevicePresenter.h; sourceTree = "<group>"; };
+		27408C151D3673DB00A0B003 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Device/State.cpp; sourceTree = "<group>"; };
+		27408C161D3673DB00A0B003 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Device/State.h; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		818462811D350421004B0C46 /* AccelerometerPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AccelerometerPresenter.cpp; sourceTree = "<group>"; };
 		818462821D350421004B0C46 /* AccelerometerPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometerPresenter.h; sourceTree = "<group>"; };
@@ -325,6 +331,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27408C111D3673C800A0B003 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				27408C131D3673DB00A0B003 /* DevicePresenter.cpp */,
+				27408C141D3673DB00A0B003 /* DevicePresenter.h */,
+				27408C151D3673DB00A0B003 /* State.cpp */,
+				27408C161D3673DB00A0B003 /* State.h */,
+			);
+			name = Device;
+			sourceTree = "<group>";
+		};
 		8184627F1D350421004B0C46 /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +353,7 @@
 				818462A31D350421004B0C46 /* CricketAudio */,
 				818462A61D350421004B0C46 /* CSTest.h */,
 				818462A71D350421004B0C46 /* CustomShader */,
+				27408C111D3673C800A0B003 /* Device */,
 				818462AA1D350421004B0C46 /* DialogueBox */,
 				818462AD1D350421004B0C46 /* DownloadProgress */,
 				818462B21D350421004B0C46 /* EmailComposer */,
@@ -886,6 +904,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27408C171D3673DB00A0B003 /* DevicePresenter.cpp in Sources */,
 				818463191D350422004B0C46 /* AccelerometerPresenter.cpp in Sources */,
 				818463501D350422004B0C46 /* Vector2.cpp in Sources */,
 				8184634D1D350422004B0C46 /* State.cpp in Sources */,
@@ -935,6 +954,7 @@
 				818463281D350422004B0C46 /* State.cpp in Sources */,
 				8184634A1D350422004B0C46 /* State.cpp in Sources */,
 				818463511D350422004B0C46 /* Vector3.cpp in Sources */,
+				27408C181D3673DB00A0B003 /* State.cpp in Sources */,
 				818463561D350422004B0C46 /* FailedTestCase.cpp in Sources */,
 				818463401D350422004B0C46 /* KeyboardPresenter.cpp in Sources */,
 				818463361D350422004B0C46 /* RenderCommandCompilerTest.cpp in Sources */,
