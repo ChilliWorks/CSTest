@@ -50,6 +50,8 @@ namespace CSTest
         {
             GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
 
+#ifdef CS_TARGETPLATFORM_WINDOWS
+
             Common::OptionsMenuDesc optionsMenuDesc;
 
             optionsMenuDesc.AddButton("Windowed", [=]()
@@ -66,6 +68,8 @@ namespace CSTest
             });
 
             m_optionsMenuPresenter->Present(optionsMenuDesc);
+
+#endif
 
         }
     }

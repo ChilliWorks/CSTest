@@ -91,8 +91,13 @@ namespace CSTest
             int count = 0;
             for (auto screenResolution : screen->GetSupportedResolutions())
             {
-                screenInfo += CS::ToString(screenResolution.x) + "x" + CS::ToString(screenResolution.y) + "   ";
-                if (++count % 5 == 0)
+                screenInfo += CS::ToString(screenResolution.x) + "x" + CS::ToString(screenResolution.y);
+                count++;
+                if (count < screen->GetSupportedResolutions().size())
+                {
+                    screenInfo += ", ";
+                }
+                if (count % 4 == 0)
                 {
                     screenInfo += "\n";
                 }
