@@ -69,6 +69,8 @@
     <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\SphereBounceComponent.cpp" />
     <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\State.cpp" />
     <ClCompile Include="..\..\AppSource\Particle\State.cpp" />
+    <ClCompile Include="..\..\AppSource\Screen\ScreenPresenter.cpp" />
+    <ClCompile Include="..\..\AppSource\Screen\State.cpp" />
     <ClCompile Include="..\..\AppSource\SmokeTest\State.cpp" />
     <ClCompile Include="..\..\AppSource\Sprite\State.cpp" />
     <ClCompile Include="..\..\AppSource\TextEntry\State.cpp" />
@@ -134,6 +136,8 @@
     <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\SphereBounceComponent.h" />
     <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\State.h" />
     <ClInclude Include="..\..\AppSource\Particle\State.h" />
+    <ClInclude Include="..\..\AppSource\Screen\ScreenPresenter.h" />
+    <ClInclude Include="..\..\AppSource\Screen\State.h" />
     <ClInclude Include="..\..\AppSource\SmokeTest\State.h" />
     <ClInclude Include="..\..\AppSource\Sprite\State.h" />
     <ClInclude Include="..\..\AppSource\TextEntry\State.h" />

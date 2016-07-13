@@ -118,6 +118,12 @@ namespace CSTest
     {
         CS_FORWARDDECLARE_CLASS(State);
     }
+
+    namespace Screen
+    {
+        CS_FORWARDDECLARE_CLASS(ScreenPresenter);
+        CS_FORWARDDECLARE_CLASS(State);
+    }
     
     namespace SmokeTest
     {

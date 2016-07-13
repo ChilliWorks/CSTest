@@ -97,6 +97,9 @@
     <Filter Include="AppSource\Device">
       <UniqueIdentifier>{d19e0b43-34de-4e9b-924e-5d1b69e80e5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\Screen">
+      <UniqueIdentifier>{7b287816-d6bf-456c-998b-a60a9dcc21a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -306,6 +309,12 @@
     <ClCompile Include="..\..\AppSource\Device\DevicePresenter.cpp">
       <Filter>AppSource\Device</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\Screen\State.cpp">
+      <Filter>AppSource\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Screen\ScreenPresenter.cpp">
+      <Filter>AppSource\Screen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -481,6 +490,12 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Device\State.h">
       <Filter>AppSource\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Screen\ScreenPresenter.h">
+      <Filter>AppSource\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Screen\State.h">
+      <Filter>AppSource\Screen</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
