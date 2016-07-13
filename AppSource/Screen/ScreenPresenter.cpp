@@ -36,6 +36,10 @@ namespace CSTest
 {
     namespace Screen
     {
+        namespace
+        {
+            constexpr u32 k_resolutionsPerLine = 4;
+        }
         CS_DEFINE_NAMEDTYPE(ScreenPresenter);
 
         //------------------------------------------------------------------------------
@@ -72,9 +76,7 @@ namespace CSTest
             m_eventConnection = screen->GetResolutionChangedEvent().OpenConnection([=](const CS::Vector2& newResolution)
             {
                 UpdateUI();
-            });
-            
-            
+            });      
         }
 
         //------------------------------------------------------------------------------
@@ -97,7 +99,7 @@ namespace CSTest
                 {
                     screenInfo += ", ";
                 }
-                if (count % 4 == 0)
+                if (count % k_resolutionsPerLine == 0)
                 {
                     screenInfo += "\n";
                 }
