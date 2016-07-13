@@ -49,9 +49,9 @@
 ///
 /// @return The new Application instance.
 //------------------------------------------------------------------------------
-CS::Application* CreateApplication() noexcept
+CS::Application* CreateApplication(CS::SystemInfoCUPtr systemInfo) noexcept
 {
-    return new CSTest::App();
+    return new CSTest::App(std::move(systemInfo));
 }
 
 #if defined(CS_TARGETPLATFORM_ANDROID) && defined(CS_ANDROIDFLAVOUR_GOOGLEPLAY)
@@ -74,6 +74,12 @@ std::string GetGooglePlayLvlPublicKey()
 
 namespace CSTest
 {
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
+    App::App(CS::SystemInfoCUPtr systemInfo) noexcept
+        : Application(std::move(systemInfo))
+    { 
+    }
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
     void App::CreateSystems() noexcept
