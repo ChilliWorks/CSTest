@@ -76,7 +76,7 @@ namespace CSTest
 {
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
-    App::App(ChilliSource::SystemInfoCUPtr systemInfo) noexcept
+    App::App(CS::SystemInfoCUPtr systemInfo) noexcept
         : Application(std::move(systemInfo))
     { 
     }
