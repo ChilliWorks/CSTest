@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		27408C171D3673DB00A0B003 /* DevicePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C131D3673DB00A0B003 /* DevicePresenter.cpp */; };
 		27408C181D3673DB00A0B003 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C151D3673DB00A0B003 /* State.cpp */; };
+		27408C251D36D6D300A0B003 /* ScreenPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C211D36D6D300A0B003 /* ScreenPresenter.cpp */; };
+		27408C261D36D6D300A0B003 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C231D36D6D300A0B003 /* State.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		818463191D350422004B0C46 /* AccelerometerPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462811D350421004B0C46 /* AccelerometerPresenter.cpp */; };
 		8184631A1D350422004B0C46 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462831D350421004B0C46 /* State.cpp */; };
@@ -128,6 +130,10 @@
 		27408C141D3673DB00A0B003 /* DevicePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DevicePresenter.h; path = Device/DevicePresenter.h; sourceTree = "<group>"; };
 		27408C151D3673DB00A0B003 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Device/State.cpp; sourceTree = "<group>"; };
 		27408C161D3673DB00A0B003 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Device/State.h; sourceTree = "<group>"; };
+		27408C211D36D6D300A0B003 /* ScreenPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScreenPresenter.cpp; path = Screen/ScreenPresenter.cpp; sourceTree = "<group>"; };
+		27408C221D36D6D300A0B003 /* ScreenPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScreenPresenter.h; path = Screen/ScreenPresenter.h; sourceTree = "<group>"; };
+		27408C231D36D6D300A0B003 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Screen/State.cpp; sourceTree = "<group>"; };
+		27408C241D36D6D300A0B003 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Screen/State.h; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		818462811D350421004B0C46 /* AccelerometerPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AccelerometerPresenter.cpp; sourceTree = "<group>"; };
 		818462821D350421004B0C46 /* AccelerometerPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometerPresenter.h; sourceTree = "<group>"; };
@@ -342,6 +348,17 @@
 			name = Device;
 			sourceTree = "<group>";
 		};
+		27408C1F1D36D6C100A0B003 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				27408C211D36D6D300A0B003 /* ScreenPresenter.cpp */,
+				27408C221D36D6D300A0B003 /* ScreenPresenter.h */,
+				27408C231D36D6D300A0B003 /* State.cpp */,
+				27408C241D36D6D300A0B003 /* State.h */,
+			);
+			name = Screen;
+			sourceTree = "<group>";
+		};
 		8184627F1D350421004B0C46 /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,6 +382,7 @@
 				818462E31D350421004B0C46 /* MainMenu */,
 				818462E61D350421004B0C46 /* MultiThreadedRenderer */,
 				818462ED1D350421004B0C46 /* Particle */,
+				27408C1F1D36D6C100A0B003 /* Screen */,
 				818462F01D350421004B0C46 /* SmokeTest */,
 				818462F31D350421004B0C46 /* Sprite */,
 				818462F61D350421004B0C46 /* TextEntry */,
@@ -945,6 +963,7 @@
 				8184631A1D350422004B0C46 /* State.cpp in Sources */,
 				8184632E1D350422004B0C46 /* GesturePresenter.cpp in Sources */,
 				818463461D350422004B0C46 /* SphereBounceComponent.cpp in Sources */,
+				27408C261D36D6D300A0B003 /* State.cpp in Sources */,
 				818463351D350422004B0C46 /* HttpRequestTest.cpp in Sources */,
 				818463321D350422004B0C46 /* BinaryOutputStreamTest.cpp in Sources */,
 				818463591D350422004B0C46 /* TestSystem.cpp in Sources */,
@@ -952,6 +971,7 @@
 				818463331D350422004B0C46 /* FileSystemTest.cpp in Sources */,
 				8184633E1D350422004B0C46 /* Tester.cpp in Sources */,
 				818463281D350422004B0C46 /* State.cpp in Sources */,
+				27408C251D36D6D300A0B003 /* ScreenPresenter.cpp in Sources */,
 				8184634A1D350422004B0C46 /* State.cpp in Sources */,
 				818463511D350422004B0C46 /* Vector3.cpp in Sources */,
 				27408C181D3673DB00A0B003 /* State.cpp in Sources */,
