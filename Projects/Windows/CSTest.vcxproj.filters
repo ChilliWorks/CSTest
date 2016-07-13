@@ -94,6 +94,9 @@
     <Filter Include="AppSource\CustomShader">
       <UniqueIdentifier>{09d90d7b-e8e9-4009-b2af-adac51904979}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\Device">
+      <UniqueIdentifier>{d19e0b43-34de-4e9b-924e-5d1b69e80e5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -297,6 +300,12 @@
     <ClCompile Include="..\..\AppSource\CustomShader\State.cpp">
       <Filter>AppSource\CustomShader</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\Device\State.cpp">
+      <Filter>AppSource\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Device\DevicePresenter.cpp">
+      <Filter>AppSource\Device</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -466,6 +475,12 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\CustomShader\State.h">
       <Filter>AppSource\CustomShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Device\DevicePresenter.h">
+      <Filter>AppSource\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Device\State.h">
+      <Filter>AppSource\Device</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

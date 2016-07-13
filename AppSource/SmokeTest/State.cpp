@@ -36,6 +36,7 @@
 #include <Accelerometer/State.h>
 #include <CricketAudio/State.h>
 #include <CustomShader/State.h>
+#include <Device/State.h>
 #include <DownloadProgress/State.h>
 #include <EmailComposer/State.h>
 #include <Gesture/State.h>
@@ -106,6 +107,11 @@ namespace CSTest
             optionsMenuDesc.AddButton("Cricket Audio", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<CricketAudio::State>());
+            });
+
+            optionsMenuDesc.AddButton("Device Info", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Device::State>());
             });
 
             optionsMenuDesc.AddButton("Download Progress", [=]()

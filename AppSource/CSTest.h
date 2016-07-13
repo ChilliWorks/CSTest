@@ -68,6 +68,12 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(State);
     }
     
+    namespace Device
+    {
+        CS_FORWARDDECLARE_CLASS(DevicePresenter);
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+
     namespace DownloadProgress
     {
         CS_FORWARDDECLARE_CLASS(State);

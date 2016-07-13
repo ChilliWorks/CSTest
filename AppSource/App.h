@@ -68,6 +68,15 @@ namespace CSTest
         /// @author Ian Copland
         //------------------------------------------------------------------------------
         void OnDestroy() noexcept override;
+
+    public:
+        //------------------------------------------------------------------------------
+        /// Constructor; needs the SystemInfo class to get information about device,
+        /// platform, and screen.
+        ///
+        /// @author Jordan Brown
+        //------------------------------------------------------------------------------
+        App(ChilliSource::SystemInfoCUPtr systemInfo) noexcept;
     };
 }
 
