@@ -49,6 +49,7 @@
 #include <TextEntry/State.h>
 #include <Keyboard/State.h>
 #include <VideoPlayer/State.h>
+#include <Screen/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -112,6 +113,11 @@ namespace CSTest
             optionsMenuDesc.AddButton("Device Info", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Device::State>());
+            });
+
+            optionsMenuDesc.AddButton("Screen Info", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Screen::State>());
             });
 
             optionsMenuDesc.AddButton("Download Progress", [=]()
