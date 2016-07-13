@@ -49,7 +49,7 @@
 ///
 /// @return The new Application instance.
 //------------------------------------------------------------------------------
-CS::Application* CreateApplication(ChilliSource::SystemInfoCUPtr systemInfo) noexcept
+CS::Application* CreateApplication(CS::SystemInfoCUPtr systemInfo) noexcept
 {
     return new CSTest::App(std::move(systemInfo));
 }

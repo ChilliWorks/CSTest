@@ -66,7 +66,17 @@ namespace CSTest
 
             auto device = CS::Application::Get()->GetSystem<CS::Device>();
 
-            m_textComponent->SetText("Device Information:\n Device Model: " + device->GetModel() + "\n Device Model Type: " + device->GetModelType() + "\n Device Manufacturer: " + device->GetManufacturer() + "\n Device UDID: " + device->GetUDID() + "\n Device Locale: " + device->GetLocale() + "\n Device Language: " + device->GetLanguage() + "\n Device OS Version: " + device->GetOSVersion() + "\n Number of CPU Cores: " + CS::ToString(device->GetNumberOfCPUCores()));
+            std::string deviceInfo = "Device Information:";
+            deviceInfo += "\nDevice Model: " + device->GetModel();
+            deviceInfo += "\nDevice Model Type: " + device->GetModelType();
+            deviceInfo += "\nDevice Manufacturer: " + device->GetManufacturer();
+            deviceInfo += "\nDevice UDID: " + device->GetUDID();
+            deviceInfo += "\nDevice Locale: " + device->GetLocale();
+            deviceInfo += "\nDevice Language: " + device->GetLanguage();
+            deviceInfo += "\nDevice OS Version: " + device->GetOSVersion();
+            deviceInfo += "\nNumber of CPU Cores: " + device->GetNumberOfCPUCores();
+
+            m_textComponent->SetText(deviceInfo);
         }
 
         //------------------------------------------------------------------------------

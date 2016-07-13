@@ -76,7 +76,7 @@ namespace CSTest
         ///
         /// @author Jordan Brown
         //------------------------------------------------------------------------------
-        App(ChilliSource::SystemInfoCUPtr systemInfo) noexcept;
+        App(CS::SystemInfoCUPtr systemInfo) noexcept;
     };
 }
 
