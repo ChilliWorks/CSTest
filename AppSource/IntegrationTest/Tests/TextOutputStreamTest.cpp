@@ -48,7 +48,8 @@ namespace CSTest
             void ClearTestDirectory()
             {
                 const auto fileSystem = CS::Application::Get()->GetFileSystem();
-                CS_ASSERT(fileSystem->CreateDirectoryPath(k_storageLocation, k_rootDirectory), "Could not create directory!");
+                bool success = fileSystem->CreateDirectoryPath(k_storageLocation, k_rootDirectory);
+                CS_ASSERT(success, "Could not create directory!");
                 
                 if(fileSystem->DoesFileExist(k_storageLocation, k_testTextFileName))
                 {
