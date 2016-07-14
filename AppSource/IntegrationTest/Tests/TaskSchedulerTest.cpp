@@ -141,8 +141,7 @@ namespace CSTest
                     taskScheduler->ScheduleTask(taskType, [=](const CS::TaskContext& in_taskContext) noexcept
                     {
                         CSIT_ASSERT(in_taskContext.GetType() == taskType, "Incorrect task type.");
-                        //TODO: Re-add this once main and system threads are seperated
-                        //CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
+                        CSIT_ASSERT(!taskScheduler->IsMainThread(), "Task run on incorrect thread.");
 
                         if (++(*taskTypesPassed) == k_backgroundTaskTypes.size())
                         {
