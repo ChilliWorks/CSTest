@@ -138,13 +138,13 @@ namespace CSTest
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<VideoPlayer::State>());
             });
-
-#ifndef CS_TARGETPLATFORM_ANDROID
+#endif
+            
+#ifdef CS_TARGETPLATFORM_IOS
             optionsMenuDesc.AddButton("Remote Notifications", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<RemoteNotifications::State>());
             });
-#endif
 #endif
 
 #ifdef CS_TARGETPLATFORM_WINDOWS
