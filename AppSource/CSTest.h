@@ -40,6 +40,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(AccelerometerPresenter);
     }
     
+    namespace AnimatedModel
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
     namespace Common
     {
         CS_FORWARDDECLARE_CLASS(BasicEntityFactory);
@@ -58,6 +63,17 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(State);
     }
     
+    namespace CustomShader
+    {
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
+    namespace Device
+    {
+        CS_FORWARDDECLARE_CLASS(DevicePresenter);
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+
     namespace DownloadProgress
     {
         CS_FORWARDDECLARE_CLASS(State);
@@ -107,6 +123,12 @@ namespace CSTest
     {
         CS_FORWARDDECLARE_CLASS(State);
         CS_FORWARDDECLARE_CLASS(RemoteNotificationsPresenter);
+    }
+
+    namespace Screen
+    {
+        CS_FORWARDDECLARE_CLASS(ScreenPresenter);
+        CS_FORWARDDECLARE_CLASS(State);
     }
     
     namespace SmokeTest

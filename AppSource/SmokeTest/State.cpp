@@ -28,16 +28,20 @@
 
 #include <SmokeTest/State.h>
 
+#include <AnimatedModel/State.h>
 #include <Common/Core/TestNavigator.h>
 #include <Common/Input/BackButtonSystem.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
 #include <Accelerometer/State.h>
 #include <CricketAudio/State.h>
+#include <CustomShader/State.h>
+#include <Device/State.h>
 #include <DownloadProgress/State.h>
 #include <EmailComposer/State.h>
 #include <Gesture/State.h>
 #include <Lighting/State.h>
+#include <MemoryWarning/State.h>
 #include <Particle/State.h>
 #include <Sprite/State.h>
 #include <WebView/State.h>
@@ -47,6 +51,7 @@
 #include <TextEntry/State.h>
 #include <Keyboard/State.h>
 #include <VideoPlayer/State.h>
+#include <Screen/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -87,6 +92,16 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Particle::State>());
             });
 
+            optionsMenuDesc.AddButton("Animated Model", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<AnimatedModel::State>());
+            });
+
+            optionsMenuDesc.AddButton("Custom Shader", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<CustomShader::State>());
+            });
+            
             optionsMenuDesc.AddButton("Gestures", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Gesture::State>());
@@ -95,6 +110,16 @@ namespace CSTest
             optionsMenuDesc.AddButton("Cricket Audio", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<CricketAudio::State>());
+            });
+
+            optionsMenuDesc.AddButton("Device Info", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Device::State>());
+            });
+
+            optionsMenuDesc.AddButton("Screen Info", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Screen::State>());
             });
 
             optionsMenuDesc.AddButton("Download Progress", [=]()
@@ -143,6 +168,11 @@ namespace CSTest
             optionsMenuDesc.AddButton("Remote Notifications", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<RemoteNotifications::State>());
+            });
+                                      
+            optionsMenuDesc.AddButton("Memory Warning", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<MemoryWarning::State>());
             });
 #endif
 

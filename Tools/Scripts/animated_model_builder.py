@@ -1,12 +1,8 @@
 #!/usr/bin/python
 #
-#  model_builder.py
-#  CSTest
-#  Created by Scott Downie on 30/06/2014.
-#
 #  The MIT License (MIT)
 #
-#  Copyright (c) 2014 Tag Games Limited
+#  Copyright (c) 2016 Tag Games Limited
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -38,18 +34,15 @@ import file_system_utils
 RELATIVE_TOOL_FILE_PATH = "../../ChilliSource/Tools/ColladaToCSModel.jar"
 
 #------------------------------------------------------------------------------
-#------------------------------------------------------------------------------
 def build(input_directory_path, output_directory_path):
     """
     Walks the input directory and converts all DAEs into csmodels.
-    
-    :Authors: S Downie
     
     :param input_directory_path: The input directory path.
     :param output_directory_path: The output directory path.
     """
     print("-----------------------------------------")
-    print("           Building Models")
+    print("           Building Animated Models")
     print("-----------------------------------------")
 
     file_system_utils.delete_directory(output_directory_path)
@@ -67,13 +60,11 @@ def build(input_directory_path, output_directory_path):
                 build_model(input_file_path, output_file_path)
 
     print (" ")
-#------------------------------------------------------------------------------
+    
 #------------------------------------------------------------------------------
 def build_model(input_file_path, output_file_path):
     '''
     Converts a single DAE to a csmodel
-    
-    :Authors: S Downie
     
     :param input_file_path: The input file path.
     :param output_file_path: The output file path.
@@ -81,15 +72,13 @@ def build_model(input_file_path, output_file_path):
     print(output_file_path)
 
     tool_file_path = file_system_utils.get_path_from_here(RELATIVE_TOOL_FILE_PATH)
-    tool_args = ["java", "-Djava.awt.headless=true", "-Xmx512m", "-jar", tool_file_path, "--input", input_file_path, "--output", output_file_path, "--swapyandz"]
+    tool_args = ["java", "-Djava.awt.headless=true", "-Xmx512m", "-jar", tool_file_path, "--input", input_file_path, "--output", output_file_path, "--swapyandz", "--animated", "--disablemeshbatch" ]
     subprocess.call(tool_args);
-#------------------------------------------------------------------------------ 
+    
 #------------------------------------------------------------------------------ 
 def parse_arguments():
     """
     Parses the given argument list.
-    
-    :Authors: Ian Copland
     
     :returns: A container for the parsed arguments.
     """
@@ -100,7 +89,7 @@ def parse_arguments():
     parser.add_argument('-o', '--output', dest='output_directory_path', type=str, required=True, help="The output directory where the output CSModel files should be saved.")
     
     return parser.parse_args()
-#------------------------------------------------------------------------------ 
+
 #------------------------------------------------------------------------------ 
 if __name__ == "__main__":
     args = parse_arguments();

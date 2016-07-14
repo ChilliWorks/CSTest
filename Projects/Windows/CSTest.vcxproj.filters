@@ -61,9 +61,6 @@
     <Filter Include="AppSource\SmokeTest">
       <UniqueIdentifier>{0e49f6fb-035d-4c26-8d32-1ff3cfa458de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AppSource\MultiThreadedRenderer">
-      <UniqueIdentifier>{714d097d-d6ce-4726-b921-eb6fde70fcff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AppSource\Sprite">
       <UniqueIdentifier>{7bf62ce1-bc7a-479f-81aa-5f4b00861d16}</UniqueIdentifier>
     </Filter>
@@ -90,6 +87,18 @@
     </Filter>
     <Filter Include="AppSource\RemoteNotifications">
       <UniqueIdentifier>{330c07b7-66f4-43b1-b24e-c42178bde530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\AnimatedModel">
+      <UniqueIdentifier>{b0f691c1-dac0-4be1-be2b-aff1d73b28ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\CustomShader">
+      <UniqueIdentifier>{09d90d7b-e8e9-4009-b2af-adac51904979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Device">
+      <UniqueIdentifier>{d19e0b43-34de-4e9b-924e-5d1b69e80e5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppSource\Screen">
+      <UniqueIdentifier>{7b287816-d6bf-456c-998b-a60a9dcc21a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -225,15 +234,6 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\ForwardRenderPassCompilerTest.cpp">
       <Filter>AppSource\IntegrationTest\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\FrameTimeCalculator.cpp">
-      <Filter>AppSource\MultiThreadedRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\SphereBounceComponent.cpp">
-      <Filter>AppSource\MultiThreadedRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\State.cpp">
-      <Filter>AppSource\MultiThreadedRenderer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\BinaryInputStreamTest.cpp">
       <Filter>AppSource\IntegrationTest\Tests</Filter>
     </ClCompile>
@@ -293,6 +293,24 @@
     </ClCompile>
     <ClCompile Include="..\..\AppSource\RemoteNotifications\State.cpp">
       <Filter>AppSource\RemoteNotifications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\AnimatedModel\State.cpp">
+      <Filter>AppSource\AnimatedModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\CustomShader\State.cpp">
+      <Filter>AppSource\CustomShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Device\State.cpp">
+      <Filter>AppSource\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Device\DevicePresenter.cpp">
+      <Filter>AppSource\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Screen\State.cpp">
+      <Filter>AppSource\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Screen\ScreenPresenter.cpp">
+      <Filter>AppSource\Screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -416,15 +434,6 @@
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\TestSystem.h">
       <Filter>AppSource\UnitTest\TestSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\FrameTimeCalculator.h">
-      <Filter>AppSource\MultiThreadedRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\SphereBounceComponent.h">
-      <Filter>AppSource\MultiThreadedRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\State.h">
-      <Filter>AppSource\MultiThreadedRenderer</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\AppSource\Sprite\State.h">
       <Filter>AppSource\Sprite</Filter>
     </ClInclude>
@@ -463,6 +472,24 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\RemoteNotifications\State.h">
       <Filter>AppSource\RemoteNotifications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\AnimatedModel\State.h">
+      <Filter>AppSource\AnimatedModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\CustomShader\State.h">
+      <Filter>AppSource\CustomShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Device\DevicePresenter.h">
+      <Filter>AppSource\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Device\State.h">
+      <Filter>AppSource\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Screen\ScreenPresenter.h">
+      <Filter>AppSource\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Screen\State.h">
+      <Filter>AppSource\Screen</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

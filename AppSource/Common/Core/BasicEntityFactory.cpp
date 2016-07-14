@@ -158,6 +158,20 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
+        CS::EntityUPtr BasicEntityFactory::CreateAnimatedModel(const CS::ModelCSPtr& in_model, const CS::MaterialCSPtr& in_material, const CS::SkinnedAnimationCSPtr& in_animation,
+                                                               CS::AnimatedModelComponent::PlaybackType in_playbackType) noexcept
+        {
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
+            
+            auto animatedModelComponent = m_renderComponentFactory->CreateAnimatedModelComponent(in_model, in_material, in_animation, in_playbackType);
+            
+            auto entity = CS::Entity::Create();
+            entity->SetName(CS::ToString(m_entityCount++) + "-AnimatedModel");
+            entity->AddComponent(std::move(animatedModelComponent));
+            return entity;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
         void BasicEntityFactory::OnInit()
         {
             m_resourcePool = CS::Application::Get()->GetResourcePool();

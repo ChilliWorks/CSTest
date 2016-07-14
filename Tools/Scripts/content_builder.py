@@ -31,18 +31,22 @@ import argparse
 import os
 import sys
 
+import animated_model_builder
+import animation_builder
 import font_builder
-import model_builder
 import music_builder
 import sfx_builder
+import static_model_builder
 import text_builder
 import texture_atlas_builder
 import texture_builder
 
+ANIMATED_MODEL_DIRECTORY_PATH = "AnimatedModels/"
+ANIMATION_DIRECTORY_PATH = "Animations/"
 FONT_DIRECTORY_PATH = "Fonts/"
-MODEL_DIRECTORY_PATH = "Models/"
 MUSIC_DIRECTORY_PATH = "Music/"
 SFX_DIRECTORY_PATH = "SFX/"
+STATIC_MODEL_DIRECTORY_PATH = "StaticModels/"
 TEXT_DIRECTORY_PATH = "Text/"
 TEXTURE_ATLAS_DIRECTORY_PATH = "TextureAtlases/"
 TEXTURE_DIRECTORY_PATH = "Textures/"
@@ -58,7 +62,9 @@ def build(input_directory_path, output_directory_path):
     :param input_directory_path: The input directory path.
     :param output_directory_path: The output directory path.
     """
-    model_builder.build(os.path.join(input_directory_path, MODEL_DIRECTORY_PATH), os.path.join(output_directory_path, MODEL_DIRECTORY_PATH))
+    static_model_builder.build(os.path.join(input_directory_path, STATIC_MODEL_DIRECTORY_PATH), os.path.join(output_directory_path, STATIC_MODEL_DIRECTORY_PATH))
+    animated_model_builder.build(os.path.join(input_directory_path, ANIMATED_MODEL_DIRECTORY_PATH), os.path.join(output_directory_path, ANIMATED_MODEL_DIRECTORY_PATH))
+    animation_builder.build(os.path.join(input_directory_path, ANIMATION_DIRECTORY_PATH), os.path.join(output_directory_path, ANIMATION_DIRECTORY_PATH))
     texture_builder.build(os.path.join(input_directory_path, TEXTURE_DIRECTORY_PATH), os.path.join(output_directory_path, TEXTURE_DIRECTORY_PATH))
     texture_atlas_builder.build(os.path.join(input_directory_path, TEXTURE_ATLAS_DIRECTORY_PATH), os.path.join(output_directory_path, TEXTURE_ATLAS_DIRECTORY_PATH))
     music_builder.build(os.path.join(input_directory_path, MUSIC_DIRECTORY_PATH), os.path.join(output_directory_path, MUSIC_DIRECTORY_PATH))

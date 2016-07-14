@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\Accelerometer\State.cpp" />
+    <ClCompile Include="..\..\AppSource\AnimatedModel\State.cpp" />
     <ClCompile Include="..\..\AppSource\App.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Behaviour\FollowerComponent.cpp" />
     <ClCompile Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.cpp" />
@@ -33,6 +34,9 @@
     <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuDesc.cpp" />
     <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\CricketAudio\State.cpp" />
+    <ClCompile Include="..\..\AppSource\CustomShader\State.cpp" />
+    <ClCompile Include="..\..\AppSource\Device\DevicePresenter.cpp" />
+    <ClCompile Include="..\..\AppSource\Device\State.cpp" />
     <ClCompile Include="..\..\AppSource\DialogueBox\State.cpp" />
     <ClCompile Include="..\..\AppSource\DownloadProgress\DownloadProgressTestSystem.cpp" />
     <ClCompile Include="..\..\AppSource\DownloadProgress\State.cpp" />
@@ -61,12 +65,11 @@
     <ClCompile Include="..\..\AppSource\Lighting\State.cpp" />
     <ClCompile Include="..\..\AppSource\LocalNotifications\State.cpp" />
     <ClCompile Include="..\..\AppSource\MainMenu\State.cpp" />
-    <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\FrameTimeCalculator.cpp" />
-    <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\SphereBounceComponent.cpp" />
-    <ClCompile Include="..\..\AppSource\MultiThreadedRenderer\State.cpp" />
     <ClCompile Include="..\..\AppSource\Particle\State.cpp" />
     <ClCompile Include="..\..\AppSource\RemoteNotifications\RemoteNotificationsPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\RemoteNotifications\State.cpp" />
+    <ClCompile Include="..\..\AppSource\Screen\ScreenPresenter.cpp" />
+    <ClCompile Include="..\..\AppSource\Screen\State.cpp" />
     <ClCompile Include="..\..\AppSource\SmokeTest\State.cpp" />
     <ClCompile Include="..\..\AppSource\Sprite\State.cpp" />
     <ClCompile Include="..\..\AppSource\TextEntry\State.cpp" />
@@ -90,6 +93,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\Accelerometer\AccelerometerPresenter.h" />
     <ClInclude Include="..\..\AppSource\Accelerometer\State.h" />
+    <ClInclude Include="..\..\AppSource\AnimatedModel\State.h" />
     <ClInclude Include="..\..\AppSource\App.h" />
     <ClInclude Include="..\..\AppSource\Common\Behaviour\FollowerComponent.h" />
     <ClInclude Include="..\..\AppSource\Common\Behaviour\OrbiterComponent.h" />
@@ -103,6 +107,9 @@
     <ClInclude Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.h" />
     <ClInclude Include="..\..\AppSource\CricketAudio\State.h" />
     <ClInclude Include="..\..\AppSource\CSTest.h" />
+    <ClInclude Include="..\..\AppSource\CustomShader\State.h" />
+    <ClInclude Include="..\..\AppSource\Device\DevicePresenter.h" />
+    <ClInclude Include="..\..\AppSource\Device\State.h" />
     <ClInclude Include="..\..\AppSource\DialogueBox\State.h" />
     <ClInclude Include="..\..\AppSource\DownloadProgress\DownloadProgressTestSystem.h" />
     <ClInclude Include="..\..\AppSource\DownloadProgress\State.h" />
@@ -124,12 +131,11 @@
     <ClInclude Include="..\..\AppSource\Lighting\State.h" />
     <ClInclude Include="..\..\AppSource\LocalNotifications\State.h" />
     <ClInclude Include="..\..\AppSource\MainMenu\State.h" />
-    <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\FrameTimeCalculator.h" />
-    <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\SphereBounceComponent.h" />
-    <ClInclude Include="..\..\AppSource\MultiThreadedRenderer\State.h" />
     <ClInclude Include="..\..\AppSource\Particle\State.h" />
     <ClInclude Include="..\..\AppSource\RemoteNotifications\RemoteNotificationsPresenter.h" />
     <ClInclude Include="..\..\AppSource\RemoteNotifications\State.h" />
+    <ClInclude Include="..\..\AppSource\Screen\ScreenPresenter.h" />
+    <ClInclude Include="..\..\AppSource\Screen\State.h" />
     <ClInclude Include="..\..\AppSource\SmokeTest\State.h" />
     <ClInclude Include="..\..\AppSource\Sprite\State.h" />
     <ClInclude Include="..\..\AppSource\TextEntry\State.h" />
