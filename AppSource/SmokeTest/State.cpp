@@ -41,6 +41,7 @@
 #include <EmailComposer/State.h>
 #include <Gesture/State.h>
 #include <Lighting/State.h>
+#include <MemoryWarning/State.h>
 #include <Particle/State.h>
 #include <Sprite/State.h>
 #include <WebView/State.h>
@@ -159,6 +160,13 @@ namespace CSTest
             optionsMenuDesc.AddButton("Video Player", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<VideoPlayer::State>());
+            });
+#endif
+            
+#ifdef CS_TARGETPLATFORM_IOS
+            optionsMenuDesc.AddButton("Memory Warning", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<MemoryWarning::State>());
             });
 #endif
 
