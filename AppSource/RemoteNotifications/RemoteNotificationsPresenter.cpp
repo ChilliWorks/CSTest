@@ -79,10 +79,7 @@ namespace CSTest
 
             m_eventConnection = m_remoteNotificationSystem->GetReceivedEvent().OpenConnection([=](const CS::NotificationCSPtr& notification)
             {
-                CS::Application::Get()->GetTaskScheduler()->ScheduleTask(ChilliSource::TaskType::k_mainThread, [=](const ChilliSource::TaskContext& taskContext)
-                {
                     CS::Application::Get()->GetSystem<CS::DialogueBoxSystem>()->ShowSystemDialogue(0, nullptr, "Remote Notification Received", notification->m_params.GetValueOrDefault("Body", "No Message"), "OK");
-                });
             });
 
             m_remoteNotificationSystem->RequestRemoteToken([=](const std::string& token)
