@@ -134,15 +134,17 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<LocalNotifications::State>());
             });
 
-            optionsMenuDesc.AddButton("Remote Notifications", [=]()
-            {
-                CS::Application::Get()->GetStateManager()->Push(std::make_shared<RemoteNotifications::State>());
-            });
-
             optionsMenuDesc.AddButton("Video Player", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<VideoPlayer::State>());
             });
+
+#ifndef CS_TARGETPLATFORM_ANDROID
+            optionsMenuDesc.AddButton("Remote Notifications", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<RemoteNotifications::State>());
+            });
+#endif
 #endif
 
 #ifdef CS_TARGETPLATFORM_WINDOWS
