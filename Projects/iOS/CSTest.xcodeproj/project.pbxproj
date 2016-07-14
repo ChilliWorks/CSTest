@@ -57,9 +57,6 @@
 		818463421D350422004B0C46 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462DE1D350421004B0C46 /* State.cpp */; };
 		818463431D350422004B0C46 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462E11D350421004B0C46 /* State.cpp */; };
 		818463441D350422004B0C46 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462E41D350421004B0C46 /* State.cpp */; };
-		818463451D350422004B0C46 /* FrameTimeCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462E71D350421004B0C46 /* FrameTimeCalculator.cpp */; };
-		818463461D350422004B0C46 /* SphereBounceComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462E91D350421004B0C46 /* SphereBounceComponent.cpp */; };
-		818463471D350422004B0C46 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462EB1D350421004B0C46 /* State.cpp */; };
 		818463481D350422004B0C46 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462EE1D350421004B0C46 /* State.cpp */; };
 		818463491D350422004B0C46 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462F11D350421004B0C46 /* State.cpp */; };
 		8184634A1D350422004B0C46 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462F41D350421004B0C46 /* State.cpp */; };
@@ -220,12 +217,6 @@
 		818462E21D350421004B0C46 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		818462E41D350421004B0C46 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		818462E51D350421004B0C46 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
-		818462E71D350421004B0C46 /* FrameTimeCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameTimeCalculator.cpp; sourceTree = "<group>"; };
-		818462E81D350421004B0C46 /* FrameTimeCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameTimeCalculator.h; sourceTree = "<group>"; };
-		818462E91D350421004B0C46 /* SphereBounceComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereBounceComponent.cpp; sourceTree = "<group>"; };
-		818462EA1D350421004B0C46 /* SphereBounceComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereBounceComponent.h; sourceTree = "<group>"; };
-		818462EB1D350421004B0C46 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
-		818462EC1D350421004B0C46 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		818462EE1D350421004B0C46 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		818462EF1D350421004B0C46 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		818462F11D350421004B0C46 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
@@ -393,7 +384,6 @@
 				818462E01D350421004B0C46 /* LocalNotifications */,
 				818462E31D350421004B0C46 /* MainMenu */,
 				817E32CD1D36F0D100F707AD /* MemoryWarning */,
-				818462E61D350421004B0C46 /* MultiThreadedRenderer */,
 				818462ED1D350421004B0C46 /* Particle */,
 				27408C1F1D36D6C100A0B003 /* Screen */,
 				818462F01D350421004B0C46 /* SmokeTest */,
@@ -630,19 +620,6 @@
 				818462E51D350421004B0C46 /* State.h */,
 			);
 			path = MainMenu;
-			sourceTree = "<group>";
-		};
-		818462E61D350421004B0C46 /* MultiThreadedRenderer */ = {
-			isa = PBXGroup;
-			children = (
-				818462E71D350421004B0C46 /* FrameTimeCalculator.cpp */,
-				818462E81D350421004B0C46 /* FrameTimeCalculator.h */,
-				818462E91D350421004B0C46 /* SphereBounceComponent.cpp */,
-				818462EA1D350421004B0C46 /* SphereBounceComponent.h */,
-				818462EB1D350421004B0C46 /* State.cpp */,
-				818462EC1D350421004B0C46 /* State.h */,
-			);
-			path = MultiThreadedRenderer;
 			sourceTree = "<group>";
 		};
 		818462ED1D350421004B0C46 /* Particle */ = {
@@ -947,7 +924,6 @@
 				8184632A1D350422004B0C46 /* DownloadProgressTestSystem.cpp in Sources */,
 				818463531D350422004B0C46 /* CSReporter.cpp in Sources */,
 				818463551D350422004B0C46 /* FailedSection.cpp in Sources */,
-				818463451D350422004B0C46 /* FrameTimeCalculator.cpp in Sources */,
 				8184632F1D350422004B0C46 /* State.cpp in Sources */,
 				8184632D1D350422004B0C46 /* EventInfo.cpp in Sources */,
 				818463261D350422004B0C46 /* OptionsMenuPresenter.cpp in Sources */,
@@ -976,7 +952,6 @@
 				8184635A1D350422004B0C46 /* State.cpp in Sources */,
 				8184631A1D350422004B0C46 /* State.cpp in Sources */,
 				8184632E1D350422004B0C46 /* GesturePresenter.cpp in Sources */,
-				818463461D350422004B0C46 /* SphereBounceComponent.cpp in Sources */,
 				27408C261D36D6D300A0B003 /* State.cpp in Sources */,
 				818463351D350422004B0C46 /* HttpRequestTest.cpp in Sources */,
 				818463321D350422004B0C46 /* BinaryOutputStreamTest.cpp in Sources */,
@@ -995,7 +970,6 @@
 				818463441D350422004B0C46 /* State.cpp in Sources */,
 				818463311D350422004B0C46 /* BinaryInputStreamTest.cpp in Sources */,
 				818463541D350422004B0C46 /* FailedAssertion.cpp in Sources */,
-				818463471D350422004B0C46 /* State.cpp in Sources */,
 				8184632B1D350422004B0C46 /* State.cpp in Sources */,
 				818463221D350422004B0C46 /* TestNavigator.cpp in Sources */,
 				818463521D350422004B0C46 /* Vector4.cpp in Sources */,
