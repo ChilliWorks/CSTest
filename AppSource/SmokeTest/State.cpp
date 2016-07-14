@@ -48,7 +48,6 @@
 #include <Keyboard/State.h>
 #include <VideoPlayer/State.h>
 
-
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
 #include <ChilliSource/Core/State.h>
