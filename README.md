@@ -5,6 +5,6 @@ A project containing a series of tests for various features of the ChilliSource 
 
 Links
 -----
-* ChilliWorks [Website](http://chilli-works.com/)
-* ChilliSource [Documentation](http://chilli-source.chilli-works.com/docs/)
+* ChilliSource [Website](http://www.chillisourceengine.com/)
+* ChilliSource [Documentation](http://www.chillisourceengine.com/tutorials/)
 * ChilliSource [Repository](https://github.com/ChilliWorks/ChilliSource)
