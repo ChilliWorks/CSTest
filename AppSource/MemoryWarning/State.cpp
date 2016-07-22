@@ -54,7 +54,7 @@ namespace CSTest
             
             u32 textureDataSize = sizeof(CS::ByteColour) * dimensions.x * dimensions.y;
             std::unique_ptr<u8[]> textureData(new u8[textureDataSize]);
-            CS::TextureDesc desc(dimensions, CS::ImageFormat::k_RGBA8888, CS::ImageCompression::k_none);
+            CS::TextureDesc desc(dimensions, CS::ImageFormat::k_RGBA8888, CS::ImageCompression::k_none, true);
             
             static u32 s_textureId = 0;
             auto resourcePool = CS::Application::Get()->GetResourcePool();
