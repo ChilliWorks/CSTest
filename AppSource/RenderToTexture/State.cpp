@@ -115,15 +115,15 @@ namespace CSTest
             auto screen = CS::Application::Get()->GetScreen();
             
             std::array<CS::Colour, k_numRenderTargets> dirLightCols =
-            {
+            {{
                 CS::Colour(0.8f, 0.2f, 0.3f),
                 CS::Colour(0.3f, 0.2f, 0.8f)
-            };
+            }};
             std::array<CS::TextureDesc, k_numRenderTargets> renderTextureDescs =
-            {
+            {{
                 CS::TextureDesc(CS::Integer2(s32(screen->GetResolution().x * k_displayScreenPercentage), s32(screen->GetResolution().y * k_displayScreenPercentage)), CS::ImageFormat::k_RGB888, CS::ImageCompression::k_none, true),
                 CS::TextureDesc(CS::Integer2(s32(screen->GetResolution().x * k_displayScreenPercentage), s32(screen->GetResolution().y * k_displayScreenPercentage)), CS::ImageFormat::k_RGB888, CS::ImageCompression::k_none, false)
-            };
+            }};
             
             for(auto i=0; i<k_numRenderTargets; ++i)
             {
