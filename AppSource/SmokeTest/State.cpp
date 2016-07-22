@@ -52,6 +52,7 @@
 #include <Keyboard/State.h>
 #include <VideoPlayer/State.h>
 #include <Screen/State.h>
+#include <RenderToTexture/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -135,6 +136,11 @@ namespace CSTest
             optionsMenuDesc.AddButton("Text Entry", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<TextEntry::State>());
+            });
+            
+            optionsMenuDesc.AddButton("Render to Texture", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<RenderToTexture::State>());
             });
 
 #if defined(CS_TARGETPLATFORM_IOS) || defined(CS_TARGETPLATFORM_ANDROID)
