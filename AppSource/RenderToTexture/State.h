@@ -52,14 +52,20 @@ namespace CSTest
             ///
             void OnUpdate(f32 timeSinceLastUpdate) noexcept override;
             
+            /// Clean up any resources when the state is destroyed
+            ///
+            void OnDestroy() noexcept override;
+            
         private:
             
             static constexpr u32 k_numRenderTargets = 2;
+            static constexpr u32 k_updatedRenderTargetIndex = k_numRenderTargets - 1;
             
             std::array<CS::TargetGroupUPtr, k_numRenderTargets> m_renderTargets;
             std::array<CS::Scene*, k_numRenderTargets> m_rtScenes;
             std::array<CS::WidgetSPtr, k_numRenderTargets> m_rtDisplays;
             std::array<CS::Vector2, k_numRenderTargets> m_rtDisplayVelocities;
+            std::array<CS::TextureSPtr, k_numRenderTargets> m_renderTextures;
         };
     }
 }
