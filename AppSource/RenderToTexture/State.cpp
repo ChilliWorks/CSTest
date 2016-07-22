@@ -97,10 +97,28 @@ namespace CSTest
         {
             CreateSystem<Common::TestNavigator>("Render to Texture");
             
+            auto resourcePool = CS::Application::Get()->GetResourcePool();
+            auto screen = CS::Application::Get()->GetScreen();
+            
+            //Set up the first texture desc to make a backup of the image for context restoring
+            //for our test that will be the one we only render into once
+            std::array<CS::TextureDesc, k_numRenderTargets> renderTextureDescs =
+            {{
+                CS::TextureDesc(CS::Integer2(s32(screen->GetResolution().x * k_displayScreenPercentage), s32(screen->GetResolution().y * k_displayScreenPercentage)), CS::ImageFormat::k_RGB888, CS::ImageCompression::k_none, true),
+                CS::TextureDesc(CS::Integer2(s32(screen->GetResolution().x * k_displayScreenPercentage), s32(screen->GetResolution().y * k_displayScreenPercentage)), CS::ImageFormat::k_RGB888, CS::ImageCompression::k_none, false)
+            }};
+            
             // Create scenes that will be rendererd to texture rather then directly to screen
-            for(auto& scene : m_rtScenes)
+            for(auto i=0; i<k_numRenderTargets; ++i)
             {
-                scene = CreateSystem<CS::Scene>();
+                // Create a new texture that the scene will be rendererd too
+                m_renderTextures[i] = resourcePool->CreateResource<CS::Texture>("SmokeTestRenderTex" + CS::ToString(i));
+                m_renderTextures[i]->Build(CS::Texture::DataUPtr(), 0, renderTextureDescs[i]);
+                m_renderTextures[i]->SetLoadState(CS::Resource::LoadState::k_loaded);
+                
+                // Convert the texture to a colour target that uses the depth buffer
+                // and set it as this scene's render target
+                m_rtScenes[i] = CreateSystem<CS::Scene>(CS::TargetGroup::CreateColourTargetGroup(m_renderTextures[i]));
             }
         }
         
@@ -111,18 +129,11 @@ namespace CSTest
             
             auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
             auto basicWidgetFactory = CS::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
-            auto resourcePool = CS::Application::Get()->GetResourcePool();
-            auto screen = CS::Application::Get()->GetScreen();
             
             std::array<CS::Colour, k_numRenderTargets> dirLightCols =
             {{
                 CS::Colour(0.8f, 0.2f, 0.3f),
                 CS::Colour(0.3f, 0.2f, 0.8f)
-            }};
-            std::array<CS::TextureDesc, k_numRenderTargets> renderTextureDescs =
-            {{
-                CS::TextureDesc(CS::Integer2(s32(screen->GetResolution().x * k_displayScreenPercentage), s32(screen->GetResolution().y * k_displayScreenPercentage)), CS::ImageFormat::k_RGB888, CS::ImageCompression::k_none, true),
-                CS::TextureDesc(CS::Integer2(s32(screen->GetResolution().x * k_displayScreenPercentage), s32(screen->GetResolution().y * k_displayScreenPercentage)), CS::ImageFormat::k_RGB888, CS::ImageCompression::k_none, false)
             }};
             
             for(auto i=0; i<k_numRenderTargets; ++i)
@@ -141,32 +152,22 @@ namespace CSTest
                 // Setup initial velocity
                 m_rtDisplayVelocities[i] = CS::Random::GenerateDirection2D<f32>() * k_displaySpeed;
                 
-                // Create a new texture that the scene will be rendererd too
-                m_renderTextures[i] = resourcePool->CreateResource<CS::Texture>("SmokeTestRenderTex" + CS::ToString(i));
-                m_renderTextures[i]->Build(CS::Texture::DataUPtr(), 0, renderTextureDescs[i]);
-                m_renderTextures[i]->SetLoadState(CS::Resource::LoadState::k_loaded);
-                
-                // Convert the texture to a colour target that uses the depth buffer
-                m_renderTargets[i] = CS::TargetGroup::CreateColourTargetGroup(m_renderTextures[i]);
-                
                 // Add a UI image to the screen scene, this will be used to display our render texture
                 m_rtDisplays[i] = basicWidgetFactory->CreateImage(CS::Vector2(k_displayScreenPercentage, k_displayScreenPercentage), m_renderTextures[i], CS::AlignmentAnchor::k_middleCentre, CS::SizePolicy::k_none);
                 auto drawable = m_rtDisplays[i]->GetComponent<CS::DrawableUIComponent>();
                 drawable->GetDrawable()->SetUVs(CS::UVs::FlipVertically(drawable->GetDrawable()->GetUVs()));
                 GetUICanvas()->AddWidget(m_rtDisplays[i]);
-                
-                // Render the contents of the scene to the target
-                CS::Application::Get()->RenderToTarget(m_rtScenes[i], m_renderTargets[i].get());
             }
+            
+            // This scene we will only render to once (rather than each frame) to test that code path works.
+            // The other scenes will be rendered each frame
+            m_rtScenes[0]->Disable();
+            CS::Application::Get()->RenderScene(m_rtScenes[0]);
         }
         
         //------------------------------------------------------------------------------
         void State::OnUpdate(f32 timeSinceLastUpdate) noexcept
         {
-            // Only updating the contents of 1 scene, the others are fixed
-            m_rtScenes[k_updatedRenderTargetIndex]->UpdateEntities(timeSinceLastUpdate);
-            CS::Application::Get()->RenderToTarget(m_rtScenes[k_updatedRenderTargetIndex], m_renderTargets[k_updatedRenderTargetIndex].get());
-            
             // Move the UI around for effect
             for(auto i=0; i<k_numRenderTargets; ++i)
             {
@@ -194,15 +195,13 @@ namespace CSTest
         }
         
         //------------------------------------------------------------------------------
-        void State::OnDestroy() noexcept
+        State::~State()
         {
             auto resourcePool = CS::Application::Get()->GetResourcePool();
             
             for(int i=0; i<k_numRenderTargets; ++i)
             {
-                m_rtDisplays[i]->RemoveFromParent();
                 m_rtDisplays[i].reset();
-                m_renderTargets[i].reset();
                 auto tex = m_renderTextures[i].get();
                 m_renderTextures[i].reset();
                 resourcePool->Release(tex);
