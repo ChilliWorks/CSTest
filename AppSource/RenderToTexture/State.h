@@ -35,7 +35,8 @@ namespace CSTest
     namespace RenderToTexture
     {
         /// A state which contains the smoke test for rendering to texture. Has a simple scene and then
-        /// renders it to a mini-cam style UI element
+        /// renders it to 2 mini-cam style UI images. One image is fixed (only rendered once) the other is updated
+        /// each frame
         ///
         class State final : public CS::State
         {
@@ -53,11 +54,12 @@ namespace CSTest
             
         private:
             
-            CS::TargetGroupUPtr m_renderTarget;
-            CS::Scene* m_rtScene;
-            CS::WidgetSPtr m_rtDisplay;
+            static constexpr u32 k_numRenderTargets = 2;
             
-            CS::Vector2 m_rtDisplayVelocity;
+            std::array<CS::TargetGroupUPtr, k_numRenderTargets> m_renderTargets;
+            std::array<CS::Scene*, k_numRenderTargets> m_rtScenes;
+            std::array<CS::WidgetSPtr, k_numRenderTargets> m_rtDisplays;
+            std::array<CS::Vector2, k_numRenderTargets> m_rtDisplayVelocities;
         };
     }
 }

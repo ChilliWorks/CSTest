@@ -52,8 +52,10 @@ namespace CSTest
             ///
             /// @param scene
             ///     The scene to add the lights to.
+            /// @param in_dirCol
+            ///     The colour of the directional light
             ///
-            void CreateLights(CS::Scene* scene)
+            void CreateLights(CS::Scene* scene, const CS::Colour& in_dirCol)
             {
                 auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
                 
@@ -67,7 +69,7 @@ namespace CSTest
                 const CS::Vector3 dirLightTarget = CS::Vector3(0.0f, 0.0f, 0.0f);
                 const auto directionLightPos = dirLightTarget - dirLightDir * k_dirLightDist;
                 
-                CS::EntitySPtr directionalLight = basicEntityFactory->CreateDirectionalLight(CS::Colour(0.8f, 0.5f, 0.4f));
+                CS::EntitySPtr directionalLight = basicEntityFactory->CreateDirectionalLight(in_dirCol);
                 scene->Add(directionalLight);
                 directionalLight->GetTransform().SetLookAt(directionLightPos, dirLightTarget, CS::Vector3::k_unitPositiveY);
             }
@@ -95,8 +97,11 @@ namespace CSTest
         {
             CreateSystem<Common::TestNavigator>("Render to Texture");
             
-            // Create a scene that will be rendererd to texture rather then directly to screen
-            m_rtScene = CreateSystem<CS::Scene>();
+            // Create scenes that will be rendererd to texture rather then directly to screen
+            for(auto& scene : m_rtScenes)
+            {
+                scene = CreateSystem<CS::Scene>();
+            }
         }
         
         //------------------------------------------------------------------------------
@@ -109,61 +114,74 @@ namespace CSTest
             auto resourcePool = CS::Application::Get()->GetResourcePool();
             auto screen = CS::Application::Get()->GetScreen();
             
-            m_rtDisplayVelocity = CS::Random::GenerateDirection2D<f32>() * k_displaySpeed;
+            std::array<CS::Colour, k_numRenderTargets> dirLightCols = { CS::Colour(0.8f, 0.2f, 0.3f), CS::Colour(0.3f, 0.2f, 0.8f) };
             
-            // Populate the display scene with some models, etc
-            CS::EntitySPtr room = basicEntityFactory->CreateRoom();
-            room->GetTransform().SetPosition(0.0f, 10.0f, 0.0f);
-            m_rtScene->Add(room);
-            
-            auto camera = basicEntityFactory->CreateThirdPersonCamera(room, CS::Vector3(0.0f, -9.0f, 0.0f));
-            m_rtScene->Add(std::move(camera));
-            
-            CreateLights(m_rtScene);
-            AddAnimatedModel(m_rtScene);
-            
-            // Create a new texture that the scene will be rendererd too
-            auto renderTexture = resourcePool->CreateResource<CS::Texture>("SmokeTestRenderTex");
-            renderTexture->Build(CS::Texture::DataUPtr(), 0, CS::TextureDesc(CS::Integer2(s32(screen->GetResolution().x * k_displayScreenPercentage), s32(screen->GetResolution().y * k_displayScreenPercentage)), CS::ImageFormat::k_RGB888, CS::ImageCompression::k_none));
-            renderTexture->SetLoadState(CS::Resource::LoadState::k_loaded);
-            
-            // Convert the texture to a colour target that uses the depth buffer
-            m_renderTarget = CS::TargetGroup::CreateColourTargetGroup(renderTexture);
-            
-            // Add a UI image to the screen scene, this will be used to display our render texture
-            m_rtDisplay = basicWidgetFactory->CreateImage(CS::Vector2(k_displayScreenPercentage, k_displayScreenPercentage), renderTexture, CS::AlignmentAnchor::k_middleCentre, CS::SizePolicy::k_none);
-            auto drawable = m_rtDisplay->GetComponent<CS::DrawableUIComponent>();
-            drawable->GetDrawable()->SetUVs(CS::UVs::FlipVertically(drawable->GetDrawable()->GetUVs()));
-            GetUICanvas()->AddWidget(m_rtDisplay);
+            for(auto i=0; i<k_numRenderTargets; ++i)
+            {
+                // Populate the display scene with some models, etc
+                CS::EntitySPtr room = basicEntityFactory->CreateRoom();
+                room->GetTransform().SetPosition(0.0f, 10.0f, 0.0f);
+                m_rtScenes[i]->Add(room);
+                
+                auto camera = basicEntityFactory->CreateThirdPersonCamera(room, CS::Vector3(0.0f, -9.0f, 0.0f));
+                m_rtScenes[i]->Add(std::move(camera));
+                
+                CreateLights(m_rtScenes[i], dirLightCols[i]);
+                AddAnimatedModel(m_rtScenes[i]);
+                
+                // Setup initial velocity
+                m_rtDisplayVelocities[i] = CS::Random::GenerateDirection2D<f32>() * k_displaySpeed;
+                
+                // Create a new texture that the scene will be rendererd too
+                auto renderTexture = resourcePool->CreateResource<CS::Texture>("SmokeTestRenderTex" + CS::ToString(i));
+                renderTexture->Build(CS::Texture::DataUPtr(), 0, CS::TextureDesc(CS::Integer2(s32(screen->GetResolution().x * k_displayScreenPercentage), s32(screen->GetResolution().y * k_displayScreenPercentage)), CS::ImageFormat::k_RGB888, CS::ImageCompression::k_none));
+                renderTexture->SetLoadState(CS::Resource::LoadState::k_loaded);
+                
+                // Convert the texture to a colour target that uses the depth buffer
+                m_renderTargets[i] = CS::TargetGroup::CreateColourTargetGroup(renderTexture);
+                
+                // Add a UI image to the screen scene, this will be used to display our render texture
+                m_rtDisplays[i] = basicWidgetFactory->CreateImage(CS::Vector2(k_displayScreenPercentage, k_displayScreenPercentage), renderTexture, CS::AlignmentAnchor::k_middleCentre, CS::SizePolicy::k_none);
+                auto drawable = m_rtDisplays[i]->GetComponent<CS::DrawableUIComponent>();
+                drawable->GetDrawable()->SetUVs(CS::UVs::FlipVertically(drawable->GetDrawable()->GetUVs()));
+                GetUICanvas()->AddWidget(m_rtDisplays[i]);
+                
+                // Render the contents of the scene to the target
+                CS::Application::Get()->RenderToTarget(m_rtScenes[i], m_renderTargets[i].get());
+            }
         }
         
         //------------------------------------------------------------------------------
         void State::OnUpdate(f32 timeSinceLastUpdate) noexcept
         {
-            m_rtScene->UpdateEntities(timeSinceLastUpdate);
+            // Only updating the contents of 1 scene, the others are fixed
+            m_rtScenes[k_numRenderTargets-1]->UpdateEntities(timeSinceLastUpdate);
+            CS::Application::Get()->RenderToTarget(m_rtScenes[k_numRenderTargets-1], m_renderTargets[k_numRenderTargets-1].get());
             
-            CS::Application::Get()->RenderToTarget(m_rtScene, m_renderTarget.get());
-            
-            CS::Vector2 currentPos = m_rtDisplay->GetLocalRelativePosition();
-            if(currentPos.x >= 0.5f)
+            // Move the UI around for effect
+            for(auto i=0; i<k_numRenderTargets; ++i)
             {
-                m_rtDisplayVelocity.x = -k_displaySpeed;
+                CS::Vector2 currentPos = m_rtDisplays[i]->GetLocalRelativePosition();
+                if(currentPos.x >= 0.5f)
+                {
+                    m_rtDisplayVelocities[i].x = -k_displaySpeed;
+                }
+                else if(currentPos.x <= -0.5f)
+                {
+                    m_rtDisplayVelocities[i].x = k_displaySpeed;
+                }
+                
+                if(currentPos.y >= 0.5f)
+                {
+                    m_rtDisplayVelocities[i].y = -k_displaySpeed;
+                }
+                else if(currentPos.y <= -0.5f)
+                {
+                    m_rtDisplayVelocities[i].y = k_displaySpeed;
+                }
+                
+                m_rtDisplays[i]->RelativeMoveBy(m_rtDisplayVelocities[i] * timeSinceLastUpdate);
             }
-            else if(currentPos.x <= -0.5f)
-            {
-                m_rtDisplayVelocity.x = k_displaySpeed;
-            }
-            
-            if(currentPos.y >= 0.5f)
-            {
-                m_rtDisplayVelocity.y = -k_displaySpeed;
-            }
-            else if(currentPos.y <= -0.5f)
-            {
-                m_rtDisplayVelocity.y = k_displaySpeed;
-            }
-            
-            m_rtDisplay->RelativeMoveBy(m_rtDisplayVelocity * timeSinceLastUpdate);
         }
 	}
 }
