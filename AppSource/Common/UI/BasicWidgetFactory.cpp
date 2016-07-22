@@ -137,6 +137,25 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
+        CS::WidgetUPtr BasicWidgetFactory::CreateImage(const CS::Vector2& in_size, const CS::TextureCSPtr& in_texture, CS::AlignmentAnchor in_alignment, CS::SizePolicy in_sizePolicy) noexcept
+        {
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Cannot create widgets on background threads.");
+            
+            auto widgetFactory = CS::Application::Get()->GetWidgetFactory();
+            
+            auto image = widgetFactory->CreateImage();
+            image->SetParentalAnchor(in_alignment);
+            image->SetOriginAnchor(in_alignment);
+            image->SetSizePolicy(in_sizePolicy);
+            image->SetRelativeSize(in_size);
+            
+            auto drawable = image->GetComponent<CS::DrawableUIComponent>();
+            drawable->ApplyDrawableDef(CS::UIDrawableDefCSPtr(new CS::StandardUIDrawableDef(in_texture)));
+            
+            return image;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
         CS::WidgetUPtr BasicWidgetFactory::CreateBlank(const CS::Vector2& in_size, CS::AlignmentAnchor in_alignment)
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Cannot create widgets on background threads.");
