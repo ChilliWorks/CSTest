@@ -85,7 +85,7 @@ namespace CSTest
             CS_ASSERT(m_textComponent, "Display hasn't been initialised.");
             
             auto resourcePool = CS::Application::Get()->GetResourcePool();
-            u32 numTextures = resourcePool->GetAllResources<CS::Texture>().size();
+            auto numTextures = resourcePool->GetAllResources<CS::Texture>().size();
             
             m_textComponent->SetText("Number of textures: " + CS::ToString(numTextures));
         }
