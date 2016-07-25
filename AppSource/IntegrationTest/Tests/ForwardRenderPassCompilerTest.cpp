@@ -97,7 +97,11 @@ namespace CSTest
                 
                 auto texture = resourcePool->LoadResource<CS::Texture>(CS::StorageLocation::k_chilliSource, "Textures/Blank.csimage");
                 auto renderTexture = texture->GetRenderTexture();
-                return renderMaterialGroupManager->CreateUnlitRenderMaterialGroup(renderTexture, true, true, true, true, false, CS::BlendMode::k_one, CS::BlendMode::k_oneMinusSourceAlpha, CS::CullFace::k_back, CS::Colour::k_white, CS::Colour::k_white);
+                return renderMaterialGroupManager->CreateUnlitRenderMaterialGroup(renderTexture, true, true, true, true, false, false,
+                                                                                  CS::TestFunc::k_lessEqual,
+                                                                                  CS::BlendMode::k_one, CS::BlendMode::k_oneMinusSourceAlpha, CS::BlendEqn::k_add,
+                                                                                  CS::StencilOp::k_keep, CS::StencilOp::k_keep, CS::StencilOp::k_keep, CS::TestFunc::k_always, 1, 0xff,
+                                                                                  CS::CullFace::k_back, CS::Colour::k_white, CS::Colour::k_white);
             }
             
             /// Removes the material group from the manager and queue it for destruction.

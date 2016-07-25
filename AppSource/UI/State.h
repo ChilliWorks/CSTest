@@ -21,8 +21,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _DEVICE_STATE_H_
-#define _DEVICE_STATE_H_
+#ifndef _UI_STATE_H_
+#define _UI_STATE_H_
 
 #include <CSTest.h>
 
@@ -30,9 +30,9 @@
 
 namespace CSTest
 {
-    namespace Device
+    namespace UI
     {
-        /// A state for testing the device info
+        /// A state for testing UI
         ///
         class State final : public CS::State
         {

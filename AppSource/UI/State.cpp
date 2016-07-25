@@ -21,30 +21,35 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _DEVICE_STATE_H_
-#define _DEVICE_STATE_H_
+#include <UI/State.h>
 
-#include <CSTest.h>
+#include <Common/Core/TestNavigator.h>
 
-#include <ChilliSource/Core/State.h>
+#include <ChilliSource/Core/Base.h>
+#include <ChilliSource/Core/Resource.h>
+#include <ChilliSource/Core/Scene.h>
+#include <ChilliSource/UI/Base.h>
 
 namespace CSTest
 {
-    namespace Device
+    namespace UI
     {
-        /// A state for testing the device info
-        ///
-        class State final : public CS::State
+        //------------------------------------------------------------------------------
+        void State::CreateSystems()
         {
-            /// The life-cycle event for creating all state systems.
-            ///
-            void CreateSystems() override;
+            CreateSystem<Common::TestNavigator>("UI");
+        }
 
-            /// Initialises the state.
-            ///
-            void OnInit() override;
-        };
+        //------------------------------------------------------------------------------
+        void State::OnInit()
+        {
+            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            
+            auto resourcePool = CS::Application::Get()->GetResourcePool();
+            auto testUITemplate = resourcePool->LoadResource<CS::WidgetTemplate>(CS::StorageLocation::k_package, "UI/Test.csui");
+            auto widgetFactory = CS::Application::Get()->GetSystem<CS::WidgetFactory>();
+            CS::WidgetSPtr testUI = widgetFactory->Create(testUITemplate);
+            GetUICanvas()->AddWidget(testUI);
+        }
     }
 }
-
-#endif

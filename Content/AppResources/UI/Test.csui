@@ -1,0 +1,48 @@
+{
+  "Type": "Widget",
+  "Name": "Root",
+  "InputEnabled": "true",
+  "RelSize": "1 1",
+  "Children": [
+    {
+      "Type": "Image",
+      "Name": "Container",
+      "RelSize": "0.5 0.5",
+      "SizePolicy": "None",
+      "ClipChildren": "false",
+      "OriginAnchor": "MiddleCentre",
+      "ParentalAnchor": "MiddleCentre",
+      "InputEnabled": "true",
+      "InputConsumeEnabled": "true",
+      "Drawable": {
+        "AtlasId": "Button01",
+        "AtlasLocation": "Package",
+        "AtlasPath": "TextureAtlases/UI/UI.csatlas",
+        "TextureLocation": "Package",
+        "TexturePath": "TextureAtlases/UI/UI.csimage",
+        "Type": "Standard"
+      },
+      "Children": [
+        {
+          "Type": "Image",
+          "Name": "Element1",
+          "RelSize": "0.5 0.5",
+          "SizePolicy": "None",
+          "ClipChildren": "false",
+          "OriginAnchor": "MiddleCentre",
+          "ParentalAnchor": "TopLeft",
+          "InputEnabled": "true",
+          "InputConsumeEnabled": "true",
+          "Drawable": {
+            "AtlasId": "Button01",
+            "AtlasLocation": "Package",
+            "AtlasPath": "TextureAtlases/UI/UI.csatlas",
+            "TextureLocation": "Package",
+            "TexturePath": "TextureAtlases/UI/UI.csimage",
+            "Type": "Standard"
+          }
+        }
+      ]
+    }
+  ]
+}

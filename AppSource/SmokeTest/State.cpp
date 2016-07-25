@@ -52,6 +52,7 @@
 #include <Keyboard/State.h>
 #include <VideoPlayer/State.h>
 #include <Screen/State.h>
+#include <UI/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -161,6 +162,11 @@ namespace CSTest
             optionsMenuDesc.AddButton("Video Player", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<VideoPlayer::State>());
+            });
+            
+            optionsMenuDesc.AddButton("UI", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<UI::State>());
             });
 #endif
             
