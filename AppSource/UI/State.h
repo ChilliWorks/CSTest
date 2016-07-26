@@ -32,7 +32,7 @@ namespace CSTest
 {
     namespace UI
     {
-        /// A state for testing UI
+        /// A state for testing UI. Including drawables, sizing, masking, etc.
         ///
         class State final : public CS::State
         {
