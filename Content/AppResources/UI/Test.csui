@@ -21,7 +21,7 @@
         "TexturePath": "TextureAtlases/UI/UI.csimage",
         "Type": "NinePatch",
         "Insets": "0.15 0.15 0.15 0.15",
-        "Masking": "true"
+        "DrawMode": "MaskOnly"
       },
       "Children": [
         {
@@ -41,7 +41,7 @@
             "TextureLocation": "Package",
             "TexturePath": "TextureAtlases/UI/UI.csimage",
             "Type": "Standard",
-            "Masking": "true",
+            "DrawMode": "Mask",
             "Colour": "1 0 0 1"
           },
           "Children": [
