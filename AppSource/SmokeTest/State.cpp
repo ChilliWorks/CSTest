@@ -138,6 +138,11 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<TextEntry::State>());
             });
 
+			optionsMenuDesc.AddButton("UI", [=]()
+			{
+				CS::Application::Get()->GetStateManager()->Push(std::make_shared<UI::State>());
+			});
+
 #if defined(CS_TARGETPLATFORM_IOS) || defined(CS_TARGETPLATFORM_ANDROID)
             optionsMenuDesc.AddButton("Web View", [=]()
             {
@@ -162,11 +167,6 @@ namespace CSTest
             optionsMenuDesc.AddButton("Video Player", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<VideoPlayer::State>());
-            });
-            
-            optionsMenuDesc.AddButton("UI", [=]()
-            {
-                CS::Application::Get()->GetStateManager()->Push(std::make_shared<UI::State>());
             });
 #endif
             

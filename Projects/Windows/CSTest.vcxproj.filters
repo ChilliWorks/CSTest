@@ -100,6 +100,9 @@
     <Filter Include="AppSource\Screen">
       <UniqueIdentifier>{7b287816-d6bf-456c-998b-a60a9dcc21a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\UI">
+      <UniqueIdentifier>{1d4235c7-6ba9-48af-b5c9-3557131f36b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -312,6 +315,9 @@
     <ClCompile Include="..\..\AppSource\Screen\ScreenPresenter.cpp">
       <Filter>AppSource\Screen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\UI\State.cpp">
+      <Filter>AppSource\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -490,6 +496,9 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Screen\State.h">
       <Filter>AppSource\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\UI\State.h">
+      <Filter>AppSource\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -74,6 +74,7 @@
     <ClCompile Include="..\..\AppSource\Sprite\State.cpp" />
     <ClCompile Include="..\..\AppSource\TextEntry\State.cpp" />
     <ClCompile Include="..\..\AppSource\TextEntry\TextEntryPresenter.cpp" />
+    <ClCompile Include="..\..\AppSource\UI\State.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\State.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="..\..\AppSource\Sprite\State.h" />
     <ClInclude Include="..\..\AppSource\TextEntry\State.h" />
     <ClInclude Include="..\..\AppSource\TextEntry\TextEntryPresenter.h" />
+    <ClInclude Include="..\..\AppSource\UI\State.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\State.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\CSReporter.h" />
     <ClInclude Include="..\..\AppSource\UnitTest\TestSystem\FailedAssertion.h" />
