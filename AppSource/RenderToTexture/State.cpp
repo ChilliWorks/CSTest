@@ -125,7 +125,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit() noexcept
         {
-            GetScene()->SetClearColour(CS::Colour::k_purple);
+            GetMainScene()->SetClearColour(CS::Colour::k_purple);
             
             auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
             auto basicWidgetFactory = CS::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
@@ -161,8 +161,8 @@ namespace CSTest
             
             // This scene we will only render to once (rather than each frame) to test that code path works.
             // The other scenes will be rendered each frame
-            m_rtScenes[0]->Disable();
-            CS::Application::Get()->RenderScene(m_rtScenes[0]);
+            m_rtScenes[0]->SetEnabled(false);
+            m_rtScenes[0]->Render();
         }
         
         //------------------------------------------------------------------------------

@@ -91,19 +91,19 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit() noexcept
         {
-            GetScene()->SetClearColour(CS::Colour::k_black);
+            GetMainScene()->SetClearColour(CS::Colour::k_black);
             
             auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
             
             CS::EntitySPtr room = basicEntityFactory->CreateRoom();
             room->GetTransform().SetPosition(0.0f, 10.0f, 0.0f);
-            GetScene()->Add(room);
+            GetMainScene()->Add(room);
             
             auto camera = basicEntityFactory->CreateThirdPersonCamera(room, CS::Vector3(0.0f, -9.0f, 0.0f));
-            GetScene()->Add(std::move(camera));
+            GetMainScene()->Add(std::move(camera));
             
-            CreateLights(GetScene());
-            AddAnimatedModel(GetScene());
+            CreateLights(GetMainScene());
+            AddAnimatedModel(GetMainScene());
         }
     }
 }

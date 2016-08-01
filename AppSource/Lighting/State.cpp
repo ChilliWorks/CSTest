@@ -57,7 +57,7 @@ namespace CSTest
             
             // ambient light
             CS::EntitySPtr ambientLight = basicEntityFactory->CreateAmbientLight(CS::Colour(0.3f, 0.3f, 0.3f, 1.0f));
-            GetScene()->Add(ambientLight);
+            GetMainScene()->Add(ambientLight);
             
             // directional light
             //TODO: We should provide multiple spinning lights, however issues with shadows in the engine mean we cannot for the time being.
@@ -67,12 +67,12 @@ namespace CSTest
             
             CS::EntitySPtr directionalLight = basicEntityFactory->CreateDirectionalLight(CS::Colour(0.8f, 0.5f, 0.4f));
             directionalLight->AddComponent(followerComponent);
-            GetScene()->Add(directionalLight);
+            GetMainScene()->Add(directionalLight);
             
             // point light
             CS::EntitySPtr pointLight = basicEntityFactory->CreatePointLight(CS::Colour(0.1f, 1.0f, 0.2f));
             pointLight->GetTransform().SetPosition(7.0f, 3.0f, 7.0f);
-            GetScene()->Add(pointLight);
+            GetMainScene()->Add(pointLight);
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ namespace CSTest
                     
                     CS::EntitySPtr box = primitiveEntityFactory->CreateBox(k_boxColours[CS::Random::Generate<u32>(0, u32(k_boxColours.size()) - 1)], size);
                     box->GetTransform().SetPosition(worldPosition);
-                    GetScene()->Add(box);
+                    GetMainScene()->Add(box);
                 }
             }
         }
@@ -118,16 +118,16 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
-            GetScene()->SetClearColour(CS::Colour::k_black);
+            GetMainScene()->SetClearColour(CS::Colour::k_black);
             
             auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
             
             CS::EntitySPtr room = basicEntityFactory->CreateRoom();
             room->GetTransform().SetPosition(0.0f, 10.0f, 0.0f);
-            GetScene()->Add(room);
+            GetMainScene()->Add(room);
             
             CS::EntitySPtr camera = basicEntityFactory->CreateThirdPersonCamera(room, CS::Vector3(0.0f, -9.0f, 0.0f));
-            GetScene()->Add(camera);
+            GetMainScene()->Add(camera);
             
             CreateLights(room);
             CreateBoxes();
