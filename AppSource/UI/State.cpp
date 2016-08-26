@@ -43,7 +43,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
-            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetMainScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
             auto resourcePool = CS::Application::Get()->GetResourcePool();
             auto testUITemplate = resourcePool->LoadResource<CS::WidgetTemplate>(CS::StorageLocation::k_package, "UI/Test.csui");

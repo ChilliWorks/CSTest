@@ -13,6 +13,7 @@
 		27408C181D3673DB00A0B003 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C151D3673DB00A0B003 /* State.cpp */; };
 		27408C251D36D6D300A0B003 /* ScreenPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C211D36D6D300A0B003 /* ScreenPresenter.cpp */; };
 		27408C261D36D6D300A0B003 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C231D36D6D300A0B003 /* State.cpp */; };
+		813292021D704FB000CA7612 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 813292001D704FB000CA7612 /* State.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		817E32D31D36F0D100F707AD /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 817E32D01D36F0D100F707AD /* State.cpp */; };
 		818463191D350422004B0C46 /* AccelerometerPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462811D350421004B0C46 /* AccelerometerPresenter.cpp */; };
@@ -139,6 +140,8 @@
 		27408C221D36D6D300A0B003 /* ScreenPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScreenPresenter.h; path = Screen/ScreenPresenter.h; sourceTree = "<group>"; };
 		27408C231D36D6D300A0B003 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Screen/State.cpp; sourceTree = "<group>"; };
 		27408C241D36D6D300A0B003 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Screen/State.h; sourceTree = "<group>"; };
+		813292001D704FB000CA7612 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		813292011D704FB000CA7612 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		817E32D01D36F0D100F707AD /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		817E32D11D36F0D100F707AD /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
@@ -373,6 +376,15 @@
 			name = Screen;
 			sourceTree = "<group>";
 		};
+		813291FF1D704FB000CA7612 /* RenderToTexture */ = {
+			isa = PBXGroup;
+			children = (
+				813292001D704FB000CA7612 /* State.cpp */,
+				813292011D704FB000CA7612 /* State.h */,
+			);
+			path = RenderToTexture;
+			sourceTree = "<group>";
+		};
 		817E32CD1D36F0D100F707AD /* MemoryWarning */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +418,7 @@
 				818462E31D350421004B0C46 /* MainMenu */,
 				817E32CD1D36F0D100F707AD /* MemoryWarning */,
 				818462ED1D350421004B0C46 /* Particle */,
+				813291FF1D704FB000CA7612 /* RenderToTexture */,
 				27408C1F1D36D6C100A0B003 /* Screen */,
 				818462F01D350421004B0C46 /* SmokeTest */,
 				818462F31D350421004B0C46 /* Sprite */,
@@ -977,6 +990,7 @@
 				818463431D350422004B0C46 /* State.cpp in Sources */,
 				8184634B1D350422004B0C46 /* State.cpp in Sources */,
 				817E32D31D36F0D100F707AD /* State.cpp in Sources */,
+				813292021D704FB000CA7612 /* State.cpp in Sources */,
 				818463291D350422004B0C46 /* State.cpp in Sources */,
 				81EB41111D464970005A7CE9 /* State.cpp in Sources */,
 				818463371D350422004B0C46 /* TaskSchedulerTest.cpp in Sources */,

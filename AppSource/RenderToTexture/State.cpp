@@ -36,6 +36,7 @@
 #include <ChilliSource/Rendering/Model.h>
 #include <ChilliSource/Rendering/Base/Renderer.h>
 #include <ChilliSource/Rendering/Camera/CameraComponent.h>
+#include <ChilliSource/Rendering/Target/RenderTargetGroup.h>
 #include <ChilliSource/UI/Base.h>
 #include <ChilliSource/UI/Drawable/DrawableUIComponent.h>
 
@@ -118,7 +119,7 @@ namespace CSTest
                 
                 // Convert the texture to a colour target that uses the depth buffer
                 // and set it as this scene's render target
-                m_rtScenes[i] = CreateSystem<CS::Scene>(CS::TargetGroup::CreateColourTargetGroup(m_renderTextures[i]));
+                m_rtScenes[i] = CreateSystem<CS::Scene>(CS::TargetGroup::CreateColourTargetGroup(m_renderTextures[i], CS::RenderTargetGroupType::k_colourDepth));
             }
         }
         

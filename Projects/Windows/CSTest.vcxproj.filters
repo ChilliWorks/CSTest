@@ -103,6 +103,9 @@
     <Filter Include="AppSource\UI">
       <UniqueIdentifier>{1d4235c7-6ba9-48af-b5c9-3557131f36b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\RenderToTexture">
+      <UniqueIdentifier>{8d3e0d7a-7bae-4765-b245-e12bb02aa0b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -318,6 +321,9 @@
     <ClCompile Include="..\..\AppSource\UI\State.cpp">
       <Filter>AppSource\UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\RenderToTexture\State.cpp">
+      <Filter>AppSource\RenderToTexture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -499,6 +505,9 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\UI\State.h">
       <Filter>AppSource\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\RenderToTexture\State.h">
+      <Filter>AppSource\RenderToTexture</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
