@@ -54,7 +54,7 @@ namespace CSTest
             
             u32 textureDataSize = sizeof(CS::ByteColour) * dimensions.x * dimensions.y;
             std::unique_ptr<u8[]> textureData(new u8[textureDataSize]);
-            CS::TextureDesc desc(dimensions, CS::ImageFormat::k_RGBA8888, CS::ImageCompression::k_none);
+            CS::TextureDesc desc(dimensions, CS::ImageFormat::k_RGBA8888, CS::ImageCompression::k_none, true);
             
             static u32 s_textureId = 0;
             auto resourcePool = CS::Application::Get()->GetResourcePool();
@@ -85,7 +85,7 @@ namespace CSTest
             CS_ASSERT(m_textComponent, "Display hasn't been initialised.");
             
             auto resourcePool = CS::Application::Get()->GetResourcePool();
-            u32 numTextures = resourcePool->GetAllResources<CS::Texture>().size();
+            auto numTextures = resourcePool->GetAllResources<CS::Texture>().size();
             
             m_textComponent->SetText("Number of textures: " + CS::ToString(numTextures));
         }
@@ -107,7 +107,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit() noexcept
         {
-            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetMainScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
             InitTextureCountDisplay();
         }

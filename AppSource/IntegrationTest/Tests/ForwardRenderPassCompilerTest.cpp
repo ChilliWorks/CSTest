@@ -171,13 +171,14 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
                 {
                     CS::ForwardRenderPassCompiler renderCompiler;
-                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, renderFrame);
+                    std::vector<CS::RenderFrame> renderFrames = {std::move(renderFrame)};
+                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup list.");
@@ -207,13 +208,14 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
                 {
                     CS::ForwardRenderPassCompiler renderCompiler;
-                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, renderFrame);
+                    std::vector<CS::RenderFrame> renderFrames = {std::move(renderFrame)};
+                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
@@ -244,13 +246,15 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
                 {
                     CS::ForwardRenderPassCompiler renderCompiler;
-                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, renderFrame);
+                    
+                    std::vector<CS::RenderFrame> renderFrames = {std::move(renderFrame)};
+                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
@@ -283,13 +287,14 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
                 {
                     CS::ForwardRenderPassCompiler renderCompiler;
-                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, renderFrame);
+                    std::vector<CS::RenderFrame> renderFrames = {std::move(renderFrame)};
+                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
@@ -318,7 +323,7 @@ namespace CSTest
                 CS::RenderDynamicMeshASPtr renderDynamicMesh = CS::SpriteMeshBuilder::Build(allocator.get(), CS::Vector3::k_zero, CS::Vector2::k_one, CS::UVs(), CS::Colour::k_red, CS::AlignmentAnchor::k_middleCentre);
                 
                 std::vector<CS::RenderObject> renderObjects { CreateUIRenderObject(transparentMaterialGroup, renderDynamicMesh.get(), k_uiObjectPosition) };
-                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, CreateRenderCamera(), CS::AmbientRenderLight(CS::Colour::k_red), std::vector<CS::DirectionalRenderLight>(), std::vector<CS::PointRenderLight>(), renderObjects);
+                CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, CreateRenderCamera(), CS::AmbientRenderLight(CS::Colour::k_red), std::vector<CS::DirectionalRenderLight>(), std::vector<CS::PointRenderLight>(), renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
@@ -328,7 +333,8 @@ namespace CSTest
                     auto renderDynamicMeshRef = renderDynamicMesh;
                     
                     CS::ForwardRenderPassCompiler renderCompiler;
-                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, renderFrame);
+                    std::vector<CS::RenderFrame> renderFrames = {std::move(renderFrame)};
+                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
@@ -365,13 +371,14 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { transparentObject, opaqueObject };
                 
-                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
                 {
                     CS::ForwardRenderPassCompiler renderCompiler;
-                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, renderFrame);
+                    std::vector<CS::RenderFrame> renderFrames = {std::move(renderFrame)};
+                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
@@ -404,13 +411,14 @@ namespace CSTest
                 std::vector<CS::PointRenderLight> pointLights;
                 std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_offScreenObjectPosition) };
                 
-                CS::RenderFrame renderFrame(k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
+                CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
                 taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
                 {
                     CS::ForwardRenderPassCompiler renderCompiler;
-                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, renderFrame);
+                    std::vector<CS::RenderFrame> renderFrames = {std::move(renderFrame)};
+                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");

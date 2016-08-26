@@ -53,6 +53,7 @@
 #include <VideoPlayer/State.h>
 #include <Screen/State.h>
 #include <UI/State.h>
+#include <RenderToTexture/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -74,7 +75,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit() noexcept
         {
-            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetMainScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
             Common::OptionsMenuDesc optionsMenuDesc;
             
@@ -136,6 +137,11 @@ namespace CSTest
             optionsMenuDesc.AddButton("Text Entry", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<TextEntry::State>());
+            });
+            
+            optionsMenuDesc.AddButton("Render to Texture", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<RenderToTexture::State>());
             });
 
 			optionsMenuDesc.AddButton("UI", [=]()

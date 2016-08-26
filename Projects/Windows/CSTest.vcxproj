@@ -68,6 +68,7 @@
     <ClCompile Include="..\..\AppSource\Particle\State.cpp" />
     <ClCompile Include="..\..\AppSource\RemoteNotifications\RemoteNotificationsPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\RemoteNotifications\State.cpp" />
+    <ClCompile Include="..\..\AppSource\RenderToTexture\State.cpp" />
     <ClCompile Include="..\..\AppSource\Screen\ScreenPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\Screen\State.cpp" />
     <ClCompile Include="..\..\AppSource\SmokeTest\State.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="..\..\AppSource\Particle\State.h" />
     <ClInclude Include="..\..\AppSource\RemoteNotifications\RemoteNotificationsPresenter.h" />
     <ClInclude Include="..\..\AppSource\RemoteNotifications\State.h" />
+    <ClInclude Include="..\..\AppSource\RenderToTexture\State.h" />
     <ClInclude Include="..\..\AppSource\Screen\ScreenPresenter.h" />
     <ClInclude Include="..\..\AppSource\Screen\State.h" />
     <ClInclude Include="..\..\AppSource\SmokeTest\State.h" />
