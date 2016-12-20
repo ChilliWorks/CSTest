@@ -154,6 +154,15 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CS::EntityUPtr CreateAnimatedModel(const CS::ModelCSPtr& in_model, const CS::MaterialCSPtr& in_material, const CS::SkinnedAnimationCSPtr& in_animation,
                                                CS::AnimatedModelComponent::PlaybackType in_playbackType) noexcept;
+            //------------------------------------------------------------------------------
+            /// Creates a model with no animation from the given model and material
+            ///
+            /// @param in_model - The model which should be used.
+            /// @param in_material - The material that should be used.
+            ///
+            /// @return The model entity.
+            //------------------------------------------------------------------------------
+            CS::EntityUPtr CreateStaticModel(const CS::ModelCSPtr& in_model, const CS::MaterialCSPtr& in_material) noexcept;
     
         private:
             friend class CS::Application;

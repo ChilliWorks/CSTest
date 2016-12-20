@@ -67,7 +67,7 @@ namespace CSTest
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            CS::CameraComponentSPtr camComponent = m_renderComponentFactory->CreatePerspectiveCameraComponent(3.14f / 3.0f, 1.0f, 30.0f);
+            CS::CameraComponentSPtr camComponent = m_renderComponentFactory->CreatePerspectiveCameraComponent(3.14f / 3.0f, 0.5f, 30.0f);
             auto followerComponent = std::make_shared<FollowerComponent>(in_target, in_targetOffset, in_distance, in_horizontalAngle, in_verticalAngle);
             auto orbiterComponent = std::make_shared<OrbiterComponent>(in_horizontalAngularVelocity);
             
@@ -168,6 +168,19 @@ namespace CSTest
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-AnimatedModel");
             entity->AddComponent(std::move(animatedModelComponent));
+            return entity;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        CS::EntityUPtr BasicEntityFactory::CreateStaticModel(const CS::ModelCSPtr& in_model, const CS::MaterialCSPtr& in_material) noexcept
+        {
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
+            
+            auto modelComponent = m_renderComponentFactory->CreateStaticModelComponent(in_model, in_material);
+            
+            auto entity = CS::Entity::Create();
+            entity->SetName(CS::ToString(m_entityCount++) + "-StaticModel");
+            entity->AddComponent(std::move(modelComponent));
             return entity;
         }
         //------------------------------------------------------------------------------
