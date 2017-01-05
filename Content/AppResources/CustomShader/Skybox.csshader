@@ -1,7 +1,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014 Tag Games Limited
+//  Copyright (c) 2017 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -39,25 +39,14 @@ GLSL
 
         //uniforms
         uniform highp mat4 u_wvpMat;
-        uniform highp mat4 u_worldMat;
-        uniform highp mat4 u_normalMat;
-        uniform highp vec3 u_cameraPos;
 
         //varyings
-        varying mediump vec2 vvTexCoord;
-        varying mediump vec3 vvEnvTexCoord;
+        varying mediump vec3 vvTexCoord;
 
         void main()
         {
-            gl_Position = u_wvpMat * a_position;
-            vec4 vWorldPosition = u_worldMat * a_position;
-            
-            vec3 vNormal = normalize((u_normalMat * vec4(a_normal, 1.0)).xyz);
-            vec3 vWorldViewDir = normalize(vWorldPosition.xyz - u_cameraPos);
-
-            vvEnvTexCoord = reflect(vWorldViewDir, vNormal);
-            
-            vvTexCoord = a_texCoord;
+            gl_Position = (u_wvpMat * a_position).xyww;
+            vvTexCoord = normalize(a_position.xyz);
         }
 	}
 
@@ -76,16 +65,11 @@ GLSL
 		uniform lowp samplerCube u_cubemap0;
 
 		//varyings
-		varying mediump vec2 vvTexCoord;
-		varying mediump vec3 vvEnvTexCoord;
+		varying mediump vec3 vvTexCoord;
 
 		void main()
 		{
-			vec3 albedo = texture2D(u_texture0, vvTexCoord).xyz;
-			vec3 reflection = textureCube(u_cubemap0, vvEnvTexCoord).xyz;
-
-			vec3 result = mix(albedo, reflection, 0.9);
-			gl_FragColor = vec4(result.x, result.y, result.z, 1.0);
+			gl_FragColor = textureCube(u_cubemap0, vvTexCoord);
 		}
 	}
 }

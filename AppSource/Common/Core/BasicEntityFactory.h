@@ -121,10 +121,11 @@ namespace CSTest
             ///
             /// @param in_size - [Optional] The size of the room. Defaults to
             /// [20, 20, 20].
+            /// @param materialPath - Path to the material to apply to the room model
             ///
             /// @return The entity.
             //------------------------------------------------------------------------------
-            CS::EntityUPtr CreateRoom(const CS::Vector3& in_size = CS::Vector3(20.0f, 20.0f, 20.0f));
+            CS::EntityUPtr CreateRoom(const CS::Vector3& in_size = CS::Vector3(20.0f, 20.0f, 20.0f), const std::string& materialPath = "Materials/CheckeredLit.csmaterial");
             //------------------------------------------------------------------------------
             /// Creates a sprite with the requested size, colour and image id. Sprite images
             /// are loaded from the sprite texture atlas.

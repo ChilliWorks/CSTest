@@ -80,14 +80,13 @@ namespace CSTest
             auto primitiveEntityFactory = CS::Application::Get()->GetSystem<CS::PrimitiveEntityFactory>();
             auto resourcePool = CS::Application::Get()->GetResourcePool();
             
-            CS::EntitySPtr room = basicEntityFactory->CreateRoom();
-            room->GetTransform().SetPosition(0.0f, 9.0f, 0.0f);
+            CS::EntitySPtr room = basicEntityFactory->CreateRoom(CS::Vector3(20.0f, 20.0f, 20.0f), "Materials/Skybox.csmaterial");
             GetMainScene()->Add(room);
             
-            CS::EntitySPtr model = primitiveEntityFactory->CreateBox(resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, "Materials/Reflective.csmaterial"));
+            CS::EntitySPtr model = primitiveEntityFactory->CreateBox(resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, "Materials/Reflective.csmaterial"), CS::Vector3(3, 3, 3));
             GetMainScene()->Add(model);
             
-            auto camera = basicEntityFactory->CreateThirdPersonCamera(model, CS::Vector3::k_zero, 2.0f, 0.0f, CS::MathUtils::k_pi / 8.0f);
+            auto camera = basicEntityFactory->CreateThirdPersonCamera(model, CS::Vector3::k_zero, 7.0f, 0.0f, -CS::MathUtils::k_pi / 7.0f);
             GetMainScene()->Add(std::move(camera));
             
             CreateLights(GetMainScene());
