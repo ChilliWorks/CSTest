@@ -14,6 +14,7 @@
 		27408C251D36D6D300A0B003 /* ScreenPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C211D36D6D300A0B003 /* ScreenPresenter.cpp */; };
 		27408C261D36D6D300A0B003 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C231D36D6D300A0B003 /* State.cpp */; };
 		813292021D704FB000CA7612 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 813292001D704FB000CA7612 /* State.cpp */; };
+		814774301E1E521300000123 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8147742E1E1E521300000123 /* State.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		817E32D31D36F0D100F707AD /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 817E32D01D36F0D100F707AD /* State.cpp */; };
 		818463191D350422004B0C46 /* AccelerometerPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462811D350421004B0C46 /* AccelerometerPresenter.cpp */; };
@@ -142,6 +143,8 @@
 		27408C241D36D6D300A0B003 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Screen/State.h; sourceTree = "<group>"; };
 		813292001D704FB000CA7612 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		813292011D704FB000CA7612 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		8147742E1E1E521300000123 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Cubemap/State.cpp; sourceTree = "<group>"; };
+		8147742F1E1E521300000123 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Cubemap/State.h; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		817E32D01D36F0D100F707AD /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		817E32D11D36F0D100F707AD /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
@@ -385,6 +388,15 @@
 			path = RenderToTexture;
 			sourceTree = "<group>";
 		};
+		8147742C1E1E51DC00000123 /* Cubemap */ = {
+			isa = PBXGroup;
+			children = (
+				8147742E1E1E521300000123 /* State.cpp */,
+				8147742F1E1E521300000123 /* State.h */,
+			);
+			name = Cubemap;
+			sourceTree = "<group>";
+		};
 		817E32CD1D36F0D100F707AD /* MemoryWarning */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,6 +417,7 @@
 				8184628A1D350421004B0C46 /* Common */,
 				818462A31D350421004B0C46 /* CricketAudio */,
 				818462A61D350421004B0C46 /* CSTest.h */,
+				8147742C1E1E51DC00000123 /* Cubemap */,
 				818462A71D350421004B0C46 /* CustomShader */,
 				27408C111D3673C800A0B003 /* Device */,
 				818462AA1D350421004B0C46 /* DialogueBox */,
@@ -882,6 +895,7 @@
 				TargetAttributes = {
 					81C7FFE31C89E86400D306F9 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = SAG97E7HLS;
 					};
 				};
 			};
@@ -965,6 +979,7 @@
 				818463271D350422004B0C46 /* State.cpp in Sources */,
 				818463491D350422004B0C46 /* State.cpp in Sources */,
 				8184634E1D350422004B0C46 /* LinearAllocator.cpp in Sources */,
+				814774301E1E521300000123 /* State.cpp in Sources */,
 				8184632A1D350422004B0C46 /* DownloadProgressTestSystem.cpp in Sources */,
 				818463531D350422004B0C46 /* CSReporter.cpp in Sources */,
 				818463551D350422004B0C46 /* FailedSection.cpp in Sources */,
@@ -1051,6 +1066,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LegacyLaunchImages;
+				DEVELOPMENT_TEAM = SAG97E7HLS;
 				ENABLE_BITCODE = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -1067,6 +1083,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LegacyLaunchImages;
+				DEVELOPMENT_TEAM = SAG97E7HLS;
 				ENABLE_BITCODE = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;

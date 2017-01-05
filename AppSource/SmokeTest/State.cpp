@@ -36,6 +36,7 @@
 #include <Accelerometer/State.h>
 #include <CricketAudio/State.h>
 #include <CustomShader/State.h>
+#include <Cubemap/State.h>
 #include <Device/State.h>
 #include <DownloadProgress/State.h>
 #include <EmailComposer/State.h>
@@ -142,6 +143,11 @@ namespace CSTest
             optionsMenuDesc.AddButton("Render to Texture", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<RenderToTexture::State>());
+            });
+            
+            optionsMenuDesc.AddButton("Cubemap", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Cubemap::State>());
             });
 
 			optionsMenuDesc.AddButton("UI", [=]()

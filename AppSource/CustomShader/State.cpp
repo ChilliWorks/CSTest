@@ -57,8 +57,9 @@ namespace CSTest
                 
                 auto materialFactory = CS::Application::Get()->GetSystem<CS::MaterialFactory>();
                 auto material = materialFactory->CreateCustom("Faces-" + CS::ToString(s_id++));
-                material->SetShadingType(CS::Material::ShadingType::k_custom);
-                material->SetCustomShader(CS::VertexFormat::k_sprite, shader);
+                material->SetShadingType(CS::MaterialShadingType::k_custom);
+                material->PrepCustomShaders(CS::VertexFormat::k_sprite, CS::MaterialShadingType::k_unlit);
+                material->AddCustomShader(shader, CS::RenderPasses::k_transparent);
                 material->AddTexture(angryTexture);
                 material->AddTexture(happyTexture);
                 material->SetFaceCullingEnabled(false);

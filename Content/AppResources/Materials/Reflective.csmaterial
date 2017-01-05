@@ -1,0 +1,12 @@
+<Material type="Custom">
+    <RenderStates>
+        <Transparency enabled="false" />
+    </RenderStates>
+    <Shaders fallback-type="Unlit">
+        <Shader pass="Base" file-name="CustomShader/Reflective.csshader"/>
+    </Shaders>
+    <Textures>
+        <Texture file-name="Textures/Blank.csimage" location="ChilliSource" mipmapped="true" type="texture" />
+        <Texture file-name="Cubemaps/EnvMap.cscubemap" mipmapped="false" type="cubemap" />
+    </Textures>
+</Material>

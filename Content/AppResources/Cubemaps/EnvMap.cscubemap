@@ -1,0 +1,11 @@
+{
+  "StorageLocation": "Package",
+  "Faces": [
+    "Textures/posx.csimage",
+    "Textures/negx.csimage",
+    "Textures/posy.csimage",
+    "Textures/negy.csimage",
+    "Textures/posz.csimage",
+    "Textures/negz.csimage"
+  ]
+}

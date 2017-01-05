@@ -34,6 +34,7 @@
     <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuDesc.cpp" />
     <ClCompile Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.cpp" />
     <ClCompile Include="..\..\AppSource\CricketAudio\State.cpp" />
+    <ClCompile Include="..\..\AppSource\Cubemap\State.cpp" />
     <ClCompile Include="..\..\AppSource\CustomShader\State.cpp" />
     <ClCompile Include="..\..\AppSource\Device\DevicePresenter.cpp" />
     <ClCompile Include="..\..\AppSource\Device\State.cpp" />
@@ -109,6 +110,7 @@
     <ClInclude Include="..\..\AppSource\Common\UI\OptionsMenuPresenter.h" />
     <ClInclude Include="..\..\AppSource\CricketAudio\State.h" />
     <ClInclude Include="..\..\AppSource\CSTest.h" />
+    <ClInclude Include="..\..\AppSource\Cubemap\State.h" />
     <ClInclude Include="..\..\AppSource\CustomShader\State.h" />
     <ClInclude Include="..\..\AppSource\Device\DevicePresenter.h" />
     <ClInclude Include="..\..\AppSource\Device\State.h" />

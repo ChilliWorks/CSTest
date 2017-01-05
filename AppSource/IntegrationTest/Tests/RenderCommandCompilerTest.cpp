@@ -105,7 +105,7 @@ namespace CSTest
                 
                 //TODO: Handle deferred rendering
                 auto renderMaterialGroup = material->GetRenderMaterialGroup();
-                auto renderMaterial = renderMaterialGroup->GetRenderMaterial(CS::VertexFormat::k_staticMesh, static_cast<u32>(CS::ForwardRenderPasses::k_base));
+                auto renderMaterial = renderMaterialGroup->GetRenderMaterial(CS::VertexFormat::k_staticMesh, static_cast<u32>(CS::RenderPasses::k_base));
                 auto renderMesh = model->GetRenderMesh(0);
                 auto worldBoundingSphere = renderMesh->GetBoundingSphere();
                 
@@ -125,7 +125,7 @@ namespace CSTest
                 
                 //TODO: Handle deferred rendering
                 auto renderMaterialGroup = material->GetRenderMaterialGroup();
-                auto renderMaterial = renderMaterialGroup->GetRenderMaterial(CS::VertexFormat::k_staticMesh, static_cast<u32>(CS::ForwardRenderPasses::k_transparent));
+                auto renderMaterial = renderMaterialGroup->GetRenderMaterial(CS::VertexFormat::k_staticMesh, static_cast<u32>(CS::RenderPasses::k_transparent));
                 auto renderMesh = model->GetRenderMesh(0);
                 auto worldBoundingSphere = renderMesh->GetBoundingSphere();
                 
@@ -253,10 +253,10 @@ namespace CSTest
                     // In a more real work case, the pre and post list would only contain load and unload commands, however we are using
                     // apply camera commands as they're easier to setup for testing.
                     CS::RenderCommandListUPtr preRenderCommandList(new CS::RenderCommandList());
-                    preRenderCommandList->AddApplyCameraCommand(CS::Vector3::k_zero, CS::Matrix4::k_identity);
+                    preRenderCommandList->AddApplyCameraCommand(CS::Vector3::k_zero, CS::Matrix4::k_identity, CS::Matrix4::k_identity);
                     
                     CS::RenderCommandListUPtr postRenderCommandList(new CS::RenderCommandList());
-                    postRenderCommandList->AddApplyCameraCommand(CS::Vector3::k_zero, CS::Matrix4::k_identity);
+                    postRenderCommandList->AddApplyCameraCommand(CS::Vector3::k_zero, CS::Matrix4::k_identity, CS::Matrix4::k_identity);
                     
                     std::vector<CS::RenderFrameData> renderFrameData;
                     auto renderCommandBuffer = CS::RenderCommandCompiler::CompileRenderCommands(taskContext, nullptr, *targetRenderPassGroups, std::move(preRenderCommandList), std::move(postRenderCommandList), std::move(renderFrameData));

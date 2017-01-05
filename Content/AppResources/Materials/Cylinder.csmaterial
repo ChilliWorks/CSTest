@@ -10,6 +10,6 @@
         <Transparency enabled="false" />
     </RenderStates>
     <Textures>
-        <Texture image-name="Textures/Cylinder.csimage" mipmapped="true" />
+        <Texture file-name="Textures/Cylinder.csimage" mipmapped="true" />
     </Textures>
 </Material>

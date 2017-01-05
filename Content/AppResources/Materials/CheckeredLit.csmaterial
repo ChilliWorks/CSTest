@@ -10,6 +10,6 @@
         <Transparency enabled="false" />
     </RenderStates>
     <Textures>
-        <Texture image-name="Textures/Checkered.csimage" mipmapped="true" wrap-mode-u="Repeat" wrap-mode-v="Repeat" />
+        <Texture file-name="Textures/Checkered.csimage" mipmapped="true" wrap-mode-u="Repeat" wrap-mode-v="Repeat" />
     </Textures>
 </Material>

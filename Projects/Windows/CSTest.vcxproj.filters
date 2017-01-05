@@ -106,6 +106,9 @@
     <Filter Include="AppSource\RenderToTexture">
       <UniqueIdentifier>{8d3e0d7a-7bae-4765-b245-e12bb02aa0b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\Cubemap">
+      <UniqueIdentifier>{f9054b3a-b255-46f7-9e2f-e2e86afb84b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -324,6 +327,9 @@
     <ClCompile Include="..\..\AppSource\RenderToTexture\State.cpp">
       <Filter>AppSource\RenderToTexture</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\Cubemap\State.cpp">
+      <Filter>AppSource\Cubemap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -508,6 +514,9 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\RenderToTexture\State.h">
       <Filter>AppSource\RenderToTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Cubemap\State.h">
+      <Filter>AppSource\Cubemap</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
