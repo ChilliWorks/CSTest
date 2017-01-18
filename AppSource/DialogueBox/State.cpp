@@ -1,6 +1,6 @@
 //  The MIT License (MIT)
 //
-//  Copyright © 2016 Tag Games. All rights reserved.
+//  Copyright ï¿½ 2016 Tag Games. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
-            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetMainScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
  
             m_dialogueBoxSystem = CS::Application::Get()->GetSystem<CS::DialogueBoxSystem>();
 

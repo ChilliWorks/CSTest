@@ -57,8 +57,9 @@ namespace CSTest
                 
                 auto materialFactory = CS::Application::Get()->GetSystem<CS::MaterialFactory>();
                 auto material = materialFactory->CreateCustom("Faces-" + CS::ToString(s_id++));
-                material->SetShadingType(CS::Material::ShadingType::k_custom);
-                material->SetCustomShader(CS::VertexFormat::k_sprite, shader);
+                material->SetShadingType(CS::MaterialShadingType::k_custom);
+                material->PrepCustomShaders(CS::VertexFormat::k_sprite, CS::MaterialShadingType::k_unlit);
+                material->AddCustomShader(shader, CS::RenderPasses::k_transparent);
                 material->AddTexture(angryTexture);
                 material->AddTexture(happyTexture);
                 material->SetFaceCullingEnabled(false);
@@ -100,22 +101,22 @@ namespace CSTest
 		//------------------------------------------------------------------------------
 		void State::OnInit() noexcept
 		{
-			GetScene()->SetClearColour(CS::Colour::k_black);
+			GetMainScene()->SetClearColour(CS::Colour::k_black);
 
 			auto basicEntityFactory = CS::Application::Get()->GetSystem<Common::BasicEntityFactory>();
 
 			CS::EntitySPtr room = basicEntityFactory->CreateRoom();
 			room->GetTransform().SetPosition(0.0f, 10.0f, 0.0f);
-			GetScene()->Add(room);
+			GetMainScene()->Add(room);
 
 			auto camera = basicEntityFactory->CreateThirdPersonCamera(room, CS::Vector3(0.0f, -9.0f, 0.0f));
-			GetScene()->Add(std::move(camera));
+			GetMainScene()->Add(std::move(camera));
 
 			CS::EntitySPtr ambientLight = basicEntityFactory->CreateAmbientLight(CS::Colour(0.65f, 0.65f, 0.65f, 1.0f));
-			GetScene()->Add(ambientLight);
+			GetMainScene()->Add(ambientLight);
 
             m_material = CreateFacesMaterial();
-            AddFace(GetScene(), m_material);
+            AddFace(GetMainScene(), m_material);
 		}
         
         //------------------------------------------------------------------------------

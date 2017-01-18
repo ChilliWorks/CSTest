@@ -67,7 +67,7 @@ namespace CSTest
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            CS::CameraComponentSPtr camComponent = m_renderComponentFactory->CreatePerspectiveCameraComponent(3.14f / 3.0f, 1.0f, 30.0f);
+            CS::CameraComponentSPtr camComponent = m_renderComponentFactory->CreatePerspectiveCameraComponent(3.14f / 3.0f, 0.5f, 30.0f);
             auto followerComponent = std::make_shared<FollowerComponent>(in_target, in_targetOffset, in_distance, in_horizontalAngle, in_verticalAngle);
             auto orbiterComponent = std::make_shared<OrbiterComponent>(in_horizontalAngularVelocity);
             
@@ -121,7 +121,7 @@ namespace CSTest
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
-        CS::EntityUPtr BasicEntityFactory::CreateRoom(const CS::Vector3& in_size)
+        CS::EntityUPtr BasicEntityFactory::CreateRoom(const CS::Vector3& in_size, const std::string& materialPath)
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
@@ -129,7 +129,7 @@ namespace CSTest
             CS::Vector2 textureRepeat(in_size.x * k_textureRepeatFactor, in_size.z * k_textureRepeatFactor);
             
             CS::ModelCSPtr mesh = m_primitiveModelFactory->CreateBox(in_size, textureRepeat, true);
-            CS::MaterialCSPtr material = m_resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, "Materials/CheckeredLit.csmaterial");
+            CS::MaterialCSPtr material = m_resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, materialPath);
             
             CS::StaticModelComponentSPtr meshComponent = m_renderComponentFactory->CreateStaticModelComponent(mesh, material);
             meshComponent->SetShadowCastingEnabled(false);
@@ -168,6 +168,19 @@ namespace CSTest
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-AnimatedModel");
             entity->AddComponent(std::move(animatedModelComponent));
+            return entity;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        CS::EntityUPtr BasicEntityFactory::CreateStaticModel(const CS::ModelCSPtr& in_model, const CS::MaterialCSPtr& in_material) noexcept
+        {
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
+            
+            auto modelComponent = m_renderComponentFactory->CreateStaticModelComponent(in_model, in_material);
+            
+            auto entity = CS::Entity::Create();
+            entity->SetName(CS::ToString(m_entityCount++) + "-StaticModel");
+            entity->AddComponent(std::move(modelComponent));
             return entity;
         }
         //------------------------------------------------------------------------------

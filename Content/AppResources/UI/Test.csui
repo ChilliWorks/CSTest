@@ -1,0 +1,112 @@
+{
+  "Type": "Widget",
+  "Name": "Root",
+  "InputEnabled": "true",
+  "RelSize": "1 1",
+  "Children": [
+    {
+      "Type": "Image",
+      "Name": "Container",
+      "RelSize": "0.5 0.5",
+      "SizePolicy": "None",
+      "OriginAnchor": "MiddleCentre",
+      "ParentalAnchor": "MiddleCentre",
+      "InputEnabled": "true",
+      "InputConsumeEnabled": "true",
+      "Drawable": {
+        "AtlasId": "Button01",
+        "AtlasLocation": "Package",
+        "AtlasPath": "TextureAtlases/UI/UI.csatlas",
+        "TextureLocation": "Package",
+        "TexturePath": "TextureAtlases/UI/UI.csimage",
+        "Type": "NinePatch",
+        "Insets": "0.15 0.15 0.15 0.15",
+        "DrawMode": "MaskOnly"
+      },
+      "Children": [
+        {
+          "Type": "Image",
+          "Name": "Element1",
+          "RelPosition": "0.25, -0.25",
+          "RelSize": "0.5 0.5",
+          "SizePolicy": "UseWidthMaintainingAspect",
+          "OriginAnchor": "MiddleCentre",
+          "ParentalAnchor": "TopLeft",
+          "InputEnabled": "true",
+          "InputConsumeEnabled": "true",
+          "Drawable": {
+            "AtlasId": "Circle01",
+            "AtlasLocation": "Package",
+            "AtlasPath": "TextureAtlases/UI/UI.csatlas",
+            "TextureLocation": "Package",
+            "TexturePath": "TextureAtlases/UI/UI.csimage",
+            "Type": "Standard",
+            "DrawMode": "Mask",
+            "Colour": "1 0 0 1"
+          },
+          "Children": [
+            {
+              "Type": "Image",
+              "Name": "Element1_1",
+              "RelSize": "1.25 1.25",
+              "SizePolicy": "UseWidthMaintainingAspect",
+              "OriginAnchor": "MiddleCentre",
+              "ParentalAnchor": "MiddleCentre",
+              "InputEnabled": "true",
+              "InputConsumeEnabled": "true",
+              "Drawable": {
+                "AtlasId": "Star01",
+                "AtlasLocation": "Package",
+                "AtlasPath": "TextureAtlases/UI/UI.csatlas",
+                "TextureLocation": "Package",
+                "TexturePath": "TextureAtlases/UI/UI.csimage",
+                "Type": "Standard",
+                "Colour": "1 0 0.1 1"
+              }
+            }
+          ]
+        },
+        {
+          "Type": "Image",
+          "Name": "Element2",
+          "RelSize": "0.5 0.5",
+          "SizePolicy": "UseWidthMaintainingAspect",
+          "OriginAnchor": "MiddleCentre",
+          "ParentalAnchor": "BottomRight",
+          "InputEnabled": "true",
+          "InputConsumeEnabled": "true",
+          "Drawable": {
+            "AtlasId": "Circle01",
+            "AtlasLocation": "Package",
+            "AtlasPath": "TextureAtlases/UI/UI.csatlas",
+            "TextureLocation": "Package",
+            "TexturePath": "TextureAtlases/UI/UI.csimage",
+            "Type": "Standard",
+            "Colour": "0 1 1 1"
+          },
+          "Children": [
+            {
+              "Type": "Image",
+              "Name": "Element2_1",
+              "RelSize": "0.5 0.5",
+              "SizePolicy": "UseWidthMaintainingAspect",
+              "OriginAnchor": "MiddleCentre",
+              "ParentalAnchor": "TopLeft",
+              "InputEnabled": "true",
+              "InputConsumeEnabled": "true",
+              "Drawable": {
+                "AtlasId": "Star01",
+                "AtlasLocation": "Package",
+                "AtlasPath": "TextureAtlases/UI/UI.csatlas",
+                "TextureLocation": "Package",
+                "TexturePath": "TextureAtlases/UI/UI.csimage",
+                "Type": "Standard",
+                "Colour": "0 1 0.9 1"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

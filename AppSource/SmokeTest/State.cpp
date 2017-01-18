@@ -36,6 +36,7 @@
 #include <Accelerometer/State.h>
 #include <CricketAudio/State.h>
 #include <CustomShader/State.h>
+#include <Cubemap/State.h>
 #include <Device/State.h>
 #include <DownloadProgress/State.h>
 #include <EmailComposer/State.h>
@@ -52,6 +53,8 @@
 #include <Keyboard/State.h>
 #include <VideoPlayer/State.h>
 #include <Screen/State.h>
+#include <UI/State.h>
+#include <RenderToTexture/State.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Scene.h>
@@ -73,7 +76,7 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::OnInit() noexcept
         {
-            GetScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
+            GetMainScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
             Common::OptionsMenuDesc optionsMenuDesc;
             
@@ -136,6 +139,21 @@ namespace CSTest
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<TextEntry::State>());
             });
+            
+            optionsMenuDesc.AddButton("Render to Texture", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<RenderToTexture::State>());
+            });
+            
+            optionsMenuDesc.AddButton("Cubemap", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Cubemap::State>());
+            });
+
+			optionsMenuDesc.AddButton("UI", [=]()
+			{
+				CS::Application::Get()->GetStateManager()->Push(std::make_shared<UI::State>());
+			});
 
 #if defined(CS_TARGETPLATFORM_IOS) || defined(CS_TARGETPLATFORM_ANDROID)
             optionsMenuDesc.AddButton("Web View", [=]()

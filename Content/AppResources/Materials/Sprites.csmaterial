@@ -11,6 +11,6 @@
         <Culling enabled="false" />
     </RenderStates>
     <Textures>
-        <Texture image-name="TextureAtlases/Sprites/Sprites.csimage" />
+        <Texture file-name="TextureAtlases/Sprites/Sprites.csimage" />
     </Textures>
 </Material>

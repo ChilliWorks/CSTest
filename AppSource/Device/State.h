@@ -32,7 +32,7 @@ namespace CSTest
 {
     namespace Device
     {
-        /// A state for testing the accelerometer input device.
+        /// A state for testing the device info
         ///
         class State final : public CS::State
         {

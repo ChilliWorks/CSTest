@@ -13,6 +13,8 @@
 		27408C181D3673DB00A0B003 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C151D3673DB00A0B003 /* State.cpp */; };
 		27408C251D36D6D300A0B003 /* ScreenPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C211D36D6D300A0B003 /* ScreenPresenter.cpp */; };
 		27408C261D36D6D300A0B003 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C231D36D6D300A0B003 /* State.cpp */; };
+		813292021D704FB000CA7612 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 813292001D704FB000CA7612 /* State.cpp */; };
+		814774301E1E521300000123 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8147742E1E1E521300000123 /* State.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		817E32D31D36F0D100F707AD /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 817E32D01D36F0D100F707AD /* State.cpp */; };
 		818463191D350422004B0C46 /* AccelerometerPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462811D350421004B0C46 /* AccelerometerPresenter.cpp */; };
@@ -113,6 +115,7 @@
 		81C7010B1C89EF9A00D306F9 /* AppResources in Resources */ = {isa = PBXBuildFile; fileRef = 81C701091C89EF9A00D306F9 /* AppResources */; };
 		81C7010C1C89EF9A00D306F9 /* CSResources in Resources */ = {isa = PBXBuildFile; fileRef = 81C7010A1C89EF9A00D306F9 /* CSResources */; };
 		81CF6EAA1C8F1378000DDF92 /* WebViewCloseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 81CF6EA91C8F1378000DDF92 /* WebViewCloseButton.png */; };
+		81EB41111D464970005A7CE9 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81EB410F1D464970005A7CE9 /* State.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +141,10 @@
 		27408C221D36D6D300A0B003 /* ScreenPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScreenPresenter.h; path = Screen/ScreenPresenter.h; sourceTree = "<group>"; };
 		27408C231D36D6D300A0B003 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Screen/State.cpp; sourceTree = "<group>"; };
 		27408C241D36D6D300A0B003 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Screen/State.h; sourceTree = "<group>"; };
+		813292001D704FB000CA7612 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		813292011D704FB000CA7612 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		8147742E1E1E521300000123 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Cubemap/State.cpp; sourceTree = "<group>"; };
+		8147742F1E1E521300000123 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Cubemap/State.h; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		817E32D01D36F0D100F707AD /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		817E32D11D36F0D100F707AD /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
@@ -294,6 +301,8 @@
 		81C7010A1C89EF9A00D306F9 /* CSResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CSResources; path = XcodeBuiltAssets/CSResources; sourceTree = "<group>"; };
 		81C7FFE41C89E86400D306F9 /* CSTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81CF6EA91C8F1378000DDF92 /* WebViewCloseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WebViewCloseButton.png; sourceTree = "<group>"; };
+		81EB410F1D464970005A7CE9 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = UI/State.cpp; sourceTree = "<group>"; };
+		81EB41101D464970005A7CE9 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = UI/State.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -370,6 +379,24 @@
 			name = Screen;
 			sourceTree = "<group>";
 		};
+		813291FF1D704FB000CA7612 /* RenderToTexture */ = {
+			isa = PBXGroup;
+			children = (
+				813292001D704FB000CA7612 /* State.cpp */,
+				813292011D704FB000CA7612 /* State.h */,
+			);
+			path = RenderToTexture;
+			sourceTree = "<group>";
+		};
+		8147742C1E1E51DC00000123 /* Cubemap */ = {
+			isa = PBXGroup;
+			children = (
+				8147742E1E1E521300000123 /* State.cpp */,
+				8147742F1E1E521300000123 /* State.h */,
+			);
+			name = Cubemap;
+			sourceTree = "<group>";
+		};
 		817E32CD1D36F0D100F707AD /* MemoryWarning */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +417,7 @@
 				8184628A1D350421004B0C46 /* Common */,
 				818462A31D350421004B0C46 /* CricketAudio */,
 				818462A61D350421004B0C46 /* CSTest.h */,
+				8147742C1E1E51DC00000123 /* Cubemap */,
 				818462A71D350421004B0C46 /* CustomShader */,
 				27408C111D3673C800A0B003 /* Device */,
 				818462AA1D350421004B0C46 /* DialogueBox */,
@@ -403,10 +431,12 @@
 				818462E31D350421004B0C46 /* MainMenu */,
 				817E32CD1D36F0D100F707AD /* MemoryWarning */,
 				818462ED1D350421004B0C46 /* Particle */,
+				813291FF1D704FB000CA7612 /* RenderToTexture */,
 				27408C1F1D36D6C100A0B003 /* Screen */,
 				818462F01D350421004B0C46 /* SmokeTest */,
 				818462F31D350421004B0C46 /* Sprite */,
 				818462F61D350421004B0C46 /* TextEntry */,
+				81EB41131D464981005A7CE9 /* UI */,
 				818462FB1D350421004B0C46 /* UnitTest */,
 				818463131D350422004B0C46 /* VideoPlayer */,
 				818463161D350422004B0C46 /* WebView */,
@@ -824,6 +854,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		81EB41131D464981005A7CE9 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				81EB410F1D464970005A7CE9 /* State.cpp */,
+				81EB41101D464970005A7CE9 /* State.h */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -856,6 +895,7 @@
 				TargetAttributes = {
 					81C7FFE31C89E86400D306F9 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = SAG97E7HLS;
 					};
 				};
 			};
@@ -939,6 +979,7 @@
 				818463271D350422004B0C46 /* State.cpp in Sources */,
 				818463491D350422004B0C46 /* State.cpp in Sources */,
 				8184634E1D350422004B0C46 /* LinearAllocator.cpp in Sources */,
+				814774301E1E521300000123 /* State.cpp in Sources */,
 				8184632A1D350422004B0C46 /* DownloadProgressTestSystem.cpp in Sources */,
 				818463531D350422004B0C46 /* CSReporter.cpp in Sources */,
 				818463551D350422004B0C46 /* FailedSection.cpp in Sources */,
@@ -964,7 +1005,9 @@
 				818463431D350422004B0C46 /* State.cpp in Sources */,
 				8184634B1D350422004B0C46 /* State.cpp in Sources */,
 				817E32D31D36F0D100F707AD /* State.cpp in Sources */,
+				813292021D704FB000CA7612 /* State.cpp in Sources */,
 				818463291D350422004B0C46 /* State.cpp in Sources */,
+				81EB41111D464970005A7CE9 /* State.cpp in Sources */,
 				818463371D350422004B0C46 /* TaskSchedulerTest.cpp in Sources */,
 				8184635B1D350422004B0C46 /* State.cpp in Sources */,
 				8184635A1D350422004B0C46 /* State.cpp in Sources */,
@@ -1023,6 +1066,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LegacyLaunchImages;
+				DEVELOPMENT_TEAM = SAG97E7HLS;
 				ENABLE_BITCODE = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -1039,6 +1083,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LegacyLaunchImages;
+				DEVELOPMENT_TEAM = SAG97E7HLS;
 				ENABLE_BITCODE = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
