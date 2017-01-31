@@ -164,6 +164,16 @@ namespace CSTest
             /// @return The model entity.
             //------------------------------------------------------------------------------
             CS::EntityUPtr CreateStaticModel(const CS::ModelCSPtr& in_model, const CS::MaterialCSPtr& in_material) noexcept;
+            
+            ///
+            /// Creates a skybox around the world that is infintely far away
+            ///
+            /// @param materialFile
+            ///     The material to apply
+            ///
+            /// @return The new entity.
+            ///
+            CS::EntityUPtr CreateSkybox(const std::string& materialFile);
     
         private:
             friend class CS::Application;

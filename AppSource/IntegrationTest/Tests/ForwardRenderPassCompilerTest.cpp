@@ -104,6 +104,20 @@ namespace CSTest
                                                                                   CS::CullFace::k_back, CS::Colour::k_white, CS::Colour::k_white);
             }
             
+            /// Creates an skybox material group with a cubemap
+            ///
+            /// @return RenderMaterialGroup
+            ///
+            const CS::RenderMaterialGroup* CreateSkyboxMaterialGroup() noexcept
+            {
+                auto renderMaterialGroupManager = CS::Application::Get()->GetSystem<CS::RenderMaterialGroupManager>();
+                auto resourcePool = CS::Application::Get()->GetResourcePool();
+                
+                auto cubemap = resourcePool->LoadResource<CS::Cubemap>(CS::StorageLocation::k_package, "Cubemaps/EnvMap.cscubemap");
+                auto renderCubemap = cubemap->GetRenderTexture();
+                return renderMaterialGroupManager->CreateSkyboxRenderMaterialGroup(renderCubemap);
+            }
+            
             /// Removes the material group from the manager and queue it for destruction.
             ///
             void DestroyMaterialGroup(const CS::RenderMaterialGroup* materialGroup) noexcept
@@ -132,6 +146,22 @@ namespace CSTest
                 CS::Sphere worldBoundingSphere(worldMatrix.GetTranslation() + localBoundingSphere.vOrigin, localBoundingSphere.fRadius);
                 
                 return CS::RenderObject(renderMaterialGroup, renderMesh, worldMatrix, worldBoundingSphere, false, CS::RenderLayer::k_standard);
+            }
+            
+            /// Creates a skybox render object with the given render material
+            /// group.
+            ///
+            /// @param renderMaterialGroup
+            ///     The render material group that should be used to render the object.
+            ///
+            /// @return The render object.
+            ///
+            CS::RenderObject CreateSkyboxRenderObject(const CS::RenderMaterialGroup* renderMaterialGroup) noexcept
+            {
+                auto primitiveModelFactory = CS::Application::Get()->GetSystem<CS::PrimitiveModelFactory>();
+                auto renderMesh = primitiveModelFactory->CreateBox(CS::Vector3::k_one)->GetRenderMesh(0);
+                
+                return CS::RenderObject(renderMaterialGroup, renderMesh, CS::Matrix4::k_identity, renderMesh->GetBoundingSphere(), false, CS::RenderLayer::k_skybox);
             }
             
             /// Creates a new UI render object with the given material group, dynamic mesh
@@ -181,13 +211,14 @@ namespace CSTest
                     auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup list.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 3, "Unexpected size of CameraRenderPassGroup list.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 2, "Unexpected size of CameraRenderPassGroup group. Expecting only base and transparent passes");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of second pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the first pass, should contain 1 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the second pass, should contain 0 transparent RenderObjects");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the Skybox CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
 
                     DestroyMaterialGroup(materialGroup);
                     
@@ -218,13 +249,14 @@ namespace CSTest
                     auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 3, "Unexpected size of CameraRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 2, "Unexpected size of CameraRenderPassGroup group. Expecting only base and transparent passes");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of second pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the first pass, should contain 0 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the second pass, should contain 1 transparent RenderObjects");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the Skybox CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
 
                     DestroyMaterialGroup(materialGroup);
                     
@@ -257,7 +289,7 @@ namespace CSTest
                     auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 3, "Unexpected size of CameraRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 3, "Unexpected size of CameraRenderPassGroup group. Expecting only base, directional and transparent passes");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_directional, "Unexpected light type of second pass, should contain directional light");
@@ -265,7 +297,8 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the first pass, should contain 1 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the second pass, should contain 1 directional RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[2].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the third pass, should contain 0 transparent RenderObjects");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the Skybox CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
 
                     DestroyMaterialGroup(materialGroup);
                     
@@ -275,7 +308,7 @@ namespace CSTest
             
             /// Validates that a RenderFrame with a transparent renderObject, ambient and directional light is setup correctly
             ///
-            CSIT_TEST(SuccessDirectionalUnilitTransparent)
+            CSIT_TEST(SuccessDirectionalUnlitTransparent)
             {
                 CS::RenderCamera renderCamera = CreateRenderCamera();
                 CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
@@ -297,7 +330,7 @@ namespace CSTest
                     auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 3, "Unexpected size of CameraRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 3, "Unexpected size of CameraRenderPassGroup group. Expecting only base, directional and transparent passes");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_directional, "Unexpected light type of second pass, should contain directional light");
@@ -305,7 +338,8 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the first pass, should contain 0 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the second pass, should contain 0 directional RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[2].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the third pass, should contain 1 transparent RenderObjects");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the Skybox CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
 
                     DestroyMaterialGroup(materialGroup);
                     
@@ -337,17 +371,49 @@ namespace CSTest
                     auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 3, "Unexpected size of CameraRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 2, "Unexpected size of CameraRenderPassGroup group. Expecting only base, directional and transparent passes");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of second pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the first pass, should contain 0 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the second pass, should contain 0 directional RenderObjects");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 1, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_none, "Unexpected light type for UI render pass.");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the UI render pass.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the Skybox CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses().size() == 1, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_none, "Unexpected light type for UI render pass.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the UI render pass.");
                     
                     DestroyMaterialGroup(transparentMaterialGroup);
+                    
+                    CSIT_PASS();
+                });
+            }
+            
+            /// Validates that a RenderFrame with a Skybox object will be correct converted to UI RenderPasses.
+            ///
+            CSIT_TEST(SuccessSkybox)
+            {
+                auto allocator = std::make_shared<CS::PagedLinearAllocator>(1024 * 1024);
+                
+                auto materialGroup = CreateSkyboxMaterialGroup();
+
+                std::vector<CS::RenderObject> renderObjects { CreateSkyboxRenderObject(materialGroup) };
+                CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, CreateRenderCamera(), CS::AmbientRenderLight(CS::Colour::k_red), std::vector<CS::DirectionalRenderLight>(), std::vector<CS::PointRenderLight>(), renderObjects);
+                
+                auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
+                taskScheduler->ScheduleTask(CS::TaskType::k_small, [=](const CS::TaskContext& taskContext)
+                {
+                    CS::ForwardRenderPassCompiler renderCompiler;
+                    std::vector<CS::RenderFrame> renderFrames = {std::move(renderFrame)};
+                    auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
+                    
+                    CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 3, "Unexpected size of CameraRenderPassGroup group.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 2, "Unexpected number of passes in the Scene CameraRenderPassGroup group");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 1, "Unexpected number of passes in the Skybox CameraRenderPassGroup group. Only expecting Skybox pass");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the first pass, should contain a Skybox object");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
+                    
+                    DestroyMaterialGroup(materialGroup);
                     
                     CSIT_PASS();
                 });
@@ -381,7 +447,7 @@ namespace CSTest
                     auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 3, "Unexpected size of CameraRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 3, "Unexpected size of CameraRenderPassGroup group. Expecting only base, directional and transparent passes");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_directional, "Unexpected light type of second pass, should contain directional light");
@@ -389,7 +455,8 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the first pass, should contain 1 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the second pass, should contain 1 directional RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[2].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the third pass, should contain 1 transparent RenderObjects");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the Skybox CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
 
                     DestroyMaterialGroup(transparentMaterialGroup);
                     DestroyMaterialGroup(opaqueMaterialGroup);
@@ -421,13 +488,14 @@ namespace CSTest
                     auto renderPassGroups = renderCompiler.CompileTargetRenderPassGroups(taskContext, std::move(renderFrames));
                     
                     CSIT_ASSERT(renderPassGroups.size() == 1, "Unexpected size of TargetRenderPassGroup group.");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 2, "Unexpected size of CameraRenderPassGroup group.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups().size() == 3, "Unexpected size of CameraRenderPassGroup group.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses().size() == 2, "Unexpected size of CameraRenderPassGroup group. Expecting only base, directional and transparent passes");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of first pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetLightType() == CS::RenderPass::LightType::k_ambient, "Unexpected light type of second pass, should contain ambient light");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the first pass, should contain 0 opaque RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[0].GetRenderPasses()[1].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the second pass, should contain 0 transparent RenderObjects");
-                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the Skybox CameraRenderPassGroup.");
+                    CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
 
                     DestroyMaterialGroup(materialGroup);
                     

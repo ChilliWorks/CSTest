@@ -80,8 +80,8 @@ namespace CSTest
             auto primitiveEntityFactory = CS::Application::Get()->GetSystem<CS::PrimitiveEntityFactory>();
             auto resourcePool = CS::Application::Get()->GetResourcePool();
             
-            CS::EntitySPtr room = basicEntityFactory->CreateRoom(CS::Vector3(20.0f, 20.0f, 20.0f), "Materials/Skybox.csmaterial");
-            GetMainScene()->Add(room);
+            CS::EntitySPtr skybox = basicEntityFactory->CreateSkybox("Materials/Skybox.csmaterial");
+            GetMainScene()->Add(skybox);
             
             CS::EntitySPtr model = primitiveEntityFactory->CreateBox(resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, "Materials/Reflective.csmaterial"), CS::Vector3(3, 3, 3));
             GetMainScene()->Add(model);

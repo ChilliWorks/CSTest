@@ -42,6 +42,7 @@
 #include <ChilliSource/Rendering/Model.h>
 #include <ChilliSource/Rendering/Texture.h>
 #include <ChilliSource/Rendering/Sprite.h>
+#include <ChilliSource/Rendering/Skybox.h>
 
 namespace CSTest
 {
@@ -181,6 +182,22 @@ namespace CSTest
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-StaticModel");
             entity->AddComponent(std::move(modelComponent));
+            return entity;
+        }
+        //------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
+        CS::EntityUPtr BasicEntityFactory::CreateSkybox(const std::string& materialFile)
+        {
+            CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
+            
+            auto material = m_resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, materialFile);
+            CS::ModelCSPtr mesh = m_primitiveModelFactory->CreateBox(CS::Vector3::k_one, CS::Vector2::k_one, true);
+            
+            CS::SkyboxComponentSPtr skyboxComponent = m_renderComponentFactory->CreateSkyboxComponent(mesh, material);
+            
+            auto entity = CS::Entity::Create();
+            entity->SetName(CS::ToString(m_entityCount++) + "-Skybox");
+            entity->AddComponent(skyboxComponent);
             return entity;
         }
         //------------------------------------------------------------------------------

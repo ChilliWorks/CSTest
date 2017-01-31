@@ -33,7 +33,7 @@ namespace CSTest
 {
     namespace Cubemap
     {
-        /// A state which contains the smoke test for cubemaps. The test uses a cubemap for environment reflections
+        /// A state which contains the smoke test for cubemaps and skyboxes. The test uses a cubemap for environment reflections
         ///
         class State final : public CS::State
         {
