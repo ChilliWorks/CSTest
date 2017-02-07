@@ -35,6 +35,7 @@
 #include <ChilliSource/Audio/CricketAudio.h>
 #include <ChilliSource/Core/Entity.h>
 #include <ChilliSource/Input/Accelerometer.h>
+#include <ChilliSource/Input/Gyroscope.h>
 #include <ChilliSource/Core/Notification.h>
 #include <ChilliSource/Input/Keyboard.h>
 #include <ChilliSource/Rendering/Model.h>
@@ -100,6 +101,7 @@ namespace CSTest
         CreateSystem<CS::RemoteNotificationSystem>();
         CreateSystem<CS::NotificationManager>();
 		CreateSystem<CS::Accelerometer>();
+        CreateSystem<CS::Gyroscope>();
 #endif
         
         CreateSystem<CS::CSSubtitlesProvider>();

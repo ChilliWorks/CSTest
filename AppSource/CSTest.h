@@ -87,6 +87,12 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(State);
     }
     
+    namespace Gyroscope
+    {
+        CS_FORWARDDECLARE_CLASS(GyroscopePresenter);
+        CS_FORWARDDECLARE_CLASS(State);
+    }
+    
     namespace IntegrationTest
     {
         CS_FORWARDDECLARE_CLASS(AutoRegister);

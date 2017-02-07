@@ -1,6 +1,6 @@
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2016 Tag Games Limited
+//  Copyright (c) 2017 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -21,27 +21,25 @@
 //  THE SOFTWARE.
 //
 
-#include <Keyboard/State.h>
+#include <Gyroscope/State.h>
 
-#include <Common/Input/BackButtonSystem.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
 #include <Common/Core/TestNavigator.h>
-#include <CricketAudio/State.h>
-#include <Keyboard/KeyboardPresenter.h>
+#include <Gyroscope/GyroscopePresenter.h>
 
 #include <ChilliSource/Core/Scene.h>
+#include <ChilliSource/Input/Gyroscope.h>
 
 namespace CSTest
 {
-    namespace Keyboard
+    namespace Gyroscope
     {
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::TestNavigator>("Keyboard");
-            CreateSystem<KeyboardPresenter>();
-            CreateSystem<Common::BackButtonSystem>();
+            CreateSystem<Common::TestNavigator>("Gyroscope");
+            CreateSystem<GyroscopePresenter>();
         }
 
         //------------------------------------------------------------------------------

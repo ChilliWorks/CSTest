@@ -13,6 +13,8 @@
 		27408C181D3673DB00A0B003 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C151D3673DB00A0B003 /* State.cpp */; };
 		27408C251D36D6D300A0B003 /* ScreenPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C211D36D6D300A0B003 /* ScreenPresenter.cpp */; };
 		27408C261D36D6D300A0B003 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C231D36D6D300A0B003 /* State.cpp */; };
+		81311D171E49D589001409BC /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81311D131E49D589001409BC /* State.cpp */; };
+		81311D181E49D589001409BC /* GyroscopePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81311D141E49D589001409BC /* GyroscopePresenter.cpp */; };
 		813292021D704FB000CA7612 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 813292001D704FB000CA7612 /* State.cpp */; };
 		814774301E1E521300000123 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8147742E1E1E521300000123 /* State.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
@@ -141,6 +143,10 @@
 		27408C221D36D6D300A0B003 /* ScreenPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScreenPresenter.h; path = Screen/ScreenPresenter.h; sourceTree = "<group>"; };
 		27408C231D36D6D300A0B003 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Screen/State.cpp; sourceTree = "<group>"; };
 		27408C241D36D6D300A0B003 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Screen/State.h; sourceTree = "<group>"; };
+		81311D131E49D589001409BC /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Gyroscope/State.cpp; sourceTree = "<group>"; };
+		81311D141E49D589001409BC /* GyroscopePresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GyroscopePresenter.cpp; path = Gyroscope/GyroscopePresenter.cpp; sourceTree = "<group>"; };
+		81311D151E49D589001409BC /* GyroscopePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GyroscopePresenter.h; path = Gyroscope/GyroscopePresenter.h; sourceTree = "<group>"; };
+		81311D161E49D589001409BC /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Gyroscope/State.h; sourceTree = "<group>"; };
 		813292001D704FB000CA7612 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		813292011D704FB000CA7612 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		8147742E1E1E521300000123 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Cubemap/State.cpp; sourceTree = "<group>"; };
@@ -379,6 +385,17 @@
 			name = Screen;
 			sourceTree = "<group>";
 		};
+		81311D111E49D526001409BC /* Gyroscope */ = {
+			isa = PBXGroup;
+			children = (
+				81311D141E49D589001409BC /* GyroscopePresenter.cpp */,
+				81311D151E49D589001409BC /* GyroscopePresenter.h */,
+				81311D131E49D589001409BC /* State.cpp */,
+				81311D161E49D589001409BC /* State.h */,
+			);
+			name = Gyroscope;
+			sourceTree = "<group>";
+		};
 		813291FF1D704FB000CA7612 /* RenderToTexture */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,7 +426,6 @@
 		8184627F1D350421004B0C46 /* AppSource */ = {
 			isa = PBXGroup;
 			children = (
-				273CA2DD1D37CFE100213044 /* RemoteNotifications */,
 				818462801D350421004B0C46 /* Accelerometer */,
 				818462851D350421004B0C46 /* AnimatedModel */,
 				818462881D350421004B0C46 /* App.cpp */,
@@ -424,6 +440,7 @@
 				818462AD1D350421004B0C46 /* DownloadProgress */,
 				818462B21D350421004B0C46 /* EmailComposer */,
 				818462B51D350421004B0C46 /* Gesture */,
+				81311D111E49D526001409BC /* Gyroscope */,
 				818462BC1D350421004B0C46 /* IntegrationTest */,
 				818462D81D350421004B0C46 /* Keyboard */,
 				818462DD1D350421004B0C46 /* Lighting */,
@@ -431,6 +448,7 @@
 				818462E31D350421004B0C46 /* MainMenu */,
 				817E32CD1D36F0D100F707AD /* MemoryWarning */,
 				818462ED1D350421004B0C46 /* Particle */,
+				273CA2DD1D37CFE100213044 /* RemoteNotifications */,
 				813291FF1D704FB000CA7612 /* RenderToTexture */,
 				27408C1F1D36D6C100A0B003 /* Screen */,
 				818462F01D350421004B0C46 /* SmokeTest */,
@@ -1032,9 +1050,11 @@
 				818463361D350422004B0C46 /* RenderCommandCompilerTest.cpp in Sources */,
 				818463441D350422004B0C46 /* State.cpp in Sources */,
 				818463311D350422004B0C46 /* BinaryInputStreamTest.cpp in Sources */,
+				81311D171E49D589001409BC /* State.cpp in Sources */,
 				818463541D350422004B0C46 /* FailedAssertion.cpp in Sources */,
 				8184632B1D350422004B0C46 /* State.cpp in Sources */,
 				818463221D350422004B0C46 /* TestNavigator.cpp in Sources */,
+				81311D181E49D589001409BC /* GyroscopePresenter.cpp in Sources */,
 				818463521D350422004B0C46 /* Vector4.cpp in Sources */,
 				818463581D350422004B0C46 /* ReportPresenter.cpp in Sources */,
 				818463571D350422004B0C46 /* Report.cpp in Sources */,
