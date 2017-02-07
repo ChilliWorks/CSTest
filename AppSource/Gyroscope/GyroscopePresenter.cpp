@@ -99,6 +99,7 @@ namespace CSTest
             landscape.x = -orientation.y;
             landscape.y = orientation.z;
             landscape.z = -orientation.x;
+            landscape.w = orientation.w;
             landscape *= CS::Quaternion(CS::Vector3::k_unitPositiveX, CS::MathUtils::DegToRad(90.0f));
             
             std::string text = "Device Orientation landscaped: ";
