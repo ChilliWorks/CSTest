@@ -41,6 +41,7 @@
 #include <DownloadProgress/State.h>
 #include <EmailComposer/State.h>
 #include <Gesture/State.h>
+#include <Gyroscope/State.h>
 #include <Lighting/State.h>
 #include <MemoryWarning/State.h>
 #include <Particle/State.h>
@@ -170,6 +171,11 @@ namespace CSTest
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Accelerometer::State>());
 			});
+            
+            optionsMenuDesc.AddButton("Gyroscope", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Gyroscope::State>());
+            });
 			
 			optionsMenuDesc.AddButton("Local Notifications", [=]()
             {

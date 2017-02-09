@@ -1,10 +1,4 @@
-<Material type="Custom">
-    <RenderStates>
-        <Transparency enabled="false" />
-    </RenderStates>
-    <Shaders>
-        <Shader pass="Base" file-name="CustomShader/Skybox.csshader"/>
-    </Shaders>
+<Material type="Skybox">
     <Textures>
         <Texture file-name="Cubemaps/EnvMap.cscubemap" mipmapped="false" type="cubemap" />
     </Textures>

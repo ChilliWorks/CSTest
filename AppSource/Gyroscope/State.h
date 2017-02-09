@@ -1,4 +1,3 @@
-//
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2017 Tag Games Limited
@@ -22,54 +21,30 @@
 //  THE SOFTWARE.
 //
 
-GLSL
+#ifndef _GYROSCOPE_STATE_H_
+#define _GYROSCOPE_STATE_H_
+
+#include <CSTest.h>
+
+#include <ChilliSource/Core/State.h>
+
+namespace CSTest
 {
-	VertexShader
-	{
-#ifndef GL_ES
-        #define lowp
-        #define mediump
-        #define highp
-#endif
-
-        //attributes
-        attribute highp vec4 a_position;
-        attribute mediump vec3 a_normal;
-        attribute mediump vec2 a_texCoord;
-
-        //uniforms
-        uniform highp mat4 u_wvpMat;
-
-        //varyings
-        varying mediump vec3 vvTexCoord;
-
-        void main()
+    namespace Gyroscope
+    {
+        /// A state for testing the gyroscope input device.
+        ///
+        class State final : public CS::State
         {
-            gl_Position = (u_wvpMat * a_position).xyww;
-            vvTexCoord = normalize(a_position.xyz);
-        }
-	}
+            /// The life-cycle event for creating all state systems.
+            ///
+            void CreateSystems() override;
 
-	FragmentShader
-	{
-#ifndef GL_ES
-		#define lowp
-		#define mediump
-		#define highp
-#else
-		precision lowp float;
-#endif
-
-		//uniforms
-		uniform lowp sampler2D u_texture0;
-		uniform lowp samplerCube u_cubemap0;
-
-		//varyings
-		varying mediump vec3 vvTexCoord;
-
-		void main()
-		{
-			gl_FragColor = textureCube(u_cubemap0, vvTexCoord);
-		}
-	}
+            /// Initialises the state.
+            ///
+            void OnInit() override;
+        };
+    }
 }
+
+#endif
