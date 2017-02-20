@@ -51,6 +51,8 @@ namespace CSTest
                 *allocated = 1;
                 
                 REQUIRE(*allocated == 1);
+                
+                pool.Deallocate(allocated);
             }
             
             /// Confirms that a raw pointer to a fundamental can be deallocated using the direct interface
@@ -67,6 +69,8 @@ namespace CSTest
                 *allocated2 = 2;
                 
                 REQUIRE(*allocated2 == 2);
+                
+                pool.Deallocate(allocated2);
             }
             
             /// Confirms that a unique pointer to a fundamental can be allocated from an ObjectPool.
@@ -268,11 +272,11 @@ namespace CSTest
             SECTION("Fixed")
             {
                 CS::ObjectPoolAllocator<int> pool(k_defaultNumObjects);
-                std::vector<std::unique_ptr<int>> allocated;
+                std::vector<CS::UniquePtr<int>> allocated;
                 
                 for(u32 i=0; i<k_defaultNumObjects; ++i)
                 {
-                    allocated.push_back(CS::MakeUnique<int>(pool, i));
+                    allocated.push_back(CS::MakeUnique<int>(pool, (int)i));
                 }
                 
                 allocated.clear();
@@ -285,8 +289,8 @@ namespace CSTest
             ///
             SECTION("Expand")
             {
-                CS::ObjectPoolAllocator<int> pool(k_defaultNumObjects, CS::ObjectPool<int>::LimitPolicy::k_expand);
-                std::vector<std::unique_ptr<int>> allocated;
+                CS::ObjectPoolAllocator<int> pool(k_defaultNumObjects, CS::ObjectPoolAllocatorLimitPolicy::k_expand);
+                std::vector<CS::UniquePtr<int>> allocated;
                 
                 for(u32 i=0; i<k_defaultNumObjects * 2; ++i)
                 {
