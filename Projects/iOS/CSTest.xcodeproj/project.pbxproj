@@ -17,6 +17,7 @@
 		81311D181E49D589001409BC /* GyroscopePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81311D141E49D589001409BC /* GyroscopePresenter.cpp */; };
 		813292021D704FB000CA7612 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 813292001D704FB000CA7612 /* State.cpp */; };
 		814774301E1E521300000123 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8147742E1E1E521300000123 /* State.cpp */; };
+		816D4B191E5B242100CA66A1 /* ObjectPoolAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 816D4B181E5B242100CA66A1 /* ObjectPoolAllocator.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		817E32D31D36F0D100F707AD /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 817E32D01D36F0D100F707AD /* State.cpp */; };
 		818463191D350422004B0C46 /* AccelerometerPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 818462811D350421004B0C46 /* AccelerometerPresenter.cpp */; };
@@ -151,6 +152,7 @@
 		813292011D704FB000CA7612 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		8147742E1E1E521300000123 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Cubemap/State.cpp; sourceTree = "<group>"; };
 		8147742F1E1E521300000123 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Cubemap/State.h; sourceTree = "<group>"; };
+		816D4B181E5B242100CA66A1 /* ObjectPoolAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectPoolAllocator.cpp; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		817E32D01D36F0D100F707AD /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		817E32D11D36F0D100F707AD /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
@@ -741,6 +743,7 @@
 			isa = PBXGroup;
 			children = (
 				818462FF1D350421004B0C46 /* LinearAllocator.cpp */,
+				816D4B181E5B242100CA66A1 /* ObjectPoolAllocator.cpp */,
 				818463001D350421004B0C46 /* PagedLinearAllocator.cpp */,
 				818463011D350421004B0C46 /* Vector2.cpp */,
 				818463021D350422004B0C46 /* Vector3.cpp */,
@@ -1051,6 +1054,7 @@
 				818463441D350422004B0C46 /* State.cpp in Sources */,
 				818463311D350422004B0C46 /* BinaryInputStreamTest.cpp in Sources */,
 				81311D171E49D589001409BC /* State.cpp in Sources */,
+				816D4B191E5B242100CA66A1 /* ObjectPoolAllocator.cpp in Sources */,
 				818463541D350422004B0C46 /* FailedAssertion.cpp in Sources */,
 				8184632B1D350422004B0C46 /* State.cpp in Sources */,
 				818463221D350422004B0C46 /* TestNavigator.cpp in Sources */,
