@@ -154,6 +154,25 @@ namespace CSTest
                 REQUIRE(allocated->m_y == 2);
             }
             
+            /// Confirms that a unique pointer to an array can be allocated from an ObjectPool.
+            ///
+            SECTION("UniqueArray")
+            {
+                CS::ObjectPoolAllocator<int> pool(k_defaultNumObjects);
+                
+                auto allocated = CS::MakeUniqueArray<int>(pool, k_defaultNumObjects);
+                
+                for (auto i = 0; i < k_defaultNumObjects; ++i)
+                {
+                    allocated[i] = i;
+                }
+                
+                for (auto i = 0; i < k_defaultNumObjects; ++i)
+                {
+                    REQUIRE(allocated[i] == i);
+                }
+            }
+            
             /// Confirms that a shared pointer to a fundamental can be allocated from an ObjectPool.
             ///
             SECTION("SharedFundamental")
