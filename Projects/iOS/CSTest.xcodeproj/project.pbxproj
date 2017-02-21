@@ -13,6 +13,7 @@
 		27408C181D3673DB00A0B003 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C151D3673DB00A0B003 /* State.cpp */; };
 		27408C251D36D6D300A0B003 /* ScreenPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C211D36D6D300A0B003 /* ScreenPresenter.cpp */; };
 		27408C261D36D6D300A0B003 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27408C231D36D6D300A0B003 /* State.cpp */; };
+		27B4257B1E5C775600E17750 /* ShapeIntersection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27B4257A1E5C775600E17750 /* ShapeIntersection.cpp */; };
 		81311D171E49D589001409BC /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81311D131E49D589001409BC /* State.cpp */; };
 		81311D181E49D589001409BC /* GyroscopePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81311D141E49D589001409BC /* GyroscopePresenter.cpp */; };
 		813292021D704FB000CA7612 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 813292001D704FB000CA7612 /* State.cpp */; };
@@ -144,6 +145,7 @@
 		27408C221D36D6D300A0B003 /* ScreenPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScreenPresenter.h; path = Screen/ScreenPresenter.h; sourceTree = "<group>"; };
 		27408C231D36D6D300A0B003 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Screen/State.cpp; sourceTree = "<group>"; };
 		27408C241D36D6D300A0B003 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Screen/State.h; sourceTree = "<group>"; };
+		27B4257A1E5C775600E17750 /* ShapeIntersection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeIntersection.cpp; sourceTree = "<group>"; };
 		81311D131E49D589001409BC /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Gyroscope/State.cpp; sourceTree = "<group>"; };
 		81311D141E49D589001409BC /* GyroscopePresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GyroscopePresenter.cpp; path = Gyroscope/GyroscopePresenter.cpp; sourceTree = "<group>"; };
 		81311D151E49D589001409BC /* GyroscopePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GyroscopePresenter.h; path = Gyroscope/GyroscopePresenter.h; sourceTree = "<group>"; };
@@ -748,6 +750,7 @@
 				818463011D350421004B0C46 /* Vector2.cpp */,
 				818463021D350422004B0C46 /* Vector3.cpp */,
 				818463031D350422004B0C46 /* Vector4.cpp */,
+				27B4257A1E5C775600E17750 /* ShapeIntersection.cpp */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1019,6 +1022,7 @@
 				8184631F1D350422004B0C46 /* Approx.cpp in Sources */,
 				8184633D1D350422004B0C46 /* TestDesc.cpp in Sources */,
 				818463301D350422004B0C46 /* State.cpp in Sources */,
+				27B4257B1E5C775600E17750 /* ShapeIntersection.cpp in Sources */,
 				8184634C1D350422004B0C46 /* TextEntryPresenter.cpp in Sources */,
 				818463251D350422004B0C46 /* OptionsMenuDesc.cpp in Sources */,
 				8184631E1D350422004B0C46 /* OrbiterComponent.cpp in Sources */,
