@@ -351,6 +351,31 @@ namespace CSTest
                 REQUIRE(CS::ShapeIntersection::Intersects(rectLHS, pointNotHit) == false);
                 
             }
+            //---------------------------------------------------------
+            /// Confirms that Ray-Plane intersection works.
+            ///
+            /// @author J Brown
+            //---------------------------------------------------------
+            SECTION("Ray vs Plane intersection")
+            {
+                CS::Plane plane;
+                CS::Ray rayHit;
+                CS::Ray rayNoHit;
+                CS::Vector3 hitIntersection;
+                
+                plane.mfD = 1.0f;
+                plane.mvNormal = CS::Vector3(0.0f, 1.0f, 0.0f);
+                
+                rayHit.vOrigin = CS::Vector3(0.0f, 0.0f, 0.0f);
+                rayHit.vDirection = CS::Vector3(0.0f, -1.0f, 0.0f);
+                
+                rayNoHit.vOrigin = CS::Vector3(0.0f, 0.0f, 0.0f);
+                rayNoHit.vDirection = CS::Vector3(0.0f, 1.0f, 0.0f);
+                
+                REQUIRE(CS::ShapeIntersection::Intersects(rayHit, plane, hitIntersection) == true);
+                REQUIRE(CS::ShapeIntersection::Intersects(rayNoHit, plane, hitIntersection) == false);
+                
+            }
         }
         
     }
