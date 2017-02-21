@@ -333,6 +333,9 @@
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\ObjectPoolAllocator.cpp">
       <Filter>AppSource\UnitTest\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\UnitTest\Tests\ShapeIntersection.cpp">
+      <Filter>AppSource\UnitTest\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">

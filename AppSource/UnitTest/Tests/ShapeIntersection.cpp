@@ -62,9 +62,11 @@ namespace CSTest
                 
                 hitRay.vOrigin = CS::Vector3(0.0f, 0.0f, -1.0f);
                 hitRay.vDirection = CS::Vector3(0.0f, 0.0f, 1.0f);
+                hitRay.fLength = 100.0f;
                 
                 notHitRay.vOrigin = CS::Vector3(0.05, 0.0f, -1.0f);
                 notHitRay.vDirection = CS::Vector3(0.0f, 0.0f, -1.0f);
+                notHitRay.fLength = 100.0f;
                 
                 f32 outT1, outT2;
                 
@@ -130,9 +132,11 @@ namespace CSTest
    
                 rayHit.vOrigin = CS::Vector3(0.0f, 0.0f, -2.0f);
                 rayHit.vDirection = CS::Vector3(0.0f, 0.0f, 1.0f);
+                rayHit.fLength = 100.0f;
                 
                 rayNotHit.vOrigin = CS::Vector3(2.0f, 0.0f, -2.0f);
                 rayNotHit.vDirection = CS::Vector3(0.0f, 0.0f, 1.0f);
+                rayNotHit.fLength = 100.0f;
                 
                 
                 REQUIRE(CS::ShapeIntersection::Intersects(sphere, rayHit) == true);
@@ -368,9 +372,11 @@ namespace CSTest
                 
                 rayHit.vOrigin = CS::Vector3(0.0f, 0.0f, 0.0f);
                 rayHit.vDirection = CS::Vector3(0.0f, -1.0f, 0.0f);
+                rayHit.fLength = 100.0f;
                 
                 rayNoHit.vOrigin = CS::Vector3(0.0f, 0.0f, 0.0f);
                 rayNoHit.vDirection = CS::Vector3(0.0f, 1.0f, 0.0f);
+                rayNoHit.fLength = 100.0f;
                 
                 REQUIRE(CS::ShapeIntersection::Intersects(rayHit, plane, hitIntersection) == true);
                 REQUIRE(CS::ShapeIntersection::Intersects(rayNoHit, plane, hitIntersection) == false);
