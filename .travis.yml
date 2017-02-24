@@ -1,5 +1,7 @@
 language: objective-c
-osx_image: xcode8.2
-xcode_project: Projects/iOS/CSTest.xcodeproj
-xcode_scheme: CSTest
-xcode_sdk: iphonesimulator8.4
+script:
+    # Build Chilli Source
+    - xcodebuild -project ChilliSource/Projects/iOS/ChilliSource.xcodeproj -sdk iphonesimulator -configuration Release
+
+    # Build App
+    - xcodebuild -project Projects/iOS/CSTest.xcodeproj -sdk iphonesimulator -configuration Release
