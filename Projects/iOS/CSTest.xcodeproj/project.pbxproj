@@ -1171,7 +1171,7 @@
 					"$(SRCROOT)/../../ChilliSource/Libraries/CricketAudio/iOS/Headers",
 					"$(SRCROOT)/../../Libraries/Catch/include",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../ChilliSource/Libraries/Core/iOS/Libs",
 					"$(PROJECT_DIR)/../../ChilliSource/Libraries/CricketAudio/iOS/Libs",
@@ -1231,7 +1231,7 @@
 					"$(SRCROOT)/../../ChilliSource/Libraries/CricketAudio/iOS/Headers",
 					"$(SRCROOT)/../../Libraries/Catch/include",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../ChilliSource/Libraries/Core/iOS/Libs",
 					"$(PROJECT_DIR)/../../ChilliSource/Libraries/CricketAudio/iOS/Libs",

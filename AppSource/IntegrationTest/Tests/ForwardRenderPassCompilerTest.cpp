@@ -76,7 +76,7 @@ namespace CSTest
             ///
             /// @return RenderMaterialGroup
             ///
-            const CS::RenderMaterialGroup* CreateLitOpaqueMaterialGroup() noexcept
+            CS::UniquePtr<CS::RenderMaterialGroup> CreateLitOpaqueMaterialGroup() noexcept
             {
                 auto renderMaterialGroupManager = CS::Application::Get()->GetSystem<CS::RenderMaterialGroupManager>();
                 auto resourcePool = CS::Application::Get()->GetResourcePool();
@@ -90,7 +90,7 @@ namespace CSTest
             ///
             /// @return RenderMaterialGroup
             ///
-            const CS::RenderMaterialGroup* CreateUnlitTransparentMaterialGroup() noexcept
+            CS::UniquePtr<CS::RenderMaterialGroup> CreateUnlitTransparentMaterialGroup() noexcept
             {
                 auto renderMaterialGroupManager = CS::Application::Get()->GetSystem<CS::RenderMaterialGroupManager>();
                 auto resourcePool = CS::Application::Get()->GetResourcePool();
@@ -108,7 +108,7 @@ namespace CSTest
             ///
             /// @return RenderMaterialGroup
             ///
-            const CS::RenderMaterialGroup* CreateSkyboxMaterialGroup() noexcept
+            CS::UniquePtr<CS::RenderMaterialGroup> CreateSkyboxMaterialGroup() noexcept
             {
                 auto renderMaterialGroupManager = CS::Application::Get()->GetSystem<CS::RenderMaterialGroupManager>();
                 auto resourcePool = CS::Application::Get()->GetResourcePool();
@@ -120,10 +120,10 @@ namespace CSTest
             
             /// Removes the material group from the manager and queue it for destruction.
             ///
-            void DestroyMaterialGroup(const CS::RenderMaterialGroup* materialGroup) noexcept
+            void DestroyMaterialGroup(CS::UniquePtr<CS::RenderMaterialGroup> materialGroup) noexcept
             {
                 auto renderMaterialGroupManager = CS::Application::Get()->GetSystem<CS::RenderMaterialGroupManager>();
-                renderMaterialGroupManager->DestroyRenderMaterialGroup(materialGroup);
+                renderMaterialGroupManager->DestroyRenderMaterialGroup(std::move(materialGroup));
             }
             
             /// Creates a simple render object at the given position with the given render material
@@ -189,6 +189,10 @@ namespace CSTest
         
         CSIT_TESTCASE(ForwardRenderPassCompiler)
         {
+            //Cannot lambda capture by move in C++11 so need these as members
+            CS::UniquePtr<CS::RenderMaterialGroup> materialGroup1;
+            CS::UniquePtr<CS::RenderMaterialGroup> materialGroup2;
+            
             /// Validates that a RenderFrame with a opaque renderObject and ambient light is setup correctly
             ///
             CSIT_TEST(SuccessAmbientLitOpaque)
@@ -196,10 +200,10 @@ namespace CSTest
                 CS::RenderCamera renderCamera = CreateRenderCamera();
                 CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
                 
-                auto materialGroup = CreateLitOpaqueMaterialGroup();
+                materialGroup1 = CreateLitOpaqueMaterialGroup();
                 std::vector<CS::DirectionalRenderLight> directionalLights;
                 std::vector<CS::PointRenderLight> pointLights;
-                std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
+                std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup1.get(), k_onScreenObjectPosition) };
                 
                 CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
@@ -220,7 +224,7 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of render objects in the Transparent pass, should be 0.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[3].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
 
-                    DestroyMaterialGroup(materialGroup);
+                    DestroyMaterialGroup(std::move(materialGroup1));
                     
                     CSIT_PASS();
                 });
@@ -233,11 +237,11 @@ namespace CSTest
                 CS::RenderCamera renderCamera = CreateRenderCamera();
                 CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
                 
-                auto materialGroup = CreateUnlitTransparentMaterialGroup();
+                materialGroup1 = CreateUnlitTransparentMaterialGroup();
                 
                 std::vector<CS::DirectionalRenderLight> directionalLights;
                 std::vector<CS::PointRenderLight> pointLights;
-                std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
+                std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup1.get(), k_onScreenObjectPosition) };
                 
                 CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
@@ -258,7 +262,7 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the Skybox CameraRenderPassGroup.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[3].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
 
-                    DestroyMaterialGroup(materialGroup);
+                    DestroyMaterialGroup(std::move(materialGroup1));
                     
                     CSIT_PASS();
                 });
@@ -272,11 +276,11 @@ namespace CSTest
                 CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
                 CS::DirectionalRenderLight directionalLight(CS::Colour::k_red, CS::Vector3::k_unitNegativeZ);
                 
-                auto materialGroup = CreateLitOpaqueMaterialGroup();
+                materialGroup1 = CreateLitOpaqueMaterialGroup();
                 
                 std::vector<CS::DirectionalRenderLight> directionalLights { directionalLight };
                 std::vector<CS::PointRenderLight> pointLights;
-                std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
+                std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup1.get(), k_onScreenObjectPosition) };
                 
                 CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
@@ -300,7 +304,7 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the Transparent pass, should contain 0 RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[3].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
 
-                    DestroyMaterialGroup(materialGroup);
+                    DestroyMaterialGroup(std::move(materialGroup1));
                     
                     CSIT_PASS();
                 });
@@ -314,11 +318,11 @@ namespace CSTest
                 CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
                 CS::DirectionalRenderLight directionalLight(CS::Colour::k_red, CS::Vector3::k_unitNegativeZ);
                 
-                auto materialGroup = CreateUnlitTransparentMaterialGroup();
+                materialGroup1 = CreateUnlitTransparentMaterialGroup();
                 
                 std::vector<CS::DirectionalRenderLight> directionalLights { directionalLight };
                 std::vector<CS::PointRenderLight> pointLights;
-                std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_onScreenObjectPosition) };
+                std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup1.get(), k_onScreenObjectPosition) };
                 
                 CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
@@ -340,7 +344,7 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[1].GetRenderPasses().size() == 0, "Unexpected number of render passes in the Skybox CameraRenderPassGroup.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[3].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
 
-                    DestroyMaterialGroup(materialGroup);
+                    DestroyMaterialGroup(std::move(materialGroup1));
                     
                     CSIT_PASS();
                 });
@@ -352,10 +356,10 @@ namespace CSTest
             {
                 auto allocator = std::make_shared<CS::PagedLinearAllocator>(1024 * 1024);
                 
-                auto transparentMaterialGroup = CreateUnlitTransparentMaterialGroup();
+                materialGroup1 = CreateUnlitTransparentMaterialGroup();
                 CS::RenderDynamicMeshASPtr renderDynamicMesh = CS::SpriteMeshBuilder::Build(allocator.get(), CS::Vector3::k_zero, CS::Vector2::k_one, CS::UVs(), CS::Colour::k_red, CS::AlignmentAnchor::k_middleCentre);
                 
-                std::vector<CS::RenderObject> renderObjects { CreateUIRenderObject(transparentMaterialGroup, renderDynamicMesh.get(), k_uiObjectPosition) };
+                std::vector<CS::RenderObject> renderObjects { CreateUIRenderObject(materialGroup1.get(), renderDynamicMesh.get(), k_uiObjectPosition) };
                 CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, CreateRenderCamera(), CS::AmbientRenderLight(CS::Colour::k_red), std::vector<CS::DirectionalRenderLight>(), std::vector<CS::PointRenderLight>(), renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
@@ -381,7 +385,7 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[3].GetRenderPasses().size() == 1, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[3].GetRenderPasses()[0].GetLightType() == CS::RenderPass::LightType::k_none, "Unexpected light type for UI render pass.");
                     
-                    DestroyMaterialGroup(transparentMaterialGroup);
+                    DestroyMaterialGroup(std::move(materialGroup1));
                     
                     CSIT_PASS();
                 });
@@ -393,9 +397,9 @@ namespace CSTest
             {
                 auto allocator = std::make_shared<CS::PagedLinearAllocator>(1024 * 1024);
                 
-                auto materialGroup = CreateSkyboxMaterialGroup();
+                materialGroup1 = CreateSkyboxMaterialGroup();
 
-                std::vector<CS::RenderObject> renderObjects { CreateSkyboxRenderObject(materialGroup) };
+                std::vector<CS::RenderObject> renderObjects { CreateSkyboxRenderObject(materialGroup1.get()) };
                 CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, CreateRenderCamera(), CS::AmbientRenderLight(CS::Colour::k_red), std::vector<CS::DirectionalRenderLight>(), std::vector<CS::PointRenderLight>(), renderObjects);
                 
                 auto taskScheduler = CS::Application::Get()->GetTaskScheduler();
@@ -414,7 +418,7 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the Transparent pass, should contain 0 RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[3].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
                     
-                    DestroyMaterialGroup(materialGroup);
+                    DestroyMaterialGroup(std::move(materialGroup1));
                     
                     CSIT_PASS();
                 });
@@ -428,11 +432,11 @@ namespace CSTest
                 CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
                 CS::DirectionalRenderLight directionalLight(CS::Colour::k_red, CS::Vector3::k_unitNegativeZ);
                 
-                auto transparentMaterialGroup = CreateUnlitTransparentMaterialGroup();
-                auto opaqueMaterialGroup = CreateLitOpaqueMaterialGroup();
+                materialGroup1 = CreateUnlitTransparentMaterialGroup();
+                materialGroup2 = CreateLitOpaqueMaterialGroup();
                 
-                auto transparentObject = CreateStandardRenderObject(transparentMaterialGroup, k_onScreenObjectPosition);
-                auto opaqueObject = CreateStandardRenderObject(opaqueMaterialGroup, k_onScreenObjectPosition);
+                auto transparentObject = CreateStandardRenderObject(materialGroup1.get(), k_onScreenObjectPosition);
+                auto opaqueObject = CreateStandardRenderObject(materialGroup2.get(), k_onScreenObjectPosition);
                 
                 std::vector<CS::DirectionalRenderLight> directionalLights { directionalLight };
                 std::vector<CS::PointRenderLight> pointLights;
@@ -459,8 +463,8 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses()[0].GetRenderPassObjects().size() == 1, "Unexpected number of objects in the Transparent pass, should contain 1 RenderObject");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[3].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
 
-                    DestroyMaterialGroup(transparentMaterialGroup);
-                    DestroyMaterialGroup(opaqueMaterialGroup);
+                    DestroyMaterialGroup(std::move(materialGroup1));
+                    DestroyMaterialGroup(std::move(materialGroup2));
                     
                     CSIT_PASS();
                 });
@@ -473,11 +477,11 @@ namespace CSTest
                 CS::RenderCamera renderCamera = CreateRenderCamera();
                 CS::AmbientRenderLight ambientLight(CS::Colour::k_red);
                 
-                auto materialGroup = CreateLitOpaqueMaterialGroup();
+                materialGroup1 = CreateLitOpaqueMaterialGroup();
                 
                 std::vector<CS::DirectionalRenderLight> directionalLights;
                 std::vector<CS::PointRenderLight> pointLights;
-                std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup, k_offScreenObjectPosition) };
+                std::vector<CS::RenderObject> renderObjects { CreateStandardRenderObject(materialGroup1.get(), k_offScreenObjectPosition) };
                 
                 CS::RenderFrame renderFrame(nullptr, k_resolution, CS::Colour::k_black, renderCamera, ambientLight, directionalLights, pointLights, renderObjects);
                 
@@ -498,7 +502,7 @@ namespace CSTest
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[2].GetRenderPasses()[0].GetRenderPassObjects().size() == 0, "Unexpected number of objects in the Transparent pass, should contain 0 RenderObjects");
                     CSIT_ASSERT(renderPassGroups[0].GetRenderCameraGroups()[3].GetRenderPasses().size() == 0, "Unexpected number of render passes in the UI CameraRenderPassGroup.");
 
-                    DestroyMaterialGroup(materialGroup);
+                    DestroyMaterialGroup(std::move(materialGroup1));
                     
                     CSIT_PASS();
                 });
