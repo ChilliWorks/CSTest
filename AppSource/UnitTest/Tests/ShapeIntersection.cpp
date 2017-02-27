@@ -64,7 +64,7 @@ namespace CSTest
                 hitRay.vDirection = CS::Vector3(0.0f, 0.0f, 1.0f);
                 hitRay.fLength = 100.0f;
                 
-                notHitRay.vOrigin = CS::Vector3(0.05, 0.0f, -1.0f);
+                notHitRay.vOrigin = CS::Vector3(0.05f, 0.0f, -1.0f);
                 notHitRay.vDirection = CS::Vector3(0.0f, 0.0f, -1.0f);
                 notHitRay.fLength = 100.0f;
                 
