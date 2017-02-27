@@ -81,8 +81,7 @@ namespace CSTest
                 auto resourcePool = CS::Application::Get()->GetResourcePool();
                 auto textureAtlas = resourcePool->LoadResource<CS::TextureAtlas>(CS::StorageLocation::k_package, "TextureAtlases/Sprites/Sprites.csatlas");
                 
-                auto renderComponentFactory = CS::Application::Get()->GetSystem<CS::RenderComponentFactory>();
-                auto spriteComponent = renderComponentFactory->CreateSpriteComponent(size, material, CS::SizePolicy::k_fitMaintainingAspect);
+                auto spriteComponent = CS::SpriteComponentUPtr(new CS::SpriteComponent(material, size, CS::SizePolicy::k_fitMaintainingAspect));
                 
                 auto entity = CS::Entity::Create();
                 entity->SetName("Face");
