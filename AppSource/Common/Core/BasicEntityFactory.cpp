@@ -68,7 +68,8 @@ namespace CSTest
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            CS::CameraComponentSPtr camComponent = m_renderComponentFactory->CreatePerspectiveCameraComponent(3.14f / 3.0f, 0.5f, 30.0f);
+            auto screen = CS::Application::Get()->GetScreen();
+            CS::CameraComponentSPtr camComponent = std::make_shared<CS::PerspectiveCameraComponent>(screen->GetResolution().x/screen->GetResolution().y, 3.14f / 3.0f, 0.5f, 30.0f);
             auto followerComponent = std::make_shared<FollowerComponent>(in_target, in_targetOffset, in_distance, in_horizontalAngle, in_verticalAngle);
             auto orbiterComponent = std::make_shared<OrbiterComponent>(in_horizontalAngularVelocity);
             
@@ -86,7 +87,7 @@ namespace CSTest
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            CS::AmbientLightComponentSPtr ambientLightComponent = m_renderComponentFactory->CreateAmbientLightComponent(in_colour);
+            auto ambientLightComponent = std::make_shared<CS::AmbientLightComponent>(in_colour);
             
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-AmbientLight");
@@ -99,7 +100,7 @@ namespace CSTest
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            CS::DirectionalLightComponentSPtr directionalLightComponent = m_renderComponentFactory->CreateDirectionalLightComponent(CS::DirectionalLightComponent::ShadowQuality::k_high, in_colour);
+            auto directionalLightComponent = std::make_shared<CS::DirectionalLightComponent>(CS::DirectionalLightComponent::ShadowQuality::k_high, in_colour);
             directionalLightComponent->SetShadowVolume(in_shadowVolume.x, in_shadowVolume.y, in_shadowVolume.z, in_shadowVolume.w);
             
             auto entity = CS::Entity::Create();
@@ -113,11 +114,11 @@ namespace CSTest
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            auto pointLightComponent = m_renderComponentFactory->CreatePointLightComponent(in_colour, in_radius, in_intensity);
+            auto pointLightComponent = std::make_shared<CS::PointLightComponent>(in_colour, in_radius, in_intensity);
             
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-PointLight");
-            entity->AddComponent(std::move(pointLightComponent));
+            entity->AddComponent(pointLightComponent);
             return entity;
         }
         //------------------------------------------------------------------------------
@@ -132,7 +133,7 @@ namespace CSTest
             CS::ModelCSPtr mesh = m_primitiveModelFactory->CreateBox(in_size, textureRepeat, true);
             CS::MaterialCSPtr material = m_resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, materialPath);
             
-            CS::StaticModelComponentSPtr meshComponent = m_renderComponentFactory->CreateStaticModelComponent(mesh, material);
+            CS::StaticModelComponentSPtr meshComponent = std::make_shared<CS::StaticModelComponent>(mesh, material);
             meshComponent->SetShadowCastingEnabled(false);
             
             auto entity = CS::Entity::Create();
@@ -149,7 +150,7 @@ namespace CSTest
             auto material = m_resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, "Materials/Sprites.csmaterial");
             auto textureAtlas = m_resourcePool->LoadResource<CS::TextureAtlas>(CS::StorageLocation::k_package, "TextureAtlases/Sprites/Sprites.csatlas");
             
-            auto spriteComponent = m_renderComponentFactory->CreateSpriteComponent(in_size, textureAtlas, in_imageId, material, CS::SizePolicy::k_fitMaintainingAspect);
+            auto spriteComponent = CS::SpriteComponentUPtr(new CS::SpriteComponent(material, textureAtlas, in_imageId, in_size, CS::SizePolicy::k_fitMaintainingAspect));
             spriteComponent->SetColour(in_colour);
             
             auto entity = CS::Entity::Create();
@@ -164,7 +165,7 @@ namespace CSTest
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            auto animatedModelComponent = m_renderComponentFactory->CreateAnimatedModelComponent(in_model, in_material, in_animation, in_playbackType);
+            auto animatedModelComponent = CS::AnimatedModelComponentUPtr(new CS::AnimatedModelComponent(in_model, in_material, in_animation, in_playbackType));
             
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-AnimatedModel");
@@ -177,7 +178,7 @@ namespace CSTest
         {
             CS_ASSERT(CS::Application::Get()->GetTaskScheduler()->IsMainThread(), "Entities must be created on the main thread.");
             
-            auto modelComponent = m_renderComponentFactory->CreateStaticModelComponent(in_model, in_material);
+            auto modelComponent = CS::StaticModelComponentUPtr(new CS::StaticModelComponent(in_model, in_material));
             
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-StaticModel");
@@ -193,7 +194,7 @@ namespace CSTest
             auto material = m_resourcePool->LoadResource<CS::Material>(CS::StorageLocation::k_package, materialFile);
             CS::ModelCSPtr mesh = m_primitiveModelFactory->CreateBox(CS::Vector3::k_one, CS::Vector2::k_one, true);
             
-            CS::SkyboxComponentSPtr skyboxComponent = m_renderComponentFactory->CreateSkyboxComponent(mesh, material);
+            CS::SkyboxComponentSPtr skyboxComponent = std::make_shared<CS::SkyboxComponent>(mesh, material);
             
             auto entity = CS::Entity::Create();
             entity->SetName(CS::ToString(m_entityCount++) + "-Skybox");
@@ -206,11 +207,8 @@ namespace CSTest
         {
             m_resourcePool = CS::Application::Get()->GetResourcePool();
             
-            m_renderComponentFactory = CS::Application::Get()->GetSystem<CS::RenderComponentFactory>();
-            CS_ASSERT(m_renderComponentFactory, "BasicEntityFactory is missing required app system: RenderComponentFactory");
-            
             m_primitiveModelFactory = CS::Application::Get()->GetSystem<CS::PrimitiveModelFactory>();
-            CS_ASSERT(m_renderComponentFactory, "BasicEntityFactory is missing required app system: PrimitiveModelFactory");
+            CS_ASSERT(m_primitiveModelFactory, "BasicEntityFactory is missing required app system: PrimitiveModelFactory");
 
             m_entityCount = 0;
         }
@@ -219,7 +217,6 @@ namespace CSTest
         void BasicEntityFactory::OnDestroy()
         {
             m_resourcePool = nullptr;
-            m_renderComponentFactory = nullptr;
             m_primitiveModelFactory = nullptr;
             m_entityCount = 0;
         }
