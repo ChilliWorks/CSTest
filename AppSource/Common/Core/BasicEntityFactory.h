@@ -206,7 +206,6 @@ namespace CSTest
             void OnDestroy() override;
             
             CS::ResourcePool* m_resourcePool = nullptr;
-            CS::RenderComponentFactory* m_renderComponentFactory = nullptr;
             CS::PrimitiveModelFactory* m_primitiveModelFactory = nullptr;
             u32 m_entityCount = 0;
         };
