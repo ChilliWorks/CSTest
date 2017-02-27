@@ -141,39 +141,6 @@ namespace CSTest
                 CS_ASSERT(created == true, "Cannot perform integration tests because test directory couldn't be created.");
             }
             //------------------------------------------------------------------------------
-            /// Calculates the SHA1 checksum of the given file. If the file cannot be read
-            /// an empty checksum will be returned.
-            ///
-            /// @author Ian Copland
-            ///
-            /// @param in_storageLocation - The storage location
-            /// @param in_filePath - The file path
-            ///
-            /// @return The checksum of the binary file.
-            //------------------------------------------------------------------------------
-            std::string CalculateFileChecksumSHA1(CS::StorageLocation in_storageLocation, const std::string& in_filePath)
-            {
-                auto fileSystem = CS::Application::Get()->GetFileSystem();
-                
-                auto fileStream = fileSystem->CreateBinaryInputStream(in_storageLocation, in_filePath);
-                if (!fileStream.get())
-                {
-                    return "";
-                }
-                
-                u32 length = u32(fileStream->GetLength());
-                
-                if (length == 0)
-                {
-                    return "";
-                }
-                
-                std::unique_ptr<u8[]> fileContents(new u8[length]);
-                fileStream->Read(fileContents.get(), length);
-                
-                return CS::HashSHA1::GenerateHexHashCode(reinterpret_cast<s8*>(fileContents.get()), length);
-            }
-            //------------------------------------------------------------------------------
             /// Calculates the SHA256 checksum of the given file. If the file cannot be read
             /// an empty checksum will be returned.
             ///
