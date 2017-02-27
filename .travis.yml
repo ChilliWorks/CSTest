@@ -1,0 +1,7 @@
+language: objective-c
+script:
+    # Build Chilli Source
+    - xcodebuild -project ChilliSource/Projects/iOS/ChilliSource.xcodeproj -sdk iphonesimulator -configuration Release
+
+    # Build App
+    - xcodebuild -project Projects/iOS/CSTest.xcodeproj -sdk iphonesimulator -configuration Release
