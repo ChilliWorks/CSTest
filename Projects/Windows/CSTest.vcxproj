@@ -55,7 +55,6 @@
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\BinaryInputStreamTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\BinaryOutputStreamTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\FileSystemTest.cpp" />
-    <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\ForwardRenderPassCompilerTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\HttpRequestTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\RenderCommandCompilerTest.cpp" />
     <ClCompile Include="..\..\AppSource\IntegrationTest\Tests\TaskSchedulerTest.cpp" />
@@ -88,6 +87,7 @@
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\LinearAllocator.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\ObjectPoolAllocator.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\PagedLinearAllocator.cpp" />
+    <ClCompile Include="..\..\AppSource\UnitTest\Tests\ShapeIntersection.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector2.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector3.cpp" />
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\Vector4.cpp" />

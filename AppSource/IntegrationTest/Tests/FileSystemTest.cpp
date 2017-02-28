@@ -59,6 +59,7 @@ namespace CSTest
             const u32 k_binaryFileLength = 4;
             const char k_binaryFileContents[] = "\x0F\x27\x00\x00";
             const std::string k_binaryFileChecksum = "EBAB98776D1DE85288E0EE94F3B92DD74DD8C0D6";
+            const std::string k_binaryFileSHA256Checksum = "aeae8c781da0e9e88f66c7cd9c477ebe72e1a2ada7c12fb1ea88f7b1d74c480f";
             
             const std::vector<std::string> k_filePathsInDirectory =
             {
@@ -140,17 +141,17 @@ namespace CSTest
                 CS_ASSERT(created == true, "Cannot perform integration tests because test directory couldn't be created.");
             }
             //------------------------------------------------------------------------------
-            /// Calculates the SHA1 checksum of the given file. If the file cannot be read
+            /// Calculates the SHA256 checksum of the given file. If the file cannot be read
             /// an empty checksum will be returned.
             ///
-            /// @author Ian Copland
+            /// @author Jordan Brown
             ///
             /// @param in_storageLocation - The storage location
             /// @param in_filePath - The file path
             ///
             /// @return The checksum of the binary file.
             //------------------------------------------------------------------------------
-            std::string CalculateFileChecksumSHA1(CS::StorageLocation in_storageLocation, const std::string& in_filePath)
+            std::string CalculateFileChecksumSHA256(CS::StorageLocation in_storageLocation, const std::string& in_filePath)
             {
                 auto fileSystem = CS::Application::Get()->GetFileSystem();
                 
@@ -170,7 +171,7 @@ namespace CSTest
                 std::unique_ptr<u8[]> fileContents(new u8[length]);
                 fileStream->Read(fileContents.get(), length);
                 
-                return CS::HashSHA1::GenerateHexHashCode(reinterpret_cast<s8*>(fileContents.get()), length);
+                return CS::HashSHA256::GenerateHexHashCode(reinterpret_cast<s8*>(fileContents.get()), length);
             }
         }
         
@@ -446,8 +447,8 @@ namespace CSTest
             //------------------------------------------------------------------------------
             CSIT_TEST(ReadBinaryFilePackage)
             {
-                CSIT_ASSERT(CalculateFileChecksumSHA1(CS::StorageLocation::k_package, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
-                CSIT_ASSERT(CalculateFileChecksumSHA1(CS::StorageLocation::k_package, k_fakeFilePath) == "", "File exists.");
+                CSIT_ASSERT(CalculateFileChecksumSHA256(CS::StorageLocation::k_package, k_binaryFilePath) == k_binaryFileSHA256Checksum, "Failed to read file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA256(CS::StorageLocation::k_package, k_fakeFilePath) == "", "File exists.");
                 
                 CSIT_PASS();
             }
@@ -463,8 +464,8 @@ namespace CSTest
                 ClearDirectory(CS::StorageLocation::k_cache, k_rootDirectory);
                 fileSystem->CopyFile(CS::StorageLocation::k_package, k_binaryFilePath, CS::StorageLocation::k_cache, k_binaryFilePath);
                 
-                CSIT_ASSERT(CalculateFileChecksumSHA1(CS::StorageLocation::k_cache, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
-                CSIT_ASSERT(CalculateFileChecksumSHA1(CS::StorageLocation::k_cache, k_fakeFilePath) == "", "File exists.");
+                CSIT_ASSERT(CalculateFileChecksumSHA256(CS::StorageLocation::k_cache, k_binaryFilePath) == k_binaryFileSHA256Checksum, "Failed to read file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA256(CS::StorageLocation::k_cache, k_fakeFilePath) == "", "File exists.");
                 
                 ClearDirectory(CS::StorageLocation::k_cache, k_rootDirectory);
                 
@@ -482,8 +483,8 @@ namespace CSTest
                 ClearDirectory(CS::StorageLocation::k_saveData, k_rootDirectory);
                 fileSystem->CopyFile(CS::StorageLocation::k_package, k_binaryFilePath, CS::StorageLocation::k_saveData, k_binaryFilePath);
                 
-                CSIT_ASSERT(CalculateFileChecksumSHA1(CS::StorageLocation::k_saveData, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
-                CSIT_ASSERT(CalculateFileChecksumSHA1(CS::StorageLocation::k_saveData, k_fakeFilePath) == "", "File exists.");
+                CSIT_ASSERT(CalculateFileChecksumSHA256(CS::StorageLocation::k_saveData, k_binaryFilePath) == k_binaryFileSHA256Checksum, "Failed to read file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA256(CS::StorageLocation::k_saveData, k_fakeFilePath) == "", "File exists.");
                 
                 ClearDirectory(CS::StorageLocation::k_saveData, k_rootDirectory);
                 
@@ -497,10 +498,9 @@ namespace CSTest
             CSIT_TEST(ReadBinaryFileChilliSource)
             {
                 const std::string csBinaryFilePath = "Fonts/CarlitoMed.low.csfont";
-                const std::string csBinaryFileChecksum = "AF722ED69AC29A53402ABF006C4CFD80B4D808CE";
-                
-                CSIT_ASSERT(CalculateFileChecksumSHA1(CS::StorageLocation::k_chilliSource, csBinaryFilePath) == csBinaryFileChecksum, "Failed to read file.");
-                CSIT_ASSERT(CalculateFileChecksumSHA1(CS::StorageLocation::k_chilliSource, k_fakeFilePath) == "", "File exists.");
+                const std::string csBinaryFileChecksum = "29482885be2130ea7284e5938b3af0b6a7f97a9253a42a01be9ae3f6331ebedc";
+                CSIT_ASSERT(CalculateFileChecksumSHA256(CS::StorageLocation::k_chilliSource, csBinaryFilePath) == csBinaryFileChecksum, "Failed to read file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA256(CS::StorageLocation::k_chilliSource, k_fakeFilePath) == "", "File exists.");
                 
                 CSIT_PASS();
             }
@@ -516,7 +516,7 @@ namespace CSTest
                 ClearDirectory(CS::StorageLocation::k_cache, k_rootDirectory);
                 
                 CSIT_ASSERT(fileSystem->WriteFile(CS::StorageLocation::k_cache, k_binaryFilePath, k_binaryFileContents, k_binaryFileLength), "Failed to write file.");
-                CSIT_ASSERT(CalculateFileChecksumSHA1(CS::StorageLocation::k_cache, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA256(CS::StorageLocation::k_cache, k_binaryFilePath) == k_binaryFileSHA256Checksum, "Failed to read file.");
                 
                 ClearDirectory(CS::StorageLocation::k_cache, k_rootDirectory);
                 
@@ -534,7 +534,7 @@ namespace CSTest
                 ClearDirectory(CS::StorageLocation::k_saveData, k_rootDirectory);
                 
                 CSIT_ASSERT(fileSystem->WriteFile(CS::StorageLocation::k_saveData, k_binaryFilePath, k_binaryFileContents, k_binaryFileLength), "Failed to write file.");
-                CSIT_ASSERT(CalculateFileChecksumSHA1(CS::StorageLocation::k_saveData, k_binaryFilePath) == k_binaryFileChecksum, "Failed to read file.");
+                CSIT_ASSERT(CalculateFileChecksumSHA256(CS::StorageLocation::k_saveData, k_binaryFilePath) == k_binaryFileSHA256Checksum, "Failed to read file.");
                 
                 ClearDirectory(CS::StorageLocation::k_saveData, k_rootDirectory);
                 
