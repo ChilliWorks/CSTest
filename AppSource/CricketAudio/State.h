@@ -26,6 +26,8 @@
 //  THE SOFTWARE.
 //
 
+#ifndef CS_TARGETPLATFORM_RPI
+
 #ifndef _CRICKETAUDIO_STATE_H_
 #define _CRICKETAUDIO_STATE_H_
 
@@ -63,5 +65,7 @@ namespace CSTest
         };
     }
 }
+
+#endif
 
 #endif

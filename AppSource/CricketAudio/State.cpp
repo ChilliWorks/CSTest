@@ -26,6 +26,8 @@
 //  THE SOFTWARE.
 //
 
+#ifndef CS_TARGETPLATFORM_RPI
+
 #include <CricketAudio/State.h>
 
 #include <Common/Core/TestNavigator.h>
@@ -89,3 +91,5 @@ namespace CSTest
         }
     }
 }
+
+#endif
