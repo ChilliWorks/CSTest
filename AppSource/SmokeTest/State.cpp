@@ -111,11 +111,13 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Gesture::State>());
             });
 
+#ifndef CS_TARGETPLATFORM_RPI
             optionsMenuDesc.AddButton("Cricket Audio", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<CricketAudio::State>());
             });
-
+#endif
+        
             optionsMenuDesc.AddButton("Device Info", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Device::State>());
@@ -200,7 +202,7 @@ namespace CSTest
             });
 #endif
 
-#ifdef CS_TARGETPLATFORM_WINDOWS
+#if defined CS_TARGETPLATFORM_WINDOWS || defined CS_TARGETPLATFORM_RPI
             optionsMenuDesc.AddButton("Keyboard", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Keyboard::State>());

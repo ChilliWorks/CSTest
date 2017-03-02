@@ -95,7 +95,7 @@ namespace CSTest
         CreateSystem<CS::HttpRequestSystem>();
         CreateSystem<CS::PrimitiveModelFactory>();
 
-#ifndef CS_TARGETPLATFORM_WINDOWS
+#if defined CS_TARGETPLATFORM_IOS || defined CS_TARGETPLATFORM_ANDROID
         CreateSystem<CS::AppNotificationSystem>();
         CreateSystem<CS::LocalNotificationSystem>();
         CreateSystem<CS::RemoteNotificationSystem>();
