@@ -26,6 +26,8 @@
 
 #include <ChilliSource/Core/Memory.h>
 
+#include <cstring>
+
 #include <catch.hpp>
 
 namespace CSTest
