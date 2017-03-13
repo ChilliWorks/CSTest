@@ -50,7 +50,7 @@ namespace CSTest
         {
             GetMainScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
 
-#ifdef CS_TARGETPLATFORM_WINDOWS
+#if defined CS_TARGETPLATFORM_WINDOWS || defined CS_TARGETPLATFORM_RPI
 
             Common::OptionsMenuDesc optionsMenuDesc;
 
