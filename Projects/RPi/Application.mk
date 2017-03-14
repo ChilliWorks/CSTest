@@ -65,7 +65,7 @@ CS_INCLUDES=-I$(CS_PROJECT_ROOT)/ChilliSource/Libraries/Core/RPi/Headers -I$(CS_
 CS_LIBRARY_DIRS=-L$(CS_PROJECT_ROOT)/ChilliSource/Libraries/Core/RPi/Libs -L$(CS_PROJECT_ROOT)/ChilliSource/Libraries/CricketAudio/RPi/Libs -L$(BUILD_OUTPUT_PATH)
 
 # Linker Flags
-LDFLAGS= $(CS_LIBRARY_DIRS) -lApplication -lChilliSource -lCSBase -lvcos -lbcm_host -lGLESv2 -lEGL -lvchiq_arm -lrt -lm -lc -lstdc++ -l:libgcc_s.so.1 -l:libX11.so.6.3.0 -l:libXau.so.6.0.0 -l:libXdmcp.so.6.0.0 -l:libxcb.so.1.1.0 -l:libxcb-xkb.so.1.0.0 -l:libxkbcommon.so.0.0.0 -l:libxkbcommon-x11.so.0.0.0
+LDFLAGS= $(CS_LIBRARY_DIRS) -lCSTest -lChilliSource -lCSBase -lvcos -lbcm_host -lGLESv2 -lEGL -lvchiq_arm -lrt -lm -lc -lstdc++ -l:libgcc_s.so.1 -l:libX11.so.6.3.0 -l:libXau.so.6.0.0 -l:libXdmcp.so.6.0.0 -l:libxcb.so.1.1.0 -l:libxcb-xkb.so.1.0.0 -l:libxkbcommon.so.0.0.0 -l:libxkbcommon-x11.so.0.0.0
 
 # All Source Files
 SOURCES=$(CS_APP_SOURCES)
@@ -78,8 +78,8 @@ OBJECTS := $(patsubst $(CS_APP_SRC_ROOT)/%.cpp, $(CS_APP_OBJ_DIR)/%.o, $(filter 
 CS_STATIC_LIB=libChilliSource.a
 
 # Name of application to generate
-CS_APP_STATIC=$(BUILD_OUTPUT_PATH)/libApplication.a
-CS_APP_EXECUTABLE=$(EXE_OUTPUT_PATH)/Application
+CS_APP_STATIC=$(BUILD_OUTPUT_PATH)/libCSTest.a
+CS_APP_EXECUTABLE=$(EXE_OUTPUT_PATH)/CSTest
 
 # Default make command.
 all: $(SOURCES) $(CS_APP_EXECUTABLE)
