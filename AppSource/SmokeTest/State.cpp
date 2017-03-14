@@ -111,13 +111,6 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Gesture::State>());
             });
 
-#ifndef CS_TARGETPLATFORM_RPI
-            optionsMenuDesc.AddButton("Cricket Audio", [=]()
-            {
-                CS::Application::Get()->GetStateManager()->Push(std::make_shared<CricketAudio::State>());
-            });
-#endif
-        
             optionsMenuDesc.AddButton("Device Info", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Device::State>());
@@ -128,6 +121,13 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Screen::State>());
             });
 
+            //TODO: Add back in when supported by RPi
+#ifndef CS_TARGETPLATFORM_RPI
+            optionsMenuDesc.AddButton("Cricket Audio", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<CricketAudio::State>());
+            });
+            
             optionsMenuDesc.AddButton("Download Progress", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<DownloadProgress::State>());
@@ -142,6 +142,7 @@ namespace CSTest
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<TextEntry::State>());
             });
+#endif
             
             optionsMenuDesc.AddButton("Render to Texture", [=]()
             {
