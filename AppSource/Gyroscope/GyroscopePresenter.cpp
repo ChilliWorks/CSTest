@@ -119,8 +119,9 @@ namespace CSTest
         {
             InitUI();
             
-            auto renderComponentFactory = CS::Application::Get()->GetSystem<CS::RenderComponentFactory>();
-            CS::CameraComponentSPtr camComponent = renderComponentFactory->CreatePerspectiveCameraComponent(3.14f / 3.0f, 0.5f, 30.0f);
+            auto screen = CS::Application::Get()->GetScreen();
+            
+            CS::CameraComponentSPtr camComponent = std::make_shared<CS::PerspectiveCameraComponent>(screen->GetResolution().x/screen->GetResolution().y, 3.14f / 3.0f, 0.5f, 30.0f);
             CS::EntityUPtr camera = CS::Entity::Create();
             camera->AddComponent(camComponent);
             camera->GetTransform().SetPosition(CS::Vector3(0.0f, 0.0f, -5.0f));

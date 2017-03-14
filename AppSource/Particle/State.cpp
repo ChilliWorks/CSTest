@@ -61,19 +61,17 @@ namespace CSTest
 				auto embersEffect = resourcePool->LoadResource<CS::ParticleEffect>(CS::StorageLocation::k_package, "Particle/Embers.csparticle");
 				auto smokeEffect = resourcePool->LoadResource<CS::ParticleEffect>(CS::StorageLocation::k_package, "Particle/Smoke.csparticle");
 
-				CS::RenderComponentFactory* renderComponentFactory = app->GetSystem<CS::RenderComponentFactory>();
-
-				auto fireComponent = renderComponentFactory->CreateParticleEffectComponent(fireEffect);
+                auto fireComponent = CS::ParticleEffectComponentUPtr(new CS::ParticleEffectComponent(fireEffect));
 				fireComponent->SetPlaybackType(CS::ParticleEffectComponent::PlaybackType::k_looping);
 				auto fireEntity = CS::Entity::Create();
 				fireEntity->AddComponent(std::move(fireComponent));
 
-				auto embersComponent = renderComponentFactory->CreateParticleEffectComponent(embersEffect);
+				auto embersComponent = CS::ParticleEffectComponentUPtr(new CS::ParticleEffectComponent(embersEffect));
 				embersComponent->SetPlaybackType(CS::ParticleEffectComponent::PlaybackType::k_looping);
 				auto embersEntity = CS::Entity::Create();
 				embersEntity->AddComponent(std::move(embersComponent));
 
-				auto smokeComponent = renderComponentFactory->CreateParticleEffectComponent(smokeEffect);
+				auto smokeComponent = CS::ParticleEffectComponentUPtr(new CS::ParticleEffectComponent(smokeEffect));
 				smokeComponent->SetPlaybackType(CS::ParticleEffectComponent::PlaybackType::k_looping);
 				auto smokeEntity = CS::Entity::Create();
 				smokeEntity->AddComponent(std::move(smokeComponent));
