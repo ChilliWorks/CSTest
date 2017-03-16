@@ -63,7 +63,7 @@ namespace CSTest
             optionsMenuDesc.AddButton("Fullscreen", [=]()
             {
                 auto screen = CS::Application::Get()->GetSystem<CS::Screen>();
-                screen->SetResolution(screen->GetSupportedResolutions().at(0));
+                screen->SetResolution(screen->GetSupportedFullscreenResolutions().at(0));
                 screen->SetDisplayMode(CS::Screen::DisplayMode::k_fullscreen);
             });
 
