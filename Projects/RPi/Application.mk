@@ -21,8 +21,13 @@
 #  THE SOFTWARE.
 #-----------------------------------------------------------------------------------
 
-# NOTE: CS_PROJECT_ROOT should be setup prior to calling this
+# NOTE:
+# CS_PROJECT_ROOT, CC, LD and AR
+# should be setup prior to calling this
 CS_PROJECT_ROOT ?= ../..
+CC ?= g++
+AR ?= ar
+LD ?= g++
 
 LOCAL_PATH = .
 
@@ -53,19 +58,14 @@ CS_SCRIPT_GETFILESWITHEXTENSIONS = $(CS_PROJECT_ROOT)/ChilliSource/Tools/Scripts
 # Gather all files in the engine that should be built.
 CS_APP_SOURCES := $(shell 'python' '$(CS_SCRIPT_GETFILESWITHEXTENSIONS)' '--directory' '$(CS_APP_SRC_ROOT)/' '--extensions' 'cpp,c,cc')
 
-# Set up tools.
-CC=/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-g++
-LD=/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-g++
-AR=/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-ar
-
 # Includes
 CS_INCLUDES=-I$(CS_PROJECT_ROOT)/ChilliSource/Libraries/Core/RPi/Headers -I$(CS_PROJECT_ROOT)/AppSource -I$(CS_PROJECT_ROOT)/Libraries/Catch/include  -I$(CS_PROJECT_ROOT)/ChilliSource/Source -I$(CS_PROJECT_ROOT)/ChilliSource/Libraries/CricketAudio/RPi/Headers
 
 # Library Directories
-CS_LIBRARY_DIRS=-L$(CS_PROJECT_ROOT)/ChilliSource/Libraries/Core/RPi/Libs -L$(CS_PROJECT_ROOT)/ChilliSource/Libraries/CricketAudio/RPi/Libs -L$(BUILD_OUTPUT_PATH)
+CS_LIBRARY_DIRS=-L$(CS_PROJECT_ROOT)/ChilliSource/Libraries/Core/RPi/Libs -L$(CS_PROJECT_ROOT)/ChilliSource/Libraries/CricketAudio/RPi/Libs -L$(BUILD_OUTPUT_PATH) -L$(LOCAL_PATH)
 
 # Linker Flags
-LDFLAGS= $(CS_LIBRARY_DIRS) -lCSTest -lChilliSource -lCSBase -lvcos -lbcm_host -lGLESv2 -lEGL -lvchiq_arm -lrt -lm -lc -lstdc++ -l:libgcc_s.so.1 -l:libX11.so.6.3.0 -l:libXau.so.6.0.0 -l:libXdmcp.so.6.0.0 -l:libxcb.so.1.1.0 -l:libxcb-xkb.so.1.0.0 -l:libxkbcommon.so.0.0.0 -l:libxkbcommon-x11.so.0.0.0
+LDFLAGS= $(CS_LIBRARY_DIRS) -lCSTest -lChilliSource -lCSBase -lvcos -lbcm_host -lGLESv2 -lEGL -lvchiq_arm -lrt -lm -lc -lstdc++ -lpthread -l:libgcc_s.so.1 -l:libX11.so.6.3.0 -l:libXau.so.6.0.0 -l:libXdmcp.so.6.0.0 -l:libxcb.so.1.1.0 -l:libxcb-xkb.so.1.0.0 -l:libxkbcommon.so.0.0.0 -l:libxkbcommon-x11.so.0.0.0
 
 # All Source Files
 SOURCES=$(CS_APP_SOURCES)

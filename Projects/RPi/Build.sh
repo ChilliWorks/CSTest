@@ -28,6 +28,15 @@
 
 export DEBUG=0
 export CS_PROJECT_ROOT=../..
+export CC=/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-g++
+export AR=/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-ar
+export LD=/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-g++
+# export CC=/Volumes/xtools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-g++
+# export AR=/Volumes/xtools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-ar
+# export LD=/Volumes/xtools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-g++
+# export CC=C:\SysGCC\Raspberry\bin\arm-linux-gnueabihf-g++.exe
+# export AR=C:\SysGCC\Raspberry\bin\arm-linux-gnueabihf-ar.exe
+# export LD=C:\SysGCC\Raspberry\bin\arm-linux-gnueabihf-g++.exe
 
 if [ "$1" = debug ]; then
     DEBUG=1
