@@ -110,12 +110,12 @@ $(CS_APP_OBJ_DIR)/%.o: $(CS_APP_SRC_ROOT)/%.cc
 .PHONY: clean cleanobjects cleangenerated
 
 clean:
-	rm -f $(shell 'python' '$(CS_SCRIPT_GETFILESWITHEXTENSIONS)' '--directory' '$(CS_APP_OBJ_DIR)/' '--extensions' 'o')
+	rm -rf $(CS_APP_OBJ_DIR)
 	rm -f $(CS_APP_STATIC)
 	rm -f $(CS_APP_EXECUTABLE)
 
 cleanobjects:
-	rm -f $(shell 'python' '$(CS_SCRIPT_GETFILESWITHEXTENSIONS)' '--directory' '(CS_APP_OBJ_DIR)/' '--extensions' 'o')
+	rm -rf $(CS_APP_OBJ_DIR)
 
 cleangenerated:
 	rm -f $(CS_APP_STATIC)
