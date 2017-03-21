@@ -31,18 +31,21 @@ import rpi_build
 CC = "g++"
 AR = "ar"
 LD = "g++"
+NUM_JOBS = 2
 
 # Windows
 if os.name == 'nt':
 	CC = "C:\SysGCC\Raspberry\\bin\\arm-linux-gnueabihf-g++.exe"
 	AR = "C:\SysGCC\Raspberry\\bin\\arm-linux-gnueabihf-ar.exe"
 	LD = "C:\SysGCC\Raspberry\\bin\\arm-linux-gnueabihf-g++.exe"
+	NUM_JOBS = None #Unrestricted
 
 # Mac OS
 elif platform.system() == "Darwin":
 	CC = "/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-g++"
 	AR = "/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-ar"
 	LD = "/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-g++"
+	NUM_JOBS = None #Unrestricted
 
 PROJECT_ROOT = os.path.normpath("../..")
 APP_SRC_ROOT = os.path.normpath("{}/AppSource".format(PROJECT_ROOT))
@@ -63,6 +66,7 @@ APP_NAME = "CSTest"
 def main(args):
 
 	rpi_build.run(args=args,
+	num_jobs=NUM_JOBS,
 	app_name=APP_NAME,
 	compiler_path=CC, linker_path=LD, archiver_path=AR, 
 	additional_libs=ADDITIONAL_LIBRARIES, additional_lib_paths=ADDITIONAL_LIBRARY_PATHS, additional_include_paths=ADDITIONAL_INCLUDE_PATHS,
