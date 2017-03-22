@@ -42,3 +42,4 @@ Thumbs.db
 *.pyc
 Projects/RPi/Build
 Projects/RPi/Output
+Projects/RPi/CrossLibs
