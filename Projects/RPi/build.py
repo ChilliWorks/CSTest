@@ -28,23 +28,23 @@ import platform
 import rpi_build
 
 # RPi
-CC = "g++"
-AR = "ar"
-LD = "g++"
+COMPILER = "g++"
+ARCHIVER = "ar"
+LINKER = "g++"
 NUM_JOBS = 2
 
 # Windows
 if os.name == 'nt':
-	CC = "C:\SysGCC\Raspberry\\bin\\arm-linux-gnueabihf-g++.exe"
-	AR = "C:\SysGCC\Raspberry\\bin\\arm-linux-gnueabihf-ar.exe"
-	LD = "C:\SysGCC\Raspberry\\bin\\arm-linux-gnueabihf-g++.exe"
+	COMPILER = "C:\SysGCC\Raspberry\\bin\\arm-linux-gnueabihf-g++.exe"
+	ARCHIVER = "C:\SysGCC\Raspberry\\bin\\arm-linux-gnueabihf-ar.exe"
+	LINKER = "C:\SysGCC\Raspberry\\bin\\arm-linux-gnueabihf-g++.exe"
 	NUM_JOBS = None #Unrestricted
 
 # Mac OS
 elif platform.system() == "Darwin":
-	CC = "/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-g++"
-	AR = "/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-ar"
-	LD = "/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-g++"
+	COMPILER = "/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-g++"
+	ARCHIVER = "/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-ar"
+	LINKER = "/Volumes/xtools/arm-none-linux-gnueabi/bin/arm-none-linux-gnueabi-g++"
 	NUM_JOBS = None #Unrestricted
 
 PROJECT_ROOT = os.path.normpath("../..")
@@ -68,7 +68,7 @@ def main(args):
 	rpi_build.run(args=args,
 	num_jobs=NUM_JOBS,
 	app_name=APP_NAME,
-	compiler_path=CC, linker_path=LD, archiver_path=AR, 
+	compiler_path=COMPILER, linker_path=LINKER, archiver_path=ARCHIVER, 
 	additional_libs=ADDITIONAL_LIBRARIES, additional_lib_paths=ADDITIONAL_LIBRARY_PATHS, additional_include_paths=ADDITIONAL_INCLUDE_PATHS,
 	additional_compiler_flags_map=ADDITIONAL_COMPILER_FLAGS_TARGET_MAP,
 	app_source_dirs=ADDITIONAL_SRC_DIRS,
