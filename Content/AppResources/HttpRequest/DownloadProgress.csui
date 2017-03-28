@@ -29,7 +29,6 @@
           "Type":"Label",
           "RelSize":"1 0.2",
           "RelPosition":"0.0 0.0",
-          "ClipChildren":"false",
           "OriginAnchor":"TopCentre",
           "ParentalAnchor":"TopCentre",
           "Font":
@@ -70,7 +69,6 @@
           "Type":"Label",
           "RelSize":"1 0.4",
           "RelPosition":"0.0 -0.6",
-          "ClipChildren":"false",
           "OriginAnchor":"TopCentre",
           "ParentalAnchor":"TopCentre",
           "Font":
