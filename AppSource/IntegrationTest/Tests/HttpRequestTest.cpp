@@ -55,13 +55,8 @@ namespace CSTest
                 auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 if(httpRequestSystem == nullptr)
                 {
-#ifdef CS_TARGETPLATFORM_RPI
-                    CSIT_PASS();
-                    return;
-#else
                     CSIT_FAIL("No HTTP system exists");
                     return;
-#endif
                 }
                 
                 httpRequestSystem->MakeGetRequest("https://httpbin.org/get", [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
@@ -82,13 +77,8 @@ namespace CSTest
                 auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 if(httpRequestSystem == nullptr)
                 {
-#ifdef CS_TARGETPLATFORM_RPI
-                    CSIT_PASS();
-                    return;
-#else
                     CSIT_FAIL("No HTTP system exists");
                     return;
-#endif
                 }
                 
                 CS::ParamDictionary headers;
@@ -112,13 +102,8 @@ namespace CSTest
                 auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 if(httpRequestSystem == nullptr)
                 {
-#ifdef CS_TARGETPLATFORM_RPI
-                    CSIT_PASS();
-                    return;
-#else
                     CSIT_FAIL("No HTTP system exists");
                     return;
-#endif
                 }
                 
                 httpRequestSystem->MakeGetRequest("https://httpbin.org/status/418", [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
@@ -139,13 +124,8 @@ namespace CSTest
                 auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 if(httpRequestSystem == nullptr)
                 {
-#ifdef CS_TARGETPLATFORM_RPI
-                    CSIT_PASS();
-                    return;
-#else
                     CSIT_FAIL("No HTTP system exists");
                     return;
-#endif
                 }
                 
                 httpRequestSystem->MakePostRequest("https://httpbin.org/post", "SomeData", [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
@@ -166,13 +146,8 @@ namespace CSTest
                 auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 if(httpRequestSystem == nullptr)
                 {
-#ifdef CS_TARGETPLATFORM_RPI
-                    CSIT_PASS();
-                    return;
-#else
                     CSIT_FAIL("No HTTP system exists");
                     return;
-#endif
                 }
                 
                 CS::ParamDictionary headers;
@@ -196,13 +171,8 @@ namespace CSTest
                 auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 if(httpRequestSystem == nullptr)
                 {
-#ifdef CS_TARGETPLATFORM_RPI
-                    CSIT_PASS();
-                    return;
-#else
                     CSIT_FAIL("No HTTP system exists");
                     return;
-#endif
                 }
                 
                 httpRequestSystem->MakePostRequest("https://httpbin.org/status/418", "SomeData", [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
@@ -223,13 +193,8 @@ namespace CSTest
                 auto httpRequestSystem = CS::Application::Get()->GetSystem<CS::HttpRequestSystem>();
                 if(httpRequestSystem == nullptr)
                 {
-#ifdef CS_TARGETPLATFORM_RPI
-                    CSIT_PASS();
-                    return;
-#else
                     CSIT_FAIL("No HTTP system exists");
                     return;
-#endif
                 }
                 
                 httpRequestSystem->CheckReachability([=](bool isReachable)

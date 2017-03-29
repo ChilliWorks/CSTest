@@ -127,11 +127,6 @@ namespace CSTest
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<CricketAudio::State>());
             });
-            
-            optionsMenuDesc.AddButton("Download Progress", [=]()
-            {
-                CS::Application::Get()->GetStateManager()->Push(std::make_shared<DownloadProgress::State>());
-            });
 
             optionsMenuDesc.AddButton("Dialogue Boxes", [=]()
             {
@@ -143,6 +138,11 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<TextEntry::State>());
             });
 #endif
+            
+            optionsMenuDesc.AddButton("Download Progress", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<DownloadProgress::State>());
+            });
             
             optionsMenuDesc.AddButton("Render to Texture", [=]()
             {
