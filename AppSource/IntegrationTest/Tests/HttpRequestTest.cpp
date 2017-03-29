@@ -62,7 +62,7 @@ namespace CSTest
                 httpRequestSystem->MakeGetRequest("https://httpbin.org/get", [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
                 {
                     CSIT_ASSERT(in_response.GetResult() == CS::HttpResponse::Result::k_completed, "The HTTP request failed.");
-                    CSIT_ASSERT(in_response.GetCode() == 200, "Recieved incorrect response code.");
+                    CSIT_ASSERT(in_response.GetCode() == 200, "Recieved incorrect response code. " + CS::ToString(in_response.GetCode()));
                     
                     CSIT_PASS();
                 });
@@ -87,7 +87,7 @@ namespace CSTest
                 httpRequestSystem->MakeGetRequest("https://httpbin.org/headers", headers, [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
                 {
                     CSIT_ASSERT(in_response.GetResult() == CS::HttpResponse::Result::k_completed, "The HTTP request failed.");
-                    CSIT_ASSERT(in_response.GetCode() == 200, "Recieved incorrect response code.");
+                    CSIT_ASSERT(in_response.GetCode() == 200, "Recieved incorrect response code. " + CS::ToString(in_response.GetCode()));
 
                     CSIT_PASS();
                 });
@@ -109,7 +109,7 @@ namespace CSTest
                 httpRequestSystem->MakeGetRequest("https://httpbin.org/status/418", [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
                 {
                     CSIT_ASSERT(in_response.GetResult() == CS::HttpResponse::Result::k_completed, "The HTTP request failed.");
-                    CSIT_ASSERT(in_response.GetCode() == 418, "Recieved incorrect response code.");
+                    CSIT_ASSERT(in_response.GetCode() == 418, "Recieved incorrect response code. " + CS::ToString(in_response.GetCode()));
 
                     CSIT_PASS();
                 });
@@ -131,7 +131,7 @@ namespace CSTest
                 httpRequestSystem->MakePostRequest("https://httpbin.org/post", "SomeData", [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
                 {
                     CSIT_ASSERT(in_response.GetResult() == CS::HttpResponse::Result::k_completed, "The HTTP request failed.");
-                    CSIT_ASSERT(in_response.GetCode() == 200, "Recieved incorrect response code.");
+                    CSIT_ASSERT(in_response.GetCode() == 200, "Recieved incorrect response code. " + CS::ToString(in_response.GetCode()));
 
                     CSIT_PASS();
                 });
@@ -156,7 +156,7 @@ namespace CSTest
                 httpRequestSystem->MakePostRequest("https://httpbin.org/post", "SomeData", headers, [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
                 {
                     CSIT_ASSERT(in_response.GetResult() == CS::HttpResponse::Result::k_completed, "The HTTP request failed.");
-                    CSIT_ASSERT(in_response.GetCode() == 200, "Recieved incorrect response code.");
+                    CSIT_ASSERT(in_response.GetCode() == 200, "Recieved incorrect response code. " + CS::ToString(in_response.GetCode()));
 
                     CSIT_PASS();
                 });
@@ -178,7 +178,7 @@ namespace CSTest
                 httpRequestSystem->MakePostRequest("https://httpbin.org/status/418", "SomeData", [=](const CS::HttpRequest* in_request, const CS::HttpResponse& in_response)
                 {
                     CSIT_ASSERT(in_response.GetResult() == CS::HttpResponse::Result::k_completed, "The HTTP request failed.");
-                    CSIT_ASSERT(in_response.GetCode() == 418, "Recieved incorrect response code.");
+                    CSIT_ASSERT(in_response.GetCode() == 418, "Recieved incorrect response code. " + CS::ToString(in_response.GetCode()));
 
                     CSIT_PASS();
                 });
