@@ -133,11 +133,11 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<DialogueBox::State>());
             });
 
+#endif
             optionsMenuDesc.AddButton("Text Entry", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<TextEntry::State>());
             });
-#endif
             
             optionsMenuDesc.AddButton("Download Progress", [=]()
             {
