@@ -33,6 +33,12 @@ Projects/Android/cstest/local.properties
 Projects/Android/cstest/.idea/workspace.xml
 
 ################################
+# Raspberry Pi Ignore Files
+################################
+Projects/RPi/Build
+Projects/RPi/Output
+
+################################
 # General Ignore Files
 ################################
 bin/
@@ -40,5 +46,3 @@ obj/
 .DS_Store
 Thumbs.db
 *.pyc
-Projects/RPi/Build
-Projects/RPi/Output
