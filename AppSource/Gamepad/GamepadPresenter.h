@@ -1,6 +1,6 @@
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2016 Tag Games Limited
+//  Copyright (c) 2017 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -21,24 +21,24 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _KEYBOARD_KEYBOARDPRESENTER_H_
-#define _KEYBOARD_KEYBOARDPRESENTER_H_
+#ifndef _GAMEPAD_GAMEPADPRESENTER_H_
+#define _GAMEPAD_GAMEPADPRESENTER_H_
 
 #include <CSTest.h>
 
-#include <ChilliSource/Core/Math/Vector3.h>
 #include <ChilliSource/Core/System.h>
+#include <ChilliSource/Input/Gamepad.h>
 
 namespace CSTest
 {
-    namespace Keyboard
+    namespace Gamepad
     {
-        /// A system which displays keypress information on-screen.
+        /// A system which displays gamepad information on-screen.
         ///
-        class KeyboardPresenter final : public CS::StateSystem
+        class GamepadPresenter final : public CS::StateSystem
         {
         public:
-            CS_DECLARE_NAMEDTYPE(KeyboardPresenter);
+            CS_DECLARE_NAMEDTYPE(GamepadPresenter);
 
             /// Allows querying of whether or not the component implements the
             /// interface associated with the given interface Id.
@@ -57,11 +57,11 @@ namespace CSTest
             ///
             /// @return The new instance.
             ///
-            static KeyboardPresenterUPtr Create() noexcept;
+            static GamepadPresenterUPtr Create() noexcept;
   
             /// Constructor
             ///
-            KeyboardPresenter() = default;
+            GamepadPresenter() = default;
             
             /// Initialises all of the UI on which the gesture information will be presented.
             ///
@@ -72,27 +72,33 @@ namespace CSTest
             ///
             void OnInit() noexcept override;
 
-            /// Called during init; adds event receiver for key presses.
+            /// Called during init; adds event receiver for button presses.
             ///
-            void AddKeyPressHandler() noexcept;
+            void AddButtonPressureHandler() noexcept;
+            
+            /// Called during init; adds event receiver for axis movements.
+            ///
+            void AddAxisPositionHandler() noexcept;
 
-            /// Called during init; adds event receiver for key releases.
+            /// Displays pressed buttons on screen.
             ///
-            void AddKeyReleaseHandler() noexcept;
-
-            /// Displays held keys on screen.
+            void DisplayButtons() noexcept;
+            
+            /// Displays moved axes on screen.
             ///
-            void DisplayKeys() noexcept;
+            void DisplayAxes() noexcept;
             
             /// Called when the presenter is about to be destroyed.
             ///
             void OnDestroy() noexcept override;
             
-            std::vector<CS::KeyCode> m_keysHeld;
+            std::vector<std::pair<CS::Gamepad, u32>> m_buttonPressures;
+            std::vector<std::pair<CS::Gamepad, CS::GamepadAxis>> m_axisPositions;
             std::vector<CS::EventConnectionUPtr> m_eventConnections;
             
             CS::WidgetSPtr m_rootUI;
-            CS::TextUIComponent* m_textComponent = nullptr;
+            CS::TextUIComponent* m_axisTextComponent = nullptr;
+            CS::TextUIComponent* m_buttonTextComponent = nullptr;
         };
     }
 }

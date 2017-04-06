@@ -1,6 +1,6 @@
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2016 Tag Games Limited
+//  Copyright (c) 2017 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -21,114 +21,166 @@
 //  THE SOFTWARE.
 //
 
-#include <Keyboard/KeyboardPresenter.h>
+#include <Gamepad/GamepadPresenter.h>
 
 #include <Common/UI/BasicWidgetFactory.h>
 
 #include <ChilliSource/Core/Base.h>
 #include <ChilliSource/Core/Resource.h>
 #include <ChilliSource/Core/State.h>
-#include <ChilliSource/Core/Math/Vector3.h>
-#include <ChilliSource/Input/Keyboard.h>
 #include <ChilliSource/Rendering/Font.h>
 #include <ChilliSource/UI/Base.h>
 #include <ChilliSource/UI/Text.h>
 
 namespace CSTest
 {
-    namespace Keyboard
+    namespace Gamepad
     {
-        CS_DEFINE_NAMEDTYPE(KeyboardPresenter);
+        CS_DEFINE_NAMEDTYPE(GamepadPresenter);
 
         //------------------------------------------------------------------------------
-        KeyboardPresenterUPtr KeyboardPresenter::Create() noexcept
+        GamepadPresenterUPtr GamepadPresenter::Create() noexcept
         {
-            return KeyboardPresenterUPtr(new KeyboardPresenter());
+            return GamepadPresenterUPtr(new GamepadPresenter());
         }
 
         //------------------------------------------------------------------------------
-        bool KeyboardPresenter::IsA(CS::InterfaceIDType interfaceId) const noexcept
+        bool GamepadPresenter::IsA(CS::InterfaceIDType interfaceId) const noexcept
         {
-            return (KeyboardPresenter::InterfaceID == interfaceId);
+            return (GamepadPresenter::InterfaceID == interfaceId);
         }
 
         //------------------------------------------------------------------------------
-        void KeyboardPresenter::InitUI() noexcept
+        void GamepadPresenter::InitUI() noexcept
         {
             auto resourcePool = CS::Application::Get()->GetResourcePool();
             auto smallFont = resourcePool->LoadResource<CS::Font>(CS::StorageLocation::k_package, "Fonts/ArialSmall.csfont");
             
             auto basicWidgetFactory = CS::Application::Get()->GetSystem<Common::BasicWidgetFactory>();
-            auto label = basicWidgetFactory->CreateLabel(CS::Vector2(0.9f, 0.8f), smallFont, "", CS::AlignmentAnchor::k_middleCentre,
+            
+            auto buttonLabel = basicWidgetFactory->CreateLabel(CS::Vector2(0.5f, 0.6f), smallFont, "", CS::AlignmentAnchor::k_topLeft,
                                                          CS::HorizontalTextJustification::k_left, CS::VerticalTextJustification::k_top);
-            m_textComponent = label->GetComponent<CS::TextUIComponent>();
+            buttonLabel->SetRelativePosition(CS::Vector2(0.01f, -0.25f));
+            m_buttonTextComponent = buttonLabel->GetComponent<CS::TextUIComponent>();
+            
+            auto axesLabel = basicWidgetFactory->CreateLabel(CS::Vector2(0.5f, 0.6f), smallFont, "", CS::AlignmentAnchor::k_topRight,
+                                                               CS::HorizontalTextJustification::k_right, CS::VerticalTextJustification::k_top);
+            axesLabel->SetRelativePosition(CS::Vector2(-0.01f, -0.25f));
+            m_axisTextComponent = axesLabel->GetComponent<CS::TextUIComponent>();
 
             auto uiCanvas = GetState()->GetUICanvas();
-            uiCanvas->AddWidget(std::move(label));
+            uiCanvas->AddWidget(std::move(buttonLabel));
+            uiCanvas->AddWidget(std::move(axesLabel));
         }
 
         //------------------------------------------------------------------------------
-        void KeyboardPresenter::AddKeyPressHandler() noexcept
+        void GamepadPresenter::AddButtonPressureHandler() noexcept
         {
-            auto keyboardSystem = CS::Application::Get()->GetSystem<CS::Keyboard>();
-            CS_ASSERT(keyboardSystem, "No keyboard detected.");
-
-            m_eventConnections.push_back(keyboardSystem->GetKeyPressedEvent().OpenConnection([=](CS::KeyCode keyPressed, std::vector<CS::ModifierKeyCode> modifiers)
+            auto gamepadSystem = CS::Application::Get()->GetSystem<CS::GamepadSystem>();
+            if(gamepadSystem)
             {
-                m_keysHeld.push_back(keyPressed);
-                DisplayKeys();
-            }));
-        }
-
-        //------------------------------------------------------------------------------
-        void KeyboardPresenter::AddKeyReleaseHandler() noexcept
-        {
-            auto keyboardSystem = CS::Application::Get()->GetSystem<CS::Keyboard>();
-            CS_ASSERT(keyboardSystem, "No keyboard detected.");
-
-            m_eventConnections.push_back(keyboardSystem->GetKeyReleasedEvent().OpenConnection([=](CS::KeyCode keyReleased)
-            {
-                auto findIterator = std::find(m_keysHeld.begin(), m_keysHeld.end(), keyReleased);
-                if (findIterator != m_keysHeld.end())
+                m_eventConnections.push_back(gamepadSystem->GetButtonPressureChangedEvent().OpenConnection([=](const CS::Gamepad& gamepad, f64 timestamp, u32 buttonIndex, f32 pressure)
                 {
-                    m_keysHeld.erase(findIterator);
-                }
+                    if(pressure <= 0.0f)
+                    {
+                        auto findIterator = std::find_if(m_buttonPressures.begin(), m_buttonPressures.end(), [=](const std::pair<CS::Gamepad, u32>& pair)
+                        {
+                            return pair.first.GetId() == gamepad.GetId();
+                        });
+                        
+                        if (findIterator != m_buttonPressures.end())
+                        {
+                            m_buttonPressures.erase(findIterator);
+                        }
+                    }
+                    else
+                    {
+                        m_buttonPressures.push_back(std::make_pair(gamepad, buttonIndex));
+                    }
+                    
+                    DisplayButtons();
+                }));
+            }
+        }
+        
+        //------------------------------------------------------------------------------
+        void GamepadPresenter::AddAxisPositionHandler() noexcept
+        {
+            auto gamepadSystem = CS::Application::Get()->GetSystem<CS::GamepadSystem>();
+            if(gamepadSystem)
+            {
+                m_eventConnections.push_back(gamepadSystem->GetAxisPositionChangedEvent().OpenConnection([=](const CS::Gamepad& gamepad, f64 timestamp, CS::GamepadAxis axis, f32 position)
+                {
+                    if(std::abs(position) < 0.05f)
+                    {
+                        auto findIterator = std::find_if(m_axisPositions.begin(), m_axisPositions.end(), [=](const std::pair<CS::Gamepad, CS::GamepadAxis>& pair)
+                        {
+                            return pair.first.GetId() == gamepad.GetId();
+                        });
 
-                DisplayKeys();
-            }));
-            
+                        if (findIterator != m_axisPositions.end())
+                        {
+                            m_axisPositions.erase(findIterator);
+                        }
+                    }
+                    else
+                    {
+                        m_axisPositions.push_back(std::make_pair(gamepad, axis));
+                    }
+
+                    DisplayAxes();
+                }));
+            }
         }
 
         //------------------------------------------------------------------------------
-        void KeyboardPresenter::DisplayKeys() noexcept
+        void GamepadPresenter::DisplayButtons() noexcept
         {
-            std::string text = "Keys Held: ";
+            std::string text;
             bool first = true;
-            for (auto key : m_keysHeld)
+            for (const auto& pair : m_buttonPressures)
             {
                 if (!first)
                 {
-                    text += ", ";
+                    text += "\n";
                 }
 
                 first = false;
-                text += CS::GetKeyName(key);
+                text += pair.first.GetName() + CS::ToString(pair.first.GetIndex()) + " Button: " + CS::ToString(pair.second) + " Pressure: " + CS::ToString(pair.first.GetButtonPressure(pair.second));
             }
 
-            m_textComponent->SetText(text);
+            m_buttonTextComponent->SetText(text);
+        }
+        
+        //------------------------------------------------------------------------------
+        void GamepadPresenter::DisplayAxes() noexcept
+        {
+            std::string text;
+            bool first = true;
+            for (const auto& pair : m_axisPositions)
+            {
+                if (!first)
+                {
+                    text += "\n";
+                }
+                
+                first = false;
+                text += pair.first.GetName() + CS::ToString(pair.first.GetIndex()) + " Axis: " + CS::ToString((u32)pair.second) + " Position: " + CS::ToString(pair.first.GetAxisPosition(pair.second));
+            }
+            
+            m_axisTextComponent->SetText(text);
         }
 
         //------------------------------------------------------------------------------
-        void KeyboardPresenter::OnInit() noexcept
+        void GamepadPresenter::OnInit() noexcept
         {
             InitUI();
-            DisplayKeys();
-            AddKeyPressHandler();
-            AddKeyReleaseHandler();
+            AddButtonPressureHandler();
+            AddAxisPositionHandler();
         }
 
         //------------------------------------------------------------------------------
-        void KeyboardPresenter::OnDestroy() noexcept
+        void GamepadPresenter::OnDestroy() noexcept
         {
             m_eventConnections.clear();
         }

@@ -1,6 +1,6 @@
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2016 Tag Games Limited
+//  Copyright (c) 2017 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef _KEYBOARD_STATE_H_
-#define _KEYBOARD_STATE_H_
+#ifndef _GAMEPAD_STATE_H_
+#define _GAMEPAD_STATE_H_
 
 #include <CSTest.h>
 
@@ -30,9 +30,9 @@
 
 namespace CSTest
 {
-    namespace Keyboard
+    namespace Gamepad
     {
-        /// A state for testing the keyboard input device.
+        /// A state for testing gamepad input devices.
         ///
         class State final : public CS::State
         {

@@ -79,6 +79,11 @@ namespace CSTest
         CS_FORWARDDECLARE_CLASS(State);
         CS_FORWARDDECLARE_CLASS(DownloadProgressTestSystem);
     }
+    
+    namespace Gamepad
+    {
+        CS_FORWARDDECLARE_CLASS(GamepadPresenter);
+    }
 
     namespace Gesture
     {

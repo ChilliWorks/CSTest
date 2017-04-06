@@ -40,6 +40,7 @@
 #include <Device/State.h>
 #include <DownloadProgress/State.h>
 #include <EmailComposer/State.h>
+#include <Gamepad/State.h>
 #include <Gesture/State.h>
 #include <Gyroscope/State.h>
 #include <Lighting/State.h>
@@ -207,6 +208,11 @@ namespace CSTest
             optionsMenuDesc.AddButton("Keyboard", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Keyboard::State>());
+            });
+            
+            optionsMenuDesc.AddButton("Gamepad", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Gamepad::State>());
             });
 #endif
 

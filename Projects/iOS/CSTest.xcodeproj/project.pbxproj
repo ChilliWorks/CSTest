@@ -18,6 +18,8 @@
 		81311D181E49D589001409BC /* GyroscopePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81311D141E49D589001409BC /* GyroscopePresenter.cpp */; };
 		813292021D704FB000CA7612 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 813292001D704FB000CA7612 /* State.cpp */; };
 		814774301E1E521300000123 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8147742E1E1E521300000123 /* State.cpp */; };
+		81559AB71E928CB300A1B107 /* GamepadPresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81559AB31E928CB300A1B107 /* GamepadPresenter.cpp */; };
+		81559AB81E928CB300A1B107 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81559AB51E928CB300A1B107 /* State.cpp */; };
 		816D4B191E5B242100CA66A1 /* ObjectPoolAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 816D4B181E5B242100CA66A1 /* ObjectPoolAllocator.cpp */; };
 		81778F9C1C8D9D18008EEAFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81778F9B1C8D9D18008EEAFD /* Images.xcassets */; };
 		817E32D31D36F0D100F707AD /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 817E32D01D36F0D100F707AD /* State.cpp */; };
@@ -94,16 +96,13 @@
 		81C700381C89ECA400D306F9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C7001B1C89ECA400D306F9 /* CFNetwork.framework */; };
 		81C700391C89ECA400D306F9 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C7001C1C89ECA400D306F9 /* CoreAudio.framework */; };
 		81C7003A1C89ECA400D306F9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C7001D1C89ECA400D306F9 /* CoreGraphics.framework */; };
-		81C7003B1C89ECA400D306F9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C7001E1C89ECA400D306F9 /* CoreLocation.framework */; };
 		81C7003C1C89ECA400D306F9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C7001F1C89ECA400D306F9 /* CoreMedia.framework */; };
 		81C7003D1C89ECA400D306F9 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700201C89ECA400D306F9 /* CoreMotion.framework */; };
-		81C7003E1C89ECA400D306F9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700211C89ECA400D306F9 /* CoreTelephony.framework */; };
 		81C7003F1C89ECA400D306F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700221C89ECA400D306F9 /* Foundation.framework */; };
 		81C700401C89ECA400D306F9 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700231C89ECA400D306F9 /* GLKit.framework */; };
 		81C700411C89ECA400D306F9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700241C89ECA400D306F9 /* libsqlite3.0.tbd */; };
 		81C700421C89ECA400D306F9 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700251C89ECA400D306F9 /* libz.1.2.5.tbd */; };
 		81C700431C89ECA400D306F9 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700261C89ECA400D306F9 /* libz.tbd */; };
-		81C700441C89ECA400D306F9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700271C89ECA400D306F9 /* MapKit.framework */; };
 		81C700451C89ECA400D306F9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700281C89ECA400D306F9 /* MediaPlayer.framework */; };
 		81C700461C89ECA400D306F9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C700291C89ECA400D306F9 /* MessageUI.framework */; };
 		81C700471C89ECA400D306F9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C7002A1C89ECA400D306F9 /* MobileCoreServices.framework */; };
@@ -153,6 +152,10 @@
 		813292011D704FB000CA7612 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		8147742E1E1E521300000123 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = Cubemap/State.cpp; sourceTree = "<group>"; };
 		8147742F1E1E521300000123 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = Cubemap/State.h; sourceTree = "<group>"; };
+		81559AB31E928CB300A1B107 /* GamepadPresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GamepadPresenter.cpp; sourceTree = "<group>"; };
+		81559AB41E928CB300A1B107 /* GamepadPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamepadPresenter.h; sourceTree = "<group>"; };
+		81559AB51E928CB300A1B107 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		81559AB61E928CB300A1B107 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		816D4B181E5B242100CA66A1 /* ObjectPoolAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectPoolAllocator.cpp; sourceTree = "<group>"; };
 		81778F9B1C8D9D18008EEAFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		817E32D01D36F0D100F707AD /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
@@ -328,16 +331,13 @@
 				81C700381C89ECA400D306F9 /* CFNetwork.framework in Frameworks */,
 				81C700391C89ECA400D306F9 /* CoreAudio.framework in Frameworks */,
 				81C7003A1C89ECA400D306F9 /* CoreGraphics.framework in Frameworks */,
-				81C7003B1C89ECA400D306F9 /* CoreLocation.framework in Frameworks */,
 				81C7003C1C89ECA400D306F9 /* CoreMedia.framework in Frameworks */,
 				81C7003D1C89ECA400D306F9 /* CoreMotion.framework in Frameworks */,
-				81C7003E1C89ECA400D306F9 /* CoreTelephony.framework in Frameworks */,
 				81C7003F1C89ECA400D306F9 /* Foundation.framework in Frameworks */,
 				81C700401C89ECA400D306F9 /* GLKit.framework in Frameworks */,
 				81C700411C89ECA400D306F9 /* libsqlite3.0.tbd in Frameworks */,
 				81C700421C89ECA400D306F9 /* libz.1.2.5.tbd in Frameworks */,
 				81C700431C89ECA400D306F9 /* libz.tbd in Frameworks */,
-				81C700441C89ECA400D306F9 /* MapKit.framework in Frameworks */,
 				81C700451C89ECA400D306F9 /* MediaPlayer.framework in Frameworks */,
 				81C700461C89ECA400D306F9 /* MessageUI.framework in Frameworks */,
 				81C700471C89ECA400D306F9 /* MobileCoreServices.framework in Frameworks */,
@@ -416,6 +416,17 @@
 			name = Cubemap;
 			sourceTree = "<group>";
 		};
+		81559AB21E928CB300A1B107 /* Gamepad */ = {
+			isa = PBXGroup;
+			children = (
+				81559AB31E928CB300A1B107 /* GamepadPresenter.cpp */,
+				81559AB41E928CB300A1B107 /* GamepadPresenter.h */,
+				81559AB51E928CB300A1B107 /* State.cpp */,
+				81559AB61E928CB300A1B107 /* State.h */,
+			);
+			path = Gamepad;
+			sourceTree = "<group>";
+		};
 		817E32CD1D36F0D100F707AD /* MemoryWarning */ = {
 			isa = PBXGroup;
 			children = (
@@ -441,6 +452,7 @@
 				818462AA1D350421004B0C46 /* DialogueBox */,
 				818462AD1D350421004B0C46 /* DownloadProgress */,
 				818462B21D350421004B0C46 /* EmailComposer */,
+				81559AB21E928CB300A1B107 /* Gamepad */,
 				818462B51D350421004B0C46 /* Gesture */,
 				81311D111E49D526001409BC /* Gyroscope */,
 				818462BC1D350421004B0C46 /* IntegrationTest */,
@@ -1021,6 +1033,8 @@
 				818463301D350422004B0C46 /* State.cpp in Sources */,
 				27B4257B1E5C775600E17750 /* ShapeIntersection.cpp in Sources */,
 				8184634C1D350422004B0C46 /* TextEntryPresenter.cpp in Sources */,
+				81559AB81E928CB300A1B107 /* State.cpp in Sources */,
+				81559AB71E928CB300A1B107 /* GamepadPresenter.cpp in Sources */,
 				818463251D350422004B0C46 /* OptionsMenuDesc.cpp in Sources */,
 				8184631E1D350422004B0C46 /* OrbiterComponent.cpp in Sources */,
 				818463391D350422004B0C46 /* TextOutputStreamTest.cpp in Sources */,
