@@ -111,7 +111,7 @@ namespace CSTest
             {
                 m_eventConnections.push_back(gamepadSystem->GetAxisPositionChangedEvent().OpenConnection([=](const CS::Gamepad& gamepad, f64 timestamp, CS::GamepadAxis axis, f32 position)
                 {
-                    if(std::abs(position) < 0.05f)
+                    if(std::abs(position) < 0.1f)
                     {
                         auto findIterator = std::find_if(m_axisPositions.begin(), m_axisPositions.end(), [=](const std::pair<CS::Gamepad, CS::GamepadAxis>& pair)
                         {
