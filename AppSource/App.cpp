@@ -88,14 +88,16 @@ namespace CSTest
         CreateSystem<CS::CSModelProvider>();
         CreateSystem<CS::CSAnimProvider>();
         
+#ifndef CS_TARGETPLATFORM_RPI
         CreateSystem<CS::CricketAudioSystem>();
 		CreateSystem<CS::CkBankProvider>();
+#endif
 
         CreateSystem<CS::PrimitiveEntityFactory>();
         CreateSystem<CS::HttpRequestSystem>();
         CreateSystem<CS::PrimitiveModelFactory>();
 
-#ifndef CS_TARGETPLATFORM_WINDOWS
+#if defined CS_TARGETPLATFORM_IOS || defined CS_TARGETPLATFORM_ANDROID
         CreateSystem<CS::AppNotificationSystem>();
         CreateSystem<CS::LocalNotificationSystem>();
         CreateSystem<CS::RemoteNotificationSystem>();

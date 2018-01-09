@@ -79,7 +79,7 @@ namespace CSTest
                 m_dialogueBoxSystem->ShowSystemConfirmDialogue(1, handleConfirmationDialogue, "Confirmation Dialogue", "Confirmation Test?", "Confirm", "Cancel");
             });
 
-#ifndef CS_TARGETPLATFORM_WINDOWS
+#ifdef CS_TARGETPLATFORM_ANDROID
             optionsMenuDesc.AddButton("Show Toast", [=]()
             {
                 m_dialogueBoxSystem->MakeToast("Toast Test Successful");

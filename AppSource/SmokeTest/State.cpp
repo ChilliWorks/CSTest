@@ -40,6 +40,7 @@
 #include <Device/State.h>
 #include <DownloadProgress/State.h>
 #include <EmailComposer/State.h>
+#include <Gamepad/State.h>
 #include <Gesture/State.h>
 #include <Gyroscope/State.h>
 #include <Lighting/State.h>
@@ -111,11 +112,6 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Gesture::State>());
             });
 
-            optionsMenuDesc.AddButton("Cricket Audio", [=]()
-            {
-                CS::Application::Get()->GetStateManager()->Push(std::make_shared<CricketAudio::State>());
-            });
-
             optionsMenuDesc.AddButton("Device Info", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Device::State>());
@@ -126,9 +122,11 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Screen::State>());
             });
 
-            optionsMenuDesc.AddButton("Download Progress", [=]()
+            //TODO: Add back in when supported by RPi
+#ifndef CS_TARGETPLATFORM_RPI
+            optionsMenuDesc.AddButton("Cricket Audio", [=]()
             {
-                CS::Application::Get()->GetStateManager()->Push(std::make_shared<DownloadProgress::State>());
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<CricketAudio::State>());
             });
 
             optionsMenuDesc.AddButton("Dialogue Boxes", [=]()
@@ -136,9 +134,15 @@ namespace CSTest
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<DialogueBox::State>());
             });
 
+#endif
             optionsMenuDesc.AddButton("Text Entry", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<TextEntry::State>());
+            });
+            
+            optionsMenuDesc.AddButton("Download Progress", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<DownloadProgress::State>());
             });
             
             optionsMenuDesc.AddButton("Render to Texture", [=]()
@@ -200,10 +204,15 @@ namespace CSTest
             });
 #endif
 
-#ifdef CS_TARGETPLATFORM_WINDOWS
+#if defined CS_TARGETPLATFORM_WINDOWS || defined CS_TARGETPLATFORM_RPI
             optionsMenuDesc.AddButton("Keyboard", [=]()
             {
                 CS::Application::Get()->GetStateManager()->Push(std::make_shared<Keyboard::State>());
+            });
+            
+            optionsMenuDesc.AddButton("Gamepad", [=]()
+            {
+                CS::Application::Get()->GetStateManager()->Push(std::make_shared<Gamepad::State>());
             });
 #endif
 

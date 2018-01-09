@@ -26,6 +26,8 @@
 //  THE SOFTWARE.
 //
 
+#ifndef CS_TARGETPLATFORM_RPI
+
 #include <CricketAudio/State.h>
 
 #include <Common/Core/TestNavigator.h>
@@ -48,16 +50,19 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
+#ifndef CS_TARGETPLATFORM_RPI
             CreateSystem<Common::TestNavigator>("Cricket Audio");
             m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
             CreateSystem<Common::BackButtonSystem>();
 
             m_audioPlayer = CreateSystem<CS::CkAudioPlayer>();
+#endif
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
+#ifndef CS_TARGETPLATFORM_RPI
             GetMainScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
             
             auto resourcePool = CS::Application::Get()->GetResourcePool();
@@ -86,6 +91,9 @@ namespace CSTest
             });
             
             m_optionsMenuPresenter->Present(optionsMenuDesc);
+#endif
         }
     }
 }
+
+#endif

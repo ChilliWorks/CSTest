@@ -1,6 +1,6 @@
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2016 Tag Games Limited
+//  Copyright (c) 2017 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -21,56 +21,33 @@
 //  THE SOFTWARE.
 //
 
-#include <Screen/State.h>
+#include <Gamepad/State.h>
 
+#include <Common/Input/BackButtonSystem.h>
 #include <Common/UI/OptionsMenuPresenter.h>
 #include <Common/UI/OptionsMenuDesc.h>
 #include <Common/Core/TestNavigator.h>
-#include <Screen/ScreenPresenter.h>
 #include <CricketAudio/State.h>
+#include <Gamepad/GamepadPresenter.h>
 
-#include <ChilliSource/Core/Base/Application.h>
 #include <ChilliSource/Core/Scene.h>
-
 
 namespace CSTest
 {
-    namespace Screen
+    namespace Gamepad
     {
         //------------------------------------------------------------------------------
         void State::CreateSystems()
         {
-            CreateSystem<Common::TestNavigator>("Screen");
-            CreateSystem<ScreenPresenter>();
-            m_optionsMenuPresenter = CreateSystem<Common::OptionsMenuPresenter>();
+            CreateSystem<Common::TestNavigator>("Gamepad");
+            CreateSystem<GamepadPresenter>();
+            CreateSystem<Common::BackButtonSystem>();
         }
 
         //------------------------------------------------------------------------------
         void State::OnInit()
         {
             GetMainScene()->SetClearColour(CS::Colour(0.9f, 0.9f, 0.9f, 1.0f));
-
-#if defined CS_TARGETPLATFORM_WINDOWS || defined CS_TARGETPLATFORM_RPI
-
-            Common::OptionsMenuDesc optionsMenuDesc;
-
-            optionsMenuDesc.AddButton("Windowed", [=]()
-            {
-                auto screen = CS::Application::Get()->GetSystem<CS::Screen>();
-                screen->SetDisplayMode(CS::Screen::DisplayMode::k_windowed);
-            });
-
-            optionsMenuDesc.AddButton("Fullscreen", [=]()
-            {
-                auto screen = CS::Application::Get()->GetSystem<CS::Screen>();
-                screen->SetResolution(screen->GetSupportedFullscreenResolutions().at(0));
-                screen->SetDisplayMode(CS::Screen::DisplayMode::k_fullscreen);
-            });
-
-            m_optionsMenuPresenter->Present(optionsMenuDesc);
-
-#endif
-
         }
     }
 }
