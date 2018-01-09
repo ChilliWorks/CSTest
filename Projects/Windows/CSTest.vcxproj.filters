@@ -109,6 +109,9 @@
     <Filter Include="AppSource\Cubemap">
       <UniqueIdentifier>{f9054b3a-b255-46f7-9e2f-e2e86afb84b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppSource\Gamepad">
+      <UniqueIdentifier>{04010d8a-4b45-4b15-b70a-ec69db874795}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\App.cpp">
@@ -333,6 +336,12 @@
     <ClCompile Include="..\..\AppSource\UnitTest\Tests\ShapeIntersection.cpp">
       <Filter>AppSource\UnitTest\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AppSource\Gamepad\GamepadPresenter.cpp">
+      <Filter>AppSource\Gamepad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\Gamepad\State.cpp">
+      <Filter>AppSource\Gamepad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppSource\App.h">
@@ -520,6 +529,12 @@
     </ClInclude>
     <ClInclude Include="..\..\AppSource\Cubemap\State.h">
       <Filter>AppSource\Cubemap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Gamepad\GamepadPresenter.h">
+      <Filter>AppSource\Gamepad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppSource\Gamepad\State.h">
+      <Filter>AppSource\Gamepad</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

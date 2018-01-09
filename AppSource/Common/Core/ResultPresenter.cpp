@@ -52,7 +52,14 @@ namespace CSTest
         //------------------------------------------------------------------------------
         void ResultPresenter::Present(const std::string& in_result)
         {
-            m_dialogueBoxSystem->ShowSystemDialogue(0, nullptr, "Result", in_result, "Okay");
+            if(m_dialogueBoxSystem != nullptr)
+            {
+                m_dialogueBoxSystem->ShowSystemDialogue(0, nullptr, "Result", in_result, "Okay");
+            }
+            else
+            {
+                CS_LOG_VERBOSE(in_result);
+            }
         }
         //------------------------------------------------------------------------------
         //------------------------------------------------------------------------------

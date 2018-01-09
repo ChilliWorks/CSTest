@@ -1,11 +1,6 @@
-//
-//  State.h
-//  CSTest
-//  Created by Ian Copland on 14/03/2016.
-//
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2016 Tag Games Limited
+//  Copyright (c) 2017 Tag Games Limited
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +21,8 @@
 //  THE SOFTWARE.
 //
 
-#ifndef CS_TARGETPLATFORM_RPI
-
-#ifndef _CRICKETAUDIO_STATE_H_
-#define _CRICKETAUDIO_STATE_H_
+#ifndef _GAMEPAD_STATE_H_
+#define _GAMEPAD_STATE_H_
 
 #include <CSTest.h>
 
@@ -37,35 +30,21 @@
 
 namespace CSTest
 {
-    namespace CricketAudio
+    namespace Gamepad
     {
-        //------------------------------------------------------------------------------
-        /// A state for testing music and sound effects played through the Cricket
-        /// Audio system.
+        /// A state for testing gamepad input devices.
         ///
-        /// @author Ian Copland
-        //------------------------------------------------------------------------------
         class State final : public CS::State
         {
-            //------------------------------------------------------------------------------
             /// The life-cycle event for creating all state systems.
             ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
             void CreateSystems() override;
-            //------------------------------------------------------------------------------
+
             /// Initialises the state.
             ///
-            /// @author Ian Copland
-            //------------------------------------------------------------------------------
             void OnInit() override;
-            
-            Common::OptionsMenuPresenter* m_optionsMenuPresenter = nullptr;
-            CS::CkAudioPlayer* m_audioPlayer = nullptr;
         };
     }
 }
-
-#endif
 
 #endif

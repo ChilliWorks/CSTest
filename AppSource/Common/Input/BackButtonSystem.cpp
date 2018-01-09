@@ -48,9 +48,10 @@ namespace CSTest
         void BackButtonSystem::OnResume() noexcept
         {
             auto deviceButtonSystem = CS::Application::Get()->GetSystem<CS::DeviceButtonSystem>();
-            CS_ASSERT(deviceButtonSystem, "No device button system active.");
-
-            m_deviceButtonConnection = deviceButtonSystem->GetTriggeredEvent().OpenConnection(CS::MakeDelegate(this, &BackButtonSystem::OnDeviceButtonPressed));
+            if(deviceButtonSystem)
+            {
+                m_deviceButtonConnection = deviceButtonSystem->GetTriggeredEvent().OpenConnection(CS::MakeDelegate(this, &BackButtonSystem::OnDeviceButtonPressed));
+            }
         }
 
         //-----------------------------------------------------
